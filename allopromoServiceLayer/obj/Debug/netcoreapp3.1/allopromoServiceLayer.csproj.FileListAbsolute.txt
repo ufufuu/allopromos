@@ -1,0 +1,12 @@
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\bin\Debug\netcoreapp3.1\allopromoServiceLayer.deps.json
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\bin\Debug\netcoreapp3.1\allopromoServiceLayer.dll
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\bin\Debug\netcoreapp3.1\allopromoServiceLayer.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\bin\Debug\netcoreapp3.1\allopromoDataAccess.dll
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\bin\Debug\netcoreapp3.1\allopromoDataAccess.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.csproj.CoreCompileInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.csproj.CopyComplete
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.dll
+C:\Users\MonPC\source\repos\allopromo\allopromoServiceLayer\obj\Debug\netcoreapp3.1\allopromoServiceLayer.pdb

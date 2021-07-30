@@ -1,0 +1,12 @@
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\bin\Debug\netcoreapp3.0\allopromoDataAccess.deps.json
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\bin\Debug\netcoreapp3.0\allopromoDataAccess.runtimeconfig.json
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\bin\Debug\netcoreapp3.0\allopromoDataAccess.runtimeconfig.dev.json
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\bin\Debug\netcoreapp3.0\allopromoDataAccess.dll
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\bin\Debug\netcoreapp3.0\allopromoDataAccess.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.dll
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Debug\netcoreapp3.0\allopromoDataAccess.genruntimeconfig.cache
