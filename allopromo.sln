@@ -5,12 +5,12 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo", "allopromo\allopromo.csproj", "{B3A2594B-FD20-4E8B-A102-23F4E6E7398B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoAuthService\allopromoAuthMicroService.csproj", "{46375714-857D-458E-A487-6A0D97031405}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoOrderProcessMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoOrderProcessMicroService\allopromoOrderProcessMicroService.csproj", "{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroServices", "..\PointNetFacilement\UsageDesDelegates\PromoAuthMicroService\allopromoAuthMicroServices.csproj", "{31C75EFC-EC91-4E94-BC43-ABD4CB398127}"
-EndProject
+# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoAuthService\allopromoAuthMicroService.csproj", "{46375714-857D-458E-A487-6A0D97031405}"
+# EndProject
+# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoOrderProcessMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoOrderProcessMicroService\allopromoOrderProcessMicroService.csproj", "{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}"
+# EndProject
+# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroServices", "..\PointNetFacilement\UsageDesDelegates\PromoAuthMicroService\allopromoAuthMicroServices.csproj", "{31C75EFC-EC91-4E94-BC43-ABD4CB398127}"
+# EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\PointNetFacilement\UsageDesDelegates\WebApi\WebApi.csproj", "{6020F78E-830F-4432-90B7-71716F06B10C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoDataAccess", "allopromoDataAccess\allopromoDataAccess.csproj", "{BBBABC0D-69B7-4983-9BC2-83F252B44A78}"
