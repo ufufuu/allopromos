@@ -12,8 +12,8 @@ namespace allopromo.Controllers
     [ApiController]
     public class DefaultController : ControllerBase
     {
-        private readonly AppDBContext _dbContext;
-        public DefaultController(AppDBContext dbContext)
+        private readonly AppDbContext _dbContext;
+        public DefaultController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿using allopromoDataAccess.Model;
+using Microsoft.EntityFrameworkCore;
 namespace allopromoDataAccess.Data
 {
     /* Field Vs Attribute in C# ?
@@ -24,6 +24,6 @@ namespace allopromoDataAccess.Data
         {
             base.OnModelCreating(modelBuilder);
         }
-        //public virtual DbSet<Store> Stores { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
     }
 }

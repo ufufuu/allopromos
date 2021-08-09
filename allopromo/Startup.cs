@@ -18,7 +18,6 @@ using allopromoDataAccess.Abstract;
 using allopromoDataAccess.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
-
 namespace allopromo
 {
     public class Startup
@@ -34,7 +33,7 @@ namespace allopromo
         {
             //services.AddDbContext<ApplicationDbContext>(options =>
 
-            services.AddDbContext<allopromoDataAccess.Data.AppDBContext>(options =>
+            services.AddDbContext<allopromoDataAccess.Data.AppDbContext>(options =>
                  options.UseSqlServer(
 
                      //("DefaultConnection")));
@@ -45,7 +44,7 @@ namespace allopromo
 
             // Prevent Unable to Register Service for type....UserManager<ApplicationUser> whiel trying to activate ..
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDBContext>()
+                .AddEntityFrameworkStores<AppDbContext>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); //forget 2 below Lines

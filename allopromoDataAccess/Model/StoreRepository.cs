@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 namespace allopromoDataAccess.Model
 {
-    public class StoreRepository
-    //public class StoreRepository : IStoreRepository, IDisposable
+    //public class StoreRepository
+    public class StoreRepository : IStoreRepository, IDisposable
     {
-        private readonly ApplicationDbContext _dbContext;
-        
-        public StoreRepository(ApplicationDbContext dbContext)
+        //private readonly allopromoDataAccess.Data.AppDBContext _dbContext;
+        private readonly allopromoDataAccess.Data.AppDbContext _dbContext;
+        public StoreRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -66,6 +66,24 @@ namespace allopromoDataAccess.Model
             throw new NotImplementedException();
         }
 
-        
+        List<Store> IStoreRepository.GetAllStores()
+        {
+            throw new NotImplementedException();
+        }
+
+        Store IStoreRepository.GetStoreById(string storeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IStoreRepository.Update(Store store)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IStoreRepository.Delete(Store storeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
