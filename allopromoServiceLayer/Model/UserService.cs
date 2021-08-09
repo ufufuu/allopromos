@@ -1,5 +1,6 @@
 ﻿using allopromoDataAccess.Abstract;
 using allopromoDataAccess.Model;
+using allopromoDataAccess.Model.ViewModel;
 using allopromoServiceLayer.Abstract;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -12,10 +13,37 @@ namespace allopromoServiceLayer.Model
         // Repository Pattern ?
         private readonly IUserRepository _userRepo;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserService(IUserRepository userRepo, UserManager<ApplicationUser> userManager)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public UserService(IUserRepository userRepo, 
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager)
         {
             _userRepo = userRepo;
             _userManager = userManager;
+            _signInManager = signInManager;
+        }
+        private async Task<bool> UserExist(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if(user!=null)
+            {
+               // var login = await SignInManager.SignInAsync(user, isPersistent:false, 
+                 //   rememberBrowser:false);
+            }
+            return true;
+            return false;
+        }
+        public bool ValidateUser(LoginModel user)
+        {
+            var appUser = new ApplicationUser { UserName = user.userName };
+            if (UserExist(user.userName).Result)
+            {
+                var login = _signInManager.SignInAsync(appUser, isPersistent: false);
+                if(login!=null)
+                return true;
+                return false;
+            }
+            return false;
         }
         public async Task<bool> CreateUser(ApplicationUser user, string password)
         {
@@ -30,6 +58,7 @@ namespace allopromoServiceLayer.Model
                 {
                     //AddUserRole(user, "Users");
                     //var currentUser = _userManager.FindByNameAsync(user.UserName);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     await _userManager.AddToRoleAsync(user, "SU");
                     return true;
                 }

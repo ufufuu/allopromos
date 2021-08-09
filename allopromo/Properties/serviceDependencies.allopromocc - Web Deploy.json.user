@@ -1,0 +1,30 @@
+{
+  "dependencies": {},
+  "parameters": {
+    "allopromocc.resourceGroupName": {
+      "Name": "allopromocc.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "enov"
+    },
+    "allopromocc.subscriptionId": {
+      "Name": "allopromocc.subscriptionId",
+      "Type": "subscription",
+      "Value": "c90ec7c6-60b3-4bb3-9a45-2f7bb11605e9"
+    },
+    "allopromocc.resourceName": {
+      "Name": "allopromocc.resourceName",
+      "Type": null,
+      "Value": "allopromocc"
+    },
+    "allopromocc.resourceGroupLocation": {
+      "Name": "allopromocc.resourceGroupLocation",
+      "Type": null,
+      "Value": "centralus"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "c90ec7c6-60b3-4bb3-9a45-2f7bb11605e9"
+    }
+  }
+}

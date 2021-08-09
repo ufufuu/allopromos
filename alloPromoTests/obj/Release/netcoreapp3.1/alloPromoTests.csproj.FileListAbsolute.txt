@@ -1,0 +1,4 @@
+C:\Users\MonPC\source\repos\allopromo\alloPromoTests\obj\Release\netcoreapp3.1\alloPromoTests.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\alloPromoTests\obj\Release\netcoreapp3.1\alloPromoTests.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\alloPromoTests\obj\Release\netcoreapp3.1\alloPromoTests.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\alloPromoTests\obj\Release\netcoreapp3.1\alloPromoTests.csproj.CoreCompileInputs.cache

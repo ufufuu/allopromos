@@ -1,9 +1,8 @@
 ﻿using allopromoDataAccess.Model;
+using allopromoDataAccess.Model.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
 namespace allopromoServiceLayer.Abstract
 {
     public interface IUserService
@@ -13,5 +12,6 @@ namespace allopromoServiceLayer.Abstract
         Task<IList<ApplicationUser>>GetUsersByRole(string role);
         public void DeleteUser(ApplicationUser user);
         public void UpdateUser(ApplicationUser user);
+        public bool ValidateUser(LoginModel user);
     }
 }

@@ -3,10 +3,10 @@ using allopromoDataAccess.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace allopromoDataAccess.Model
 {
-    public class StoreRepository : IStoreRepository, IDisposable
+    public class StoreRepository
+    //public class StoreRepository : IStoreRepository, IDisposable
     {
         private readonly ApplicationDbContext _dbContext;
         
@@ -14,21 +14,22 @@ namespace allopromoDataAccess.Model
         {
             _dbContext = dbContext;
         }
-        public List<Store> GetAllStores()
+        public void GetAllStores()
         {
-            return _dbContext.Stores.AsQueryable().ToList();
+            //var stores = _dbContext.Stores.AsQueryable().ToList();
+            //return stores;
         }
 
-        public Store GetStoreById(string storeId)
+        public void GetStoreById(string storeId)
         {
-            return _dbContext.Stores.Find(storeId);
+            //return _dbContext.Stores.Find(storeId);
         }
         //public Store Insert(Store store)
         public void Insert(Store store)
         {
             store = new Store();
             //store.storeId = storeId;
-            _dbContext.Stores.Add(store);
+            //_dbContext.Stores.Add(store);
             Save();
         }
         public void Save()
@@ -53,12 +54,14 @@ namespace allopromoDataAccess.Model
             GC.SuppressFinalize(this);
         }
 
-        void IStoreRepository.Update(Store store)
+        //void IStoreRepository.Update(Store store)
+        void Update(Store store)
         {
             throw new NotImplementedException();
         }
 
-        void IStoreRepository.Delete(Store store)
+        //void IStoreRepository.Delete(Store store)
+        void Delete(Store store)
         {
             throw new NotImplementedException();
         }

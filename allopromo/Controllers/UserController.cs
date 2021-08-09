@@ -1,6 +1,7 @@
 ﻿using allopromo.Model.DTO;
 using allopromoDataAccess.Abstract;
 using allopromoDataAccess.Model;
+using allopromoDataAccess.Model.ViewModel;
 using allopromoServiceLayer.Abstract;
 using allopromoServiceLayer.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -24,7 +25,6 @@ namespace allopromo.Controllers
             _userService = userService;
         }
         [HttpPost]
-        //[Route("api/[controller]/create/{userName}/{userPassword}")]
         [AllowAnonymous]
         public async Task<bool> CreateUser(User user)
         {
@@ -36,7 +36,6 @@ namespace allopromo.Controllers
             {
                 var appUser = new ApplicationUser 
                 { 
-                    //appUserFirstName = user.userEmail,
                     UserName=user.userEmail,
                     Email=user.userEmail,
                     PhoneNumber=user.userPhoneNumber
@@ -56,16 +55,19 @@ namespace allopromo.Controllers
             }
             return false;
         }
-        [HttpPut]
-        [Route("api/[controller]/login")]
-        //public IActionResult Login(string UserName, string Password)
-        public IActionResult Login(User user)
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult Login(LoginModel user)
         {
-            if (user != null)
+            if (_userService.ValidateUser(user))
+            //If Login Successful, then return JWT String !
+            //var logged= JWT.CreateJWT();
+            //return 
             {
 
+                return Ok(user.userName);
             }
-            return NotFound(user);
+            return NotFound(user.userName);
         }
         [HttpGet]
         public Task<IList<ApplicationUser>> GetUsersByRole(string role)

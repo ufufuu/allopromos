@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace allopromo.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class StoresController : ControllerBase
     {
@@ -20,18 +20,22 @@ namespace allopromo.Controllers
             _storeService = storeService;
         }
         [HttpGet]
+        [Route("api/stores")]
         public List<StoreDTO> GetStores()
         {
-            return new StoreDTOConverter().ConvertToStoreDTO(_storeService.GetStores().ToList());
+            var stores= new StoreDTOConverter().ConvertToStoreDTO(_storeService.GetStores().ToList());
+            //return new StoreDTOConverter().ConvertToStoreDTO(_storeService.GetStores().ToList());
+            int v = 4;
+            return stores;
         }
         [HttpGet]
         [Route("api/stores/{Id}")]
-        public StoreDTO GetStore(string storeId)
+        public StoreDTO GetStore(string Id)
         {
-            return new StoreDTOConverter().ConvertToStoreDTO(_storeService.GetStore(storeId));
+            return new StoreDTOConverter().ConvertToStoreDTO(_storeService.GetStore(Id));
         }
         [HttpPost]
-        //[Route("api/store/create")]
+        [Route("api/store/create")]
         public void CreateStore(Store store)
         {
             //return new StoreDTOConverter().ConvertToStoreDTO(_storeService.CreateStore(store));

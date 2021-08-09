@@ -4,14 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo", "allopromo\allopromo.csproj", "{B3A2594B-FD20-4E8B-A102-23F4E6E7398B}"
-EndProject
-# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoAuthService\allopromoAuthMicroService.csproj", "{46375714-857D-458E-A487-6A0D97031405}"
-# EndProject
-# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoOrderProcessMicroService", "..\PointNetFacilement\UsageDesDelegates\allopromoOrderProcessMicroService\allopromoOrderProcessMicroService.csproj", "{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}"
-# EndProject
-# Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoAuthMicroServices", "..\PointNetFacilement\UsageDesDelegates\PromoAuthMicroService\allopromoAuthMicroServices.csproj", "{31C75EFC-EC91-4E94-BC43-ABD4CB398127}"
-# EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\PointNetFacilement\UsageDesDelegates\WebApi\WebApi.csproj", "{6020F78E-830F-4432-90B7-71716F06B10C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBBABC0D-69B7-4983-9BC2-83F252B44A78} = {BBBABC0D-69B7-4983-9BC2-83F252B44A78}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoDataAccess", "allopromoDataAccess\allopromoDataAccess.csproj", "{BBBABC0D-69B7-4983-9BC2-83F252B44A78}"
 EndProject
@@ -19,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "alloPromoTests", "alloPromo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "alloPromoTest", "alloPromoTest\alloPromoTest.csproj", "{1795688F-7C91-434C-B36A-49758854F46B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "allopromoServiceLayer", "allopromoServiceLayer\allopromoServiceLayer.csproj", "{45DE49A6-89AB-4076-ADB9-D3916FD59DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromoServiceLayer", "allopromoServiceLayer\allopromoServiceLayer.csproj", "{45DE49A6-89AB-4076-ADB9-D3916FD59DC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\PointNetFacilement\UsageDesDelegates\WebApi\WebApi.csproj", "{11DC0501-3B5A-4043-B573-59E0F8391DFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +28,6 @@ Global
 		{B3A2594B-FD20-4E8B-A102-23F4E6E7398B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3A2594B-FD20-4E8B-A102-23F4E6E7398B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3A2594B-FD20-4E8B-A102-23F4E6E7398B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46375714-857D-458E-A487-6A0D97031405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46375714-857D-458E-A487-6A0D97031405}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46375714-857D-458E-A487-6A0D97031405}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46375714-857D-458E-A487-6A0D97031405}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFAC1081-AAD7-4CAC-B1BB-AC7EAA1EDC62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31C75EFC-EC91-4E94-BC43-ABD4CB398127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31C75EFC-EC91-4E94-BC43-ABD4CB398127}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31C75EFC-EC91-4E94-BC43-ABD4CB398127}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31C75EFC-EC91-4E94-BC43-ABD4CB398127}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6020F78E-830F-4432-90B7-71716F06B10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6020F78E-830F-4432-90B7-71716F06B10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6020F78E-830F-4432-90B7-71716F06B10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6020F78E-830F-4432-90B7-71716F06B10C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBBABC0D-69B7-4983-9BC2-83F252B44A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBBABC0D-69B7-4983-9BC2-83F252B44A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBBABC0D-69B7-4983-9BC2-83F252B44A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +44,10 @@ Global
 		{45DE49A6-89AB-4076-ADB9-D3916FD59DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45DE49A6-89AB-4076-ADB9-D3916FD59DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45DE49A6-89AB-4076-ADB9-D3916FD59DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11DC0501-3B5A-4043-B573-59E0F8391DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11DC0501-3B5A-4043-B573-59E0F8391DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DC0501-3B5A-4043-B573-59E0F8391DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11DC0501-3B5A-4043-B573-59E0F8391DFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

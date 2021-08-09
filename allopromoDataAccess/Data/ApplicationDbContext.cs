@@ -5,12 +5,12 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using allopromoDataAccess.Model;
-//using Microsoft.Identity
 namespace allopromoDataAccess.Data
 {
     //public class ApplicationDbContext:IdentityDbContext<IdentityUser, IdentityRole, string>, DbContext
     //public class ApplicationDbContext: IdentityDbContext<IdentityUser>, DbContext
-    public class ApplicationDbContext:IdentityDbContext<ApplicationUser> // ?vs DbContext
+    //public class ApplicationDbContext:IdentityDbContext<ApplicationUser> // ?vs DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
@@ -28,8 +28,9 @@ namespace allopromoDataAccess.Data
 
             modelBuilder.Entity<Category>().ToTable("Categories");
             */
+           // modelBuilder.Entity<Store>().ToTable("Stores");
         }
-        public DbSet<Store> Stores { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
     }
 }
 //https://www.tektutorialshub.com/asp-net-core/asp-net-core-identity-tutorial/
@@ -53,3 +54,27 @@ namespace allopromoDataAccess.Data
 //Enrollments{intEnrollmentId, CourseId, StudentId, Grade grade, virtual Course course, virtual Student student}
 
 //WHAT THEN should BE Model-First Strategy???
+
+/*{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  //->
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Initial Catalog=dbname;MultipleActiveResultSets=true;User ID=sa;Password=mypass"
+  },
+  "Jwt": {
+    "SecretKey": "myjwtpass"
+  },
+  "EmailConfiguration": {
+    "SmtpServer": "mysmtpserver",
+    "SmtpPort": 2525,
+    "SmtpUsername": "myusername",
+    "SmtpPassword": "mypassword"
+  }
+  //<-
+}
+*/
