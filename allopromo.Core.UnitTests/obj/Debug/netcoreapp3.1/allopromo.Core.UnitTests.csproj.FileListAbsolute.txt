@@ -139,8 +139,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcore
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\nunit.framework.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\allopromo.Core.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\nunit.framework.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\nunit.framework.xml
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.pdb
