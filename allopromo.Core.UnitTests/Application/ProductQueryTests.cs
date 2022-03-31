@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace alloPromo.Core.UnitTests.Application
 {
-    [TestClass]
+    [TestFixture]
     public class ProductServiceTests
     {
         //[TestInitialize]
@@ -14,7 +14,7 @@ namespace alloPromo.Core.UnitTests.Application
         //{
 
         //}
-        [TestMethod]
+        [TestCase]
         public async Task ObtenirProduct_DEVRAIT_RetournerProduitParId()
         {
 

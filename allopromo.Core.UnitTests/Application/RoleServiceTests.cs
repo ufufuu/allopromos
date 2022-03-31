@@ -12,14 +12,13 @@ using Microsoft.EntityFrameworkCore;
 
 #pragma warning disable CS0234 // The type or namespace name 'Abstract' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
 #pragma warning restore CS0234 // The type or namespace name 'Abstract' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using alloprom.Core.Interface;
 using allopromo.Core.Model;
 using Assert = NUnit.Framework.Assert;
 
 namespace alloPromoTests.Services
 {
-    [TestClass]
+    [TestFixture]
     public class RoleServiceTests
     {
 #pragma warning disable CS0246 // The type or namespace name 'IModelRepository' could not be found (are you missing a using directive or an assembly reference?)

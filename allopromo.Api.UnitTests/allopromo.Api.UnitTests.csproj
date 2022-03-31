@@ -9,15 +9,25 @@
   <ItemGroup>
     <Compile Remove="Controllers\StoreControllerTest.cs" />
   </ItemGroup>
+	
+<!--
+  <ItemGroup>
+    <Compile Remove="Controllers\StoreControllerTest.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
-
+-->
+	
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="coverlet.collector" Version="1.3.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

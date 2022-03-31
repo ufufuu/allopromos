@@ -1,5 +1,4 @@
 ﻿//ca va ca va
-
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
 using allopromo.Core.Model;

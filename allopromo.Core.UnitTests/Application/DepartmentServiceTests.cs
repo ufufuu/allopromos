@@ -1,12 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace allopromo.Data.UnitTests
+namespace allopromo.Core.Application.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class DeparmentServiceTests
 
     {
-        [TestMethod]
+        [TestCase]
         public void GetStores_SHOULD_Return_Stores()
         {
 
