@@ -1,4 +1,0 @@
-C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Release\netcoreapp3.0\allopromoDataAccess.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Release\netcoreapp3.0\allopromoDataAccess.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Release\netcoreapp3.0\allopromoDataAccess.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromoDataAccess\obj\Release\netcoreapp3.0\allopromoDataAccess.csproj.CoreCompileInputs.cache

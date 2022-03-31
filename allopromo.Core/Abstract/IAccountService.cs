@@ -1,0 +1,30 @@
+﻿using allopromo.Core.Model;
+using allopromo.Core.Model.ApiResponse;
+using allopromo.Core.Model.ViewModel;
+using System;
+using static allopromo.Core.Model.AccountService;
+namespace allopromo.Core.Abstract
+{
+    public class UserAuthenticateEventArgs : EventArgs { 
+    }
+    public interface IAccountService
+    {
+        //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
+
+        public string generateJwtToken(User user); // or Remove this Mehods from Interface and make it private in service.
+
+        // method for handling event without any data
+        public event UserAuthenticatedEventHandler userAuthenticated;
+        public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
+
+        public delegate UserAuthenticateEventArgs onUserAuthenticates();
+
+        public void OnUserAuthenticate(string userName);
+        public void OnUserAuthenticated();
+        abstract LoginResponseModel Authenticate(LoginModel login);
+    }
+}
+/*The EventArgs class is the base type for all event data classes. ... The EventHandler delegate includes
+ * the EventArgs class as a parameter. When you want to create a customized event data class, 
+ * create a class that derives from EventArgs, and then provide any members needed to pass data that 
+ * is related to the event*/

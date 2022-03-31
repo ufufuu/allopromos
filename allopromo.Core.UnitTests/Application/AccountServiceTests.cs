@@ -1,0 +1,123 @@
+﻿
+using allopromo.Core.Model;
+using Microsoft.AspNetCore.Identity;
+using Moq;
+#pragma warning disable CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
+using NUnit.Framework;
+#pragma warning restore CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
+using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+/////using allopromo.Infrastructure.Helpers;
+using allopromo.Core.Helpers;
+using allopromo.Core.Model.ViewModel;
+using allopromo.Core.Abstract;
+
+namespace allopromo.Core.UnitTests
+{
+#pragma warning disable CS0246 // The type or namespace name 'TestFixtureAttribute' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning disable CS0246 // The type or namespace name 'TestFixture' could not be found (are you missing a using directive or an assembly reference?)
+    [TestFixture]
+#pragma warning restore CS0246 // The type or namespace name 'TestFixture' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning restore CS0246 // The type or namespace name 'TestFixtureAttribute' could not be found (are you missing a using directive or an assembly reference?)
+    public class AccountServiceTests
+    {
+        private  AccountService _accountService;
+
+#pragma warning disable CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
+        private Mock<IRepository> _userRepo= new Mock<IRepository>();
+#pragma warning restore CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
+        public AccountServiceTests()
+        {
+        }
+         
+#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+        [TestCase]
+#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+        public void AccountService_Raises_EventEmailSend_When_UserAuthenticates()
+        {
+            var mockAccountService = new Mock<IAccountService>();
+            mockAccountService.Setup(p => p.Authenticate(It.IsAny<LoginModel>()));
+                //.Raises(e=>e.userAuthenticated+=null,
+        }
+#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+        [Test]
+#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+
+        //[TestCase(null, "kdjfdkfj")]
+        //[TestCase("user" , "kdjfdkfj")]
+
+        public async Task AccountService_CreateUser_Returns_UserNotCreated()
+        {
+            var mockAppSettings = new Mock<IOptions<AppSettings>>();
+
+            //_accountService = new AccountService(_userRepo.Object, null, null);
+            _accountService = new AccountService(mockAppSettings.Object);
+            // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
+            //var result = await _accountService.CreatesAccount(new User { }, "kjk788kkk");
+
+            //Assert.IsTrue(result.Equals(false));
+        }
+#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+        [Test]
+#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+        public async Task AccountService_CreateUserAndAccount_Returns_UserNotCreated_False()
+        {
+            var mockAppSettings = new Mock<IOptions<AppSettings>>();
+            _userRepo = new Mock<IRepository>();
+
+            //_accountService = new AccountService(_userRepo.Object, null, null);
+
+            _accountService = new AccountService(mockAppSettings.Object);
+            //var result = await _accountService.CreatesAccount(null, "kjk788kkk");
+
+            //Assert.Throws<Exception>(async () => await _userService.CreateUser(null, "akaj4i"));
+            //Assert.ThrowsAsync<Exception>(async () =>await _userService.CreateUser(null, "kjk788kkk"));
+            //Assert.Throws<>("");
+            //User cann/ne eut etre null
+
+            //Assert.IsTrue(result.Equals(false));
+        }
+        //[Test]
+        public void AccountService_CreateUserAndAccount_Returns_UserCreated()
+        {
+           //Task<bool> result= _accountService.CreatesAccount(new ApplicationUser { }, "");
+
+            //Assert.IsNotNull(result);
+        }
+        //[Test]
+        public async Task AccountService_CreateUserAndAccount_Returns_Exception()
+        {
+            throw new  ArgumentNullException();
+        }
+    }
+    public interface Il1
+    {
+    }
+    public class Cl3
+    {
+    }
+    public class Cll1 : C3, I1
+    {
+       public Cll1()
+       {
+
+       }
+    }
+    public class Cv2
+    {
+        void Method1()
+        {
+            C1 c1 = new C1();
+            C3 c2 = new C1();
+            C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS 
+            //C1 c4 = new C3();
+        }
+    }
+}

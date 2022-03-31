@@ -1,5 +1,0 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo\obj\Release\netcoreapp3.1\allopromo.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo\obj\Release\netcoreapp3.1\allopromo.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo\obj\Release\netcoreapp3.1\allopromo.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo\obj\Release\netcoreapp3.1\allopromo.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo\obj\Release\netcoreapp3.1\allopromo.MvcApplicationPartsAssemblyInfo.cache
