@@ -25,9 +25,4 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish -c Release -o website
-    - name: Upload a Build Artifact
-      uses: actions/upload artifact@v2.2.2
-      with:
-        name: website
-        path: allopromo/website/**
-        if not files found: error
+    
