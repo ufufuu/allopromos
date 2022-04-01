@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Q0tNGNZltwQvGYRn7WeOSoOQpzsPXI0pF5B1BwkkIwpOPfmQhLyyb2AHaP2wnqn2IAM143G8BI/DdF7ATFIsVQ==",
+  "dgSpecHash": "COhGWL+XKpkmJXOYtOEpTXKExU+wcfAfV+wph+8VBs6v9Vff9w7cKhG6hc008n4Yc8P+lc5Bhuo8Qg6djPtAhQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructures.UnitTest\\allopromo.Infrastructure.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -82,7 +82,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\newtonsoft.json\\10.0.2\\newtonsoft.json.10.0.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\portable.bouncycastle\\1.8.5\\portable.bouncycastle.1.8.5.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
