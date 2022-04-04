@@ -1,13 +1,19 @@
 {
   "dependencies": {
-    "mssql1": {
-      "type": "mssql.onprem",
-      "connectionId": "ConnectionString/DefaultConnection",
-      "secretStore": "AzureAppSettings"
-    },
     "signalr1": {
       "type": "signalr",
       "connectionId": "",
+      "suggestion": "true",
+      "ignored": "true"
+    },
+    "mssql3": {
+      "type": "mssql.onprem",
+      "connectionId": "DefaultConnection",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "DefaultDevConnection",
       "suggestion": "true",
       "ignored": "true"
     }

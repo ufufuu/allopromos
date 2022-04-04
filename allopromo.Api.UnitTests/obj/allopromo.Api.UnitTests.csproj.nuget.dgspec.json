@@ -196,6 +196,10 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            },
             "Owin": {
               "target": "Package",
               "version": "[1.0.0, )"
@@ -298,6 +302,10 @@
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",

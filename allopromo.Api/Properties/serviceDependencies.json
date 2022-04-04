@@ -3,15 +3,15 @@
     "secrets1": {
       "type": "secrets"
     },
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "DefaultConnection"
-    },
     "mssql2": {
       "type": "mssql",
       "connectionId": "ConnectionString/DefaultConnection",
       "suggestion": "true",
       "ignored": "true"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "DefaultConnection"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iRjSnYNZyPo1zpAIjkAH97d22cKE91YarlaDNVz3L4gozAW///I/HvPq4NaI4L3cEDekY3VivZamDWWZ4L0fZg==",
+  "dgSpecHash": "lqYdL5ymLm/+in6dup6NtzKbhuAdjCGSxRMjJUvRGwWlSZO0F9zhGaNZPxBBENGwyNv4tS6FBXA8mJ1uox9x5g==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructure\\allopromo.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -79,7 +79,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\mimekit\\2.6.0\\mimekit.2.6.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\netcore.mailkit\\2.0.3\\netcore.mailkit.2.0.3.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\newtonsoft.json\\10.0.2\\newtonsoft.json.10.0.2.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\portable.bouncycastle\\1.8.5\\portable.bouncycastle.1.8.5.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
