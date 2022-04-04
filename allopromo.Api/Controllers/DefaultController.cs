@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using Microsoft.AspNetCore.Authorization;
-
 namespace allopromo.Controllers
 {
     // ProductsCatalog Class -vs FoodMenu Class - > 

@@ -104,9 +104,11 @@ namespace allopromo
 
                         //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
             //services.AddScoped<ILoggerManager, LoggerManager>();
 
+
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountService, AccountService>();
 
             services.AddScoped <Core.Abstract.IStoreRepository, //Repositories.

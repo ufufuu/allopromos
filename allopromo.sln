@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Infrastructure.Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Core.UnitTests", "allopromo.Core.UnitTests\allopromo.Core.UnitTests.csproj", "{E881FD4A-3644-4CCC-9E70-7FF4F0075F94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "allopromo.ApiTests", "allopromo.ApiTests\allopromo.ApiTests.csproj", "{4A7893E1-D347-4B4B-931A-3DA987369968}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{E881FD4A-3644-4CCC-9E70-7FF4F0075F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E881FD4A-3644-4CCC-9E70-7FF4F0075F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E881FD4A-3644-4CCC-9E70-7FF4F0075F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A7893E1-D347-4B4B-931A-3DA987369968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7893E1-D347-4B4B-931A-3DA987369968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7893E1-D347-4B4B-931A-3DA987369968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7893E1-D347-4B4B-931A-3DA987369968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{E0D0B383-AC37-4C0D-93B0-5A7694FA115C} = {BCAC362C-4258-448F-985F-7CF343E4E6FB}
 		{7C784765-3553-4FC7-8AE4-DF6892CC25A3} = {F119E781-E4B3-4D7A-A12D-13BF97BB12EC}
 		{E881FD4A-3644-4CCC-9E70-7FF4F0075F94} = {F119E781-E4B3-4D7A-A12D-13BF97BB12EC}
+		{4A7893E1-D347-4B4B-931A-3DA987369968} = {918C8F23-A10C-4AFB-95AF-E1392E2BD145}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4183155A-A95C-4805-BF2A-579D6D143D64}

@@ -8,7 +8,7 @@ using NUnit.Framework;
 using System;
 namespace allopromo.Api.UnitTests
 {
-    [TestFixture]
+    //[TestFixture]
     public class StoreControllerTest
     {
         Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();//? is Core.Abstract ?How ?

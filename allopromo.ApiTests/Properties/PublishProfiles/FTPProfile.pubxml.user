@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyW7vwudR1U2GUalgTUbuvgAAAAACAAAAAAAQZgAAAAEAACAAAADqYaMF00SZ36iccRsbYZYE10GGO673Lvj/VaK7RHSQrAAAAAAOgAAAAAIAACAAAABsbzk54K0lQ6owIHh15poEPxQrgo0IzqDWfOKcIiDkJoAAAAAcqxa/ZfgatA3akCCTHfyAB4F2Fg24rncU8CVkDOou2yRIO77L3dL85gaKKXmaXclqwc2EDKFB7bqgDjxvpdsQrMA73VckCnqhC/kPtQjW1ZbSeLyA5lmeMxl+v2aiu0hYmlTHSLjDVz/P7KwZZFPjdrtMy5l8mfn4+PXIFjqOq0AAAAAXUVKBtRQPz3iiAyd5CdcM948uU2i5L4cZpBEwzawbQD1ufvxa5b8Alb+WHcXb3+Xc72ZCyhKceRX6oCv/+THa</EncryptedPassword>
+    <_PublishTargetUrl>ftp://waws-prod-dm1-189.ftp.azurewebsites.windows.net/site/wwwroot_promo</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="allopromo.ApiTests.deps.json">
+      <publishTime>04/03/2022 23:32:03</publishTime>
+    </File>
+    <File Include="allopromo.ApiTests.dll">
+      <publishTime>04/03/2022 23:32:02</publishTime>
+    </File>
+    <File Include="allopromo.ApiTests.exe">
+      <publishTime>04/03/2022 23:32:02</publishTime>
+    </File>
+    <File Include="allopromo.ApiTests.pdb">
+      <publishTime>04/03/2022 23:32:02</publishTime>
+    </File>
+    <File Include="allopromo.ApiTests.runtimeconfig.json">
+      <publishTime>04/03/2022 23:26:17</publishTime>
+    </File>
+    <File Include="appsettings.Development.json">
+      <publishTime>04/03/2022 23:15:23</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>04/03/2022 23:15:23</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>04/03/2022 23:32:07</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

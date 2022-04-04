@@ -1,0 +1,7 @@
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\allopromo.ApiTests.exe
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\allopromo.ApiTests.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\allopromo.ApiTests.deps.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\allopromo.ApiTests.runtimeconfig.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\PubTmp\Out\allopromo.ApiTests.pdb

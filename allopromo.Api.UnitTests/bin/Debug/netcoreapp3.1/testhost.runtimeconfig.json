@@ -1,14 +1,9 @@
-
-
-
 {
-  "runtimeOptions": { 
+  "runtimeOptions": {
     "tfm": "netcoreapp3.1",
     "framework": {
       "name": "allopromo.Api.UnitTests",
       "version": "3.0.0"
     }
-  },
-  
-  {"dfdfd":"https://docs.microsoft.com/en-us/dotnet/core/runtime-config/"
+  }
 }

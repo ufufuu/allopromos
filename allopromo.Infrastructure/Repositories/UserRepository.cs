@@ -1,11 +1,18 @@
-﻿using allopromo.Core.Domain;
+﻿using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 namespace allopromo.Infrastructure.Repositories
 {
     public class UserRepository //: IEntityBaseRepository<ApplicationUser>, IUserRepository
+        :IUserRepository
     {
+        public void CreateUser(ApplicationUser user, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(ApplicationUser obj)
         {
             throw new NotImplementedException();

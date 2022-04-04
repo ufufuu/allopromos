@@ -7,19 +7,18 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 namespace allopromo.Infrastructure.Data
 {
-    public interface IAppDbContext
-    {
-
-    }
-    public class AppDbContextFactory
-    {
-        private readonly AppDbContext _dbContext;
+    //public interface IAppDbContext
+    //{
+    //}
+    //public class AppDbContextFactory
+    //{
+    //    private readonly AppDbContext _dbContext;
         
-        public AppDbContextFactory()
-        {
-            //_dbContext = new AppDbContext();
-        }
-    }
+    //    public AppDbContextFactory()
+    //    {
+    //        //_dbContext = new AppDbContext();
+    //    }
+    //}
     public class AppDbContext : IdentityDbContext<ApplicationUser,
         ApplicationRole, string, IdentityUserClaim<string> ,
         ApplicationUserRole, IdentityUserLogin<string>,
@@ -38,12 +37,13 @@ namespace allopromo.Infrastructure.Data
 
         // public virtual DbSet<ApplicationRole> Roles { get; set; }
 
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-        public AppDbContext()
-        {
-        }
+        //public AppDbContext()
+        //{
+        //}
+        //public AppDbContext(DbContextOptions options) : base(options)
+        //{
+        //}
+        //l'un en haut ou l'autre en Bas
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }

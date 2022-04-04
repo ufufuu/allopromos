@@ -11,7 +11,6 @@ using allopromo.Model.ViewModel;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Infrastructure;
 using allopromo.Core.Domain;
-
 namespace allopromo.Controllers
 {
     [Route("api/[controller]")]

@@ -14,7 +14,7 @@ namespace allopromo.Infrastructure.Repositories
         private readonly AppDbContext _dbContext;
         public StoreRepository()
         {
-            _dbContext = new AppDbContext();
+            //_dbContext = new AppDbContext();
         }
         public StoreRepository(AppDbContext dbContext)
             => _dbContext = dbContext;

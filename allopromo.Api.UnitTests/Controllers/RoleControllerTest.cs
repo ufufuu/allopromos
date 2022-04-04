@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 namespace alloPromoTests.ApiControllers
 {
-    [TestFixture]
+    //[TestFixture]
     public class RoleControllerTest
     {
         private Mock<IUserService> _userService;

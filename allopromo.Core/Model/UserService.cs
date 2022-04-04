@@ -175,25 +175,25 @@ namespace allopromo.Core.Model
         }
         public User GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
-            /*
-            var user = _userManager.Users.SingleOrDefault(u=>u.UserName.Equals(appUser.UserName)
-                .Include(u=>u.UserRoles).Then;
 
-            var user11= _userManager.Users.Select(x=>x.UserName.Equals(appUser.UserName))
+            var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
+                //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                //.Where(x => x.UserName == appUser.UserName)
+                //.FirstOrDefault());
+
+
+            /*var user11= _userManager.Users.Select(x=>x.UserName.Equals(appUser.UserName))
                 .Join(_roleManager.Roles)
 
             var query23 = (from u in _userManager.Users
                            join r in _roleManager.Roles on u.Us equals r.Name);
                             //where u.Email=="alistcom" select u);
-
             var users32= _userManager.Users;
             var roles = _roleManager.Roles;
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
 
-            return UserConvertor.ConvertUser(_userManager.Users
-                .Include(u=>u.UserRoles).ThenInclude(ur=>ur.Role)
-                .Where(x=>x.UserName==appUser.UserName)
-                .FirstOrDefault());
+
+            return UserConvertor.ConvertUser(user);
             
             //var query= (from _userManager.Users
             //var query9 = "SELECT from UserTable join [dbo].[AspNetUSerRoles] join [dbo.].[AspNetUsers]";

@@ -168,7 +168,6 @@ namespace alloPromoTests.ControllerTests
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
             //Act
-
             //Assert
         }
         [Test]
