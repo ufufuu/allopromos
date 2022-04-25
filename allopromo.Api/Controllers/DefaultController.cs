@@ -31,7 +31,7 @@ namespace allopromo.Controllers
         {
             try
             {
-                var defaultResult = "hello Default Controller";
+                var defaultResult = "hello Default Controller this 25 April";
                 return Ok(defaultResult);
             }
             catch(Exception ex)
