@@ -17,6 +17,7 @@ namespace allopromo.Core.Entities
         public string storeDescription { get; set;}
         public DateTime storeCreatedOn{ get; set;}
         public DateTime storeBecomesInactiveOn { get; set; }
+        public int storeCategoryId { get; set; }
         public virtual tStoreCategory storeCategory { get; set; }
     }
 }

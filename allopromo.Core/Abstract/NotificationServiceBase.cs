@@ -4,7 +4,7 @@
     //{
     //}
 
-    public class NotificationServiceBase
+    public abstract class NotificationServiceBase
     {
 
     }

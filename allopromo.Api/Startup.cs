@@ -99,12 +99,18 @@ namespace allopromo
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
-            services.AddScoped<IStoreService, StoreService>();
-            services.AddScoped<INotificationService, NotificationService>();
 
-                        //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
+            services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<INotifyService, EmailNotificationService>();
+
+            //2 lines below vs 2 above ? or Addtransient vs addScoped ?
+            //services.AddTransient<IStoreService, StoreService>();
+            //services.AddTransient<INotificationService, NotificationService>();
+
+            //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            
             //services.AddScoped<ILoggerManager, LoggerManager>();
 
 
@@ -114,7 +120,8 @@ namespace allopromo
             services.AddScoped <Core.Abstract.IStoreRepository, //Repositories.
                Infrastructure.Repositories.StoreRepository>();
 
-            services.AddScoped<IStoreQuery, StoreQuery>();
+            //services.AddScoped<IStoreQuery, StoreQuery>();
+
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp)); //?Instead of <ApplicationUser>>
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<EmailConfiguration>

@@ -38,8 +38,10 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+    <PackageReference Include="xmlrpcnet" Version="3.0.0.241" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Contracts\" />
     <Folder Include="Infrastructure\_Exceptions\" />
   </ItemGroup>
 </Project>

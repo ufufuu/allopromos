@@ -80,6 +80,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\Syst
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\CookComputing.XmlRpcV2.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll

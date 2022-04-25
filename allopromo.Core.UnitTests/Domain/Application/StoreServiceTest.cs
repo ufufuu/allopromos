@@ -11,11 +11,11 @@ namespace alloPromo.Core.UnitTests.Domain.Application
     public class StoreServiceTest
     {
         private readonly IStoreService _sut;
-        //private readonly IStoreQuery _storeQuery = Substitute.For<IStoreQuery>();
+
         private readonly Mock<IStoreQuery> _storeQuery = new Mock<IStoreQuery>();
         public StoreServiceTest()
         {
-            _sut = new StoreService(_storeQuery.Object);
+           // _sut = new StoreService(_storeQuery.Object);
         }
         [TestCase]
         public void CreateStore_SHOULD_CreateAndReturnStoreDto()
@@ -23,8 +23,10 @@ namespace alloPromo.Core.UnitTests.Domain.Application
 
 
             StoreDto storeDto = new StoreDto { };
-            var sut = new StoreService(_storeQuery.Object);
-            var store = sut.CreateStore(storeDto);
+
+            //var sut = new StoreService(_storeQuery.Object);
+
+            //var store = sut.CreateStore(storeDto);
 
         }
         //[TestCase]

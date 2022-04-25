@@ -13,6 +13,9 @@ namespace allopromo.Core.Abstract
         Task<IList<ApplicationUser>>GetUsersByRole(string userRole);
         public void DeleteUser(ApplicationUser user);
         public void UpdateUser(ApplicationUser user);
+
+        public bool ValidateUser(string userNane, string userPassword);
+
         public bool LoginUser(ApplicationUser user);
         //public Task<bool> UserExist(string userName);
         //Task<bool> UserExist(string userName);

@@ -87,6 +87,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.16.0, )"
+            },
+            "xmlrpcnet": {
+              "target": "Package",
+              "version": "[3.0.0.241, )"
             }
           },
           "imports": [

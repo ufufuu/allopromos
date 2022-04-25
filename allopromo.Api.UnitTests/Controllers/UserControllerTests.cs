@@ -10,9 +10,9 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Domain;
-namespace alloPromoTests.ControllerTests
+namespace allopromo.Api.UnitTests
 {
-    [TestFixture]
+    //[TestFixture]
     public class UserControllerTests
     {
         public UserControllerTests()
@@ -78,7 +78,7 @@ namespace alloPromoTests.ControllerTests
             var result = actualResult as IActionResult;
             var res1 = await actualResult;
             var okResult = await actualResult as OkObjectResult;
-
+            int y = 9;
             // When Do we Need Setup of Mock ?
             Assert.AreEqual(okResult.StatusCode, 200);
             var userT = okResult.Value as User;
@@ -104,7 +104,7 @@ namespace alloPromoTests.ControllerTests
             Assert.IsNotNull(notFoundResult);
             Assert.IsInstanceOf<NotFoundResult>(notFoundResult);
         }
-        [Test]
+        //[Test]
         public void AccountController_GetUsers_ShouldReturnUsersByRole()
         {
             var actualUsersList = new List<ApplicationUser>
@@ -126,7 +126,7 @@ namespace alloPromoTests.ControllerTests
         public void AccountController_Login_Returns_User()
         {
             //Arrange
-            //Mock<UserService> userServiceMock = new Mock<UserService>();
+            //Mock<UserService> userServiceMock = new Mock<UserService>() @errAbaophone43;
             var user = new ApplicationUser
             {
                 UserName = "couli.mama@free.fr",

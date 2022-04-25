@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.IO;
 using System.Net.Http;
+using allopromo.Core.Services;
 
 namespace allopromo.Core.Infrastructure
 {
@@ -25,8 +26,10 @@ namespace allopromo.Core.Infrastructure
 
             //Send Email through MailKIt or Other Service 
             //Pub.Event += Sub.Method;
-            _accountService.onUserAuthenticated += _emailService.SendEmailMessage(new EmailMessage(), 
-                "kekvin.djo@allo.fr");
+
+            //_accountService.onUserAuthenticated += _emailService.SendEmailMessage(new EmailMessage(), 
+              //  "kekvin.djo@allo.fr");
+
             //......
             //then Call Pub Event or Method to Raise Event !
 

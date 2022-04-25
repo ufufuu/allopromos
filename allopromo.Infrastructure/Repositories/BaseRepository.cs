@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 namespace allopromo.Infrastructure.Data.Repository
 {
-    public abstract class BaseRepository
+    public abstract class BaseRepository//:IGenericReposi
     {
         public virtual List<tStore> GetStores() 
-            // ? What does extern modifier , adding a DLL import attribute to specc import ?
         {
             return null;
         }
@@ -59,3 +58,4 @@ namespace allopromo.Infrastructure.Data.Repository
         }
     }
 }
+// ? What does extern modifier , adding a DLL import attribute to specc import ?

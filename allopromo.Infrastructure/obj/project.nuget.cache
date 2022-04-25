@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lqYdL5ymLm/+in6dup6NtzKbhuAdjCGSxRMjJUvRGwWlSZO0F9zhGaNZPxBBENGwyNv4tS6FBXA8mJ1uox9x5g==",
+  "dgSpecHash": "eyHCqsfEEqM7+xZP5gatCHmjE8X8YVl49+SOcHbC7+czCn4VRjAGuAW5Pkir8OBUwsJjDjBv9UKDc7xwsviY0w==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructure\\allopromo.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -195,7 +195,8 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\xmlrpcnet\\3.0.0.241\\xmlrpcnet.3.0.0.241.nupkg.sha512"
   ],
   "logs": [
     {
@@ -204,6 +205,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'xmlrpcnet 3.0.0.241' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "xmlrpcnet",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
       ]

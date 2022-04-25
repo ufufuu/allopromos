@@ -15,11 +15,11 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 namespace allopromo.Core.Model
 {
-    
     public class UserService : IUserService 
    {
         private readonly IUserRepository _userRepo;
         private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly AspNetUserManager userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private Serilog.ILogger _logger; // vs Microsoft Logging !
@@ -77,7 +77,7 @@ namespace allopromo.Core.Model
             }
             //return false;
         }
-        public ApplicationUser AuthenticateUser(string userName,   string password)
+        public ApplicationUser AuthenticateUser(string userName, string password)
         {
             // var user = _userRepo.GetUsers().FirstOrDefault(x => x.UserName == userName 
             //       && x.PasswordHash == password);
@@ -115,12 +115,15 @@ namespace allopromo.Core.Model
             try
             {
                 if (user == null)
+
                     //if(user.Equals(null))
                     //{
                     //throw new Exception("User cann/ne eut etre null");
                     //return null; ? Nullabel Bool ??
+
                     return false;
-               // }
+                // }
+                user.Id = Guid.NewGuid().ToString();
                 var result = await _userManager.CreateAsync(user, password);
                 int c = 8;
                 if (result.Succeeded)
@@ -128,31 +131,40 @@ namespace allopromo.Core.Model
                     //AddUserRole(user, "Users");
                     //var currentUser = _userManager.FindByNameAsync(user.UserName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _userManager.AddToRoleAsync(user, "SU");
+
+                    //await _userManager.AddToRoleAsync(user, "SU");
                     created= true;
                 }
                 //else
                 //  return false;
             }
-            catch (InvalidOperationException)
-            {
-                throw new Exception("Operations Non Valide !");
-            }
-            catch (ArgumentNullException ex)
-            {
-                //throw new ArgumentNullException("{Valeur ne peut etre nulle");
-                _logger.Information(ex.Message);
-                return default;
-            }
-            catch (FormatException)
-            {
-            }
-            catch (Exception)
+            
+            //catch (InvalidOperationException)
+            //{
+            //    throw new Exception("Operations Non Valide !");
+            //}
+            //catch (ArgumentNullException ex)
+            //{
+                
+            //    _logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
+            //    return default;
+            //}
+            //catch (FormatException)
+            //{
+            //}
+            catch (Exception ex)
             {
                 //throw new Exception(" Une erreur est survenur. Veuillez re(essayer)");
-                return default;
+                //return default;
+
+                throw ex;
             }
             return created;
+        }
+        public bool ValidateUser(string userEmail, string userPassword)
+        {
+            var user = _userManager.FindByEmailAsync(userEmail);
+            return _signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
         }
         private void AddUserRole(ApplicationUser user, string roleName)
         {

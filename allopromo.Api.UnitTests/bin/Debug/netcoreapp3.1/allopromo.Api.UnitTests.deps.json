@@ -2319,6 +2319,14 @@
           }
         }
       },
+      "xmlrpcnet/3.0.0.241": {
+        "runtime": {
+          "lib/Net20/CookComputing.XmlRpcV2.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.241"
+          }
+        }
+      },
       "allopromo.Api/1.0.0": {
         "dependencies": {
           "AutoMapper": "6.2.2",
@@ -2339,7 +2347,8 @@
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
           "allopromo.Core": "1.0.0",
-          "allopromo.Infrastructure": "1.0.0"
+          "allopromo.Infrastructure": "1.0.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "runtime": {
           "allopromo.Api.dll": {}
@@ -2357,7 +2366,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.16.0"
+          "System.IdentityModel.Tokens.Jwt": "6.16.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "runtime": {
           "allopromo.Core.dll": {}
@@ -2375,7 +2385,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "allopromo.Core": "1.0.0"
+          "allopromo.Core": "1.0.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "runtime": {
           "allopromo.Infrastructure.dll": {}
@@ -3858,6 +3869,13 @@
       "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "xmlrpcnet/3.0.0.241": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NRjvhkQpM4PgcLvHmUqz65gfYhs+G6NYESl/5oStU5fZfSWlndKFwgH6uSRecPLCx+kUi/irMKM6PhgJWChpaw==",
+      "path": "xmlrpcnet/3.0.0.241",
+      "hashPath": "xmlrpcnet.3.0.0.241.nupkg.sha512"
     },
     "allopromo.Api/1.0.0": {
       "type": "project",

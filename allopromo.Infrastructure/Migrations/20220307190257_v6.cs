@@ -31,7 +31,7 @@ namespace allopromo.Infrastructure.Data.Migrations
                 {
                     storeCategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    storeCategorytName = table.Column<int>(type: "int", nullable: false)
+                    storeCategoryName = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

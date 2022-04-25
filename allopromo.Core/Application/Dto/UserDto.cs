@@ -15,7 +15,7 @@ namespace allopromo.Core.Application.Dto
         public UserDto ConvertToDto(ApplicationUser appUser)
         {
             UserDto userDto = null;
-            userDto.userName = appUser.userName;
+            userDto.userName = appUser.UserName;
             userDto.userEmail = appUser.Email;
             return userDto;
         }

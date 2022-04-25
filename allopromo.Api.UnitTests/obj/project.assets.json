@@ -3403,6 +3403,15 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "xmlrpcnet/3.0.0.241": {
+        "type": "package",
+        "compile": {
+          "lib/Net20/CookComputing.XmlRpcV2.dll": {}
+        },
+        "runtime": {
+          "lib/Net20/CookComputing.XmlRpcV2.dll": {}
+        }
+      },
       "allopromo.Api/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -3425,7 +3434,8 @@
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
           "allopromo.Core": "1.0.0",
-          "allopromo.Infrastructure": "1.0.0"
+          "allopromo.Infrastructure": "1.0.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "compile": {
           "bin/placeholder/allopromo.Api.dll": {}
@@ -3451,7 +3461,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.16.0"
+          "System.IdentityModel.Tokens.Jwt": "6.16.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "compile": {
           "bin/placeholder/allopromo.Core.dll": {}
@@ -3477,7 +3488,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "allopromo.Core": "1.0.0"
+          "allopromo.Core": "1.0.0",
+          "xmlrpcnet": "3.0.0.241"
         },
         "compile": {
           "bin/placeholder/allopromo.Infrastructure.dll": {}
@@ -10878,6 +10890,21 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
+    "xmlrpcnet/3.0.0.241": {
+      "sha512": "NRjvhkQpM4PgcLvHmUqz65gfYhs+G6NYESl/5oStU5fZfSWlndKFwgH6uSRecPLCx+kUi/irMKM6PhgJWChpaw==",
+      "type": "package",
+      "path": "xmlrpcnet/3.0.0.241",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Readme.txt",
+        "lib/Net20/CookComputing.XmlRpcV2.dll",
+        "lib/SL3-WP/CookComputing.XmlRpcPhone.dll",
+        "lib/SL3/CookComputing.XmlRpcSilverlight.dll",
+        "xmlrpcnet.3.0.0.241.nupkg.sha512",
+        "xmlrpcnet.nuspec"
+      ]
+    },
     "allopromo.Api/1.0.0": {
       "type": "project",
       "path": "../allopromo.Api/allopromo.Api.csproj",
@@ -11034,6 +11061,16 @@
       "warningLevel": 1,
       "message": "Package 'Owin 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
       "libraryId": "Owin",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'xmlrpcnet 3.0.0.241' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "xmlrpcnet",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
       ]

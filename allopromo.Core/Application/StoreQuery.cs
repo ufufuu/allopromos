@@ -17,7 +17,7 @@ namespace allopromo.Core.Application
         Task<IEnumerable<tStore>> GetStoresByCatIdAsync(string catId);
         StoreDto CreateStore(StoreDto store);
     }
-    public class StoreQuery:IStoreQuery    // IUnitOfWork uO, IStore _sQ, ILogger<
+    public class StoreQuery//:IStoreQuery
     {
         private IStoreRepository _storeRepository;
         public StoreQuery(IStoreRepository storeRepository)
@@ -32,19 +32,19 @@ namespace allopromo.Core.Application
             return null;
         }
 
-        public async Task<tStore> GetStoreByIdAsync(string id)
-        {
-                var query = await _storeRepository.GetStoreAsync(id);
-                if (query == null)
-                    return null;
-                return  query as tStore;
-        }
-        public async Task<IEnumerable<tStore>> GetStoresByCatIdAsync(string catId)
-        {
-            if (catId == null)
-                return null;
-            return await _storeRepository.GetStoresByIdAsync(catId);
-        }
+        //public async Task<tStore> GetStoreByIdAsync(string id)
+        //{
+        //        var query = await _storeRepository.GetStoreAsync(id);
+        //        if (query == null)
+        //            return null;
+        //        return  query as tStore;
+        //}
+        //public async Task<IEnumerable<tStore>> GetStoresByCatIdAsync(string catId)
+        //{
+        //    if (catId == null)
+        //        return null;
+        //    return await _storeRepository.GetStoresByIdAsync(catId);
+        //}
         //public async Task<tStore> GetStoresAsync(string usersRole)
         //{
         //    using (var db = new AppDbContext())
@@ -103,3 +103,8 @@ namespace allopromo.Core.Application
     }
 }
 // ???? Convrt List of Anomynmos to List of Type T?
+
+
+
+
+// IUnitOfWork uO, IStore _sQ, ILogger<

@@ -1,0 +1,10 @@
+2022-04-21 15:21:57.441 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-21 15:22:03.775 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-21 15:22:03.781 -04:00 [INF] Hosting environment: Development
+2022-04-21 15:22:03.782 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-21 15:22:03.831 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-21 15:22:06.555 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-21 15:22:06.774 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-21 15:22:06.930 -04:00 [INF] Request finished in 3111.4207ms 404 
+2022-04-21 15:22:07.433 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/favicon.ico  
+2022-04-21 15:22:07.482 -04:00 [INF] Request finished in 53.9186ms 404 

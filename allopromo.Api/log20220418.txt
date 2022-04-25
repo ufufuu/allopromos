@@ -1,0 +1,262 @@
+2022-04-18 14:25:55.069 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:25:59.526 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:25:59.529 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:25:59.530 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:25:59.635 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:25:59.638 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:26:00.689 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:26:00.692 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:26:00.749 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:26:00.991 -04:00 [INF] Request finished in 1369.8851ms 404 
+2022-04-18 14:26:01.399 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:26:49.031 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 47609.2018ms
+2022-04-18 14:26:49.660 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:26:50.505 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:26:51.537 -04:00 [INF] Request finished in 51922.3468ms 500 text/plain
+2022-04-18 14:30:33.705 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:30:37.461 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:30:37.465 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:30:37.466 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:30:37.526 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:30:37.526 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:30:38.471 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:30:38.475 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:30:38.539 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:30:38.784 -04:00 [INF] Request finished in 1256.2476ms 404 
+2022-04-18 14:30:39.314 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:30:57.260 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 17919.7035ms
+2022-04-18 14:30:57.417 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:30:57.802 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:30:58.620 -04:00 [INF] Request finished in 21117.0955ms 500 text/plain
+2022-04-18 14:32:49.322 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:32:58.751 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:32:58.753 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:32:58.754 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:32:58.830 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:32:58.819 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:32:59.750 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:32:59.750 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:32:59.842 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:32:59.974 -04:00 [INF] Request finished in 1183.7333ms 404 
+2022-04-18 14:33:00.178 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:33:09.346 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 9126.59ms
+2022-04-18 14:33:09.464 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:33:09.954 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:33:10.679 -04:00 [INF] Request finished in 11890.7621ms 500 text/plain
+2022-04-18 14:34:43.234 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:34:43.339 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:34:43.351 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:34:44.315 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 963.1391ms
+2022-04-18 14:34:44.430 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:34:44.697 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:34:45.497 -04:00 [INF] Request finished in 2286.6357ms 500 text/plain
+2022-04-18 14:35:54.093 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:35:58.806 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:35:58.809 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:35:58.810 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:35:58.876 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:35:58.928 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:36:02.114 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:36:02.114 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:36:02.156 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:36:02.393 -04:00 [INF] Request finished in 3527.6552ms 404 
+2022-04-18 14:36:02.553 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:36:06.401 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 3825.5696ms
+2022-04-18 14:36:06.533 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:36:06.886 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:36:07.448 -04:00 [INF] Request finished in 8591.5566ms 500 text/plain
+2022-04-18 14:36:23.285 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:36:23.317 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:36:23.320 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:36:24.041 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 720.1858ms
+2022-04-18 14:36:24.153 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:36:24.523 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'allopromo.Core.Entities.tStore'.
+   at allopromo.Core.Model.StoreService.CreateStore(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 69
+   at allopromo.Controllers.StoreController.CreateStoreAsync(StoreDto store) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 84
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-18 14:36:24.563 -04:00 [INF] Request finished in 1280.4561ms 500 text/plain
+2022-04-18 14:40:49.830 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:41:01.657 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:41:01.660 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:41:01.660 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:41:01.696 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:41:01.695 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:41:02.982 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:41:02.982 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:41:03.224 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:41:03.471 -04:00 [INF] Request finished in 1802.5521ms 404 
+2022-04-18 14:41:03.573 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:50:55.570 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-18 14:50:57.991 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-18 14:50:57.992 -04:00 [INF] Hosting environment: Development
+2022-04-18 14:50:57.993 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-04-18 14:50:58.047 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-04-18 14:50:58.599 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:50:58.644 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-04-18 14:50:58.761 -04:00 [INF] Request finished in 725.7844ms 404 
+2022-04-18 14:51:09.129 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:51:09.143 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:51:09.549 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:51:30.089 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-04-18 14:51:36.266 -04:00 [INF] Executed DbCommand (846ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Stores] ([storeId], [storeBecomesInactiveOn], [storeCategoryId], [storeCreatedOn], [storeDescription], [storeName], [userId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2022-04-18 14:51:37.302 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Application.Dto.StoreDto'.
+2022-04-18 14:51:37.554 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 27979.301ms
+2022-04-18 14:51:37.558 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:51:37.581 -04:00 [INF] Request finished in 28458.39ms 200 application/json; charset=utf-8
+2022-04-18 14:52:46.739 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/store/create application/json 114
+2022-04-18 14:52:46.795 -04:00 [INF] Executing endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:52:46.801 -04:00 [INF] Route matched with {action = "CreateStore", controller = "Store"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateStoreAsync(allopromo.Core.Application.Dto.StoreDto) on controller allopromo.Controllers.StoreController (allopromo.Api).
+2022-04-18 14:52:47.092 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-04-18 14:52:47.145 -04:00 [INF] Executed DbCommand (34ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Stores] ([storeId], [storeBecomesInactiveOn], [storeCategoryId], [storeCreatedOn], [storeDescription], [storeName], [userId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2022-04-18 14:53:37.549 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Application.Dto.StoreDto'.
+2022-04-18 14:53:37.819 -04:00 [INF] Executed action allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api) in 51015.8513ms
+2022-04-18 14:53:40.599 -04:00 [INF] Executed endpoint 'allopromo.Controllers.StoreController.CreateStoreAsync (allopromo.Api)'
+2022-04-18 14:53:41.100 -04:00 [INF] Request finished in 54415.9029ms 200 application/json; charset=utf-8

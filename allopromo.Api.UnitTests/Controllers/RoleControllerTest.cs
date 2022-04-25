@@ -21,12 +21,13 @@ namespace alloPromoTests.ApiControllers
         [TestCase]
         public void UserController_CreatesUser_ReturnCreated_User()
         {
+
         }
         [TestCase]
         public void UserController_GetUser_Returns_UserWithRole()
         {
         }
-        [TestCase]
+        //[Test]
         public void RoleController_GetRole_Returns_RoleNumber()
         {
             var roleController = new RoleController(_userService.Object);

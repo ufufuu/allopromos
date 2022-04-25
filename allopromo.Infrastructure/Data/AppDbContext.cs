@@ -7,51 +7,25 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 namespace allopromo.Infrastructure.Data
 {
-    //public interface IAppDbContext
-    //{
-    //}
-    //public class AppDbContextFactory
-    //{
-    //    private readonly AppDbContext _dbContext;
-        
-    //    public AppDbContextFactory()
-    //    {
-    //        //_dbContext = new AppDbContext();
-    //    }
-    //}
+    
     public class AppDbContext : IdentityDbContext<ApplicationUser,
         ApplicationRole, string, IdentityUserClaim<string> ,
         ApplicationUserRole, IdentityUserLogin<string>,
         IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbContext
     {
         public DbSet<tStore> Stores { get; set; }
-
         public DbSet<tProduct> Products { get; set; }
-
         public DbSet<tStoreCategory> StoreCategories { get; set; }
         public DbSet<tProductCategory> ProductCategories { get; set; }
-
-        //public DbSet<ApplicationUser> Users { get; set; }
-
-        //public virtual DbSet<ApplicationUserRole> UserRoles { get; set; }
-
-        // public virtual DbSet<ApplicationRole> Roles { get; set; }
-
-        //public AppDbContext()
-        //{
-        //}
-        //public AppDbContext(DbContextOptions options) : base(options)
-        //{
-        //}
-        //l'un en haut ou l'autre en Bas
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+        //public AppDbContext()
+        //{
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-
            //modelBuilder.Entity<ApplicationUserRole>(userRole =>
             //{
             //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -105,3 +79,27 @@ namespace allopromo.Infrastructure.Data
               optionsBuilder.UseSqlServer(connectionString); //or any other DB provider*/
 /*}
 }*/
+
+//public DbSet<ApplicationUser> Users { get; set; }
+//public virtual DbSet<ApplicationUserRole> UserRoles { get; set; }
+// public virtual DbSet<ApplicationRole> Roles { get; set; }
+//public AppDbContext()
+//{
+//}
+//public AppDbContext(DbContextOptions options) : base(options)
+//{
+//}
+//l'un en haut ou l'autre en Bas
+
+//public interface IAppDbContext
+//{
+//}
+//public class AppDbContextFactory
+//{
+//    private readonly AppDbContext _dbContext;
+
+//    public AppDbContextFactory()
+//    {
+//        //_dbContext = new AppDbContext();
+//    }
+//}

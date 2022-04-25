@@ -7,22 +7,28 @@ namespace allopromo.Core.Abstract                   //?  Some Would Call it Doma
 {
     public interface IStoreRepository
     {
-        Task<List<tStore>> GetStoresByIdAsync(string catId);
-        Task<tStore> GetStoreAsync(string storeId);
-        List<tStore> GetStoresAsync();
         tStore Add(tStore store);
+        //Task<tStore> GetStoreAsync(string storeId);
+        //Task<tStore> GetStoreByIdAsync(string storeId);
 
-        Task<List<tStore>> GetStoresByCatIdAsync(string catId);
-        Task<tStore> GetStoreByIdAsync(string storeId);
+        Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync();
+        Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId);
+        Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int limitPerPage, int offSet);
+        IEnumerable<tStore> GetStoresAsync();
+        tStoreCategory AddCategory(tStoreCategory storeCategory);
 
 
-        //List<tStore> GetStoresAsync();
-        //tStore Add(tStore store);
-
-        //tStore Read(tStore store);
-        //tStore Update(tStore store);
-        //tStore Delete(tStore store);
+        //Task<List<tStore>> GetStoresByCategoryIdAsync(string catId);
+        //Task<List<tStore>> GetStoresByCatIdAsync(string catId);
     }
 }
+
+
+
+
+
+
+
+
 //services.AddScoped<IStoreRepository, allopromo.Infrastructure.Repositories.
-                //StoreRepository>();
+//StoreRepository>();

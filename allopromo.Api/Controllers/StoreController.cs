@@ -18,34 +18,55 @@ namespace allopromo.Controllers
     [ApiController]
     public class StoreController : ControllerBase
     {
-        public event StoreCreatedEventHandler StoreCreated; //, IConfiguration config
+        //public event StoreCreatedEventHandler StoreCreated; 
+        //, IConfiguration config
         private IStoreService _storeService { get; set; } // What would read-only change here vs private ?
+        private INotifyService _notificationService; // { get; set; }
         private IProductService _productService;
-        private INotificationService _notificationService { get; set; }
-        public StoreCreatedEventArgs storeCreated { get; set; }
-        public event EventHandler<string> _storeCreated;
+        //public StoreCreatedEventArgs storeCreated { get; set; }
+        //public event EventHandler<string> _storeCreated;
         private IStoreQuery _storeQuery;
-        public StoreController(IStoreService storeService, INotificationService notificationService)
+        public StoreController(IStoreService storeService,
+            INotifyService notificationService)
         {
             _storeService = storeService;
             _notificationService = notificationService;
         }
-        public StoreController(IStoreService storeService, IConfiguration config,
-            INotificationService notificationService, IStoreQuery storeQuery)
+        [HttpPost]
+        [Route("create")]
+        public IActionResult CreateStoreAsync([FromBody] StoreDto store)// StoreDto
         {
-            _storeService = storeService;
-            _notificationService = notificationService;
-            _storeQuery = storeQuery;
-        }
-        protected virtual void OnStoreCreated()
-        {
-            if (StoreCreated != null)
+            if (store != null) 
             {
-                StoreCreated(this, StoreCreatedEventArgs.Empty);
+                var storeDto = _storeService.CreateStore(store);
+
+                if (storeDto != null)
+                {
+                    _storeService.storeCreated += _notificationService.StoreCreatedEventHandler;
+                    _storeService.OnStoreCreated();
+                    return Ok(store);
+                }
+                return null;
+            }
+            return Unauthorized();
+        }
+        [HttpGet]
+        [Route("{categoryId}/{pageNumber}/{limitPerPage}")]
+        //[Route("categoryId?limit=10&offSet=4")]
+        public async Task<IActionResult> GetStoresByCategoryIdAsync(int categoryId, int pageNumber, int limitPerPage)
+        {
+            limitPerPage = 10;
+            if (categoryId == null)
+                return NotFound();
+            else
+            {
+                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
+                    .GetStoresByCategoryIdAsync(categoryId, pageNumber , limitPerPage));
+                return Ok(stores);
             }
         }
         [HttpGet]
-        public ActionResult<StoreDto> GetStoreByIdAsync([FromBody] StoreData storeData)
+        public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] StoreData storeData)
         {
             var store = _storeQuery.GetStoreByIdAsync(storeData.storeData);
             if (store == null)
@@ -54,21 +75,9 @@ namespace allopromo.Controllers
         }
         [HttpGet]
         [Route("Id")]
-        public ActionResult<StoreDto> GetStoreByIdAsync(string Id)
+        public ActionResult<StoreDto> GetStoreByStoreIdAsync(string Id)
         {
             return null;
-        }
-        [HttpGet]
-        [Route("id")]
-        public async Task<IActionResult> GetStoresByCatId(string catId)
-        {
-            if (catId == null)
-                return NotFound();
-            else
-            {
-                var stores = await ((Task<List<StoreDto>>) _storeService.GetStoresByCatIdAsync(catId));
-                return Ok(stores);
-            }
         }
         [HttpGet]
         [Route("{store}/{products}")]
@@ -78,69 +87,28 @@ namespace allopromo.Controllers
                 return null;
             return await _productService.GetProductsByStore(storeId);
         }
-        [HttpGet]
-        //[Authorize(AuthenticationSchemes = "Test")]
-        //[Authorize(Roles = "users")]
-        [Route("create")]
-        //[BasicAuthenticationFilter]
-
-        //[Authorize(AuthenticationSchemes = "Test")]
-
-
-        //[BasicJwtAuthorize] //vs [AuthorizeAttribute]?
-        public IActionResult CreateStore()//ActionExecutingContext actionContext)bwith [BasicJwt Attrib] !
-        {
-            //if (storeDto != null)
-            {
-              //  var store = _storeService.CreateStore(storeDto);
-
-            }
-            return NotFound();
-        }
-        public IActionResult CreateStoreAsync(StoreDto storeDto)
-        {
-            return null;
-        }
-
         [HttpPost]
-        [Route("create")]
-
-        // ? Custom Authorization ?
-        //[allopromo.Infrastructure.Providers.BasicAuthenticationFilter]
-        //[Authorize(AuthenticationSchemes ="Test")]
-
-        public IActionResult CreateStoreS([FromBody] StoreDto store)// StoreDto
+        [Route("{categories}/{create}")]
+        public async Task<IActionResult> PostStoreCategory([FromBody] StoreCategoryDto storeCategory)
         {
-            if (store != null)
-            {
-                StoreCreated +=_notificationService.StoreCreatedEventHandler;
-
-                //_storeService.storeCreated += _notificationService.StoreCreatedEventHandler;
-                //_storeService.OnStoreCreated();
-                //OnStoreCreated(store.storeName + " is Created");
-
-                OnStoreCreated();
-                //var d_store = _storeService.CreateStore((Store)TConvertor.ConvertObjToStore((object)store));
-                var storeDto = _storeService.CreateStore(store);
-                return Ok(store);
-            }
-            return Unauthorized();
+            return Ok(_storeService.CreateStoreCategory(storeCategory));
+        }
+        [HttpGet]
+        [Route("{categories}")]
+        public async Task<IActionResult> GetStoreCategories()
+        {
+            var storeCategories =  _storeService.GetStoreCategoriesAsync();
+            return Ok(storeCategories);
         }
     }
     public class StoreData
     {
         public string storeData { get; set; }
     }
-    
-    //Delegates
     public delegate string mydelegate(string msg);
-
-    //Generic Delegates
     public delegate string myGenericDelegate<T>(string msg);
-    //Structs
     public struct DeliveryStatus
     {
-
     }
     enum DeliveryStatuts
     {
@@ -174,18 +142,13 @@ namespace allopromo.Controllers
     {
         public enum orderStatus { Requested, Aknowledged, Started, Finished, Picked, Delivered };
     }
-    //Direct Casting vs Operator casting
-
-    //Extensions Methods 0001-01-01 00:00:00.0000000
     public static class MyExtensionClass
     {
-        //Extension Class 
         public static int MyExtensionMethod(this int v)
         {
             return 4;
         }
     }
-    //Singleton Pattern : Why Use ?
     public class StoreCreatedSingleton
     {
         private static readonly StoreCreatedSingleton _instance = new StoreCreatedSingleton();
@@ -212,8 +175,6 @@ namespace allopromo.Controllers
             return instance;
         }
     }
-
-    //Other Patterns ?
 }
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/
@@ -225,3 +186,18 @@ namespace allopromo.Controllers
 /* Fields vs Properties ??? */
 /* Store Servcice having StoerRepo as Fields ? Why ?
  */
+/*
+ * //Singleton Pattern : Why Use ? //Extension Class  //Extensions Methods 0001-01-01 00:00:00.0000000 //Direct Casting vs Operator casting
+ * 
+ * */
+/*
+ * //[Authorize(AuthenticationSchemes = "Test")]
+        //[Authorize(Roles = "users")]
+*/
+//[Authorize(AuthenticationSchemes = "Test")]//[BasicAuthenticationFilter]//[BasicJwtAuthorize] //vs [AuthorizeAttribute]?
+
+//Delegates //Generic Delegates //Structs
+
+//[Authorize(AuthenticationSchemes ="Test")] //[allopromo.Infrastructure.Providers.BasicAuthenticationFilter]
+        // ? Custom Authorization ?
+        //ActionExecutingContext actionContext)bwith [BasicJwt Attrib] !

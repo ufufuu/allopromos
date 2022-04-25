@@ -11,13 +11,14 @@ namespace alloPromoTests.Services
         [Test]
         public void NotificationService_SendsNotification_When_Stores_Is_Created()
         {
-            var notificationService = new NotificationService(storeServiceMock.Object);
+            //var notificationService = new NotifyService(storeServiceMock.Object);
 
-            storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>())).Returns(new StoreDto())
-            .Raises(p => p.storeCreated += new NotificationService(storeServiceMock.Object).StoreCreatedEventHandler);
+            storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>())).Returns(new StoreDto());
 
-            var result = notificationService.SendNotification();
-            
+            //.Raises(p => p.storeCreated += new NotificationService(storeServiceMock.Object).StoreCreatedEventHandler);
+
+            //var result = notificationService.SendNotification();
+
             //notificationService.StoreCreatedEventHandler
             
             //var mockAccountService = new Mock<IAccountService>();

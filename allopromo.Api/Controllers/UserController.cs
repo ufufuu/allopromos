@@ -83,7 +83,7 @@ namespace allopromo.Controllers
                     if (result)
                     {
                     _accountService.OnUserAuthenticate(user.userEmail);
-                    return Ok(appUser);
+                        return Ok(appUser);
                     }
                 else
                 {
@@ -110,49 +110,56 @@ namespace allopromo.Controllers
         public IActionResult Login(LoginModel loginModel)
         {
             //_accountService.Authenticate(loginModel);
+            //_signInManager.PasswordSignInAsync
+
             if (loginModel != null)
             {
                 var account = _userManager?.FindByEmailAsync(loginModel.userName).Result;
-                if ((account != null))//&& (_signInManager.UserManager.CheckPasswordAsync
-                                      //(account, loginModel.userPassword).Result))
-                {
-                    var role = _userService.GetUserRole(account).UserRole;
-                    if (role == null)
-                        role = "";
-                    User user = new User
-                    {
-                        userName = loginModel.userName,
-                        userEmail = loginModel.userName,
-                        UserRole= (string)role
-                    };
-                    var userDto = UserConvertor.ConvertUser(account);
-                    //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
+                    //&& (_signInManager.UserManager.CheckPasswordAsync
+                    //(account, loginModel.userPassword).Result))
 
+                if (account != null)
+                {
+                    var loginValid2 = _signInManager?.PasswordSignInAsync(
+                        loginModel.userName.ToString(), loginModel.userPassword.ToString(),true, true);
+
+                    var loginValid = _userService.ValidateUser("djifa@allo.co", loginModel.userPassword);
+                    if (loginValid)
+                    {
+                        var role = _userService.GetUserRole(account).UserRole;
+                        if (role == null)
+                            role = "";
+                        User user = new User
+                        {
+                            userName = loginModel.userName,
+                            userEmail = loginModel.userName,
+                            UserRole = (string)role
+                        };
+                        var userDto = UserConvertor.ConvertUser(account);
+                        return Ok(new ApiResponseModel
+                        {
+                            userResponse = user,
+                            jwtToken = _accountService.generateJwtToken(user),
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new { message = "User name or Pwd UUY incorrect" });
+                    }
+                    //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
                     /*
                     using(var emailNotifyService= new EmailNotificationService())
                     {
                         _accountService.userAuthenticated += emailNotifyService.SendNotification;
                         _accountService.OnUserAuthenticate(loginModel.userName);
                     }*/
-
-                    //using(var accountService =new AccountService())
-                    //{
-                        return Ok(new ApiResponseModel
-                        {
-                            userResponse = user,
-                            jwtToken = _accountService.generateJwtToken(user),
-                        }); 
-                    //}
                 }
                 else
                 {
-                    return NotFound(new { message ="User name or Pwd incorrect" });
+                    return Unauthorized();
                 }
             }
-            else
-            {
-                return null;
-            }
+            return Unauthorized();
         }
         [HttpDelete]
         [Route("login")]
@@ -226,7 +233,6 @@ catch (Exception)
 */
 //https://code-maze.com/global-error-handling-aspnetcore/
 //https://34.65.74.140/net-core-web-development-part3/
-
 
 //Redirecting to Another Page
 /*app.Use(async (context, next) =>

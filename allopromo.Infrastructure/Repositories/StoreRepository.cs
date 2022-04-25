@@ -8,14 +8,13 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class StoreRepository: //allopromo.Core.Abstract.
+    public class StoreRepository:
         IStoreRepository
     {
         private readonly AppDbContext _dbContext;
-        public StoreRepository()
-        {
-            //_dbContext = new AppDbContext();
-        }
+        //public StoreRepository()
+        //{
+        //}
         public StoreRepository(AppDbContext dbContext)
             => _dbContext = dbContext;
         public tStore Add(tStore store)
@@ -26,25 +25,19 @@ namespace allopromo.Infrastructure.Repositories
             store.storeCreatedOn = DateTime.Now.Date;
             store.storeBecomesInactiveOn = DateTime.Now.AddMonths(6).Date;
             store.storeDescription = "ZZAAZ";
+            store.userId = "1ec20d6f-e844-4865-b275-9c08a3249619";
+            tStoreCategory tCategory = new tStoreCategory {storeCategoryName = "Epiceries" };
+            _dbContext.StoreCategories.Add(tCategory);
+            store.storeCategory = tCategory;
+            //tCategory.tStores.Add(store);
+            int e = 7;
+            //store.storeCategoryId = 1;
             if (_dbContext != null)
-
                 _dbContext.Stores.Add(store);
-            int r = 6;
             _dbContext.SaveChanges();
             return store;
         }
-        public async Task<List<tStore>> GetStoresByIdAsync(string catId) //GetStoresByIdAsync
-        {
-            return await _dbContext.Stores
-                .Where(x => x.storeId == catId).ToListAsync();
-        }
-        public List<tStore> GetStoresAsync()
-        {
-            var stores = _dbContext.Stores.AsQueryable().ToList();
-            int y = 5;
-            return stores;
-        }
-        public async Task<tStore> GetStoreByIdAsync(string Id)
+        public async Task<tStore> GetStoreAsync(string Id)
         {
             tStore store = null;
             if (Id == null)
@@ -56,7 +49,50 @@ namespace allopromo.Infrastructure.Repositories
                 store = _dbContext.Stores
                 .Where(x => x.userId == Id.ToString()).FirstOrDefault();
             }
-            return store; 
+            return store;
+        }
+        public tStoreCategory AddCategory(tStoreCategory storeCategory)
+        {
+            if (_dbContext != null)
+            {
+                _dbContext?.StoreCategories.Add(storeCategory);
+            }
+            _dbContext.SaveChanges();
+            return storeCategory;
+        }
+        public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
+        {
+            return await _dbContext.StoreCategories.ToListAsync();
+        }
+        //public async Task<List<tStore>> GetStoresByCategoryIdAsync(int catId)
+        //{
+        //    return null;
+        //GetStoreByIdAsync(string storeId)
+        //}
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId) //GetStoresByIdAsync GetStoresByCatIdAsync
+        {
+            var stores = from q in _dbContext.Stores.Where(x => x.storeCategoryId == categoryId)
+                         .AsNoTracking()
+                         select q;
+            return await stores.ToListAsync();
+        }
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int offSet, int limitPerPage)
+        {
+            var stores = from q in _dbContext.Stores.Where(x => x.storeCategoryId == categoryId)
+                         .Skip((offSet-1) * limitPerPage)
+                         .Take(limitPerPage)
+                         .AsNoTracking()
+                            select q;
+            return await stores.AsNoTracking().ToListAsync();
+        }
+        public IEnumerable<tStore> GetStoresAsync()
+        {
+            var stores = _dbContext.Stores.AsQueryable().ToList().AsEnumerable();
+            return stores;
+        }
+        private int Count()
+        {
+            return _dbContext.Stores.Count();
         }
         private async Task<AppDbContext> GetDatabaseContext()
         {
@@ -65,42 +101,52 @@ namespace allopromo.Infrastructure.Repositories
         //void IStoreRepository.Update(Store store)
         void Update(tStore store)
         {
-            throw new NotImplementedException();
         }
         //void IStoreRepository.Delete(Store store)
         void Delete(tStore store)
         {
-            throw new NotImplementedException();
         }
+        //Task<tStore> IStoreRepository.GetStoreByIdAsync(string storeId)
+        //{
+        //    return null;
+        //}
+        //List<tStore> IStoreRepository.GetStoresAsync()
+        //{
+        //    return null;
+        //}
 
-        Task<List<tStore>> IStoreRepository.GetStoresByCatIdAsync(string catId)
+        //Task<List<tStore>> GetStoresByIdAsync(string catId)
+        //{
+        //    return null;
+        //}
+
+        //public Task<tStore> GetStoreAsync(string storeId)
+        //{
+        //    return null;
+        //}
+        Task<List<tStore>> GetStoresByIdAsync(int categoryId, int limitPerPage)
         {
             throw new NotImplementedException();
         }
+        //Task<tStore> GetStoreAsync(string storeId)
+        //{
+        //    return null;
+        //}
 
-        Task<tStore> IStoreRepository.GetStoreByIdAsync(string storeId)
+        //tStore Add(tStore store)
+        //{
+        //    return null;
+        //}
+        Task<List<tStore>> GetStoresByCatIdAsync(string catId)
         {
-            throw new NotImplementedException();
+            return null;
         }
-
-        List<tStore> IStoreRepository.GetStoresAsync()
+        Task<IEnumerable<tStore>> GetStoresByCatIdAsync(int categoryId)
         {
-            throw new NotImplementedException();
-        }
-
-        Task<List<tStore>> IStoreRepository.GetStoresByIdAsync(string catId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<tStore> GetStoreAsync(string storeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<tStore>> GetStoresByCatIdAsync(string catId)
-        {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
+/* hat IS is it with that CancellationToken , in get Method argument at end ?
+ * 
+ * Method OverLoading vs method Overriding */
