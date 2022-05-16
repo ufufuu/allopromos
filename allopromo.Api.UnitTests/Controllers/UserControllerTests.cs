@@ -24,7 +24,7 @@ namespace allopromo.Api.UnitTests
         private UserController _accountController;
         public void AccountController_CreateUser_UserIsInvalidOrNull_ReturnsNull()
         {
-            User user1 = new User();
+            ApplicationUser user1 = new ApplicationUser();
             _userServiceMock = new Mock<IUserService>();
             /*
             _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), ""))
@@ -43,17 +43,17 @@ namespace allopromo.Api.UnitTests
         public void AccountController_CreateUser_UserPassword_Invalid_Or_Empty_ReturnsException()
         {
             _userServiceMock = new Mock<IUserService>();
-            User user = new User
+            ApplicationUser ApplicationUser = new ApplicationUser
             {
-                userEmail = "alala@f.fr",
-                userName = "ff",
-                userPassword = string.Empty,
-                userPhoneNumber = ""
+                Email = "alala@f.fr",
+                UserName = "ff",
+                PasswordHash = string.Empty,
+                PhoneNumber = ""
             };
             _accountController = new UserController(_userServiceMock.Object);
             //Act 
-            var actualResult = _accountController.CreateUser(user);
-            Assert.ThrowsAsync<Exception>(async () => await _accountController.CreateUser(user)); ;
+            var actualResult = _accountController.CreateUser(ApplicationUser);
+            Assert.ThrowsAsync<Exception>(async () => await _accountController.CreateUser(ApplicationUser)); ;
         }
         //Collection Initializer IEnumerable !?
         //_userServiceMock.Setup(m => m.CreateUser(It.IsAny<ApplicationUser>,"")).Returns((Task<bool> result)=> {return result;});
@@ -62,18 +62,18 @@ namespace allopromo.Api.UnitTests
         public async Task AccountController_CreateUser_UserValid_ReturnsOkCreated()
         {
             _userServiceMock = new Mock<IUserService>();
-            User user = new User
+            ApplicationUser ApplicationUser = new ApplicationUser
             {
-                userEmail = "alala@freee.fr",
-                userName = "fdfkdkff",
-                userPassword = "K@da120",
-                userPhoneNumber = "581-578-4401"
+                Email = "alala@freee.fr",
+                UserName = "fdfkdkff",
+                PasswordHash = "K@da120",
+                PhoneNumber = "581-578-4401"
             };
             _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), ""))
             .ReturnsAsync(true);
             _accountController = new UserController(_userServiceMock.Object);
             //Act
-            var actualResult = _accountController.CreateUser(user);
+            var actualResult = _accountController.CreateUser(ApplicationUser);
             //Assert
             var result = actualResult as IActionResult;
             var res1 = await actualResult;
@@ -81,24 +81,24 @@ namespace allopromo.Api.UnitTests
             int y = 9;
             // When Do we Need Setup of Mock ?
             Assert.AreEqual(okResult.StatusCode, 200);
-            var userT = okResult.Value as User;
+            var userT = okResult.Value as ApplicationUser;
             Assert.IsNotNull(okResult);
         }
         public async Task AccountController_CreateUser_Returns_NotFound()
         {   //Arrange
-            var user = new User
+            var ApplicationUser = new ApplicationUser
             {
-                userEmail = "fddssd",
-                userName = "cvcvcv",
-                userPassword = "rt5465",
-                userPhoneNumber = "899-898-3566"
+                Email = "fddssd",
+                UserName = "cvcvcv",
+                PasswordHash = "rt5465",
+                PhoneNumber = "899-898-3566"
             };
             _userServiceMock = new Mock<IUserService>();
             _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), "hjkjkjk6687"))
                 .ReturnsAsync(false);
             //Act
             _accountController = new UserController(_userServiceMock.Object);
-            var actualResult = _accountController.CreateUser(user);
+            var actualResult = _accountController.CreateUser(ApplicationUser);
             var result = await actualResult;
             var notFoundResult =  result as NotFoundResult;  // vs NotFoundObjectResult ?
             Assert.IsNotNull(notFoundResult);
@@ -114,7 +114,8 @@ namespace allopromo.Api.UnitTests
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(service => service.GetUsersByRole("admin"))
                             .Returns(Task.FromResult<IList<ApplicationUser>>(actualUsersList));
-            var userController = new RoleController(userServiceMock.Object);
+
+            //var userController = new RoleController(userServiceMock.Object);
             //var expectedUsersList = userController.GetUsersByRole("admin");
             //Act
             //Assert
@@ -127,20 +128,20 @@ namespace allopromo.Api.UnitTests
         {
             //Arrange
             //Mock<UserService> userServiceMock = new Mock<UserService>() @errAbaophone43;
-            var user = new ApplicationUser
+            var ApplicationUser = new ApplicationUser
             {
                 UserName = "couli.mama@free.fr",
                 PasswordHash = "errAbaophone43"
             };
             _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(x => x.LoginUser(user)).Returns(true);
-            _userServiceMock.Setup(y => y.GetUserIfExist(user.UserName)).Returns(user);
+            _userServiceMock.Setup(x => x.LoginUser(ApplicationUser)).Returns(true);
+            _userServiceMock.Setup(y => y.GetUserIfExist(ApplicationUser.UserName)).Returns(ApplicationUser);
 
-            //var user = new ApplicationUser {Email = "couli.mama@free.fr"};
-            var userDto = new User
+            //var ApplicationUser = new ApplicationUser {Email = "couli.mama@free.fr"};
+            var userDto = new ApplicationUser
             {
-                userName = "couli.mama@free.fr",
-                UserRole = "Merchant",
+                UserName = "couli.mama@free.fr",
+                //UserRole = "Merchant",
             };
             var userLoginResponse = new ApiResponseModel
             {
@@ -211,7 +212,7 @@ namespace allopromo.Api.UnitTests
 
 // Prime Numbers and Composite Number btw/n 1-200 - biz manager --04 am --  4 pm ---><---
 
-//1. Create and Assign Role to User
+//1. Create and Assign Role to ApplicationUser
 // 2. Test 
 //3. Seed Roles 
 //4. Add Column or Create Table for Wallet ?

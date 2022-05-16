@@ -7,21 +7,13 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 namespace allopromo.Controllers
 {
-    // ProductsCatalog Class -vs FoodMenu Class - > 
-    //composed of several products & catalog products !
-    //JWT Auth & Autho 
-    //1- install 5 nuget Packages - 2- settings config - 3-Setup Register & Login models & Response model Classes along with Roles
-    //4- 5- 
-
     [Route("api/v1/[controller]")]
     [ApiController]
     public class DefaultController : ControllerBase
     {
         private readonly IConfiguration _config;
-        //private readonly AppDbContext _dbContext;
         public DefaultController(IConfiguration config)
         {
-            //_dbContext = dbContext;
             _config = config;
         }
         [HttpGet]
@@ -31,7 +23,7 @@ namespace allopromo.Controllers
         {
             try
             {
-                var defaultResult = "hello Default Controller this 25 April";
+                var defaultResult = "hello Default Controller this 02 May";
                 return Ok(defaultResult);
             }
             catch(Exception ex)
@@ -98,3 +90,9 @@ Password=K@da120790;MultipleActiveResultSets=False;Encrypt=True;TrustServerCerti
  * add-migration -Name "defaultConn", v1
  * update-database -Connection "defuoo"
  */
+
+// ProductsCatalog Class -vs FoodMenu Class - > 
+//composed of several products & catalog products !
+//JWT Auth & Autho 
+//1- install 5 nuget Packages - 2- settings config - 3-Setup Register & Login models & Response model Classes along with Roles
+//4- 5- 

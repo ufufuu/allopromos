@@ -1,11 +1,14 @@
 ﻿using allopromo.Controllers;
 using allopromo.Core.Abstract;
 using allopromo.Core.Application.Dto;
+using allopromo.Core.Domain;
+using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.Threading.Tasks;
 namespace allopromo.Api.UnitTests
 {
     [TestFixture]
@@ -13,86 +16,97 @@ namespace allopromo.Api.UnitTests
     {
         StoreCreatedEventArgs storeCreatedEventArgs;
         bool notifySent; // = false;
-        [Test]
-        public void StoreCrontroller_CreateStore_ReturnsUnauthorized()
+        Mock<IStoreService> _storeServiceMock;
+        Mock<INotifyService> _notificationServiceMock;
+        StoreController SUT;
+        [SetUp]
+        public void Init()
+        {
+            _storeServiceMock = new Mock<IStoreService>();
+            _notificationServiceMock = new Mock<INotifyService>();
+            SUT = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
+        }
+        public void StoreCrontroller_CreateStore_ReturnsNotFound()
         {
             //Arrange
+
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             StoreDto store = null;
-            var storeController = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
-            var result = storeController.CreateStoreAsync(store);
-            Assert.IsInstanceOf<UnauthorizedResult>(result);
+            var SUT = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
+            var result = SUT.CreateStoreAsync(store);
+            Assert.IsInstanceOf<NotFoundResult>(result.Result);
         }
         [Test]
-        public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEvent()
+        public async Task StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEvent()
         {
-
             //Arrange
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
-            StoreController storeController =
+            StoreController SUT =
                 new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);//, _notificationService.Object);
             var store = new StoreDto
             {
                 storeId = "dsd",
                 storeName = "Thierry Plank",
             };
-
-            _storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>()))
+            _storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
+                It.IsAny<UserDto>()))
                 .Returns(new StoreDto())
-                .Raises(e => e.storeCreated += null, (StoreDto store) => new EventArgs { });
+                .Raises(e => e.StoreCreated += null, (StoreDto store) => new EventArgs { });
 
+            _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
+                It.IsAny<UserDto>()))
+                .Returns(new StoreDto());
             //Act
-            //var result = storeController.CreateStoreAsync(store);
+            _storeServiceMock.Object.StoreCreated += (o, e) => notifySent = true;
 
-            _storeServiceMock.Object.storeCreated += (o, e) => notifySent = true;
-            //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } or Below // += (_, e) => notifySent = true;
+            //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } 
+            //or Below // += (_, e) => notifySent = true;
+
             _notificationServiceMock.Object.SendNotification();
-            _storeServiceMock.Object.storeCreated += (_, e) =>
+            _storeServiceMock.Object.StoreCreated += (_, e) =>
             {
                 //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
                 //StoreCreated(_, e);
                 notifySent = true;
                 return true;
             };
-            _storeServiceMock.Object.storeCreated += (StoreCreated);
+            _storeServiceMock.Object.StoreCreated += (StoreCreated);
 
-            //_storeServiceMock.Setup(x => x.CreateStore(It.IsAny<Store>())).Returns(new Store())
-            //    .Raises(e => e.storeCreated += _notificationService.Object.StoreCreatedEventHandler);
-            //_storeServiceMock.Setup(x => x.CreateStore(It.IsAny<Store>())).Returns(store)
-            //    .Raises((e)=>
-            //    {
-            //        storeCreatedEventArgs = (StoreCreatedEventArgs)e;
-            //    });
-            //.Raises(x => x.storeCreated+=StoreCreated);
+            _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
+                It.IsAny<UserDto>())).Returns(new StoreDto())
+            //.Raises(e => e.StoreCreated += _notificationServiceMock.Object.StoreCreatedEventHandler)
+                //.Raises(e =>
+                //{
+                //    storeCreatedEventArgs = (StoreCreatedEventArgs)e;
+                //});
+            .Raises(x => x.StoreCreated+=StoreCreated);
 
-            _storeServiceMock.Object.storeCreated += delegate (object source, EventArgs e)
+            _storeServiceMock.Object.StoreCreated += delegate (object source, EventArgs e)
             {
                 //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
                 notifySent = true;
                 return true;
             };
 
-            //_storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>())).Returns(store);
-            storeController.CreateStoreAsync(store);
-
-            _storeServiceMock.Verify(x=> x.OnStoreCreated(), Times.Once);
+            SUT.CreateStoreAsync(store);
+            //var result = SUT.CreateStoreAsync(store);
+            
             //Assert.IsNotNull(storeCreatedEventArgs);
-            Assert.IsTrue(notifySent);
-            _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
-        }
+            //Assert.IsTrue(notifySent);
 
+            _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
+            //_storeServiceMock.Verify(x=> x.OnStoreCreated(), Times.Once);
+        }
         public void GetStoreByCategoryId_ShouldReturn_StoresbyCategoryId()
         {
             int pageId = 2;
             int limitPerPage = 10;
-            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();                      //? is Core.Abstract ?How ?
+            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();//? is Core.Abstract ?How ?
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             var storeController = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
-
         }
-
         bool StoreCreated(object source, System.EventArgs e)
         {
             //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
@@ -124,8 +138,45 @@ namespace allopromo.Api.UnitTests
             StoreDto store = new StoreDto(); // null;
             store.storeId = null;
             StoreController storeController = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
-           // var result = storeController.GetStoreByIdAsync("null");//store);//.storeId);
+            //var result = storeController.GetStoreByIdAsync("null");//store);//.storeId);
             //Assert.AreEqual(result.GetType(), new NotFoundResult().GetType());
+        }
+        [Test]
+        public void StoreController_CreateProductAsync_SHOULDReturn_CreatedProduct()
+        {
+            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
+            Mock<IProductService> _productServiceMock = new Mock<IProductService>();
+            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object);
+            var productDto = new tProduct { };
+
+            var result = _sut.CreateProductAsync(productDto);
+            Assert.IsNotNull(result);
+        }
+        [Test]
+        public void StoreController_CreateProductAsync_SHOULD_Return_NotAuthenticated_IfUserNotAuthenticated()
+        {
+            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
+            Mock<IProductService> _productServiceMock = new Mock<IProductService>();
+            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object);
+            UserDto user = null;
+            tProduct tproduct = new tProduct();
+            var result = _sut.CreateProductAsync(tproduct);
+            Assert.AreEqual(result.Result.GetType(), typeof(UnauthorizedResult));
+        }
+        public void Create_SHOULDReturn_PageToLogin_ifNotAuthenticated()
+        {
+        }
+        [Test]
+        public void StoreController_GetProductsByCategoryIdAsync_SHOULD_Return_Products()
+        {
+            SUT = new StoreController(_storeServiceMock.Object, _notificationServiceMock.Object);
+            var products = SUT.GetProducts();
+            Assert.IsNotNull(products);
+        }
+        [Test]
+        public void trt()
+        {
+
         }
     }
 }

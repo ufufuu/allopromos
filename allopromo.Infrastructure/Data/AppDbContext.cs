@@ -1,32 +1,41 @@
 ﻿using allopromo.Core.Domain;
 using allopromo.Core.Entities;
+using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 namespace allopromo.Infrastructure.Data
-{
-    
-    public class AppDbContext : IdentityDbContext<ApplicationUser,
-        ApplicationRole, string, IdentityUserClaim<string> ,
+{ 
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
+        /*ApplicationRole, string, IdentityUserClaim<string> ,
         ApplicationUserRole, IdentityUserLogin<string>,
-        IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbContext
+        IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
     {
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<tStore> Stores { get; set; }
-        public DbSet<tProduct> Products { get; set; }
         public DbSet<tStoreCategory> StoreCategories { get; set; }
+        public DbSet<tCity> Cities { get; set; }
+        public DbSet<tCountry> Countries { get; set; }
+        public DbSet<tRegion> Regions { get; set; }
+        public DbSet<tProduct> Products { get; set; }
         public DbSet<tProductCategory> ProductCategories { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        //public AppDbContext()
-        //{
-        //}
+        public AppDbContext()
+        {
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-           //modelBuilder.Entity<ApplicationUserRole>(userRole =>
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    //.HasDiscriminator<int>("Type")
+            //    .HasValue<ApplicationUser>(1);
+
+            //modelBuilder.Entity<ApplicationUserRole>(userRole =>
             //{
             //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
             //    userRole.HasOne(ur => ur.Role)
@@ -39,7 +48,7 @@ namespace allopromo.Infrastructure.Data
             //        .IsRequired();
             //});
             //modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p =>
-                                                               //new { p.UserId, p.RoleId });
+            //new { p.UserId, p.RoleId });
             //modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
             /*
             modelBuilder.Entity<tStore>().HasNoKey();

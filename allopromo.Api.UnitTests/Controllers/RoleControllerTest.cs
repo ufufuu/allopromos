@@ -30,7 +30,8 @@ namespace alloPromoTests.ApiControllers
         //[Test]
         public void RoleController_GetRole_Returns_RoleNumber()
         {
-            var roleController = new RoleController(_userService.Object);
+            //var roleController = new RoleController(_userService.Object);
+
             //var result = userController(null);
             //Assert
             //Assert.IsTrue(result.Exception.Equals(result));

@@ -9,28 +9,28 @@ namespace allopromo.Core.Helpers.Convertors
     // when Do We need static Classes ? along with their Methods ?
     public static class UserConvertor
     {
-        public static User ConvertUser(ApplicationUser appUser)
+        public static ApplicationUser ConvertUser(ApplicationUser appUser)
         {
-            var userObj = new User();
+            var userObj = new ApplicationUser();
             //userObj = (object)appUser;
             //if(appUser.UserRoles!=null)
-            userObj.UserRole = (string)appUser.UserRoles?.FirstOrDefault()?.Role.Name;
-            userObj.userEmail = appUser.Email;
+            userObj.UserRoles = (ICollection<ApplicationUserRole>)(appUser.UserRoles?.FirstOrDefault());
+            userObj.Email = appUser.Email;
             return userObj;
         }
-        public static List<User> ConvertUsers(List<ApplicationUser> appUsers)
+        public static List<ApplicationUser> ConvertUsers(List<ApplicationUser> appUsers)
         {
-            var listObj = new List<User>();
+            var listObj = new List<ApplicationUser>();
             foreach(var appUser in appUsers)
             {
-                var user = new User();
-                user.userEmail = appUser.Email;
-                user.userName = appUser.UserName;
-                user.userPassword = appUser.PasswordHash;
-                user.userPhoneNumber = appUser.PhoneNumber;
+                var user = new ApplicationUser();
+                user.Email = appUser.Email;
+                user.UserName = appUser.UserName;
+                user.PasswordHash = appUser.PasswordHash;
+                user.PhoneNumber = appUser.PhoneNumber;
                 //user.userRoles = appUser.UserRoles;
 
-                user.UserRole = (string)appUser.UserRoles.FirstOrDefault().Role.Name;
+                user.UserRoles = (ICollection<ApplicationUserRole>)appUser.UserRoles.FirstOrDefault();
                 //user.primaireRole = appUser.UserRoles.FirstOrDefault();
                 //user.userRoles = (List<string>)appUser.UserRoles;
                 //user.primaryRole = appUser.UserRoles.FirstOrDefault();

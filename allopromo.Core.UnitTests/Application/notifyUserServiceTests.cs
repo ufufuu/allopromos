@@ -1,15 +1,9 @@
-﻿#pragma warning disable CS0234 // The type or namespace name 'Abstract' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
-#pragma warning restore CS0234 // The type or namespace name 'Abstract' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
-#pragma warning disable CS0234 // The type or namespace name 'Model' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
-#pragma warning restore CS0234 // The type or namespace name 'Model' does not exist in the namespace 'allopromo.Data' (are you missing an assembly reference?)
-using allopromo.Core.Abstract;
+﻿using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Moq;
-#pragma warning disable CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
 using NUnit.Framework;
-#pragma warning restore CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
 using System;
 using System.Threading.Tasks;
 namespace allopromo.Core.UnitTests
@@ -18,9 +12,7 @@ namespace allopromo.Core.UnitTests
     public class AccountServiceTest
     {
         private  UserService _userService;
-#pragma warning disable CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
         private Mock<IUserRepository> _userRepo= new Mock<IUserRepository>();
-#pragma warning restore CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
 
         //private Mock<UserManager<ApplicationUser>> _userManager= new Mock<UserManager<ApplicationUser>>();
         //public static Mock<UserManager<TUser>> MockUserManager<TUser>(List<TUser> ls) where TUser : class
@@ -42,11 +34,7 @@ namespace allopromo.Core.UnitTests
                 null);
         }*/
 
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-        [Test]
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
+        //[Test]
         //[TestCase(null, "kdjfdkfj")]
         //[TestCase("user" , "kdjfdkfj")]
         public async Task UserService_CreateUser_Returns_UserNotCreated()
@@ -58,11 +46,7 @@ namespace allopromo.Core.UnitTests
 
             Assert.IsTrue(result.Equals(false));
         }
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-        [Test]
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
+        //[Test]
         public async Task UserService_CreateUser_Returns_UserNotCreated_False()
         {
             _userRepo = new Mock<IUserRepository>();

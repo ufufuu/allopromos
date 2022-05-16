@@ -20,14 +20,10 @@ namespace alloPromo.Core.UnitTests.Domain.Application
         [TestCase]
         public void CreateStore_SHOULD_CreateAndReturnStoreDto()
         {
-
-
             StoreDto storeDto = new StoreDto { };
 
             //var sut = new StoreService(_storeQuery.Object);
-
             //var store = sut.CreateStore(storeDto);
-
         }
         //[TestCase]
         public void GetStore_SHOULD_Return_StoreById()

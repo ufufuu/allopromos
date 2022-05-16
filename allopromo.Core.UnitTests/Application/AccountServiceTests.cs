@@ -1,10 +1,7 @@
-﻿
-using allopromo.Core.Model;
+﻿using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Moq;
-#pragma warning disable CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
 using NUnit.Framework;
-#pragma warning restore CS0246 // The type or namespace name 'NUnit' could not be found (are you missing a using directive or an assembly reference?)
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -12,41 +9,25 @@ using Microsoft.Extensions.Options;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ViewModel;
 using allopromo.Core.Abstract;
-
 namespace allopromo.Core.UnitTests
 {
-#pragma warning disable CS0246 // The type or namespace name 'TestFixtureAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestFixture' could not be found (are you missing a using directive or an assembly reference?)
     [TestFixture]
-#pragma warning restore CS0246 // The type or namespace name 'TestFixture' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'TestFixtureAttribute' could not be found (are you missing a using directive or an assembly reference?)
     public class AccountServiceTests
     {
         private  AccountService _accountService;
-
-#pragma warning disable CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
         private Mock<IRepository> _userRepo= new Mock<IRepository>();
-#pragma warning restore CS0246 // The type or namespace name 'IRepository' could not be found (are you missing a using directive or an assembly reference?)
         public AccountServiceTests()
         {
         }
          
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
         [TestCase]
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
         public void AccountService_Raises_EventEmailSend_When_UserAuthenticates()
         {
             var mockAccountService = new Mock<IAccountService>();
             mockAccountService.Setup(p => p.Authenticate(It.IsAny<LoginModel>()));
                 //.Raises(e=>e.userAuthenticated+=null,
         }
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
         [Test]
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
 
         //[TestCase(null, "kdjfdkfj")]
         //[TestCase("user" , "kdjfdkfj")]
@@ -59,14 +40,9 @@ namespace allopromo.Core.UnitTests
             _accountService = new AccountService(mockAppSettings.Object);
             // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
             //var result = await _accountService.CreatesAccount(new User { }, "kjk788kkk");
-
             //Assert.IsTrue(result.Equals(false));
         }
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
         [Test]
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
         public async Task AccountService_CreateUserAndAccount_Returns_UserNotCreated_False()
         {
             var mockAppSettings = new Mock<IOptions<AppSettings>>();

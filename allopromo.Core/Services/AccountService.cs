@@ -1,4 +1,5 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Model.ViewModel;
@@ -20,7 +21,7 @@ namespace allopromo.Core.Model
         public event UserAuthenticatedEventHandler userAuthenticated;
         public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
 
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly AppSettings _appSettings;
         public AccountService()
@@ -45,8 +46,8 @@ namespace allopromo.Core.Model
         //public AuthenticateResponse Authenticate(AuthenticateRequest model)
         public LoginResponseModel Authenticate(LoginModel loginModel)
         {
-            var user = _userManager.Users.FirstOrDefault(x => x.userName
-                        == loginModel.userPassword && x.userPassword == loginModel.userPassword);
+            var user = _userManager.Users.FirstOrDefault(x => x.UserName
+                        == loginModel.userPassword && x.PasswordHash == loginModel.userPassword);
             if (user == null) return null;
 
             // authentication successful so generate jwt token
@@ -56,7 +57,7 @@ namespace allopromo.Core.Model
             //return new AuthenticateResponse(user, token);
             return new LoginResponseModel(user, token);
         }
-        public string generateJwtToken(User user)
+        public string generateJwtToken(ApplicationUser user)
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -64,7 +65,7 @@ namespace allopromo.Core.Model
             int y = 8;
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.userName.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserName.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials=new SigningCredentials(
                     new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
@@ -72,7 +73,7 @@ namespace allopromo.Core.Model
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        public async Task CreatesAccount(User user, string userpwd)
+        public async Task CreatesAccount(ApplicationUser user, string userpwd)
         {
             await new Task(null);
         }

@@ -10,11 +10,10 @@ namespace allopromo.Core.Application.Dto
         public string storeId { get; set; }
         public string  storeName { get; set; }
         public int storeReferenceNumber { get; set; }
+
         public StoreDto()
         {
-
         }
-        
         //public StoreDto(string storeId, string storeName, int storeRefNumber)
         //{
         //    _storeId = storeId;
@@ -22,8 +21,6 @@ namespace allopromo.Core.Application.Dto
         //    _storeReferenceNumber = storeRefNumber;
         //}
     }
-
-
 
     public class CreateStoreDto
     {
@@ -40,9 +37,8 @@ namespace allopromo.Core.Application.Dto
         public bool storeIsEnabled { get; set; }
         public bool storeIsDeleted { get; set; }
     }
-    public class UserDTO
-    {
+    //public class UserDTO
+    //{
 
-    }
-
+    //}
 }

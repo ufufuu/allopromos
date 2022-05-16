@@ -11,10 +11,13 @@ using allopromo.Model.ViewModel;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Infrastructure;
 using allopromo.Core.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using allopromo.Infrastructure.Data;
+
 namespace allopromo.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]   
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -28,7 +31,7 @@ namespace allopromo.Controllers
             _userService = userService;
         }
         public UserController(AccountService accountService,
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, 
+            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _accountService = accountService;
@@ -48,7 +51,7 @@ namespace allopromo.Controllers
         [HttpGet("{role}")]
         public IActionResult GetUsers(string role)
         {
-            if(role!=null)
+            if (role != null)
             {
                 var roleUsers = _userService.GetUsersInRole(role);
                 return Ok(roleUsers);
@@ -63,28 +66,29 @@ namespace allopromo.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(User user) 
+        public async Task<IActionResult> CreateUser(ApplicationUser user)
         {
             if (user == null)
                 return null;
             else
             {
-                if(string.IsNullOrEmpty(user.userPassword))
-                     throw new Exception("Password is invalid or Empty");
+                if (string.IsNullOrEmpty(user.PasswordHash))
+                    throw new Exception("Password is invalid or Empty");
                 //if (ModelState.IsValid)
                 //{
-                    var appUser = new ApplicationUser
-                    {
-                        UserName = user.userEmail,
-                        Email = user.userEmail,
-                        PhoneNumber = user.userPhoneNumber
-                    };
-                    var result = await _userService.CreateUser(appUser, user.userPassword);
-                    if (result)
-                    {
-                    _accountService.OnUserAuthenticate(user.userEmail);
-                        return Ok(appUser);
-                    }
+                var appUser = new ApplicationUser
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                };
+
+                var result = await _userService.CreateUser(appUser, user.PasswordHash);
+                if (result)
+                {
+                    _accountService.OnUserAuthenticate(user.Email);
+                    return Ok(appUser);
+                }
                 else
                 {
                     return NotFound();
@@ -107,33 +111,42 @@ namespace allopromo.Controllers
         }
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(LoginModel loginModel)
+        public IActionResult Login(LoginModel loginModel) // mot de passe : @errAbaophone43
         {
             //_accountService.Authenticate(loginModel);
             //_signInManager.PasswordSignInAsync
 
             if (loginModel != null)
             {
-                var account = _userManager?.FindByEmailAsync(loginModel.userName).Result;
-                    //&& (_signInManager.UserManager.CheckPasswordAsync
-                    //(account, loginModel.userPassword).Result))
+                ApplicationUser account = null;
+                try
+                {
+                    account = _userManager?.FindByEmailAsync(loginModel.UserName).Result;
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                //&& (_signInManager.UserManager.CheckPasswordAsync
+                //(account, loginModel.userPassword).Result))
 
                 if (account != null)
                 {
                     var loginValid2 = _signInManager?.PasswordSignInAsync(
-                        loginModel.userName.ToString(), loginModel.userPassword.ToString(),true, true);
+                        loginModel.UserName.ToString(), loginModel.PasswordHash.ToString(), true, true);
 
-                    var loginValid = _userService.ValidateUser("djifa@allo.co", loginModel.userPassword);
+                    var loginValid = _userService.ValidateUser(loginModel.UserName, loginModel.PasswordHash);
                     if (loginValid)
                     {
-                        var role = _userService.GetUserRole(account).UserRole;
-                        if (role == null)
-                            role = "";
-                        User user = new User
+                        var role = _userService.GetUserRole(account).UserRoles;
+                        //if (role == null)
+                        //role = "hg";
+                        ApplicationUser user = new ApplicationUser
                         {
-                            userName = loginModel.userName,
-                            userEmail = loginModel.userName,
-                            UserRole = (string)role
+                            UserName = loginModel.UserName,
+                            Email = loginModel.UserName,
+                            UserRoles = role
                         };
                         var userDto = UserConvertor.ConvertUser(account);
                         return Ok(new ApiResponseModel
@@ -146,6 +159,7 @@ namespace allopromo.Controllers
                     {
                         return NotFound(new { message = "User name or Pwd UUY incorrect" });
                     }
+
                     //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
                     /*
                     using(var emailNotifyService= new EmailNotificationService())
@@ -165,12 +179,12 @@ namespace allopromo.Controllers
         [Route("login")]
         public IActionResult Login2(LoginModel userLogin)
         {
-            var user = _userService.GetUserIfExist(userLogin.userName);
-            if (user!= null)
+            var user = _userService.GetUserIfExist(userLogin.UserName);
+            if (user != null)
             {
                 var result = user;
-                int y = 5;  
-                if(_userService.LoginUser(user))
+                int y = 5;
+                if (_userService.LoginUser((ApplicationUser)user))
                 {
                     var userDto = UserConvertor.ConvertUser(user);
                     return Ok(userDto);
@@ -181,6 +195,11 @@ namespace allopromo.Controllers
                 }
             }
             return NotFound();
+        }
+        private async Task<ApplicationUser> GetConnectedUser()
+        {
+            var user = await _userManager.FindByIdAsync(User.Identity.Name);
+            return user;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -8,32 +9,53 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class StoreRepository:
-        IStoreRepository
+    public class StoreRepository: IStoreRepository
     {
         private readonly AppDbContext _dbContext;
-        //public StoreRepository()
-        //{
-        //}
         public StoreRepository(AppDbContext dbContext)
             => _dbContext = dbContext;
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
         public tStore Add(tStore store)
         {
-            store = new tStore();
+            tStoreCategory category = new tStoreCategory { storeCategoryName = "Commercants" };
+            _dbContext.StoreCategories.Add(category);
+
+            tCity cityLocation = new tCity { cityGpsLongitude= "Lome - Maizerte"}; //get from Localization Library
+            cityLocation.cityName = "Quarier Agbelepedogan 2ieme von apres Total Totsi en allant " +
+                "vers Attikoume - 7VP3+PR6 Singapore  N 48.14305  E 17.13055 * ";
+            cityLocation.cityGpsLatitude = "wekrfewjk wdlfkkl wekfdlfk ";
+
+            //tUser user1 = new tUser {userId= "1ec20d6f-e844-4865-b275-9c08a3249619"};
+
+
+            ApplicationUser user1 =new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+            };
+
+            //allopromo.Core.Model.tUser
+            //store = new tStore();
+
             store.storeId = Guid.NewGuid().ToString();
             store.storeName = store.storeName;
             store.storeCreatedOn = DateTime.Now.Date;
             store.storeBecomesInactiveOn = DateTime.Now.AddMonths(6).Date;
-            store.storeDescription = "ZZAAZ";
-            store.userId = "1ec20d6f-e844-4865-b275-9c08a3249619";
-            tStoreCategory tCategory = new tStoreCategory {storeCategoryName = "Epiceries" };
-            _dbContext.StoreCategories.Add(tCategory);
-            store.storeCategory = tCategory;
+            store.storeDescription = store.storeDescription;
+
+            store.user = user1;
+            store.City = cityLocation;
+            store.Category = category;
+
+            int y = 6;
+            //_dbContext.StoreCategories.Add(tCategory);
             //tCategory.tStores.Add(store);
-            int e = 7;
-            //store.storeCategoryId = 1;
+
             if (_dbContext != null)
                 _dbContext.Stores.Add(store);
+
             _dbContext.SaveChanges();
             return store;
         }
@@ -47,7 +69,7 @@ namespace allopromo.Infrastructure.Repositories
             else
             {
                 store = _dbContext.Stores
-                .Where(x => x.userId == Id.ToString()).FirstOrDefault();
+                .Where(x => x.user.Id == Id.ToString()).FirstOrDefault();
             }
             return store;
         }
@@ -71,14 +93,14 @@ namespace allopromo.Infrastructure.Repositories
         //}
         public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId) //GetStoresByIdAsync GetStoresByCatIdAsync
         {
-            var stores = from q in _dbContext.Stores.Where(x => x.storeCategoryId == categoryId)
+            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId == categoryId)
                          .AsNoTracking()
                          select q;
             return await stores.ToListAsync();
         }
         public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int offSet, int limitPerPage)
         {
-            var stores = from q in _dbContext.Stores.Where(x => x.storeCategoryId == categoryId)
+            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId == categoryId)
                          .Skip((offSet-1) * limitPerPage)
                          .Take(limitPerPage)
                          .AsNoTracking()
@@ -150,3 +172,5 @@ namespace allopromo.Infrastructure.Repositories
 /* hat IS is it with that CancellationToken , in get Method argument at end ?
  * 
  * Method OverLoading vs method Overriding */
+// vousbrillez-ca : Cegep de Ste Foy: intelligence d'Affaires et Mega-Donnees 
+// other info: categor y cat, location loc, user user to passs to store 4 propagation !

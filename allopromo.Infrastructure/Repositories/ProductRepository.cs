@@ -1,4 +1,6 @@
-﻿using allopromo.Core.Entities;
+﻿using allopromo.Core.Abstract;
+using allopromo.Core.Application.Dto;
+using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,8 +10,28 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class ProductRepository//: IEntityBaseRepository
+    public class ProductRepository //:IEntityBaseRepository
+        : IProductRepository
     {
+        public async Task<tProduct> CreateAsync(tProduct product)
+        {
+            tProduct tproduct = null;
+            using (var db = new AppDbContext())
+            {
+                db.Products.Add(tproduct);
+            }
+            return tproduct;
+        }
+        public async Task<tProduct> GetProductAsync(string id)
+        {
+            //using(var db = new AppDbContext())
+            //{
+            //    return db.Products
+            //        .Where(x => x.storeId == id)
+            //        .FirstOrDefault();
+            //}
+            return null;
+        }
         public async Task<List<tProduct>> GetProductsAsync(string storeId)
         {
             //using (var db = new AppDbContext())
@@ -21,15 +43,9 @@ namespace allopromo.Infrastructure.Repositories
             //}
             return null;
         }
-        public async Task<tProduct> GetProductAsync(string id)
+        public Task<tProduct> GetProductsByStoreIdAsync(string id)
         {
-            //using(var db = new AppDbContext())
-            //{
-            //    return db.Products
-            //        .Where(x => x.storeId == id)
-            //        .FirstOrDefault();
-            //}
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

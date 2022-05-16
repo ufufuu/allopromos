@@ -15,14 +15,14 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 namespace allopromo.Core.Model
 {
-    public class UserService : IUserService 
+   public class UserService : IUserService 
    {
         private readonly IUserRepository _userRepo;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;//= new UserManager<ApplicationUser>(); 
         //private readonly AspNetUserManager userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private Serilog.ILogger _logger; // vs Microsoft Logging !
+        private Serilog.ILogger _logger;                            // vs Microsoft Logging !
         private HttpContextAccessor _httpContextAccessor;
 
         public UserService(IUserRepository userRepo, 
@@ -38,7 +38,6 @@ namespace allopromo.Core.Model
             var user = this._userManager.FindByNameAsync(userName);
             return user.Result;
         }
-        //public async Task<bool> UserExist(string userName)
         private async Task<bool> UserExists(string userName)
         {
             bool userExists = false;
@@ -64,8 +63,8 @@ namespace allopromo.Core.Model
                     return false;
             }
             //catch(SqlException ex)
-           // {
-             //   throw ex;
+            // {
+            //   throw ex;
             //}
             catch(InvalidOperationException ex)
             {
@@ -77,7 +76,7 @@ namespace allopromo.Core.Model
             }
             //return false;
         }
-        public ApplicationUser AuthenticateUser(string userName, string password)
+        public ApplicationUser AuthenticateUser(string UserName, string PasswordHash)
         {
             // var user = _userRepo.GetUsers().FirstOrDefault(x => x.UserName == userName 
             //       && x.PasswordHash == password);
@@ -107,36 +106,27 @@ namespace allopromo.Core.Model
         }
         public async Task<bool> CreateUser(ApplicationUser user, string password)
         {
-            
-            //if (UserExist(user.UserName).Result)
-            //  throw new Exception("User name already iNn use");
-            //if(user.passwor)
             bool created = false;
             try
             {
                 if (user == null)
-
-                    //if(user.Equals(null))
-                    //{
-                    //throw new Exception("User cann/ne eut etre null");
-                    //return null; ? Nullabel Bool ??
-
                     return false;
-                // }
                 user.Id = Guid.NewGuid().ToString();
-                var result = await _userManager.CreateAsync(user, password);
-                int c = 8;
-                if (result.Succeeded)
+                var result = _userManager?.CreateAsync(user, password);
+                if(result!=null)// && result.Succeeded((bool)(result?.Succeeded))
                 {
                     //AddUserRole(user, "Users");
-                    //var currentUser = _userManager.FindByNameAsync(user.UserName);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    created = true;
+
+                    //var werwe = _signInManager;
+                    int yl = 21;
+
+                    //await _signInManager?.SignInAsync(user, isPersistent: false);
+
+                    //var bgbg = await _signInManager?.SignInAsync(user, isPersistent: false);
 
                     //await _userManager.AddToRoleAsync(user, "SU");
-                    created= true;
                 }
-                //else
-                //  return false;
             }
             
             //catch (InvalidOperationException)
@@ -156,7 +146,6 @@ namespace allopromo.Core.Model
             {
                 //throw new Exception(" Une erreur est survenur. Veuillez re(essayer)");
                 //return default;
-
                 throw ex;
             }
             return created;
@@ -181,18 +170,17 @@ namespace allopromo.Core.Model
         {
             return _userManager.GetUserNameAsync(user);
         }
-        public User GetUserById(string userId)
+        public ApplicationUser GetUserById(string userId)
         {
             return UserConvertor.ConvertUser(_userManager.FindByIdAsync(userId).Result);
         }
-        public User GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
+        public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
 
             var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
                 //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 //.Where(x => x.UserName == appUser.UserName)
                 //.FirstOrDefault());
-
 
             /*var user11= _userManager.Users.Select(x=>x.UserName.Equals(appUser.UserName))
                 .Join(_roleManager.Roles)
@@ -203,7 +191,6 @@ namespace allopromo.Core.Model
             var users32= _userManager.Users;
             var roles = _roleManager.Roles;
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
-
 
             return UserConvertor.ConvertUser(user);
             
@@ -216,14 +203,13 @@ namespace allopromo.Core.Model
             //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             _httpContextAccessor = new HttpContextAccessor();
             var user = _httpContextAccessor.HttpContext?.User;
-
             return user;
             /*
             ClaimsPrincipal currentUser = this.User;
             var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);*/
         }
-        public List<User> GetUsers()
+        public List<ApplicationUser> GetUsers()
         {
             return UserConvertor.ConvertUsers(_userManager.Users
                 .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
@@ -238,15 +224,15 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-        public User GetUserByNameOrEmail(ApplicationUser user)
+        public ApplicationUser GetUserByNameOrEmail(ApplicationUser user)
         {
             throw new NotImplementedException();
         }
-        public User GetUserbyId(string userId)
+        public ApplicationUser GetUserbyId(string userId)
         {
             return UserConvertor.ConvertUser(_userManager.Users.FirstOrDefault(x => x.Id.Equals(userId)));
         }
-    }
+   }
 }
 // BuySellAds ?
 //Code Coverage ? Input Possibilities | User is Valid , 

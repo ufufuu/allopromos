@@ -18,15 +18,15 @@ namespace allopromo.Core.Model
             _roleManager = roleManager;
         }
         //public Roles ConvertUserRole(User user, Roles role)
-        public string ConvertUserRole(User user, Roles role)
+        public string ConvertUserRole(ApplicationUser user, Roles role)
         {
-            user.UserRole = role.ToString();
-            return user.UserRole;
+            //user.UserRoles = role;
+            return user.UserRoles.ToString();
         }
         public List<Role> GetRoles() => RoleConvertor.ConvertRoles((List<ApplicationRole>)_roleManager.Roles);
-        public string GetUserRole(User user)
+        public string GetUserRole(ApplicationUser user)
         {
-            return user.UserRole;
+            return user.UserRoles.ToString();
         }
         public List<Role> GetRolesByNameOrEmaail(string userName)
         {

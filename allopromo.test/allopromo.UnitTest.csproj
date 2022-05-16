@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\allopromo.Api\allopromo.Api.csproj" />
     <ProjectReference Include="..\allopromo.Core\allopromo.Core.csproj" />
     <ProjectReference Include="..\allopromo.Infrastructure\allopromo.Infrastructure.csproj" />

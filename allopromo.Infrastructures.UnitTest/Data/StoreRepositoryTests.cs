@@ -16,8 +16,8 @@ namespace allopromo.Infrastructures.UnitTest.Data
     [TestFixture]
     public class StoreRepositoryTests
     {
-       // [TestCase]
-        public void Creer_Strore_DEVRAIT_RetournerStoreCree()
+       [TestCase]
+        public void Creer_Store_DEVRAIT_RetournerStoreCree()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase("allopromo")
@@ -52,12 +52,17 @@ namespace allopromo.Infrastructures.UnitTest.Data
             }
             IStoreRepository _SUT = new StoreRepository(new AppDbContext(options));
             var stores =  _SUT.GetStoresAsync();
+
             //var dbContextMock = new Mock<AppDbContext>(options.Object);// options.Object);
+
             var dbSetMock = new Mock<DbSet<tStore>>();
             dbSetMock.Setup(s => s.Add(new tStore()));
+
             //dbContextMock.Setup(s => s.Set<tStore>()).Returns(dbSetMock.Object);
             //IStoreRepository storeRepository = new StoreRepository(dbContextMock.Object);
+
             var storeCree =  _SUT.Add(store);
+
             //Assert.IsNotNull(storeCree);
             Assert.IsNotNull(stores);
             Assert.AreEqual(3, storesS.Count);
@@ -71,9 +76,9 @@ namespace allopromo.Infrastructures.UnitTest.Data
             List<tStore> stores = new List<tStore>();
             using(var dbContext= new AppDbContext(options))
             {
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId=9});
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId=9 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId=9 });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
                 dbContext.SaveChanges();
             }
             IEnumerable<tStore> storesPerPage = null;
@@ -93,17 +98,17 @@ namespace allopromo.Infrastructures.UnitTest.Data
             List<tStore> stores = new List<tStore>();
             using (var dbContext = new AppDbContext(options))
             {
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
 
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
 
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
-                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(), storeCategoryId = 8 });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
+                dbContext.Stores.Add(new tStore { storeId = Guid.NewGuid().ToString(),  });
                 //storesPerPage = sut.GetStoresByCategoryIdAsync(category.storeCategoryId, 3, 3).Result.ToList();
                 dbContext.SaveChanges();
             }

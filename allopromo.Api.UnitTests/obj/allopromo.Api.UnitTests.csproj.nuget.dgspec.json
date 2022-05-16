@@ -219,10 +219,6 @@
             "Serilog.Sinks.File": {
               "target": "Package",
               "version": "[5.0.0, )"
-            },
-            "xmlrpcnet": {
-              "target": "Package",
-              "version": "[3.0.0.241, )"
             }
           },
           "imports": [
@@ -287,6 +283,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            },
             "FirebaseAdmin": {
               "target": "Package",
               "version": "[1.2.0, )"
@@ -330,10 +330,6 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.16.0, )"
-            },
-            "xmlrpcnet": {
-              "target": "Package",
-              "version": "[3.0.0.241, )"
             }
           },
           "imports": [
@@ -447,10 +443,6 @@
             "Serilog.Sinks.File": {
               "target": "Package",
               "version": "[5.0.0, )"
-            },
-            "xmlrpcnet": {
-              "target": "Package",
-              "version": "[3.0.0.241, )"
             }
           },
           "imports": [

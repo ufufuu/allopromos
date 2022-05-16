@@ -5,5 +5,7 @@
         public int productId { get; set; }
         public string productName { get; set; }
         public virtual StoreDto productStoreId { get; set; }
+
+        public int productStatus { get; set; }
     }
 }

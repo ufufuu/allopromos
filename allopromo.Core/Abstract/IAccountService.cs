@@ -1,4 +1,5 @@
-﻿using allopromo.Core.Model;
+﻿using allopromo.Core.Domain;
+using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Model.ViewModel;
 using System;
@@ -11,14 +12,13 @@ namespace allopromo.Core.Abstract
     {
         //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
 
-        public string generateJwtToken(User user); // or Remove this Mehods from Interface and make it private in service.
+        public string generateJwtToken(ApplicationUser user); // or Remove this Mehods from Interface and make it private in service.
 
         // method for handling event without any data
         public event UserAuthenticatedEventHandler userAuthenticated;
         public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
 
         public delegate UserAuthenticateEventArgs onUserAuthenticates();
-
         public void OnUserAuthenticate(string userName);
         public void OnUserAuthenticated();
         abstract LoginResponseModel Authenticate(LoginModel login);

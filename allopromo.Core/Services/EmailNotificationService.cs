@@ -1,4 +1,5 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Model.ApiResponse;
 using FluentEmail.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,7 @@ namespace allopromo.Core.Model
         }
         public bool SendNotification()
         {
-            _storeService.storeCreated += RaisesEmailEventHandler;
+            _storeService.StoreCreated += RaisesEmailEventHandler;
             return true;
         }
        
@@ -45,6 +46,11 @@ namespace allopromo.Core.Model
             await email1.SendAsync();
             return true;
         }
+
+        public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
@@ -52,3 +58,6 @@ namespace allopromo.Core.Model
 //FluentEmail.Smtp.SendMailEx.SendMailExAsync();
 //_email.S
 //then SignalR - Send Notifiation to Client
+
+
+//https://www.thecodehubs.com/firebase-notification-in-net-core/

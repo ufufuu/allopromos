@@ -11,6 +11,8 @@ namespace allopromo.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public  int storeCategoryId { get; set; }
         public string storeCategoryName { get; set; }
+
+
         //public bool hasChildren { get; set; }
         public virtual ICollection<tStore> tStores { get; } = new List<tStore>();
 

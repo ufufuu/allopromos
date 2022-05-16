@@ -8,27 +8,33 @@
     <Compile Remove="allopromoDataAccess\**" />
     <Compile Remove="bin\ViewModel\**" />
     <Compile Remove="Infrastructure\ExceptionHandlers\**" />
+    <Compile Remove="Infrastructure\Excetions\**" />
     <Compile Remove="Infrastructure\Filters\**" />
     <Compile Remove="Infrastructure\Middlewares\**" />
     <Content Remove="allopromoDataAccess\**" />
     <Content Remove="bin\ViewModel\**" />
     <Content Remove="Infrastructure\ExceptionHandlers\**" />
+    <Content Remove="Infrastructure\Excetions\**" />
     <Content Remove="Infrastructure\Filters\**" />
     <Content Remove="Infrastructure\Middlewares\**" />
     <EmbeddedResource Remove="allopromoDataAccess\**" />
     <EmbeddedResource Remove="bin\ViewModel\**" />
     <EmbeddedResource Remove="Infrastructure\ExceptionHandlers\**" />
+    <EmbeddedResource Remove="Infrastructure\Excetions\**" />
     <EmbeddedResource Remove="Infrastructure\Filters\**" />
     <EmbeddedResource Remove="Infrastructure\Middlewares\**" />
     <None Remove="allopromoDataAccess\**" />
     <None Remove="bin\ViewModel\**" />
     <None Remove="Infrastructure\ExceptionHandlers\**" />
+    <None Remove="Infrastructure\Excetions\**" />
     <None Remove="Infrastructure\Filters\**" />
     <None Remove="Infrastructure\Middlewares\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\AccounttController.cs" />
+    <Compile Remove="Controllers\RoleController.cs" />
+    <Compile Remove="Controllers\StoreCategorie.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthHandler.cs" />
@@ -47,7 +53,6 @@
     <Folder Include="bin\" />
     <Folder Include="Controllers\Errors\" />
     <Folder Include="Infrastructure\Hubs\" />
-    <Folder Include="Infrastructure\Excetions\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Properties\" />
@@ -99,8 +104,6 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    
-    <PackageReference Include="xmlrpcnet" Version="3.0.0.241" />
   </ItemGroup>
 
   <ItemGroup>

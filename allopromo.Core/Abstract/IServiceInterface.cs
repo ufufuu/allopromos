@@ -5,6 +5,10 @@ namespace allopromo.Services.Abstract
 {
     // Service Contracts
     // Service Interface + Message Types = Service Layer//Business Logic + Validation Logi
+    public interface IRoleService
+    {
+
+    }
     public interface IServiceInterface
     {
 

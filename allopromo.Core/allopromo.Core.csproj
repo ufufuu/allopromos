@@ -7,19 +7,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Concrete\**" />
+    <Compile Remove="Contracts\**" />
     <Compile Remove="DTO\**" />
+    <Compile Remove="Infrastructure\Servers\**" />
     <Compile Remove="Repositories\**" />
     <EmbeddedResource Remove="Concrete\**" />
+    <EmbeddedResource Remove="Contracts\**" />
     <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="Infrastructure\Servers\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <None Remove="Concrete\**" />
+    <None Remove="Contracts\**" />
     <None Remove="DTO\**" />
+    <None Remove="Infrastructure\Servers\**" />
     <None Remove="Repositories\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Abstract\IRoleService.cs" />
+    <Compile Remove="Abstract\ISmsNotificationService.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
+    <Compile Remove="Entities\tOrder.cs" />
     <Compile Remove="Entities\tRole.cs" />
-    <Compile Remove="Entities\tUser.cs" />
     <Compile Remove="Interfaces\IIRepository.cs" />
     <Compile Remove="Interfaces\IRepository.cs" />
     <Compile Remove="Model\ApplicationUser.cs" />
@@ -27,6 +35,7 @@
     <Compile Remove="Services\IAccountService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FirebaseAdmin" Version="1.2.0" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
@@ -38,10 +47,10 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
-    <PackageReference Include="xmlrpcnet" Version="3.0.0.241" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Infrastructure\_Exceptions\" />
+    <Folder Include="Aggregates\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
 </Project>

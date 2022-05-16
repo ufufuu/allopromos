@@ -4,7 +4,7 @@ namespace allopromo.Core.Abstract
 {
     public interface IGenericRepository<T> where T:class
     {
-        void Add(T obj);
+        Task Add(T obj);
         void Update(T obj);
         void Save();
         Task<List<T>> GetAllAsync();

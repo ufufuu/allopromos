@@ -8,9 +8,15 @@ namespace allopromo.Infrastructure.Abstract
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
+        #region fields
         private readonly AppDbContext _dbContext;
         private DbSet<T> _table;
-        public GenericRepository()
+        #endregion
+        #region Public Method
+        //public GenericRepository(AppDbContext db)
+        //{
+        //}
+        public GenericRepository(AppDbContext db)
         {
             //_dbContext = new AppDbContext();
             _table = _dbContext.Set<T>();
@@ -20,9 +26,10 @@ namespace allopromo.Infrastructure.Abstract
             _dbContext = dbContext;
             _table = table;
         }
-        public void Add(T obj)
+        public Task Add(T obj)
         {
             _table.Add(obj);
+            return obj as Task;
         }
         public void Save()
         {
@@ -46,5 +53,6 @@ namespace allopromo.Infrastructure.Abstract
             T existing = _table.Find(Id);
             _table.Remove(existing);
         }
+        #endregion
     }
 }

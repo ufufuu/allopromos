@@ -98,7 +98,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcorea
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\CookComputing.XmlRpcV2.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\de\Microsoft.TestPlatform.CoreUtilities.resources.dll

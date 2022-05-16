@@ -8,10 +8,13 @@
   <ItemGroup>
     <Compile Remove="Entities\**" />
     <Compile Remove="Model\**" />
+    <Compile Remove="SignalR\Factory\**" />
     <EmbeddedResource Remove="Entities\**" />
     <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="SignalR\Factory\**" />
     <None Remove="Entities\**" />
     <None Remove="Model\**" />
+    <None Remove="SignalR\Factory\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,11 +38,14 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="xmlrpcnet" Version="3.0.0.241" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\allopromo.Core\allopromo.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Config\" />
   </ItemGroup>
 
   <!--<ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,13 @@ namespace allopromo.Core.Helpers
     // from Jsasom Watomre .Net Core JWT -- Look the ohter File
     // Jsasom Watomre .Net Core JWT
     //[AttributeUsage(AttributeTargets.Class|AttributeTargets.Methods)]?
-
     public class JwtBasicAuthorizeAttribute : Attribute, System.Web.Http.Filters.IAuthenticationFilter
     {
         public bool AllowMultiple => throw new NotImplementedException();
-
         public Task AuthenticateAsync(System.Web.Http.Filters.HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
-
         /*
         public Task AuthenticateAsync(System.Web.Http.Filters.HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
@@ -47,11 +45,11 @@ namespace allopromo.Core.Helpers
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (User)context.HttpContext.Items["User"];
+            var user = (ApplicationUser)context.HttpContext.Items["User"];
             if (user == null)
             {
-                context.Result =//}){...}
-                    new JsonResult(new { message = "Unauthorizedhello", StatusCode = StatusCodes.Status401Unauthorized });
+                context.Result =
+                    new JsonResult(new { message = "Unauthorized", StatusCode = StatusCodes.Status401Unauthorized });
             }
             var headers = context.HttpContext.Request.Headers;
             var parameters = headers.Values;

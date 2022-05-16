@@ -1,26 +1,23 @@
-﻿//ca va ca va
-using allopromo.Core.Abstract;
+﻿using allopromo.Core.Abstract;
+using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Model;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 namespace alloPromoTests.ServiceTests
 {
-
-    // ? unit for Work - Generic Repository - Logging - Query Pattenrs- Resilienccy !
-
     public class UserServiceTest
     {
-        private  UserService _userService;
-
-      private Mock<IUserRepository> _userRepo= new Mock<IUserRepository>();
+    private UserService _sut;
+    private Mock<IUserRepository> _userRepoMock= new Mock<IUserRepository>();
+    private readonly UserManager<ApplicationUser> _userManager;
 
         public UserServiceTest()
         {
         }
-        /*
         private static Mock<UserManager<ApplicationUser>> MockUserManager()
         {
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
@@ -33,36 +30,37 @@ namespace alloPromoTests.ServiceTests
                 null,
                 null,
                 null);
-        }*/
-
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-        [Test]
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-        //[TestCase(null, "kdjfdkfj")]
-        //[TestCase("user" , "kdjfdkfj")]
-        public async Task UserService_CreateUser_Returns_UserNotCreated()
-        //public async Task UserService_CreateUser_Returns_UserNotCreated(, "")
-        {
-            _userService = new UserService(_userRepo.Object, null, null);
-            // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
-            var result = await _userService.CreateUser(new ApplicationUser { }, "kjk788kkk");
-
-            Assert.IsTrue(result.Equals(false));
         }
-#pragma warning disable CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
         [Test]
-#pragma warning restore CS0246 // The type or namespace name 'TestAttribute' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning restore CS0246 // The type or namespace name 'Test' could not be found (are you missing a using directive or an assembly reference?)
-        public async Task UserService_CreateUser_Returns_UserNotCreated_False()
+        //[TestCase("user" , "kdjfdkfj")]
+        public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {
-            _userRepo = new Mock<IUserRepository>();
-            _userService = new UserService(_userRepo.Object, null, null);
-            var result = await _userService.CreateUser(null, "kjk788kkk");
-            //Assert.Throws<Exception>(async () => await _userService.CreateUser(null, "akaj4i"));
-            //Assert.ThrowsAsync<Exception>(async () =>await _userService.CreateUser(null, "kjk788kkk"));
+            //Arrange
+            UserDto userDto = new UserDto
+            {
+                userEmail="kevin.djondo@allo.pro",
+                userName="Kevin DjonDo Johnson",
+                Password="Password"
+            };
+            _sut = new UserService(_userRepoMock.Object, MockUserManager().Object, null);
+
+            var result = await _sut?.CreateUser(new ApplicationUser{}, "kjk788kkk");
+
+            ApplicationUser user = new ApplicationUser
+            {
+            };
+
+            Assert.IsTrue(result.Equals(true));
+        }
+        [Test]
+        public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
+        {
+            _userRepoMock = new Mock<IUserRepository>();
+            _sut = new UserService(_userRepoMock.Object, null, null);
+            var result = await _sut.CreateUser(null, "kjk788kkk");
+
+            //Assert.Throws<Exception>(async () => await _sut.CreateUser(null, "akaj4i"));
+            //Assert.ThrowsAsync<Exception>(async () =>await _sut.CreateUser(null, "kjk788kkk"));
             //Assert.Throws<>("");
             //User cann/ne eut etre null
             Assert.IsTrue(result.Equals(false));
@@ -70,7 +68,7 @@ namespace alloPromoTests.ServiceTests
         //[Test]
         public void UserService_CreateUser_Returns_UserCreated()
         {
-           Task<bool> result= _userService.CreateUser(new ApplicationUser { }, "");
+           Task<bool> result= _sut.CreateUser(new ApplicationUser { }, "");
             Assert.IsNotNull(result);
         }
         //[Test]
@@ -116,3 +114,5 @@ namespace alloPromoTests.ServiceTests
 
 //htmlAgilityPack - newtonSoft - Nuget.Core -             
 
+//ca va ca va
+// ? unit for Work - Generic Repository - Logging - Query Pattenrs- Resilienccy ! 

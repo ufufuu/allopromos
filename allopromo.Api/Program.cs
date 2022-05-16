@@ -37,7 +37,7 @@ namespace allopromo
             {
                 //Log.CloseAndFlush();
             }
-            CreateWebHostBuilder(args).Build().Run(); //or BelowF
+            CreateWebHostBuilder(args).Build().Run();//or BelowF
             //Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONNEMENT1", "Production");
             BuildWebHost(args).Run();
         }

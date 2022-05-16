@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tXsmx2jqBKedNBQ2/fxcxnFXoxnQxRPwgHraHVSvOXpL53nOquXMOXzsZld25rcXMOEgAeGqhXhpM2/Ku7tQgA==",
+  "dgSpecHash": "SHW589QUK1jPGFiIPOccJLUTAI2492v0Am8cZVIJE1kevcNMXrod0s03AJl6hIKH6Fq94wYDcnNTydvzCVx1dg==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Api.UnitTests\\allopromo.Api.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -213,8 +213,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\xmlrpcnet\\3.0.0.241\\xmlrpcnet.3.0.0.241.nupkg.sha512"
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
     {
@@ -253,16 +252,6 @@
       "warningLevel": 1,
       "message": "Package 'Owin 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
       "libraryId": "Owin",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'xmlrpcnet 3.0.0.241' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "xmlrpcnet",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
       ]

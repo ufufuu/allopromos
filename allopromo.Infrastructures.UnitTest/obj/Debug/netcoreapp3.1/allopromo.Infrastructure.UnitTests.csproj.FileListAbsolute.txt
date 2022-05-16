@@ -10,6 +10,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.runtimeconfig.dev.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\FirebaseAdmin.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\FluentEmail.Core.dll
@@ -89,7 +90,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\CookComputing.XmlRpcV2.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\de\Microsoft.TestPlatform.CoreUtilities.resources.dll

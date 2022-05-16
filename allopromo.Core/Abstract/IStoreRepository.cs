@@ -7,6 +7,7 @@ namespace allopromo.Core.Abstract                   //?  Some Would Call it Doma
 {
     public interface IStoreRepository
     {
+        void Save();
         tStore Add(tStore store);
         //Task<tStore> GetStoreAsync(string storeId);
         //Task<tStore> GetStoreByIdAsync(string storeId);

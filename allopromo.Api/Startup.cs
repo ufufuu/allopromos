@@ -23,13 +23,18 @@ using System;
 using allopromo.Core.Application;
 using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
+using allopromo.Infrastructure.Abstract;
+using allopromo.Core.Entities;
+using allopromo.Api.Model;
+using allopromo.Api;
+//using allopromo.Api.Services.Factory;
 //using allopromo.Core.Application.Interface;
 //using allopromo.Core.Services;
 //using allopromo.Infrastructure.Helpers.Authentication;
 [assembly:OwinStartup(typeof(allopromo.Startup))]
 namespace allopromo
 {
-    public class Startup
+    public class  Startup
     {
         public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
         public Startup(IConfiguration configuration)
@@ -96,6 +101,10 @@ namespace allopromo
                 };
 
             });
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
+            );
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
@@ -116,11 +125,11 @@ namespace allopromo
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IGenericRepository<tStore>, GenericRepository<tStore>>();
 
-            services.AddScoped <Core.Abstract.IStoreRepository, //Repositories.
+            services.AddScoped <Core.Abstract.IStoreRepository,
                Infrastructure.Repositories.StoreRepository>();
 
-            //services.AddScoped<IStoreQuery, StoreQuery>();
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp)); //?Instead of <ApplicationUser>>
             services.AddSingleton<ILoggerManager, LoggerManager>();
@@ -178,7 +187,7 @@ namespace allopromo
                 app.UseDeveloperExceptionPage();
                 //app.UseSerilogRequestLogging();
             }
-            else 
+            else
             {
                 //app.UseExceptionHandler("/error");
                 //Or Below ?
@@ -186,7 +195,7 @@ namespace allopromo
             }
             //app.ConfigureExceptionHandler(logger);// OR Below 
             //app.ConfigureCustomExceptionMiddleware();
-            
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
@@ -203,9 +212,14 @@ namespace allopromo
                 //Entreles points determinaison pour les contrôleurs et lesecours 
                 //côtéclient,ajoutez un point de
                 //terminaison pour le Hub
-                endpoints.MapHub<allopromoServers.Hubs.Chat>("/chathub");
+
+                ///endpoints.MapHub<ChatHub>("/chathub");
+
                 endpoints.MapFallbackToFile("index.html");
             });
+
+            AutoMapperConfiguration.Initialize();
+
             /*
             app.UseMvc();
             app.UseCors(options =>options.AllowAnyMethod().AllowAnyHeader()

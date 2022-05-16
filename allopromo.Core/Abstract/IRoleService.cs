@@ -3,8 +3,5 @@ using System.Collections.Generic;
 using System.Text;
 namespace allopromo.Core.Abstract
 {
-    public interface IRoleService
-    {
-
-    }
+    
 }
