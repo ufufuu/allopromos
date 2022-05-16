@@ -13,8 +13,7 @@ namespace alloPromoTests.ServiceTests
     {
     private UserService _sut;
     private Mock<IUserRepository> _userRepoMock= new Mock<IUserRepository>();
-    private readonly UserManager<ApplicationUser> _userManager;
-
+    //private readonly UserManager<ApplicationUser> _userManager;
         public UserServiceTest()
         {
         }
@@ -49,7 +48,6 @@ namespace alloPromoTests.ServiceTests
             ApplicationUser user = new ApplicationUser
             {
             };
-
             Assert.IsTrue(result.Equals(true));
         }
         [Test]
@@ -72,7 +70,7 @@ namespace alloPromoTests.ServiceTests
             Assert.IsNotNull(result);
         }
         //[Test]
-        public async Task UserService_CreateUser_Returns_Exception()
+        public void UserService_CreateUser_Returns_Exception()
         {
             throw new  ArgumentNullException();
         }

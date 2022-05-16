@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ViewModel;
 using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
+
 namespace allopromo.Core.UnitTests
 {
     [TestFixture]
@@ -32,18 +34,19 @@ namespace allopromo.Core.UnitTests
         //[TestCase(null, "kdjfdkfj")]
         //[TestCase("user" , "kdjfdkfj")]
 
-        public async Task AccountService_CreateUser_Returns_UserNotCreated()
+        public void AccountService_CreateUser_Returns_UserNotCreated()
         {
             var mockAppSettings = new Mock<IOptions<AppSettings>>();
 
             //_accountService = new AccountService(_userRepo.Object, null, null);
             _accountService = new AccountService(mockAppSettings.Object);
             // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
-            //var result = await _accountService.CreatesAccount(new User { }, "kjk788kkk");
+            //var result = await _accountService.CreatesAccount(new ApplicationUser { }, "kjk788kkk");
+
             //Assert.IsTrue(result.Equals(false));
         }
         [Test]
-        public async Task AccountService_CreateUserAndAccount_Returns_UserNotCreated_False()
+        public void AccountService_CreateUserAndAccount_Returns_UserNotCreated_False()
         {
             var mockAppSettings = new Mock<IOptions<AppSettings>>();
             _userRepo = new Mock<IRepository>();
@@ -68,7 +71,7 @@ namespace allopromo.Core.UnitTests
             //Assert.IsNotNull(result);
         }
         //[Test]
-        public async Task AccountService_CreateUserAndAccount_Returns_Exception()
+        public void  AccountService_CreateUserAndAccount_Returns_Exception()
         {
             throw new  ArgumentNullException();
         }

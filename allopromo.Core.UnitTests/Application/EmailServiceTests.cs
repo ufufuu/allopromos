@@ -8,12 +8,12 @@ using NUnit.Framework;
 namespace alloPromo.Core.UnitTests.Domain.Application
 {
     [TestFixture]
-    public class StoreServiceTest
+    public class EmailServiceTests
     {
-        private readonly IStoreService _sut;
-
         private readonly Mock<IStoreQuery> _storeQuery = new Mock<IStoreQuery>();
-        public StoreServiceTest()
+
+        //private readonly IStoreService _sut = new IStoreService();
+        public EmailServiceTests()
         {
            // _sut = new StoreService(_storeQuery.Object);
         }
@@ -31,9 +31,10 @@ namespace alloPromo.Core.UnitTests.Domain.Application
             var store = new allopromo.Core.Application.Dto.StoreDto();
             store.storeId = "lklk";
             store.storeName = "SED Food";
-            var result = _sut.GetStoreByIdAsync(store.storeId);
-            Assert.IsNotNull(result);
-            Assert.IsTrue(store.storeId.Equals(result.Id));
+            //var result = _sut.GetStoreByIdAsync(store.storeId);
+
+            //Assert.IsNotNull(result);
+            //Assert.IsTrue(store.storeId.Equals(result.Id));
         }
         //[TestCase]
         public void ObtenirStoresAsync_DEVRAIT_Retouner_AllMagazins()
@@ -41,3 +42,8 @@ namespace alloPromo.Core.UnitTests.Domain.Application
         }
     }
 }
+
+
+// Repo ?
+//Query Pattern ?
+// Is N-Tiers a sort of  Client-Server Architecture ?

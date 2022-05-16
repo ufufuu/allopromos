@@ -65,9 +65,9 @@ namespace allopromo.Core.UnitTests
             Assert.IsNotNull(result);
         }
         //[Test]
-        public async Task UserService_CreateUser_Returns_Exception()
+        public void UserService_CreateUser_Returns_Exception()
         {
-            throw new  ArgumentNullException();
+            
         }
     }
     public interface I1

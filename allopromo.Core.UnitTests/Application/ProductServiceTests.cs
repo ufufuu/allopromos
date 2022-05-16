@@ -9,7 +9,13 @@ namespace alloPromo.Core.UnitTests.Application
     public class ProductServiceTest
     {
         [TestCase]
-        public async Task ObtenirProduct_DEVRAIT_RetournerProduitParId()
+        public void  ObtenirProduct_DEVRAIT_RetournerProduitParId()
+        {
+
+        }
+        [TestCase]
+        public void ObtenirProduct_DEVRAIT_RetournerProduitParIds()
+        //public async Task ObtenirProduct_DEVRAIT_RetournerProduitParIds()
         {
 
         }

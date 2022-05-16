@@ -15,7 +15,8 @@ namespace allopromo.Core.UnitTest.ServicesTests
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {
-            StoreCreatedEventArgs storeCreated = null ;
+            //StoreCreatedEventArgs storeCreated = null ;
+
             //IStoreService storeService = new StoreService(storeRepositoryMock.Object);
             StoreDto store = new StoreDto
             {
