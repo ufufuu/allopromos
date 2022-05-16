@@ -15,16 +15,11 @@ namespace allopromo.Core.UnitTest.ServicesTests
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {
-            //StoreCreatedEventArgs storeCreated = null ;
-
-            //IStoreService storeService = new StoreService(storeRepositoryMock.Object);
             StoreDto store = new StoreDto
             {
                 storeName = "La Planque a Thierry",
                 storeId = "348ireknf"
             };
-            //var storeDto= storeService.CreateStore(store);
-            //Assert.IsNotNull(storeDto);
         }
         [TestCase]
         public void StoresService_DeleteStore_Deletes()
