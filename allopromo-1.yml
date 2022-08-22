@@ -18,7 +18,10 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'monepicier - Azure'
+    azureSubscription: 'Azure subscription 1(c90ec7c6-60b3-4bb3-9a45-2f7bb11605e9)'
     appType: 'webApp'
-    WebAppName: 'monepicier'
-
+    WebAppName: 'allopromocp'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'allopromo_apps'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
