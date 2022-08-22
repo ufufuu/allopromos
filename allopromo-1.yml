@@ -20,5 +20,5 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'monepicier - Azure'
     appType: 'webApp'
-    WebAppName: 'allopromocc'
+    WebAppName: 'allopromocp'
     packageForLinux: 
