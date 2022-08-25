@@ -24,4 +24,3 @@ steps:
     deployToSlotOrASE: true
     ResourceGroupName: 'allopromo_apps'
     SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
