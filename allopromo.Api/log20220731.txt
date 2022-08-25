@@ -1,0 +1,674 @@
+2022-07-31 21:52:30.213 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 21:52:42.373 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 21:52:42.375 -04:00 [INF] Hosting environment: Development
+2022-07-31 21:52:42.376 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 21:52:43.205 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 21:52:43.226 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 21:52:46.545 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 21:52:46.546 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 21:52:46.722 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 21:52:46.964 -04:00 [INF] Request finished in 3764.0764ms 404 
+2022-07-31 21:52:47.089 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 21:52:55.868 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 21:53:07.789 -04:00 [INF] Executed DbCommand (6,450ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 21:53:10.021 -04:00 [INF] Executed DbCommand (764ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 21:53:12.387 -04:00 [INF] Executed DbCommand (78ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 21:53:14.010 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 21:53:14.354 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 27244.294ms
+2022-07-31 21:53:14.356 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 21:53:14.378 -04:00 [INF] Request finished in 31198.4244ms 200 application/json; charset=utf-8
+2022-07-31 21:53:14.780 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 21:53:14.799 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 21:53:14.802 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 21:53:14.975 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 21:53:15.023 -04:00 [INF] Executed DbCommand (15ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 21:53:15.076 -04:00 [INF] Executed DbCommand (47ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 21:53:15.133 -04:00 [INF] Executed DbCommand (26ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 21:53:15.137 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 21:53:15.145 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 342.2932ms
+2022-07-31 21:53:15.146 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 21:53:15.147 -04:00 [INF] Request finished in 367.437ms 200 application/json; charset=utf-8
+2022-07-31 22:10:51.381 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:10:54.769 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:10:54.773 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:10:54.773 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:10:54.994 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:10:55.724 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:10:55.797 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:10:55.865 -04:00 [INF] Request finished in 890.5532ms 404 
+2022-07-31 22:16:36.588 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:16:36.606 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:16:36.900 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:16:42.722 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:16:46.173 -04:00 [INF] Executed DbCommand (308ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:16:46.697 -04:00 [INF] Executed DbCommand (20ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:16:46.932 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:16:47.395 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:16:48.255 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 11305.4729ms
+2022-07-31 22:16:48.257 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:16:48.282 -04:00 [INF] Request finished in 11712.0869ms 200 application/json; charset=utf-8
+2022-07-31 22:16:48.605 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:16:48.616 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:16:48.618 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:16:48.817 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:16:48.849 -04:00 [INF] Executed DbCommand (24ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:16:48.877 -04:00 [INF] Executed DbCommand (19ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:16:48.921 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:16:48.924 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:16:48.927 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 308.4579ms
+2022-07-31 22:16:48.928 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:16:48.929 -04:00 [INF] Request finished in 323.1723ms 200 application/json; charset=utf-8
+2022-07-31 22:20:10.117 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:20:13.305 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:20:13.308 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:20:13.309 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:20:13.472 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:20:15.548 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:20:15.663 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:20:15.878 -04:00 [INF] Request finished in 2414.411ms 404 
+2022-07-31 22:20:22.173 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:20:22.184 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:20:22.377 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:20:27.440 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:20:31.167 -04:00 [INF] Executed DbCommand (393ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:20:31.885 -04:00 [INF] Executed DbCommand (31ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:20:32.175 -04:00 [INF] Executed DbCommand (15ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:20:32.737 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:20:32.973 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 10577.0925ms
+2022-07-31 22:20:32.975 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:20:32.989 -04:00 [INF] Request finished in 10822.695ms 200 application/json; charset=utf-8
+2022-07-31 22:20:33.291 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:20:33.302 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:20:33.304 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:20:33.420 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:20:33.435 -04:00 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:20:33.451 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:20:33.482 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:20:33.485 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:20:33.488 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 183.6163ms
+2022-07-31 22:20:33.489 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:20:33.490 -04:00 [INF] Request finished in 199.4356ms 200 application/json; charset=utf-8
+2022-07-31 22:28:33.995 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:28:37.305 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:28:37.326 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:28:37.327 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:28:37.491 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:28:38.251 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:28:38.283 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:28:38.389 -04:00 [INF] Request finished in 915.6063ms 404 
+2022-07-31 22:29:02.816 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:29:02.840 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:29:03.020 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:29:07.752 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:29:11.032 -04:00 [INF] Executed DbCommand (396ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:29:11.565 -04:00 [INF] Executed DbCommand (15ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:29:11.811 -04:00 [INF] Executed DbCommand (11ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:29:12.309 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:29:12.575 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 9534.537ms
+2022-07-31 22:29:12.578 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:29:12.594 -04:00 [INF] Request finished in 9788.2435ms 200 application/json; charset=utf-8
+2022-07-31 22:29:12.822 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:29:12.831 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:29:12.832 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:29:12.975 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:29:13.010 -04:00 [INF] Executed DbCommand (32ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:29:13.025 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:29:13.063 -04:00 [INF] Executed DbCommand (8ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:29:13.065 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:29:13.068 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 235.1736ms
+2022-07-31 22:29:13.068 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:29:13.069 -04:00 [INF] Request finished in 247.5166ms 200 application/json; charset=utf-8
+2022-07-31 22:37:21.198 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:37:25.979 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:37:25.982 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:37:25.982 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:37:26.184 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:37:27.305 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:37:27.507 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:37:27.831 -04:00 [INF] Request finished in 1600.4432ms 404 
+2022-07-31 22:37:30.104 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/favicon.ico  
+2022-07-31 22:37:30.111 -04:00 [INF] Request finished in 8.3892ms 0 
+2022-07-31 22:37:36.175 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:37:36.191 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:37:36.402 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:37:43.490 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:37:50.179 -04:00 [INF] Executed DbCommand (998ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:37:50.822 -04:00 [INF] Executed DbCommand (28ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:37:51.523 -04:00 [INF] Executed DbCommand (184ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:37:55.207 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:37:55.655 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 19223.7296ms
+2022-07-31 22:37:55.658 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:37:55.685 -04:00 [INF] Request finished in 19518.3779ms 200 application/json; charset=utf-8
+2022-07-31 22:37:56.140 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:37:56.147 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:37:56.151 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:37:56.520 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:37:56.743 -04:00 [INF] Executed DbCommand (142ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:37:57.680 -04:00 [INF] Executed DbCommand (845ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:37:57.818 -04:00 [INF] Executed DbCommand (28ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:37:57.822 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:37:57.827 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 1672.4685ms
+2022-07-31 22:37:57.828 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:37:57.829 -04:00 [INF] Request finished in 1691.362ms 200 application/json; charset=utf-8
+2022-07-31 22:40:53.798 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:40:58.847 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:40:58.849 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:40:58.850 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:40:58.978 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:40:59.569 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:40:59.596 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:40:59.666 -04:00 [INF] Request finished in 702.1459ms 404 
+2022-07-31 22:41:51.811 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:41:51.827 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:41:52.132 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:41:56.911 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:42:00.184 -04:00 [INF] Executed DbCommand (481ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:42:00.742 -04:00 [INF] Executed DbCommand (24ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:42:01.124 -04:00 [INF] Executed DbCommand (16ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:42:01.597 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:42:01.872 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 9720.3313ms
+2022-07-31 22:42:01.874 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:42:01.894 -04:00 [INF] Request finished in 10100.5216ms 200 application/json; charset=utf-8
+2022-07-31 22:42:02.138 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:42:02.153 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:42:02.155 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:42:02.307 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:42:02.332 -04:00 [INF] Executed DbCommand (19ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:42:02.368 -04:00 [INF] Executed DbCommand (20ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:42:02.456 -04:00 [INF] Executed DbCommand (36ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:42:02.460 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:42:02.469 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 312.693ms
+2022-07-31 22:42:02.469 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:42:02.470 -04:00 [INF] Request finished in 333.0858ms 200 application/json; charset=utf-8
+2022-07-31 22:52:03.708 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:52:08.076 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:52:08.093 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:52:08.094 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:52:08.257 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:52:09.376 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:52:09.567 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:52:09.766 -04:00 [INF] Request finished in 1523.2761ms 404 
+2022-07-31 22:52:23.406 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:52:23.416 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:52:23.640 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:52:30.454 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:52:34.701 -04:00 [INF] Executed DbCommand (539ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:52:35.262 -04:00 [INF] Executed DbCommand (23ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:52:35.585 -04:00 [INF] Executed DbCommand (13ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:52:36.248 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:52:36.548 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 12889.953ms
+2022-07-31 22:52:36.550 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:52:36.568 -04:00 [INF] Request finished in 13172.2867ms 200 application/json; charset=utf-8
+2022-07-31 22:52:36.811 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:52:36.824 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:52:36.827 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:52:36.954 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:52:36.968 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:52:36.978 -04:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:52:37.007 -04:00 [INF] Executed DbCommand (3ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:52:37.011 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:52:37.015 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 188.3335ms
+2022-07-31 22:52:37.016 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:52:37.017 -04:00 [INF] Request finished in 207.694ms 200 application/json; charset=utf-8
+2022-07-31 22:55:29.907 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:55:38.574 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:55:38.589 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:55:38.590 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:55:38.900 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:55:40.453 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:55:40.575 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:55:40.672 -04:00 [INF] Request finished in 1788.7574ms 404 
+2022-07-31 22:56:01.738 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 22:56:01.755 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:56:01.999 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:56:10.757 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:56:14.641 -04:00 [INF] Executed DbCommand (373ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:56:15.270 -04:00 [INF] Executed DbCommand (20ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:56:15.534 -04:00 [INF] Executed DbCommand (13ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:56:16.192 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:56:16.514 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 14488.2777ms
+2022-07-31 22:56:16.516 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:56:16.534 -04:00 [INF] Request finished in 14805.397ms 200 application/json; charset=utf-8
+2022-07-31 22:56:16.792 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 22:56:16.805 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:56:16.808 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 22:56:16.958 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 22:56:16.985 -04:00 [INF] Executed DbCommand (15ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:56:16.993 -04:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 22:56:17.026 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 22:56:17.030 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 22:56:17.034 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 225.8299ms
+2022-07-31 22:56:17.035 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 22:56:17.036 -04:00 [INF] Request finished in 244.3726ms 200 application/json; charset=utf-8
+2022-07-31 22:59:23.365 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 22:59:26.271 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 22:59:26.274 -04:00 [INF] Hosting environment: Development
+2022-07-31 22:59:26.274 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 22:59:26.472 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 22:59:27.316 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:59:27.345 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 22:59:27.418 -04:00 [INF] Request finished in 960.8016ms 404 
+2022-07-31 23:00:07.402 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:00:07.415 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:00:07.692 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:00:14.579 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:00:20.546 -04:00 [INF] Executed DbCommand (703ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:00:21.193 -04:00 [INF] Executed DbCommand (29ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:00:21.483 -04:00 [INF] Executed DbCommand (11ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:00:22.000 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:00:22.295 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 14582.32ms
+2022-07-31 23:00:22.296 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:00:22.335 -04:00 [INF] Request finished in 14946.0502ms 200 application/json; charset=utf-8
+2022-07-31 23:00:22.541 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:00:22.552 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:00:22.555 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:00:22.689 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:00:22.701 -04:00 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:00:22.709 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:00:22.752 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:00:22.754 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:00:22.758 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 202.2986ms
+2022-07-31 23:00:22.758 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:00:22.759 -04:00 [INF] Request finished in 218.162ms 200 application/json; charset=utf-8
+2022-07-31 23:04:10.974 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 23:04:14.673 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 23:04:14.700 -04:00 [INF] Hosting environment: Development
+2022-07-31 23:04:14.701 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 23:04:14.991 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 23:04:17.704 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:04:17.768 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:04:18.567 -04:00 [INF] Request finished in 3623.5238ms 404 
+2022-07-31 23:04:41.325 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:04:41.338 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:04:41.639 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:04:47.331 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:04:53.230 -04:00 [INF] Executed DbCommand (2,646ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:04:53.760 -04:00 [INF] Executed DbCommand (34ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:04:54.024 -04:00 [INF] Executed DbCommand (14ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:04:54.482 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:04:54.752 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 13095.3993ms
+2022-07-31 23:04:54.754 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:04:54.773 -04:00 [INF] Request finished in 13455.7212ms 200 application/json; charset=utf-8
+2022-07-31 23:04:54.969 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:04:54.980 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:04:54.983 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:04:55.139 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:04:55.154 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:04:55.163 -04:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:04:55.194 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:04:55.198 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:04:55.202 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 218.172ms
+2022-07-31 23:04:55.202 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:04:55.203 -04:00 [INF] Request finished in 235.6831ms 200 application/json; charset=utf-8
+2022-07-31 23:07:53.008 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 23:07:56.792 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 23:07:56.800 -04:00 [INF] Hosting environment: Development
+2022-07-31 23:07:56.805 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 23:07:56.944 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 23:07:57.616 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:07:57.651 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:07:57.718 -04:00 [INF] Request finished in 790.3664ms 404 
+2022-07-31 23:08:47.504 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:08:47.516 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:08:47.722 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:08:52.438 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:08:55.527 -04:00 [INF] Executed DbCommand (417ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:08:56.098 -04:00 [INF] Executed DbCommand (20ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:08:56.349 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:08:56.815 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:08:57.074 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 9332.0314ms
+2022-07-31 23:08:57.076 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:08:57.101 -04:00 [INF] Request finished in 9602.5496ms 200 application/json; charset=utf-8
+2022-07-31 23:08:57.343 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:08:57.356 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:08:57.358 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:08:57.510 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:08:57.525 -04:00 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:08:57.543 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:08:57.578 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:08:57.581 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:08:57.585 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 225.88ms
+2022-07-31 23:08:57.585 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:08:57.586 -04:00 [INF] Request finished in 244.7414ms 200 application/json; charset=utf-8
+2022-07-31 23:12:15.617 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 23:12:23.885 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 23:12:23.888 -04:00 [INF] Hosting environment: Development
+2022-07-31 23:12:23.908 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 23:12:24.031 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 23:12:24.708 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:12:24.747 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:12:24.826 -04:00 [INF] Request finished in 810.8064ms 404 
+2022-07-31 23:12:46.057 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:12:46.068 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:12:46.281 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:12:52.496 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:12:55.846 -04:00 [INF] Executed DbCommand (331ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:12:56.404 -04:00 [INF] Executed DbCommand (18ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:12:56.657 -04:00 [INF] Executed DbCommand (11ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:12:57.188 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:12:58.085 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 11783.1707ms
+2022-07-31 23:12:58.087 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:12:58.130 -04:00 [INF] Request finished in 12080.3587ms 200 application/json; charset=utf-8
+2022-07-31 23:12:58.430 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:12:58.445 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:12:58.447 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:12:58.590 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:12:58.611 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:12:58.623 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:12:58.669 -04:00 [INF] Executed DbCommand (9ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:12:58.673 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:12:58.678 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 229.7535ms
+2022-07-31 23:12:58.678 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:12:58.679 -04:00 [INF] Request finished in 250.6418ms 200 application/json; charset=utf-8
+2022-07-31 23:16:11.995 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 23:16:16.412 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 23:16:16.465 -04:00 [INF] Hosting environment: Development
+2022-07-31 23:16:16.466 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 23:16:16.618 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 23:16:17.223 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:16:17.252 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:16:17.323 -04:00 [INF] Request finished in 722.2024ms 404 
+2022-07-31 23:16:30.182 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:16:30.194 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:16:30.510 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:16:35.509 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:16:38.821 -04:00 [INF] Executed DbCommand (265ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:16:39.359 -04:00 [INF] Executed DbCommand (14ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:16:39.606 -04:00 [INF] Executed DbCommand (8ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:16:40.064 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:16:40.349 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 9817.529ms
+2022-07-31 23:16:40.351 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:16:40.370 -04:00 [INF] Request finished in 10194.9556ms 200 application/json; charset=utf-8
+2022-07-31 23:16:40.569 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:16:40.580 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:16:40.584 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:16:40.700 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:16:40.717 -04:00 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:16:40.726 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:16:40.772 -04:00 [INF] Executed DbCommand (8ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:16:40.775 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:16:40.778 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 194.0241ms
+2022-07-31 23:16:40.779 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:16:40.780 -04:00 [INF] Request finished in 211.3944ms 200 application/json; charset=utf-8
+2022-07-31 23:18:25.607 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 23:18:28.351 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 23:18:28.359 -04:00 [INF] Hosting environment: Development
+2022-07-31 23:18:28.360 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-07-31 23:18:28.526 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/default  
+2022-07-31 23:18:29.165 -04:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:18:29.213 -04:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2022-07-31 23:18:29.285 -04:00 [INF] Request finished in 782.3578ms 404 
+2022-07-31 23:18:49.597 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json 70
+2022-07-31 23:18:49.607 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:18:49.792 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:18:54.440 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:18:57.579 -04:00 [INF] Executed DbCommand (425ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:18:58.124 -04:00 [INF] Executed DbCommand (27ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:18:58.365 -04:00 [INF] Executed DbCommand (12ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:18:58.816 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:18:59.088 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 9275.0025ms
+2022-07-31 23:18:59.089 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:18:59.112 -04:00 [INF] Request finished in 9534.0899ms 200 application/json; charset=utf-8
+2022-07-31 23:18:59.325 -04:00 [INF] Request starting HTTP/1.1 POST https://localhost:44367/api/user/login application/json; charset=utf-8 
+2022-07-31 23:18:59.337 -04:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:18:59.339 -04:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Model.ViewModel.LoginModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2022-07-31 23:18:59.466 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-07-31 23:18:59.483 -04:00 [INF] Executed DbCommand (11ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:18:59.509 -04:00 [INF] Executed DbCommand (18ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-07-31 23:18:59.541 -04:00 [INF] Executed DbCommand (4ms) [Parameters=[@__appUser_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__appUser_UserName_0
+2022-07-31 23:18:59.545 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2022-07-31 23:18:59.548 -04:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 208.3631ms
+2022-07-31 23:18:59.549 -04:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2022-07-31 23:18:59.550 -04:00 [INF] Request finished in 227.2116ms 200 application/json; charset=utf-8

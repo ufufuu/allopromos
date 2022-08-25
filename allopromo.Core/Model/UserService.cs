@@ -19,12 +19,10 @@ namespace allopromo.Core.Model
    {
         private readonly IUserRepository _userRepo;
         private readonly UserManager<ApplicationUser> _userManager;//= new UserManager<ApplicationUser>(); 
-        //private readonly AspNetUserManager userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private Serilog.ILogger _logger;                            // vs Microsoft Logging !
         private HttpContextAccessor _httpContextAccessor;
-
         public UserService(IUserRepository userRepo, 
             UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager)
@@ -211,9 +209,24 @@ namespace allopromo.Core.Model
         }
         public List<ApplicationUser> GetUsers()
         {
-            return UserConvertor.ConvertUsers(_userManager.Users
-                .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                .ToList());
+            List<ApplicationUser> users = null;
+            try
+            {
+                //users = UserConvertor.ConvertUsers(_userManager.Users
+                ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                //.ToList());
+
+                users = _userRepo.getUsers();
+                //using(var db = new allopromo.Infrastructure.
+                //{
+                //}
+            }
+            catch(Exception ex)
+            {
+                int h = 5;
+            }
+            int r = 44;
+            return users;
         }
         public IList<ApplicationUser> GetUsersInRole(string roleName)
         {

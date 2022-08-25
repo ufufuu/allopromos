@@ -1,0 +1,57 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Account Admin - Home page";
+}
+<!--
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+
+        </div>
+    </div>
+    <div class="col-md-9">
+
+        -->
+
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+
+        </div>
+        <p>
+            <a asp-page="Credte">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @*Html.DisplayNameFor(model => model.ViewData[0].ToString)*@
+                    <th>
+                        @*Html.DisplayNameFor(model => model.ViewData[0].ToString)*@
+                    </th>
+                    <th>
+                        @* Html.DisplayNameFor(model => model.ViewData[0].ToString)*@
+                    </th>
+                    <th>
+                        @* Html.DisplayNameFor(model => model.ViewData[0].ToString)*@
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <div>
+            <a href="#" class="list-group-item active">
+                Free Domain Name Registration
+            </a>
+            <a href="#" class="list-group-item">24*7 support</a>z
+            <a href="#" class="list-group-item">Free Window Space hosting</a>
+            <a href="#" class="list-group-item">Number of Images</a>
+            <a href="#" class="list-group-item">Renewal cost per year</a>
+
+        </div>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+        alert('hello from index page');
+    })
+</script>

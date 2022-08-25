@@ -15,15 +15,12 @@ namespace allopromo.Core.Services
 {
     public class ProductService :IProductService
     {
-        private readonly IProductQuery _productQuery;
-        private readonly ModelStateDictionary _modelStateDictionnary;
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository, 
-            ModelStateDictionary modelStateDictonnary,
-            IProductQuery productQuery)
+        public ProductService(IProductRepository productRepository
+            )
         {
             _productRepository = productRepository;
-            _productQuery = productQuery;
+            //_productQuery = productQuery;
         }
         public async Task<ProductDto> CreateAsync(tProduct product)
         {
@@ -38,10 +35,10 @@ namespace allopromo.Core.Services
         }
         public async Task<ProductDto> GetProductById(string productId)
         {
-            if (productId != null)
-                return new ProductConvertor().ConvertDto(
-                    await _productQuery.GetProductAsync(productId));
-            return null;
+            if (productId == null)
+                return null;
+            return new ProductConvertor().ConvertDto(
+            await _productRepository.GetProductAsync(productId));
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id)
         {
@@ -51,9 +48,9 @@ namespace allopromo.Core.Services
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByStore(string storeId)
         {
-            if (storeId != null)
-                return (IEnumerable<ProductDto>)
-                    await _productQuery.GetProductsByStoreIdAsync(storeId);
+            //if (storeId != null)
+                //return (IEnumerable<ProductDto>)
+                    //await _productQuery.GetProductsByStoreIdAsync(storeId);
             return null;
         }
         public Task<IEnumerable<ProductDto>> GetProductsByStore()
@@ -62,11 +59,12 @@ namespace allopromo.Core.Services
         }
         protected bool ValidateProduct()
         {
-            return _modelStateDictionnary.IsValid;
+            // return _modelStateDictionnary.IsValid;
+            return true;
         }
     }
 }
-/*
- * 
- * IDataErrorInfo c# - 
+/*  IDataErrorInfo c# -
+ *  //ModelStateDictionary modelStateDictonnary,
+    //IProductQuery productQuery
  */

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<allopromo.Admin.Models.Dto.StoreCategoryDto>
+@{
+    ViewData["Title"] = "GetItems";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>GetItems</h1>
+<p>
+    <a asp-action="Create">Create New Caljkklkktgry</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.isParent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.categoryThumb)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.storeCategoryName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeCategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isParent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categoryThumb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeCategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeCategoryName)
+            </td>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.storeCategoryName)
+            </th>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new {id = item.storeCategoryId}) |
+                @Html.ActionLink("Delete", "Delete", "Categories", new {id = item.storeCategoryId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

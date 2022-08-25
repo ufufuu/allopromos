@@ -5,16 +5,13 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\nunit.engine.api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\testhost.exe
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.deps.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.runtimeconfig.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.runtimeconfig.dev.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\BoDi.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\FirebaseAdmin.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\FluentEmail.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\FluentEmail.Smtp.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Gherkin.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Google.Apis.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Google.Apis.Auth.PlatformServices.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
@@ -68,9 +65,9 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Moq.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\nunit.framework.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Polly.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Serilog.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Serilog.AspNetCore.dll
@@ -81,6 +78,8 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\TechTalk.SpecFlow.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\SpecFlow.Internal.Json.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
@@ -178,4 +177,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.genruntimeconfig.cache

@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 namespace allopromo.Infrastructure.Data
-{ 
+{
     public class AppDbContext : IdentityDbContext<ApplicationUser>
-        /*ApplicationRole, string, IdentityUserClaim<string> ,
-        ApplicationUserRole, IdentityUserLogin<string>,
-        IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
+
+    /*ApplicationRole, string, IdentityUserClaim<string> ,
+    ApplicationUserRole, IdentityUserLogin<string>,
+    IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
+
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<tStore> Stores { get; set; }

@@ -27,6 +27,9 @@ using allopromo.Infrastructure.Abstract;
 using allopromo.Core.Entities;
 using allopromo.Api.Model;
 using allopromo.Api;
+using allopromo.Core.Services;
+using Ocelot.Middleware;
+using Ocelot.DependencyInjection;
 //using allopromo.Api.Services.Factory;
 //using allopromo.Core.Application.Interface;
 //using allopromo.Core.Services;
@@ -119,17 +122,15 @@ namespace allopromo
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
-            
+            services.AddScoped<IProductService, ProductService>();
             //services.AddScoped<ILoggerManager, LoggerManager>();
-
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IGenericRepository<tStore>, GenericRepository<tStore>>();
-
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped <Core.Abstract.IStoreRepository,
                Infrastructure.Repositories.StoreRepository>();
-
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp)); //?Instead of <ApplicationUser>>
             services.AddSingleton<ILoggerManager, LoggerManager>();
@@ -168,6 +169,7 @@ namespace allopromo
 
             //Adding E-mail Services
             services.AddFluentEmail("test-email@allopromo.test");
+            services.AddOcelot();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -200,6 +202,7 @@ namespace allopromo
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseOcelot();
             //app.UseMvc();
             app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
             .SetIsOriginAllowed((host) => true).AllowCredentials() //vs alloAnyOrigin

@@ -10,8 +10,6 @@ namespace alloPromo.Core.UnitTests.Domain.Application
     [TestFixture]
     public class EmailServiceTests
     {
-        private readonly Mock<IStoreQuery> _storeQuery = new Mock<IStoreQuery>();
-
         //private readonly IStoreService _sut = new IStoreService();
         public EmailServiceTests()
         {

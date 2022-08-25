@@ -13,7 +13,7 @@ using allopromo.Core.Infrastructure;
 using allopromo.Core.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using allopromo.Infrastructure.Data;
-
+using Microsoft.Extensions.Logging;
 namespace allopromo.Controllers
 {
     [Route("api/[controller]")]
@@ -24,7 +24,7 @@ namespace allopromo.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
+        private ILogger<UserController> _logger { get; set; }
         private readonly IUserService _userService;
         public UserController(IUserService userService)
         {
@@ -32,12 +32,13 @@ namespace allopromo.Controllers
         }
         public UserController(AccountService accountService,
             UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
         {
             _accountService = accountService;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _logger = logger;
         }
         [ActivatorUtilitiesConstructor]
         public UserController(IUserService userService, UserManager<ApplicationUser> userManager, IAccountService accountService,
@@ -62,6 +63,7 @@ namespace allopromo.Controllers
         public IActionResult GetUsers()
         {
             var roleUsers = _userService.GetUsers();
+            int y = 6;
             return Ok(roleUsers);
         }
         [HttpPost]
@@ -82,7 +84,6 @@ namespace allopromo.Controllers
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber
                 };
-
                 var result = await _userService.CreateUser(appUser, user.PasswordHash);
                 if (result)
                 {
@@ -122,7 +123,6 @@ namespace allopromo.Controllers
                 try
                 {
                     account = _userManager?.FindByEmailAsync(loginModel.UserName).Result;
-
                 }
                 catch (Exception ex)
                 {
@@ -130,12 +130,10 @@ namespace allopromo.Controllers
                 }
                 //&& (_signInManager.UserManager.CheckPasswordAsync
                 //(account, loginModel.userPassword).Result))
-
                 if (account != null)
                 {
                     var loginValid2 = _signInManager?.PasswordSignInAsync(
                         loginModel.UserName.ToString(), loginModel.PasswordHash.ToString(), true, true);
-
                     var loginValid = _userService.ValidateUser(loginModel.UserName, loginModel.PasswordHash);
                     if (loginValid)
                     {
@@ -159,7 +157,6 @@ namespace allopromo.Controllers
                     {
                         return NotFound(new { message = "User name or Pwd UUY incorrect" });
                     }
-
                     //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
                     /*
                     using(var emailNotifyService= new EmailNotificationService())
@@ -195,6 +192,12 @@ namespace allopromo.Controllers
                 }
             }
             return NotFound();
+        }
+        [HttpGet]
+        [Route("/account")]
+        public object GetAccount()
+        {
+            return null;
         }
         private async Task<ApplicationUser> GetConnectedUser()
         {
@@ -298,3 +301,6 @@ catch (Exception)
 //! koz Task<T> blocks the thread !
 
 ////Utoubeur des Accents Africains !!!
+
+
+//If I am Admin Role, Who Admin , then show the rOther and let's Start Chatting ! 

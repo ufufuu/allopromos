@@ -3,18 +3,14 @@ using allopromoInfrastructure.Abstract;
 using allopromoInfrastructure.Logging;
 using Microsoft.AspNetCore.Http;
 using Serilog;
-//using Microsoft.Extensions.Logging;
-//using allopromoInfrastructure.Logging.
 using System;
 using System.Net;
 using System.Threading.Tasks;
-
 namespace allopromoInfrastructure.Middleware.Exceptions
 {
     public class CustomExceptionMiddleWare
     {
         //private readonly LoggerManager _logger;
-
         private readonly RequestDelegate _next;
         private readonly ILogger _logger;
         public CustomExceptionMiddleWare(RequestDelegate next,

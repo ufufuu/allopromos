@@ -9,25 +9,25 @@ namespace allopromo.Core.Abstract                   //?  Some Would Call it Doma
     {
         void Save();
         tStore Add(tStore store);
-        //Task<tStore> GetStoreAsync(string storeId);
-        //Task<tStore> GetStoreByIdAsync(string storeId);
-
         Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync();
         Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId);
         Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int limitPerPage, int offSet);
         IEnumerable<tStore> GetStoresAsync();
-        tStoreCategory AddCategory(tStoreCategory storeCategory);
+
+        tStoreCategory AddStoreCategory(string storeCategory);
+
+        void DeleteStoreCategory(tStoreCategory storeCategory);
+        tStoreCategory GetStoreByIdAsync(string storeId);
+
 
 
         //Task<List<tStore>> GetStoresByCategoryIdAsync(string catId);
         //Task<List<tStore>> GetStoresByCatIdAsync(string catId);
+
+        //Task<tStore> GetStoreAsync(string storeId);
+        //Task<tStore> GetStoreByIdAsync(string storeId);
     }
 }
-
-
-
-
-
 
 
 

@@ -13,7 +13,7 @@ namespace allopromo.Core.Helpers.Convertors
         public tStore Convert(StoreDto store)
         {
             tStore obj = new tStore();
-            obj.storeId = store.storeId;
+            obj.storeId = Guid.Parse(store.storeId); //.ToString();
             return obj;
         }
         public StoreDto ConvertStore(tStore tstore)
@@ -22,7 +22,9 @@ namespace allopromo.Core.Helpers.Convertors
                 return null;
             var roleObj = new StoreDto { };
             //roleObj = (object)tstore as StoreDto;
-            roleObj.storeId= tstore.storeId;
+
+            //roleObj.storeId= Guid.Parse(tstore.storeId);
+
             roleObj.storeName = tstore.storeName;
             //roleObj.storeName= tstore.so
             return roleObj;
@@ -33,31 +35,12 @@ namespace allopromo.Core.Helpers.Convertors
             foreach(var t_store in tstores)
             {
                 var store = new tStore();
-                store.storeId = t_store.storeId.ToString();
+
+                //store.storeId = Guid.Parse(t_store.storeId); //.ToString();
 
                 //listObj.Add(store);
             }
             return listObj;
         }
     }
-    //public class StoreDTOConverter
-    //{
-    //    public StoreDTO ConvertToStoreDTO(Store store)
-    //    {
-    //        StoreDTO storeDTO = new StoreDTO();
-    //        storeDTO.storeId = store.storeId;
-    //        storeDTO.storeName = store.storeName;
-    //        storeDTO.storeDescription = store.storeName;
-    //        return storeDTO;
-    //    }
-    //    public List<StoreDTO> ConvertToStoreDTO(List<Store> stores)
-    //    {
-    //        List<StoreDTO> dtoStores = new List<StoreDTO>();
-    //        foreach (var store in stores)
-    //        {
-    //            dtoStores.Add(ConvertToStoreDTO(store));
-    //        }
-    //        return dtoStores;
-    //    }
-    //}
 }

@@ -1,7 +1,9 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
+using allopromo.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 namespace allopromo.Infrastructure.Repositories
 {
@@ -12,35 +14,38 @@ namespace allopromo.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
-
         public void Delete(ApplicationUser obj)
         {
             throw new NotImplementedException();
         }
-
         public ApplicationUser Get()
         {
             throw new NotImplementedException();
         }
-
         public IEnumerable<ApplicationUser> GetAll()
         {
             throw new NotImplementedException();
         }
-
         public ApplicationUser GetBy()
         {
             throw new NotImplementedException();
         }
-
         public void Insert(ApplicationUser obj)
         {
             throw new NotImplementedException();
         }
-
         public void Update(ApplicationUser obj)
         {
             throw new NotImplementedException();
+        }
+        public List<ApplicationUser> getUsers()
+        {
+            List<ApplicationUser> users = null;
+            using(var db = new AppDbContext())
+            {
+                users = db.ApplicationUsers.ToList();
+            }
+            return users;
         }
     }
 }

@@ -1,0 +1,110 @@
+﻿@{
+    Layout="~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "CreateStoreCategory";
+}
+@model allopromo.Admin.Models.Dto.StoreCategoryDto
+
+<h4>Create StoreCategory | Manage</h4>
+<hr />
+
+<!--
+<div class="row">
+    <div class="col-md-4">
+    -->
+
+        @Html.BeginForm("Create", "Categories", FormMethod.Post)
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label">Cat&eacute;gory Name:</label>
+                    @Html.TextBoxFor(x=>x.storeCategoryName)
+                    <span asp-validation-for="storeCategoryvbName" class="text-danger">
+                    </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="categoryId" class="control-label">Cat&eacute;gory Has Parent ?</label>
+                <div class="radio" onclick="HandleCategoryParenting()">
+                    <input type="radio" name="hasParentRadio" id="isParent_Yes"
+                        value="Yes" /> Yes
+                    <input type="radio" name="hasParentRadio" id="isParent_No"
+                        value="No" checked /> No
+                </div>
+                <div class="checkbox">
+                </div>
+                <span asp-validation-for="categoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="parentCategory">
+                <label asp-for="categoryId" class="control-label">Parent Cat&eacute;gory:</label>
+                    <select>
+                        <option value="B">Boutique</option>
+                        <option value="S">Super Markets</option>
+                        <option value="E">&Eacute;piceries</option>
+                        <option value="P">Pharmacies</option>
+                        <option value="Bu">Bureau</option>
+                    </select> 
+            </div>
+                <!--
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="isParent" />
+                    @Html.DisplayNameFor(model => model.isParent)
+            </label>
+        </div>
+        <div class="form-group">
+            <label asp-for="categoryThumb" class="control-label"></label>
+            <input asp-for="categoryThumb" class="form-control" />
+            <span asp-validation-for="categoryThumb" class="text-danger"></span>
+        </div>
+            -->
+                <div class="form-group">
+                    <input type="submit" value="Create Category" class="btn btn-primary" />
+                </div>
+        }
+<!--
+    </div>
+</div>
+-->
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    function HandleCategoryParenting() {
+        //parent.hidden = false;
+        //alert("handling was" + document.getElementById("isParentYes").value);
+
+        const parent = document.getElementById("parentCategory");
+        
+        if (document.getElementById('isParent_Yes').checked) {
+            
+            parent.hidden = false;
+        }
+        else if (document.getElementById('isParent_No').checked){
+             parent.hidden = true;
+        }
+    }
+</script>
+
+<!--Import JQuery UI Library here -->
+<script>
+    function confirmCreation()
+    {
+        alert(" Category Creee avec Succes !")
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        //alert("create Store Loading !");
+        const parent = document.getElementById("parentCategory");
+        parent.hidden = true;
+
+        // Hositing
+        // Deboucing ?
+    })
+</script>
+}

@@ -14,12 +14,10 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Model.Notifications;
 using Microsoft.Extensions.Options;
-
 namespace allopromo.Core.Infrastructure
 {
     public class PushNotificationService :  INotifyService
     {
-        private EmailService _emailService = new EmailService();
         private AccountService _accountService { get; set; }
         NotificationSettings _notificationSettings { get; set; }
         public PushNotificationService(IOptions<NotificationSettings> notificationSettings)
@@ -120,5 +118,4 @@ namespace allopromo.Core.Infrastructure
 /*
  *  https://www.thecodehubs.com
     https://www.thecodehubs.com/firebase-notification-in-net-core/
-    
  */

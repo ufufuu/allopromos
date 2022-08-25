@@ -8,19 +8,20 @@
   <ItemGroup>
     <Compile Remove="Entities\**" />
     <Compile Remove="Model\**" />
-    <Compile Remove="SignalR\Factory\**" />
+    <Compile Remove="Services\Factory\**" />
     <EmbeddedResource Remove="Entities\**" />
     <EmbeddedResource Remove="Model\**" />
-    <EmbeddedResource Remove="SignalR\Factory\**" />
+    <EmbeddedResource Remove="Services\Factory\**" />
     <None Remove="Entities\**" />
     <None Remove="Model\**" />
-    <None Remove="SignalR\Factory\**" />
+    <None Remove="Services\Factory\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
     <Compile Remove="Repositories\IStoreRepository.cs" />
     <Compile Remove="Repositories\StoreRepositoryT.cs" />
+    <Compile Remove="Services\Emailing\EmailService2.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Polly" Version="7.2.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />

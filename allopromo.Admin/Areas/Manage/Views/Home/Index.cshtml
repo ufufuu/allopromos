@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Admin Index";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h1> Index | Manage , Users </h1>
+    @model IEnumerable<allopromo.Admin.Models.ViewModel.LoginViewModel>;
+    <div class="text-center">
+        <h4 class="display-4">Admin Board | Home | Index |</h4>
+        <h5 class="display-4">Welcome, @ViewBag.UserName, role: @ViewData["role"]</h5>
+        <div>
+            @Html.ActionLink("Mon Compte", "Login")
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Panel heading without title
+        </div>
+        <div class="panel-body">
+            Panel 1
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Panel 2
+            </h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        Panel 3
+    </div>
+    <div class="panel-body">
+        This 4
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            This 5
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            This 6
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            This 7
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            This is a Basic panel
+        </div>
+        <table class="table">
+            <th>Product</th>
+            <th>Price </th>
+            <tr><td>Product A</td><td>200</td></tr>
+            <tr><td>Product B</td><td>400</td></tr>
+            @{ foreach (var m in Model)
+                {
+                    <tr><td>@m.UserName</td><td>@m.PasswordHash</td></tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+

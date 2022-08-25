@@ -58,7 +58,7 @@
             },
             "Microsoft.AspNet.WebApi.Core": {
               "target": "Package",
-              "version": "[5.2.7, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -71,6 +71,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.2, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.3, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -188,6 +192,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.3, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",

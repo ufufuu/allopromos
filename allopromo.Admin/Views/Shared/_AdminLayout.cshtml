@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - allopromo.Admin - Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+<!--        
+.container{
+   padding:0;
+   margin:0
+}
+body{
+    padding:0;
+}
+.navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top
+ {
+     margin-left:0;
+     margin-right:0;
+     margin-bottom:0;
+}
+-->
+</head>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid p-0">
+        <img src="~/images/allopromo-logo.png" height="50" width="75" />
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">allopromo.Admin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">allo2Promo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">allo2Pay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">alloPass</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<body style="background-color:#f0f1f6;margin: 0 !important; padding: 0 !important">
+
+    <!--
+    <header style="background-color:#000;color:#fff;font-size:14px;">
+    </header>
+
+        padding:0px;margin:0px
+    -->
+
+    <div class="container-fluid p-0" style="background-color:#f0f1f6; width:100%;margin:0 auto">
+        <div class="row" style="background-color:forestgreen;width:100%">
+            <div class="col-md-3">
+                <!--<div class="text-center" style="background-color:forestgreen">
+            <h4 class="display-4" style="color:#000">Dashboard</h4>
+            -->
+                <div id="MainLeftMenu">
+                    <div class="align-items-md-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Cat&eacute;gories de Produits
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div>
+                                <button data-target="#AddStoreCategory" data-toggle="modal">ADDD</button>
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="Index">Ajout</a>
+                                    @Html.ActionLink("Ajouter", "AjouPer", new { area = "Manage" }), null);
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="List">
+                                    @Html.ActionLink("Liste", "Listing", new { area = "Manage" }), null);
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-md-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Cat&eacute;gories de Stores
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body" style="">
+                                @Html.ActionLink("Ajouter", "Create", "Categories", null,
+                                    new { @style = "color:#000" })
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="List">List of </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-md-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Types de Stores
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body" style="">
+                                @Html.ActionLink("Ajouter Type", "Create", "Types", null,
+                                    new { @style = "color:#000" })
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="List">List of </a>
+                            </div>
+                            <div id="div_storeCategoryAdd" style="display:none; align-content:center; align:center">
+                                <h3>Ajouter Store Categ</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a href="">Stores</a>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a asp-controller="Home" asp-action="Users">Localizations</a>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Utilisateurs >
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.ActionLink("Users", "Index", "Users", null,
+                                new { @style = "color:#000" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    Click me to exapand 3
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                33333333
+                            </div>
+                            <div class="panel-body">
+                                444444444
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9" style="background-color:#fff">
+
+                <main role="main" class="pb-3" style="background-color:#fff">
+                    @RenderBody()
+                </main>
+
+            </div>
+
+        </div>
+        <div class="row" style="background-color:red">
+            <div class="col-md-4"><h4> Footer 11</h4></div>
+            <div class="col-md-4"><h4> Footer 22</h4></div>
+            <div class="col-md-4"><h4> Footer 33</h4></div>
+        </div>
+        <div class="modal fade" id="addStoreCategory" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                                data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            This Modal title
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        Add some text here
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            Submit changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - allopromo.Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script href="/lib/jquery/dist/jquery.js" type="text/javascript">
+        </script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js">
+        </script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </div>
+    
+</body>

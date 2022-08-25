@@ -1,4 +1,5 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
@@ -23,23 +24,18 @@ namespace allopromo.Infrastructure.Repositories
             tStoreCategory category = new tStoreCategory { storeCategoryName = "Commercants" };
             _dbContext.StoreCategories.Add(category);
 
-            tCity cityLocation = new tCity { cityGpsLongitude= "Lome - Maizerte"}; //get from Localization Library
+            tCity cityLocation = new tCity { cityGpsLongitude= "Lome - Maizerte"}; 
+            //get from Localization Library
             cityLocation.cityName = "Quarier Agbelepedogan 2ieme von apres Total Totsi en allant " +
                 "vers Attikoume - 7VP3+PR6 Singapore  N 48.14305  E 17.13055 * ";
             cityLocation.cityGpsLatitude = "wekrfewjk wdlfkkl wekfdlfk ";
-
-            //tUser user1 = new tUser {userId= "1ec20d6f-e844-4865-b275-9c08a3249619"};
-
 
             ApplicationUser user1 =new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
             };
 
-            //allopromo.Core.Model.tUser
-            //store = new tStore();
-
-            store.storeId = Guid.NewGuid().ToString();
+            store.storeId = Guid.NewGuid(); //.ToString();
             store.storeName = store.storeName;
             store.storeCreatedOn = DateTime.Now.Date;
             store.storeBecomesInactiveOn = DateTime.Now.AddMonths(6).Date;
@@ -49,7 +45,6 @@ namespace allopromo.Infrastructure.Repositories
             store.City = cityLocation;
             store.Category = category;
 
-            int y = 6;
             //_dbContext.StoreCategories.Add(tCategory);
             //tCategory.tStores.Add(store);
 
@@ -73,34 +68,62 @@ namespace allopromo.Infrastructure.Repositories
             }
             return store;
         }
-        public tStoreCategory AddCategory(tStoreCategory storeCategory)
+        //public tStoreCategory AddStoreCategory(tStoreCategory storeCategory)
+        //{
+        //    return null;
+        //}
+        public tStoreCategory AddStoreCategory(string storeCategoryName)
         {
-            if (_dbContext != null)
+            if (storeCategoryName != null)
             {
-                _dbContext?.StoreCategories.Add(storeCategory);
+                using (var dbContext = new AppDbContext())
+                {
+                    var storeCategory = new tStoreCategory();
+                    storeCategory.storeCategoryName = storeCategoryName;
+                    dbContext?.StoreCategories?.Add(storeCategory);
+
+                    //}
+
+                    dbContext.SaveChanges();
+                    return storeCategory;
+                }
             }
-            _dbContext.SaveChanges();
-            return storeCategory;
+            else
+                return null;
         }
         public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
         {
-            return await _dbContext.StoreCategories.ToListAsync();
+            var tCategories= await _dbContext.StoreCategories.ToListAsync();
+            return tCategories ;
         }
-        //public async Task<List<tStore>> GetStoresByCategoryIdAsync(int catId)
-        //{
-        //    return null;
+
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int catId)
+        {
+            return null;
+        }
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int catId, int fd, int t)
+        {
+            return null;
+        }
+        tStoreCategory AddStoreCategory(tStoreCategory storeCategory)
+        {
+            return null;
+        }
         //GetStoreByIdAsync(string storeId)
         //}
-        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId) //GetStoresByIdAsync GetStoresByCatIdAsync
+
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(string categoryId) 
+            //GetStoresByIdAsync GetStoresByCatIdAsync
         {
-            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId == categoryId)
+            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId.ToString() == categoryId)
                          .AsNoTracking()
                          select q;
             return await stores.ToListAsync();
         }
-        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int offSet, int limitPerPage)
+        public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(string categoryId, int offSet, int limitPerPage)
         {
-            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId == categoryId)
+            var stores = from q in _dbContext.Stores.Where(x => x.Category.storeCategoryId.ToString()
+                         == categoryId)
                          .Skip((offSet-1) * limitPerPage)
                          .Take(limitPerPage)
                          .AsNoTracking()
@@ -120,7 +143,14 @@ namespace allopromo.Infrastructure.Repositories
         {
             return null;
         }
-        //void IStoreRepository.Update(Store store)
+        public void DeleteStoreCategory(tStoreCategory storeCategory)
+        {
+            if(storeCategory!=null)
+            using(var db= new AppDbContext())
+            {
+                db.StoreCategories.Remove(storeCategory);
+            }
+        }
         void Update(tStore store)
         {
         }
@@ -128,37 +158,10 @@ namespace allopromo.Infrastructure.Repositories
         void Delete(tStore store)
         {
         }
-        //Task<tStore> IStoreRepository.GetStoreByIdAsync(string storeId)
-        //{
-        //    return null;
-        //}
-        //List<tStore> IStoreRepository.GetStoresAsync()
-        //{
-        //    return null;
-        //}
-
-        //Task<List<tStore>> GetStoresByIdAsync(string catId)
-        //{
-        //    return null;
-        //}
-
-        //public Task<tStore> GetStoreAsync(string storeId)
-        //{
-        //    return null;
-        //}
         Task<List<tStore>> GetStoresByIdAsync(int categoryId, int limitPerPage)
         {
             throw new NotImplementedException();
         }
-        //Task<tStore> GetStoreAsync(string storeId)
-        //{
-        //    return null;
-        //}
-
-        //tStore Add(tStore store)
-        //{
-        //    return null;
-        //}
         Task<List<tStore>> GetStoresByCatIdAsync(string catId)
         {
             return null;
@@ -166,6 +169,11 @@ namespace allopromo.Infrastructure.Repositories
         Task<IEnumerable<tStore>> GetStoresByCatIdAsync(int categoryId)
         {
             return null;
+        }
+
+        public tStoreCategory GetStoreByIdAsync(string storeId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

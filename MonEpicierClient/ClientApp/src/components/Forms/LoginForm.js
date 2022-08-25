@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-export class Footer extends React.Component
+export class LoginForm extends React.Component
 {
 	render()
 	{

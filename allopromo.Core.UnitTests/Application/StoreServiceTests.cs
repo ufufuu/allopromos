@@ -37,8 +37,6 @@ namespace allopromo.Core.UnitTest.ServicesTests
         {
         }
 
-
-
         //[Test]
         //public void StoreCrontroller_CreateStore_ReturnsStoreCreated_RaisesNotificationEvent()
         //{
@@ -82,7 +80,6 @@ namespace allopromo.Core.UnitTest.ServicesTests
         //    storeCreated =e;
         //    return true;
         //}
-
 
     }
 }

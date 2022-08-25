@@ -19,6 +19,7 @@ namespace allopromo
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile("Ocelot.json")
                 .Build();
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()

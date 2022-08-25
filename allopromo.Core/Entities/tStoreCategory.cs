@@ -8,14 +8,15 @@ namespace allopromo.Core.Entities
     public class tStoreCategory
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public  int storeCategoryId { get; set; }
+        //[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+
+        //public Guid StoreCategoryId { get; set; }
+        [ForeignKey("Category")]
+        public Guid storeCategoryId { get; set; }
         public string storeCategoryName { get; set; }
 
 
         //public bool hasChildren { get; set; }
-        public virtual ICollection<tStore> tStores { get; } = new List<tStore>();
-
-        //public virtual string storeId { get; set; }
+        public ICollection<tStore> tStores { get; set; } = new List<tStore>();
     }
 }

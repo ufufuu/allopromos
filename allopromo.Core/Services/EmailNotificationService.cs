@@ -26,7 +26,6 @@ namespace allopromo.Core.Model
             _storeService.StoreCreated += RaisesEmailEventHandler;
             return true;
         }
-       
         private async Task<object> SendSingleEmail([FromServices] IFluentEmail singleEmail)
         {
             var email = singleEmail

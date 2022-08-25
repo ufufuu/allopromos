@@ -9,5 +9,6 @@ namespace allopromo.Core.Abstract
     public interface IUserRepository
     {
         void CreateUser(ApplicationUser user, string password);
+        public List<ApplicationUser> getUsers();
     }
 }

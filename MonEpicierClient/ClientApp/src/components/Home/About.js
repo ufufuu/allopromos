@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ItemsCategories from '../items/ItemsCategories';
+//import ItemsCategories from '../items/ItemsCategories';
 import Contact from './Contact';
-
 //645
-
-
-
-
 class About extends React.Component
 {
 	constructor(props){
@@ -35,9 +30,7 @@ class About extends React.Component
 	  const variable=5;
 	  var count= this.state.count;
     return (
-	
-	
-	<div className="container" style={{backgroundColor:'#e2e2e2', fontColor:'#fff', fontcolor:'#fff'}} id="ontent">
+  <div className="container" style={{backgroundColor:'#e2e2e2', fontColor:'#fff', fontcolor:'#fff'}} id="ontent">
 	<div class="row" >
 	
 			<div>
@@ -51,7 +44,8 @@ class About extends React.Component
 				<h3>Parent Com</h3>
 				<hr />
 				INPUT Value:{this.state.inputValue}
-				<ItemsCategories handleInput={this.handleInputValue} />
+					{/*<ItemsCategories 
+						handleInput={this.handleInputValue} />{*/}
 			</div>
 			
 			<div style={{margin:'0px 0 0px 0px'}}>

@@ -27,8 +27,55 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\search.js" />
+    <None Remove="ClientApp\src\components\search.js" />
+    <None Remove="ClientApp\src\components\subHeader.js" />
+    <None Remove="ClientApp\src\components\subHeader.js" />
+    <None Remove="ClientApp\src\components\topHeader.js" />
+    <None Remove="ClientApp\src\components\topHeader.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\About.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\About.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\Register2.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\Register2.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing1.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing1.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing2.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing2.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing3.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing3.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing4.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Account\SubmitListing4.js" />
+    <None Remove="ClientApp\src\components\ContainerComponents\atlantic.js" />
+    <None Remove="ClientApp\src\components\ContainerComponents\atlantic.js" />
+    <None Remove="ClientApp\src\components\ContainerComponents\pacific.js" />
+    <None Remove="ClientApp\src\components\ContainerComponents\pacific.js" />
+    <None Remove="ClientApp\src\components\Home\About.js" />
+    <None Remove="ClientApp\src\components\Home\About.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Content\About.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Content\menu.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Content\menu.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\items.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\items.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\ItemsCategories.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\ItemsCategories.js" />
+    <None Remove="ClientApp\src\components\Home\Contact.js" />
+    <None Remove="ClientApp\src\components\Home\Contact.js" />
+    <None Remove="ClientApp\src\components\Home\Home.js" />
+    <None Remove="ClientApp\src\components\Home\Home.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\ToolsItems.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\items\ToolsItems.js" />
     <None Remove="ClientApp\src\components\main.js" />
     <None Remove="ClientApp\src\components\main.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Blog.js" />
+    <None Remove="ClientApp\src\components\ViewComponents\Blog.js" />
+    <None Remove="ClientApp\src\components\_services\model\Services.js" />
+    <None Remove="ClientApp\src\components\_services\model\Services.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\components\ViewComponents\items\" />
+    <Folder Include="ClientApp\src\components\_services\model\" />
+    <Folder Include="__Tests__\ClientAppUnitTests\ControllerComponents\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -9,39 +9,43 @@
     <Compile Remove="Concrete\**" />
     <Compile Remove="Contracts\**" />
     <Compile Remove="DTO\**" />
-    <Compile Remove="Infrastructure\Servers\**" />
     <Compile Remove="Repositories\**" />
+    <Compile Remove="Services\Threads\**" />
     <EmbeddedResource Remove="Concrete\**" />
     <EmbeddedResource Remove="Contracts\**" />
     <EmbeddedResource Remove="DTO\**" />
-    <EmbeddedResource Remove="Infrastructure\Servers\**" />
     <EmbeddedResource Remove="Repositories\**" />
+    <EmbeddedResource Remove="Services\Threads\**" />
     <None Remove="Concrete\**" />
     <None Remove="Contracts\**" />
     <None Remove="DTO\**" />
-    <None Remove="Infrastructure\Servers\**" />
     <None Remove="Repositories\**" />
+    <None Remove="Services\Threads\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Abstract\IRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
     <Compile Remove="Abstract\ISmsNotificationService.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
+    <Compile Remove="Application\StoreQuery.cs" />
     <Compile Remove="Entities\tOrder.cs" />
     <Compile Remove="Entities\tRole.cs" />
     <Compile Remove="Interfaces\IIRepository.cs" />
     <Compile Remove="Interfaces\IRepository.cs" />
     <Compile Remove="Model\ApplicationUser.cs" />
     <Compile Remove="Services\AccounttService.cs" />
+    <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FirebaseAdmin" Version="1.2.0" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Polly" Version="7.2.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
@@ -49,8 +53,6 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregates\" />
-    <Folder Include="Infrastructure\" />
-    <Folder Include="Specifications\" />
+    <Folder Include="Aggregates\Specifications\" />
   </ItemGroup>
 </Project>

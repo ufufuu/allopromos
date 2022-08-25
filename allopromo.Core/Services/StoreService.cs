@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Identity;
 using allopromo.Core.Domain;
 using AutoMapper;
 using System.Linq;
+using Serilog;
+
 namespace allopromo.Core.Model
 {
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
@@ -23,10 +25,12 @@ namespace allopromo.Core.Model
         public event StoreCreatedEventHandler StoreCreated;
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
-        private IStoreQuery _storeQuery;
         private IProductService _productService;
         private IStoreRepository _storeRepository;
-        IGenericRepository<tStore> _tGenericRepository;//= GenericRepositoryFactory.GetRepository();
+
+        IGenericRepository<tStore> _tGenericRepository;
+        
+        //= GenericRepositoryFactory.GetRepository();
         private UserService _userService { get; set; }
 
         //public StoreService(IGenericRepository<tStore> tGenericRepository, IStoreRepository storeRepository)
@@ -79,7 +83,8 @@ namespace allopromo.Core.Model
             }
             return null;
         }
-        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId, int pageNumber, int offSet)
+        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId, 
+            int pageNumber, int offSet)
         {
             offSet = 10;
             if(categoryId.Equals(null))
@@ -87,7 +92,8 @@ namespace allopromo.Core.Model
             else
             {
                 var storesByCategory =  TConvertor.
-                    ConverToListObj(await _storeRepository.GetStoresByCategoryIdAsync(categoryId, pageNumber, offSet));
+                    ConverToListObj(await _storeRepository.GetStoresByCategoryIdAsync(categoryId,
+                    pageNumber, offSet));
                 return (IEnumerable<StoreDto>)storesByCategory;
             }
         }
@@ -110,25 +116,20 @@ namespace allopromo.Core.Model
             {
                 return true;
             };
-            var tStore = await _storeQuery.GetStoreByIdAsync(storeId);
-            var storeDto = new StoreConvertor().ConvertStore(tStore);
-            if (storeDto == null)
-                return null;
-            return storeDto;
+            var tStore = _storeRepository.GetStoreByIdAsync(storeId);
+            return AutoMapper.Mapper.Map<StoreDto>(tStore);
         }
         public void DeleteStore(StoreDto store)
         {
         }
-        async Task<StoreDto> GetStoreBy(string storeId)
+        public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
-            var stores = await _storeQuery.GetStoreByIdAsync(storeId);
-            return new StoreConvertor().ConvertStore(stores);
-        }
-        public IEnumerable<StoreDto> GetStoreCategoriesAsync()
-        {
-            var storeCategories = _storeRepository.GetStoreCategoriesAsync();
+            var categories = Mapper.Map<IEnumerable<StoreCategoryDto>>
+                (_storeRepository.GetStoreCategoriesAsync().Result);
 
-            return (IEnumerable<StoreDto>)storeCategories;
+            //var storeCategories = Mapper.Map<IEnumerable<StoreCategoryDto>>(categories);
+
+            return categories;
         }
         private int GetStores(ApplicationUser user)
         {
@@ -158,25 +159,51 @@ namespace allopromo.Core.Model
         }
 
         #region  StoresCategories
-        public tStoreCategory CreateStoreCategory(StoreCategoryDto storeCategory)
+        public tStoreCategory CreateStoreCategory(string storeCategoryName)
         {
+            if (storeCategoryName == null)
+                return null;
+
             var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-            var t_store = TConvertor.ConvertToObj(storeCategory);
-            _storeRepository.AddCategory(t_store as tStoreCategory);
-            return new tStoreCategory { storeCategoryId = 1, storeCategoryName = "rlelel" };
+            
+            //var tStoreCategory3 = TConvertor.ConvertToObj(storeCategory);
+            //var tStoreCategorye = AutoMapper.Mapper.Map<tStoreCategory>(storeCategory);
+
+            var tStoreCategory = new tStoreCategory();
+            tStoreCategory.storeCategoryName = storeCategoryName;
+
+            //tStoreCategory.storeCategoryId = new Guid().ToString();
+
+            _storeRepository.AddStoreCategory(storeCategoryName); 
+
+            return tStoreCategory;
+        }
+        public Task<StoreDto> CreateStore(StoreDto store)
+        {
+            throw new NotImplementedException();
         }
         #endregion StoresCategories
         //IEnumerable<StoreDto> IStoreService.GetStoresByCatIdAsync(string catId)
         //{
         //    throw new NotImplementedException();
         //}
+        public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
+        {
+            if (storeCategoryDto == null)
+            {
+                var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
+                _storeRepository.DeleteStoreCategory(storeCategory);
+            }
+        }
     }
     public class StoreLocator
     {
         HttpClient _httpClient { get; set; }
-        public StoreLocator(HttpClient httpClient)
+        private ILogger _logger { get; set; }
+        public StoreLocator(HttpClient httpClient, ILogger logger)
         {
-            _httpClient = httpClient;      
+            _httpClient = httpClient;
+            _logger = logger;
         }
         public string GetLocation()
         {
@@ -188,7 +215,9 @@ namespace allopromo.Core.Model
             var rootObjc= getAddress(23.5270797, 77.2548046);
             return ""; //rootObj.display_Name;
         }
-        private static RootObject getAddress (double Longitude, double Latitude) // getAddress(23.5270797, 77.2548046);
+        private static RootObject getAddress (double Longitude, double Latitude)
+            
+            //getAddress(23.5270797, 77.2548046);
         {
             //onst double longitude = Longitude;
             //const double latitude = Latitude;

@@ -1,0 +1,44 @@
+﻿@model allopromo.Admin.Models.Dto.StoreDto
+@{
+    ViewData["Title"] = "CreateStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Create Store</h1>
+<h4>StoreDto| Create Store</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateStore">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="storeId" class="control-label"></label>
+                <input asp-for="storeId" class="form-control" />
+                <span asp-validation-for="storeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="storeNumber" class="control-label"></label>
+                <input asp-for="storeNumber" class="form-control" />
+                <span asp-validation-for="storeNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="storeName" class="control-label"></label>
+                <input asp-for="storeName" class="form-control" />
+                <span asp-validation-for="storeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="storeStatus" class="control-label"></label>
+                <input asp-for="storeStatus" class="form-control" />
+                <span asp-validation-for="storeStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

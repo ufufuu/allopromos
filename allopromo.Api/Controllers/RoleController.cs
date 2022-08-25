@@ -25,7 +25,8 @@ namespace allopromo.Controllers
             _userService = userService;
         }
         public RoleController(IAccountService accountService,
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
+            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, 
+            SignInManager<ApplicationUser> signInManager)
         {
             _accountService = accountService;
             _userManager = userManager;
@@ -56,7 +57,8 @@ namespace allopromo.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(User user) //Task<ActionResult<User>> cU(u) , task<bool> cU(u)
+        public async Task<IActionResult> CreateUser(User user)
+            //Task<ActionResult<User>> cU(u) , task<bool> cU(u)
         {
             //throw new AccessViolationException();
             if (user == null)
@@ -64,7 +66,8 @@ namespace allopromo.Controllers
             else
             {
                 if(string.IsNullOrEmpty(user.userPassword))
-                     throw new Exception("Password is invalid or Empty"); // How to throw as an ActionResult Exception ?
+                     throw new Exception("Password is invalid or Empty");
+                // How to throw as an ActionResult Exception ?
                     var appUser = new ApplicationUser
                     {
                         UserName = user.userEmail,

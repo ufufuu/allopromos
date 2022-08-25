@@ -5,7 +5,6 @@ using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-/////using allopromo.Infrastructure.Helpers;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ViewModel;
 using allopromo.Core.Abstract;
@@ -17,7 +16,7 @@ namespace allopromo.Core.UnitTests
     public class AccountServiceTests
     {
         private  AccountService _accountService;
-        private Mock<IRepository> _userRepo= new Mock<IRepository>();
+        //private Mock<IRepository> _userRepo= new Mock<IRepository>();
         public AccountServiceTests()
         {
         }
@@ -33,11 +32,9 @@ namespace allopromo.Core.UnitTests
 
         //[TestCase(null, "kdjfdkfj")]
         //[TestCase("user" , "kdjfdkfj")]
-
         public void AccountService_CreateUser_Returns_UserNotCreated()
         {
             var mockAppSettings = new Mock<IOptions<AppSettings>>();
-
             //_accountService = new AccountService(_userRepo.Object, null, null);
             _accountService = new AccountService(mockAppSettings.Object);
             // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
@@ -49,7 +46,7 @@ namespace allopromo.Core.UnitTests
         public void AccountService_CreateUserAndAccount_Returns_UserNotCreated_False()
         {
             var mockAppSettings = new Mock<IOptions<AppSettings>>();
-            _userRepo = new Mock<IRepository>();
+            //_userRepo = new Mock<IRepository>();
 
             //_accountService = new AccountService(_userRepo.Object, null, null);
 

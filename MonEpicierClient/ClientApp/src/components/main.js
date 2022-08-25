@@ -1,30 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
-// HOW TO CENTRALIZE ROUTES !! 
-
-
+import { routes } from '../Containers/routes';
 //import Items from '../components/items';
 //import ToolsItems from '../components/items/ToolsItems';
-//import {BrowserRouter,Route,} from 'react-router-dom';
-
 import {BrowserRouter as Router} from 'react-router-dom';
-import Header from '../components/Header/Header';
-import Content from '../components/Content/Content';
-import Content2 from '../components/Content/Content2';
-import {Footer} from '../components/footer';
-import Search from  '../components/search';
-import Account from '../components/Account/Account';
-import AccountHome from '../components/Account/MyAccount';
-import routes from '../components/routing/routes';
-import Atlantic from '../components/routing/atlantic';
-import SubmitListing from '../components/Account/SubmitListing2';
-
-import Register from '../components/Account/Register';
-import About from './Home/About';
-import Contact from './Home/Contact';
-import Blog from './Home/Blog';
 import {
   Route,
   NavLink,
@@ -40,27 +19,7 @@ render() {
   var headerDiv={};
   var contentDiv={};
 	var footerDiv = {};
-	return (
-		<BrowserRouter>
-			<div>
-				<Header/>		
-					<Route exact path ="/" component={Content2} />
-					<Route exact path ="/Account" component={Account} />
-					<Route path ="/stores/africains" component={Content2} />
-					<Route path ="/Account/Home" component={AccountHome} />
-					<Route path ="/Search" component={Search} />
-					<Route path ="/Atlantic" component={Atlantic} />
-					<Route path ="/Store/Submit" component={SubmitListing} />
-					<Route path="/Account/Register" component={Register} />
-					<Route path="/rentals/MACONNERIE" component={Content} />
-					<Route path="/rentals/menuiserie" component={Content} />
-					<Route path="/Home/About" component={About} />
-					<Route path="/Home/Contact" component={Contact} />
-					<Route path="/blog" component={Blog} />
-				<Footer />
-			</div>
-		</BrowserRouter>
-    );
+		return (routes);
   }
 }
 /*

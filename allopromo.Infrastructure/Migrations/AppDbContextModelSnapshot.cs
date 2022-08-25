@@ -178,10 +178,6 @@ namespace allopromo.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -233,8 +229,6 @@ namespace allopromo.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("allopromo.Core.Entities.tCity", b =>
@@ -296,13 +290,21 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("productCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("productName")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("storeId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("productId");
+
+                    b.HasIndex("productCategoryId");
 
                     b.ToTable("Products");
                 });
@@ -359,6 +361,9 @@ namespace allopromo.Infrastructure.Migrations
 
                     b.Property<string>("storeName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("storeStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
@@ -420,13 +425,6 @@ namespace allopromo.Infrastructure.Migrations
                     b.HasIndex("UserId1");
 
                     b.HasDiscriminator().HasValue("ApplicationUserRole");
-                });
-
-            modelBuilder.Entity("allopromo.Core.Model.User", b =>
-                {
-                    b.HasBaseType("allopromo.Core.Domain.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -496,6 +494,15 @@ namespace allopromo.Infrastructure.Migrations
                     b.Navigation("Region");
                 });
 
+            modelBuilder.Entity("allopromo.Core.Entities.tProduct", b =>
+                {
+                    b.HasOne("allopromo.Core.Entities.tProductCategory", "productCategory")
+                        .WithMany()
+                        .HasForeignKey("productCategoryId");
+
+                    b.Navigation("productCategory");
+                });
+
             modelBuilder.Entity("allopromo.Core.Entities.tStore", b =>
                 {
                     b.HasOne("allopromo.Core.Entities.tStoreCategory", "Category")
@@ -506,8 +513,8 @@ namespace allopromo.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("cityId");
 
-                    b.HasOne("allopromo.Core.Model.User", "user")
-                        .WithMany("Stores")
+                    b.HasOne("allopromo.Core.Domain.ApplicationUser", "user")
+                        .WithMany()
                         .HasForeignKey("userId");
 
                     b.Navigation("Category");
@@ -550,11 +557,6 @@ namespace allopromo.Infrastructure.Migrations
             modelBuilder.Entity("allopromo.Core.Domain.ApplicationRole", b =>
                 {
                     b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("allopromo.Core.Model.User", b =>
-                {
-                    b.Navigation("Stores");
                 });
 #pragma warning restore 612, 618
         }

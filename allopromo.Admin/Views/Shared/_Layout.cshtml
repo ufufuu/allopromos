@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - allopromo.Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script href="/lib/jquery/dist/jquery.js" type="text/javascript">
+    </script>
+    <!--
+    a{
+        color:#000
+    }
+    .panel-body a:link{
+        color:#000;
+    }
+    -->
+</head>
+<body style="background-color:#f0f1f6;padding:0px;margin:0px">
+    <header style="background-color:#000;color:#fff;font-size:14px;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <img src="../Views/Shared/images/allopromo-logo.png" />
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">allopromo.Admin</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">allo2Promo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">allo2Pay</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">alloPass</a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("hello", "helloLink", new { area = "" }, null);
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid" style="background-color:#f0f1f6;">
+        <div class="row" style="background-color:forestgreen;">
+            <div class=" col-xs-6 col-sm-3 col-md-3">
+                <div class="text-center" style="background-color:forestgreen">
+                    <h4 class="display-4" style="color:#000">Dashboard</h4>
+                </div>
+                <div id="MainLeftMenu">
+                    <div class="align-items-md-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Cat&eacute;gories de Produits
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="Index">Ajout</a>
+                                @Html.ActionLink("AjouPer", "AjouPer", new { area = "Manage" }), null);
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="List">
+                                    List of Categorie de Produistc
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="align-items-md-center">
+                        <a asp-controller="Home" asp-action="Users">Utilisateurs</a>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a href="">Param&egrave;tres</a>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a href="">Stores</a>
+                    </div>
+                    -->
+                    <div class="align-items-md-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Cat&eacute;gories de Storeses
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body" style="">
+                                <!--
+                                <a style="color:#000" asp-controller="Categories" asp-action="Index">Ajout</a>
+                                  -->
+                                @Html.ActionLink("Ajouter", "Create", "Categories", null,
+                                   /* new { area = "Manage" },*/ new { @style = "color:#000" })
+                            </div>
+                            <div class="panel-body">
+                                <a style="color:#000" asp-controller="Categories" asp-action="List">List of </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a href="Manage/Types">Types de Stores</a>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a href="">Stores</a>
+                    </div>
+                    <div class="align-items-md-center">
+                        <a asp-controller="Home" asp-action="Users">Localizations</a>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a style="color:#fff" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Utilisateurs >
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.ActionLink("Users", "Index", "Users", null,
+                                new { @style = "color:#000" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    Click me to exapand 3
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                33333333
+                            </div>
+                            <div class="panel-body">
+                                444444444
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color:lightgray">
+                    <div class="align-items-md-center">
+                        @{
+                            //var userRole = ViewBag["userRole"];
+                            //if ((string)userRole == "admin")
+                            //{
+                            <div class="panel-body">
+                                <a style="color:#fff" asp-controller="User" asp-action="Add">D&eacute;connecter</a>
+                            </div>
+                            //}
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9" style="background-color:#fff">
+                <main role="main" class="pb-3" style="background-color:#fff">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - allopromo.Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

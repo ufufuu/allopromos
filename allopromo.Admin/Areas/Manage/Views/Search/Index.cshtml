@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model allopromo.Admin.Models.SearchModel
+<h1>Index | Search</h1>
+<div>
+    <div>
+        <h4>Rechercher</h4>
+    @Html.BeginForm("Index", "Search", FormMethod.Post) 
+    {
+    <div>
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <th>
+                        <label>Rechercher:</label>
+                    </th>
+                    <th>
+                        @Html.TextBoxFor(x=>x.keyWord)
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <input class="btn btn-primary btn-lg" type="submit" value="Rechercher" />
+    </div>
+    }
+    </div>
+</div>

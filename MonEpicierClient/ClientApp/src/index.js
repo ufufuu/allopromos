@@ -1,27 +1,20 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import './index.css';
 import './styles/styles.css';
 
 //import '../public/styles/my.css';
 //import Bootstrap from 'react-bootstrap';
-
-import { Main } from './components/main';
-
-//IMPORTING ALL ROUTES
-import routes from './components/routing/routes';
-
-// BootStraping
-//import 'bootstrap/dist/css/bootstrap.min.css';
-//import BootStrap from 'boostrap';
-
+import { BrowserRouter } from 'react-router-dom';
+import routes from './components/routes';
 import App from './App';
 //import * as serviceWorker from './serviceWorker';
 import registerServiceWorker from './registerServiceWorker';
 
-const allRoutes = routes;
+//const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+const rootElement = document.getElementById('root');
+const appRoutes = routes;
+
 /*
 ReactDOM.render(
 <Main />,
@@ -30,9 +23,16 @@ document.getElementById("App"));
 */
 
 ReactDOM.render(
-    <Main />, 
-    document.getElementById('root'));
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    rootElement);
 
+/*
+ReactDOM.render(
+    <MainHome />, 
+    document.getElementById('root'));
+ */
 //ReactDOM.render(<Main />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -42,23 +42,13 @@ ReactDOM.render(
 
 registerServiceWorker();
 
-
-
 //https://docs.microsoft.com/en-us/visualstudio/ide/csharp-developer-productivity?utm_source=VisualStudio&utm_medium=aspnet-getstarted&utm_campaign=VisualStudio&view=vs-2019
-
-
-
-
 
 /*
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- *
+ 
  * 
  * import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';

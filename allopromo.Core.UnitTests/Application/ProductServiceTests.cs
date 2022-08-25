@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using allopromo.Core.Abstract;
+using allopromo.Core.Services;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,26 @@ namespace alloPromo.Core.UnitTests.Application
     [TestFixture]
     public class ProductServiceTest
     {
-        Mock<ModelStateDictionary> modelStateMock; 
+        Mock<IProductRepository> _productRepository = new Mock<IProductRepository>();
         [TestCase]
-        public void  ObtenirProduct_DEVRAIT_RetournerProduitParId()
+        public async Task ObtenirProduct_DEVRAIT_RetournerUneException()
         {
-
+            var productService = new ProductService(_productRepository.Object);
+            var result = await productService.GetProductById(null);
+            //Assert.Throws<ArgumentNullException>(null);
+            Assert.IsNull(result);
+        }
+        [TestCase]
+        public void ObtenirProduct_DEVRAIT_RetournerProduitParId_Trouve()
+        {
+            var productService = new ProductService(_productRepository.Object);
+            var result = productService.GetProductById(It.IsAny<string>());
+            Assert.IsNotNull(result);
         }
         [TestCase]
         public void ObtenirProduct_DEVRAIT_RetournerProduitParIds()
-        //public async Task ObtenirProduct_DEVRAIT_RetournerProduitParIds()
         {
-
         }
     }
 }
+//Mock<ModelStateDictionary> modelStateMock;
