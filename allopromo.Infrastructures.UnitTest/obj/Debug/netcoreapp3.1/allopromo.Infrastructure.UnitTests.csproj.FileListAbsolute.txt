@@ -177,3 +177,9 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.deps.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.runtimeconfig.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.runtimeconfig.dev.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.genruntimeconfig.cache
