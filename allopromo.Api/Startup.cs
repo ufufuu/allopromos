@@ -15,8 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using allopromo.Infrastructure.Helpers.Authentication;
 using allopromo.Core.Infrastructure.Abstract;
-using Owin;
-using Microsoft.Owin;
+//using Owin;
+//using Microsoft.Owin;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.Linq;
 using System;
@@ -35,7 +35,7 @@ using allopromo.Core.Services;
 //using allopromo.Core.Application.Interface;
 //using allopromo.Core.Services;
 //using allopromo.Infrastructure.Helpers.Authentication;
-[assembly:OwinStartup(typeof(allopromo.Startup))]
+//[assembly:OwinStartup(typeof(allopromo.Startup))]
 namespace allopromo
 {
     public class  Startup

@@ -80,8 +80,6 @@
     
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
     
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.1.0" />
-    
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
@@ -98,7 +96,7 @@
     
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     
-    <PackageReference Include="Ocelot" Version="8.0.0" />
+    <!--<PackageReference Include="Ocelot" Version="8.0.0" /> -->
     
     <PackageReference Include="Polly" Version="7.2.3" />
     
@@ -123,15 +121,19 @@
     <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
       <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnetcore.identity.entityframeworkcore\5.0.7\lib\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
     </Reference>
+	  <!--
     <Reference Include="Microsoft.Owin">
       <HintPath>..\..\..\..\.nuget\packages\microsoft.owin\4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
+	-->
+	  <!--
     <Reference Include="Owin">
       <HintPath>..\..\..\..\.nuget\packages\owin\1.0.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="Owin.Extensions">
       <HintPath>..\..\..\..\.nuget\packages\owin.extensions\0.8.5\lib\net40\Owin.Extensions.dll</HintPath>
     </Reference>
+	-->
     <Reference Include="Serilog.Sinks.File">
       <HintPath>..\..\..\..\.nuget\packages\serilog.sinks.file\5.0.0\lib\net5.0\Serilog.Sinks.File.dll</HintPath>
     </Reference>
