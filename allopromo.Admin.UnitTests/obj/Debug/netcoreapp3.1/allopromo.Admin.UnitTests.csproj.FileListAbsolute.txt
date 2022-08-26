@@ -203,7 +203,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\bin\Debug\netcor
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\bin\Debug\netcoreapp3.1\allopromo.Admin.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.xml
-C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.csproj.CoreCompileInputs.cache
@@ -211,3 +210,4 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcor
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Admin.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Admin.UnitTests.csprojAssemblyReference.cache

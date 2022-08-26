@@ -10,7 +10,9 @@ namespace allopromo.IntegrationTests
     [TestFixture]
     public class StoreCategoriesTest
     {
-
+        public StoreCategoriesTest()
+        {
+        }
         [Test]
         public async Task GetKjfkj()
         {
@@ -27,6 +29,9 @@ namespace allopromo.IntegrationTests
     public class ManageCategoryTest
     {
         private WebApplicationFactory<Startup> _factoryClient;
+        public ManageCategoryTest()
+        {
+        }
         public ManageCategoryTest(WebApplicationFactory<Startup> factoryClient)
         {
             _factoryClient = _factoryClient;
