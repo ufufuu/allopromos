@@ -134,6 +134,8 @@ namespace allopromo
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<INotifyService, EmailNotificationService>();
 
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserRepository, UserRepository>();

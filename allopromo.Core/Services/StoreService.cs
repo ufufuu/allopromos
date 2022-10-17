@@ -23,14 +23,18 @@ namespace allopromo.Core.Model
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
         private IProductService _productService { get; set; }
-        private IStoreRepository _storeRepository;
+
+
+        private IRepository<tStore> _storeRepository;
+
+
         allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
 
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
-        public StoreService(IStoreRepository storeRepository)
+        public StoreService(IRepository<tStore> storeRepository)
         {
             _storeRepository = storeRepository;
         }
@@ -82,7 +86,7 @@ namespace allopromo.Core.Model
                 return null;
             else
             {
-                var storesByCategory = await _storeRepository.GetStoresByCategoryIdAsync(categoryId,
+                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId,
                     pageNumber, offSet);
 
                 //return (IEnumerable<StoreDto>)storesByCategory;
@@ -110,7 +114,7 @@ namespace allopromo.Core.Model
             {
                 return true;
             };
-            var tStore =await _storeRepository.GetStoreByIdAsync(storeId);
+            var tStore =await _storeRepository.GetByIdAsync(storeId);
             return AutoMapper.Mapper.Map<StoreDto>(tStore);
         }
         public void DeleteStore(StoreDto store)
@@ -120,7 +124,7 @@ namespace allopromo.Core.Model
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
             var categories = Mapper.Map<IEnumerable<StoreCategoryDto>>
-                (await _storeRepository.GetStoreCategoriesAsync());
+                (await _storeRepository.GetAllAsync());
             return categories;
         }
         public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
@@ -131,10 +135,10 @@ namespace allopromo.Core.Model
                         select q;
             return query.FirstOrDefault();
         }
-        private int GetStores(ApplicationUser user)
+        private async Task<int> GetStoresAsync(ApplicationUser user)
         {
             var Id = _userService.GetUserbyId(user.Id);
-            var query = from q in _storeRepository.GetStoresAsync()
+            var query = from q in await _storeRepository.GetAllAsync()
                         where q.user.Equals(user)
                         select q;
             int numberStores = query.Count();
@@ -173,7 +177,7 @@ namespace allopromo.Core.Model
             else
                 imageUrl = "http://www.noiamgesfornow.jpg";
             tStoreCategory.storeCategoryImageUrl = imageUrl;
-            _storeRepository.AddStoreCategory(tStoreCategory.storeCategoryName, imageUrl);
+            _storeRepository.Add(tStoreCategory.storeCategoryName, imageUrl);
             return storeCategoryDto;
         }
         public Task<StoreDto> CreateStore(StoreDto store)
@@ -190,7 +194,10 @@ namespace allopromo.Core.Model
             if (storeCategoryDto == null)
             {
                 var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
-                _storeRepository.DeleteStoreCategory(storeCategory);
+
+               // _storeRepository.DeleteStoreCategory(storeCategory);
+
+
                 var category = storeRepository.GetByIdAsync("kjkjk");
                 if (storeCategory == null)
                 {

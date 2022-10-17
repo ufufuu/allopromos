@@ -12,8 +12,8 @@ namespace allopromo.Core.UnitTest.ServicesTests
     [TestFixture]
     public class StoreServiceTests
     {
-        private Mock<IRepository<tStore>> _storeRepositoryMock= new Mock<IRepository<tStore>>();
-        private Mock<IStoreRepository> storeRepositoryMock = new Mock<IStoreRepository>();
+        private Mock<IRepository<tStore>> storeRepositoryMock= new Mock<IRepository<tStore>>();
+        
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {

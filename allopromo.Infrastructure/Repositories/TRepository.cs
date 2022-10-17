@@ -99,6 +99,31 @@ namespace allopromo.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task IRepository<T>.Add(T obj, string imageUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<T>.Add(string obj, string imageUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IRepository<T>.GetByIdAsync(int categoryId, int pageNumber, int offSet)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IRepository<T>.GetByIdAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<T>.DeleteStoreCategory(T obj)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
