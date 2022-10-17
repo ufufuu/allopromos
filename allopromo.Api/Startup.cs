@@ -117,6 +117,8 @@ namespace allopromo
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
 
+
+
             //2 lines below vs 2 above ? or Addtransient vs addScoped ?
             //services.AddTransient<IStoreService, StoreService>();
             //services.AddTransient<INotificationService, NotificationService>();
@@ -124,12 +126,15 @@ namespace allopromo
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "my API", Version = "v1" });
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
+
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
@@ -169,6 +174,8 @@ namespace allopromo
                 new[] { "application/octet-stream" });
             });
 
+
+
             //services.AddAuthentication(auth =>
             //{
             //    auth.DefaultScheme = "Test";
@@ -176,11 +183,16 @@ namespace allopromo
             //    .AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
             //Adding E-mail Services
 
+
+
+
             services.AddFluentEmail("test-email@allopromo.test");
             //services.AddOcelot();
         }
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
+
+
             /*
             app.UseRouting();
             app.UseEndpoints(endpoints =>
@@ -190,6 +202,7 @@ namespace allopromo
                 });
             });
             */
+
             
             if (env.IsDevelopment()) //if(env.IsProduction() || ens.IsStaging() || env.IsEnvironnement("Staging_2"))
             {
@@ -218,6 +231,8 @@ namespace allopromo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+
                 //Utilisez l’intergiciel decompression deréponseen haut dela
                 //configuration du pipeline detraitement.
                 //Entreles points determinaison pour les contrôleurs et lesecours 

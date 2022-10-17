@@ -26,6 +26,7 @@
     <None Remove="Services\Threads\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Abstract\IProductRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
     <Compile Remove="Abstract\ISmsNotificationService.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />

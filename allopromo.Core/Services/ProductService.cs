@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 //using System.Web.Http.ModelBinding;
 namespace allopromo.Core.Services
 {
     public class ProductService :IProductService
     {
-        private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository
+        private readonly IRepository<tProduct> _productRepository;
+        public ProductService(IRepository<tProduct> productRepository
             )
         {
             _productRepository = productRepository;
@@ -26,7 +27,7 @@ namespace allopromo.Core.Services
             ProductDto productDto = null;
             if (product != null)
             {
-                tProduct tProduct = await _productRepository.CreateAsync(product);
+                var tProduct = await _productRepository.CreateProductAsync(product);
                 ProductDto pod = Mapper.Map<ProductDto>(product);
                 productDto = Mapper.Map<ProductDto>(tProduct);
             }
@@ -37,7 +38,9 @@ namespace allopromo.Core.Services
             if (productId == null)
                 return null;
             return AutoMapper.Mapper.Map<tProduct, ProductDto>(
-            await _productRepository.GetProductAsync(productId));
+            await _productRepository.GetByIdAsync(productId));
+
+
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id)
         {

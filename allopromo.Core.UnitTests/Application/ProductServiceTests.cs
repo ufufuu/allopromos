@@ -1,5 +1,7 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Entities;
 using allopromo.Core.Services;
+//using allopromo.Shared.Abstract;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -12,7 +14,7 @@ namespace alloPromo.Core.UnitTests.Application
     [TestFixture]
     public class ProductServiceTest
     {
-        Mock<IProductRepository> _productRepository = new Mock<IProductRepository>();
+        Mock<IRepository<tProduct>> _productRepository = new Mock<IRepository<tProduct>>();
         [TestCase]
         public async Task ObtenirProduct_DEVRAIT_RetournerUneException()
         {

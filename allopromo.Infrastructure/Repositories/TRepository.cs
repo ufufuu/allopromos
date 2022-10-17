@@ -1,4 +1,6 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Application.Dto;
+using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -51,6 +53,51 @@ namespace allopromo.Infrastructure.Repositories
         {
             T existing = _table.Find(Id);
             _table.Remove(existing);
+        }
+
+        Task IRepository<T>.Add(T obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<T>.Update(T obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<T>.Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<T>> IRepository<T>.GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IRepository<T>.GetByIdAsync(object Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<T>.Delete(object Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<ProductDto> IRepository<T>.CreateProductAsync(tProduct product)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
