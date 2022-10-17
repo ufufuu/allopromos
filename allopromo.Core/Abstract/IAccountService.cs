@@ -16,7 +16,8 @@ namespace allopromo.Core.Abstract
 
         // method for handling event without any data
         public event UserAuthenticatedEventHandler userAuthenticated;
-        public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
+
+        //public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
 
         public delegate UserAuthenticateEventArgs onUserAuthenticates();
         public void OnUserAuthenticate(string userName);

@@ -4,29 +4,28 @@
     <UserSecretsId>70a4f25b-41ed-403f-afb7-1d442fe1bb5d</UserSecretsId>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="allopromoDataAccess\**" />
     <Compile Remove="bin\ViewModel\**" />
     <Compile Remove="Infrastructure\ExceptionHandlers\**" />
     <Compile Remove="Infrastructure\Excetions\**" />
     <Compile Remove="Infrastructure\Filters\**" />
     <Compile Remove="Infrastructure\Middlewares\**" />
     <Compile Remove="Infrastructure\Notifications\**" />
-    <Content Remove="allopromoDataAccess\**" />
     <Content Remove="bin\ViewModel\**" />
     <Content Remove="Infrastructure\ExceptionHandlers\**" />
     <Content Remove="Infrastructure\Excetions\**" />
     <Content Remove="Infrastructure\Filters\**" />
     <Content Remove="Infrastructure\Middlewares\**" />
     <Content Remove="Infrastructure\Notifications\**" />
-    <EmbeddedResource Remove="allopromoDataAccess\**" />
     <EmbeddedResource Remove="bin\ViewModel\**" />
     <EmbeddedResource Remove="Infrastructure\ExceptionHandlers\**" />
     <EmbeddedResource Remove="Infrastructure\Excetions\**" />
     <EmbeddedResource Remove="Infrastructure\Filters\**" />
     <EmbeddedResource Remove="Infrastructure\Middlewares\**" />
     <EmbeddedResource Remove="Infrastructure\Notifications\**" />
-    <None Remove="allopromoDataAccess\**" />
     <None Remove="bin\ViewModel\**" />
     <None Remove="Infrastructure\ExceptionHandlers\**" />
     <None Remove="Infrastructure\Excetions\**" />
@@ -48,6 +47,7 @@
     <Compile Remove="Infrastructure\Providers\BasicAuthenticationFilter.cs" />
     <Compile Remove="Infrastructure\Services\ErrorService.cs" />
     <Compile Remove="Infrastructure\ToolKit\JwtSecurityTokenHandler.cs" />
+    <Compile Remove="Model\MappingProfile.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,6 +94,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     
     <!--<PackageReference Include="Ocelot" Version="8.0.0" /> -->
@@ -107,6 +109,8 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    
+    <PackageReference Include="swashbuckle.aspnetcore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>

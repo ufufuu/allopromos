@@ -16,9 +16,9 @@ namespace allopromo.Api.Controllers
         public string odooPwd = "@12345";
         //public XmlRpcClient client = new XmlRpcClient();
         //public 
-        public void Get()
-        {
+        //public void Get()
+        //{
 
-        }
+        //}
     }
 }

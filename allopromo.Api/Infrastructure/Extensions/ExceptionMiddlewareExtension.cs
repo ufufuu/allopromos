@@ -1,13 +1,14 @@
-﻿using allopromoInfrastructure.Abstract;
+﻿
+using allopromo.Api.Infrastructure.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using allopromo.Model.Errors;
+using allopromo.Core.Exceptions;
 using Microsoft.AspNetCore.Http;
-namespace allopromoInfrastructure.Extensions
+namespace allopromo.Api.Infrastructure.Extensions
 {
     public static class ExceptionMiddlewareExtension
     {
@@ -23,7 +24,7 @@ namespace allopromoInfrastructure.Extensions
                     if (contextFeature != null)
                     {
                         logger.Error($"Some went Wrong - try again{contextFeature.Error}");
-                        await context.Response.WriteAsync(new allopromo.Model.Errors.ErrorDetails()
+                        await context.Response.WriteAsync(new ErrorDetails()
                         {
                             statusCode = context.Response.StatusCode,
                             errorMessage = "Internal Server Erreur "

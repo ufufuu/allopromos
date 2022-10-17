@@ -34,14 +34,13 @@ namespace allopromo.Infrastructure.Repositories
         }
         public async Task<List<tProduct>> GetProductsAsync(string storeId)
         {
-            //using (var db = new AppDbContext())
-            //{
-            //    var products= db.Products
-            //         .Where(x => x.storeId == storeId)
-            //         .ToListAsync();
-            //    return await products;
-            //}
-            return null;
+            using (var db = new AppDbContext())
+            {
+                var products = db.Products
+                     .Where(x => x.storeId == storeId)
+                     .ToListAsync();
+                return await products;
+            }
         }
         public Task<tProduct> GetProductsByStoreIdAsync(string id)
         {

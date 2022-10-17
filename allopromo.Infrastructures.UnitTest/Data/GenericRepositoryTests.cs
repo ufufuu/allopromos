@@ -28,7 +28,7 @@ namespace allopromo.Infrastructure.UnitTests.Data
             }
             using (var dbContext = new AppDbContext(options))
             {
-                IGenericRepository<tStore> _SUT = new GenericRepository<tStore>(dbContext);
+                //IRepository<tStore> _SUT = new GenericRepository<tStore>(dbContext);
 
             }
             //var _stu = new GenericRepository<tStore>(db.);

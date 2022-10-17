@@ -1,8 +1,3 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\allopromo.Admin.Views.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\allopromo.Admin.Views.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\allopromo.Admin.exe
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\nunit.engine.dll
@@ -464,10 +459,9 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netco
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\allopromo.Admin.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\allopromo.Admin.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Debug\netcoreapp3.1\System.Reactive.xml
+C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.csproj.CoreCompileInputs.cache
@@ -475,4 +469,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netco
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Debug\netcoreapp3.1\allopromo.IntegrationTests.csprojAssemblyReference.cache

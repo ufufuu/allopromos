@@ -2256,30 +2256,6 @@
           "lib/net40/WatiN.Core.dll": {}
         }
       },
-      "allopromo.Admin/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "6.2.2",
-          "FluentValidation.AspNetCore": "11.1.2",
-          "Microsoft.AspNet.SignalR.Core": "1.1.4",
-          "Microsoft.AspNet.WebApi.Client": "5.2.9",
-          "Microsoft.Extensions.Http.Polly": "6.0.6",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
-          "Polly": "7.2.3",
-          "Polly.Caching.Distributed": "3.0.1",
-          "Polly.Caching.Memory": "3.0.2",
-          "Polly.Contrib.WaitAndRetry": "1.1.1",
-          "Polly.Extensions.Http": "3.0.0",
-          "System.Reactive.Core": "5.0.0",
-          "WatiN": "2.1.0",
-          "jQuery.UI.Combined": "1.13.2"
-        },
-        "runtime": {
-          "allopromo.Admin.dll": {}
-        },
-        "compile": {
-          "allopromo.Admin.dll": {}
-        }
-      },
       "System.Reactive.Reference/5.0.0.0": {
         "runtime": {
           "System.Reactive.dll": {
@@ -3928,6 +3904,25 @@
           "WindowsBase.dll": {}
         },
         "compileOnly": true
+      },
+      "allopromo.Admin/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "6.2.2",
+          "FluentValidation.AspNetCore": "11.1.2",
+          "Microsoft.AspNet.SignalR.Core": "1.1.4",
+          "Microsoft.AspNet.WebApi.Client": "5.2.9",
+          "Microsoft.Extensions.Http.Polly": "6.0.6",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
+          "Polly": "7.2.3",
+          "Polly.Caching.Distributed": "3.0.1",
+          "Polly.Caching.Memory": "3.0.2",
+          "Polly.Contrib.WaitAndRetry": "1.1.1",
+          "Polly.Extensions.Http": "3.0.0",
+          "System.Reactive.Core": "5.0.0",
+          "WatiN": "2.1.0",
+          "jQuery.UI.Combined": "1.13.2"
+        },
+        "compileOnly": true
       }
     }
   },
@@ -4993,11 +4988,6 @@
       "sha512": "sha512-r/aKh34f3duKOfvmd3FAG73J0Cq1xYXgi45qy9CvocIah7AoSib8o6dvMA4tNMN3JL5HByo2BY6zYjguRZId0g==",
       "path": "watin/2.1.0",
       "hashPath": "watin.2.1.0.nupkg.sha512"
-    },
-    "allopromo.Admin/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "System.Reactive.Reference/5.0.0.0": {
       "type": "reference",
@@ -6366,6 +6356,11 @@
     },
     "WindowsBase/4.0.0.0": {
       "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "allopromo.Admin/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

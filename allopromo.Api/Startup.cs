@@ -7,14 +7,17 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
-using allopromoInfrastructure.Logging;
-using allopromoInfrastructure.Abstract;
+
+using allopromo.Api.Infrastructure;
+//using allopromoInfrastructure.Abstract;
+
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using allopromo.Infrastructure.Helpers.Authentication;
 using allopromo.Core.Infrastructure.Abstract;
+
 //using Owin;
 //using Microsoft.Owin;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -25,9 +28,12 @@ using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
 using allopromo.Infrastructure.Abstract;
 using allopromo.Core.Entities;
-using allopromo.Api.Model;
+//using allopromo.Api.Model;
 using allopromo.Api;
 using allopromo.Core.Services;
+using allopromo.Api.Infrastructure.Abstract;
+using allopromo.Api.Infrastructure.Logging;
+using Microsoft.Extensions.Hosting;
 //using Ocelot.Middleware;
 //using Ocelot.DependencyInjection;
 
@@ -47,26 +53,22 @@ namespace allopromo
         }
         public IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
-
         public void ConfigureServices(IServiceCollection services)
         {
-            //For Entity Framework Core 
+            //Register(services, connString)
+
             services.AddDbContext<AppDbContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection")));
-
-            //Prevent Unable to Register Service for type....UserManager<ApplicationUser> whiel trying to activate ..
-            
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
-
-            //Adding Authentication trhrough JWT
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+
             /*
             services.AddAuthentication(options =>
             {
@@ -74,7 +76,8 @@ namespace allopromo
             })*/
                 /*.AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>
                 ("Test", null);*/
-            //By Jwt Bearer Adding from Below | 
+            //By Jwt Bearer Adding from Below|
+
             .AddJwtBearer(token =>
             {
                 token.SaveToken = true;
@@ -94,25 +97,23 @@ namespace allopromo
                 //Events
                 token.Events = new JwtBearerEvents
                 {
-                    OnChallenge= async ctx =>
-                    {
+                    //OnChallenge= async ctx =>
+                    //{
                         // get the app calling
                         //get EF
                         //can Read
                         //check if 
                         // Add claim
-                    }
+                    //}
                 };
 
             });
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
-
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
 
@@ -122,18 +123,24 @@ namespace allopromo
 
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
+            //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "my API", Version = "v1" });
+            });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<ILoggerManager, LoggerManager>();
-
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IGenericRepository<tStore>, GenericRepository<tStore>>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped <Core.Abstract.IStoreRepository,
-               Infrastructure.Repositories.StoreRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
 
-            services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp)); //?Instead of <ApplicationUser>>
+            //services.AddScoped<IRepository, TRepository>();
+            //services.AddScoped <Core.Abstract.IStoreRepository,
+               //Infrastructure.Repositories.StoreRepository>();
+
+            services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
+            //services.AddScoped<ILoggerManager, LoggerManager>();
+            //?Instead of <ApplicationUser>>
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
@@ -167,12 +174,12 @@ namespace allopromo
             //    auth.DefaultScheme = "Test";
             //})
             //    .AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
-
             //Adding E-mail Services
+
             services.AddFluentEmail("test-email@allopromo.test");
             //services.AddOcelot();
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             /*
             app.UseRouting();
@@ -183,12 +190,11 @@ namespace allopromo
                 });
             });
             */
-            //Below to return Customized Message 
+            
             if (env.IsDevelopment()) //if(env.IsProduction() || ens.IsStaging() || env.IsEnvironnement("Staging_2"))
             {
                 //app.UserExceptionHandler("/Home/Error-local-development");
                 app.UseDeveloperExceptionPage();
-                //app.UseSerilogRequestLogging();
             }
             else
             {
@@ -222,9 +228,11 @@ namespace allopromo
 
                 endpoints.MapFallbackToFile("index.html");
             });
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>{
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             AutoMapperConfiguration.Initialize();
-
             /*
             app.UseMvc();
             app.UseCors(options =>options.AllowAnyMethod().AllowAnyHeader()

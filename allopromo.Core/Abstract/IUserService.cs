@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using allopromo.Core.Domain;
+using allopromo.Core.Application.Dto;
 
 namespace allopromo.Core.Abstract
 {
@@ -19,10 +20,10 @@ namespace allopromo.Core.Abstract
 
         //public Task<bool> UserExist(string userName);
         //Task<bool> UserExist(string userName);
+
         public ApplicationUser GetUserIfExist(string userName);
         public IList<ApplicationUser> GetUsersInRole(string roleName);
         public ApplicationUser GetUserRole(ApplicationUser user);
-        public ApplicationUser GetUserById(string userId);
-        //public User GetUserbyId(string userId);
+        public UserDto GetUserById(string userId);
     }
 }

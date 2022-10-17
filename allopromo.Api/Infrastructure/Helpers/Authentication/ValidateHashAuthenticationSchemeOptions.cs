@@ -44,7 +44,6 @@ namespace allopromo.Infrastructure.Helpers.Authentication
                 Console.WriteLine("Exception Occured while Deserializing: " + ex);
                 return Task.FromResult(AuthenticateResult.Fail("TokenParseException"));
             }
-            int y = 5;
             if (model!= null)
             {
                 // success case AuthenticationTicket generation

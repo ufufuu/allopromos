@@ -12,7 +12,8 @@ namespace allopromo.Api.Model
         public MappingProfile()
         {
             CreateMap<StoreDto, tStore>()
-                .ForMember(vm => vm.storeId, map => map.MapFrom(m => m.storeId));
+                .ForMember(vm => vm.storeId, map => 
+                map.MapFrom(m => m.storeId));
         }
     }
 }

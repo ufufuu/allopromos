@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-namespace allopromo.Model.Errors
+namespace allopromo.Core.Exceptions
 {
     public class ErrorDetails
     {

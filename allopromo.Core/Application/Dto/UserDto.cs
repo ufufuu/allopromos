@@ -11,14 +11,14 @@ namespace allopromo.Core.Application.Dto
         public string userEmail { get; set; }
         public string Password { get; set; }
     }
-    public class UserConvertor
-    {
-        public UserDto ConvertToDto(ApplicationUser appUser)
-        {
-            UserDto userDto = null;
-            userDto.userName = appUser.UserName;
-            userDto.userEmail = appUser.Email;
-            return userDto;
-        }
-    }
+    //public class UserConvertor
+    //{
+    //    public UserDto ConvertToDto(ApplicationUser appUser)
+    //    {
+    //        UserDto userDto = null;
+    //        userDto.userName = appUser.UserName;
+    //        userDto.userEmail = appUser.Email;
+    //        return userDto;
+    //    }
+    //}
 }

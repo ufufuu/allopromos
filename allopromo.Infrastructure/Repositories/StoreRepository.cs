@@ -23,7 +23,6 @@ namespace allopromo.Infrastructure.Repositories
         {
             tStoreCategory category = new tStoreCategory { storeCategoryName = "Commercants" };
             _dbContext.StoreCategories.Add(category);
-
             tCity cityLocation = new tCity { cityGpsLongitude= "Lome - Maizerte"}; 
             //get from Localization Library
             cityLocation.cityName = "Quarier Agbelepedogan 2ieme von apres Total Totsi en allant " +
@@ -68,22 +67,16 @@ namespace allopromo.Infrastructure.Repositories
             }
             return store;
         }
-        //public tStoreCategory AddStoreCategory(tStoreCategory storeCategory)
-        //{
-        //    return null;
-        //}
-        public tStoreCategory AddStoreCategory(string storeCategoryName)
+        public tStoreCategory AddStoreCategory(string storeCategoryName, string  imageUrl)
         {
             if (storeCategoryName != null)
             {
                 using (var dbContext = new AppDbContext())
                 {
                     var storeCategory = new tStoreCategory();
-                    storeCategory.storeCategoryName = storeCategoryName;
+                    storeCategory.storeCategoryName = storeCategoryName; // storeCategoryName;
+
                     dbContext?.StoreCategories?.Add(storeCategory);
-
-                    //}
-
                     dbContext.SaveChanges();
                     return storeCategory;
                 }
@@ -105,13 +98,8 @@ namespace allopromo.Infrastructure.Repositories
         {
             return null;
         }
-        tStoreCategory AddStoreCategory(tStoreCategory storeCategory)
-        {
-            return null;
-        }
         //GetStoreByIdAsync(string storeId)
         //}
-
         public async Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(string categoryId) 
             //GetStoresByIdAsync GetStoresByCatIdAsync
         {
@@ -139,10 +127,7 @@ namespace allopromo.Infrastructure.Repositories
         {
             return _dbContext.Stores.Count();
         }
-        private async Task<AppDbContext> GetDatabaseContext()
-        {
-            return null;
-        }
+        
         public void DeleteStoreCategory(tStoreCategory storeCategory)
         {
             if(storeCategory!=null)
@@ -176,6 +161,9 @@ namespace allopromo.Infrastructure.Repositories
             throw new NotImplementedException();
         }
     }
+
+
+
 }
 /* hat IS is it with that CancellationToken , in get Method argument at end ?
  * 

@@ -19,7 +19,11 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
+    <Compile Remove="Repositories\BaseRepository.cs" />
+    <Compile Remove="Repositories\GenericRepository.cs" />
     <Compile Remove="Repositories\IStoreRepository.cs" />
+    <Compile Remove="Repositories\ProductRepository.cs" />
+    <Compile Remove="Repositories\StoreRepository.cs" />
     <Compile Remove="Repositories\StoreRepositoryT.cs" />
     <Compile Remove="Services\Emailing\EmailService2.cs" />
   </ItemGroup>
@@ -43,11 +47,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\allopromo.Core\allopromo.Core.csproj" />
+    <Folder Include="Data\Config\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Config\" />
+    <ProjectReference Include="..\allopromo.Core\allopromo.Core.csproj" />
   </ItemGroup>
 
   <!--<ItemGroup>

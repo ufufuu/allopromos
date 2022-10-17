@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using allopromo.Core.Helpers.Convertors;
 using allopromo.Model.ViewModel;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Infrastructure;
@@ -63,7 +62,6 @@ namespace allopromo.Controllers
         public IActionResult GetUsers()
         {
             var roleUsers = _userService.GetUsers();
-            int y = 6;
             return Ok(roleUsers);
         }
         [HttpPost]
@@ -146,7 +144,6 @@ namespace allopromo.Controllers
                             Email = loginModel.UserName,
                             UserRoles = role
                         };
-                        var userDto = UserConvertor.ConvertUser(account);
                         return Ok(new ApiResponseModel
                         {
                             userResponse = user,
@@ -173,26 +170,7 @@ namespace allopromo.Controllers
             return Unauthorized();
         }
         [HttpDelete]
-        [Route("login")]
-        public IActionResult Login2(LoginModel userLogin)
-        {
-            var user = _userService.GetUserIfExist(userLogin.UserName);
-            if (user != null)
-            {
-                var result = user;
-                int y = 5;
-                if (_userService.LoginUser((ApplicationUser)user))
-                {
-                    var userDto = UserConvertor.ConvertUser(user);
-                    return Ok(userDto);
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            return NotFound();
-        }
+        
         [HttpGet]
         [Route("/account")]
         public object GetAccount()

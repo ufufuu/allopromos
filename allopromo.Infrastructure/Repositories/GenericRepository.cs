@@ -6,19 +6,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Abstract
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IRepository<T> where T : class
     {
         #region fields
         private readonly AppDbContext _dbContext;
         private DbSet<T> _table;
         #endregion
         #region Public Method
-        //public GenericRepository(AppDbContext db)
-        //{
-        //}
+        
         public GenericRepository(AppDbContext db)
         {
-            //_dbContext = new AppDbContext();
             _table = _dbContext.Set<T>();
         }
         public GenericRepository(AppDbContext dbContext, DbSet<T> table)

@@ -6,12 +6,14 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace allopromo.Core.UnitTest.ServicesTests
 {
     [TestFixture]
     public class StoreServiceTests
     {
-        private Mock<IGenericRepository<tStore>> storeRepositoryMock= new Mock<IGenericRepository<tStore>>();
+        private Mock<IRepository<tStore>> _storeRepositoryMock= new Mock<IRepository<tStore>>();
+        private Mock<IStoreRepository> storeRepositoryMock = new Mock<IStoreRepository>();
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {
@@ -21,67 +23,34 @@ namespace allopromo.Core.UnitTest.ServicesTests
                 storeId = "348ireknf"
             };
         }
-        [TestCase]
+        [Test]
         public void StoresService_DeleteStore_Deletes()
         {
         }
-        [TestCase]
-        public void StoresService_GetStores_ReturnStores()
+        [Test]
+        public void StoreService_GetStores_ReturnStores()
         {
-            //var storeService = new StoreService(storeRepositoryMock.Object);
+            var storeService = new StoreService(storeRepositoryMock.Object);
             List<StoreDto> listStores = new List<StoreDto>();
-            //var stores = storeService.GetStoresAsync();
+            var stores = storeService.GetStoreCategoriesAsync();
         }
-        [TestCase]
+        [Test]
         public void StoreService_GetCategories_ReturnsCategories()
         {
+            var storeService = new StoreService(storeRepositoryMock.Object);
+            var result = storeService.GetStoreCategoriesAsync();
+            Assert.IsNotNull(result);
         }
-
-        //[Test]
-        //public void StoreCrontroller_CreateStore_ReturnsStoreCreated_RaisesNotificationEvent()
-        //{
-        //    //Arrange
-        //    //Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
-        //    Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
-        //    StoreService storeService =
-        //        new StoreService(storeRepositoryMock.Object); // _notificationServiceMock.Object);//, _notificationService.Object);
-        //    var store = new StoreDto
-        //    {
-        //        storeId = "dsd",
-        //        storeName = "Thierry Plank",
-        //    };
-        //    //Act
-        //    var result = storeService.CreateStore(store);
-        //    _notificationServiceMock.Object.storeCreated += (o, e) => notifySent = true;
-
-        //    //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } or Below
-
-        //    _notificationServiceMock.Object.SendNotification(); // += (_, e) => notifySent = true;
-        //    _notificationServiceMock.Object.SendNotification += (_, e) =>
-        //    {
-        //        storeCreatedEventArgs = (StoreCreatedEventArgs)e;
-        //        StoreCreated(_, e);
-        //        return true;
-        //    };
-        //    _notificationServiceMock.Object.storeCreated += (StoreCreated);
-        //    _notificationServiceMock.Object.storeCreated += delegate (object source, EventArgs e)
-        //    {
-        //        storeCreatedEventArgs = e as StoreCreatedEventArgs;
-        //        notifySent = true;
-        //        return true;
-        //    };
-        //    _notificationServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>())).Returns(store);
-        //    storeService.CreateStoreAsync(store);
-        //    _notificationServiceMock.Verify(x => x.OnStoreCreated(), Times.Once);
-        //    _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
-        //}
-        //bool StoreCreated(object source, StoreCreatedEventArgs e)
-        //{
-        //    storeCreated =e;
-        //    return true;
-        //}
-
+        [Test]
+        public async Task StoreService_GetImageUrl_SHOULD_Return_ImageLink()
+        {
+            var storeService = new StoreService(storeRepositoryMock.Object);
+            var storeCategoryUrl = await storeService.getImageUrl();
+            Assert.IsNotNull(storeCategoryUrl);
+            Assert.AreEqual(storeCategoryUrl.GetType(), typeof(string));
+        }
     }
+
 }
 
 //storeService.storeCreated+= delegate 
@@ -90,4 +59,5 @@ namespace allopromo.Core.UnitTest.ServicesTests
 //    storeCreated = new StoreCreatedEventArgs();
 //    store_created = true;
 //    return true;
-//};
+//};1`0
+

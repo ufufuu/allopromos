@@ -9,29 +9,31 @@
     <Compile Remove="Concrete\**" />
     <Compile Remove="Contracts\**" />
     <Compile Remove="DTO\**" />
+    <Compile Remove="Helpers\Convertors\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Services\Threads\**" />
     <EmbeddedResource Remove="Concrete\**" />
     <EmbeddedResource Remove="Contracts\**" />
     <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="Helpers\Convertors\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Services\Threads\**" />
     <None Remove="Concrete\**" />
     <None Remove="Contracts\**" />
     <None Remove="DTO\**" />
+    <None Remove="Helpers\Convertors\**" />
     <None Remove="Repositories\**" />
     <None Remove="Services\Threads\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Abstract\IRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
     <Compile Remove="Abstract\ISmsNotificationService.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
     <Compile Remove="Entities\tOrder.cs" />
     <Compile Remove="Entities\tRole.cs" />
-    <Compile Remove="Interfaces\IIRepository.cs" />
-    <Compile Remove="Interfaces\IRepository.cs" />
+    <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
+    <Compile Remove="Abstract\Interfaces\IRepository.cs" />
     <Compile Remove="Model\ApplicationUser.cs" />
     <Compile Remove="Services\AccounttService.cs" />
     <Compile Remove="Services\EmailService.cs" />
@@ -41,7 +43,6 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FirebaseAdmin" Version="1.2.0" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -54,5 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregates\Specifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\allopromo.Shared\allopromo.Shared.csproj" />
   </ItemGroup>
 </Project>

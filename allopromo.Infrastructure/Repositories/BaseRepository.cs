@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace allopromo.Infrastructure.Data.Repository
 {
-    public abstract class BaseRepository//:IGenericReposi
+    public abstract class BaseRepository
     {
         public virtual List<tStore> GetStores() 
         {

@@ -3,14 +3,13 @@ using allopromo.Core.Application;
 using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
-using allopromo.Core.Helpers.Convertors;
 using allopromo.Services.Abstract;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Http.ModelBinding;
+//using System.Web.Http.ModelBinding;
 namespace allopromo.Core.Services
 {
     public class ProductService :IProductService
@@ -37,7 +36,7 @@ namespace allopromo.Core.Services
         {
             if (productId == null)
                 return null;
-            return new ProductConvertor().ConvertDto(
+            return AutoMapper.Mapper.Map<tProduct, ProductDto>(
             await _productRepository.GetProductAsync(productId));
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id)
@@ -48,9 +47,9 @@ namespace allopromo.Core.Services
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByStore(string storeId)
         {
-            //if (storeId != null)
-                //return (IEnumerable<ProductDto>)
-                    //await _productQuery.GetProductsByStoreIdAsync(storeId);
+            if (storeId != null)
+                return (IEnumerable<ProductDto>)
+                    await _productRepository.GetProductsByStoreIdAsync(storeId);
             return null;
         }
         public Task<IEnumerable<ProductDto>> GetProductsByStore()

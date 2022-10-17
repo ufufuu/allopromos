@@ -1,9 +1,9 @@
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\testhost.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\nunit.engine.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\nunit.engine.api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\testhost.exe
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\testhost.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\allopromo.Core.UnitTests.deps.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\allopromo.Core.UnitTests.runtimeconfig.json

@@ -24,7 +24,7 @@ namespace allopromo.Core.Infrastructure
         {
             _notificationSettings = notificationSettings.Value;
         }
-        public async Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
+        public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
         {
             ApiResponseModel apiResponseModel = new ApiResponseModel();
             {
@@ -32,13 +32,13 @@ namespace allopromo.Core.Infrastructure
                 {
                     //FcmSettings = new FcmSetting();
                     //FirebaseAdmin.
-
                 }
                 catch (Exception ex)
                 {
                     //apiResponseModel.userResponse =;
                     //apiResponseModel.Message = "Something Went Wring";
                     //return apiResponseMode;
+                    throw ex;
                 }
             }
             return null;
@@ -55,12 +55,13 @@ namespace allopromo.Core.Infrastructure
             //......
             //then Call Pub Event or Method to Raise Event !
             //FirebaseAdmin.
-            var currentUser2 = getCurrentUser();
+            var currentUser2 = this.getCurrentUser();
         }
-        private async Task getCurrentUser()
+        private Task getCurrentUser()
         {
             //var user2 = UserManager<User>
             //var cirrentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            return null;
         }
         public void Dispose()
         {
@@ -98,7 +99,7 @@ namespace allopromo.Core.Infrastructure
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
                 //_logger.LogError("$ Exception was thrown{ex}");
             }
             return false;

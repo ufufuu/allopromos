@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-namespace allopromoInfrastructure.Abstract
+namespace allopromo.Api.Infrastructure.Abstract
 {
     public interface ILoggerManager:Serilog.ILogger
     {

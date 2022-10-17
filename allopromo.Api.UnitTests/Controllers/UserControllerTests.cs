@@ -78,7 +78,6 @@ namespace allopromo.Api.UnitTests
             var result = actualResult as IActionResult;
             var res1 = await actualResult;
             var okResult = await actualResult as OkObjectResult;
-            int y = 9;
             // When Do we Need Setup of Mock ?
             Assert.AreEqual(okResult.StatusCode, 200);
             var userT = okResult.Value as ApplicationUser;

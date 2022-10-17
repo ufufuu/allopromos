@@ -1,5 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Helpers.Convertors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,15 +12,19 @@ using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using allopromo.Core.Application.Dto;
+
 namespace allopromo.Core.Model
 {
    public class UserService : IUserService 
    {
         private readonly IUserRepository _userRepo;
+
         private readonly UserManager<ApplicationUser> _userManager;//= new UserManager<ApplicationUser>(); 
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private Serilog.ILogger _logger;                            // vs Microsoft Logging !
+
+        //private Serilog.ILogger _logger;           // vs Microsoft Logging !
+
         private HttpContextAccessor _httpContextAccessor;
         public UserService(IUserRepository userRepo, 
             UserManager<ApplicationUser> userManager, 
@@ -110,14 +113,12 @@ namespace allopromo.Core.Model
                 if (user == null)
                     return false;
                 user.Id = Guid.NewGuid().ToString();
-                var result = _userManager?.CreateAsync(user, password);
+                var result = await _userManager?.CreateAsync(user, password);
                 if(result!=null)// && result.Succeeded((bool)(result?.Succeeded))
                 {
                     //AddUserRole(user, "Users");
                     created = true;
-
                     //var werwe = _signInManager;
-                    int yl = 21;
 
                     //await _signInManager?.SignInAsync(user, isPersistent: false);
 
@@ -137,9 +138,7 @@ namespace allopromo.Core.Model
             //    _logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
             //    return default;
             //}
-            //catch (FormatException)
-            //{
-            //}
+            
             catch (Exception ex)
             {
                 //throw new Exception(" Une erreur est survenur. Veuillez re(essayer)");
@@ -168,9 +167,11 @@ namespace allopromo.Core.Model
         {
             return _userManager.GetUserNameAsync(user);
         }
-        public ApplicationUser GetUserById(string userId)
+        public UserDto GetUserById(string userId)
         {
-            return UserConvertor.ConvertUser(_userManager.FindByIdAsync(userId).Result);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user);
+
         }
         public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
@@ -190,8 +191,8 @@ namespace allopromo.Core.Model
             var roles = _roleManager.Roles;
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
 
-            return UserConvertor.ConvertUser(user);
-            
+            return null;
+
             //var query= (from _userManager.Users
             //var query9 = "SELECT from UserTable join [dbo].[AspNetUSerRoles] join [dbo.].[AspNetUsers]";
             //var YYUU= 
@@ -223,9 +224,8 @@ namespace allopromo.Core.Model
             }
             catch(Exception ex)
             {
-                int h = 5;
+                throw ex;
             }
-            int r = 44;
             return users;
         }
         public IList<ApplicationUser> GetUsersInRole(string roleName)
@@ -241,9 +241,10 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-        public ApplicationUser GetUserbyId(string userId)
+        public UserDto GetUserbyId(string userId)
         {
-            return UserConvertor.ConvertUser(_userManager.Users.FirstOrDefault(x => x.Id.Equals(userId)));
+            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId));
+            return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
         }
    }
 }

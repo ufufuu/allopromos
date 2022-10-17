@@ -9,7 +9,8 @@ namespace allopromo.Core.Model
     public class EmailNotificationService:INotifyService
     {
         private readonly IStoreService _storeService;
-        private readonly IFluentEmail _email;
+
+        //private readonly IFluentEmail _email;
         public EmailNotificationService(IStoreService storeService)
         {
             _storeService = storeService;

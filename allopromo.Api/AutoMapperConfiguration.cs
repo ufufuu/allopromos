@@ -17,22 +17,15 @@ namespace allopromo.Api
                 configuration.CreateMap<StoreDto, tStore>();
                 //.ForMember(x=>x.storeId, opt=>opt.Ignore());
 
-
                 configuration.CreateMap<UserDto, ApplicationUser>();
-
+                configuration.CreateMap<ApplicationUser, UserDto>();
                 configuration.CreateMap<StoreCategoryDto, tStoreCategory>();
             });
-            //Mapper.Initialize(configuration =>
-            //{
-            //    configuration.CreateMap<UserDto, ApplicationUser>();
-            //});
-            //Mapper.Initialize(configuration =>
-            //{
-            //    configuration.CreateMap<StoreCategoryDto, tStoreCategory>();
-            //});
+            
         }
     }
 }
+
 //Mapper.Initialize(x =>
 //{
 //    x.AddProfile<MappingProfile>();

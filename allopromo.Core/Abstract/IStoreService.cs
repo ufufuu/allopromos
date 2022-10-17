@@ -10,18 +10,23 @@ namespace allopromo.Core.Abstract
     {
         event StoreCreatedEventHandler StoreCreated;
         StoreDto CreateStore(StoreDto store, StoreCategoryDto category, UserDto user);
-        Task<StoreDto> CreateStore(StoreDto store);  //, StoreCategoryDto category, UserDto user);
+        Task<StoreDto> CreateStore(StoreDto store);
         Task <IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet);
         Task<StoreDto> GetStoreByIdAsync(string storeId);
         void OnStoreCreated();
         Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync();
-        tStoreCategory CreateStoreCategory(string storeCategoryName);
+        Task<string> getImageInformationAsync();
+        Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategoryName);
         void DeleteStoreCategory(StoreCategoryDto storeCategoryDto);
+        Task<string> getImageUrl();
+        void DeleteStoreCategory(string categoryId);
+        Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id);
 
         //Action<bool> StoreCreatedDel;
         //public Func<bool, int> StoreCreatedDel2;
         //IEnumerable<StoreDto> GetStores(int page, int size);
         //public void DeleteStore(StoreDto store);
         //public void OnStoreCreated();
+
     }
 }

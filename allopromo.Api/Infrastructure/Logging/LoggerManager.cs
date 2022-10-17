@@ -1,10 +1,10 @@
-﻿using allopromoInfrastructure.Abstract;
+﻿using allopromo.Api.Infrastructure.Abstract;
 using Serilog;
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace allopromoInfrastructure.Logging
+namespace allopromo.Api.Infrastructure.Logging
 {
     public class LoggerManager : ILoggerManager //Serilog.ILogger
     {

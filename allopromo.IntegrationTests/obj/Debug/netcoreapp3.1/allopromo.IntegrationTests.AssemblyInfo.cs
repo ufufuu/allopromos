@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("allopromo.Admin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Admin", "allopromo.Admin.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("allopromo.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

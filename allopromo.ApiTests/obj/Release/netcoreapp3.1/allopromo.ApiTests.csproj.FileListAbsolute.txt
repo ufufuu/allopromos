@@ -6,6 +6,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\bin\Release\netcoreapp3
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\bin\Release\netcoreapp3.1\allopromo.ApiTests.runtimeconfig.dev.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\bin\Release\netcoreapp3.1\allopromo.ApiTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\bin\Release\netcoreapp3.1\allopromo.ApiTests.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.csproj.CoreCompileInputs.cache
@@ -17,4 +18,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.ApiTests\obj\Release\netcoreapp3.1\allopromo.ApiTests.csprojAssemblyReference.cache

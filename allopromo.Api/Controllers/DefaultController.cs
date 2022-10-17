@@ -28,7 +28,7 @@ namespace allopromo.Controllers
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
             /*
             try

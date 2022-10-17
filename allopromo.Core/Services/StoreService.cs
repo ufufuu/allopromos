@@ -1,5 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Helpers.Convertors;
 using System;
 using System.Collections.Generic;
 using allopromo.Core.Application;
@@ -7,16 +6,14 @@ using System.Threading.Tasks;
 using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using System.Net.Http;
-using System.Net;
-using System.Runtime.Serialization.Json;
-using System.Runtime.Serialization;
-using System.IO;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Core.Domain;
 using AutoMapper;
 using System.Linq;
-using Serilog;
-
+using allopromo.Core.Services;
+using System.Text;
+using Newtonsoft.Json;
+using System.IO;
 namespace allopromo.Core.Model
 {
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
@@ -25,22 +22,21 @@ namespace allopromo.Core.Model
         public event StoreCreatedEventHandler StoreCreated;
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
-        private IProductService _productService;
+        private IProductService _productService { get; set; }
         private IStoreRepository _storeRepository;
+        allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
 
-        IGenericRepository<tStore> _tGenericRepository;
-        
-        //= GenericRepositoryFactory.GetRepository();
+        private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
-
-        //public StoreService(IGenericRepository<tStore> tGenericRepository, IStoreRepository storeRepository)
-        //{
-        //    _tGenericRepository = tGenericRepository;
-        //    _storeRepository = storeRepository;
-        //}
+        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
+        public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         public StoreService(IStoreRepository storeRepository)
         {
             _storeRepository = storeRepository;
+        }
+        public StoreService(allopromo.Shared.Abstract.IRepository<tStore> storeRepo)
+        {
+            storeRepository = storeRepo;
         }
         public void OnStoreCreated()
         {
@@ -62,40 +58,36 @@ namespace allopromo.Core.Model
             if (storeDto != null)
             {
                 var tUser = Mapper.Map<ApplicationUser>(userDto);
-                var t_store = TConvertor.ConvertToObj(storeDto);
+
                 var tCategory = AutoMapper.Mapper.Map<tStoreCategory>(category);
                 var store = Mapper.Map<tStore>(storeDto);
                 var location = new tLocation();
                 var city = new tCity { cityName = "kara" };
-
                 store.Category = tCategory;
                 store.user = tUser;
                 store.City = city;
-
-                //t_stre.user = new User { userId = Guid.NewGuid().ToString() };
-                //_tGenericRepository.Add(t_stre);
-                //_tGenericRepository.Save();
-
                 _storeRepository.Add(store);
                 _storeRepository.Save();
+                _tGenericRepository.Save();
                 OnStoreCreated();
                 return (StoreDto)storeDto;
             }
             return null;
         }
-        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId, 
+        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId,
             int pageNumber, int offSet)
         {
             offSet = 10;
-            if(categoryId.Equals(null))
-               return null;
+            if (categoryId.Equals(null))
+                return null;
             else
             {
-                var storesByCategory =  TConvertor.
-                    ConverToListObj(await _storeRepository.GetStoresByCategoryIdAsync(categoryId,
-                    pageNumber, offSet));
-                return (IEnumerable<StoreDto>)storesByCategory;
+                var storesByCategory = await _storeRepository.GetStoresByCategoryIdAsync(categoryId,
+                    pageNumber, offSet);
+
+                //return (IEnumerable<StoreDto>)storesByCategory;
             }
+            return null;
         }
         public async Task<IEnumerable<StoreDto>> GetStoresByLocationAsync(int locationId, int page, int size)
         {
@@ -103,10 +95,12 @@ namespace allopromo.Core.Model
                 return null;
             else
             {
-                var storesByLocation = TConvertor.
-                    ConverToListObj(await _tGenericRepository.GetAllAsync());
-                return (IEnumerable<StoreDto>)storesByLocation;
+                var storesByLocation = 
+                await _tGenericRepository.GetAllAsync();
+
+                //return (IEnumerable<StoreDto>)storesByLocation;
             }
+            return null;
         }
         public async Task<StoreDto> GetStoreByIdAsync(string storeId)
         {
@@ -116,20 +110,26 @@ namespace allopromo.Core.Model
             {
                 return true;
             };
-            var tStore = _storeRepository.GetStoreByIdAsync(storeId);
+            var tStore =await _storeRepository.GetStoreByIdAsync(storeId);
             return AutoMapper.Mapper.Map<StoreDto>(tStore);
         }
         public void DeleteStore(StoreDto store)
         {
+            storeRepository.Delete(store);
         }
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
             var categories = Mapper.Map<IEnumerable<StoreCategoryDto>>
-                (_storeRepository.GetStoreCategoriesAsync().Result);
-
-            //var storeCategories = Mapper.Map<IEnumerable<StoreCategoryDto>>(categories);
-
+                (await _storeRepository.GetStoreCategoriesAsync());
             return categories;
+        }
+        public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
+        {
+            var categories = await this.GetStoreCategoriesAsync();
+            var query = from q in categories
+                        where q.storeCategoryId == Id
+                        select q;
+            return query.FirstOrDefault();
         }
         private int GetStores(ApplicationUser user)
         {
@@ -141,7 +141,6 @@ namespace allopromo.Core.Model
             return numberStores;
         }
         #endregion Stores
-
         #region Products
         public async Task<IEnumerable<ProductDto>> GetProductsByStoresAndCategories(string storeId)
         {
@@ -157,130 +156,170 @@ namespace allopromo.Core.Model
                                select q;
             return productQuery.Count();
         }
-
-        #region  StoresCategories
-        public tStoreCategory CreateStoreCategory(string storeCategoryName)
+        #region StoresCategories
+        public async Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategory)
         {
-            if (storeCategoryName == null)
+            if (storeCategory == null)
                 return null;
-
             var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-            
-            //var tStoreCategory3 = TConvertor.ConvertToObj(storeCategory);
-            //var tStoreCategorye = AutoMapper.Mapper.Map<tStoreCategory>(storeCategory);
-
+            var storeCategoryDto = new StoreCategoryDto();
             var tStoreCategory = new tStoreCategory();
-            tStoreCategory.storeCategoryName = storeCategoryName;
-
-            //tStoreCategory.storeCategoryId = new Guid().ToString();
-
-            _storeRepository.AddStoreCategory(storeCategoryName); 
-
-            return tStoreCategory;
+            tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
+            tStoreCategory.storeCategoryId = new Guid();
+            tStoreCategory.storeCategoryImageUrl = storeCategory.storeCategoryImageUrl;
+            var imageUrl = string.Empty;
+            if (postStoreCategoryImage() != null)
+                imageUrl = await this.getImageUrl();
+            else
+                imageUrl = "http://www.noiamgesfornow.jpg";
+            tStoreCategory.storeCategoryImageUrl = imageUrl;
+            _storeRepository.AddStoreCategory(tStoreCategory.storeCategoryName, imageUrl);
+            return storeCategoryDto;
         }
         public Task<StoreDto> CreateStore(StoreDto store)
         {
             throw new NotImplementedException();
         }
         #endregion StoresCategories
-        //IEnumerable<StoreDto> IStoreService.GetStoresByCatIdAsync(string catId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void DeleteStoreCategory(string categoryId)
+        {
+
+        }
         public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
         {
             if (storeCategoryDto == null)
             {
                 var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
                 _storeRepository.DeleteStoreCategory(storeCategory);
+                var category = storeRepository.GetByIdAsync("kjkjk");
+                if (storeCategory == null)
+                {
+                    throw new NullReferenceException();
+                }
+                else
+                {
+                    storeRepository.Delete(storeCategory);
+                }
             }
         }
-    }
-    public class StoreLocator
-    {
-        HttpClient _httpClient { get; set; }
-        private ILogger _logger { get; set; }
-        public StoreLocator(HttpClient httpClient, ILogger logger)
+        public async Task<string> getImageInformationAsync()
         {
-            _httpClient = httpClient;
-            _logger = logger;
-        }
-        public string GetLocation()
-        {
-            var location = getAddress(23.5270797, 77.2548046);
-            return location.ToString();
-        }
-        private string ReturnGPSCoordinates()
-        {
-            var rootObjc= getAddress(23.5270797, 77.2548046);
-            return ""; //rootObj.display_Name;
-        }
-        private static RootObject getAddress (double Longitude, double Latitude)
-            
-            //getAddress(23.5270797, 77.2548046);
-        {
-            //onst double longitude = Longitude;
-            //const double latitude = Latitude;
-
-            string pathUrl = " https://nominatim.openstreetmap.org/reverse?format=json&lat=30.4573699&lon=-97.8247654";
-            const string  mapBox= " https://api.mapbox.com/geocoding/v5/{endpoint}/";
-            const string reverseGeoCodingApiEndPoint = " http://nominatim.openstreetmap.org/reverse?format=json&lat= "; // + Latitude + "&lon=" + Longitude;
-
-            HttpResponseMessage msg = new HttpResponseMessage();
-            RootObject obj = null;
             using (var httpClient = new HttpClient())
             {
-                //msg = await httpClient.GetFromJsonAsync(pathUrl);
+                var imageInformationUlr = new Uri("https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893");
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, imageInformationUlr);
+                var httpResponseMsg = await httpClient.SendAsync(httpRequest);
+                var content = await httpResponseMsg.Content.ReadAsStringAsync();       //httpResponseMsg
+                var response = Newtonsoft.Json.JsonConvert.SerializeObject(httpResponseMsg);
+                var image = (string)response;
             }
-            using (var webClient = new WebClient())
+            var data = new metaData { Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
+            var res = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            return res;
+        }
+        private async Task<string> postStoreCategoryImage()
+        {
+            string response = string.Empty;
+            var jsonObj = "{" +
+                " \"data\": {" +
+                " \"id\": \"soLHmGdX\", " +
+                " \"url\": \"https://thumbsnap.com/soLHmGdX\", " +
+                " \"media\": \"https://thumbsnap.com/i/soLHmGdX.png\", " +
+                " \"thumb\": \"https://thumbsnap.com/t/soLHmGdX.jpg\", " +
+                " \"width\": 224, " +
+                " \"height\": 224 " +
+                "}," +
+                " \"success\": true, " +
+                "  \"status\": 200 " +
+            " }";
+            //var jsonData = JObject.Parse(jsonObj);
+            string imageUrl = string.Empty;
+            using (var httpClient = new HttpClient())
             {
-                var jsonData = webClient.DownloadData(reverseGeoCodingApiEndPoint);
-                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RootObject));
-                obj = (RootObject)ser.ReadObject(new MemoryStream(jsonData));
+                var Url = new Uri
+                    ("https://thumbsnap.com/api/upload");
+                var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
+                //var content = new HttpMessageContent(httpRequest);
+                var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);//, content);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                    var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
+                    MediaApiResponseModel dataObj = obj.data;
+                    var image = JsonConvert.SerializeObject(dataObj);
+
+                    var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
+                    imageUrl = media.url;
+                }
             }
-                return obj;
+            return imageUrl;
+        }
+        public async Task<string> getImageUrl()
+        {
+            MediaApiResponseModel data1 = new MediaApiResponseModel();
+            string img = string.Empty;
+            var response = await this.postStoreCategoryImage();
+            if (response == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                img = response;
+            }
+            return img;
+        }
+        public T GetJsonInstance<T>(string propertyName, string json)
+        {
+            using (var stringReader = new StringReader(json))
+            {
+                using (var jsonReader = new JsonTextReader(stringReader))
+                {
+                    while (jsonReader.Read())
+                    {
+                        if (jsonReader.TokenType == JsonToken.PropertyName
+                            && (string)jsonReader.Value == propertyName)
+                        {
+                            jsonReader.Read();
+                            var serializer = new JsonSerializer();
+                            return serializer.Deserialize<T>(jsonReader);
+                        }
+                    }
+                    return default(T);
+                }
+            }
         }
     }
-    [DataContract]
-    public class RootObject
+    public class metaData
     {
-        [DataMember]
-        public string place_id { get; set; }
-        [DataMember]
-        public string licence { get; set; }
-        [DataMember]
-        public string osm_type { get; set; }
-        [DataMember]
-        public string osm_id { get; set; }
-        [DataMember]
-        public string lat { get; set; }
-        [DataMember]
-        public string lon { get; set; }
-        [DataMember]
-        public string display_name { get; set; }
-        [DataMember]
-        public Address address { get; set; }
+        public string Id { get; set; }
+        public string Url { get; set; }
+        public metaData(string id, string url)
+        {
+            Id = string.Empty;
+            Url = string.Empty;
+        }
+        public metaData()
+        {
+        }
+
     }
-    [DataContract]
-    public class Address
+    public class MediaApiResponseModel
     {
-        [DataMember]
-        public string road { get; set; }
-        [DataMember]
-        public string suburb { get; set; }
-        [DataMember]
-        public string city { get; set; }
-        [DataMember]
-        public string state_district { get; set; }
-        [DataMember]
-        public string state { get; set; }
-        [DataMember]
-        public string postcode { get; set; }
-        [DataMember]
-        public string country { get; set; }
-        [DataMember]
-        public string country_code { get; set; }
+        public string id { get; set; }
+        public string url { get; set; }
+        public string media { get; set; }
+        public string thumb { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
     }
+    public class ThumbyModel
+    {
+        public MediaApiResponseModel data { get; set; }
+        public int status { get; set; }
+        public bool success { get; set; }
+    }
+
     //public class OrderPlacedEventArgs : EventArgs
     //{
     //}
@@ -317,3 +356,4 @@ Longitude: -71.268900 / W 71° 16' 8.04''
  */
 
 
+/* particulier a particulier : entreprises*/

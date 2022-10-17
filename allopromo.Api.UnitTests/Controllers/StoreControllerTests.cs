@@ -9,13 +9,16 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
+using allopromo.Api.Controllers;
 namespace allopromo.Api.UnitTests
 {
     [TestFixture]
     public class StoreControllerTest
     {
-        StoreCreatedEventArgs storeCreatedEventArgs;
-        bool notifySent; // = false;
+        //StoreCreatedEventArgs storeCreatedEventArgs;
+
+        private bool NotifySent { get; set; }
+
         Mock<IStoreService> _storeServiceMock;
         Mock<IProductService> _productService;
         Mock<INotifyService> _notificationServiceMock;
@@ -38,10 +41,10 @@ namespace allopromo.Api.UnitTests
             var SUT = new StoreController(_storeServiceMock.Object, _productService.Object,
                 _notificationServiceMock.Object);
             var result = SUT.CreateStoreAsync(store);
-            Assert.IsInstanceOf<NotFoundResult>(result.Result);
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]
-        public async Task StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEvent()
+        public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEvent()
         {
             //Arrange
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
@@ -64,7 +67,7 @@ namespace allopromo.Api.UnitTests
                 It.IsAny<UserDto>()))
                 .Returns(new StoreDto());
             //Act
-            _storeServiceMock.Object.StoreCreated += (o, e) => notifySent = true;
+            _storeServiceMock.Object.StoreCreated += (o, e) => NotifySent = true;
 
             //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } 
             //or Below // += (_, e) => notifySent = true;
@@ -74,7 +77,7 @@ namespace allopromo.Api.UnitTests
             {
                 //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
                 //StoreCreated(_, e);
-                notifySent = true;
+                NotifySent = true;
                 return true;
             };
             _storeServiceMock.Object.StoreCreated += (StoreCreated);
@@ -91,7 +94,7 @@ namespace allopromo.Api.UnitTests
             _storeServiceMock.Object.StoreCreated += delegate (object source, EventArgs e)
             {
                 //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
-                notifySent = true;
+                NotifySent = true;
                 return true;
             };
 
@@ -106,8 +109,9 @@ namespace allopromo.Api.UnitTests
         }
         public void GetStoreByCategoryId_ShouldReturn_StoresbyCategoryId()
         {
-            int pageId = 2;
-            int limitPerPage = 10;
+            //int pageId = 2;
+            //int limitPerPage = 10;
+
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();//? is Core.Abstract ?How ?
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             var storeController = new StoreController(_storeServiceMock.Object,
@@ -117,7 +121,7 @@ namespace allopromo.Api.UnitTests
         bool StoreCreated(object source, System.EventArgs e)
         {
             //storeCreatedEventArgs = (StoreCreatedEventArgs)e;
-            notifySent = true;
+            NotifySent = true;
             return true;
         }
         //[Test]
@@ -169,9 +173,9 @@ namespace allopromo.Api.UnitTests
         {
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<IProductService> _productServiceMock = new Mock<IProductService>();
-            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, _notificationServiceMock.Object);
-
-            UserDto user = null;
+            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, 
+                _notificationServiceMock.Object);
+            //UserDto user = null;
             tProduct tproduct = new tProduct();
             var result = _sut.CreateProductAsync(tproduct);
             Assert.AreEqual(result.Result.GetType(), typeof(UnauthorizedResult));
@@ -185,22 +189,92 @@ namespace allopromo.Api.UnitTests
             SUT = new StoreController(_storeServiceMock.Object,
                 _productService.Object,
                 _notificationServiceMock.Object);
-            //var products = SUT.GetProducts();
 
+            //var products = SUT.GetProducts();
             //Assert.IsNotNull(products);
         }
         [Test]
-        public void trt()
+        public void StoreController_ModifyStoreCategory_SHOULD_ReturnStatus()
         {
-
+            var sut = new StoreController(_storeServiceMock.Object,
+                _productService.Object, _notificationServiceMock.Object);
+            StoreCategoryDto category = new StoreCategoryDto
+            { storeCategoryId = "1", storeCategoryName = "", storeCategoryStatus = true };
+            var storeStatus = sut.PutStoreCategory(category);
+            Assert.IsNotNull(storeStatus);
+        }
+        [Test]
+        public void StoreController_DeleteStoreCategory_SHOULD_Delete()
+        {
+            StoreCategoryDto category = new StoreCategoryDto
+            { storeCategoryId = "1nmnm-kkjkk-kmkmkmk-jnjjv88", 
+                storeCategoryName = "", storeCategoryStatus = true };
+            var result = new StoreController(_storeServiceMock.Object,
+                _productService.Object, _notificationServiceMock.Object)
+                .DeleteStoreCategory(category.storeCategoryId);
+            Assert.IsNotNull(result);
+        }
+        [Test]
+        public void StoreController_DeleteStoreCategory_SHOULD_NotReturnNotfound()
+        {
+            var result = new StoreController(_storeServiceMock.Object,
+                _productService.Object, _notificationServiceMock.Object)
+                .DeleteStoreCategory(null);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.GetType(), typeof(BadRequestResult));
+        }
+        [Test]
+        public void StoreController_GetStorCategoryThumbnail_SHOULD_ReTurnImageDirectory()
+        {
         }
         [Test]
         public void PostCreateShouldSaveCustomerAndReturnDetailsView()
         {
+        }
+        [Test]
+        public void StoreCrontroller_CreateStore_ReturnsStoreCreated_RaisesNotificationEvent()
+        {
+            //Arrange
+            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
+            Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
 
+            StoreController storeController =
+                new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object); 
+            var store = new StoreDto
+            {
+                storeId = "dsd",
+                storeName = "Thierry Plank",
+            };
+            //Act
+            var result = storeController.CreateStoreAsync(store);
+
+            //_notificationServiceMock.Object.storeCreated += (o, e) => notifySent = true;
+            //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } or Below
+
+            _notificationServiceMock.Object.SendNotification(); // += (_, e) => notifySent = true;
+
+            //_notificationServiceMock.Object.SendNotification += (_, e) =>
+            //{
+            //    storeCreatedEventArgs = (StoreCreatedEventArgs)e;
+            //    StoreCreated(_, e);
+            //    return true;
+            //};
+            //_notificationServiceMock.Object.SendNotification += (StoreCreated);
+            //_notificationServiceMock.Object.storeCreated += delegate (object source, EventArgs e)
+            //{
+            //    storeCreatedEventArgs = e as StoreCreatedEventArgs;
+            //    notifySent = true;
+            //    return true;
+            //};
+            //_notificationServiceMock.Setup(x => x.CreateStoreAync(It.IsAny<StoreDto>())).Returns(store);
+            //storeService.CreateStoreAsync(store);
+            //_notificationServiceMock.Verify(x => x.OnStoreCreated(), Times.Once);
+
+            _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
         }
     }
 }
+
 // Speed Up React Native Startup librarty 
 //Replacing C# Events: https://rehansaeed.com/reactive-extensions-part1-replacing-events/
 //kdjf
@@ -217,5 +291,4 @@ namespace allopromo.Api.UnitTests
 // We can use Invoke property to call Delegates or regularly 
 /*https://www.justia.com/criminal/offenses/drug-crimes/drug-trafficking/
  * 1 store service raising event ? 2. notification subscribing 3. signalRing ? 4. Refactoring, Generic ing , Performance Testing */
-
 //EnvironmentVariableTarget

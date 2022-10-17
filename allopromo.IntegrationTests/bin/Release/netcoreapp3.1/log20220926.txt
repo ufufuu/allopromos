@@ -1,0 +1,160 @@
+2022-09-26 00:06:01.693 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 00:06:04.870 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 00:06:04.873 -04:00 [INF] Hosting environment: Development
+2022-09-26 00:06:04.874 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 00:06:05.198 -04:00 [INF] Application is shutting down...
+2022-09-26 01:00:07.128 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:00:08.977 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:00:08.979 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:00:08.979 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:00:09.373 -04:00 [INF] Application is shutting down...
+2022-09-26 01:09:53.975 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:09:55.679 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:09:55.681 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:09:55.682 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:09:56.025 -04:00 [INF] Application is shutting down...
+2022-09-26 01:18:52.723 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:18:54.647 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:18:54.649 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:18:54.651 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:18:55.025 -04:00 [INF] Application is shutting down...
+2022-09-26 01:22:28.988 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:22:31.062 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:22:31.064 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:22:31.065 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:22:31.436 -04:00 [INF] Application is shutting down...
+2022-09-26 01:26:50.794 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:26:52.738 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:26:52.739 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:26:52.740 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:26:53.127 -04:00 [INF] Application is shutting down...
+2022-09-26 01:29:29.091 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:29:30.651 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:29:30.652 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:29:30.652 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:29:31.002 -04:00 [INF] Application is shutting down...
+2022-09-26 01:30:43.507 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:30:45.080 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:30:45.081 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:30:45.081 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:30:45.429 -04:00 [INF] Application is shutting down...
+2022-09-26 01:31:53.402 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:31:55.028 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:31:55.029 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:31:55.030 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:31:55.369 -04:00 [INF] Application is shutting down...
+2022-09-26 01:32:46.537 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:32:48.130 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:32:48.131 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:32:48.131 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:32:48.521 -04:00 [INF] Application is shutting down...
+2022-09-26 01:34:44.434 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:34:46.007 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:34:46.009 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:34:46.009 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:34:46.354 -04:00 [INF] Application is shutting down...
+2022-09-26 01:38:41.441 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:38:43.315 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:38:43.317 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:38:43.317 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:38:43.682 -04:00 [INF] Application is shutting down...
+2022-09-26 01:39:47.158 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:39:48.763 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:39:48.764 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:39:48.764 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:39:49.101 -04:00 [INF] Application is shutting down...
+2022-09-26 01:42:08.254 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:42:10.166 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:42:10.168 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:42:10.168 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:42:10.588 -04:00 [INF] Application is shutting down...
+2022-09-26 01:47:54.122 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:47:56.070 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:47:56.072 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:47:56.072 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:47:56.452 -04:00 [INF] Application is shutting down...
+2022-09-26 01:49:40.297 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 01:49:41.311 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 01:49:41.313 -04:00 [INF] Hosting environment: Development
+2022-09-26 01:49:41.313 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 01:49:41.594 -04:00 [INF] Application is shutting down...
+2022-09-26 16:05:06.297 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:05:09.830 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:05:09.832 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:05:09.832 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:05:10.165 -04:00 [INF] Application is shutting down...
+2022-09-26 16:07:03.631 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:07:05.573 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:07:05.575 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:07:05.576 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:07:05.949 -04:00 [INF] Application is shutting down...
+2022-09-26 16:11:45.614 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:11:47.655 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:11:47.657 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:11:47.657 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:11:48.159 -04:00 [INF] Application is shutting down...
+2022-09-26 16:16:20.784 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:16:22.873 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:16:22.875 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:16:22.875 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:16:23.629 -04:00 [INF] Application is shutting down...
+2022-09-26 16:19:57.192 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:19:59.219 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:19:59.222 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:19:59.222 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:19:59.630 -04:00 [INF] Application is shutting down...
+2022-09-26 16:26:20.554 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:26:21.655 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:26:21.656 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:26:21.656 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:26:21.927 -04:00 [INF] Application is shutting down...
+2022-09-26 16:36:07.640 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:36:08.723 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:36:08.724 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:36:08.724 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:36:08.995 -04:00 [INF] Application is shutting down...
+2022-09-26 16:38:11.664 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:38:12.724 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:38:12.725 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:38:12.725 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:38:12.993 -04:00 [INF] Application is shutting down...
+2022-09-26 16:50:38.858 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 16:50:40.095 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 16:50:40.096 -04:00 [INF] Hosting environment: Development
+2022-09-26 16:50:40.097 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 16:50:40.365 -04:00 [INF] Application is shutting down...
+2022-09-26 17:15:20.797 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 17:15:23.224 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 17:15:23.226 -04:00 [INF] Hosting environment: Development
+2022-09-26 17:15:23.227 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 17:15:23.539 -04:00 [INF] Application is shutting down...
+2022-09-26 17:31:48.210 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 17:31:49.302 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 17:31:49.303 -04:00 [INF] Hosting environment: Development
+2022-09-26 17:31:49.303 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 17:31:49.580 -04:00 [INF] Application is shutting down...
+2022-09-26 17:43:45.754 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 17:43:48.103 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 17:43:48.105 -04:00 [INF] Hosting environment: Development
+2022-09-26 17:43:48.105 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 17:43:48.422 -04:00 [INF] Application is shutting down...
+2022-09-26 18:22:20.830 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 18:22:22.061 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 18:22:22.062 -04:00 [INF] Hosting environment: Development
+2022-09-26 18:22:22.063 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 18:22:22.337 -04:00 [INF] Application is shutting down...
+2022-09-26 18:25:47.473 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 18:25:48.634 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 18:25:48.635 -04:00 [INF] Hosting environment: Development
+2022-09-26 18:25:48.635 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 18:25:48.942 -04:00 [INF] Application is shutting down...
+2022-09-26 18:31:13.821 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 18:31:14.932 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 18:31:14.933 -04:00 [INF] Hosting environment: Development
+2022-09-26 18:31:14.933 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 18:31:15.209 -04:00 [INF] Application is shutting down...
+2022-09-26 18:35:33.553 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-09-26 18:35:34.531 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-09-26 18:35:34.533 -04:00 [INF] Hosting environment: Development
+2022-09-26 18:35:34.533 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-09-26 18:35:34.815 -04:00 [INF] Application is shutting down...

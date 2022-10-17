@@ -1,5 +1,4 @@
-﻿using allopromo.Admin;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,48 +9,35 @@ namespace allopromo.IntegrationTests
     [TestFixture]
     public class StoreCategoriesTest
     {
+        //private WebApplicationFactory<Startup> clientFactory { get; set; } // ClientOptions client = new Web
         public StoreCategoriesTest()
         {
+            //var application = new WebApplicationFactory<Program>()
+            //    .WithWebHostBuilder(builder =>
+            //    {
+            //    });
+            //var clientFactory = application.CreateClient();
         }
-        [Test]
-        public async Task GetKjfkj()
+        
+        public void  GetHello() //asyn Task
         {
-            var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
-                {
-
-                });
-            var client = application.CreateClient();
-
-        }
-    }
-    [TestFixture]
-    public class ManageCategoryTest
-    {
-        private WebApplicationFactory<Startup> _factoryClient;
-        public ManageCategoryTest()
-        {
-        }
-        public ManageCategoryTest(WebApplicationFactory<Startup> factoryClient)
-        {
-            _factoryClient = _factoryClient;
-        }
-
-        [Theory]
-        [Test]
-        [TestCase("fdf")]
-        [TestCase("/Create")]
-        public async Task GetHello()
-        {
-            //Arrange
-            var client = _factoryClient.CreateClient();
-            //Act
-            var response = await  client.GetAsync("");
-            //Assert
-            Assert.IsNotNull(response);
-            response.EnsureSuccessStatusCode();
-            Assert.AreEqual("text/html, charset-utf8",
-                response.Content.Headers.ContentType.ToString());
+            ////var client = clientFactory.CreateClient();
+            //var response = await client.GetAsync("api/v1/categories/");
+            //Assert.IsNotNull(response);
+            //response.EnsureSuccessStatusCode();
+            //Assert.AreEqual("text/html, charset-utf8",
+            //    response.Content.Headers.ContentType.ToString());
         }
     }
 }
+
+
+
+
+
+
+
+//Integration Testing :
+//DB
+//File System
+//Network resource 

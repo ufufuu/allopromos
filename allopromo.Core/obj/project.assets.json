@@ -117,27 +117,6 @@
           "lib/netstandard2.0/MailKit.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Core/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Client": "5.0.0"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -2149,6 +2128,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "allopromo.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        }
       }
     }
   },
@@ -2305,35 +2294,6 @@
         "lib/xamarinios/MailKit.xml",
         "mailkit.2.6.0.nupkg.sha512",
         "mailkit.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Client/5.0.0": {
-      "sha512": "OMTp9ot40TZgZxnFO+S0ac0EY5CtQs6KTHkMSHmNFDc+a0tWMCsSBuOG6HoH9+G95wNhEfZrZ20btAsHMlQe7w==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.client/5.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/System.Net.Http.Formatting.dll",
-        "lib/net45/System.Net.Http.Formatting.xml",
-        "lib/portable-wp8+netcore45+net45/System.Net.Http.Formatting.dll",
-        "lib/portable-wp8+netcore45+net45/System.Net.Http.Formatting.xml",
-        "microsoft.aspnet.webapi.client.5.0.0.nupkg.sha512",
-        "microsoft.aspnet.webapi.client.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Core/5.0.0": {
-      "sha512": "ZOVLLtFpSM8nkJopUM9upbJEUkAUS60j6Sj1hDKewHaekWMUnnoMX/i3Ee+7KgxMGk13yxxQRHtSwcjh1JpJ4w==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.core/5.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "content/web.config.transform",
-        "lib/net45/System.Web.Http.dll",
-        "lib/net45/System.Web.Http.xml",
-        "microsoft.aspnet.webapi.core.5.0.0.nupkg.sha512",
-        "microsoft.aspnet.webapi.core.nuspec"
       ]
     },
     "Microsoft.CSharp/4.5.0": {
@@ -7316,6 +7276,11 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "allopromo.Shared/1.0.0": {
+      "type": "project",
+      "path": "../allopromo.Shared/allopromo.Shared.csproj",
+      "msbuildProject": "../allopromo.Shared/allopromo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7323,7 +7288,6 @@
       "AutoMapper >= 6.2.2",
       "FirebaseAdmin >= 1.2.0",
       "FluentEmail.Smtp >= 3.0.0",
-      "Microsoft.AspNet.WebApi.Core >= 5.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.7",
       "NETCore.MailKit >= 2.0.3",
       "Newtonsoft.Json >= 12.0.2",
@@ -7332,7 +7296,8 @@
       "Serilog.Settings.Configuration >= 3.2.0",
       "Serilog.Sinks.Console >= 4.0.0",
       "Serilog.Sinks.File >= 5.0.0",
-      "System.IdentityModel.Tokens.Jwt >= 6.16.0"
+      "System.IdentityModel.Tokens.Jwt >= 6.16.0",
+      "allopromo.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7366,7 +7331,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj": {
+              "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -7390,10 +7359,6 @@
           "FluentEmail.Smtp": {
             "target": "Package",
             "version": "[3.0.0, )"
-          },
-          "Microsoft.AspNet.WebApi.Core": {
-            "target": "Package",
-            "version": "[5.0.0, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -7453,27 +7418,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Client 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Client",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

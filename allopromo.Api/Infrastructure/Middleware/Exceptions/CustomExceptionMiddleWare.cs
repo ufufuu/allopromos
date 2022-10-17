@@ -1,6 +1,6 @@
-﻿using allopromo.Model.Errors;
-using allopromoInfrastructure.Abstract;
-using allopromoInfrastructure.Logging;
+﻿using allopromo.Core.Exceptions;
+using allopromo.Api.Infrastructure.Abstract;
+using allopromo.Api.Infrastructure.Logging;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 using System;

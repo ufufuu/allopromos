@@ -20,10 +20,10 @@ namespace allopromo.Core.Helpers
     // from Jsasom Watomre .Net Core JWT -- Look the ohter File
     // Jsasom Watomre .Net Core JWT
     //[AttributeUsage(AttributeTargets.Class|AttributeTargets.Methods)]?
-    public class JwtBasicAuthorizeAttribute : Attribute, System.Web.Http.Filters.IAuthenticationFilter
+    public class JwtBasicAuthorizeAttribute : Attribute//, IAuthenticationFilter
     {
         public bool AllowMultiple => throw new NotImplementedException();
-        public Task AuthenticateAsync(System.Web.Http.Filters.HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public Task AuthenticateAsync(HttpContext context, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,7 @@ namespace allopromo.Core.Helpers
             var parameters = authorization.Parameter;
         }
         */
-        public Task ChallengeAsync(System.Web.Http.Filters.HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+        public Task ChallengeAsync(HttpContext context, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

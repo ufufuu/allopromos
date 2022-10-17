@@ -19,15 +19,16 @@ namespace allopromo.Core.Model
         public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
 
         public event UserAuthenticatedEventHandler userAuthenticated;
-        public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
 
-        private readonly UserManager<ApplicationUser> _userManager;
+        //public event EventHandler<UserAuthenticateEventArgs> OnUserAuthenticated;
+
+        private static UserManager<ApplicationUser> _userManager { get; set; }
 
         private readonly AppSettings _appSettings;
         public AccountService()
         {
         }
-        public AccountService(IOptions<AppSettings>? appSettings)
+        public AccountService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
@@ -62,7 +63,6 @@ namespace allopromo.Core.Model
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            int y = 8;
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserName.ToString()) }),

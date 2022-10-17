@@ -1,6 +1,6 @@
-﻿using allopromo.Model.Errors;
-using allopromoInfrastructure.Abstract;
-using allopromoInfrastructure.Logging;
+﻿using allopromo.Core.Exceptions;
+using allopromo.Api.Infrastructure.Abstract;
+using allopromo.Api.Infrastructure.Logging;
 using allopromoInfrastructure.Middleware.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;

@@ -13,10 +13,10 @@ namespace allopromo.Controllers
         public AuthenticationController()
         {
         }
-        public void LoginUser()
-        {
+        //public void LoginUser()
+        //{
 
-        }
+        //}
     }
 }
 //AAA: Authentication - Authentication - Accounting  Web APi?

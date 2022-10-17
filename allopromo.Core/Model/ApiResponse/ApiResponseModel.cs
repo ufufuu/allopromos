@@ -9,4 +9,5 @@ namespace allopromo.Core.Model.ApiResponse
         public ApplicationUser userResponse { get; set; }
         public string jwtToken { get; set; }
     }
+    
 }
