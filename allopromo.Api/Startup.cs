@@ -124,7 +124,7 @@ namespace allopromo
             //services.AddTransient<INotificationService, NotificationService>();
 
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
 
 
@@ -138,12 +138,15 @@ namespace allopromo
             services.AddScoped<INotifyService, EmailNotificationService>();
 
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+
+
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
 
             //services.AddScoped<IRepository, TRepository>();
+
             //services.AddScoped <Core.Abstract.IStoreRepository,
-               //Infrastructure.Repositories.StoreRepository>();
+            //Infrastructure.Repositories.StoreRepository>();
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
             //services.AddScoped<ILoggerManager, LoggerManager>();

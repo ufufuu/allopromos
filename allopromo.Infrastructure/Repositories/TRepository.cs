@@ -126,5 +126,4 @@ namespace allopromo.Infrastructure.Repositories
         }
         #endregion
     }
-}
-    //Generics : code reuse - type safety - performance - 
+}//Generics : code reuse - type safety - performance - 
