@@ -18,9 +18,14 @@ namespace allopromo.Infrastructure.Repositories
         #endregion
         #region Public Method
 
-        public TRepository(AppDbContext db)
+        public TRepository(AppDbContext dbContext)
         {
-            _table = _dbContext.Set<T>();
+
+            int y = 5;
+            //_table = _dbContext.Set<T>();
+            _dbContext = dbContext;
+
+            _table = dbContext.Set<T>();
         }
         public TRepository(AppDbContext dbContext, DbSet<T> table)
         {
