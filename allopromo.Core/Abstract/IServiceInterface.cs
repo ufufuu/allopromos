@@ -21,8 +21,11 @@ namespace allopromo.Services.Abstract
     {
 
     }
-    public class ProductService
-    {
+}
+    //public class ProductService
+    //{
+
+    /*
         public class Product
         {
             public string productName { get; set; }
@@ -58,11 +61,19 @@ namespace allopromo.Services.Abstract
                 //_modelState.AddModelError("UnitsInStock", "Units in stock cannot be less than zero.");
             //return _modelState.IsValid;
             */
+
+    /*
             return true;
         }
-    }
+
+    */
+
+
+    /*
+    //}
     public interface IOrderService
     {
 
     }
-}
+    */
+//}

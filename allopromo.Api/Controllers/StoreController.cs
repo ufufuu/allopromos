@@ -20,8 +20,13 @@ using System.Net.Http;
 
 namespace allopromo.Api.Controllers
 {
+    
     public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
-    [ApiController]
+
+   [ApiController]
+    //[Route("{categories}/{create}/{categoryId}")]
+
+    [Route("api/v1/store")]
     public class StoreController : ControllerBase
     {
         //public event StoreCreatedEventHandler StoreCreated; 
@@ -44,6 +49,7 @@ namespace allopromo.Api.Controllers
             _notificationService = notificationService;
         }
         [HttpPost]
+
         [Route("{categories}/{create}/{categoryId}")]
         public async Task<IActionResult> PostStoreCategory([FromBody] 
             StoreCategoryDto storeCategory)

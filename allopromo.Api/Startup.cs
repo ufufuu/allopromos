@@ -142,7 +142,7 @@ namespace allopromo
 
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
 
-            //services.AddScoped<IRepository, TRepository>();
+            services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
 
             //services.AddScoped <Core.Abstract.IStoreRepository,
             //Infrastructure.Repositories.StoreRepository>();
