@@ -21,8 +21,8 @@ namespace allopromo.Infrastructure.Repositories
         public TRepository(AppDbContext dbContext)
         {
 
-            int y = 5;
             //_table = _dbContext.Set<T>();
+
             _dbContext = dbContext;
 
             _table = dbContext.Set<T>();

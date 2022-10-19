@@ -27,6 +27,7 @@ namespace allopromo.Core.Model
 
         private IRepository<tStore> _storeRepository;
 
+        private IStoreManager _storeManager; 
 
         allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
 
@@ -49,34 +50,46 @@ namespace allopromo.Core.Model
                 StoreCreated(this, EventArgs.Empty);
             }
         }
-        #region Stores
-        public StoreDto CreateStore(StoreDto storeDto, StoreCategoryDto category, UserDto userDto)
+
+        #region StoresE
+        public async Task<StoreDto> CreateStore(StoreDto store)
         {
-            var appUser = Mapper.Map<ApplicationUser>(userDto);
-            var storesNumber = GetStoresProducts(appUser);
-            if (storesNumber == 0)
-                //throw "Argument Null Exception "; // Throw Customized StoreWithoutProductException !
+            if (store == null)
                 return null;
-
-            var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-            if (storeDto != null)
+            return new StoreDto();
+        }
+        #endregion
+        #region Stores
+        public async Task<StoreDto> CreateStoreAsync(StoreDto store, StoreCategoryDto category, UserDto userDto)
+        {
+            if(store!=null)
             {
-                var tUser = Mapper.Map<ApplicationUser>(userDto);
+                StoreDto storeDto = null;
 
+                tStore tStore = null;
+
+                var appUser = Mapper.Map<ApplicationUser>(userDto);
+                var storesNumber = GetStoresProducts(appUser);
+                var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
+                var tUser = Mapper.Map<ApplicationUser>(userDto);
                 var tCategory = AutoMapper.Mapper.Map<tStoreCategory>(category);
-                var store = Mapper.Map<tStore>(storeDto);
+
+                storeDto = Mapper.Map<StoreDto>(store);
                 var location = new tLocation();
                 var city = new tCity { cityName = "kara" };
-                store.Category = tCategory;
-                store.user = tUser;
-                store.City = city;
-                _storeRepository.Add(store);
+
+                tStore.Category = tCategory;
+                tStore.user = tUser;
+                tStore.City = city;
+
+                _storeRepository.Add(tStore);
                 _storeRepository.Save();
                 _tGenericRepository.Save();
                 OnStoreCreated();
-                return (StoreDto)storeDto;
+                return storeDto;
             }
-            return null;
+            else
+                return null;
         }
         public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId,
             int pageNumber, int offSet)
@@ -177,17 +190,12 @@ namespace allopromo.Core.Model
             else
                 imageUrl = "http://www.noiamgesfornow.jpg";
             tStoreCategory.storeCategoryImageUrl = imageUrl;
-            _storeRepository.Add(tStoreCategory.storeCategoryName, imageUrl);
+            await _storeRepository.Add(tStoreCategory.storeCategoryName, imageUrl);
             return storeCategoryDto;
-        }
-        public Task<StoreDto> CreateStore(StoreDto store)
-        {
-            throw new NotImplementedException();
         }
         #endregion StoresCategories
         public void DeleteStoreCategory(string categoryId)
         {
-
         }
         public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
         {
@@ -296,6 +304,11 @@ namespace allopromo.Core.Model
                 }
             }
         }
+
+        public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class metaData
     {
@@ -320,6 +333,8 @@ namespace allopromo.Core.Model
         public int width { get; set; }
         public int height { get; set; }
     }
+    
+
     public class ThumbyModel
     {
         public MediaApiResponseModel data { get; set; }

@@ -13,6 +13,7 @@ namespace alloPromoTests.ServiceTests
     {
     private UserService _sut;
     private Mock<IUserRepository> _userRepoMock= new Mock<IUserRepository>();
+
     //private readonly UserManager<ApplicationUser> _userManager;
         public UserServiceTest()
         {
@@ -31,24 +32,20 @@ namespace alloPromoTests.ServiceTests
                 null);
         }
         [Test]
-        //[TestCase("user" , "kdjfdkfj")]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {
             //Arrange
-            UserDto userDto = new UserDto
-            {
-                userEmail="kevin.djondo@allo.pro",
-                userName="Kevin DjonDo Johnson",
-                Password="Password"
-            };
             _sut = new UserService(_userRepoMock.Object, MockUserManager().Object, null);
-
-            var result = await _sut?.CreateUser(new ApplicationUser{}, "kjk788kkk");
-
             ApplicationUser user = new ApplicationUser
             {
+                 Email="dgdgdg@hhdhddh.fr",
             };
-            Assert.IsTrue(result.Equals(true));
+            //Act
+            var result = await _sut?.CreateUser(user, "kjk788kkk");
+            //Assert
+            Assert.IsNotNull(result);
+            //Assert.IsTrue(result.Equals(true));
+
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()

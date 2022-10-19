@@ -22,7 +22,6 @@ namespace allopromo.Api.Controllers
 {
     public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
     [ApiController]
-    [Route(ConstancesCommunes.BaseUrl+ "[controller]")]
     public class StoreController : ControllerBase
     {
         //public event StoreCreatedEventHandler StoreCreated; 
@@ -63,7 +62,7 @@ namespace allopromo.Api.Controllers
                 var category = new StoreCategoryDto();
                 object user = null;
                 _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                var store = _storeService.CreateStore(storeDto, category, (UserDto)user);
+                var store = _storeService.CreateStore(storeDto);//, category, (UserDto)user);
                 if (store != null)
                 {
                     _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
@@ -230,8 +229,6 @@ namespace allopromo.Api.Controllers
             IsWorkNumber = wk;
         }
     }
-   
-    
 }
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/

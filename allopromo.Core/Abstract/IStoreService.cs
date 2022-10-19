@@ -9,7 +9,7 @@ namespace allopromo.Core.Abstract
     public interface IStoreService
     {
         event StoreCreatedEventHandler StoreCreated;
-        StoreDto CreateStore(StoreDto store, StoreCategoryDto category, UserDto user);
+        Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user);
         Task<StoreDto> CreateStore(StoreDto store);
         Task <IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet);
         Task<StoreDto> GetStoreByIdAsync(string storeId);

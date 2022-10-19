@@ -44,7 +44,7 @@ namespace allopromo.Api.UnitTests
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]
-        public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEvent()
+        public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEventAsync()
         {
             //Arrange
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
@@ -58,14 +58,16 @@ namespace allopromo.Api.UnitTests
                 storeId = "dsd",
                 storeName = "Thierry Plank",
             };
+
             _storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
                 It.IsAny<UserDto>()))
-                .Returns(new StoreDto())
+                .Returns(Task.FromResult(new StoreDto()))
+
                 .Raises(e => e.StoreCreated += null, (StoreDto store) => new EventArgs { });
 
             _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
                 It.IsAny<UserDto>()))
-                .Returns(new StoreDto());
+                .Returns(Task.FromResult(store));
             //Act
             _storeServiceMock.Object.StoreCreated += (o, e) => NotifySent = true;
 
@@ -80,10 +82,10 @@ namespace allopromo.Api.UnitTests
                 NotifySent = true;
                 return true;
             };
-            _storeServiceMock.Object.StoreCreated += (StoreCreated);
+            _storeServiceMock.Object.StoreCreated += StoreCreated;
 
             _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
-                It.IsAny<UserDto>())).Returns(new StoreDto())
+                It.IsAny<UserDto>())).Returns(Task.FromResult(new StoreDto()))
             //.Raises(e => e.StoreCreated += _notificationServiceMock.Object.StoreCreatedEventHandler)
             //.Raises(e =>
             //{
@@ -99,14 +101,18 @@ namespace allopromo.Api.UnitTests
             };
 
             SUT.CreateStoreAsync(store);
-            //var result = SUT.CreateStoreAsync(store);
 
+            var result = SUT.CreateStoreAsync(store);
             //Assert.IsNotNull(storeCreatedEventArgs);
+
+            Assert.IsNotNull(result);
+
             //Assert.IsTrue(notifySent);
 
-            _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
-            //_storeServiceMock.Verify(x=> x.OnStoreCreated(), Times.Once);
+            //_notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
+            //return Task.CompletedTask;
         }
+
         public void GetStoreByCategoryId_ShouldReturn_StoresbyCategoryId()
         {
             //int pageId = 2;
