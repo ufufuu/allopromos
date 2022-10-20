@@ -40,13 +40,14 @@ namespace allopromo.Infrastructure.Repositories
         }
         Task IRepository<T>.Add(T obj, string imageUrl)
         {
-            if (obj == null)
+            if (obj != null)
             {
-                throw new NullReferenceException();
+                _dbContext.Add(obj);
+                this.Save();
             }
             else
             {
-                _dbContext.Add(obj);
+                throw new NullReferenceException();
             }
             return Task.FromResult(obj);
         }

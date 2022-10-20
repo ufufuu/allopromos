@@ -8,6 +8,6 @@ namespace allopromo.Core.Application.Dto
         public string storeCategoryId { get; set; }
         public string storeCategoryName { get; set; }
         public bool storeCategoryStatus { get; set; }
-        public string storeCategoryImageUrl { get; set; }
+        //public string storeCategoryImageUrl { get; set; }
     }
 }

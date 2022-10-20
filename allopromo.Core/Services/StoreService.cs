@@ -179,10 +179,7 @@ namespace allopromo.Core.Model
             var tStoreCategory = new tStoreCategory();
 
             tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
-            tStoreCategory.storeCategoryId = new Guid();
-
-            //tStoreCategory.storeCategoryImageUrl = storeCategory.storeCategoryImageUrl;
-
+            tStoreCategory.storeCategoryId = Guid.NewGuid();
             var imageUrl = string.Empty;
             if (postStoreCategoryImage() != null)
             {
@@ -191,9 +188,10 @@ namespace allopromo.Core.Model
             else
             {
                 imageUrl = "http://www.noiamgesfornow.jpg";
-                tStoreCategory.storeCategoryImageUrl = imageUrl;
             }
+            tStoreCategory.storeCategoryImageUrl = imageUrl;
             await _categoryRepository.Add(tStoreCategory); //, imageUrl);
+            int y=5;
             return storeCategoryDto;
         }
         #endregion StoresCategories
