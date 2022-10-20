@@ -24,7 +24,7 @@ namespace allopromo.Core.Model
         public static int _storesNumber { get; set; }
         private IProductService _productService { get; set; }
 
-
+        private IRepository<tStoreCategory> _categoryRepository;
         private IRepository<tStore> _storeRepository;
 
         private IStoreManager _storeManager; 
@@ -35,13 +35,10 @@ namespace allopromo.Core.Model
         private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
-        public StoreService(IRepository<tStore> storeRepository)
+        public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepo)
         {
             _storeRepository = storeRepository;
-        }
-        public StoreService(allopromo.Shared.Abstract.IRepository<tStore> storeRepo)
-        {
-            storeRepository = storeRepo;
+            _categoryRepository = categoryRepo;
         }
         public void OnStoreCreated()
         {
@@ -50,7 +47,6 @@ namespace allopromo.Core.Model
                 StoreCreated(this, EventArgs.Empty);
             }
         }
-
         #region StoresE
         public async Task<StoreDto> CreateStore(StoreDto store)
         {
@@ -181,16 +177,23 @@ namespace allopromo.Core.Model
             var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
             var storeCategoryDto = new StoreCategoryDto();
             var tStoreCategory = new tStoreCategory();
+
             tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
             tStoreCategory.storeCategoryId = new Guid();
-            tStoreCategory.storeCategoryImageUrl = storeCategory.storeCategoryImageUrl;
+
+            //tStoreCategory.storeCategoryImageUrl = storeCategory.storeCategoryImageUrl;
+
             var imageUrl = string.Empty;
             if (postStoreCategoryImage() != null)
+            {
                 imageUrl = await this.getImageUrl();
+            }
             else
+            {
                 imageUrl = "http://www.noiamgesfornow.jpg";
-            tStoreCategory.storeCategoryImageUrl = imageUrl;
-            await _storeRepository.Add(tStoreCategory.storeCategoryName, imageUrl);
+                tStoreCategory.storeCategoryImageUrl = imageUrl;
+            }
+            await _categoryRepository.Add(tStoreCategory); //, imageUrl);
             return storeCategoryDto;
         }
         #endregion StoresCategories
@@ -256,16 +259,16 @@ namespace allopromo.Core.Model
                 var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
                 //var content = new HttpMessageContent(httpRequest);
                 var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);//, content);
-                if (result.IsSuccessStatusCode)
-                {
+
+                //if (result.IsSuccessStatusCode)
+                //{
                     response = result.StatusCode.ToString();
                     var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
                     MediaApiResponseModel dataObj = obj.data;
                     var image = JsonConvert.SerializeObject(dataObj);
-
                     var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
                     imageUrl = media.url;
-                }
+                //}
             }
             return imageUrl;
         }

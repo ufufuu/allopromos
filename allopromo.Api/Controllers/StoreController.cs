@@ -50,7 +50,7 @@ namespace allopromo.Api.Controllers
         }
         [HttpPost]
 
-        [Route("{categories}/{create}/{categoryId}")]
+        [Route("categories/create/categoryId")]
         public async Task<IActionResult> PostStoreCategory([FromBody] 
             StoreCategoryDto storeCategory)
         {
@@ -68,7 +68,7 @@ namespace allopromo.Api.Controllers
                 var category = new StoreCategoryDto();
                 object user = null;
                 _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                var store = _storeService.CreateStore(storeDto);//, category, (UserDto)user);
+                var store = _storeService.CreateStore(storeDto);    //, category, (UserDto)user);
                 if (store != null)
                 {
                     _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;

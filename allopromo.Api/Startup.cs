@@ -7,7 +7,6 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
-
 using allopromo.Api.Infrastructure;
 //using allopromoInfrastructure.Abstract;
 
@@ -141,7 +140,7 @@ namespace allopromo
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
-
+            services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
 
             //services.AddScoped <Core.Abstract.IStoreRepository,

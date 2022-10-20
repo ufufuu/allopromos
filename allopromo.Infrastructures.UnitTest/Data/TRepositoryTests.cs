@@ -2,6 +2,8 @@
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Abstract;
 using allopromo.Infrastructure.Data;
+using allopromo.Infrastructure.Repositories;
+using allopromo.Shared.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 using Moq;
@@ -12,40 +14,38 @@ using System.Text;
 namespace allopromo.Infrastructure.UnitTests.Data
 {
     [TestFixture]
-    public class GenericRepositoryTests
+    public class TRepositoryTests
     {
-        //[TestCase]
-        public void Creer_Type_DEVRAIT_RetournerTypeCree()
+        private Mock<AppDbContext> _mockDb { get; set; }
+        [Test]
+        public void Add_TEntity_DEVRAIT_RetournerTEntityCrees()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase("allopromo")
                 .Options;
-            var store = new tStore { };
+            var obj = new tStore { };
             Mock<InMemoryDatabase> db = new Mock<InMemoryDatabase>();
             using (var dbContext = new AppDbContext(options))
             {
                  dbContext.SaveChanges();
             }
-            using (var dbContext = new AppDbContext(options))
-            {
-                //IRepository<tStore> _SUT = new GenericRepository<tStore>(dbContext);
-
-            }
-            //var _stu = new GenericRepository<tStore>(db.);
-
             var dbSetMock = new Mock<DbSet<tStore>>();
             dbSetMock.Setup(s => s.Add(new tStore()));
-
         }
         [Test]
-        public void CREER_TYPE_DEVRAIT_ENREGISTRER()
+        public void UpDate_TYPE_DEVRAIT_ENREGISTRER()
         {
-
         }
         [Test]
-        public void SAVE_TYPE_DEVRAIT_ENREGISTRER()
+        public void Delete_TYPE_DEVRAIT_SUPPRIMER(object obj)
         {
-
+            var tRepo = new TRepository<Object>(_mockDb.Object);
+            Object result = tRepo.Delete(obj);
+            Assert.IsNotNull(result);
+        }
+        //[Test]
+        public void Save_TYPE_DEVRAIT_ENREGISTRER()
+        {
         }
     }
 }
