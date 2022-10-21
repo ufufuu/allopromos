@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class TRepository<T> : IRepository<T> where T : class        /// Unit of Work ?
+    public class TRepository<T> : IRepository<T> where T : class        /// Unit of Work ? que doit retourner creeer categry ?
     {
         #region fields
         private readonly AppDbContext _dbContext;

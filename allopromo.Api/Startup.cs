@@ -16,7 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using allopromo.Infrastructure.Helpers.Authentication;
 using allopromo.Core.Infrastructure.Abstract;
-
 //using Owin;
 //using Microsoft.Owin;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -25,7 +24,6 @@ using System;
 using allopromo.Core.Application;
 using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
-using allopromo.Infrastructure.Abstract;
 using allopromo.Core.Entities;
 //using allopromo.Api.Model;
 using allopromo.Api;
