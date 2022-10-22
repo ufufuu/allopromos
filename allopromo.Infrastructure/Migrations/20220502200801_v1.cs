@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-
 namespace allopromo.Infrastructure.Migrations
 {
     public partial class v1 : Migration
@@ -278,7 +277,9 @@ namespace allopromo.Infrastructure.Migrations
                     storeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     storeCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     storeBecomesInactiveOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+
                     CategorystoreCategoryId = table.Column<int>(type: "int", nullable: true),
+
                     cityId = table.Column<int>(type: "int", nullable: true),
                     userId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
