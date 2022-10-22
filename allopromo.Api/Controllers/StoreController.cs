@@ -17,15 +17,10 @@ using allopromo.Core.Entities;
 using System.Net;
 using System.ComponentModel;
 using System.Net.Http;
-
 namespace allopromo.Api.Controllers
 {
-    
-    public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
-
+   public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
    [ApiController]
-    //[Route("{categories}/{create}/{categoryId}")]
-
     [Route("api/v1/store")]
     public class StoreController : ControllerBase
     {
@@ -34,9 +29,6 @@ namespace allopromo.Api.Controllers
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
-
-        // { get; set; }
-
         private IStoreService _storeService { get; set; }
         private INotifyService _notificationService;
         private IProductService _productService;
@@ -49,7 +41,6 @@ namespace allopromo.Api.Controllers
             _notificationService = notificationService;
         }
         [HttpPost]
-
         [Route("categories/create/categoryId")]
         public async Task<IActionResult> PostStoreCategory([FromBody] 
             StoreCategoryDto storeCategory)
@@ -147,13 +138,16 @@ namespace allopromo.Api.Controllers
             return Ok(store);
         }
         [HttpGet]
-        [Route(ConstancesCommunes.BaseUrl+"{categories}")]
+        [Route("categories")]
         //[SwaggerResponse(HttpStatusCode.OK , Description= "xxx Enregistree dans l\'Antememoire",
         //Type=typeof(StoreCategoryDto))]
+
         public async Task<IActionResult> GetStoreCategories()
         {
             var storeCategories = await _storeService.GetStoreCategoriesAsync();
-            return Ok(storeCategories);
+            if(storeCategories!=null)
+                return Ok(storeCategories);
+            return BadRequest();
         }
         [HttpGet]
         [Route("{category}/{Id}/{products}")]
@@ -179,7 +173,7 @@ namespace allopromo.Api.Controllers
                 return Ok(product);
         }
         [HttpDelete]
-        [Route("{categories}/{id}/{delete}")]
+        [Route("categories/delete/id")]
         public IActionResult DeleteStoreCategory(string categoryId)
         {
             if (categoryId == null)

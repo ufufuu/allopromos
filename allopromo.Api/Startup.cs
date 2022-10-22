@@ -141,9 +141,6 @@ namespace allopromo
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
 
-            //services.AddScoped <Core.Abstract.IStoreRepository,
-            //Infrastructure.Repositories.StoreRepository>();
-
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
             //services.AddScoped<ILoggerManager, LoggerManager>();
             //?Instead of <ApplicationUser>>

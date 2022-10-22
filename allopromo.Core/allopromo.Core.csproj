@@ -31,6 +31,7 @@
     <Compile Remove="Abstract\IProductRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
     <Compile Remove="Abstract\ISmsNotificationService.cs" />
+    <Compile Remove="Abstract\IStoreRepository.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
     <Compile Remove="Entities\tOrder.cs" />

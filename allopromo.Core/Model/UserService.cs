@@ -220,6 +220,7 @@ namespace allopromo.Core.Model
                 //using(var db = new allopromo.Infrastructure.
                 //{
                 //}
+                int j = 5;
             }
             catch(Exception ex)
             {

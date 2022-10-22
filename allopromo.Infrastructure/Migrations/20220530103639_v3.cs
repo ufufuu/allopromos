@@ -10,7 +10,6 @@ namespace allopromo.Infrastructure.Migrations
                 name: "StoreState",
                 table: "Stores");
         }
-
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(

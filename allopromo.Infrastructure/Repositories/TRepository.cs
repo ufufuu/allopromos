@@ -72,9 +72,16 @@ namespace allopromo.Infrastructure.Repositories
             _table.Attach(obj);
             _dbContext.Entry(obj).State = EntityState.Modified;
         }
-        public Task<List<T>> GetAllAsync() ////Task<List<T>> IRepository<T>.GetAllAsync()
+        public Task<List<T>> GetAllAsync()////Task<List<T>> IRepository<T>.GetAllAsync()
         {
-            return _table.ToListAsync();
+            var tObjects = _table.ToListAsync();
+            int g = 5;
+            return tObjects;
+        }
+        public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
+        {
+            var tCategories = await _dbContext.StoreCategories.ToListAsync();
+            return tCategories;
         }
         Task<T> IRepository<T>.GetByIdAsync(int categoryId, int pageNumber, int offSet)
         {
@@ -116,41 +123,8 @@ namespace allopromo.Infrastructure.Repositories
         }
         #endregion
     }
-}//Generics : code reuse - type safety - performance - 
-
-
-/*public class StoreRepository3:IEntityBaseRepository<tStore>
-    {
-        public void Delete(tStore obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public tStore Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<tStore> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public tStore GetBy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(tStore obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(tStore obj)
-        {
-            throw new NotImplementedException();
-        }
-
+}//Generics : code reuse - type safety - performance -
+/*
         void GetStoresAsync()
         {
             //using(var db = new AppDbContext())

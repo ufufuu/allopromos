@@ -13,14 +13,10 @@ namespace allopromo.Core.Abstract                   //?  Some Would Call it Doma
         Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId);
         Task<IEnumerable<tStore>> GetStoresByCategoryIdAsync(int categoryId, int limitPerPage, int offSet);
         IEnumerable<tStore> GetStoresAsync();
-
         tStoreCategory AddStoreCategory(string storeCategoryName, string imageUrl);
 
         void DeleteStoreCategory(tStoreCategory storeCategory);
         Task<tStoreCategory> GetStoreByIdAsync(string storeId);
-
-
-
 
         //Task<List<tStore>> GetStoresByCategoryIdAsync(string catId);
         //Task<List<tStore>> GetStoresByCatIdAsync(string catId);
@@ -29,11 +25,3 @@ namespace allopromo.Core.Abstract                   //?  Some Would Call it Doma
         //Task<tStore> GetStoreByIdAsync(string storeId);
     }
 }
-
-
-
-
-
-
-//services.AddScoped<IStoreRepository, allopromo.Infrastructure.Repositories.
-//StoreRepository>();

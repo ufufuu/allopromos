@@ -23,14 +23,10 @@ namespace allopromo.Core.Model
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
         private IProductService _productService { get; set; }
-
         private IRepository<tStoreCategory> _categoryRepository;
         private IRepository<tStore> _storeRepository;
-
         private IStoreManager _storeManager; 
-
         allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
-
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
@@ -132,8 +128,22 @@ namespace allopromo.Core.Model
         }
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
-            var categories = Mapper.Map<IEnumerable<StoreCategoryDto>>
-                (await _storeRepository.GetAllAsync());
+            IEnumerable<StoreCategoryDto> categories = null;
+            //try
+            //{
+            categories = AutoMapper.Mapper.Map
+                    <IEnumerable<StoreCategoryDto>>(await _storeRepository.GetAllAsync());
+                int g = 54;
+                if (categories == null)
+                    throw new ArgumentNullException();
+            //}
+            //catch( ex)
+            //{
+            //}
+            //catch(Exception ex)
+            //{
+            //    throw new Exception();
+            //}
             return categories;
         }
         public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
@@ -191,7 +201,6 @@ namespace allopromo.Core.Model
             }
             tStoreCategory.storeCategoryImageUrl = imageUrl;
             await _categoryRepository.Add(tStoreCategory); //, imageUrl);
-            int y=5;
             return storeCategoryDto;
         }
         #endregion StoresCategories
@@ -347,8 +356,6 @@ namespace allopromo.Core.Model
     //{
     //}
 
-    ////return new StoreRepository().GetAllStores().AsEnumerable();//GetStoresCategories()
-    //return _storeRepo.GetAllStores().AsEnumerable();//(page, size).AsEnnumerable();
 }
 /* 1. table jointure
  * 2. re architecture

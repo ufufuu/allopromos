@@ -118,4 +118,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\al
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cs

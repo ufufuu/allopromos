@@ -27,7 +27,6 @@ namespace allopromo.Core.Aggregates
     //{
     //}
 
-    ////return new StoreRepository().GetAllStores().AsEnumerable();//GetStoresCategories()
     //return _storeRepo.GetAllStores().AsEnumerable();//(page, size).AsEnnumerable();
 }
 /* 1. table jointure

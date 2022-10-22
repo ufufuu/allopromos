@@ -79,3 +79,4 @@ namespace allopromo.Infrastructure.UnitTests.Data
         }
     }
 }
+//https://rubikscode.net/2022/07/11/implementing-and-testing-repository-pattern-using-entity-framework/
