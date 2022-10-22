@@ -33,14 +33,13 @@ namespace allopromo.Core.Contracts
             var city = await _cityRepository.GetByIdAsync(cityId);
             return city;
         }
-        public List<CityDto> Gets()
+        public List<CityDto> GetCities()
         {
-            var ailesRepository = new List<allopromo.Core.Entities.tAisle>();
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Boucherie" });
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Charcuterie" });
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Boulangerie" });
-
-            return null;
+            var citiesRepository = new List<CityDto>();
+            citiesRepository.Add(new CityDto { cityId = Guid.NewGuid(), cityName = "Lome" });
+            citiesRepository.Add(new CityDto{ cityId = Guid.NewGuid(), cityName = "Montreal" });
+            citiesRepository.Add(new CityDto { cityId = Guid.NewGuid(), cityName = "Quebec" });
+            return citiesRepository;
         }
         public void Put(AisleDto aisle)
         {

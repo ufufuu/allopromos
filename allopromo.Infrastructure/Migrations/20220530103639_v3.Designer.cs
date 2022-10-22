@@ -346,7 +346,7 @@ namespace allopromo.Infrastructure.Migrations
                     b.Property<string>("storeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("CategorystoreCategoryId")
+                    b.Property<int?>("storeCategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("cityId")
@@ -372,7 +372,7 @@ namespace allopromo.Infrastructure.Migrations
 
                     b.HasKey("storeId");
 
-                    b.HasIndex("CategorystoreCategoryId");
+                    b.HasIndex("storeCategoryId");
 
                     b.HasIndex("cityId");
 
@@ -509,7 +509,7 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     b.HasOne("allopromo.Core.Entities.tStoreCategory", "Category")
                         .WithMany("tStores")
-                        .HasForeignKey("CategorystoreCategoryId");
+                        .HasForeignKey("storeCategoryId");
 
                     b.HasOne("allopromo.Core.Entities.tCity", "City")
                         .WithMany()

@@ -8,8 +8,8 @@ using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
 using allopromo.Api.Infrastructure;
-//using allopromoInfrastructure.Abstract;
 
+//using allopromoInfrastructure.Abstract;
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +31,7 @@ using allopromo.Core.Services;
 using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Logging;
 using Microsoft.Extensions.Hosting;
+using allopromo.Core.Contracts;
 //using Ocelot.Middleware;
 //using Ocelot.DependencyInjection;
 
@@ -113,8 +114,8 @@ namespace allopromo
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
-
-
+            services.AddScoped<ILocalizeService, LocalizeService>();
+            //services.AddScoped<>
 
             //2 lines below vs 2 above ? or Addtransient vs addScoped ?
             //services.AddTransient<IStoreService, StoreService>();
@@ -140,6 +141,7 @@ namespace allopromo
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
+            services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
             //services.AddScoped<ILoggerManager, LoggerManager>();

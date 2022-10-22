@@ -6,6 +6,6 @@ namespace allopromo.Core.Application.Dto
     public class CityDto
     {
         public Guid cityId { get; set; }
-        public int cityName { get; set; }
+        public string cityName { get; set; }
     }
 }

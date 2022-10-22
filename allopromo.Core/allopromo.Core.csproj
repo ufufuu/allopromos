@@ -39,6 +39,7 @@
     <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
     <Compile Remove="Abstract\Interfaces\IRepository.cs" />
     <Compile Remove="Model\ApplicationUser.cs" />
+    <Compile Remove="Model\StoreCategory.cs" />
     <Compile Remove="Services\AccounttService.cs" />
     <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />

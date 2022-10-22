@@ -21,20 +21,20 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILocalizeService _localizeService;
+
         private readonly IExceptionWriter _exceptionWriter;
         public CitiesController(IConfiguration config,
-                           ILocalizeService localizeService,
-                           IExceptionWriter exceptionWriter)
+                           ILocalizeService localizeService)
+                           //IExceptionWriter exceptionWriter)
         {
             _config = config;
             _localizeService = localizeService;
-            _exceptionWriter = exceptionWriter;
+
+            //_exceptionWriter = exceptionWriter;
         }
 
         [HttpPost]
-
         //[Route(ConstancesCommunes)]
-
         public IActionResult PostCity([FromRoute] CityDto city)
         {
             try
@@ -43,16 +43,16 @@ namespace allopromo.Api.Controllers
             }
             catch (Exception ex)
             {
-                _exceptionWriter.WriteException(ex.ToString());
+                //_exceptionWriter.WriteException(ex.ToString());
                 throw;
             }
             return Ok(city);
         }
         [HttpGet]
-        [Route("cities")]
+        [Route("")]
         public IActionResult GetCities()
         {
-            var cities = _localizeService.Gets();
+            var cities = _localizeService.GetCities();
             return Ok(cities);
         }
         [HttpGet]
@@ -61,7 +61,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var city = _localizeService.Gets();
+                var city = _localizeService.GetCities();
                 return Ok(city);
             }
             catch(Exception ex)
@@ -75,7 +75,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var city = from c in _localizeService.Gets()
+                var city = from c in _localizeService.GetCities()
                            where c.cityId.Equals(Id)
                            select c;
                 _localizeService.Delete(city.FirstOrDefault());

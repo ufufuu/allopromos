@@ -85,3 +85,671 @@ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Categor
 ClientConnectionId:abc579b9-2f6a-483c-9d7a-d994d73a5b42
 Error Number:207,State:1,Class:16
 2022-10-22 11:35:51.324 -04:00 [INF] Request finished in 20597.9826ms 500 text/plain
+2022-10-22 12:06:28.630 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:06:33.513 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:06:33.515 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:06:33.516 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:06:33.737 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:06:34.767 -04:00 [INF] Request finished in 1041.3785ms 200 text/html;charset=utf-8
+2022-10-22 12:06:36.720 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:06:37.490 -04:00 [INF] Request finished in 770.3817ms 200 application/json;charset=utf-8
+2022-10-22 12:07:19.654 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:07:19.797 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:07:20.036 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:07:26.587 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:07:34.518 -04:00 [ERR] Failed executing DbCommand (1,160ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeId], [s].[CategorystoreCategoryId], [s].[cityId], [s].[storeBecomesInactiveOn], [s].[storeCreatedOn], [s].[storeDescription], [s].[storeName], [s].[storeStatus], [s].[userId]
+FROM [Stores] AS [s]
+2022-10-22 12:07:35.537 -04:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CategorystoreCategoryId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:3bd4235e-4a40-4760-80c9-b41a35005106
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CategorystoreCategoryId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:3bd4235e-4a40-4760-80c9-b41a35005106
+Error Number:207,State:1,Class:16
+2022-10-22 12:07:40.967 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 20894.3929ms
+2022-10-22 12:07:41.648 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:07:43.428 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CategorystoreCategoryId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Core.Model.StoreService.GetStoreCategoriesAsync() in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 134
+   at allopromo.Api.Controllers.StoreController.GetStoreCategories() in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 147
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:3bd4235e-4a40-4760-80c9-b41a35005106
+Error Number:207,State:1,Class:16
+2022-10-22 12:07:43.869 -04:00 [INF] Request finished in 24215.6913ms 500 text/plain
+2022-10-22 12:20:35.537 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:20:38.219 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:20:38.234 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:20:38.234 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:20:38.468 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:20:39.729 -04:00 [INF] Request finished in 1276.4979ms 200 text/html;charset=utf-8
+2022-10-22 12:20:40.644 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:20:41.717 -04:00 [INF] Request finished in 1074.1512ms 200 application/json;charset=utf-8
+2022-10-22 12:20:57.157 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:20:57.215 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:20:57.514 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:21:03.433 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:21:07.521 -04:00 [ERR] Failed executing DbCommand (1,125ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryImageUrl], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:21:08.492 -04:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:fb38e554-3223-4a6e-a89e-a68baf774035
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:fb38e554-3223-4a6e-a89e-a68baf774035
+Error Number:207,State:1,Class:16
+2022-10-22 12:21:12.548 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 15009.7931ms
+2022-10-22 12:21:13.076 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:21:14.800 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Core.Model.StoreService.GetStoreCategoriesAsync() in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 134
+   at allopromo.Api.Controllers.StoreController.GetStoreCategories() in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 147
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:fb38e554-3223-4a6e-a89e-a68baf774035
+Error Number:207,State:1,Class:16
+2022-10-22 12:21:15.185 -04:00 [INF] Request finished in 18029.0804ms 500 text/plain
+2022-10-22 12:22:52.425 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:22:55.521 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:22:55.523 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:22:55.523 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:22:55.690 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:22:57.779 -04:00 [INF] Request finished in 2101.3196ms 200 text/html;charset=utf-8
+2022-10-22 12:22:58.906 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:22:59.596 -04:00 [INF] Request finished in 689.9103ms 200 application/json;charset=utf-8
+2022-10-22 12:23:17.457 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:23:17.494 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:23:17.724 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:23:22.938 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:23:27.242 -04:00 [ERR] Failed executing DbCommand (1,103ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryImageUrl], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:23:28.315 -04:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:38c12ffb-a388-46c4-8628-9f17061001e4
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:38c12ffb-a388-46c4-8628-9f17061001e4
+Error Number:207,State:1,Class:16
+2022-10-22 12:23:32.546 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 14802.6727ms
+2022-10-22 12:23:33.108 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:23:34.819 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Core.Model.StoreService.GetStoreCategoriesAsync() in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 134
+   at allopromo.Api.Controllers.StoreController.GetStoreCategories() in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 147
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:38c12ffb-a388-46c4-8628-9f17061001e4
+Error Number:207,State:1,Class:16
+2022-10-22 12:23:35.159 -04:00 [INF] Request finished in 17703.3006ms 500 text/plain
+2022-10-22 12:25:59.827 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:26:02.521 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:26:02.523 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:26:02.523 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:26:02.705 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:26:03.856 -04:00 [INF] Request finished in 1163.4099ms 200 text/html;charset=utf-8
+2022-10-22 12:26:04.901 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:26:05.543 -04:00 [INF] Request finished in 644.0179ms 200 application/json;charset=utf-8
+2022-10-22 12:26:17.260 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:26:17.298 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:26:17.659 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:26:23.859 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:26:27.720 -04:00 [ERR] Failed executing DbCommand (1,137ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryImageUrl], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:26:28.782 -04:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:582ef69e-5ed5-47a9-9748-b2facfd7a59d
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:582ef69e-5ed5-47a9-9748-b2facfd7a59d
+Error Number:207,State:1,Class:16
+2022-10-22 12:26:33.191 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 15512.7204ms
+2022-10-22 12:26:33.698 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:26:35.334 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Core.Model.StoreService.GetStoreCategoriesAsync() in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 134
+   at allopromo.Api.Controllers.StoreController.GetStoreCategories() in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 147
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:582ef69e-5ed5-47a9-9748-b2facfd7a59d
+Error Number:207,State:1,Class:16
+2022-10-22 12:26:35.766 -04:00 [INF] Request finished in 18506.5609ms 500 text/plain
+2022-10-22 12:28:43.909 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:28:46.904 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:28:46.907 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:28:46.907 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:28:47.135 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:28:48.412 -04:00 [INF] Request finished in 1281.5868ms 200 text/html;charset=utf-8
+2022-10-22 12:28:50.019 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:28:50.616 -04:00 [INF] Request finished in 598.2959ms 200 application/json;charset=utf-8
+2022-10-22 12:29:13.565 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:29:13.681 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:29:13.915 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:29:18.917 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:29:23.221 -04:00 [ERR] Failed executing DbCommand (1,129ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryImageUrl], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:29:24.176 -04:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:362b1b72-b5a0-4d4e-94eb-291c3ac72e71
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:362b1b72-b5a0-4d4e-94eb-291c3ac72e71
+Error Number:207,State:1,Class:16
+2022-10-22 12:29:28.143 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 14207.7503ms
+2022-10-22 12:29:28.612 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:29:30.144 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeCategoryImageUrl'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Core.Model.StoreService.GetStoreCategoriesAsync() in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 134
+   at allopromo.Api.Controllers.StoreController.GetStoreCategories() in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 147
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:362b1b72-b5a0-4d4e-94eb-291c3ac72e71
+Error Number:207,State:1,Class:16
+2022-10-22 12:29:30.431 -04:00 [INF] Request finished in 16870.2931ms 500 text/plain
+2022-10-22 12:29:51.727 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:29:51.742 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:29:51.746 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:29:51.990 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:30:37.979 -04:00 [ERR] Failed executing DbCommand (12,154ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryImageUrl], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:41:06.637 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:41:12.236 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:41:12.239 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:41:12.239 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:41:12.441 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:41:13.737 -04:00 [INF] Request finished in 1304.5915ms 200 text/html;charset=utf-8
+2022-10-22 12:41:15.044 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:41:15.800 -04:00 [INF] Request finished in 763.8563ms 200 application/json;charset=utf-8
+2022-10-22 12:41:29.169 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/store/categories  
+2022-10-22 12:41:29.294 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:41:29.761 -04:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2022-10-22 12:41:35.699 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 12:41:43.581 -04:00 [INF] Executed DbCommand (430ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[storeCategoryId], [s].[storeCategoryName]
+FROM [StoreCategories] AS [s]
+2022-10-22 12:41:44.210 -04:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.StoreCategoryDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-10-22 12:41:45.033 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 15243.2402ms
+2022-10-22 12:41:45.037 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2022-10-22 12:41:45.057 -04:00 [INF] Request finished in 15889.3975ms 200 application/json; charset=utf-8
+2022-10-22 12:53:38.086 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:53:41.694 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:53:41.706 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:53:41.707 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:53:41.898 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:53:43.278 -04:00 [INF] Request finished in 1389.3146ms 200 text/html;charset=utf-8
+2022-10-22 12:53:44.672 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:53:45.618 -04:00 [INF] Request finished in 947.6692ms 200 application/json;charset=utf-8
+2022-10-22 12:54:15.493 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities/cities  
+2022-10-22 12:54:15.573 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 12:54:15.898 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 12:54:17.274 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 1138.8807ms
+2022-10-22 12:54:18.255 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 12:54:18.663 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'allopromo.Core.Abstract.ILocalizeService' while attempting to activate 'allopromo.Api.Controllers.CitiesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-10-22 12:54:21.348 -04:00 [INF] Request finished in 5874.1866ms 500 text/plain
+2022-10-22 12:57:12.153 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 12:57:15.324 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 12:57:15.327 -04:00 [INF] Hosting environment: Development
+2022-10-22 12:57:15.327 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 12:57:15.504 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 12:57:16.931 -04:00 [INF] Request finished in 1441.0654ms 200 text/html;charset=utf-8
+2022-10-22 12:57:18.393 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 12:57:18.987 -04:00 [INF] Request finished in 595.2616ms 200 application/json;charset=utf-8
+2022-10-22 12:57:27.033 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 12:57:27.070 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 12:57:27.572 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 12:57:28.591 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 988.0239ms
+2022-10-22 12:57:28.750 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 12:57:29.132 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'allopromo.Core.Abstract.ILocalizeService' while attempting to activate 'allopromo.Api.Controllers.CitiesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-10-22 12:57:29.544 -04:00 [INF] Request finished in 2513.4935ms 500 text/plain
+2022-10-22 13:00:15.677 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:00:18.199 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:00:18.202 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:00:18.202 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:00:18.391 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:00:19.587 -04:00 [INF] Request finished in 1209.8179ms 200 text/html;charset=utf-8
+2022-10-22 13:00:20.752 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:00:21.503 -04:00 [INF] Request finished in 756.8119ms 200 application/json;charset=utf-8
+2022-10-22 13:03:29.740 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:03:32.395 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:03:32.398 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:03:32.398 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:03:32.555 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:03:33.594 -04:00 [INF] Request finished in 1050.8981ms 200 text/html;charset=utf-8
+2022-10-22 13:03:34.605 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:03:35.235 -04:00 [INF] Request finished in 632.4131ms 200 application/json;charset=utf-8
+2022-10-22 13:03:43.448 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 13:03:43.479 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:03:43.786 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 13:03:45.279 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 1462.704ms
+2022-10-22 13:03:45.626 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:03:46.241 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'allopromo.Core.Abstract.ILocalizeService' while attempting to activate 'allopromo.Api.Controllers.CitiesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-10-22 13:03:47.129 -04:00 [INF] Request finished in 3682.2801ms 500 text/plain
+2022-10-22 13:13:35.876 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:13:38.294 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:13:38.317 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:13:38.318 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:13:38.491 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:13:39.901 -04:00 [INF] Request finished in 1428.7058ms 200 text/html;charset=utf-8
+2022-10-22 13:13:41.222 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:13:42.047 -04:00 [INF] Request finished in 825.5161ms 200 application/json;charset=utf-8
+2022-10-22 13:14:02.644 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 13:14:02.710 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:14:03.590 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 13:14:10.002 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 13:14:10.763 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 7148.994ms
+2022-10-22 13:14:10.927 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:14:11.299 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'allopromo.Core.Exceptions.IExceptionWriter' while attempting to activate 'allopromo.Api.Controllers.CitiesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-10-22 13:14:11.674 -04:00 [INF] Request finished in 9035.7313ms 500 text/plain
+2022-10-22 13:15:48.402 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:15:52.741 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:15:52.745 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:15:52.746 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:15:52.913 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:15:54.466 -04:00 [INF] Request finished in 1572.4025ms 200 text/html;charset=utf-8
+2022-10-22 13:15:55.605 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:15:56.498 -04:00 [INF] Request finished in 893.7321ms 200 application/json;charset=utf-8
+2022-10-22 13:16:07.878 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 13:16:07.935 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:16:08.260 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 13:16:13.589 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 13:16:14.288 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 5999.4449ms
+2022-10-22 13:16:14.429 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:16:14.746 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'allopromo.Core.Exceptions.IExceptionWriter' while attempting to activate 'allopromo.Api.Controllers.CitiesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-10-22 13:16:15.104 -04:00 [INF] Request finished in 7226.434ms 500 text/plain
+2022-10-22 13:18:15.571 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:18:18.387 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:18:18.389 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:18:18.390 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:18:18.583 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:18:19.846 -04:00 [INF] Request finished in 1273.0852ms 200 text/html;charset=utf-8
+2022-10-22 13:18:20.959 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:18:21.503 -04:00 [INF] Request finished in 547.3791ms 200 application/json;charset=utf-8
+2022-10-22 13:18:33.261 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 13:18:33.311 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:18:33.529 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 13:18:40.294 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 13:18:44.535 -04:00 [INF] Executing ObjectResult, writing value of type 'null'.
+2022-10-22 13:18:44.556 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 11007.6002ms
+2022-10-22 13:18:44.564 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:18:44.588 -04:00 [INF] Request finished in 11327.319ms 204 
+2022-10-22 13:25:29.896 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-10-22 13:25:32.428 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-10-22 13:25:32.431 -04:00 [INF] Hosting environment: Development
+2022-10-22 13:25:32.431 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2022-10-22 13:25:32.615 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/index.html  
+2022-10-22 13:25:33.670 -04:00 [INF] Request finished in 1071.9277ms 200 text/html;charset=utf-8
+2022-10-22 13:25:34.873 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/swagger/v1/swagger.json  
+2022-10-22 13:25:35.728 -04:00 [INF] Request finished in 873.1752ms 200 application/json;charset=utf-8
+2022-10-22 13:26:06.102 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44367/api/v1/Cities  
+2022-10-22 13:26:06.249 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:26:06.452 -04:00 [INF] Route matched with {action = "GetCities", controller = "Cities"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCities() on controller allopromo.Api.Controllers.CitiesController (allopromo.Api).
+2022-10-22 13:26:12.954 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2022-10-22 13:26:12.978 -04:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.CityDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-10-22 13:26:13.528 -04:00 [INF] Executed action allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api) in 7045.3745ms
+2022-10-22 13:26:13.537 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.CitiesController.GetCities (allopromo.Api)'
+2022-10-22 13:26:13.562 -04:00 [INF] Request finished in 7461.9054ms 200 application/json; charset=utf-8

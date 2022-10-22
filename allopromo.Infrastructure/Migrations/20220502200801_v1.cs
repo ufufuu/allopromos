@@ -96,6 +96,8 @@ namespace allopromo.Infrastructure.Migrations
                     storeCategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     storeCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+
+                    //storeCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -278,7 +280,7 @@ namespace allopromo.Infrastructure.Migrations
                     storeCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     storeBecomesInactiveOn = table.Column<DateTime>(type: "datetime2", nullable: false),
 
-                    CategorystoreCategoryId = table.Column<int>(type: "int", nullable: true),
+                    storeCategoryId = table.Column<int>(type: "int", nullable: true),
 
                     cityId = table.Column<int>(type: "int", nullable: true),
                     userId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -299,8 +301,8 @@ namespace allopromo.Infrastructure.Migrations
                         principalColumn: "cityId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Stores_StoreCategories_CategorystoreCategoryId",
-                        column: x => x.CategorystoreCategoryId,
+                        name: "FK_Stores_StoreCategories_storeCategoryId",
+                        column: x => x.storeCategoryId,
                         principalTable: "StoreCategories",
                         principalColumn: "storeCategoryId",
                         onDelete: ReferentialAction.Restrict);
@@ -375,9 +377,9 @@ namespace allopromo.Infrastructure.Migrations
                 column: "regionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stores_CategorystoreCategoryId",
+                name: "IX_Stores_storeCategoryId",
                 table: "Stores",
-                column: "CategorystoreCategoryId");
+                column: "storeCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_cityId",

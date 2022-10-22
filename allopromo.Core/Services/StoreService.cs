@@ -132,7 +132,7 @@ namespace allopromo.Core.Model
             //try
             //{
             categories = AutoMapper.Mapper.Map
-                    <IEnumerable<StoreCategoryDto>>(await _storeRepository.GetAllAsync());
+                    <IEnumerable<StoreCategoryDto>>(await _categoryRepository.GetAllAsync());  
                 int g = 54;
                 if (categories == null)
                     throw new ArgumentNullException();
@@ -199,7 +199,8 @@ namespace allopromo.Core.Model
             {
                 imageUrl = "http://www.noiamgesfornow.jpg";
             }
-            tStoreCategory.storeCategoryImageUrl = imageUrl;
+            //tStoreCategory.storeCategoryImageUrl = imageUrl;
+
             await _categoryRepository.Add(tStoreCategory); //, imageUrl);
             return storeCategoryDto;
         }

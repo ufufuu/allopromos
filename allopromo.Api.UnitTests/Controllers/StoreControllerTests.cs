@@ -205,7 +205,10 @@ namespace allopromo.Api.UnitTests
             var sut = new StoreController(_storeServiceMock.Object,
                 _productService.Object, _notificationServiceMock.Object);
             StoreCategoryDto category = new StoreCategoryDto
-            { storeCategoryId = "1", storeCategoryName = "", storeCategoryStatus = true };
+            {
+                storeCategoryId = "1",
+                storeCategoryName = "", //storeCategoryStatus = true };
+            };
             var storeStatus = sut.PutStoreCategory(category);
             Assert.IsNotNull(storeStatus);
         }
@@ -213,8 +216,10 @@ namespace allopromo.Api.UnitTests
         public void StoreController_DeleteStoreCategory_SHOULD_Delete()
         {
             StoreCategoryDto category = new StoreCategoryDto
-            { storeCategoryId = "1nmnm-kkjkk-kmkmkmk-jnjjv88", 
-                storeCategoryName = "", storeCategoryStatus = true };
+            {
+                storeCategoryId = "1nmnm-kkjkk-kmkmkmk-jnjjv88",
+                storeCategoryName = "", //storeCategoryStatus = true };
+            };
             var result = new StoreController(_storeServiceMock.Object,
                 _productService.Object, _notificationServiceMock.Object)
                 .DeleteStoreCategory(category.storeCategoryId);
