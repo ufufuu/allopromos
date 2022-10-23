@@ -10,6 +10,7 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Exceptions;
 using allopromo.Core.Application.Dto;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace allopromo.Api.Controllers
 {
@@ -50,10 +51,12 @@ namespace allopromo.Api.Controllers
         }
         [HttpGet]
         [Route("")]
-        public IActionResult GetCities()
+        public async Task<IActionResult> GetCities()
         {
-            var cities = _localizeService.GetCities();
-            return Ok(cities);
+            var cities = await _localizeService.GetCities();
+            if (cities!= null)
+                return Ok(cities);
+            return BadRequest();
         }
         [HttpGet]
         [Route("cities+{cityId}")]
@@ -71,14 +74,14 @@ namespace allopromo.Api.Controllers
         }
         [HttpDelete]
         [Route("cities+{cityId}")]
-        public IActionResult Delete(string Id)
+        public async Task<IActionResult> Delete(string Id)
         {
             try
             {
-                var city = from c in _localizeService.GetCities()
+                var city = from c in await _localizeService.GetCities()
                            where c.cityId.Equals(Id)
                            select c;
-                _localizeService.Delete(city.FirstOrDefault());
+                //_localizeService.Delete(city.FirstOrDefault());
                 return Ok();
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,8 @@ namespace allopromo.Core.Contracts
 {
     public class LocalizeService: ILocalizeService
     {
-        private allopromo.Core.Abstract.IRepository<tCity> _cityRepository { get; set;}
-        public LocalizeService(allopromo.Core.Abstract.IRepository<tCity> cityRepository)
+        private IRepository<tCity> _cityRepository { get; set;}
+        public LocalizeService(IRepository<tCity> cityRepository)
         {
             _cityRepository = cityRepository;
         }
@@ -19,7 +20,7 @@ namespace allopromo.Core.Contracts
             tCity city = new tCity();
             city.cityName = cityDto.cityName.ToString();
             city.countryId = 2344;
-            city.cityId = 4433;
+            //city.cityId = 4433;
 
             await _cityRepository.Add(city);
             return true;
@@ -33,13 +34,12 @@ namespace allopromo.Core.Contracts
             var city = await _cityRepository.GetByIdAsync(cityId);
             return city;
         }
-        public List<CityDto> GetCities()
+        public async Task<IEnumerable<CityDto>> GetCities()
         {
-            var citiesRepository = new List<CityDto>();
-            citiesRepository.Add(new CityDto { cityId = Guid.NewGuid(), cityName = "Lome" });
-            citiesRepository.Add(new CityDto{ cityId = Guid.NewGuid(), cityName = "Montreal" });
-            citiesRepository.Add(new CityDto { cityId = Guid.NewGuid(), cityName = "Quebec" });
-            return citiesRepository;
+            IEnumerable<CityDto> cities = null;
+            cities = AutoMapper.Mapper.Map
+                <IEnumerable<CityDto>>(await _cityRepository.GetAllAsync());
+            return cities;
         }
         public void Put(AisleDto aisle)
         {

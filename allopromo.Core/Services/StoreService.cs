@@ -91,8 +91,8 @@ namespace allopromo.Core.Model
                 return null;
             else
             {
-                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId,
-                    pageNumber, offSet);
+                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId);
+                    //pageNumber, offSet);
 
                 //return (IEnumerable<StoreDto>)storesByCategory;
             }
@@ -129,21 +129,10 @@ namespace allopromo.Core.Model
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
             IEnumerable<StoreCategoryDto> categories = null;
-            //try
-            //{
             categories = AutoMapper.Mapper.Map
                     <IEnumerable<StoreCategoryDto>>(await _categoryRepository.GetAllAsync());  
-                int g = 54;
                 if (categories == null)
                     throw new ArgumentNullException();
-            //}
-            //catch( ex)
-            //{
-            //}
-            //catch(Exception ex)
-            //{
-            //    throw new Exception();
-            //}
             return categories;
         }
         public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)

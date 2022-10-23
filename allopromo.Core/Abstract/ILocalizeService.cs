@@ -9,7 +9,7 @@ namespace allopromo.Core.Abstract
         Task<bool> Create(Application.Dto.CityDto aisle);
         void Delete(CityDto aisle);
         Task<tCity> Get(string cityId);
-        List<CityDto> GetCities();
+        Task<IEnumerable<CityDto>> GetCities();
         void Put(CityDto aisle);
     }
 }

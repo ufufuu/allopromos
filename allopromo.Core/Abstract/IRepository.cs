@@ -1,6 +1,7 @@
 ﻿using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Core.Abstract
 {
@@ -15,14 +16,16 @@ namespace allopromo.Core.Abstract
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(object Id);
         bool Delete(object Id);
+        void Delete(TEntity obj);
 
-        Task<TEntity> GetByIdAsync(int categoryId, int pageNumber, int offSet);
+        IQueryable<TEntity> GetByIdAsync(int categoryId, int pageNumber, int offSet);
         Task<TEntity> GetByIdAsync(int categoryId); 
 
-        Task<ProductDto> CreateProductAsync(tProduct product);
+        /*Task<ProductDto> CreateProductAsync(tProduct product);
         Task<ProductDto> GetProductAsync(string productId);
+        
         Task<IEnumerable<ProductDto>> GetProductsByStoreIdAsync(string Id);
-        void DeleteStoreCategory(TEntity obj);
+        */
     }
 }
 

@@ -27,9 +27,10 @@ namespace allopromo.Core.Services
             ProductDto productDto = null;
             if (product != null)
             {
-                var tProduct = await _productRepository.CreateProductAsync(product);
+                //var tProduct2 = 
+                    await _productRepository.Add(product);
                 ProductDto pod = Mapper.Map<ProductDto>(product);
-                productDto = Mapper.Map<ProductDto>(tProduct);
+                productDto = Mapper.Map<ProductDto>(product);
             }
             return productDto;
         }
@@ -45,14 +46,16 @@ namespace allopromo.Core.Services
         public async Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id)
         {
             var products = Mapper.Map<IEnumerable<ProductDto>>(
-                await _productRepository.GetProductsByStoreIdAsync(id));
+                await _productRepository.//GetProductsByStoreIdAsync(id));
+                GetByIdAsync(id));
             return products;
         }
         public async Task<IEnumerable<ProductDto>> GetProductsByStore(string storeId)
         {
             if (storeId != null)
                 return (IEnumerable<ProductDto>)
-                    await _productRepository.GetProductsByStoreIdAsync(storeId);
+                    await _productRepository.//GetProductsByStoreIdAsync(storeId);
+                    GetByIdAsync(storeId);
             return null;
         }
         public Task<IEnumerable<ProductDto>> GetProductsByStore()

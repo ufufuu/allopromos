@@ -5,6 +5,7 @@ using allopromo.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
@@ -21,7 +22,7 @@ namespace allopromo.Infrastructure.Repositories
             //_table = _dbContext.Set<T>();
 
             _dbContext = dbContext;
-            _table = dbContext.Set<T>();
+            _table = _dbContext.Set<T>();
         }
         public TRepository(AppDbContext dbContext, DbSet<T> table)
         {
@@ -75,17 +76,19 @@ namespace allopromo.Infrastructure.Repositories
         public Task<List<T>> GetAllAsync()////Task<List<T>> IRepository<T>.GetAllAsync()
         {
             var tObjects = _table.ToListAsync();
+            var tObjects2 = _dbContext.Set<T>();
+
             int g = 5;
-            return tObjects;
+            return tObjects; //.ToListAsync();
         }
         public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
         {
             var tCategories = await _dbContext.StoreCategories.ToListAsync();
             return tCategories;
         }
-        Task<T> IRepository<T>.GetByIdAsync(int categoryId, int pageNumber, int offSet)
+        public IQueryable<T> GetByIdAsync(int categoryId, int pageNumber, int offSet)
         {
-            throw new NotImplementedException();
+            return null;
         }
         public async Task<T> GetByIdAsync(int Id)
         {
@@ -97,6 +100,10 @@ namespace allopromo.Infrastructure.Repositories
             _table.Remove(obj);
             return true;
         }
+        public void Delete(T obj)
+        {
+
+        }
         void IRepository<T>.Update(T obj)
         {
             throw new NotImplementedException();
@@ -105,24 +112,27 @@ namespace allopromo.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
-        Task<ProductDto> IRepository<T>.CreateProductAsync(tProduct product)
-        {
-            throw new NotImplementedException();
-        }
-        Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
-        {
-            throw new NotImplementedException();
-        }
-        Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
-        {
-            throw new NotImplementedException();
-        }
-        void IRepository<T>.DeleteStoreCategory(T obj)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<ProductDto> IRepository<T>.CreateProductAsync(tProduct product)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //void IRepository<T>.DeleteStoreCategory(T obj)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         #endregion
     }
+
 }//Generics : code reuse - type safety - performance -
 /*
         void GetStoresAsync()

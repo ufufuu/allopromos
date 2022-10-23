@@ -139,9 +139,6 @@ namespace allopromo.Api.Controllers
         }
         [HttpGet]
         [Route("categories")]
-        //[SwaggerResponse(HttpStatusCode.OK , Description= "xxx Enregistree dans l\'Antememoire",
-        //Type=typeof(StoreCategoryDto))]
-
         public async Task<IActionResult> GetStoreCategories()
         {
             var storeCategories = await _storeService.GetStoreCategoriesAsync();
@@ -288,7 +285,10 @@ namespace allopromo.Api.Controllers
  * Evendt Handlers
  * 
  * Specification : library  ?
- * Validations : fluent Validation lib
+ * Validations : fluent Validation libGet
  * Enurms
  * Custom Guards ? 
  */
+
+//[SwaggerResponse(HttpStatusCode.OK , Description= "xxx Enregistree dans l\'Antememoire",
+//Type=typeof(StoreCategoryDto))]
