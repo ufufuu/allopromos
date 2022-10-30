@@ -21,16 +21,14 @@ namespace allopromo.Api.Controllers
        // ApiController
     {
         private readonly IConfiguration _config;
-        private readonly ILocalizeService _localizeService;
-
+        private readonly ILocalisationService _localisationService;
         private readonly IExceptionWriter _exceptionWriter;
         public CitiesController(IConfiguration config,
-                           ILocalizeService localizeService)
+                           ILocalisationService localizeService)
                            //IExceptionWriter exceptionWriter)
         {
             _config = config;
-            _localizeService = localizeService;
-
+            _localisationService = localizeService;
             //_exceptionWriter = exceptionWriter;
         }
 
@@ -40,7 +38,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                _localizeService.Create(city);
+                _localisationService.Create(city);
             }
             catch (Exception ex)
             {
@@ -53,7 +51,7 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<IActionResult> GetCities()
         {
-            var cities = await _localizeService.GetCities();
+            var cities = await _localisationService.GetCities();
             if (cities!= null)
                 return Ok(cities);
             return BadRequest();
@@ -64,7 +62,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var city = _localizeService.GetCities();
+                var city = _localisationService.GetCities();
                 return Ok(city);
             }
             catch(Exception ex)
@@ -78,7 +76,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var city = from c in await _localizeService.GetCities()
+                var city = from c in await _localisationService.GetCities()
                            where c.cityId.Equals(Id)
                            select c;
                 //_localizeService.Delete(city.FirstOrDefault());
@@ -88,6 +86,15 @@ namespace allopromo.Api.Controllers
             {
                 throw ex;
             }
+        }
+        [HttpGet]
+        [Route("city")]
+        public IActionResult getCurrentCity(string currentIp)
+        {
+            //currentIp = "74.57.247.6";
+            currentIp = "41.207.160.90";
+            var city = _localisationService.GetUserCurrentCity(currentIp);
+            return Ok(city);
         }
     }
 }

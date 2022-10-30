@@ -40,6 +40,7 @@ namespace allopromo
             }
             CreateWebHostBuilder(args).Build().Run();//or BelowF
             //Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONNEMENT1", "Production");
+
             BuildWebHost(args).Run();
         }
         public static IWebHost BuildWebHost(string[] args) =>
@@ -49,6 +50,7 @@ namespace allopromo
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
         /*public static HostBuilder CreateHostBuilder(string args)
         {
             return Host.CreateHostBuilder(HostBuilder)

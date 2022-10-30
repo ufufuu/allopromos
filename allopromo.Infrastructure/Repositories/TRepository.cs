@@ -19,8 +19,6 @@ namespace allopromo.Infrastructure.Repositories
         #region Public Method
         public TRepository(AppDbContext dbContext)
         {
-            //_table = _dbContext.Set<T>();
-
             _dbContext = dbContext;
             _table = _dbContext.Set<T>();
         }
@@ -31,13 +29,16 @@ namespace allopromo.Infrastructure.Repositories
         }
         public Task Add(T obj)
         {
-            if (obj != null)
+            if (obj == null)
+            {
+                throw new ArgumentNullException("obj");
+            }
+            else
             {
                 _dbContext.Entry<T>(obj);
                 this.Save();
                 return obj as Task;
             }
-            throw new  NullReferenceException();
         }
         Task IRepository<T>.Add(T obj, string imageUrl)
         {
@@ -77,7 +78,6 @@ namespace allopromo.Infrastructure.Repositories
         {
             var tObjects = _table.ToListAsync();
             var tObjects2 = _dbContext.Set<T>();
-
             int g = 5;
             return tObjects; //.ToListAsync();
         }
@@ -92,9 +92,19 @@ namespace allopromo.Infrastructure.Repositories
         }
         public async Task<T> GetByIdAsync(int Id)
         {
-            return await _table.FindAsync(Id);
+            return await _table.FindAsync(Id.ToString());
         }
-        public bool Delete(object Id) //void IRepository<T>.Delete(object Id)
+        async Task<T> IRepository<T>.GetByIdAsync(object Id)
+        {
+            var obj = await _table.FindAsync(Id.ToString());
+            return obj;
+        }
+        public async Task<T> GetByIdAsync(string Id)
+        {
+
+            return await _table.FindAsync(Guid.Parse(Id));
+        }
+            public bool Delete(object Id)
         {
             T obj = _table.Find(Id);
             _table.Remove(obj);
@@ -102,34 +112,19 @@ namespace allopromo.Infrastructure.Repositories
         }
         public void Delete(T obj)
         {
-
         }
         void IRepository<T>.Update(T obj)
         {
-            throw new NotImplementedException();
+            var Id = GetByIdAsync(obj.GetHashCode());
+            _dbContext.Entry(obj).State = EntityState.Modified;
+            //_dbContext.Entry(obj).CurrentValues.SetValues()
+            //_table.Update(obj);
+            //_dbContext.SaveChanges();
         }
-        Task<T> IRepository<T>.GetByIdAsync(object Id)
-        {
-            throw new NotImplementedException();
-        }
-        //Task<ProductDto> IRepository<T>.CreateProductAsync(tProduct product)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
         //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
-        //{
-        //    throw new NotImplementedException();
-        //}
         //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         //void IRepository<T>.DeleteStoreCategory(T obj)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         #endregion
     }
 
@@ -150,8 +145,6 @@ namespace allopromo.Infrastructure.Repositories
                 //    {
                 //    };
            // }
-
-
 
             //var query7= AppDbContex
            /* var query= from ct in AppDbContext.CT
@@ -190,19 +183,7 @@ namespace allopromo.Infrastructure.Repositories
     {
         throw new NotImplementedException();
     }
-    public void Delete(tStore storeId)
-    {
-        throw new NotImplementedException();
-    }
-    public void DeleteUser()
-    {
-        throw new NotImplementedException();
-    }
 
-    public IEnumerable<ApplicationUser> GeApplicationUsers()
-    {
-        throw new NotImplementedException();
-    }
     public ApplicationRole GetRole()
     {
         throw new NotImplementedException();
@@ -211,110 +192,8 @@ namespace allopromo.Infrastructure.Repositories
     {
         throw new NotImplementedException();
     }
-    public tStore GetStoreById(string storeId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public List<tStore> GetStores()
-    {
-        throw new NotImplementedException();
-    }
-    public ApplicationUser GetUser()
-    {
-        throw new NotImplementedException();
-    }
-    public IEnumerable<ApplicationUser> GetUsers()
-    {
-        var users = (IEnumerable<ApplicationUser>)_dbContext.Users.ToList();
-        return users;
-    }
-    public void Insert(tStore store)
-    {
-        if (store == null)
-            throw new Exception();
-        else
-        {
-            _dbContext.Stores.Add(store);
-            _dbContext.SaveChanges();
-        }
-    }
-    public void Save()
-    {
-        throw new NotImplementedException();
-    }
-    public void Update(tStore store)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateUser()
-    {
-        throw new NotImplementedException();
-    }
-}
-public interface IEntityBaseRepository<TDomain> where TDomain : class, new()
-{
-    //abstract List<tStore> GetStores();
-    void Insert(TDomain obj);
-    void Update(TDomain obj);
-    void Delete(TDomain obj);
-    TDomain Get();
-    IEnumerable<TDomain> GetAll();
-    TDomain GetBy();
-}
-public interface IGenericsRepository<T> where T : class
-{
-    void Insert(T obj);
-    void Update(T obj);
-    void Delete(T obj);
-    T Get();
-    IEnumerable<T> GetAll();
-    T GetBy();
-}
-public class GenericRepository<T> where T : class //: IGenericsRepository<T>
-{
-    private readonly AppDbContext _appDbContext;
-
-    private AppDbContextFactory _dbContext;
-    public void Delete(T obj)
-    {
-        throw new NotImplementedException();
-    }
-
-    public T Get()
-    {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<T> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-    public T GetBy()
-    {
-        throw new NotImplementedException();
-    }
-    public void Insert(T obj)
-    {
-        throw new NotImplementedException();
-    }
-    public void Update(T obj)
-    {
-        throw new NotImplementedException();
-    }
-}
-public class GenericRepositoryFactory<T> where T : class
-{
-    public static GenericRepository<T> GetRepository()
-    {
-        return new GenericRepository<T>();
-    }
-}
-}
 //Factory Pattern --- vs fctory method vs abstract factory 
 //sql having vs where
-
 //public interface IRepository<T> where T : class
 //{
 //}
@@ -327,7 +206,6 @@ public class GenericRepositoryFactory<T> where T : class
 //    public void Delete(tStore storeId);
 //    public void Save();
 //}
-
 //public class RoleRepository : IModelRepository
 //public class RoleRepository : BaseRepository
 //{

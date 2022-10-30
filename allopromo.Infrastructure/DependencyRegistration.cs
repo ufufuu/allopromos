@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace allopromo.Infrastructure
 {
     public class DependencyRegistration 
@@ -12,7 +11,11 @@ namespace allopromo.Infrastructure
         public void Register(IServiceCollection services, string connectString)
         {
             services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(connectString));
+                options.UseSqlServer(connectString)
+             );
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+             );
         }
     }
 }

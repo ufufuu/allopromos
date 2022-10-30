@@ -17,8 +17,7 @@ namespace allopromo.Infrastructure.UnitTests.Data
     {
         public int Id { get; set; }
     }
-    public class TRepositoryTests
-    {
+    public class TRepositoryTests    {
         private Mock<AppDbContext> _mockDb { get; set; }
         [Test]
         public void Add_TEntity_DEVRAIT_RetournerTEntityCrees()
@@ -69,7 +68,11 @@ namespace allopromo.Infrastructure.UnitTests.Data
             mockDbContext.Verify(x => x.Set<TestClass>());
             //mockDbSet.Verify(x => x.Remove(It.Is<TestClass>(y => y == testObject))); // 1 and 2 !
         }
-        //[Test]
+        [Test]
+        public void GetByIdAsync_DEVRAIT_ReturnerObjet()
+        {
+            //var tRepo = new TRepository<TestClass>();
+        }
         public void Save_TYPE_DEVRAIT_ENREGISTRER()
         {
         }

@@ -16,7 +16,6 @@ namespace allopromo.Api.UnitTests
     public class StoreControllerTest
     {
         //StoreCreatedEventArgs storeCreatedEventArgs;
-
         private bool NotifySent { get; set; }
 
         Mock<IStoreService> _storeServiceMock;
@@ -31,17 +30,31 @@ namespace allopromo.Api.UnitTests
             _notificationServiceMock = new Mock<INotifyService>();
             SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
         }
+        [Test]
+        public void StoreController_Put_StoreCategory_Null_SHOULD_ReturnStoreNotFoundResult()
+        {
+            SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+            var result = SUT.PutStoreCategory(null);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.GetType(), typeof(NotFoundResult));
+        }
+        [Test]
+        public void StoreController_Put_StoreCategory_SHOULD_ModifyStoreCategory()
+        {
+            SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+            var result = SUT.PutStoreCategory(It.IsAny<StoreCategoryDto>());
+            Assert.IsNotNull(result);
+        }
         public void StoreCrontroller_CreateStore_ReturnsNotFound()
         {
             //Arrange
-
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             StoreDto store = null;
             var SUT = new StoreController(_storeServiceMock.Object, _productService.Object,
                 _notificationServiceMock.Object);
-            var result = SUT.CreateStoreAsync(store);
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            //var result = SUT.CreateStoreAsync(store);
+            //Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]
         public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEventAsync()
@@ -55,7 +68,7 @@ namespace allopromo.Api.UnitTests
                 _notificationServiceMock.Object);//, _notificationService.Object);
             var store = new StoreDto
             {
-                storeId = "dsd",
+                //storeId = "dsd",
                 storeName = "Thierry Plank",
             };
 
@@ -100,12 +113,13 @@ namespace allopromo.Api.UnitTests
                 return true;
             };
 
-            SUT.CreateStoreAsync(store);
+            //SUT.CreateStoreAsync(store);
 
-            var result = SUT.CreateStoreAsync(store);
+            //var result = SUT.CreateStoreAsync(store);
+
             //Assert.IsNotNull(storeCreatedEventArgs);
 
-            Assert.IsNotNull(result);
+            //Assert.IsNotNull(result);
 
             //Assert.IsTrue(notifySent);
 
@@ -186,6 +200,11 @@ namespace allopromo.Api.UnitTests
             var result = _sut.CreateProductAsync(tproduct);
             Assert.AreEqual(result.Result.GetType(), typeof(UnauthorizedResult));
         }
+        [Test]
+        public void PutStoreCategory_SHOULD_Update()
+        {
+
+        }
         public void Create_SHOULDReturn_PageToLogin_ifNotAuthenticated()
         {
         }
@@ -204,12 +223,14 @@ namespace allopromo.Api.UnitTests
         {
             var sut = new StoreController(_storeServiceMock.Object,
                 _productService.Object, _notificationServiceMock.Object);
+            string categoryId = "";
             StoreCategoryDto category = new StoreCategoryDto
             {
                 storeCategoryId = "1",
                 storeCategoryName = "", //storeCategoryStatus = true };
             };
             var storeStatus = sut.PutStoreCategory(category);
+            //var storeStatus = sut.PutStoreCategory(categoryId, category);
             Assert.IsNotNull(storeStatus);
         }
         [Test]
@@ -257,7 +278,7 @@ namespace allopromo.Api.UnitTests
                 storeName = "Thierry Plank",
             };
             //Act
-            var result = storeController.CreateStoreAsync(store);
+            //var result = storeController.CreateStoreAsync(store);
 
             //_notificationServiceMock.Object.storeCreated += (o, e) => notifySent = true;
             //_storeServiceMock.Object.storeCreated += delegate(o,e){ notifySent = true; } or Below
@@ -303,3 +324,67 @@ namespace allopromo.Api.UnitTests
 /*https://www.justia.com/criminal/offenses/drug-crimes/drug-trafficking/
  * 1 store service raising event ? 2. notification subscribing 3. signalRing ? 4. Refactoring, Generic ing , Performance Testing */
 //EnvironmentVariableTarget
+
+
+/*
+ * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/
+ * 
+ * Number of occurence in a Word , number of words in a Phrase !
+ */
+/* Asynchronous Method vs , whhen should I make a methdos Asynchronous ? What are Callbacks ?
+ */
+/* Fields vs Properties ??? */
+/* Store Servcice having StoerRepo as Fields ? Why ?
+ */
+/*
+ * //Singleton Pattern : Why Use ? //Extension Class  //Extensions Methods 0001-01-01 00:00:00.0000000 //Direct Casting vs Operator casting
+ * 
+ * */
+/*
+ * //[Authorize(AuthenticationSchemes = "Test")]
+        //[Authorize(Roles = "users")]
+*/
+//[Authorize(AuthenticationSchemes = "Test")]//[BasicAuthenticationFilter]//[BasicJwtAuthorize] //vs [AuthorizeAttribute]?
+
+//Delegates //Generic Delegates //Structs
+
+//[Authorize(AuthenticationSchemes ="Test")] //[allopromo.Infrastructure.Providers.BasicAuthenticationFilter]
+// ? Custom Authorization ?
+//ActionExecutingContext actionContext)bwith [BasicJwt Attrib]!
+
+//return Unauthorized();
+//Secured Api Action
+
+/* 4.. Shared kernel  Project ::::
+ * Base Entity - Base value Object - Base Domain Events -Base specications - Common INterface
+ * Common Exceptions - Comom Auth - Common Guards - Common Libraries , DI, Loggin, Validators
+/****
+ * 
+ * Api Endpoint- Razor pages - Controllers - Views  - Api Models - ViewModels - Filters - Mmodel Binders -Tag Helpers
+ * 
+ * Interface rrurn types 
+ *  COmpostion Root ?
+ **
+//Infrastructure Prject:
+//Repositoriies - Api Clients ?  - DbContext Classes  - Cached Repositories  - File System Accessort - Azure Storeage
+//Accessort - Emimailing Implement - SMS implementations - System Clock - Other Services , Interfaces 
+
+///*github.com/ardalis/CleanArchitecture 
+/*Ardalis Clean Archiecture Template from nuget 
+/* CORE, What Beloing in the Core Project 
+ * Interface
+ * 
+ * Aggregates (grouoing Entiites)
+ * ValuesObjects( time , not Id contrary to Entities
+ * 
+ * Domain Services
+ * 
+ * Domain Exceptions 
+ * Domain Events 
+ * Evendt Handlers
+ * 
+ * Specification : library  ?
+ * Validations : fluent Validation lib
+ * Enurms
+ * Custom Guards ? 
+ */

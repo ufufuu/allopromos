@@ -15,11 +15,13 @@ namespace allopromo.Core.Abstract
         void Save();
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(object Id);
+        Task<TEntity> GetByIdAsync(int categoryId);
+        Task<TEntity> GetByIdAsync(string categoryId);
+
         bool Delete(object Id);
         void Delete(TEntity obj);
 
         IQueryable<TEntity> GetByIdAsync(int categoryId, int pageNumber, int offSet);
-        Task<TEntity> GetByIdAsync(int categoryId); 
 
         /*Task<ProductDto> CreateProductAsync(tProduct product);
         Task<ProductDto> GetProductAsync(string productId);

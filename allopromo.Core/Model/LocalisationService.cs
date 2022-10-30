@@ -1,17 +1,22 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
+using allopromo.Core.Model;
 using AutoMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Core.Contracts
 {
-    public class LocalizeService: ILocalizeService
+    public class LocalisationService: ILocalisationService
     {
         private IRepository<tCity> _cityRepository { get; set;}
-        public LocalizeService(IRepository<tCity> cityRepository)
+        private static string urlCityURL = "http://ipinfo.io/";
+        public LocalisationService(IRepository<tCity> cityRepository)
         {
             _cityRepository = cityRepository;
         }
@@ -41,10 +46,25 @@ namespace allopromo.Core.Contracts
                 <IEnumerable<CityDto>>(await _cityRepository.GetAllAsync());
             return cities;
         }
+        public async Task<string> GetUserCurrentCity(string ip)
+        {
+            IpInfo ipInfo = new IpInfo();
+            try
+            {
+                string info = new WebClient().DownloadString(urlCityURL + ip);
+                ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
+                RegionInfo myRIf = new RegionInfo(ipInfo.Country);
+                ipInfo.Country = myRIf.EnglishName;
+            }
+            catch (Exception)
+            {
+                ipInfo.Country=null;
+            }
+            return ipInfo.City;
+        }
         public void Put(AisleDto aisle)
         {
         }
-
         public Task<bool> CreateAisle(AisleDto aisle)
         {
             return null;
@@ -55,7 +75,6 @@ namespace allopromo.Core.Contracts
         public Task<string> GetAisle(AisleDto aisles)
         {
             return null;
-
         }
         public List<AisleDto> GetAisles()
         {
@@ -69,7 +88,6 @@ namespace allopromo.Core.Contracts
         public void UpdateAisle(AisleDto aisle)
         {
         }
-
         public void Put(CityDto aisle)
         {
             throw new NotImplementedException();

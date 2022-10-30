@@ -19,9 +19,9 @@ using System.ComponentModel;
 using System.Net.Http;
 namespace allopromo.Api.Controllers
 {
-   public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
-   [ApiController]
-    [Route("api/v1/store")]
+    public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
+    [ApiController]
+    [Route("api/v1/[controller]")]
     public class StoreController : ControllerBase
     {
         //public event StoreCreatedEventHandler StoreCreated; 
@@ -29,9 +29,10 @@ namespace allopromo.Api.Controllers
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
-        private IStoreService _storeService { get; set; }
-        private INotifyService _notificationService;
-        private IProductService _productService;
+
+        private readonly IStoreService _storeService;
+        private readonly INotifyService _notificationService;
+        private readonly IProductService _productService;
         public Core.Services.MediaService _mediaService { get; set; }
         public StoreController(IStoreService storeService, IProductService productService,
             INotifyService notificationService)
@@ -51,15 +52,16 @@ namespace allopromo.Api.Controllers
         }
         [HttpPost]
         [Route("create")]
-        [BasicJwtAuthorize]
-        public IActionResult CreateStoreAsync([FromBody] StoreDto storeDto)
+        //[BasicJwtAuthorize]
+        public IActionResult CreateStoreAsync(//[FromBody] StoreDto storeDto)
+            string  storeDtoName)
         {
-            if (storeDto != null)
+            if (storeDtoName != null)
             {
                 var category = new StoreCategoryDto();
                 object user = null;
                 _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                var store = _storeService.CreateStore(storeDto);    //, category, (UserDto)user);
+                var store = _storeService.CreateStore(storeDtoName);    //, category, (UserDto)user);
                 if (store != null)
                 {
                     _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
@@ -121,22 +123,31 @@ namespace allopromo.Api.Controllers
             }
         }
         [HttpPut]
-        [Route(ConstancesCommunes.BaseUrl+"{apiController}")]
-        public ActionResult<StoreDto> PutStoreCategory([FromBody] StoreCategoryDto storeData)
+        [Route("categories/{catId}")]
+        public ActionResult PutStoreCategory([FromBody] StoreCategoryDto category)
         {
-            var store = _storeService.GetStoreByIdAsync(storeData.storeCategoryId);
-            if (store == null)
+            string catId = string.Empty;
+            //var store = await _storeService.GetStoreCategoryByIdAsync(catId); //storeData.storeCategoryId);
+            if (category == null)
+            {
                 return NotFound();
-            return Ok(store);
+            }
+            else
+            {
+                catId = category.storeCategoryId;
+                _storeService.UpdateStoreCategory(catId.ToString(), category);
+                return Ok(category);
+            }
         }
-        [HttpPut]
-        public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] StoreData storeData)
-        {
-            var store = _storeService.GetStoreByIdAsync(storeData.storeData);
-            if (store == null)
-                return NotFound();
-            return Ok(store);
-        }
+        //[HttpPut]
+        //[Route("")]
+        //public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] StoreData storeData)
+        //{
+        //    var store = _storeService.GetStoreByIdAsync(storeData.storeData);
+        //    if (store == null)
+        //        return NotFound();
+        //    return Ok(store);
+        //}
         [HttpGet]
         [Route("categories")]
         public async Task<IActionResult> GetStoreCategories()

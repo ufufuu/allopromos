@@ -43,11 +43,27 @@ namespace allopromo.Core.Model
                 StoreCreated(this, EventArgs.Empty);
             }
         }
-        #region StoresE
-        public async Task<StoreDto> CreateStore(StoreDto store)
+        public async Task<StoreDto> CreateStore(StoreDto storeDto)
         {
-            if (store == null)
+            return null;
+        }
+        #region StoresE
+        public async Task<StoreDto> CreateStore(//StoreDto storeDto)
+            string storeDtoName)
+        {
+            if (storeDtoName == null)
                 return null;
+            else
+            {
+                tStore store = new tStore();
+                tStoreCategory category = null;
+
+                store.storeId = Guid.NewGuid();
+                store.storeName = storeDtoName;
+                store.City = new tCity { cityName = "Lome", cityId = 679, countryId = 990 };
+                store.Category = category;
+                await _storeRepository.Add(store);
+            }
             return new StoreDto();
         }
         #endregion
@@ -57,7 +73,6 @@ namespace allopromo.Core.Model
             if(store!=null)
             {
                 StoreDto storeDto = null;
-
                 tStore tStore = null;
 
                 var appUser = Mapper.Map<ApplicationUser>(userDto);
@@ -73,7 +88,6 @@ namespace allopromo.Core.Model
                 tStore.Category = tCategory;
                 tStore.user = tUser;
                 tStore.City = city;
-
                 _storeRepository.Add(tStore);
                 _storeRepository.Save();
                 _tGenericRepository.Save();
@@ -92,8 +106,7 @@ namespace allopromo.Core.Model
             else
             {
                 var storesByCategory = await _storeRepository.GetByIdAsync(categoryId);
-                    //pageNumber, offSet);
-
+                //pageNumber, offSet);
                 //return (IEnumerable<StoreDto>)storesByCategory;
             }
             return null;
@@ -106,10 +119,15 @@ namespace allopromo.Core.Model
             {
                 var storesByLocation = 
                 await _tGenericRepository.GetAllAsync();
-
-                //return (IEnumerable<StoreDto>)storesByLocation;
             }
             return null;
+        }
+        public async Task<StoreCategoryDto> GetStoreCategoryByIdAsync(string storeId)
+        {
+            if (storeId == null)
+                return null;
+            var cat= await _categoryRepository.GetByIdAsync(storeId);
+            return AutoMapper.Mapper.Map<StoreCategoryDto>(cat);
         }
         public async Task<StoreDto> GetStoreByIdAsync(string storeId)
         {
@@ -119,7 +137,7 @@ namespace allopromo.Core.Model
             {
                 return true;
             };
-            var tStore =await _storeRepository.GetByIdAsync(storeId);
+            var tStore = await _storeRepository.GetByIdAsync(storeId);
             return AutoMapper.Mapper.Map<StoreDto>(tStore);
         }
         public void DeleteStore(StoreDto store)
@@ -139,7 +157,7 @@ namespace allopromo.Core.Model
         {
             var categories = await this.GetStoreCategoriesAsync();
             var query = from q in categories
-                        where q.storeCategoryId == Id
+                        where q.storeCategoryId.ToString() == Id
                         select q;
             return query.FirstOrDefault();
         }
@@ -189,7 +207,6 @@ namespace allopromo.Core.Model
                 imageUrl = "http://www.noiamgesfornow.jpg";
             }
             //tStoreCategory.storeCategoryImageUrl = imageUrl;
-
             await _categoryRepository.Add(tStoreCategory); //, imageUrl);
             return storeCategoryDto;
         }
@@ -197,15 +214,17 @@ namespace allopromo.Core.Model
         public void DeleteStoreCategory(string categoryId)
         {
         }
+        public void UpdateStoreCategory(StoreCategoryDto category)
+        {
+            var obj = AutoMapper.Mapper.Map<tStoreCategory>(category);
+            _categoryRepository.Update(obj);
+        }
         public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
         {
             if (storeCategoryDto == null)
             {
                 var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
-
-               // _storeRepository.DeleteStoreCategory(storeCategory);
-
-
+                //_storeRepository.DeleteStoreCategory(storeCategory);
                 var category = storeRepository.GetByIdAsync("kjkjk");
                 if (storeCategory == null)
                 {
@@ -254,9 +273,7 @@ namespace allopromo.Core.Model
                 var Url = new Uri
                     ("https://thumbsnap.com/api/upload");
                 var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
-                //var content = new HttpMessageContent(httpRequest);
-                var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);//, content);
-
+                var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);
                 //if (result.IsSuccessStatusCode)
                 //{
                     response = result.StatusCode.ToString();
@@ -265,7 +282,6 @@ namespace allopromo.Core.Model
                     var image = JsonConvert.SerializeObject(dataObj);
                     var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
                     imageUrl = media.url;
-                //}
             }
             return imageUrl;
         }
@@ -304,10 +320,16 @@ namespace allopromo.Core.Model
                 }
             }
         }
-
         public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
         {
             throw new NotImplementedException();
+        }
+        public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
+        {
+            if (Id != categoryDto.storeCategoryId.ToString())
+                throw new Exception();
+            var obj = AutoMapper.Mapper.Map<StoreCategoryDto, tStoreCategory>(categoryDto);
+            _categoryRepository.Update(obj);
         }
     }
     public class metaData
@@ -322,26 +344,8 @@ namespace allopromo.Core.Model
         public metaData()
         {
         }
-
-    }
-    public class MediaApiResponseModel
-    {
-        public string id { get; set; }
-        public string url { get; set; }
-        public string media { get; set; }
-        public string thumb { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
     }
     
-
-    public class ThumbyModel
-    {
-        public MediaApiResponseModel data { get; set; }
-        public int status { get; set; }
-        public bool success { get; set; }
-    }
-
     //public class OrderPlacedEventArgs : EventArgs
     //{
     //}
@@ -365,7 +369,7 @@ namespace allopromo.Core.Model
 //https://api.mapbox.com/geocoding/v5/{endpoint}/{
 
 //IQuery Pattern ?
-
+/* particulier a particulier : entreprises*/
 /*
  * Latitude: 46.861114 / N 46° 51' 40.012''
 Longitude: -71.268900 / W 71° 16' 8.04''
@@ -374,6 +378,3 @@ Longitude: -71.268900 / W 71° 16' 8.04''
  * https://www.gps-coordinates.net/api
  * 
  */
-
-
-/* particulier a particulier : entreprises*/

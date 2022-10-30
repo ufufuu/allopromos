@@ -8,7 +8,7 @@ using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
 using allopromo.Api.Infrastructure;
-
+using Polly;
 //using allopromoInfrastructure.Abstract;
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +32,7 @@ using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Logging;
 using Microsoft.Extensions.Hosting;
 using allopromo.Core.Contracts;
+using System.Net.Http;
 //using Ocelot.Middleware;
 //using Ocelot.DependencyInjection;
 
@@ -40,6 +41,7 @@ using allopromo.Core.Contracts;
 //using allopromo.Core.Services;
 //using allopromo.Infrastructure.Helpers.Authentication;
 //[assembly:OwinStartup(typeof(allopromo.Startup))]
+
 namespace allopromo
 {
     public class  Startup
@@ -53,10 +55,11 @@ namespace allopromo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Register(services, connString)
-
             services.AddDbContext<AppDbContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection")));
+            services.AddDbContext<AppDbContext>(options =>
+                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
@@ -66,16 +69,6 @@ namespace allopromo
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-
-            /*
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = "Test";
-            })*/
-                /*.AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>
-                ("Test", null);*/
-            //By Jwt Bearer Adding from Below|
-
             .AddJwtBearer(token =>
             {
                 token.SaveToken = true;
@@ -109,22 +102,24 @@ namespace allopromo
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+            );
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
-            services.AddScoped<ILocalizeService, LocalizeService>();
-            //services.AddScoped<>
+            services.AddScoped<ILocalisationService, LocalisationService>();
 
+            //services.AddScoped<>
             //2 lines below vs 2 above ? or Addtransient vs addScoped ?
             //services.AddTransient<IStoreService, StoreService>();
             //services.AddTransient<INotificationService, NotificationService>();
-
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
-
 
             services.AddSwaggerGen(c =>
             {
@@ -134,10 +129,8 @@ namespace allopromo
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
-
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
@@ -174,25 +167,36 @@ namespace allopromo
                 new[] { "application/octet-stream" });
             });
 
-
-
             //services.AddAuthentication(auth =>
             //{
-            //    auth.DefaultScheme = "Test";
+            //auth.DefaultScheme = "Test";
             //})
-            //    .AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
+            //.AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
             //Adding E-mail Services
-
-
-
-
             services.AddFluentEmail("test-email@allopromo.test");
             //services.AddOcelot();
+
+            //Polly Retry 1
+            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>
+                (Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                .WaitAndRetryAsync(3, retryAttemps => TimeSpan.FromSeconds(retryAttemps)));
+            HttpClient httpClient = new HttpClient();
+            //Polly Retry 2
+            services.AddSingleton<Polly.Retry.AsyncRetryPolicy>(x =>
+            {
+                var policy = Policy.Handle<Exception>().WaitAndRetryAsync(
+                    retryCount: 3,
+                    sleepDurationProvider: (retryCount) => TimeSpan.FromMilliseconds( 500 * retryCount),
+                    onRetry: (result, timeSpan, retryCount, context) =>
+                    {
+                        System.Console.WriteLine($"begin {retryCount} retry {context.CorrelationId} " +
+                            $"with {timeSpan.TotalSeconds} seconds of delays");
+                    });
+                return policy;
+            });
         }
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-
-
             /*
             app.UseRouting();
             app.UseEndpoints(endpoints =>
@@ -202,7 +206,6 @@ namespace allopromo
                 });
             });
             */
-
             
             if (env.IsDevelopment()) //if(env.IsProduction() || ens.IsStaging() || env.IsEnvironnement("Staging_2"))
             {
@@ -223,7 +226,6 @@ namespace allopromo
             app.UseAuthentication();
             app.UseAuthorization();
             //app.UseOcelot();
-
             //app.UseMvc();
             app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
             .SetIsOriginAllowed((host) => true).AllowCredentials() //vs alloAnyOrigin
@@ -231,8 +233,6 @@ namespace allopromo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-
-
                 //Utilisez l’intergiciel decompression deréponseen haut dela
                 //configuration du pipeline detraitement.
                 //Entreles points determinaison pour les contrôleurs et lesecours 

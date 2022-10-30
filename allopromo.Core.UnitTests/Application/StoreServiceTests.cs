@@ -50,6 +50,13 @@ namespace allopromo.Core.UnitTest.ServicesTests
             Assert.IsNotNull(storeCategoryUrl);
             Assert.AreEqual(storeCategoryUrl.GetType(), typeof(string));
         }
+        [Test]
+        public void UpdateStoreCategory_DEVRAIT_RetournerUpdatedStoreCategory()
+        {
+            categoryRepositoryMock.Setup(x => x.Update(It.IsAny<tStoreCategory>()));
+            var storeService = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object);
+            //var updated =storeService.UpdateStoreCategory() 
+        }
     }
 
 }

@@ -38,6 +38,7 @@
     <Compile Remove="Controllers\AccounttController.cs" />
     <Compile Remove="Controllers\RoleController.cs" />
     <Compile Remove="Controllers\StoreCategorie.cs" />
+    <Compile Remove="Controllers\StoreData.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthHandler.cs" />

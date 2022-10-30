@@ -7,8 +7,8 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 namespace allopromo.Controllers
 {
-    [Route("api/v1/[controller]")]
-    [ApiController]
+    //[Route("api/v1/[controller]")]
+    //[ApiController]
     public class DefaultController : ControllerBase
     {
         private readonly IConfiguration _config;

@@ -29,6 +29,7 @@ namespace alloPromo.Core.UnitTests.Domain.Application
             var store = new allopromo.Core.Application.Dto.StoreDto();
             store.storeId = "lklk";
             store.storeName = "SED Food";
+
             //var result = _sut.GetStoreByIdAsync(store.storeId);
 
             //Assert.IsNotNull(result);

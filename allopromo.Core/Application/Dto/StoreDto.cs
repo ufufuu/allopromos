@@ -21,7 +21,6 @@ namespace allopromo.Core.Application.Dto
         //    _storeReferenceNumber = storeRefNumber;
         //}
     }
-
     public class CreateStoreDto
     {
         [Required(ErrorMessage = "Name Required")]
@@ -39,6 +38,5 @@ namespace allopromo.Core.Application.Dto
     }
     //public class UserDTO
     //{
-
     //}
 }

@@ -15,57 +15,39 @@ using System.Threading.Tasks;
 using RegisterModel = allopromo.ViewModel.RegisterModel;
 namespace allopromo.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccounttController : ControllerBase
-    {
-        private readonly IAccountService _accountService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        public AccounttController(IAccountService accountService, 
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
-        {
-            _accountService = accountService;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-        }
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login(LoginModel loginModel)
-        {
-            return null;  
-        }
-        [HttpPost]
-        [Route("create")]
-        public void Post([FromBody] RegisterModel registerModel)
-        {
-            //var createdAccount = _accountManager.CreateAccount(accountModel.userName);
-            if (registerModel == null)
-            {
+    //[Route("api/[controller]")]
+    //[ApiController]
+    //public class AccounttController : ControllerBase
+    //{
+    //    private readonly IAccountService _accountService;
+    //    private readonly UserManager<ApplicationUser> _userManager;
+    //    private readonly RoleManager<IdentityRole> _roleManager;
+    //    private readonly SignInManager<ApplicationUser> _signInManager;
+    //    public AccounttController(IAccountService accountService, 
+    //        UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
+    //    {
+    //        _accountService = accountService;
+    //        _userManager = userManager;
+    //        _roleManager = roleManager;
+    //        _signInManager = signInManager;
+    //    }
+    //    public void Post([FromBody] RegisterModel registerModel)
+    //    {
+    //        //var createdAccount = _accountManager.CreateAccount(accountModel.userName);
+    //    }
+    //    [AllowAnonymous]
+    //    public void Get([FromBody] LoginModel login)
+    //    {
 
-            }
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        public void Get([FromBody] LoginModel login)
-        {
+    //    }
+    //    [HttpPut]
+    //    public void Put(string userName, string token)
+    //    {
+    //        //var token = JwtManager.ValidateToken(token);
+    //        if (userName.Equals(token))
+    //        {
 
-        }
-        [HttpPut]
-        public void Put(string userName, string token)
-        {
-            //var token = JwtManager.ValidateToken(token);
-            if (userName.Equals(token))
-            {
-
-            }
-        }
-        [HttpDelete]
-        public void Delete(string userName, string Pwd)
-        {
-
-        }
-    }
+    //        }
+    //    }
+    //}
 }
