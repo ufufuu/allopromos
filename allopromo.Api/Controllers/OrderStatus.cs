@@ -2,7 +2,7 @@
 
 namespace allopromo.Api.Controllers
 {
-    public class OrderStatut
+    public class OrderStatus
     {   public enum orderStatus { Requested, Aknowledged, Started, Finished, Picked, Delivered };
     }
 }

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class TRepository<T> : IRepository<T> where T : class        /// Unit of Work ? que doit retourner creeer categry ?
+    public class TRepository<T> : IRepository<T> where T : class /// Unit of Work ? que doit retourner creeer categry ?
     {
         #region fields
         private readonly AppDbContext _dbContext;
@@ -69,11 +69,6 @@ namespace allopromo.Infrastructure.Repositories
         {
             _dbContext.SaveChanges();
         }
-        public void Update(T obj)
-        {
-            _table.Attach(obj);
-            _dbContext.Entry(obj).State = EntityState.Modified;
-        }
         public Task<List<T>> GetAllAsync()////Task<List<T>> IRepository<T>.GetAllAsync()
         {
             var tObjects = _table.ToListAsync();
@@ -101,10 +96,9 @@ namespace allopromo.Infrastructure.Repositories
         }
         public async Task<T> GetByIdAsync(string Id)
         {
-
             return await _table.FindAsync(Guid.Parse(Id));
         }
-            public bool Delete(object Id)
+        public bool Delete(object Id)
         {
             T obj = _table.Find(Id);
             _table.Remove(obj);
@@ -113,13 +107,25 @@ namespace allopromo.Infrastructure.Repositories
         public void Delete(T obj)
         {
         }
+        public void Update(T obj)
+        {
+            if (obj != null)
+            {
+                //throw new ArgumentNullException();
+
+                _table.Attach(obj);
+                _dbContext.Entry(obj).State = EntityState.Modified;
+            }
+        }
         void IRepository<T>.Update(T obj)
         {
             var Id = GetByIdAsync(obj.GetHashCode());
             _dbContext.Entry(obj).State = EntityState.Modified;
-            //_dbContext.Entry(obj).CurrentValues.SetValues()
+            _dbContext.Entry(obj).CurrentValues.SetValues(obj);
+
             //_table.Update(obj);
-            //_dbContext.SaveChanges();
+
+            _dbContext.SaveChanges();
         }
 
         //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
@@ -153,6 +159,7 @@ namespace allopromo.Infrastructure.Repositories
                        join pct in AppDbContext.PCT
                        on ct.ID equals pct.ID
                        where pct.CT_ID equals parametreRecu
+
                        orderby pct.pct_ordreParametres ascending 
                        select new tempClass { } as tempObj
                        {

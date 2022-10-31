@@ -329,6 +329,8 @@ namespace allopromo.Core.Model
             if (Id != categoryDto.storeCategoryId.ToString())
                 throw new Exception();
             var obj = AutoMapper.Mapper.Map<StoreCategoryDto, tStoreCategory>(categoryDto);
+            obj.storeCategoryId = Guid.Parse(Id);
+            obj.storeCategoryName = categoryDto.storeCategoryName;
             _categoryRepository.Update(obj);
         }
     }

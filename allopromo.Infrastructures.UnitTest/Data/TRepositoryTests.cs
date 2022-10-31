@@ -22,6 +22,7 @@ namespace allopromo.Infrastructure.UnitTests.Data
         [Test]
         public void Add_TEntity_DEVRAIT_RetournerTEntityCrees()
         {
+
             //var options = new DbContextOptionsBuilder<AppDbContext>()
             //    .UseInMemoryDatabase("allopromo")
             //    .Options;
@@ -55,30 +56,34 @@ namespace allopromo.Infrastructure.UnitTests.Data
             var testClass = new TestClass();
             var mockDbContext = new Mock<AppDbContext>();
             var mockDbSet = new Mock<DbSet<TestClass>>();
-
             mockDbContext.Setup(x => x.Set<TestClass>()).Returns(mockDbSet.Object);
             //mockDbSet.Setup(x => x.Remove(It.IsAny<TestClass>())).Returns(testClass); // 1 and 2 !
-
             //Act
             var tRepo = new TRepository<TestClass>(mockDbContext.Object);
             tRepo.Delete(testClass);
-
             //Assert
             //Assert.IsNotNull(result);
             mockDbContext.Verify(x => x.Set<TestClass>());
             //mockDbSet.Verify(x => x.Remove(It.Is<TestClass>(y => y == testObject))); // 1 and 2 !
         }
         [Test]
-        public void GetByIdAsync_DEVRAIT_ReturnerObjet()
+        public void UpDate_TYPE_DEVRAIT_ENREGISTRER()
         {
-            //var tRepo = new TRepository<TestClass>();
+            var mockDbContext = new Mock<AppDbContext>();
+            var tRepository= new TRepository<TestClass>(mockDbContext.Object);
+            var db = mockDbContext.Object;
+            mockDbContext.Setup(x => x.Entry(It.IsAny<TestClass>()));
+            tRepository.Update(It.IsAny<TestClass>());
+            mockDbContext.Verify(x => x.Update(It.IsAny<TestClass>()), Times.AtMostOnce);
         }
         public void Save_TYPE_DEVRAIT_ENREGISTRER()
         {
+             
         }
         [Test]
-        public void UpDate_TYPE_DEVRAIT_ENREGISTRER()
+        public void GetByIdAsync_DEVRAIT_ReturnerObjet()
         {
+            //var tRepo = new TRepository<TestClass>();
         }
     }
 }
