@@ -38,10 +38,10 @@
           "lib/netstandard1.5/FirebaseAdmin.dll": {}
         }
       },
-      "FluentEmail.Core/3.0.0": {
+      "FluentEmail.Core/3.0.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.11"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
         },
         "compile": {
           "lib/netstandard2.0/FluentEmail.Core.dll": {}
@@ -50,10 +50,10 @@
           "lib/netstandard2.0/FluentEmail.Core.dll": {}
         }
       },
-      "FluentEmail.Smtp/3.0.0": {
+      "FluentEmail.Smtp/3.0.2": {
         "type": "package",
         "dependencies": {
-          "FluentEmail.Core": "3.0.0"
+          "FluentEmail.Core": "3.0.2"
         },
         "compile": {
           "lib/netstandard2.0/FluentEmail.Smtp.dll": {}
@@ -2128,16 +2128,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
-      },
-      "allopromo.Shared/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/allopromo.Shared.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/allopromo.Shared.dll": {}
-        }
       }
     }
   },
@@ -2176,27 +2166,27 @@
         "lib/netstandard1.5/FirebaseAdmin.xml"
       ]
     },
-    "FluentEmail.Core/3.0.0": {
-      "sha512": "aR81GYqWS5qATQh1300BmnRnUukgB89THcYXOHs7YGuSHc827qZtWqrGJlV8k9Jk60hlcmm/O/9Vmoaw2ytD3g==",
+    "FluentEmail.Core/3.0.2": {
+      "sha512": "uQFFbJgMhhCFUti7pfMi429fMNi7fLGMj+7uDtD7POlQzLxlhXJ6tmt4Y1SI51sZsA36GO5b7+o29eY/dKiICQ==",
       "type": "package",
-      "path": "fluentemail.core/3.0.0",
+      "path": "fluentemail.core/3.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "fluentemail.core.3.0.0.nupkg.sha512",
+        "fluentemail.core.3.0.2.nupkg.sha512",
         "fluentemail.core.nuspec",
         "fluentemail_logo_64x64.png",
         "lib/netstandard2.0/FluentEmail.Core.dll"
       ]
     },
-    "FluentEmail.Smtp/3.0.0": {
-      "sha512": "/Oc/OeWavbdNcMsEDoQljw7QAkAMm67xil+RG/JwJct5i6/cdl8jHzNSsSSzTRskxMDydIoUk/1DYFGgM7AqmQ==",
+    "FluentEmail.Smtp/3.0.2": {
+      "sha512": "Y5pZKS/mXSl7D5WJWecvfo1kpIMDc6U0VRU6wRbE9wEv2IqMH3cQXa/97Pwi+m31COepIqc6dMhGMtAJ2Qh7rw==",
       "type": "package",
-      "path": "fluentemail.smtp/3.0.0",
+      "path": "fluentemail.smtp/3.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "fluentemail.smtp.3.0.0.nupkg.sha512",
+        "fluentemail.smtp.3.0.2.nupkg.sha512",
         "fluentemail.smtp.nuspec",
         "fluentemail_logo_64x64.png",
         "lib/netstandard2.0/FluentEmail.Smtp.dll"
@@ -7276,18 +7266,13 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
-    },
-    "allopromo.Shared/1.0.0": {
-      "type": "project",
-      "path": "../allopromo.Shared/allopromo.Shared.csproj",
-      "msbuildProject": "../allopromo.Shared/allopromo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AutoMapper >= 6.2.2",
       "FirebaseAdmin >= 1.2.0",
-      "FluentEmail.Smtp >= 3.0.0",
+      "FluentEmail.Smtp >= 3.0.2",
       "Microsoft.EntityFrameworkCore >= 5.0.7",
       "NETCore.MailKit >= 2.0.3",
       "Newtonsoft.Json >= 12.0.2",
@@ -7296,8 +7281,7 @@
       "Serilog.Settings.Configuration >= 3.2.0",
       "Serilog.Sinks.Console >= 4.0.0",
       "Serilog.Sinks.File >= 5.0.0",
-      "System.IdentityModel.Tokens.Jwt >= 6.16.0",
-      "allopromo.Shared >= 1.0.0"
+      "System.IdentityModel.Tokens.Jwt >= 6.16.0"
     ]
   },
   "packageFolders": {
@@ -7331,11 +7315,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj": {
-              "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -7358,7 +7338,7 @@
           },
           "FluentEmail.Smtp": {
             "target": "Package",
-            "version": "[3.0.0, )"
+            "version": "[3.0.2, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

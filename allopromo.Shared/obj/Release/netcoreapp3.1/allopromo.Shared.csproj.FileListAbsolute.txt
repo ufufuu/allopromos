@@ -1,9 +1,0 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netcoreapp3.1\allopromo.Shared.deps.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netcoreapp3.1\allopromo.Shared.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netcoreapp3.1\allopromo.Shared.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netcoreapp3.1\allopromo.Shared.pdb

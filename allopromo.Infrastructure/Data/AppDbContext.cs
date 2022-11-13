@@ -1,4 +1,5 @@
-﻿using allopromo.Core.Domain;
+﻿using allopromo.Core.Abstract.Interfaces;
+using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 namespace allopromo.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser> //, IAppDbContext
 
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,

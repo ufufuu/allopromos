@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "tY3KFcOgtz/Wtmm2WsbX+WY7t8io/9nH0AwZ3S5+zHUIrmHCRtTXHwokcBFoypnbJyOii2WLFQXm5EMP5MKTZg==",
+  "dgSpecHash": "ZzQ7i0+DtCLtHdoyBJ/bfcfnify8CyptuSVm1i3ZfnprSmVjqEyf8ZzpJWAhpylYgq5vEdrLKb70diKCylGt4w==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Core\\allopromo.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MonPC\\.nuget\\packages\\automapper\\6.2.2\\automapper.6.2.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\firebaseadmin\\1.2.0\\firebaseadmin.1.2.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.core\\3.0.0\\fluentemail.core.3.0.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.smtp\\3.0.0\\fluentemail.smtp.3.0.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.core\\3.0.2\\fluentemail.core.3.0.2.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.smtp\\3.0.2\\fluentemail.smtp.3.0.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\google.apis\\1.35.1\\google.apis.1.35.1.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\google.apis.auth\\1.35.1\\google.apis.auth.1.35.1.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\google.apis.core\\1.35.1\\google.apis.core.1.35.1.nupkg.sha512",

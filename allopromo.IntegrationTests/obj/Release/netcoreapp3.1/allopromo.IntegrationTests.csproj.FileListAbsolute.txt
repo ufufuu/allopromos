@@ -371,7 +371,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Release\net
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Release\netcoreapp3.1\allopromo.IntegrationTests.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Release\netcoreapp3.1\allopromo.IntegrationTests.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Release\netcoreapp3.1\allopromo.IntegrationTests.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.IntegrationTests\obj\Release\netcoreapp3.1\allopromo.IntegrationTests.csproj.CoreCompileInputs.cache

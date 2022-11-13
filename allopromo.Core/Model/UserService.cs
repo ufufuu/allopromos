@@ -25,6 +25,10 @@ namespace allopromo.Core.Model
         //private Serilog.ILogger _logger;           // vs Microsoft Logging !
 
         private HttpContextAccessor _httpContextAccessor;
+        public UserService()
+        {
+
+        }
         public UserService(IUserRepository userRepo, 
             UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager)

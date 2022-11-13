@@ -1,0 +1,4 @@
+C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard1.5\allopromo.Common.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard1.5\allopromo.Common.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard1.5\allopromo.Common.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard1.5\allopromo.Common.csproj.CoreCompileInputs.cache

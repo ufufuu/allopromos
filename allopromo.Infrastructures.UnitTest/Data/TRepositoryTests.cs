@@ -2,7 +2,7 @@
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using allopromo.Infrastructure.Repositories;
-using allopromo.Shared.Abstract;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 using Moq;

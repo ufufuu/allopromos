@@ -1,12 +1,9 @@
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\bin\Release\netcoreapp3.1\allopromo.Core.deps.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\bin\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\bin\Release\netcoreapp3.1\allopromo.Core.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core\bin\Release\netcoreapp3.1\allopromo.Shared.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core\bin\Release\netcoreapp3.1\allopromo.Shared.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core\obj\Release\netcoreapp3.1\allopromo.Core.csprojAssemblyReference.cache

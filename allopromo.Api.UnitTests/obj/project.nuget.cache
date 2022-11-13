@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0uak3aSh+f9OrjDnEpLctpI5oXKKPPx6uTwy8d76yVSQEmZTA/4nzm44DUyhWzyYp+1XdcfK7sd9DW4u2r9Usg==",
+  "dgSpecHash": "WG/lH8fD5oVSnTbiJn1UgYrorDz/OgBi7PR8vG+DA+LDHXTWv4YHkK1BCG4hFOPETWKdqbBLeDvkOcruGqYTAQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Api.UnitTests\\allopromo.Api.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -9,8 +9,8 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\coverlet.collector\\1.3.0\\coverlet.collector.1.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\firebaseadmin\\1.2.0\\firebaseadmin.1.2.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.core\\3.0.0\\fluentemail.core.3.0.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.smtp\\3.0.0\\fluentemail.smtp.3.0.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.core\\3.0.2\\fluentemail.core.3.0.2.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\fluentemail.smtp\\3.0.2\\fluentemail.smtp.3.0.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\fluentvalidation\\11.1.0\\fluentvalidation.11.1.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.1.2\\fluentvalidation.aspnetcore.11.1.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.1.0\\fluentvalidation.dependencyinjectionextensions.11.1.0.nupkg.sha512",

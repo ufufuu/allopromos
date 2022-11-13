@@ -4,9 +4,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netco
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Core.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Shared.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Core.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Shared.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfo.cs

@@ -1,11 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>allopromo.Shared</AssemblyName>
+    <RootNamespace>allopromo.Shared</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Security\" />
+    <Folder Include="UtilitiesLinq\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
   </ItemGroup>
 
 </Project>

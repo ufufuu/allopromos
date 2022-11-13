@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
@@ -40,14 +40,13 @@
     <Compile Remove="Abstract\Interfaces\IRepository.cs" />
     <Compile Remove="Model\ApplicationUser.cs" />
     <Compile Remove="Model\StoreCategory.cs" />
-    <Compile Remove="Services\AccounttService.cs" />
     <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FirebaseAdmin" Version="1.2.0" />
-    <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -60,8 +59,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregates\Specifications\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\allopromo.Shared\allopromo.Shared.csproj" />
   </ItemGroup>
 </Project>

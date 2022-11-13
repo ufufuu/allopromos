@@ -8,13 +8,13 @@
   <ItemGroup>
     <Compile Remove="Entities\**" />
     <Compile Remove="Model\**" />
-    <Compile Remove="Services\Factory\**" />
+    <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Entities\**" />
     <EmbeddedResource Remove="Model\**" />
-    <EmbeddedResource Remove="Services\Factory\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="Entities\**" />
     <None Remove="Model\**" />
-    <None Remove="Services\Factory\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +23,7 @@
     <Compile Remove="Repositories\GenericRepository.cs" />
     <Compile Remove="Repositories\IStoreRepository.cs" />
     <Compile Remove="Repositories\ProductRepository.cs" />
-    <Compile Remove="Repositories\StoreRepository.cs" />   
-    <Compile Remove="Services\Emailing\EmailService2.cs" />
+    <Compile Remove="Repositories\StoreRepository.cs" />
     <Compile Remove="UnitofWork.cs" />
   </ItemGroup>
 

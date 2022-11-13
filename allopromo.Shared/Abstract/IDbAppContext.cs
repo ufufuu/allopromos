@@ -6,9 +6,9 @@ namespace allopromo.Shared.Abstract
 {
     public interface IDbAppContext
     {
-        public void DeleteAsync(string Id);
-        public void SaveChangesAsync();
-        public void FindAsync();
+        //public void DeleteAsync(string Id);
+        //public void SaveChangesAsync();
+        //public void FindAsync();
     }
 }
 

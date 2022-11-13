@@ -25,8 +25,10 @@ namespace allopromo.Core.Model
         private IProductService _productService { get; set; }
         private IRepository<tStoreCategory> _categoryRepository;
         private IRepository<tStore> _storeRepository;
-        private IStoreManager _storeManager; 
-        allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
+        private IStoreManager _storeManager;
+
+        //allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
+        IRepository<tStore> storeRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
