@@ -7,12 +7,12 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
-namespace alloPromoTests.ServiceTests
+namespace allopromo.Core.UnitTests
 {
     public class UserServiceTest
     {
     private UserService _sut;
-    private Mock<IUserRepository> _userRepoMock= new Mock<IUserRepository>();
+    private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
 
     //private readonly UserManager<ApplicationUser> _userManager;
         public UserServiceTest()
@@ -50,7 +50,7 @@ namespace alloPromoTests.ServiceTests
         [Test]
         public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
         {
-            _userRepoMock = new Mock<IUserRepository>();
+            _userRepoMock = new Mock<IRepository<ApplicationUser>>();
             _sut = new UserService(_userRepoMock.Object, null, null);
             var result = await _sut.CreateUser(null, "kjk788kkk");
 

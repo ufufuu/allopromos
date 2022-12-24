@@ -7,8 +7,8 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 namespace allopromo.Controllers
 {
-    //[Route("api/v1/[controller]")]
-    //[ApiController]
+    [Route("api/v1/[controller]")]
+    [ApiController]
     public class DefaultController : ControllerBase
     {
         private readonly IConfiguration _config;
@@ -23,7 +23,7 @@ namespace allopromo.Controllers
         {
             try
             {
-                var defaultResult = "hello Default Controller this 02 May";
+                var defaultResult = "hello Default Controller this 24 dec";
                 return Ok(defaultResult);
             }
             catch(Exception ex)
@@ -64,7 +64,6 @@ Server=tcp:enov.database.windows.net,1433;Initial Catalog=allopromo;Persist Secu
 User ID=aliwiyao;
 Password=K@da120790;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
  */
-
 /*
  * UBER CLONE } Sonny Sangha
  * Reacy Native \ using Expo | setting the dev environnement , install expo globally: -g expo-cli
@@ -75,22 +74,17 @@ Password=K@da120790;MultipleActiveResultSets=False;Encrypt=True;TrustServerCerti
  * React navigation
  * React native maps
  * google 
- *  rn google-places-autocomplete
- *  
- *  
+ *  rn google-places-autocomplete 
  *  Builder Design Pattern ex:
  *  public class User:IUser
  *      p rea Name, 
- *      p readon 
- *      
+ *      p readon      
  */
 //Coiffeur  : 418-261-1266-
-
 /*
  * add-migration -Name "defaultConn", v1
  * update-database -Connection "defuoo"
  */
-
 // ProductsCatalog Class -vs FoodMenu Class - > 
 //composed of several products & catalog products !
 //JWT Auth & Autho 

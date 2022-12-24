@@ -38,6 +38,9 @@ namespace allopromo.Core.Model
             _storeRepository = storeRepository;
             _categoryRepository = categoryRepo;
         }
+        public StoreService()
+        {
+        }
         public void OnStoreCreated()
         {
             if (StoreCreated != null)

@@ -12,7 +12,8 @@ namespace allopromo.Core.UnitTests
     public class AccountServiceTest
     {
         private  UserService _userService;
-        private Mock<IUserRepository> _userRepo= new Mock<IUserRepository>();
+        private Mock<IUserRepository> userRepo = new Mock<IUserRepository>();
+        private Mock<IRepository<ApplicationUser>> _userRepo= new Mock<IRepository<ApplicationUser>>();
 
         //private Mock<UserManager<ApplicationUser>> _userManager= new Mock<UserManager<ApplicationUser>>();
         //public static Mock<UserManager<TUser>> MockUserManager<TUser>(List<TUser> ls) where TUser : class
@@ -49,7 +50,7 @@ namespace allopromo.Core.UnitTests
         //[Test]
         public async Task UserService_CreateUser_Returns_UserNotCreated_False()
         {
-            _userRepo = new Mock<IUserRepository>();
+            _userRepo = new Mock<IRepository<ApplicationUser>>();
             _userService = new UserService(_userRepo.Object, null, null);
             var result = await _userService.CreateUser(null, "kjk788kkk");
             //Assert.Throws<Exception>(async () => await _userService.CreateUser(null, "akaj4i"));

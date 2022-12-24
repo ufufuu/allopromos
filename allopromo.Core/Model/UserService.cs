@@ -17,24 +17,30 @@ namespace allopromo.Core.Model
 {
    public class UserService : IUserService 
    {
-        private readonly IUserRepository _userRepo;
-
+        private readonly IRepository <ApplicationUser>_userRepo;
         private readonly UserManager<ApplicationUser> _userManager;//= new UserManager<ApplicationUser>(); 
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly PasswordHasher<ApplicationUser> _passwordHasher;
 
-        //private Serilog.ILogger _logger;           // vs Microsoft Logging !
-
+                                                                                //private Serilog.ILogger _logger;// vs Microsoft Logging !
         private HttpContextAccessor _httpContextAccessor;
-        public UserService()
-        {
-
-        }
-        public UserService(IUserRepository userRepo, 
+        public UserService(IRepository<ApplicationUser> userRepo, 
             UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager)
+        {
+            _userRepo= userRepo;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _passwordHasher = new PasswordHasher<ApplicationUser>();
+        }
+        public UserService(IRepository<ApplicationUser> userRepo, 
+            UserManager<ApplicationUser> userManager, 
+            PasswordHasher<ApplicationUser> passwordHasher,
             SignInManager<ApplicationUser> signInManager)
         {
             _userRepo = userRepo;
             _userManager = userManager;
+            _passwordHasher = passwordHasher;
             _signInManager = signInManager;
         }
         public ApplicationUser GetUserIfExist(string userName)
@@ -115,29 +121,39 @@ namespace allopromo.Core.Model
             {
                 if (user == null)
                     return false;
+
                 user.Id = Guid.NewGuid().ToString();
+                user.PasswordHash = _passwordHasher.HashPassword(user, password);
+
+                //user.NormalizedEmail=u
+                //ApplicationUser appUser = new ApplicationUser
+                //{
+                //    Id = user.Id,
+                //    Email = user.Email,
+                //    UserName = user.UserName,
+                //    PasswordHash = user.PasswordHash
+                //};
+
                 var result = await _userManager?.CreateAsync(user, password);
+
                 if(result!=null)// && result.Succeeded((bool)(result?.Succeeded))
                 {
                     //AddUserRole(user, "Users");
                     created = true;
-                    //var werwe = _signInManager;
 
+                    //await _userRepo.Add(user, password);
                     //await _signInManager?.SignInAsync(user, isPersistent: false);
-
-                    //var bgbg = await _signInManager?.SignInAsync(user, isPersistent: false);
-
                     //await _userManager.AddToRoleAsync(user, "SU");
+
+                    _userRepo.Save();
                 }
             }
-            
             //catch (InvalidOperationException)
             //{
             //    throw new Exception("Operations Non Valide !");
             //}
             //catch (ArgumentNullException ex)
             //{
-                
             //    _logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
             //    return default;
             //}
@@ -178,7 +194,6 @@ namespace allopromo.Core.Model
         }
         public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
-
             var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
                 //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 //.Where(x => x.UserName == appUser.UserName)
@@ -211,7 +226,7 @@ namespace allopromo.Core.Model
             var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);*/
         }
-        public List<ApplicationUser> GetUsers()
+        public async Task<List<ApplicationUser>> GetUsers()
         {
             List<ApplicationUser> users = null;
             try
@@ -220,7 +235,7 @@ namespace allopromo.Core.Model
                 ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 //.ToList());
 
-                users = _userRepo.getUsers();
+                users = await _userRepo.GetAllAsync();
                 //using(var db = new allopromo.Infrastructure.
                 //{
                 //}

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - allopromo.Administration</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- jQuery UI-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://resources/demos/style.css" />
+</head>
+<body style="background-color:honeydew">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">allopromo.Administration</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Acceuil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!--
+    <div id="accordion">
+        <h3>Section 1</h3>
+        <div>
+            <p>
+                Mauris  Craa dictum. Pllentesque habitant lre gtre ojkkopoi
+                hjhhj uhhjkjh hhjh hjhjh hjhj
+                ghghg y5r545e54e wewewe
+                kk ppoi ou kjk
+            </p>
+        </div>
+    </div>-->
+
+    <div class="container">
+        <div id="header">
+            <h3>
+                allo-promo
+            </h3>
+            <ul id="navlist">
+                <li class="first">
+                    <a href="/"
+                       id="current">Home</a>
+                </li>
+                <li>
+                    <a href="/Store/">Store</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            
+            <!--<div id="accordion">
+        <h3>Section 1</h3>
+        <div>
+            <p>
+                Mauris  Craa dictum. Pllentesque habitant lre gtre ojkkopoi
+                hjhhj uhhjkjh hhjh hjhjh hjhj
+                ghghg y5r545e54e wewewe
+                kk ppoi ou kjk
+            </p>
+        </div>
+    </div>
+        -->
+            <div class="col-sm-9 col-md-3 col-lg-4" style="background-color:darkgreen;margin:0;color:#000;font-size:14px">
+                <div style="border-style:dashed">
+                    <div style="background-color:#000">
+                        <h5 style="color:#fff;">Store D&eacute;partements</h5>
+                    </div>
+                    <div>
+                        <ul>
+                            <li style="list-style:none;">
+                                @Html.ActionLink("Add Department", "Create", "Department", null)
+                            </li>
+                            <li style="list-style:none;">
+                                @Html.ActionLink("Listes", "Index", "Department", null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="border-style:dashed;color:">
+                    <div style="background-color:#000">
+                        <h5 style="color:#fff;">Store Categories</h5>
+                    </div>
+                    <div>
+                        <ul>
+                            <li style="list-style:none;">
+                                <a style="color:#000" href="../Pages/Categories/AddCategory">Add</a>
+                            </li>
+                            <li style="list-style:none;">
+                                <a style="color:#000 " href="#">List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div style="background-color:#000">
+                        <h5 style="color:#fff;">Store Marketplace Locations</h5>
+                    </div>
+                    <div>
+                        <ul>
+                            <li style="list-style:none;">
+                                <a style="color:#000" href="../Cities/Add">Create</a>
+                            </li>
+                            <li style="list-style:none;">
+                                <a style="color:#000 " href="#">...Cities</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="background-color:darkgreen">
+                    <h5 style="color:#fff;">Store Pay adm </h5>
+                </div>
+                <div style="background-color:darkgreen">
+                    <h3 style="color:#fff;">Merchants</h3>
+                </div>
+                <div style="background-color:darkgreen">
+                    <h5 style="color:#fff;">Partner sous C</h5>
+                </div>
+                <div style="background-color:darkgreen">
+                    <h3 style="color:#fff;">Marques</h3>
+                </div>
+                <div style="background-color:darkgreen">
+                    <h5 style="color:#fff;">Makes</h5>
+                </div>
+                <div id="accordion">
+                    <h3>Section 1</h3>
+                    <div>
+                        <p>
+                            Mauris  Craa dictum. Pllentesque habitant lre gtre ojkkopoi
+                            hjhhj uhhjkjh hhjh hjhjh hjhj
+                            ghghg y5r545e54e wewewe
+                            kk ppoi ou kjk
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3 col-md-9 col-lg-8" style="background-color:#fff">
+                @RenderBody()
+            </div>
+            <main role="main" class="pb-3" style="background-color:beige">
+            </main>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - allopromo.Administration - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <!--
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    -->
+
+    <!--
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    -->
+    <script>
+        $(function () {
+            $("#accordion").accordion({
+                heightStyle: "content"
+            });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

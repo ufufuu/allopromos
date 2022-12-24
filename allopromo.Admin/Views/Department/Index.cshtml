@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "../Shared/Admin/_AdminLayout";
+}
+@model IEnumerable<allopromo.Admin.Models.Dto.DepartmentDto>
+<div class="text-center">
+    <h1 class="display-4" style="background-color:darkgreen">Departement List</h1>
+    <div class="">
+        <h3 class="display-4" style="background-color:beige;margin-top:5px">Department Info </h3>
+        <div style="border-style:;background-color:#fefbfb">
+            <table>
+                <tr>
+                    <th>
+                        Genre
+                    </th>
+                    <th>
+                        Artist
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        AlbumArtUrl
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departmentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departmentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departmentName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.departmentName }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.departmentName }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.departmentName })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

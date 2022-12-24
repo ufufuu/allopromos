@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "../Shared/Admin/_AdminLayout";
+}
+@model IEnumerable<allopromo.Admin.Models.Dto.CategoryDto>
+<div class="col-md-9">
+    <h3 class="display-4" style="background-color:beige;margin-top:5px">hello Admin </h3> <!--honeydew - beige darkgreen-->
+    <div style="border-style:dotted;background-color:#fefbfb">
+        <h4>Administration Cat&eacute;gories </h4>
+        @foreach (var category in Model)
+        {
+            <div>@category.categoryId</div>
+            <div>@category.categoryName</div>
+            <div>@category.catThumbnail</div>
+        }
+    </div>
+</div>

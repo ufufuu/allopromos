@@ -2,7 +2,6 @@
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using allopromo.Infrastructure.Repositories;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 using Moq;
@@ -57,6 +56,7 @@ namespace allopromo.Infrastructure.UnitTests.Data
             var mockDbContext = new Mock<AppDbContext>();
             var mockDbSet = new Mock<DbSet<TestClass>>();
             mockDbContext.Setup(x => x.Set<TestClass>()).Returns(mockDbSet.Object);
+
             //mockDbSet.Setup(x => x.Remove(It.IsAny<TestClass>())).Returns(testClass); // 1 and 2 !
             //Act
             var tRepo = new TRepository<TestClass>(mockDbContext.Object);

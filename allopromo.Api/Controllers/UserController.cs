@@ -15,14 +15,15 @@ using allopromo.Infrastructure.Data;
 using Microsoft.Extensions.Logging;
 namespace allopromo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        UserManager<ApplicationUser> _userManager;
         private ILogger<UserController> _logger { get; set; }
         private readonly IUserService _userService;
         public UserController(IUserService userService)
@@ -66,61 +67,58 @@ namespace allopromo.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(ApplicationUser user)
+        public async Task<IActionResult> CreateUser(Core.Model.ViewModel.RegisterModel registerViewModel)
         {
-            if (user == null)
+            if (registerViewModel == null)
                 return null;
             else
             {
-                if (string.IsNullOrEmpty(user.PasswordHash))
+                if (string.IsNullOrEmpty(registerViewModel.UserPassword))
                     throw new Exception("Password is invalid or Empty");
-                //if (ModelState.IsValid)
-                //{
-                var appUser = new ApplicationUser
-                {
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber
-                };
-                var result = await _userService.CreateUser(appUser, user.PasswordHash);
-                if (result)
-                {
-                    _accountService.OnUserAuthenticate(user.Email);
-                    return Ok(appUser);
-                }
                 else
                 {
-                    return NotFound();
+                    if (ModelState.IsValid)
+                    {
+
+                        ApplicationUser appUser = AutoMapper.Mapper.Map<ApplicationUser>(registerViewModel);
+
+                        //var appUser = new ApplicationUser
+                        //{
+                        //    UserName = registerViewModel.UserName,
+                        //    NormalizedUserName=registerViewModel.UserName,
+                        //    PasswordHash=registerViewModel.UserPassword,
+                        //    Email = registerViewModel.Email,
+                        //    PhoneNumber = registerViewModel.PhoneNumber
+                        //};
+
+                        var result = await _userService.CreateUser(appUser, registerViewModel.UserPassword);
+                        if (result)
+                        {
+                            _accountService.OnUserAuthenticate(registerViewModel.Email);
+                            return Ok(appUser);
+                        }
+                        else
+                        {
+                            return NotFound();
+                        }
+                    }
                 }
+                return NotFound();
             }
-            //throw new Exception("User is Created");
-            /*
-            {
-                return BadRequest(); //or throw new HttException (400, "ldkd") ?
-                throw new AccessViolationException();
-            }
-            else
-            {
-               throw; // for Developer
-                    //_logger.LogError($"Something went wrong: {ex}");
-                    //return StatusCode(500, "Internal Server Error");
-            }
-        }
-        */
         }
         [HttpPost]
-        [Route("login")]
-        public IActionResult Login(LoginModel loginModel) // mot de passe : @errAbaophone43
+        [Route("Login")]
+        public IActionResult Login(LoginViewModel loginViewModel) // mot de passe : @errAbaophone43|couli.mama@free.fr
         {
             //_accountService.Authenticate(loginModel);
             //_signInManager.PasswordSignInAsync
-
-            if (loginModel != null)
+            
+            if (loginViewModel != null)
             {
                 ApplicationUser account = null;
                 try
                 {
-                    account = _userManager?.FindByEmailAsync(loginModel.UserName).Result;
+                    account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
                 }
                 catch (Exception ex)
                 {
@@ -131,8 +129,8 @@ namespace allopromo.Controllers
                 if (account != null)
                 {
                     var loginValid2 = _signInManager?.PasswordSignInAsync(
-                        loginModel.UserName.ToString(), loginModel.PasswordHash.ToString(), true, true);
-                    var loginValid = _userService.ValidateUser(loginModel.UserName, loginModel.PasswordHash);
+                        loginViewModel.UserName.ToString(), loginViewModel.UserPassword.ToString(), true, true);
+                    var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
                     if (loginValid)
                     {
                         var role = _userService.GetUserRole(account).UserRoles;
@@ -140,8 +138,8 @@ namespace allopromo.Controllers
                         //role = "hg";
                         ApplicationUser user = new ApplicationUser
                         {
-                            UserName = loginModel.UserName,
-                            Email = loginModel.UserName,
+                            UserName = loginViewModel.UserName,
+                            Email = loginViewModel.UserName,
                             UserRoles = role
                         };
                         return Ok(new ApiResponseModel
@@ -152,8 +150,9 @@ namespace allopromo.Controllers
                     }
                     else
                     {
-                        return NotFound(new { message = "User name or Pwd UUY incorrect" });
+                          return NotFound(new { message = "User name or Pwd UUY incorrect" });
                     }
+                    
                     //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
                     /*
                     using(var emailNotifyService= new EmailNotificationService())
@@ -170,7 +169,6 @@ namespace allopromo.Controllers
             return Unauthorized();
         }
         [HttpDelete]
-        
         [HttpGet]
         [Route("/account")]
         public object GetAccount()
@@ -282,3 +280,20 @@ catch (Exception)
 
 
 //If I am Admin Role, Who Admin , then show the rOther and let's Start Chatting ! 
+
+
+//throw new Exception("User is Created");
+
+
+/*
+{
+    return BadRequest(); //or throw new HttException (400, "ldkd") ?
+    throw new AccessViolationException();
+}
+else
+{
+   throw; // for Developer
+        //_logger.LogError($"Something went wrong: {ex}");
+        //return StatusCode(500, "Internal Server Error");
+}
+*/

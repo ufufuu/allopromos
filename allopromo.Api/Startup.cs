@@ -110,8 +110,16 @@ namespace allopromo
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
+
             services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<ILocalisationService, LocalisationService>();
+            services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
+                Core.Services.Base.BaseService<Core.Application.Dto.DepartmentDto>>();
+
+            //services.AddScoped<IDepartmentService, DepartmentService>();
+            //services.AddScoped<I>
+
+            //services.AddScoped<IHttpClientFactory, IHttpClientFactory>();
 
             //services.AddScoped<>
             //2 lines below vs 2 above ? or Addtransient vs addScoped ?
@@ -130,7 +138,9 @@ namespace allopromo
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<IAccountService, AccountService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepository<ApplicationUser>, TRepository<ApplicationUser>>();
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();

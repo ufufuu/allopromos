@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Abstract\IRepository.cs" />
+    <Compile Remove="Model\tUsers.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
     <Folder Include="Security\" />
     <Folder Include="UtilitiesLinq\" />
   </ItemGroup>

@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class UserRepository //: IEntityBaseRepository<ApplicationUser>, IUserRepository
+    public class UserRepository    //: IEntityBaseRepository<ApplicationUser>, IUserRepository
         :IUserRepository
     {
+       
         public void CreateUser(ApplicationUser user, string password)
         {
-            throw new NotImplementedException();
+            using(var db = new AppDbContext())
+            {
+            }
         }
         public void Delete(ApplicationUser obj)
         {
@@ -46,6 +49,13 @@ namespace allopromo.Infrastructure.Repositories
                 users = db.ApplicationUsers.ToList();
             }
             return users;
+        }
+        public void Saves()
+        {
+            using (var db = new AppDbContext())
+            {
+                db.SaveChanges();
+            }
         }
     }
 }

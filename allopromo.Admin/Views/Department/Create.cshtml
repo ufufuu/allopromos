@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "../Shared/Admin/_AdminLayout";
+}
+@model allopromo.Admin.Models.Dto.DepartmentDto
+<div class="form">
+    <h3 class="display-3" style="background-color:darkgreen">Departement Create</h3>
+    <fieldset>
+        <legend>Department Infos</legend>
+        <h5 class="display-4" style="background-color:beige;margin-top:5px">Informations</h5>
+        <div style="border-style:;background-color:#fefbfb">
+            @Html.ValidationSummary()
+            @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="firstname" class="col-sm-2 control-label">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="departmentName" name="departmentName" placeholder="Department name" />
+                        <span style="color:red">@Html.ValidationMessageFor(x => x.departmentName)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">Thumbnail:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="departmentThumbnail" placeholder="Department Thumbnail" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" style="background-color:seagreen;color:#fff">
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </fieldset>
+</div>

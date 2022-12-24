@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "allopromo.Domain/1.0.0": {
+        "runtime": {
+          "allopromo.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "allopromo.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

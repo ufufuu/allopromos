@@ -11,7 +11,6 @@ using allopromo.Core.Exceptions;
 using allopromo.Core.Application.Dto;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]

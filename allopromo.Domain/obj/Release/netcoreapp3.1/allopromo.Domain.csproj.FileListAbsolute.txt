@@ -1,0 +1,9 @@
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\bin\Release\netcoreapp3.1\allopromo.Domain.deps.json
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\bin\Release\netcoreapp3.1\allopromo.Domain.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\bin\Release\netcoreapp3.1\allopromo.Domain.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.csproj.CoreCompileInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\netcoreapp3.1\allopromo.Domain.pdb

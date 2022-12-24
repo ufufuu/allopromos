@@ -10,6 +10,7 @@ namespace allopromo.Core.Abstract
     {
         void CreateUser(ApplicationUser user, string password);
         public List<ApplicationUser> getUsers();
+        public void Saves();
     }
     public interface IRoleRepository
     {

@@ -8,4 +8,11 @@
 
         public int productStatus { get; set; }
     }
+    public class MakeDto
+    {
+        public int makeId { get; set; }
+        public string makeTitle { get; set; }
+        public string makeLogo { get; set; }
+    }
 }
+

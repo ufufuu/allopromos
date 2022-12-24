@@ -14,7 +14,6 @@ namespace allopromo.Core.Entities
 
         public tRegion Region { get; set; }
         public List<tCity> Cities { get; set; }
-
     }
 }
 

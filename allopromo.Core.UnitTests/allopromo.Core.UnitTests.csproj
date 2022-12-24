@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functional\Integration\" />
+    <Folder Include="Functional\" />
   </ItemGroup>
 
 </Project>
