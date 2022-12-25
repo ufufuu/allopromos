@@ -9,7 +9,7 @@ namespace allopromo.Core.Services.Base
     {
         public Task<IEnumerable<TEntity>> GetEntities();
         
-        //abstract int Add(TEntity baseEntity);
+        abstract void Add(TEntity baseEntity);
         //abstract int Add(List<TEntity> baseEntities);
 
         public void Create(TEntity entity);

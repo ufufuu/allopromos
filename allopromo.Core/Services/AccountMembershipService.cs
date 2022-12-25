@@ -9,7 +9,7 @@ namespace allopromo.Core.Model
     public class AccountMembershipService<TEntity>:BaseService <TEntity> where TEntity:class
     {
         public IAppDbContext<TEntity> db { get; set; }
-        public IEnumerable<TEntity> GetEntities()
+        public new IEnumerable<TEntity> GetEntities()
         {
             return null;
         }

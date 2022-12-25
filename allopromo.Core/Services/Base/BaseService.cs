@@ -15,11 +15,12 @@ namespace allopromo.Core.Services.Base
         }
         public BaseService(IRepository<TEntity> departmentRepo)
         {
-            //if(_departmentRepo != null)
+            if(_departmentRepo != null)
             _departmentRepo = departmentRepo;
         }
         public void Add(TEntity entity)
         {
+            if(_departmentRepo !=null)
             _departmentRepo.Add(entity);
         }
         public async Task<IEnumerable<TEntity>> GetEntities()

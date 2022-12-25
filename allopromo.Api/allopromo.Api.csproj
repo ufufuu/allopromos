@@ -39,6 +39,7 @@
     <Compile Remove="Controllers\OrderStatus.cs" />
     <Compile Remove="Controllers\RoleController.cs" />
     <Compile Remove="Controllers\StoreCategorie.cs" />
+    <Compile Remove="Controllers\StoreCreatedSingleton.cs" />
     <Compile Remove="Controllers\StoreData.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />

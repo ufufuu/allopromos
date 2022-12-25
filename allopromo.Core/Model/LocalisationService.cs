@@ -46,7 +46,7 @@ namespace allopromo.Core.Contracts
                 <IEnumerable<CityDto>>(await _cityRepository.GetAllAsync());
             return cities;
         }
-        public async Task<string> GetUserCurrentCity(string ip)
+        public new async Task<string> GetUserCurrentCity(string ip)
         {
             IpInfo ipInfo = new IpInfo();
             try

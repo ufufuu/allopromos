@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class DepartmentService : BaseService<tDepartment>  //  !!!
+    public class DepartmentService : BaseService<tDepartment>                                                   //!!!
     {
         private IRepository<tDepartment> _departmentRepository;
         public DepartmentService()
@@ -35,11 +35,11 @@ namespace allopromo.Core.Services
                 throw ex;
             }
         }
-        public void Add(tDepartment department)
+        public new void Add(tDepartment department)
         {
             _departmentRepository.Add(new tDepartment { });
         }
-        public IEnumerable<DepartmentDto> GetEntities()
+        public new IEnumerable<DepartmentDto> GetEntities()
         {
             return null;
         }
