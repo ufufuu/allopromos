@@ -99,9 +99,11 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\ru
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Infrastructure.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Shared.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\Microsoft.AspNet.SignalR.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Core.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\allopromo.Shared.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\Microsoft.AspNet.SignalR.Core.xml
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.AssemblyInfoInputs.cache

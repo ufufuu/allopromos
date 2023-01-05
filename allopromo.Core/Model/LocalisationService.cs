@@ -25,20 +25,12 @@ namespace allopromo.Core.Contracts
             tCity city = new tCity();
             city.cityName = cityDto.cityName.ToString();
             city.countryId = 2344;
-
             //city.cityId = 4433;
+
             await _cityRepository.Add(city);
             return true;
         }
-        public void Delete(CityDto city)
-        {
-            _cityRepository.Delete(city);
-        }
-        public async Task<tCity> Get(string cityId)
-        {
-            var city = await _cityRepository.GetByIdAsync(cityId);
-            return city;
-        }
+        
         public async Task<IEnumerable<CityDto>> GetCities()
         {
             IEnumerable<CityDto> cities = null;
@@ -46,6 +38,12 @@ namespace allopromo.Core.Contracts
                 <IEnumerable<CityDto>>(await _cityRepository.GetAllAsync());
             return cities;
         }
+        public async Task<tCity> Get(string cityId)
+        {
+            var city = await _cityRepository.GetByIdAsync(cityId);
+            return city;
+        }
+       
         public new async Task<string> GetUserCurrentCity(string ip)
         {
             IpInfo ipInfo = new IpInfo();
@@ -61,6 +59,10 @@ namespace allopromo.Core.Contracts
                 ipInfo.Country=null;
             }
             return ipInfo.City;
+        }
+        public void Delete(CityDto city)
+        {
+            _cityRepository.Delete(city);
         }
         public void Put(AisleDto aisle)
         {

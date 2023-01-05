@@ -8,16 +8,27 @@ namespace allopromo.Core.Entities
     public class tStoreCategory
     {
         [Key]
-        //[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        
-        [ForeignKey("Category")]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+
+        [Column("categoryId")]
         public Guid storeCategoryId { get; set; }
+        [Column("categoryName")]
         public string storeCategoryName { get; set; }
         public DateTime created { get; set; }
         public DateTime expires { get; set; }
         public bool active { get; set; }
         //public bool hasChildren { get; set; }
+        [Column("categoryImageUrl")]
         public string storeCategoryImageUrl { get; set; }
-        //public ICollection<tStore> tStores { get; set; } = new List<tStore>();
+
+        [Column("departmentId")]
+        [ForeignKey("departmentId")]
+        public string departmentId { get; set; }
+
+
+        [ForeignKey("departmentId")]
+        
+        public virtual tDepartment Department { get; set; }
+        public virtual ICollection<tStore> tStores { get; set; } = new List<tStore>();
     }
 }

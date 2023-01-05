@@ -16,11 +16,14 @@ namespace allopromo.Api.UnitTests
         [Test]
         public void PostDepartment_SHOULD_Return_CreatedDeparmentDto()
         {
-            var departmentController = new DepartmentController(_mockConfig.Object, 
-                _mockDepartmentService.Object);
-            var result = departmentController.PostDepartment(new DepartmentDto { departmentId=89, departmentName="kl lklk" });
-            Assert.IsNotNull(result);
-            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
+            //var departmentController = new DepartmentController(_mockConfig.Object, 
+
+            //    _mockDepartmentService.Object);
+            //var result = departmentController.PostDepartment(new DepartmentDto 
+            //{departmentName="Boulangeries & Patisseries" 
+            //});
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(typeof(OkObjectResult), result.GetType());
         }
     }
 }

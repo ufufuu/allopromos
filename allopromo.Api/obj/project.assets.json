@@ -3233,6 +3233,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "allopromo.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.2"
+        },
+        "compile": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        }
       }
     }
   },
@@ -10229,6 +10242,11 @@
       "type": "project",
       "path": "../allopromo.Infrastructure/allopromo.Infrastructure.csproj",
       "msbuildProject": "../allopromo.Infrastructure/allopromo.Infrastructure.csproj"
+    },
+    "allopromo.Shared/1.0.0": {
+      "type": "project",
+      "path": "../allopromo.Shared/allopromo.Shared.csproj",
+      "msbuildProject": "../allopromo.Shared/allopromo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -10253,6 +10271,7 @@
       "Serilog.Sinks.File >= 5.0.0",
       "allopromo.Core >= 1.0.0",
       "allopromo.Infrastructure >= 1.0.0",
+      "allopromo.Shared >= 1.0.0",
       "swashbuckle.aspnetcore >= 6.4.0"
     ]
   },
@@ -10293,6 +10312,9 @@
             },
             "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructure\\allopromo.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructure\\allopromo.Infrastructure.csproj"
+            },
+            "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj": {
+              "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj"
             }
           }
         }

@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
 using allopromo.Api.Infrastructure;
 using Polly;
-//using allopromoInfrastructure.Abstract;
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using allopromo.Infrastructure.Helpers.Authentication;
 using allopromo.Core.Infrastructure.Abstract;
-//using Owin;
+//using Osericecwin;
 //using Microsoft.Owin;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.Linq;
@@ -110,11 +109,15 @@ namespace allopromo
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
-
+            services.AddScoped<ICategorieService, CategorieService>();
             services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<ILocalisationService, LocalisationService>();
+
+            /*services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
+                Core.Services.Base.BaseService<Core.Application.Dto.DepartmentDto>>();*/
+
             services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
-                Core.Services.Base.BaseService<Core.Application.Dto.DepartmentDto>>();
+                DepartmentService<Core.Application.Dto.DepartmentDto>>();
 
             //services.AddScoped<IDepartmentService, DepartmentService>();
             //services.AddScoped<I>
@@ -145,6 +148,9 @@ namespace allopromo
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
             services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
+            services.AddScoped<IRepository<tDepartment>,TRepository<tDepartment>>();
+
+            
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
             //services.AddScoped<ILoggerManager, LoggerManager>();

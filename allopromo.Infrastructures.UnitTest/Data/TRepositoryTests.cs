@@ -81,9 +81,16 @@ namespace allopromo.Infrastructure.UnitTests.Data
              
         }
         [Test]
-        public void GetByIdAsync_DEVRAIT_ReturnerObjet()
+        public void GetByIdAsync_DEVRAIT_RetournerObject()
         {
-            //var tRepo = new TRepository<TestClass>();
+            var tRepo = new TRepository<TestClass>(_mockDb.Object);
+            var obj = tRepo.GetByIdAsync(new object());
+            Assert.IsNotNull(obj);
+        }
+        [Test]
+        public void GetByIdAsync_DEVRAIT_RetournerListOfObjects()
+        {
+            var tRepo = new TRepository<TestClass>(_mockDb.Object);
         }
     }
 }

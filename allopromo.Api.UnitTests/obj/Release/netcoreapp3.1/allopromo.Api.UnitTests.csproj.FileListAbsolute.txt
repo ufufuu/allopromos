@@ -187,9 +187,11 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcor
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Infrastructure.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Shared.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Core.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Shared.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfo.cs

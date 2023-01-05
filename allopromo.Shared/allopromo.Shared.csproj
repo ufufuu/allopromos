@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Abstract\IRepository.cs" />
+    <Compile Remove="AppDbContext.cs" />
     <Compile Remove="Model\tUsers.cs" />
   </ItemGroup>
 

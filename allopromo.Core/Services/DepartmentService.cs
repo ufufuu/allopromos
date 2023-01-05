@@ -9,39 +9,123 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class DepartmentService : BaseService<tDepartment>                                                   //!!!
+    public class DepartmentService<TEntity> : IBaseService<TEntity> where TEntity : DepartmentDto
+        //: BaseService<TEntity> where TEntity : DepartmentDto
     {
-        private IRepository<tDepartment> _departmentRepository;
-        public DepartmentService()
+        public IRepository<tDepartment> _departmentRepo;
+
+        //public Enum DEPARTMENT_STATUS = ACTif, Inactif, Publie, Cree - 
+        //public categoriesService {get;set;}
+        //public enclosedFileService {get; set;} //public approvalService 
+
+        #region "Proprietes & Constantes"
+        private const string SUJET_TRNASCTIon_REUSE = "TRrans Refuse";
+        #endregion
+
+        #region "Constructeurs & Methodes de Base"
+        public DepartmentService(IRepository<tDepartment> departmentRepo) //: base(repo)
         {
+            _departmentRepo = departmentRepo;
         }
-        public DepartmentService(IRepository<tDepartment> departmentRepository)
+        public int Create(TEntity entity)
         {
-            _departmentRepository = departmentRepository;
+            if (entity != null)
+            {
+                try
+                {
+                    var tObj = new tDepartment();
+                    tObj.departmentId = Guid.NewGuid().ToString();
+                    tObj.departmentName = entity.departmentName;
+                    tObj.categories = null;
+
+                    tObj.categories = new List<tStoreCategory>
+                    {
+                        new tStoreCategory
+                        {
+                              storeCategoryId=Guid.NewGuid(),
+                        },
+                         new tStoreCategory
+                        {
+                             storeCategoryId=Guid.NewGuid(),
+                        },
+                    };
+                    var department = AutoMapper.Mapper.Map<tDepartment>(entity);
+                    _departmentRepo.Add(tObj);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return 0;
         }
-        public void Create()
+        public void CreateDepartement(DepartmentDto departmentDto)
         {
+            if (departmentDto != null)
+            {
+                try
+                {
+                    var department = AutoMapper.Mapper.Map<tDepartment>(departmentDto);
+                    _departmentRepo.Add(department);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+        public async Task<IEnumerable<TEntity>> GetEntites()
+        {
+            IEnumerable<DepartmentDto> departments = new List<DepartmentDto>();
             try
             {
-                _departmentRepository.Add(new tDepartment
-                {
-                    departmentId = Guid.NewGuid().ToString(),
-                    departmentName = "",
-                    departmentThumbnail = ""
-                });
+                var tEntities = await _departmentRepo.GetAllAsync();
+                departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return (IEnumerable<TEntity>)departments;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetEntities()
+        {
+            IEnumerable<DepartmentDto> departments = new List<DepartmentDto>();
+            try
+            { 
+                var tEntities = await  _departmentRepo.GetAllAsync();
+                departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return (IEnumerable<TEntity>)departments;
         }
-        public new void Add(tDepartment department)
+        Task<object> IBaseService<TEntity>.GetById(string Id)
         {
-            _departmentRepository.Add(new tDepartment { });
+            var tObj = new Object();
+            tObj = _departmentRepo.GetByIdAsync(Id);
+            return (Task<object>)tObj;
         }
-        public new IEnumerable<DepartmentDto> GetEntities()
+        void IBaseService<TEntity>.Save(TEntity entity)
         {
-            return null;
+            _departmentRepo.Save();
         }
+        int IBaseService<TEntity>.Delete(TEntity tEntity)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region "Methodes pour DtO"
+        #endregion
+
+        #region "Methodes Specifiques"
+        #endregion
+
+        #region "Validations"
+        #endregion
     }
 }

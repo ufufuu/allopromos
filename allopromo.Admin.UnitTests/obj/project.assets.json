@@ -4023,6 +4023,7 @@
           "Serilog.Sinks.File": "5.0.0",
           "allopromo.Core": "1.0.0",
           "allopromo.Infrastructure": "1.0.0",
+          "allopromo.Shared": "1.0.0",
           "swashbuckle.aspnetcore": "6.4.0"
         },
         "compile": {

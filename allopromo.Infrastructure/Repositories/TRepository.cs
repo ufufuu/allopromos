@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class TRepository<T> : IRepository<T> where T : class /// Unit of Work ? que doit retourner creeer categry ?
+    public class TRepository<T> : IRepository<T> where T : class /// Unit of Work ? que doit retourner creer category ?
     {
         #region fields
         private readonly AppDbContext _dbContext;
@@ -36,6 +36,7 @@ namespace allopromo.Infrastructure.Repositories
             else
             {
                 _dbContext.Entry<T>(obj);
+                _dbContext.Add(obj);
                 this.Save();
                 return obj as Task;
             }
@@ -69,33 +70,25 @@ namespace allopromo.Infrastructure.Repositories
         {
             _dbContext.SaveChanges();
         }
-        public Task<List<T>> GetAllAsync()                                      ////Task<List<T>> IRepository<T>.GetAllAsync()
+        public Task<List<T>> GetAllAsync()                                      
         {
             var tObjects = _table.ToListAsync();
-            var tObjects2 = _dbContext.Set<T>();
-            return tObjects;//.ToListAsync();
-        }
-        public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
-        {
-            var tCategories = await _dbContext.StoreCategories.ToListAsync();
-            return tCategories;
+            var entityObjects = _dbContext.Set<T>();
+            return tObjects;                   
         }
         public IQueryable<T> GetByIdAsync(int categoryId, int pageNumber, int offSet)
         {
             return null;
         }
-        public async Task<T> GetByIdAsync(int Id)
+        public async Task<T> GetByIdAsync(object Id)
         {
-            return await _table.FindAsync(Id.ToString());
-        }
-        async Task<T> IRepository<T>.GetByIdAsync(object Id)
-        {
-            var obj = await _table.FindAsync(Id.ToString());
-            return obj;
+            var tObj = await _table.FindAsync(Id.ToString());
+            return tObj;
         }
         public async Task<T> GetByIdAsync(string Id)
         {
-            return await _table.FindAsync(Guid.Parse(Id));
+            var tObj = await _table.FindAsync(Id.ToString()); // Guid.Parse(Id)
+            return tObj;
         }
         public bool Delete(object Id)
         {
@@ -103,15 +96,20 @@ namespace allopromo.Infrastructure.Repositories
             _table.Remove(obj);
             return true;
         }
-        public void Delete(T obj)
+        public bool Delete(T obj)
         {
+            if (obj!= null)
+            {
+                _table.Remove(obj);
+                return true;
+            }
+            return false;
         }
         public void Update(T obj)
         {
             if (obj != null)
             {
                 //throw new ArgumentNullException();
-
                 _table.Attach(obj);
                 _dbContext.Entry(obj).State = EntityState.Modified;
             }
@@ -121,9 +119,7 @@ namespace allopromo.Infrastructure.Repositories
             var Id = GetByIdAsync(obj.GetHashCode());
             _dbContext.Entry(obj).State = EntityState.Modified;
             _dbContext.Entry(obj).CurrentValues.SetValues(obj);
-
             //_table.Update(obj);
-
             _dbContext.SaveChanges();
         }
 
@@ -133,7 +129,8 @@ namespace allopromo.Infrastructure.Repositories
         #endregion
     }
 
-}//Generics : code reuse - type safety - performance -
+}
+//Generics : code reuse - type safety - performance -
 /*
         void GetStoresAsync()
         {
@@ -149,31 +146,28 @@ namespace allopromo.Infrastructure.Repositories
                 //         select new
                 //    {
                 //    };
-           // }
-
-            //var query7= AppDbContex
-           /* var query= from ct in AppDbContext.CT
-                       where ct.DateDebut < dateDemande
-                       ....
-                       join pct in AppDbContext.PCT
-                       on ct.ID equals pct.ID
-                       where pct.CT_ID equals parametreRecu
-
-                       orderby pct.pct_ordreParametres ascending 
-                       select new tempClass { } as tempObj
-                       {
-                           ChampConcatene = pct.CleParametres+","
-                       }
-                        
-                        join ta in AppDbContext.TA
-                        Select{
-                            tarifId= ta.Id,
-                            tarifMontant= ta.Montant
-                        }
-                    */
+  // }
+ //var query7= AppDbContex
+ /* var query= from ct in AppDbContext.CT
+   where ct.DateDebut < dateDemande
+   ....
+    join pct in AppDbContext.PCT
+    on ct.ID equals pct.ID
+    where pct.CT_ID equals parametreRecu
+    orderby pct.pct_ordreParametres ascending 
+    select new tempClass { } as tempObj
+ {
+   ChampConcatene = pct.CleParametres+","
+ }
+ join ta in AppDbContext.TA
+ Select{
+ tarifId= ta.Id,
+ tarifMontant= ta.Montant
+ }
+ */
 /*
-        }
-    }
+     }
+  }
     public class Repository<T> where T : class//,  IRepository<T> where T:class 
 {
     private readonly AppDbContext _dbContext;
@@ -181,7 +175,6 @@ namespace allopromo.Infrastructure.Repositories
     {
         //_dbContext = new AppDbContext();
     }
-
     public void CreateUser(ApplicationUser user, string password)
     {
     }
@@ -189,7 +182,6 @@ namespace allopromo.Infrastructure.Repositories
     {
         throw new NotImplementedException();
     }
-
     public ApplicationRole GetRole()
     {
         throw new NotImplementedException();

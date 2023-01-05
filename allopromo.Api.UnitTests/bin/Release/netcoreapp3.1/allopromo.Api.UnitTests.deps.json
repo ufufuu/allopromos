@@ -2463,6 +2463,7 @@
           "Serilog.Sinks.File": "5.0.0",
           "allopromo.Core": "1.0.0",
           "allopromo.Infrastructure": "1.0.0",
+          "allopromo.Shared": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -2507,12 +2508,12 @@
           "allopromo.Infrastructure.dll": {}
         }
       },
-      "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
+      "allopromo.Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7"
+        },
         "runtime": {
-          "Microsoft.AspNet.SignalR.Core.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.21022.0"
-          }
+          "allopromo.Shared.dll": {}
         }
       }
     }
@@ -4092,8 +4093,8 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
-      "type": "reference",
+    "allopromo.Shared/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

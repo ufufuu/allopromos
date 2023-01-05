@@ -5,15 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Core.Services
 {
-    public class MediaService:IMediaService
+    public interface IMediaService
+    {
+        bool SaveCategoryThumbnail();
+        Task<string> GetImageUrl();
+
+        //Task<string> GetImageInformationUrlAsync();
+
+    }
+    public class MediaService//:ICategorieService
     {
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
-        public bool saveCategoryThumbnail()
+        public bool SaveCategoryThumbnail()
         {
             return true;
         }
-        public async Task<string> getImageInformationUrlAsync()
+        public async Task<string> GetImageInformationUrlAsync()
         {
             using(var httpClient = new HttpClient())
             {

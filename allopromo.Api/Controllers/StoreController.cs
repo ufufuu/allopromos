@@ -17,6 +17,8 @@ using allopromo.Core.Entities;
 using System.Net;
 using System.ComponentModel;
 using System.Net.Http;
+using allopromo.Core.Services;
+
 namespace allopromo.Api.Controllers
 {
     public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
@@ -24,22 +26,34 @@ namespace allopromo.Api.Controllers
     [Route("api/v1/[controller]")]
     public class StoreController : ControllerBase
     {
+        #region "Events"
         //public event StoreCreatedEventHandler StoreCreated; 
-        //, IConfiguration config
+        //IConfiguration config
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
-
+        #endregion
+        #region  "Constantes & Properties"
+        private const string BASE_API = "api/v1/store";
+        #endregion
+        #region "Properties"
+        private readonly ILocalisationService LocalisationService;
         private readonly IStoreService _storeService;
+        private readonly Core.Abstract.ICategorieService _categoryService;
         private readonly INotifyService _notificationService;
         private readonly IProductService _productService;
         public Core.Services.MediaService _mediaService { get; set; }
-        public StoreController(IStoreService storeService, IProductService productService,
+        #endregion
+        #region"Constructors & Methods"
+        public StoreController(IStoreService storeService, 
+            IProductService productService, 
+            Core.Abstract.ICategorieService categorieService,
             INotifyService notificationService)
         {
             _storeService = storeService;
             _productService = productService;
             _notificationService = notificationService;
+            _categoryService = categorieService;
         }
         [HttpPost]
         [Route("categories/create/categoryId")]
@@ -48,7 +62,7 @@ namespace allopromo.Api.Controllers
         {
             if (storeCategory == null)
                 return BadRequest();
-            return Ok(await _storeService.CreateStoreCategoryAsync(storeCategory));
+            return Ok(await _categoryService.CreateStoreCategoryAsync(storeCategory));
         }
         [HttpPost]
         [Route("create")]
@@ -61,7 +75,7 @@ namespace allopromo.Api.Controllers
                 var category = new StoreCategoryDto();
                 object user = null;
                 _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                var store = _storeService.CreateStore(storeDtoName);    //, category, (UserDto)user);
+                var store = _storeService.CreateStore(storeDtoName);//, category, (UserDto)user);
                 if (store != null)
                 {
                     _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
@@ -135,27 +149,34 @@ namespace allopromo.Api.Controllers
             else
             {
                 catId = category.storeCategoryId;
-                _storeService.UpdateStoreCategory(catId.ToString(), category);
+                _categoryService.UpdateStoreCategory(catId.ToString(), category);
                 return Ok(category);
             }
         }
-        //[HttpPut]
-        //[Route("")]
-        //public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] StoreData storeData)
-        //{
-        //    var store = _storeService.GetStoreByIdAsync(storeData.storeData);
-        //    if (store == null)
-        //        return NotFound();
-        //    return Ok(store);
-        //}
+        [HttpPut]
+        [Route("")]
+        public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] Object storeData)
+        {
+            var store = _storeService.GetStoreByIdAsync(storeData.ToString());
+            if (store == null)
+                return NotFound();
+            return Ok(store);
+        }
         [HttpGet]
         [Route("categories")]
         public async Task<IActionResult> GetStoreCategories()
         {
-            var storeCategories = await _storeService.GetStoreCategoriesAsync();
+            var storeCategories = await _categoryService.GetStoreCategoriesAsync();
             if(storeCategories!=null)
                 return Ok(storeCategories);
             return BadRequest();
+        }
+        [HttpGet]
+        [Route("category/{Id}")]
+        public async Task<IActionResult> GetCategoryByIdAsync(string Id)
+        {
+            var storeCategory = await _categoryService.GetStoreCategoryAsyncById(Id); // GetStoreByIdAsync(Id);
+            return Ok(storeCategory);
         }
         [HttpGet]
         [Route("{category}/{Id}/{products}")]
@@ -190,10 +211,12 @@ namespace allopromo.Api.Controllers
             }
             else
             {
-                _storeService.DeleteStoreCategory(categoryId);
+                _categoryService.DeleteStoreCategory(categoryId);
                 return Ok(true);
             }
         }
+        #endregion
+
         //[HttpGet]
         //[Route("{categories}/images")]
         //public async Task<IActionResult> getImageAsync()
@@ -216,7 +239,7 @@ namespace allopromo.Api.Controllers
         //    else
         //        return false;
         //}
-    } 
+    }
     public delegate string mydelegate(string msg);
     public delegate string myGenericDelegate<T>(string msg);
     public class PhoneNumber

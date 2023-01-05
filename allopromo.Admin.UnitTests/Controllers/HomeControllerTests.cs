@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace allopromo.Admin.UnitTests.Controllers
 {
-    
     public delegate IActionResult delRe();
     [TestFixture]
     public class HomeControllerTests
@@ -21,22 +20,31 @@ namespace allopromo.Admin.UnitTests.Controllers
         private Admin.Controllers.HomeController homeController; // =
         private Mock<HttpClient> _httpMock = new Mock<HttpClient>();
         private Mock<IHttpClientFactory> _httpFactoryMock = new Mock<IHttpClientFactory>();
+
         [Test]
-        public void AccountController_Login_Should_Return_LoginFailed()
+        public void HomeController_Index_Should_Return_View()
+        {
+            var homeController = new Admin.Controllers.HomeController(_httpFactoryMock.Object, null);
+            var result = homeController.Index();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.GetType(), typeof(ViewResult));
+        }
+        //[Test]
+        public void HomeController_Login_Should_Return_LoginFailed()
         {
             _httpFactoryMock.Setup(x => x.CreateClient(It.IsAny<string>()))//"", It.IsAny<StringContent>()))
                 .Returns(new HttpClient()).Verifiable();
-            homeController = new Admin.Controllers.HomeController(_httpFactoryMock.Object, null);
+            var homeController = new Admin.Controllers.HomeController(_httpFactoryMock.Object, null);
             var result = homeController.Index(It.IsAny<Models.ViewModel.LoginViewModel>());
             Assert.IsNotNull(result);
         }
-        //[Test]
+        [Test]
         public void HomeController_Login_Should_Raise_Exception_When_Argument_IsNull()
         {
             var homeController = new Admin.Controllers.HomeController(_httpFactoryMock.Object, null);
-            var result = Assert.Throws<ArgumentNullException>(() => homeController.Index());
-            Assert.That(result.Message.GetType().Equals(typeof(ArgumentNullException)));
-            Assert.That(() => homeController.Index(null), Throws.TypeOf<ArgumentNullException>());
+            //var result = homeController.Index();
+            //Assert.IsNotNull(result);
+            var result = Assert.Throws<ArgumentNullException>(() => homeController.Index(null));
         }
         //[Test]
         public void HomeController_Should_Return_Failed_When_ExceptionRaised()

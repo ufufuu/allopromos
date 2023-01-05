@@ -42,6 +42,9 @@ namespace allopromo.Shared
             public static string API_GET_DEPARTMENTS = "api/v1/departments";
             public static string API_GET_DEPARTMENT = "api/v1/department";
             public static string API_DELETE_DEPARTMENT = "api/v1/department/delete";
+
+            public static string API_STORE_CREATE = "api/v1/store";
+            public static string API_STORE_GET  = "api/v1/store";
         }
     }
 }
