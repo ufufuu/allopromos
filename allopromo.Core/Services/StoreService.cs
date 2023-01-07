@@ -14,17 +14,11 @@ using allopromo.Core.Services;
 using System.Text;
 using Newtonsoft.Json;
 using System.IO;
-using allopromo.Core.Abstract;
-
 namespace allopromo.Core.Model
 {
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
-    public class StoreService : IStoreService, IMediaService
+    public class StoreService : IStoreService
     {
-        private ILocalisationService _localisationService;
-        private IUserService _userService;
-        private ICategorieService _categoryService;
-
         public event StoreCreatedEventHandler StoreCreated;
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
@@ -36,6 +30,7 @@ namespace allopromo.Core.Model
         //allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
         IRepository<tStore> storeRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
+        private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepo)
@@ -53,6 +48,10 @@ namespace allopromo.Core.Model
                 StoreCreated(this, EventArgs.Empty);
             }
         }
+        public async Task<StoreDto> CreateStore(StoreDto storeDto)
+        {
+            return null;
+        }
         #region StoresE
         public async Task<StoreDto> CreateStore(//StoreDto storeDto)
             string storeDtoName)
@@ -62,36 +61,39 @@ namespace allopromo.Core.Model
             else
             {
                 tStore store = new tStore();
+                tStoreCategory category = null;
 
                 store.storeId = Guid.NewGuid();
                 store.storeName = storeDtoName;
-                store.City = new tCity {cityName = "Lome", cityId = 679, countryId = 990};
-                store.Category = _categoryService.GetCategoryById("");
-                
+                store.City = new tCity { cityName = "Lome", cityId = 679, countryId = 990 };
+                store.Category = category;
                 await _storeRepository.Add(store);
             }
             return new StoreDto();
         }
         #endregion
         #region Stores
-        public async Task<StoreDto> CreateStoreAsync(StoreDto storeDto, StoreCategoryDto category, UserDto userDto)
+        public async Task<StoreDto> CreateStoreAsync(StoreDto store, StoreCategoryDto category, UserDto userDto)
         {
-            if(storeDto!=null)
+            if(store!=null)
             {
-                tStore storeObj = null;
+                StoreDto storeDto = null;
+                tStore tStore = null;
+
                 var appUser = Mapper.Map<ApplicationUser>(userDto);
                 var storesNumber = GetStoresProducts(appUser);
                 var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
                 var tUser = Mapper.Map<ApplicationUser>(userDto);
                 var tCategory = AutoMapper.Mapper.Map<tStoreCategory>(category);
 
+                storeDto = Mapper.Map<StoreDto>(store);
                 var location = new tLocation();
-                var city = new tCity { cityName = "Kara" };
-                storeObj.Category = tCategory;
-                storeObj.user = tUser;
-                storeObj.City = city;
-                storeObj.storeName = storeDto.storeName;
-                await _storeRepository.Add(storeObj);
+                var city = new tCity { cityName = "kara" };
+
+                tStore.Category = tCategory;
+                tStore.user = tUser;
+                tStore.City = city;
+                _storeRepository.Add(tStore);
                 _storeRepository.Save();
                 _tGenericRepository.Save();
                 OnStoreCreated();
@@ -147,10 +149,26 @@ namespace allopromo.Core.Model
         {
             storeRepository.Delete(store);
         }
-        
+        public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
+        {
+            IEnumerable<StoreCategoryDto> categories = null;
+            categories = AutoMapper.Mapper.Map
+                    <IEnumerable<StoreCategoryDto>>(await _categoryRepository.GetAllAsync());  
+                if (categories == null)
+                    throw new ArgumentNullException();
+            return categories;
+        }
+        public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
+        {
+            var categories = await this.GetStoreCategoriesAsync();
+            var query = from q in categories
+                        where q.storeCategoryId.ToString() == Id
+                        select q;
+            return query.FirstOrDefault();
+        }
         private async Task<int> GetStoresAsync(ApplicationUser user)
         {
-            var Id = _userService.GetUserById(user.Id);
+            var Id = _userService.GetUserbyId(user.Id);
             var query = from q in await _storeRepository.GetAllAsync()
                         where q.user.Equals(user)
                         select q;
@@ -173,7 +191,56 @@ namespace allopromo.Core.Model
                                select q;
             return productQuery.Count();
         }
-       
+        #region StoresCategories
+        public async Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategory)
+        {
+            if (storeCategory == null)
+                return null;
+            var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
+            var storeCategoryDto = new StoreCategoryDto();
+            var tStoreCategory = new tStoreCategory();
+
+            tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
+            tStoreCategory.storeCategoryId = Guid.NewGuid();
+            var imageUrl = string.Empty;
+            if (postStoreCategoryImage() != null)
+            {
+                imageUrl = await this.getImageUrl();
+            }
+            else
+            {
+                imageUrl = "http://www.noiamgesfornow.jpg";
+            }
+            //tStoreCategory.storeCategoryImageUrl = imageUrl;
+            await _categoryRepository.Add(tStoreCategory); //, imageUrl);
+            return storeCategoryDto;
+        }
+        #endregion StoresCategories
+        public void DeleteStoreCategory(string categoryId)
+        {
+        }
+        public void UpdateStoreCategory(StoreCategoryDto category)
+        {
+            var obj = AutoMapper.Mapper.Map<tStoreCategory>(category);
+            _categoryRepository.Update(obj);
+        }
+        public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
+        {
+            if (storeCategoryDto == null)
+            {
+                var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
+                //_storeRepository.DeleteStoreCategory(storeCategory);
+                var category = storeRepository.GetByIdAsync("kjkjk");
+                if (storeCategory == null)
+                {
+                    throw new NullReferenceException();
+                }
+                else
+                {
+                    storeRepository.Delete(storeCategory);
+                }
+            }
+        }
         public async Task<string> getImageInformationAsync()
         {
             using (var httpClient = new HttpClient())
@@ -181,63 +248,63 @@ namespace allopromo.Core.Model
                 var imageInformationUlr = new Uri("https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893");
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, imageInformationUlr);
                 var httpResponseMsg = await httpClient.SendAsync(httpRequest);
-                var content = await httpResponseMsg.Content.ReadAsStringAsync();                                    //httpResponseMsg
+                var content = await httpResponseMsg.Content.ReadAsStringAsync();       //httpResponseMsg
                 var response = Newtonsoft.Json.JsonConvert.SerializeObject(httpResponseMsg);
                 var image = (string)response;
             }
-            var data = new {Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
+            var data = new metaData { Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
             var res = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             return res;
         }
-        //private async Task<string> postStoreCategoryImage()
-        //{
-        //    string response = string.Empty;
-        //    var jsonObj = "{" +
-        //        " \"data\": {" +
-        //        " \"id\": \"soLHmGdX\", " +
-        //        " \"url\": \"https://thumbsnap.com/soLHmGdX\", " +
-        //        " \"media\": \"https://thumbsnap.com/i/soLHmGdX.png\", " +
-        //        " \"thumb\": \"https://thumbsnap.com/t/soLHmGdX.jpg\", " +
-        //        " \"width\": 224, " +
-        //        " \"height\": 224 " +
-        //        "}," +
-        //        " \"success\": true, " +
-        //        "  \"status\": 200 " +
-        //    " }";
-        //    //var jsonData = JObject.Parse(jsonObj);
-        //    string imageUrl = string.Empty;
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        var Url = new Uri
-        //            ("https://thumbsnap.com/api/upload");
-        //        var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
-        //        var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);
-        //        //if (result.IsSuccessStatusCode)
-        //        //{
-        //            response = result.StatusCode.ToString();
-        //            var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
-        //            MediaApiResponseModel dataObj = obj.data;
-        //            var image = JsonConvert.SerializeObject(dataObj);
-        //            var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
-        //            imageUrl = media.url;
-        //    }
-        //    return imageUrl;
-        //}
-        //public async Task<string> GetImageUrl()
-        //{
-        //    MediaApiResponseModel data1 = new MediaApiResponseModel();
-        //    string img = string.Empty;
-        //    var response = await this.postStoreCategoryImage();
-        //    if (response == null)
-        //    {
-        //        throw new Exception();
-        //    }
-        //    else
-        //    {
-        //        img = response;
-        //    }
-        //    return img;
-        //}
+        private async Task<string> postStoreCategoryImage()
+        {
+            string response = string.Empty;
+            var jsonObj = "{" +
+                " \"data\": {" +
+                " \"id\": \"soLHmGdX\", " +
+                " \"url\": \"https://thumbsnap.com/soLHmGdX\", " +
+                " \"media\": \"https://thumbsnap.com/i/soLHmGdX.png\", " +
+                " \"thumb\": \"https://thumbsnap.com/t/soLHmGdX.jpg\", " +
+                " \"width\": 224, " +
+                " \"height\": 224 " +
+                "}," +
+                " \"success\": true, " +
+                "  \"status\": 200 " +
+            " }";
+            //var jsonData = JObject.Parse(jsonObj);
+            string imageUrl = string.Empty;
+            using (var httpClient = new HttpClient())
+            {
+                var Url = new Uri
+                    ("https://thumbsnap.com/api/upload");
+                var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
+                var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);
+                //if (result.IsSuccessStatusCode)
+                //{
+                    response = result.StatusCode.ToString();
+                    var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
+                    MediaApiResponseModel dataObj = obj.data;
+                    var image = JsonConvert.SerializeObject(dataObj);
+                    var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
+                    imageUrl = media.url;
+            }
+            return imageUrl;
+        }
+        public async Task<string> getImageUrl()
+        {
+            MediaApiResponseModel data1 = new MediaApiResponseModel();
+            string img = string.Empty;
+            var response = await this.postStoreCategoryImage();
+            if (response == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                img = response;
+            }
+            return img;
+        }
         public T GetJsonInstance<T>(string propertyName, string json)
         {
             using (var stringReader = new StringReader(json))
@@ -271,30 +338,20 @@ namespace allopromo.Core.Model
             obj.storeCategoryName = categoryDto.storeCategoryName;
             _categoryRepository.Update(obj);
         }
-
-        public bool SaveCategoryThumbnail()
+    }
+    public class metaData
+    {
+        public string Id { get; set; }
+        public string Url { get; set; }
+        public metaData(string id, string url)
         {
-            throw new NotImplementedException();
+            Id = string.Empty;
+            Url = string.Empty;
         }
-
-        public Task<string> GetImageUrl()
+        public metaData()
         {
-            throw new NotImplementedException();
         }
     }
-    //public class metaData
-    //{
-    //    public string Id { get; set; }
-    //    public string Url { get; set; }
-    //    public metaData(string id, string url)
-    //    {
-    //        Id = string.Empty;
-    //        Url = string.Empty;
-    //    }
-    //    public metaData()
-    //    {
-    //    }
-    //}
     
     //public class OrderPlacedEventArgs : EventArgs
     //{

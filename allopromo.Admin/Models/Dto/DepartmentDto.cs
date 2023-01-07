@@ -8,7 +8,7 @@ namespace allopromo.Admin.Models.Dto
 {
     public class DepartmentDto
     {
-        public string DepartmentId { get; set; }
+        public string departmentId { get; set; }
         [Required(ErrorMessage ="Name is Required for Department ")]
         [MinLength(16, ErrorMessage =" Lenght should be 16")]
         public string departmentName { get; set; }

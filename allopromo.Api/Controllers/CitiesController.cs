@@ -33,18 +33,18 @@ namespace allopromo.Api.Controllers
 
         [HttpPost]
         //[Route(ConstancesCommunes)]
-        public IActionResult PostCity([FromBody] CityDto cityDto)
+        public IActionResult PostCity([FromRoute] CityDto city)
         {
             try
             {
-                _localisationService.Create(cityDto);
+                _localisationService.Create(city);
             }
             catch (Exception ex)
             {
                 //_exceptionWriter.WriteException(ex.ToString());
                 throw;
             }
-            return Ok(cityDto);
+            return Ok(city);
         }
         [HttpGet]
         [Route("")]
@@ -90,7 +90,8 @@ namespace allopromo.Api.Controllers
         [Route("city")]
         public IActionResult getCurrentCity(string currentIp)
         {
-            currentIp = "41.207.160.90";//currentIp = "74.57.247.6";
+            //currentIp = "74.57.247.6";
+            currentIp = "41.207.160.90";
             var city = _localisationService.GetUserCurrentCity(currentIp);
             return Ok(city);
         }

@@ -40,7 +40,7 @@ namespace allopromo.Admin.Controllers
                 {
                     try
                     {
-                        var department = new DepartmentDto { DepartmentId= new Guid().ToString(), departmentName = departmentDto.departmentName };
+                        var department = new DepartmentDto { departmentId = new Guid().ToString(), departmentName = departmentDto.departmentName };
                         var jsonDepartment = JsonConvert.SerializeObject(department);
                         var httpContent = new StringContent(jsonDepartment, System.Text.Encoding.UTF8, "application/json");
                         using (var httpClient = _httpClientFactory.CreateClient())

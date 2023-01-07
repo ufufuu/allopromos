@@ -19,9 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Infrastructure", 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Api", "allopromo.Api\allopromo.Api.csproj", "{5DFB4743-78BC-4E7A-8F21-0B51729F8589}"
-	ProjectSection(ProjectDependencies) = postProject
-		{420B6808-04DB-4084-A707-1092FD1FB7B7} = {420B6808-04DB-4084-A707-1092FD1FB7B7}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Infrastructure.UnitTests", "allopromo.Infrastructures.UnitTest\allopromo.Infrastructure.UnitTests.csproj", "{7C784765-3553-4FC7-8AE4-DF6892CC25A3}"
 	ProjectSection(ProjectDependencies) = postProject

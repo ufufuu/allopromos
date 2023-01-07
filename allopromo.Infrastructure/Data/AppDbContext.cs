@@ -13,8 +13,8 @@ namespace allopromo.Infrastructure.Data
 
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,
-    IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext
-    */
+    IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
+
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<tStore> Stores { get; set; }
@@ -24,7 +24,6 @@ namespace allopromo.Infrastructure.Data
         public DbSet<tRegion> Regions { get; set; }
         public DbSet<tProduct> Products { get; set; }
         public DbSet<tProductCategory> ProductCategories { get; set; }
-        public DbSet<tDepartment> Departments { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -34,42 +33,30 @@ namespace allopromo.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ApplicationUser>()
-              .HasDiscriminator<int>("Type")
-              .HasValue<ApplicationUser>(1);
 
-            modelBuilder.Entity<tDepartment>()
-                .HasMany(d=>d.categories)
-                .WithOne();
-            modelBuilder.Entity<tDepartment>()
-                .Property(s => s.departmentId)
-                .HasColumnName("departmentId");
+            //modelBuilder.Entity<ApplicationUser>()
+            //    //.HasDiscriminator<int>("Type")
+            //    .HasValue<ApplicationUser>(1);
 
-            modelBuilder.Entity<tStoreCategory>()
-            .HasOne<tDepartment>(c =>c.Department)
-            .WithMany(d => d.categories)
-            .HasForeignKey(s => s.departmentId);
-
-
-
-            //);
-            /*modelBuilder.Entity<ApplicationUserRole>(userRole =>
-            {
-                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
-                userRole.HasOne(ur => ur.Role)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.RoleId)
-                    .IsRequired();
-                userRole.HasOne(ur => ur.User)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.UserId)
-                    .IsRequired();
-            });*/
-            /*modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p =>
-            new { p.UserId, p.RoleId });
-            modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            //modelBuilder.Entity<ApplicationUserRole>(userRole =>
+            //{
+            //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+            //    userRole.HasOne(ur => ur.Role)
+            //        .WithMany(r => r.UserRoles)
+            //        .HasForeignKey(ur => ur.RoleId)
+            //        .IsRequired();
+            //    userRole.HasOne(ur => ur.User)
+            //        .WithMany(r => r.UserRoles)
+            //        .HasForeignKey(ur => ur.UserId)
+            //        .IsRequired();
+            //});
+            //modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p =>
+            //new { p.UserId, p.RoleId });
+            //modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            /*
             modelBuilder.Entity<tStore>().HasNoKey();
             modelBuilder.Entity<tStore>().ToTable("Store");
+
             modelBuilder.Entity<tStore>(store =>
             {
                 store.HasKey(s => new { s.storeId });

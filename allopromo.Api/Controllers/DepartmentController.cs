@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using allopromo.Core.Services.Base;
 using allopromo.Core.Services;
 using allopromo.Core.Entities;
+
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -22,25 +23,26 @@ namespace allopromo.Api.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private IBaseService<DepartmentDto> _departmentService; //= new DepartmentService<DepartmentDto>();
-
-        private IBaseService<DepartmentDto> _departmentServices;
+        private IBaseService<DepartmentDto> _departmentService;
         private readonly IExceptionWriter _exceptionWriter;
-        
         public DepartmentController(IConfiguration config,
-               IBaseService<DepartmentDto> departmentServices,
-        IBaseService<DepartmentDto> departmentService)
+            IBaseService<DepartmentDto> departmentService
+                                        )
         {
             _departmentService = departmentService;
             _config = config;
-            //_exceptionWriter = exceptionWriter;
-            _departmentServices = departmentServices;
+         //_exceptionWriter = exceptionWriter;
         }
+
         [HttpPost]
         public IActionResult PostDepartment ([FromBody] DepartmentDto departmentDto)
         {
+            String Id = String.Empty;
             try
             {
+                var department = new tDepartment();
+                department.departmentId = departmentDto.departmentId.ToString();
+                department.departmentName = departmentDto.departmentName.ToString();
                 _departmentService.Create(departmentDto);
             }
             catch (Exception ex)
@@ -53,14 +55,14 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<IActionResult> GetDepartments()
         {
-            var departments = await _departmentServices.GetEntities();
-            return Ok(departments);
+
+            return BadRequest();
         }
         [HttpGet]
-        [Route("{departmentId}")]
+        [Route("cities+{cityId}")]
         public IActionResult GetDepartmentById(string cityId)
         {
-            try 
+            try
             {
                 String city= string.Empty;
                 return Ok(city);
@@ -71,13 +73,13 @@ namespace allopromo.Api.Controllers
             }
         }
         [HttpDelete]
-        [Route("delete/{departmentId}")]
+        [Route("department+{Id}")]
         public async Task<IActionResult> Delete(string Id)
         {
             try
             {
                 var department = from c in await _departmentService.GetEntities()  //(Id)
-                           where c.departmentName.Equals(Id)
+                           where c.departmentId.Equals(Id)
                            select c;
                 return Ok();
             }

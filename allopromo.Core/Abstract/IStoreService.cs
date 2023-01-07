@@ -10,28 +10,23 @@ namespace allopromo.Core.Abstract
     {
         event StoreCreatedEventHandler StoreCreated;
         Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user);
-        
+        Task<StoreDto> CreateStore(StoreDto store);
         Task<StoreDto> CreateStore(string storeDtoName);
         Task <IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet);
         Task<StoreDto> GetStoreByIdAsync(string storeId);
-
+        Task <StoreCategoryDto> GetStoreCategoryByIdAsync(string catId);
         void OnStoreCreated();
-        
+        Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync();
         Task<string> getImageInformationAsync();
-
-        //void DeleteStoreCategory(StoreCategoryDto storeCategoryDto);
-        //void DeleteStoreCategory(string categoryId);
-        //Task<StoreCategoryDto> GetStoreCategoryAsyncById(string Id);
-        //public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto);
-        //Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync();
-        //Task <StoreCategoryDto> GetStoreCategoryByIdAsync(string catId);
-        //Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategoryName);
-
+        Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategoryName);
+        void DeleteStoreCategory(StoreCategoryDto storeCategoryDto);
+        Task<string> getImageUrl();
+        void DeleteStoreCategory(string categoryId);
+        Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id);
         //Action<bool> StoreCreatedDel;
         //public Func<bool, int> StoreCreatedDel2;
         //IEnumerable<StoreDto> GetStores(int page, int size);
-        //Task<StoreDto> CreateStore(StoreDto store);
 
-
+        public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto);
     }
 }

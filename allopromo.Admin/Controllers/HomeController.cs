@@ -34,19 +34,11 @@ namespace allopromo.Admin.Controllers
         [HttpPost]
         public IActionResult Index(LoginViewModel loginViewModel)
         {
-            IEnumerable<Models.Dto.CategoryDto> cats = new List<Models.Dto.CategoryDto>();
-            if (loginViewModel == null)
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
-                List<Models.Dto.CategoryDto> categories = new List<Models.Dto.CategoryDto>();
-                categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
-                categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
-                categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
-                cats = categories.AsEnumerable();
-            }
+            List<Models.Dto.CategoryDto> categories = new List<Models.Dto.CategoryDto>();
+            categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
+            categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
+            categories.Add(new Models.Dto.CategoryDto { categoryId = 1, categoryName = "Xsds", catThumbnail = "" });
+            var cats = categories.AsEnumerable();
             return View(cats);
 
             //Response.Redirect("Account/Login");

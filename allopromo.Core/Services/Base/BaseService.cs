@@ -7,40 +7,33 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services.Base
 {
-    //public class BaseService<TEntity>: IBaseService<TEntity> where TEntity:class
-    //{
-    //    public IRepository<TEntity> _repo { get; set; }
-    //    public BaseService(IRepository<TEntity> repo)
-    //    {
-    //        _repo = repo;
-    //    }
-    //    public void Create(TEntity entity) => _repo.Add(entity);
-
-    //    public int Delete(TEntity entity) 
-    //    {
-    //        return 0;
-    //    }
-    //    public async Task<IEnumerable<TEntity>> GetEntites()
-    //    {
-    //        var tObjects = await _repo.GetAllAsync();
-    //        return tObjects;
-    //    }
-    //    int IBaseService<TEntity>.Create(TEntity entity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //    public virtual async Task<IEnumerable<TEntity>> GetEntities() => await _repo.GetAllAsync();
-    //    int IBaseService<TEntity>.Delete(TEntity tEntity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //    Task<object> IBaseService<TEntity>.GetById(string Id)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //    void IBaseService<TEntity>.Save(TEntity entity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+    public class BaseService<TEntity>: IBaseService<TEntity> where TEntity:class
+    {
+        IRepository<TEntity> _departmentRepo;
+        public BaseService()
+        {
+        }
+        public BaseService(IRepository<TEntity> departmentRepo)
+        {
+            if(_departmentRepo != null)
+            _departmentRepo = departmentRepo;
+        }
+        public void Add(TEntity entity)
+        {
+            if(_departmentRepo !=null)
+            _departmentRepo.Add(entity);
+        }
+        public async Task<IEnumerable<TEntity>> GetEntities()
+        {
+            return await _departmentRepo.GetAllAsync();
+        }
+        
+        public void Create(TEntity entity)                         //string Id)
+        {
+            if (entity!= null)
+            {
+                _departmentRepo.Add(entity);
+            }
+        }
+    }
 }

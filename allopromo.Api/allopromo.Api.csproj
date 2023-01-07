@@ -119,7 +119,6 @@
   <ItemGroup>
     <ProjectReference Include="..\allopromo.Core\allopromo.Core.csproj" />
     <ProjectReference Include="..\allopromo.Infrastructure\allopromo.Infrastructure.csproj" />
-    <ProjectReference Include="..\allopromo.Shared\allopromo.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
