@@ -43,7 +43,7 @@ namespace allopromo.Core.Contracts
         {
             IEnumerable<CityDto> cities = null;
             cities = AutoMapper.Mapper.Map
-                <IEnumerable<CityDto>>(await _cityRepository.GetAllAsync());
+                <IEnumerable<CityDto>>(_cityRepository.GetAllAsync());
             return cities;
         }
         public new async Task<string> GetUserCurrentCity(string ip)

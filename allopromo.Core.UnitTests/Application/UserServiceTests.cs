@@ -6,36 +6,74 @@ using Microsoft.AspNetCore.Identity;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Core.UnitTests
 {
     public class UserServiceTest
     {
-    private UserService _sut;
-    private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
-
-    //private readonly UserManager<ApplicationUser> _userManager;
+        private UserService _sut;
+        private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
+        private Mock<UserManager<ApplicationUser>> _userManagerMock = new Mock<UserManager<ApplicationUser>>();
+        private Mock<SignInManager<ApplicationUser>> signInManager = new Mock<SignInManager<ApplicationUser>>();
         public UserServiceTest()
         {
+            _sut = new UserService(_userRepoMock.Object, MockUserManager().Object, 
+                GetSignInManagerMock().Object);
+        }
+        private static Mock<SignInManager<ApplicationUser>> GetSignInManagerMock()
+        {
+            var signManagerMock = new Mock<IRoleStore<ApplicationUser>>();
+            //return signManagerMock.Object;
+            return new Mock<SignInManager<ApplicationUser>>();
+        }
+        private Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
+        {
+            var mockUsrMgr = MockUserManager();
+            //var mockAuthMgr = new Mock<AuthenticationManager>();
+            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object); //, mockAuthMgr.Object);
         }
         private static Mock<UserManager<ApplicationUser>> MockUserManager()
         {
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(storeMock.Object, 
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+            return new Mock<UserManager<ApplicationUser>>
+                (
+                storeMock.Object,null,null,null,null,null,null,null,null
+         );
+        }
+        [Test]
+        public void UserService_GetUsers_SHOULD_Return_Users_With_Roles()
+        {
+            _userManagerMock.Setup(x => x.Users).Returns(GetUsers());
+            _userRepoMock.Setup(x => x.GetAllAsync()).Returns(GetUsersAsync());
+
+            var t = _sut;
+            var usersWithRoles = _sut.GetUsersWithRoles();
+            var userWithRole = usersWithRoles.Result.FirstOrDefault();
+            Assert.IsNotNull(usersWithRoles.Result.FirstOrDefault().UserRoles);
+            Assert.IsNotNull(usersWithRoles);
+            _userRepoMock.Verify(x => x.GetAllAsync(), Times.Once());
+        }
+        private IQueryable<ApplicationUser> GetUsers()
+        {
+            IList<ApplicationUser> users = new List<ApplicationUser>();
+            return users.AsQueryable();
+        }
+        private async Task<IQueryable<ApplicationUser>> GetUsersAsync()
+        {
+            var result = await Task.Run(() => getUsers());
+                return result.AsQueryable();
+        }
+        private List<ApplicationUser> getUsers()
+        {
+            IList<ApplicationUser> appUsers = new List<ApplicationUser>();
+            return appUsers.ToList();
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {
             //Arrange
-            _sut = new UserService(_userRepoMock.Object, MockUserManager().Object, null);
             ApplicationUser user = new ApplicationUser
             {
                  Email="dgdgdg@hhdhddh.fr",
@@ -51,7 +89,6 @@ namespace allopromo.Core.UnitTests
         public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
         {
             _userRepoMock = new Mock<IRepository<ApplicationUser>>();
-            _sut = new UserService(_userRepoMock.Object, null, null);
             var result = await _sut.CreateUser(null, "kjk788kkk");
 
             //Assert.Throws<Exception>(async () => await _sut.CreateUser(null, "akaj4i"));
@@ -72,42 +109,18 @@ namespace allopromo.Core.UnitTests
             throw new  ArgumentNullException();
         }
     }
-    //public interface I1
-    //{
-    //}
-    //public class C3
-    //{
-    //}
-    //public class C1 : C3, I1
-    //{
-    //   public C1()
-    //   {
-
-    //   }
-    //}
-    //public class C2
-    //{
-    //    void Method1()
-    //    {
-    //        C1 c1 = new C1();
     //        C3 c2 = new C1();
-    //        C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS 
-    //        //C1 c4 = new C3();
-    //    }
-    //}
+    //        C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS
 }
-//
 
 /// new , present myself - intro if the course
 /// 
 //what i do ?
 //start - present proecjt - like , sub
 //pblm
-// vs entreprise testing lines ! live uinit testing 
+// vs entreprise testing lines ! live uinit testing
 //InlineData("six ' eight \"", false, 0) => Nuinit ??
 //CreateUser_Suuceeess, cretePerson_throwsexc
-
-//htmlAgilityPack - newtonSoft - Nuget.Core -             
-
+//htmlAgilityPack - newtonSoft - Nuget.Core -
 //ca va ca va
-// ? unit for Work - Generic Repository - Logging - Query Pattenrs- Resilienccy ! 
+// ? unit for Work - Generic Repository - Logging - Query Pattenrs- Resilienccy

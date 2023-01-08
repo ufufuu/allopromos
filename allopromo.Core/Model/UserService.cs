@@ -18,11 +18,10 @@ namespace allopromo.Core.Model
    public class UserService : IUserService 
    {
         private readonly IRepository <ApplicationUser>_userRepo;
-        private readonly UserManager<ApplicationUser> _userManager;//= new UserManager<ApplicationUser>(); 
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
-
-                                                                                //private Serilog.ILogger _logger;// vs Microsoft Logging !
+                     //private Serilog.ILogger _logger;// vs Microsoft Logging !
         private HttpContextAccessor _httpContextAccessor;
         public UserService(IRepository<ApplicationUser> userRepo, 
             UserManager<ApplicationUser> userManager, 
@@ -42,6 +41,26 @@ namespace allopromo.Core.Model
             _userManager = userManager;
             _passwordHasher = passwordHasher;
             _signInManager = signInManager;
+        }
+        public async Task<List<ApplicationUser>> GetUsersWithRoles()
+        {
+            IQueryable<ApplicationUser> users = null;
+            try
+            {
+                //users = UserConvertor.ConvertUsers(_userManager.Users
+                ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                //.ToList());
+
+                users = await _userRepo.GetAllAsync();
+                //users = _userManager.Users;
+
+                int j = 5;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return users.ToList();
         }
         public ApplicationUser GetUserIfExist(string userName)
         {
@@ -72,10 +91,6 @@ namespace allopromo.Core.Model
                         return true;
                     return false;
             }
-            //catch(SqlException ex)
-            // {
-            //   throw ex;
-            //}
             catch(InvalidOperationException ex)
             {
                 throw ex;
@@ -210,10 +225,6 @@ namespace allopromo.Core.Model
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
 
             return null;
-
-            //var query= (from _userManager.Users
-            //var query9 = "SELECT from UserTable join [dbo].[AspNetUSerRoles] join [dbo.].[AspNetUsers]";
-            //var YYUU= 
         }
         public ClaimsPrincipal GetCurrentUser()
         {
@@ -226,31 +237,7 @@ namespace allopromo.Core.Model
             var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);*/
         }
-        public async Task<List<ApplicationUser>> GetUsers()
-        {
-            IQueryable<ApplicationUser> users = null;
-            try
-            {
-                //users = UserConvertor.ConvertUsers(_userManager.Users
-                ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                //.ToList());
-                //users = await _userRepo.GetAllAsync();
-
-
-                users = _userManager.Users;
-
-                //using(var db = new allopromo.Infrastructure.
-                //{
-                //}
-
-                int j = 5;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            return users.ToList();
-        }
+        
         public IList<ApplicationUser> GetUsersInRole(string roleName)
         {
             var users = GetUsersByRole(roleName);

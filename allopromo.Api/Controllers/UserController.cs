@@ -62,7 +62,7 @@ namespace allopromo.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
-            var roleUsers = _userService.GetUsers();
+            var roleUsers = _userService.GetUsersWithRoles();
             return Ok(roleUsers);
         }
         [HttpPost]

@@ -13,7 +13,7 @@ namespace allopromo.Core.Abstract
 
         void Update(TEntity obj);
         void Save();
-        Task<List<TEntity>> GetAllAsync();
+        Task<IQueryable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(object Id);
         Task<TEntity> GetByIdAsync(int categoryId);
         Task<TEntity> GetByIdAsync(string categoryId);
