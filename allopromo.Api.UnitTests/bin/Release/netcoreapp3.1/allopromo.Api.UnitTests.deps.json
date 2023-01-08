@@ -2506,14 +2506,6 @@
         "runtime": {
           "allopromo.Infrastructure.dll": {}
         }
-      },
-      "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
-        "runtime": {
-          "Microsoft.AspNet.SignalR.Core.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.21022.0"
-          }
-        }
       }
     }
   },
@@ -4089,11 +4081,6 @@
     },
     "allopromo.Infrastructure/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

@@ -228,24 +228,28 @@ namespace allopromo.Core.Model
         }
         public async Task<List<ApplicationUser>> GetUsers()
         {
-            List<ApplicationUser> users = null;
+            IQueryable<ApplicationUser> users = null;
             try
             {
                 //users = UserConvertor.ConvertUsers(_userManager.Users
                 ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 //.ToList());
+                //users = await _userRepo.GetAllAsync();
 
-                users = await _userRepo.GetAllAsync();
+
+                users = _userManager.Users;
+
                 //using(var db = new allopromo.Infrastructure.
                 //{
                 //}
+
                 int j = 5;
             }
             catch(Exception ex)
             {
                 throw ex;
             }
-            return users;
+            return users.ToList();
         }
         public IList<ApplicationUser> GetUsersInRole(string roleName)
         {
