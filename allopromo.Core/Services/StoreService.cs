@@ -14,6 +14,8 @@ using allopromo.Core.Services;
 using System.Text;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+
 namespace allopromo.Core.Model
 {
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
@@ -23,20 +25,22 @@ namespace allopromo.Core.Model
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
         private IProductService _productService { get; set; }
-        private IRepository<tStoreCategory> _categoryRepository;
+        public IRepository<tStoreCategory> _categoryRepository { get; set; }
         private IRepository<tStore> _storeRepository;
         private IStoreManager _storeManager;
+        public IRepository<tDepartment> _departmentRepository { get; set; }
 
-        //allopromo.Shared.Abstract.IRepository<tStore> storeRepository;
         IRepository<tStore> storeRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
-        public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepo)
+        public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepository,
+            IRepository<tDepartment> departmentRepository)
         {
             _storeRepository = storeRepository;
-            _categoryRepository = categoryRepo;
+            _categoryRepository = categoryRepository;
+            _departmentRepository = departmentRepository;
         }
         public StoreService()
         {
@@ -152,9 +156,17 @@ namespace allopromo.Core.Model
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
             IEnumerable<StoreCategoryDto> categories = null;
+            var categoriesObj = await _categoryRepository.GetAllAsync();
+            var tObj = categoriesObj.AsQueryable().Include(x => x.Department)
+                .Select ( c=> new StoreCategoryDto
+                {
+                    storeCategoryName=c.storeCategoryName,
+                    DepartmentName= c.Department.departmentName
+                });
+
             categories = AutoMapper.Mapper.Map
-                    <IEnumerable<StoreCategoryDto>>(await _categoryRepository.GetAllAsync());  
-                if (categories == null)
+                    <IEnumerable<StoreCategoryDto>>(tObj);
+            if (categories == null)
                     throw new ArgumentNullException();
             return categories;
         }

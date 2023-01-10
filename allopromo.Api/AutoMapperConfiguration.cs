@@ -21,8 +21,10 @@ namespace allopromo.Api
                 configuration.CreateMap<UserDto, ApplicationUser>();
                 configuration.CreateMap<ApplicationUser, UserDto>();
                 configuration.CreateMap<StoreCategoryDto, tStoreCategory>();
-                    //.ForMember(x=>x.storeCategoryId, opt=>opt)
+                //.ForMember(x=>x.storeCategoryId, opt=>opt)
+
                 configuration.CreateMap<tStoreCategory, StoreCategoryDto>();
+                    //.ForMember(dest => dest.storeCategoryImageUrl, opt => opt.MapFrom(src => src.storeCategoryName));
 
                 //configuration.CreateMap<tCity, CityDto>();
 

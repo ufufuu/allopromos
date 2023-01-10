@@ -13,6 +13,7 @@ namespace allopromo.Core.Domain
         //public string hId { get; set; }
 
         //public string userName { get; set; }
+
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
 
     }

@@ -1,3 +1,7 @@
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\testhost.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\NUnit3.TestAdapter.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\NUnit3.TestAdapter.pdb
@@ -173,10 +177,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Rel
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\allopromo.Infrastructure.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\allopromo.Core.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb

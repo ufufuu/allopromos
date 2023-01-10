@@ -14,7 +14,13 @@ namespace allopromo.Core.UnitTest.ServicesTests
     {
         private Mock<IRepository<tStore>> storeRepositoryMock= new Mock<IRepository<tStore>>();
         private Mock<IRepository<tStoreCategory>> categoryRepositoryMock = new Mock<IRepository<tStoreCategory>>();
-
+        private Mock<IRepository<tDepartment>> departmentRepositoryMock = new Mock<IRepository<tDepartment>>();
+        private StoreService _sut;
+        public StoreServiceTests()
+        {
+            _sut = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object,
+                departmentRepositoryMock.Object);
+        }
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {
@@ -31,22 +37,19 @@ namespace allopromo.Core.UnitTest.ServicesTests
         [Test]
         public void StoreService_GetStores_ReturnStores()
         {
-            var storeService = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object);
             List<StoreDto> listStores = new List<StoreDto>();
-            var stores = storeService.GetStoreCategoriesAsync();
+            var stores = _sut.GetStoreCategoriesAsync();
         }
         [Test]
         public void StoreService_GetCategories_ReturnsCategories()
         {
-            var storeService = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object);
-            var result = storeService.GetStoreCategoriesAsync();
+            var result = _sut.GetStoreCategoriesAsync();
             Assert.IsNotNull(result);
         }
         [Test]
         public async Task StoreService_GetImageUrl_SHOULD_Return_ImageLink()
         {
-            var storeService = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object);
-            var storeCategoryUrl = await storeService.getImageUrl();
+            var storeCategoryUrl = await _sut.getImageUrl();
             Assert.IsNotNull(storeCategoryUrl);
             Assert.AreEqual(storeCategoryUrl.GetType(), typeof(string));
         }
@@ -54,7 +57,6 @@ namespace allopromo.Core.UnitTest.ServicesTests
         public void UpdateStoreCategory_DEVRAIT_RetournerUpdatedStoreCategory()
         {
             categoryRepositoryMock.Setup(x => x.Update(It.IsAny<tStoreCategory>()));
-            var storeService = new StoreService(storeRepositoryMock.Object, categoryRepositoryMock.Object);
             //var updated =storeService.UpdateStoreCategory() 
         }
     }

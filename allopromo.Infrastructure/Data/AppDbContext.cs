@@ -24,6 +24,8 @@ namespace allopromo.Infrastructure.Data
         public DbSet<tRegion> Regions { get; set; }
         public DbSet<tProduct> Products { get; set; }
         public DbSet<tProductCategory> ProductCategories { get; set; }
+
+        public DbSet<tDepartment> Departments { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -33,6 +35,18 @@ namespace allopromo.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<tStoreCategory>(category=>
+            //{
+            //    category.HasKey(c=> new {c.})
+            //});
+
+            modelBuilder.Entity<tDepartment>(category =>
+            {
+                category.HasKey(c => new { c.departmentId });
+                category.HasMany(c => c.Categories)
+                .WithOne(s => s.Department);
+            });
 
             //modelBuilder.Entity<ApplicationUser>()
             //    //.HasDiscriminator<int>("Type")

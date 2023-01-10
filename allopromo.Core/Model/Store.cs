@@ -19,6 +19,5 @@ namespace allopromo.Core.Model
     //    public string storeName { get; set; }
     //    public string storeDescription { get; set; }
     //    //public virtual ApplicationUser storeOwner { get; set; }
-
     //}
 }

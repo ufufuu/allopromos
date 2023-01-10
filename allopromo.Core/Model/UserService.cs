@@ -19,41 +19,33 @@ namespace allopromo.Core.Model
    {
         private readonly IRepository <ApplicationUser>_userRepo;
         private readonly UserManager<ApplicationUser> _userManager;
+
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
-                     //private Serilog.ILogger _logger;// vs Microsoft Logging !
+
+        private RoleManager<IdentityRole> _roleManager;
         private HttpContextAccessor _httpContextAccessor;
-        public UserService(IRepository<ApplicationUser> userRepo, 
-            UserManager<ApplicationUser> userManager, 
+        
+        public UserService(IRepository<ApplicationUser> userRepo, RoleManager<IdentityRole> roleManager, 
+        UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager)
         {
             _userRepo= userRepo;
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
-            _passwordHasher = new PasswordHasher<ApplicationUser>();
-        }
-        public UserService(IRepository<ApplicationUser> userRepo, 
-            UserManager<ApplicationUser> userManager, 
-            PasswordHasher<ApplicationUser> passwordHasher,
-            SignInManager<ApplicationUser> signInManager)
-        {
-            _userRepo = userRepo;
-            _userManager = userManager;
-            _passwordHasher = passwordHasher;
-            _signInManager = signInManager;
+            //_passwordHasher = new PasswordHasher<ApplicationUser>();
         }
         public async Task<List<ApplicationUser>> GetUsersWithRoles()
         {
             IQueryable<ApplicationUser> users = null;
             try
             {
-                //users = UserConvertor.ConvertUsers(_userManager.Users
-                ////.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                //.ToList());
-
                 users = await _userRepo.GetAllAsync();
-                //users = _userManager.Users;
 
+                users = _userManager.Users;
+                //.Include(u => u.UserRoles); //.ThenInclude(ur => ur.Role);// ToList();
+                
                 int j = 5;
             }
             catch (Exception ex)

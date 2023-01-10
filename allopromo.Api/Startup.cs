@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
 using allopromo.Api.Infrastructure;
 using Polly;
-//using allopromoInfrastructure.Abstract;
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -145,10 +144,9 @@ namespace allopromo
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
             services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
+            services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
-            //services.AddScoped<ILoggerManager, LoggerManager>();
-            //?Instead of <ApplicationUser>>
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
