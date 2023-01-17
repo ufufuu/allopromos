@@ -15,8 +15,12 @@ namespace allopromo.Api
             Mapper.Initialize(configuration =>
             {
                 configuration.ValidateInlineMaps = false;
-                configuration.CreateMap<StoreDto, tStore>()
-                .ForMember(x=>x.storeId, opt=>opt.Ignore());
+
+                configuration.CreateMap<StoreDto, tStore>();
+                //.ForMember(x=>x.storeId, opt=>opt.Ignore());
+
+                configuration.CreateMap<tStore, StoreDto>();
+                //.ForMember(x => x.storeId, opt => opt.Ignore());
 
                 configuration.CreateMap<UserDto, ApplicationUser>();
                 configuration.CreateMap<ApplicationUser, UserDto>();
@@ -32,9 +36,7 @@ namespace allopromo.Api
                     .ForMember(x => x.cityGpsLatitude, opt => opt.Ignore())
                     .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore())
                     .ForMember(x => x.countryId, opt => opt.Ignore());
-
             });
-            
         }
     }
 }

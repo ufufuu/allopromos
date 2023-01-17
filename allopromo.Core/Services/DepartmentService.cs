@@ -12,12 +12,20 @@ namespace allopromo.Core.Services
     public class DepartmentService : BaseService<tDepartment>                                                   //!!!
     {
         private IRepository<tDepartment> _departmentRepository;
-        public DepartmentService()
-        {
-        }
         public DepartmentService(IRepository<tDepartment> departmentRepository)
         {
             _departmentRepository = departmentRepository;
+        }
+        public DepartmentService()
+        {}
+        public new IEnumerable<DepartmentDto> GetEntities()
+        {
+            var tEntities = _departmentRepository.GetAllAsync();
+            var departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+            if (tEntities == null)
+                return departments;
+            else
+                throw new NullReferenceException();
         }
         public void Create()
         {
@@ -38,10 +46,6 @@ namespace allopromo.Core.Services
         public new void Add(tDepartment department)
         {
             _departmentRepository.Add(new tDepartment { });
-        }
-        public new IEnumerable<DepartmentDto> GetEntities()
-        {
-            return null;
         }
     }
 }

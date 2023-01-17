@@ -25,15 +25,20 @@ namespace allopromo.Api.Controllers
         private readonly IConfiguration _config;
         private IBaseService<DepartmentDto> _departmentService;
         private readonly IExceptionWriter _exceptionWriter;
-        public DepartmentController(IConfiguration config,
-            IBaseService<DepartmentDto> departmentService
-                                        )
+        public DepartmentController(IConfiguration config, //IExceptionWriter exceptionWriter,
+        IBaseService<DepartmentDto> departmentService)
         {
             _departmentService = departmentService;
             _config = config;
-         //_exceptionWriter = exceptionWriter;
+            //_exceptionWriter = exceptionWriter;
         }
-
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetDepartments()
+        {
+            var departments = await _departmentService.GetEntities();
+            return Ok(departments);
+        }
         [HttpPost]
         public IActionResult PostDepartment ([FromBody] DepartmentDto departmentDto)
         {
@@ -51,13 +56,7 @@ namespace allopromo.Api.Controllers
             }
             return Ok(departmentDto);
         }
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetDepartments()
-        {
-
-            return BadRequest();
-        }
+        
         [HttpGet]
         [Route("cities+{cityId}")]
         public IActionResult GetDepartmentById(string cityId)

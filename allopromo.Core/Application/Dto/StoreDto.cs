@@ -9,7 +9,9 @@ namespace allopromo.Core.Application.Dto
     {
         public string storeId { get; set; }
         public string  storeName { get; set; }
-        public int storeReferenceNumber { get; set; }
+        public string storeDescription { get; set; }
+        public string Category { get; set; }
+        public string City { get; set; }
 
         public StoreDto()
         {

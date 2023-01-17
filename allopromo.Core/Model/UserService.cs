@@ -19,34 +19,32 @@ namespace allopromo.Core.Model
    {
         private readonly IRepository <ApplicationUser>_userRepo;
         private readonly UserManager<ApplicationUser> _userManager;
-
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
 
         private RoleManager<IdentityRole> _roleManager;
         private HttpContextAccessor _httpContextAccessor;
         
-        public UserService(IRepository<ApplicationUser> userRepo, RoleManager<IdentityRole> roleManager, 
-        UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager)
+        public UserService(IRepository<ApplicationUser> userRepo,
+                           UserManager<ApplicationUser> userManager, 
+                            SignInManager<ApplicationUser> signInManager)
         {
             _userRepo= userRepo;
             _userManager = userManager;
-            _roleManager = roleManager;
             _signInManager = signInManager;
-            //_passwordHasher = new PasswordHasher<ApplicationUser>();
         }
-        public async Task<List<ApplicationUser>> GetUsersWithRoles()
+        public async Task<List<UserDto>> GetUsersWithRoles()
         {
-            IQueryable<ApplicationUser> users = null;
+            IQueryable<UserDto> users = null;
             try
             {
-                users = await _userRepo.GetAllAsync();
+                var tObj = await _userRepo.GetAllAsync();
+                //users = _userManager.Users;
 
-                users = _userManager.Users;
-                //.Include(u => u.UserRoles); //.ThenInclude(ur => ur.Role);// ToList();
+                var usersObj = tObj
+                    .Include(u => u.UserRoles).AsQueryable();//.ThenInclude(ur => ur.Role);
                 
-                int j = 5;
+                users = AutoMapper.Mapper.Map<IQueryable<UserDto>>(usersObj);
             }
             catch (Exception ex)
             {
@@ -130,7 +128,7 @@ namespace allopromo.Core.Model
                     return false;
 
                 user.Id = Guid.NewGuid().ToString();
-                user.PasswordHash = _passwordHasher.HashPassword(user, password);
+                //user.PasswordHash = _passwordHasher.HashPassword(user, password);
 
                 //user.NormalizedEmail=u
                 //ApplicationUser appUser = new ApplicationUser
@@ -197,7 +195,6 @@ namespace allopromo.Core.Model
         {
             var user = _userManager.FindByIdAsync(userId).Result;
             return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user);
-
         }
         public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {

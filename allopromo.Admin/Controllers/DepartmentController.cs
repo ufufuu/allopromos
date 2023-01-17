@@ -88,7 +88,6 @@ namespace allopromo.Admin.Controllers
         {
             using (var httpClient = _httpClientFactory.CreateClient())
             {
-
             }
             return View("Create");
         }

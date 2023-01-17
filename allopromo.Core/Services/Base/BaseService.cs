@@ -4,19 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace allopromo.Core.Services.Base
 {
     public class BaseService<TEntity>: IBaseService<TEntity> where TEntity:class
     {
         IRepository<TEntity> _departmentRepo;
-        public BaseService()
-        {
-        }
         public BaseService(IRepository<TEntity> departmentRepo)
         {
-            if(_departmentRepo != null)
             _departmentRepo = departmentRepo;
+        }
+        public BaseService()
+        {
         }
         public void Add(TEntity entity)
         {
@@ -25,10 +23,12 @@ namespace allopromo.Core.Services.Base
         }
         public async Task<IEnumerable<TEntity>> GetEntities()
         {
-            return await _departmentRepo.GetAllAsync();
+            if (_departmentRepo != null)
+                return await _departmentRepo.GetAllAsync();
+            else
+                throw new NullReferenceException();
         }
-        
-        public void Create(TEntity entity)                         //string Id)
+        public void Create(TEntity entity)
         {
             if (entity!= null)
             {

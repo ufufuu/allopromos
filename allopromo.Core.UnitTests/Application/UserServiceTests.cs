@@ -15,44 +15,47 @@ namespace allopromo.Core.UnitTests
     {
         private UserService _sut;
         private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
-        private Mock<IRoleService>  _roleService = new Mock<IRoleService>();
-
         private Mock<UserManager<ApplicationUser>> _userManagerMock = new Mock<UserManager<ApplicationUser>>();
-        private Mock<SignInManager<ApplicationUser>> signInManager = new Mock<SignInManager<ApplicationUser>>();
+        
+        private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
         public UserServiceTest()
         {
-            //_sut = new UserService(_userRepoMock.Object, MockUserManager().Object, 
-              //  GetSignInManagerMock().Object);
+            //_sut = new UserService(_userRepoMock.Object, _userManagerMock.Object, _signInManager.Object);
+            _sut = new UserService(_userRepoMock.Object,
+                MockUserManager().Object, null
+           );
+        }
+        [TearDown]
+        public void Init()
+        {
+            AutoMapper.Mapper.Reset();
         }
         private static Mock<SignInManager<ApplicationUser>> GetSignInManagerMock()
         {
             var signManagerMock = new Mock<IRoleStore<ApplicationUser>>();
-            //return signManagerMock.Object;
-            return new Mock<SignInManager<ApplicationUser>>();
+            return (Mock<SignInManager<ApplicationUser>>)signManagerMock.Object;
+
+            //return new Mock<SignInManager<ApplicationUser>>();
         }
         private Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
         {
             var mockUsrMgr = MockUserManager();
             //var mockAuthMgr = new Mock<AuthenticationManager>();
-            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object); //, mockAuthMgr.Object);
+            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);//, mockAuthMgr.Object);
         }
         private static Mock<UserManager<ApplicationUser>> MockUserManager()
         {
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>
-                (
+            return new Mock<UserManager<ApplicationUser>>(
                 storeMock.Object,null,null,null,null,null,null,null,null
          );
         }
         [Test]
-        public void UserService_GetUsers_SHOULD_Return_Users_With_Roles()
+        public async Task UserService_GetUsers_SHOULD_Return_Users_With_RolesAsync()
         {
             _userManagerMock.Setup(x => x.Users).Returns(GetUsers());
             _userRepoMock.Setup(x => x.GetAllAsync()).Returns(GetUsersAsync());
-
-            var t = _sut;
-            var usersWithRoles = _sut.GetUsersWithRoles();
-            var userWithRole = usersWithRoles.Result.FirstOrDefault();
+            var usersWithRoles = await _sut.GetUsersWithRoles();//.Result.FirstOrDefault();
             //Assert.IsNotNull(usersWithRoles.Result.FirstOrDefault().UserRoles);
             Assert.IsNotNull(usersWithRoles);
             _userRepoMock.Verify(x => x.GetAllAsync(), Times.Once());
@@ -70,7 +73,7 @@ namespace allopromo.Core.UnitTests
         private List<ApplicationUser> getUsers()
         {
             IList<ApplicationUser> appUsers = new List<ApplicationUser>();
-            return appUsers.ToList();
+                return appUsers.ToList();
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
@@ -85,13 +88,11 @@ namespace allopromo.Core.UnitTests
             //Assert
             Assert.IsNotNull(result);
             //Assert.IsTrue(result.Equals(true));
-
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
         {
             var result = await _sut.CreateUser(null, "kjk788kkk");
-
             //Assert.Throws<Exception>(async () => await _sut.CreateUser(null, "akaj4i"));
             //Assert.ThrowsAsync<Exception>(async () =>await _sut.CreateUser(null, "kjk788kkk"));
             //Assert.Throws<>("");
@@ -110,8 +111,8 @@ namespace allopromo.Core.UnitTests
             throw new  ArgumentNullException();
         }
     }
-    //        C3 c2 = new C1();
-    //        C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS
+// C3 c2 = new C1();
+// C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS
 }
 
 /// new , present myself - intro if the course

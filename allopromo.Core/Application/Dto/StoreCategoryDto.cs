@@ -10,9 +10,7 @@ namespace allopromo.Core.Application.Dto
         public Entities.tDepartment Department {get; set;}
         public string DepartmentName { get; set; }
 
-
         //public string storeCategoryImageUrl { get; set; }
-
         //public bool storeCategoryStatus { get; set; }
     }
 }

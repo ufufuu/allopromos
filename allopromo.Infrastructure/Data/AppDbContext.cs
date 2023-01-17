@@ -35,17 +35,23 @@ namespace allopromo.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.Entity<tStoreCategory>(category=>
-            //{
-            //    category.HasKey(c=> new {c.})
-            //});
-
+            modelBuilder.Entity<tStoreCategory>(stores=>
+            {
+                stores.HasKey(c => new { c.storeCategoryId });
+                stores.HasMany(s => s.Stores)
+                .WithOne(s => s.Category);
+            });
             modelBuilder.Entity<tDepartment>(category =>
             {
                 category.HasKey(c => new { c.departmentId });
                 category.HasMany(c => c.Categories)
                 .WithOne(s => s.Department);
+            });
+            modelBuilder.Entity<tProductCategory>(products =>
+            {
+                products.HasKey(p => new { p.productCategoryId });
+                products.HasMany(p => p.categoryProducts)
+                .WithOne(p => p.ProductCategory);
             });
 
             //modelBuilder.Entity<ApplicationUser>()

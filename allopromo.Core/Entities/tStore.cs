@@ -10,17 +10,26 @@ namespace allopromo.Core.Entities
     public class tStore
     {
         [Key]
+        [Column("storeId")]
         public Guid storeId { get; set; }
-
         //public string userId { get; set; }
+        [Column("storeName")]
         public string storeName { get; set; }
+        [Column("storeDescription")]
         public string storeDescription { get; set;}
+        [Column("storeCreatedOn")]
         public DateTime storeCreatedOn{ get; set;}
+        [Column("storeBecomesInactiveOn")]
         public DateTime storeBecomesInactiveOn { get; set; }
-        //public string categoryId { get; set; }
+
+        [Column("CategorystoreCategoryId")]
         public tStoreCategory Category { get; set; }
         public tCity City { get; set; }
         public ApplicationUser user { get; set; }
+
+        //[Column("CategorystoreCategoryId")]
+        //public string CategorystoreCategoryId { get; set; }
+
         [Required]
         public virtual int storeStatus
         {

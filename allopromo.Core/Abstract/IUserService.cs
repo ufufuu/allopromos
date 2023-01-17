@@ -10,7 +10,7 @@ namespace allopromo.Core.Abstract
     {
         Task<bool> CreateUser(ApplicationUser user, string password); // ? Task CreateUser(
         Task<string> GetUser(ApplicationUser user);
-        public Task<List<ApplicationUser>> GetUsersWithRoles();
+        public Task<List<UserDto>> GetUsersWithRoles();
 
         Task<IList<ApplicationUser>>GetUsersByRole(string userRole);
         public void DeleteUser(ApplicationUser user);

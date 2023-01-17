@@ -41,10 +41,11 @@ namespace allopromo.Core.Contracts
         }
         public async Task<IEnumerable<CityDto>> GetCities()
         {
-            IEnumerable<CityDto> cities = null;
-            cities = AutoMapper.Mapper.Map
-                <IEnumerable<CityDto>>(_cityRepository.GetAllAsync());
-            return cities;
+            var tObjs =_cityRepository.GetAllAsync();
+            IEnumerable<CityDto> cities = AutoMapper.Mapper.Map<IEnumerable<CityDto>>(tObjs);
+           if(cities !=null)
+                return cities;
+            throw new NullReferenceException();
         }
         public new async Task<string> GetUserCurrentCity(string ip)
         {

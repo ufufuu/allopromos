@@ -29,10 +29,14 @@ namespace allopromo.Api.Controllers
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
-
+        #region Fields
         private readonly IStoreService _storeService;
         private readonly INotifyService _notificationService;
         private readonly IProductService _productService;
+        #endregion
+        #region Constructors & Properties
+        public delegate string mydelegate(string msg);
+        public delegate string myGenericDelegate<T>(string msg);
         public Core.Services.MediaService _mediaService { get; set; }
         public StoreController(IStoreService storeService, IProductService productService,
             INotifyService notificationService)
@@ -41,8 +45,95 @@ namespace allopromo.Api.Controllers
             _productService = productService;
             _notificationService = notificationService;
         }
+        #endregion
+        #region GET
+        [HttpGet]
+        public async Task<ActionResult<StoreDto>> GetStores()//tiktak.ca/en/store/62143| 
+        {
+            ////kijiji.ca/b-autos-vehicules/ville-de-quebec/c27l1700124
+            var stores = await _storeService.GetStores();
+            if (stores == null)
+                return NotFound();
+            else
+                return Ok(stores);
+        }
+        [HttpGet]
+        [Route("{LocalizationId}")]
+        public async Task<IActionResult> GetStoresByLocationId(string LocalizationId)
+        {
+            var stores = await _storeService.GetStores(LocalizationId);
+            if (stores != null)
+                return Ok(stores);
+            return BadRequest();
+        }
+        [HttpGet]
+        [Route("{categoryID}/{LocalizationID}")]
+        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string LocalizationID)
+        {
+            var stores = await _storeService.GetStores(LocalizationID);
+            if (stores != null)
+                return Ok(stores);
+            return BadRequest();
+        }
+        [HttpGet]
+        [Route("categories")]
+        public async Task<IActionResult> GetStoreCategories()
+        {
+            var storeCategories = await _storeService.GetStoreCategoriesAsync();
+            if (storeCategories != null)
+                return Ok(storeCategories);
+            return BadRequest();
+        }
+        [HttpGet]
+        [Route("{Id}/category/{products}")]
+        public async Task<IActionResult> GetProductsByCategoryAsync(string storeId)
+        {
+            var products = await _productService.GetProductsByCategoryId(storeId);
+            if (products == null)
+                throw new NullReferenceException();
+            else
+                return Ok(products);
+        }
+        [HttpGet]
+        [Route("products/{storeId}")]
+        public async Task<IActionResult> GetProductsAsync(string storeId)
+        {
+            
+            var products = await _productService.GetProductsByStore(storeId);
+            if (products == null)
+                throw new NullReferenceException();
+            else
+                return Ok(products);
+        }
+        //[HttpGet]
+        //[Route("{products}/{categories}")]
+        //public async Task<IActionResult> GetProducts(string storeId)
+        //{
+        //    var products = await _productService.GetProductsByStore(storeId);
+        //    if (products == null)
+        //        throw new NullReferenceException();
+        //    else
+        //        return Ok(products);
+        //}
+        [HttpGet]
+        [Route("{categoryId}/{pageNumber}/{limitPerPage}")]
+        //[Route("categoryId?limit=10&offSet=4")]
+        public async Task<IActionResult> GetStoresByCategoryIdAsync(int categoryId, int pageNumber, int limitPerPage)
+        {
+            limitPerPage = 10;
+            if (categoryId == null)
+                return NotFound();
+            else
+            {
+                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
+                    .GetStoresByCategoryIdAsync(categoryId, pageNumber, limitPerPage));
+                return Ok(stores);
+            }
+        }
+        #endregion
+        #region POST
         [HttpPost]
-        [Route("categories/create/categoryId")]
+        [Route("categories/create/")]
         public async Task<IActionResult> PostStoreCategory([FromBody] 
             StoreCategoryDto storeCategory)
         {
@@ -88,40 +179,12 @@ namespace allopromo.Api.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var productDto = await _productService.CreateAsync(product);
+                var productDto = await _productService.CreateProductAsync(product);
                 return CreatedAtAction(nameof(productDto), new { }, product);
             }
         }
-        //[HttpGet]
-        //[Route("{categoryId}/{pageNumber}/{limitPerPage}")]
-        ////[Route("categoryId?limit=10&offSet=4")]
-        //public async Task<IActionResult> GetStoresByCategoryIdAsync(int categoryId, int pageNumber, int limitPerPage)
-        //{
-        //    limitPerPage = 10;
-        //    if (categoryId == null)
-        //        return NotFound();
-        //    else
-        //    {
-        //        var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
-        //            .GetStoresByCategoryIdAsync(categoryId, pageNumber , limitPerPage));
-        //        return Ok(stores);
-        //    }
-        //}
-        [HttpDelete]
-        [Route("{locationId}/{pageNumber}/{limitPerPage}")]
-        //[Route("categoryId?limit=10&offSet=4")]
-        public async Task<IActionResult> GetStoresByLocationIdAsync(int locationId, int categoryId, int pageNumber, int limitPerPage)
-        {
-            limitPerPage = 10;
-            if (categoryId.Equals(null))
-                return NotFound();
-            else
-            {
-                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
-                    .GetStoresByCategoryIdAsync(categoryId, pageNumber, limitPerPage));
-                return Ok(stores);
-            }
-        }
+        #endregion
+        #region PUT
         [HttpPut]
         [Route("categories/{catId}")]
         public ActionResult PutStoreCategory([FromBody] StoreCategoryDto category)
@@ -139,46 +202,24 @@ namespace allopromo.Api.Controllers
                 return Ok(category);
             }
         }
-        //[HttpPut]
-        //[Route("")]
-        //public ActionResult<StoreDto> GetStoresByIdAsync([FromBody] StoreData storeData)
-        //{
-        //    var store = _storeService.GetStoreByIdAsync(storeData.storeData);
-        //    if (store == null)
-        //        return NotFound();
-        //    return Ok(store);
-        //}
-        [HttpGet]
-        [Route("categories")]
-        public async Task<IActionResult> GetStoreCategories()
+        
+        #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("{locationId}/{pageNumber}/{limitPerPage}")]
+        //[Route("categoryId?limit=10&offSet=4")]
+        public async Task<IActionResult> GetStoresByLocationIdAsync(int locationId, int categoryId, int pageNumber, int limitPerPage)
         {
-            var storeCategories = await _storeService.GetStoreCategoriesAsync();
-            if(storeCategories!=null)
-                return Ok(storeCategories);
-            return BadRequest();
-        }
-        [HttpGet]
-        [Route("{category}/{Id}/{products}")]
-        public async Task<IActionResult> GetProductsByCategoryAsync(string Id)
-        {
-            var products = await  _productService.GetProductsByCategoryId(Id);
-            return Ok(products);
-        }
-        [HttpGet]
-        [Route("{products}/{categories}")]
-        public async Task<IActionResult> GetProducts()
-        {
-            var products =await  _productService.GetProductsByStore();
-            return Ok(products);
-        }
-        [HttpGet]
-        public async Task<ActionResult<ProductDto>> GetProduct(string Id)
-        {
-            var product = await _productService.GetProductsByCategoryId(Id);
-            if (product == null)
+            limitPerPage = 10;
+            if (categoryId.Equals(null))
                 return NotFound();
             else
-                return Ok(product);
+            {
+                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
+                    .GetStoresByCategoryIdAsync(categoryId, pageNumber, limitPerPage));
+                return Ok(stores);
+            }
         }
         [HttpDelete]
         [Route("categories/delete/id")]
@@ -194,48 +235,7 @@ namespace allopromo.Api.Controllers
                 return Ok(true);
             }
         }
-        //[HttpGet]
-        //[Route("{categories}/images")]
-        //public async Task<IActionResult> getImageAsync()
-        //{
-        //    var image = await _storeService?.getImageUrl();
-        //    if (image == null)
-        //        return BadRequest();
-        //    return Ok(image);
-        //}
-
-        //[HttpPatch]
-        //[Route("categories/images/{mediaUrl}")]
-        //public bool SaveThumbnailImage(string mediaUrl)
-        //{
-        //    return false;
-        //    //_storeService.postStoreCategoryImage();
-        //    bool gr = true;
-        //    if(gr)
-        //        return true;
-        //    else
-        //        return false;
-        //}
-    } 
-    public delegate string mydelegate(string msg);
-    public delegate string myGenericDelegate<T>(string msg);
-    public class PhoneNumber
-    {
-        public string Name { get; set; }
-        public string Number { get; set; }
-        public PhoneNumber(string n, string num)
-        {
-            Name = n;
-            Number = num;
-        }
-    }
-    public class Friend : PhoneNumber
-    {
-        public bool IsWorkNumber { get; set; }
-        public Friend(string m, string num, bool wk) : base(m, num)
-        {
-            IsWorkNumber = wk;
-        }
+        #endregion  
     }
 }
 /*

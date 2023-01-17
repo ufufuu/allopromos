@@ -9,7 +9,6 @@ namespace allopromo.Core.Entities
     {
         [Key]
         //[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        
         [ForeignKey("Category")]
         [Column("categoryId")]
         public Guid storeCategoryId { get; set; }
@@ -22,7 +21,8 @@ namespace allopromo.Core.Entities
         //public bool hasChildren { get; set; }
         //[Column("categoryImage")]
         //public string storeCategoryImageUrl { get; set; }
-        //public ICollection<tStore> tStores { get; set; } = new List<tStore>();
+        public ICollection<tStore> Stores { get; set; }
+
         public tDepartment Department { get; set; }
         
     }

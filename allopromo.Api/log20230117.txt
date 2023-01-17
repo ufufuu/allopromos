@@ -1,0 +1,56 @@
+2023-01-17 00:00:38.569 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-17 00:00:41.854 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-17 00:00:41.856 -05:00 [INF] Hosting environment: Development
+2023-01-17 00:00:41.856 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-17 00:00:42.143 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-17 00:00:43.825 -05:00 [INF] Request finished in 1695.6371ms 200 text/html;charset=utf-8
+2023-01-17 00:00:45.015 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-17 00:00:45.161 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-17 00:00:45.495 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-17 00:00:47.777 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-17 00:00:47.777 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-17 00:00:47.778 -05:00 [INF] Request finished in 2617.7127ms 0 text/css
+2023-01-17 00:00:47.778 -05:00 [INF] Request finished in 2763.7358ms 0 image/png
+2023-01-17 00:00:48.266 -05:00 [INF] Request finished in 2770.6231ms 200 application/json;charset=utf-8
+2023-01-17 00:01:18.723 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store/3bf68237-0cf8-4503-9a42-08cd2c196ee5/3bf68237-0cf8-4503-9a42-08cd2c196ee5  
+2023-01-17 00:01:19.040 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api)'
+2023-01-17 00:01:19.924 -05:00 [INF] Route matched with {action = "GetStoresByCategoryAndByLocation", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoresByCategoryAndByLocation(System.String, System.String) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-17 00:01:25.288 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-17 00:01:34.505 -05:00 [INF] Executed DbCommand (550ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]), [s].[storeName], [s].[storeDescription], [s0].[categoryName], [c].[cityName]
+FROM [Stores] AS [s]
+LEFT JOIN [Cities] AS [c] ON [s].[cityId] = [c].[cityId]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+WHERE [c].[cityId] = 1
+2023-01-17 00:01:34.737 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-17 00:01:35.560 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api) in 15599.9331ms
+2023-01-17 00:01:35.563 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api)'
+2023-01-17 00:01:35.604 -05:00 [INF] Request finished in 16883.6373ms 200 application/json; charset=utf-8
+2023-01-17 00:13:33.418 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-17 00:13:36.368 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-17 00:13:36.370 -05:00 [INF] Hosting environment: Development
+2023-01-17 00:13:36.378 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-17 00:13:36.527 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-17 00:13:38.222 -05:00 [INF] Request finished in 1706.9138ms 200 text/html;charset=utf-8
+2023-01-17 00:13:38.532 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-17 00:13:39.173 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-17 00:13:39.658 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-17 00:13:39.849 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-17 00:13:39.859 -05:00 [INF] Request finished in 1326.9929ms 0 text/css
+2023-01-17 00:13:39.860 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-17 00:13:39.861 -05:00 [INF] Request finished in 690.7377ms 0 image/png
+2023-01-17 00:13:40.410 -05:00 [INF] Request finished in 752.4162ms 200 application/json;charset=utf-8
+2023-01-17 00:14:32.892 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store/41312416-648c-4bbb-dcf8-08da597b9be4/1  
+2023-01-17 00:14:33.047 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api)'
+2023-01-17 00:14:33.321 -05:00 [INF] Route matched with {action = "GetStoresByCategoryAndByLocation", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoresByCategoryAndByLocation(System.String, System.String) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-17 00:14:38.961 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-17 00:14:51.672 -05:00 [INF] Executed DbCommand (184ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]), [s].[storeName], [s].[storeDescription], [s0].[categoryName], [c].[cityName]
+FROM [Stores] AS [s]
+LEFT JOIN [Cities] AS [c] ON [s].[cityId] = [c].[cityId]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+WHERE [c].[cityId] = 1
+2023-01-17 00:14:51.811 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-17 00:14:52.408 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api) in 19070.5787ms
+2023-01-17 00:14:52.413 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoresByCategoryAndByLocation (allopromo.Api)'
+2023-01-17 00:14:52.433 -05:00 [INF] Request finished in 19546.9497ms 200 application/json; charset=utf-8

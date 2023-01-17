@@ -30,7 +30,29 @@ namespace allopromo.Api.Controllers
             _localisationService = localizeService;
             //_exceptionWriter = exceptionWriter;
         }
-
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetCities()
+        {
+            var cities = await _localisationService.GetCities();
+            if (cities != null)
+                return Ok(cities);
+            return BadRequest();
+        }
+        [HttpGet]
+        [Route("cities+{cityId}")]
+        public IActionResult GetCityById(string cityId)
+        {
+            try
+            {
+                var city = _localisationService.GetCities();
+                return Ok(city);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpPost]
         //[Route(ConstancesCommunes)]
         public IActionResult PostCity([FromRoute] CityDto city)
@@ -46,29 +68,7 @@ namespace allopromo.Api.Controllers
             }
             return Ok(city);
         }
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetCities()
-        {
-            var cities = await _localisationService.GetCities();
-            if (cities!= null)
-                return Ok(cities);
-            return BadRequest();
-        }
-        [HttpGet]
-        [Route("cities+{cityId}")]
-        public IActionResult GetCityById(string cityId)
-        {
-            try
-            {
-                var city = _localisationService.GetCities();
-                return Ok(city);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         [HttpDelete]
         [Route("cities+{cityId}")]
         public async Task<IActionResult> Delete(string Id)

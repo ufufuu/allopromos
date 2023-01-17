@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace alloPromoTests.Services
 {
-    //[TestFixture]
+    //[TestFixture] Fifi Aimee Afi - Dadzie- Adjalle 
     public class NotificationServiceTests
     {
         private Mock<StoreService> storeServiceMock = new Mock<StoreService>();
@@ -15,7 +15,7 @@ namespace alloPromoTests.Services
         {
             //var notificationService = new NotifyService(storeServiceMock.Object);
 
-            storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>(),
+            storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<StoreDto>(),
                         It.IsAny<StoreCategoryDto>(), It.IsAny<UserDto>())).Returns(Task.FromResult(new StoreDto()));
 
             //.Raises(p => p.storeCreated += new NotificationService(storeServiceMock.Object).StoreCreatedEventHandler);

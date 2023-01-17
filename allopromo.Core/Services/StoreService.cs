@@ -21,20 +21,24 @@ namespace allopromo.Core.Model
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
     public class StoreService : IStoreService
     {
+        #region Properties
         public event StoreCreatedEventHandler StoreCreated;
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
-        private IProductService _productService { get; set; }
+        public IRepository<tDepartment> _departmentRepository { get; set; }
+        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
+        public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         public IRepository<tStoreCategory> _categoryRepository { get; set; }
+        #endregion
+        #region Fields
         private IRepository<tStore> _storeRepository;
         private IStoreManager _storeManager;
-        public IRepository<tDepartment> _departmentRepository { get; set; }
-
+        private IProductService _productService { get; set; }
         IRepository<tStore> storeRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
-        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
-        public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
+        #endregion
+        #region Constructors
         public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepository,
             IRepository<tDepartment> departmentRepository)
         {
@@ -45,6 +49,21 @@ namespace allopromo.Core.Model
         public StoreService()
         {
         }
+
+        event StoreCreatedEventHandler IStoreService.StoreCreated
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+        #endregion
+        #region Events
         public void OnStoreCreated()
         {
             if (StoreCreated != null)
@@ -52,11 +71,157 @@ namespace allopromo.Core.Model
                 StoreCreated(this, EventArgs.Empty);
             }
         }
-        public async Task<StoreDto> CreateStore(StoreDto storeDto)
+        #endregion
+        #region Public Properties - Getting Objects
+        public async Task<IEnumerable<StoreDto>> GetStores()
         {
+            IEnumerable<StoreDto> stores = new List<StoreDto>();
+            var tStoreObj = await _storeRepository.GetAllAsync();
+            stores = tStoreObj.AsQueryable()
+                .Include(c=>c.Category)
+                .Select(s => new StoreDto
+            {
+                storeId = s.storeId.ToString(),
+                storeName = s.storeName,
+                storeDescription = s.storeDescription,
+                Category= s.Category.storeCategoryName
+            });
+            if (stores!= null)
+                return stores;
+            else
+                throw new NullReferenceException();
+        }
+        public async Task<IEnumerable<StoreDto>> GetStores(string categoryId)
+        {
+            var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
+                .Include(c => c.Category)
+                .Include(v => v.City).Where(v => v.City.cityId.Equals(1))
+                .Select(s => new StoreDto()
+                {
+                    storeId = s.storeId.ToString(),
+                    storeName = s.storeName,
+                    storeDescription = s.storeDescription,
+                    Category = s.Category.storeCategoryName,
+                    City = s.City.cityName.ToString()
+                });
+            if (stores != null)
+                return stores;
+            else
+                throw new NullReferenceException();
+        }
+        public async Task<IEnumerable<StoreDto>> GetStores (string categoryId, string localizationId)
+        {
+            var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
+                .Include(c => c.Category)
+                .Include(v => v.City).Where(v => v.City.cityId.Equals(1))
+                .Select(s => new StoreDto()
+                {
+                    storeId = s.storeId.ToString(),
+                    storeName = s.storeName,
+                    storeDescription = s.storeDescription,
+                    Category = s.Category.storeCategoryName,
+                    City = s.City.cityName.ToString()
+                });
+            if (stores!= null)
+                return stores;
+            else
+                throw new NullReferenceException();
+        }
+        public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
+        {
+            IEnumerable<StoreCategoryDto> categories = null;
+            var categoriesRepo = await _categoryRepository.GetAllAsync();
+            var categoriesObj = categoriesRepo.AsQueryable().Include(x => x.Department)
+                .Select(c => new StoreCategoryDto
+                {
+                    storeCategoryId = c.storeCategoryId.ToString(),
+                    storeCategoryName = c.storeCategoryName,
+                    DepartmentName = c.Department.departmentName
+                });
+            categories = AutoMapper.Mapper.Map
+                    <IEnumerable<StoreCategoryDto>>(categoriesObj);
+            if (categories == null)
+                throw new ArgumentNullException();
+            return categories;
+        }
+        
+        public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
+        {
+            var categories = await this.GetStoreCategoriesAsync();
+            var query = from q in categories
+                        where q.storeCategoryId.ToString() == Id
+                        select q;
+            return query.FirstOrDefault();
+        }
+        private async Task<int> GetUserStoresAsync(ApplicationUser user)
+        {
+            var Id = _userService.GetUserbyId(user.Id);
+            var query = from q in await _storeRepository.GetAllAsync()
+                        where q.user.Equals(user)
+                        select q;
+            int numberStores = query.Count();
+            return numberStores;
+        }
+        public async Task<IEnumerable<ProductDto>> GetProductsByStoresAndCategories(string storeId)
+        {
+            if (storeId == null)
+                return null;
+            return await _productService.GetProductsByStore(storeId);
+        }
+
+        private int GetStoresProducts(ApplicationUser user)
+        {
+            var Id = String.Empty;
+            var productQuery = from q
+                               in _productService.GetProductsByStore(Id).Result
+                               select q;
+            return productQuery.Count();
+        }
+        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId,
+            int pageNumber, int offSet)
+        {
+            offSet = 10;
+            if (categoryId.Equals(null))
+                return null;
+            else
+            {
+                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId);
+                //pageNumber, offSet);
+                //return (IEnumerable<StoreDto>)storesByCategory;
+            }
             return null;
         }
-        #region StoresE
+        public async Task<IEnumerable<StoreDto>> GetStoresByLocationAsync(int locationId, int page, int size)
+        {
+            if (locationId.Equals(null))
+                return null;
+            else
+            {
+                var storesByLocation =
+                await _tGenericRepository.GetAllAsync();
+            }
+            return null;
+        }
+        public async Task<StoreCategoryDto> GetStoreCategoryByIdAsync(string storeId)
+        {
+            if (storeId == null)
+                return null;
+            var cat = await _categoryRepository.GetByIdAsync(storeId);
+            return AutoMapper.Mapper.Map<StoreCategoryDto>(cat);
+        }
+        public async Task<StoreDto> GetStoreByIdAsync(string storeId)
+        {
+            if (storeId == null)
+                return null;
+            StoreCreatedEventHandler del = delegate
+            {
+                return true;
+            };
+            var tStore = await _storeRepository.GetByIdAsync(storeId);
+            return AutoMapper.Mapper.Map<StoreDto>(tStore);
+        }
+        #endregion
+        #region Creating Objects
         public async Task<StoreDto> CreateStore(//StoreDto storeDto)
             string storeDtoName)
         {
@@ -75,8 +240,33 @@ namespace allopromo.Core.Model
             }
             return new StoreDto();
         }
-        #endregion
-        #region Stores
+        public async Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategory)
+        {
+            if (storeCategory == null)
+                return null;
+            var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
+            var storeCategoryDto = new StoreCategoryDto();
+            var tStoreCategory = new tStoreCategory();
+
+            tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
+            tStoreCategory.storeCategoryId = Guid.NewGuid();
+            var imageUrl = string.Empty;
+            if (postStoreCategoryImage() != null)
+            {
+                imageUrl = await this.getImageUrl();
+            }
+            else
+            {
+                imageUrl = "http://www.noiamgesfornow.jpg";
+            }
+            //tStoreCategory.storeCategoryImageUrl = imageUrl;
+            await _categoryRepository.Add(tStoreCategory); //, imageUrl);
+            return storeCategoryDto;
+        }
+        //public async Task<StoreDto> CreateStore(StoreDto storeDto)
+        //{
+        //    return null;
+        //}
         public async Task<StoreDto> CreateStoreAsync(StoreDto store, StoreCategoryDto category, UserDto userDto)
         {
             if(store!=null)
@@ -106,135 +296,63 @@ namespace allopromo.Core.Model
             else
                 return null;
         }
-        public async Task<IEnumerable<StoreDto>> GetStoresByCategoryIdAsync(int categoryId,
-            int pageNumber, int offSet)
-        {
-            offSet = 10;
-            if (categoryId.Equals(null))
-                return null;
-            else
-            {
-                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId);
-                //pageNumber, offSet);
-                //return (IEnumerable<StoreDto>)storesByCategory;
-            }
-            return null;
-        }
-        public async Task<IEnumerable<StoreDto>> GetStoresByLocationAsync(int locationId, int page, int size)
-        {
-            if (locationId.Equals(null))
-                return null;
-            else
-            {
-                var storesByLocation = 
-                await _tGenericRepository.GetAllAsync();
-            }
-            return null;
-        }
-        public async Task<StoreCategoryDto> GetStoreCategoryByIdAsync(string storeId)
-        {
-            if (storeId == null)
-                return null;
-            var cat= await _categoryRepository.GetByIdAsync(storeId);
-            return AutoMapper.Mapper.Map<StoreCategoryDto>(cat);
-        }
-        public async Task<StoreDto> GetStoreByIdAsync(string storeId)
-        {
-            if (storeId == null)
-                return null;
-            StoreCreatedEventHandler del = delegate
-            {
-                return true;
-            };
-            var tStore = await _storeRepository.GetByIdAsync(storeId);
-            return AutoMapper.Mapper.Map<StoreDto>(tStore);
-        }
-        public void DeleteStore(StoreDto store)
-        {
-            storeRepository.Delete(store);
-        }
-        public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
-        {
-            IEnumerable<StoreCategoryDto> categories = null;
-            var categoriesObj = await _categoryRepository.GetAllAsync();
-            var tObj = categoriesObj.AsQueryable().Include(x => x.Department)
-                .Select ( c=> new StoreCategoryDto
-                {
-                    storeCategoryName=c.storeCategoryName,
-                    DepartmentName= c.Department.departmentName
-                });
+        #endregion
 
-            categories = AutoMapper.Mapper.Map
-                    <IEnumerable<StoreCategoryDto>>(tObj);
-            if (categories == null)
-                    throw new ArgumentNullException();
-            return categories;
-        }
-        public async Task<StoreCategoryDto> GetStoreCategoriesAsyncById(string Id)
+        #region Updating Entities
+        public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
         {
-            var categories = await this.GetStoreCategoriesAsync();
-            var query = from q in categories
-                        where q.storeCategoryId.ToString() == Id
-                        select q;
-            return query.FirstOrDefault();
-        }
-        private async Task<int> GetStoresAsync(ApplicationUser user)
-        {
-            var Id = _userService.GetUserbyId(user.Id);
-            var query = from q in await _storeRepository.GetAllAsync()
-                        where q.user.Equals(user)
-                        select q;
-            int numberStores = query.Count();
-            return numberStores;
-        }
-        #endregion Stores
-        #region Products
-        public async Task<IEnumerable<ProductDto>> GetProductsByStoresAndCategories(string storeId)
-        {
-            if (storeId == null)
-                return null;
-            return await _productService.GetProductsByStore(storeId);
-        }
-        #endregion Products
-        private int GetStoresProducts(ApplicationUser user)
-        {
-            var productQuery = from q
-                               in _productService.GetProductsByStore().Result
-                               select q;
-            return productQuery.Count();
-        }
-        #region StoresCategories
-        public async Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategory)
-        {
-            if (storeCategory == null)
-                return null;
-            var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-            var storeCategoryDto = new StoreCategoryDto();
-            var tStoreCategory = new tStoreCategory();
-
-            tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
-            tStoreCategory.storeCategoryId = Guid.NewGuid();
-            var imageUrl = string.Empty;
-            if (postStoreCategoryImage() != null)
-            {
-                imageUrl = await this.getImageUrl();
-            }
-            else
-            {
-                imageUrl = "http://www.noiamgesfornow.jpg";
-            }
-            //tStoreCategory.storeCategoryImageUrl = imageUrl;
-            await _categoryRepository.Add(tStoreCategory); //, imageUrl);
-            return storeCategoryDto;
-        }
-        #endregion StoresCategories
-        public void DeleteStoreCategory(string categoryId)
-        {
+            if (Id != categoryDto.storeCategoryId.ToString())
+                throw new Exception();
+            var obj = AutoMapper.Mapper.Map<StoreCategoryDto, tStoreCategory>(categoryDto);
+            obj.storeCategoryId = Guid.Parse(Id);
+            obj.storeCategoryName = categoryDto.storeCategoryName;
+            _categoryRepository.Update(obj);
         }
         public void UpdateStoreCategory(StoreCategoryDto category)
         {
             var obj = AutoMapper.Mapper.Map<tStoreCategory>(category);
             _categoryRepository.Update(obj);
+        }
+        #endregion
+        //public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //public async Task<IEnumerable<ProductDto>> GetStoresByLocalizationIdAsync(string storeId)
+        //{
+        //    return null;
+        //}
+        //Task<IEnumerable<StoreDto>> IStoreService.GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<StoreDto> IStoreService.GetStoreByIdAsync(string storeId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<StoreCategoryDto> IStoreService.GetStoreCategoryByIdAsync(string catId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<StoreDto> IStoreService.GetStoresByLocationIdAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //Task<StoreCategoryDto> IStoreService.GetStoreCategoriesAsyncById(string Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        
+        #region DELETE Objects
+        public void DeleteStore(StoreDto store)
+        {
+            storeRepository.Delete(store);
+        }
+        public void DeleteStoreCategory(string categoryId)
+        {
         }
         public void DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
         {
@@ -253,6 +371,8 @@ namespace allopromo.Core.Model
                 }
             }
         }
+        #endregion
+        #region Utilities Methods
         public async Task<string> getImageInformationAsync()
         {
             using (var httpClient = new HttpClient())
@@ -260,12 +380,17 @@ namespace allopromo.Core.Model
                 var imageInformationUlr = new Uri("https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893");
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, imageInformationUlr);
                 var httpResponseMsg = await httpClient.SendAsync(httpRequest);
-                var content = await httpResponseMsg.Content.ReadAsStringAsync();       //httpResponseMsg
+                var content = await httpResponseMsg.Content.ReadAsStringAsync();//httpResponseMsg
                 var response = Newtonsoft.Json.JsonConvert.SerializeObject(httpResponseMsg);
                 var image = (string)response;
             }
-            var data = new metaData { Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
-            var res = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            //var data = new metaData { Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
+
+            var res = Newtonsoft.Json.JsonConvert.SerializeObject(new 
+            {
+                Id="2332", 
+                Url= "https//allo.promo/images/92bw23fhj.jpg" }
+            );
             return res;
         }
         private async Task<string> postStoreCategoryImage()
@@ -317,6 +442,8 @@ namespace allopromo.Core.Model
             }
             return img;
         }
+        #endregion
+        #region Other
         public T GetJsonInstance<T>(string propertyName, string json)
         {
             using (var stringReader = new StringReader(json))
@@ -337,38 +464,59 @@ namespace allopromo.Core.Model
                 }
             }
         }
-        public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
+        void IStoreService.OnStoreCreated()
         {
             throw new NotImplementedException();
         }
-        public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
+
+        Task<StoreDto> IStoreService.CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
         {
-            if (Id != categoryDto.storeCategoryId.ToString())
-                throw new Exception();
-            var obj = AutoMapper.Mapper.Map<StoreCategoryDto, tStoreCategory>(categoryDto);
-            obj.storeCategoryId = Guid.Parse(Id);
-            obj.storeCategoryName = categoryDto.storeCategoryName;
-            _categoryRepository.Update(obj);
+            throw new NotImplementedException();
         }
-    }
-    public class metaData
-    {
-        public string Id { get; set; }
-        public string Url { get; set; }
-        public metaData(string id, string url)
+        Task<StoreDto> IStoreService.CreateStore(StoreDto store)
         {
-            Id = string.Empty;
-            Url = string.Empty;
+            throw new NotImplementedException();
         }
-        public metaData()
+        Task<StoreDto> IStoreService.CreateStore(string storeDtoName)
         {
+            throw new NotImplementedException();
         }
+        void IStoreService.UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<StoreCategoryDto> IStoreService.CreateStoreCategoryAsync(StoreCategoryDto storeCategoryName)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+        void IStoreService.DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IStoreService.DeleteStoreCategory(string categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IStoreService.getImageUrl()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IStoreService.getImageInformationAsync()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
     
     //public class OrderPlacedEventArgs : EventArgs
     //{
     //}
-
 }
 /* 1. table jointure
  * 2. re architecture
@@ -388,12 +536,10 @@ namespace allopromo.Core.Model
 //https://api.mapbox.com/geocoding/v5/{endpoint}/{
 
 //IQuery Pattern ?
-/* particulier a particulier : entreprises*/
-/*
+/* particulier a particulier : entreprises
  * Latitude: 46.861114 / N 46° 51' 40.012''
 Longitude: -71.268900 / W 71° 16' 8.04''
 */
 /*
  * https://www.gps-coordinates.net/api
- * 
  */

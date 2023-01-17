@@ -9,6 +9,9 @@ using allopromo.Core.Abstract;
 using Microsoft.Extensions.Configuration;
 using allopromo.Api.Controllers;
 using System.Threading.Tasks;
+using allopromo.Core.Application.Dto;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace allopromo.Api.UnitTests
 {
@@ -17,6 +20,19 @@ namespace allopromo.Api.UnitTests
     {
         private Mock<ILocalisationService>  _localizeServiceMock = new Mock<ILocalisationService>();
         private Mock<IConfiguration> _configMock = new Mock<IConfiguration>();
+        private CitiesController _sut { get; set; }
+        public CitiesControllerTests()
+        {
+            _sut = new CitiesController(_configMock.Object, _localizeServiceMock.Object);
+        }
+        [Test]
+        public void CitiesController_GetCurrentCity_RETURN_Cities()
+        {
+            _localizeServiceMock.Setup(x => x.GetCities()).Returns(Task.FromResult(GetCities()));
+            var cities = _sut.GetCities();
+            Assert.AreEqual(cities,typeof(Task<IActionResult>));
+             Assert.IsNotNull(cities);
+        }
         [Test]
         public void CitiesController_GetCurrentCity_RETURN_City()
         {
@@ -37,6 +53,13 @@ namespace allopromo.Api.UnitTests
             //Assert.AreEqual(res, typeof(string));
 
             localiseServiceMock.Verify(x => x.GetUserCurrentCity(ip), Times.AtMostOnce());
+        }
+        private IEnumerable<Core.Application.Dto.CityDto> GetCities()
+        {
+            var cities = new List<Core.Application.Dto.CityDto>();
+            cities.Add(new CityDto { cityId = 12, cityName = "" });
+            cities.Add(new CityDto { cityId = 21, cityName = "" });
+            return cities.AsEnumerable();
         }
         [TestCase()]
         public void PostCreatesCityTest()

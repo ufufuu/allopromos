@@ -157,7 +157,7 @@ namespace allopromo.Api.UnitTests
             {
                 storeId = Guid.NewGuid().ToString(),
                 storeName = "Thierry Plank",
-                storeReferenceNumber = 9213
+                //storeReferenceNumber = 9213
             };
             // var actualResult = storeController.GetStoreByIdAsync("dsd").Result as OkObjectResult;
             //Assert.AreEqual(actualResult.StatusCode, 200);

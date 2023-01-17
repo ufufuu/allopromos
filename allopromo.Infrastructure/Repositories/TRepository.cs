@@ -71,9 +71,12 @@ namespace allopromo.Infrastructure.Repositories
         }
         public async Task<IQueryable<T>> GetAllAsync()
         {
-            var tObjects =  _table.AsQueryable();
-            var tObjects2 = _dbContext.Set<T>();
-            return tObjects;//.ToListAsync();
+            var tObjects = _table.AsQueryable();
+            //if(tObjects!=null)
+
+            int g= 6;
+                return tObjects;
+            //return null;
         }
         public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
         {
