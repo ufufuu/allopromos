@@ -1,0 +1,646 @@
+2023-01-20 00:50:57.305 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 00:51:03.661 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 00:51:03.665 -05:00 [INF] Hosting environment: Development
+2023-01-20 00:51:03.666 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 00:51:04.177 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 00:51:06.689 -05:00 [INF] Request finished in 2528.2902ms 200 text/html;charset=utf-8
+2023-01-20 00:51:09.523 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 00:51:10.782 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 00:51:13.096 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 00:51:13.101 -05:00 [INF] Request finished in 3584.2442ms 0 image/png
+2023-01-20 00:51:13.463 -05:00 [INF] Request finished in 2681.3275ms 200 application/json;charset=utf-8
+2023-01-20 00:51:47.589 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=11  
+2023-01-20 00:51:47.608 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:51:47.975 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:51:54.272 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:51:57.899 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-01-20 00:51:59.446 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 11436.9878ms
+2023-01-20 00:51:59.646 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:51:59.939 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncEnumerable(ActionContext context, ObjectResult result, Object asyncEnumerable, Func`2 reader)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 00:52:00.122 -05:00 [INF] Request finished in 12531.4218ms 500 text/plain
+2023-01-20 00:52:00.271 -05:00 [ERR] An error occurred using the connection to database 'allopromo' on server 'DESKTOP-51CUQQV'.
+2023-01-20 00:52:01.968 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-01-20 00:52:34.733 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Department  
+2023-01-20 00:52:34.768 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.DepartmentController.GetDepartments (allopromo.Api)'
+2023-01-20 00:52:34.892 -05:00 [INF] Route matched with {action = "GetDepartments", controller = "Department"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDepartments() on controller allopromo.Api.Controllers.DepartmentController (allopromo.Api).
+2023-01-20 00:54:12.085 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 00:54:18.521 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 00:54:18.540 -05:00 [INF] Hosting environment: Development
+2023-01-20 00:54:18.540 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 00:54:18.667 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 00:54:20.247 -05:00 [INF] Request finished in 1596.5076ms 200 text/html;charset=utf-8
+2023-01-20 00:54:20.820 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 00:54:21.454 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 00:54:22.096 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 00:54:22.807 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 00:54:22.807 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 00:54:22.813 -05:00 [INF] Request finished in 1359.2063ms 0 image/png
+2023-01-20 00:54:22.814 -05:00 [INF] Request finished in 1992.7792ms 0 text/css
+2023-01-20 00:54:23.440 -05:00 [INF] Request finished in 1344.3948ms 200 application/json;charset=utf-8
+2023-01-20 00:54:42.305 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store/categories  
+2023-01-20 00:54:42.355 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2023-01-20 00:54:42.815 -05:00 [INF] Route matched with {action = "GetStoreCategories", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStoreCategories() on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:54:53.057 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:54:57.586 -05:00 [INF] Executed DbCommand (876ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[categoryId]) AS [storeCategoryId], [s].[categoryName] AS [storeCategoryName], [d].[departmentName] AS [DepartmentName]
+FROM [StoreCategories] AS [s]
+LEFT JOIN [Departments] AS [d] ON [s].[departmentId] = [d].[departmentId]
+2023-01-20 00:54:57.681 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.StoreCategoryDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-20 00:54:58.326 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api) in 15492.3046ms
+2023-01-20 00:54:58.331 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStoreCategories (allopromo.Api)'
+2023-01-20 00:54:58.380 -05:00 [INF] Request finished in 16088.017ms 200 application/json; charset=utf-8
+2023-01-20 00:55:49.028 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store/products/41312416-648C-4BBB-DCF8-08DA597B9BE4  
+2023-01-20 00:55:49.168 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api)'
+2023-01-20 00:55:49.262 -05:00 [INF] Route matched with {action = "GetProducts", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductsAsync(System.String) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:55:49.458 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:56:01.798 -05:00 [INF] Executed DbCommand (134ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[productName], [p].[productDescription], [p].[productStatus], [p0].[productCategoryName]
+FROM [Products] AS [p]
+LEFT JOIN [ProductCategories] AS [p0] ON [p].[productCategoryId] = [p0].[productCategoryId]
+2023-01-20 00:56:01.803 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.ProductDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-20 00:56:01.832 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api) in 12569.1643ms
+2023-01-20 00:56:01.832 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api)'
+2023-01-20 00:56:01.833 -05:00 [INF] Request finished in 12816.6984ms 200 application/json; charset=utf-8
+2023-01-20 00:56:35.618 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/Products  
+2023-01-20 00:56:35.654 -05:00 [INF] Executing endpoint 'allopromo.Controllers.ProductsController.GetProducts (allopromo.Api)'
+2023-01-20 00:56:35.666 -05:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Collections.Generic.List`1[allopromo.Core.Application.Dto.StoreDto] GetProducts() on controller allopromo.Controllers.ProductsController (allopromo.Api).
+2023-01-20 00:56:35.671 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-20 00:56:35.692 -05:00 [INF] Executed action allopromo.Controllers.ProductsController.GetProducts (allopromo.Api) in 25.535ms
+2023-01-20 00:56:35.692 -05:00 [INF] Executed endpoint 'allopromo.Controllers.ProductsController.GetProducts (allopromo.Api)'
+2023-01-20 00:56:35.693 -05:00 [INF] Request finished in 76.5909ms 200 application/json; charset=utf-8
+2023-01-20 00:57:12.792 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 00:57:12.819 -05:00 [INF] Request finished in 27.0635ms 200 text/html;charset=utf-8
+2023-01-20 00:57:14.167 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 00:57:14.279 -05:00 [INF] Request finished in 112.5907ms 200 application/json;charset=utf-8
+2023-01-20 00:58:33.154 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store/products/41312416-648C-4BBB-DCF8-08DA597B9BE4  
+2023-01-20 00:58:33.160 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api)'
+2023-01-20 00:58:33.163 -05:00 [INF] Route matched with {action = "GetProducts", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductsAsync(System.String) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:58:33.312 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:58:36.587 -05:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[productName], [p].[productDescription], [p].[productStatus], [p0].[productCategoryName]
+FROM [Products] AS [p]
+LEFT JOIN [ProductCategories] AS [p0] ON [p].[productCategoryId] = [p0].[productCategoryId]
+2023-01-20 00:58:36.589 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.ProductDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-20 00:58:36.593 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api) in 3428.8338ms
+2023-01-20 00:58:36.593 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetProductsAsync (allopromo.Api)'
+2023-01-20 00:58:36.594 -05:00 [INF] Request finished in 3440.8766ms 200 application/json; charset=utf-8
+2023-01-20 00:58:44.466 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 00:58:44.481 -05:00 [INF] Request finished in 14.6493ms 200 text/html;charset=utf-8
+2023-01-20 00:58:45.338 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 00:58:45.608 -05:00 [INF] Request finished in 269.4374ms 200 application/json;charset=utf-8
+2023-01-20 00:59:05.121 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1  
+2023-01-20 00:59:05.125 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:59:05.164 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:59:05.170 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:59:05.933 -05:00 [INF] Executed DbCommand (157ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Stores] AS [s]
+2023-01-20 00:59:06.277 -05:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results.
+2023-01-20 00:59:06.280 -05:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results.
+2023-01-20 00:59:06.569 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-01-20 00:59:08.434 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 3269.6651ms
+2023-01-20 00:59:08.569 -05:00 [INF] Executed DbCommand (1,916ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [t].[storeId]) AS [storeId], [t].[storeName], [t].[storeDescription], [s0].[categoryName] AS [Category]
+FROM (
+    SELECT [s].[storeId], [s].[CategorystoreCategoryId], [s].[storeDescription], [s].[storeName]
+    FROM [Stores] AS [s]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [StoreCategories] AS [s0] ON [t].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 00:59:08.621 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:59:09.360 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncEnumerable(ActionContext context, ObjectResult result, Object asyncEnumerable, Func`2 reader)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 00:59:09.487 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:84cb9317-09d5-4dc9-ac4a-da1cc6ddcba9
+Error Number:10742,State:1,Class:15
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:84cb9317-09d5-4dc9-ac4a-da1cc6ddcba9
+Error Number:10742,State:1,Class:15
+2023-01-20 00:59:09.724 -05:00 [INF] Request finished in 4603.2756ms 500 text/plain
+2023-01-20 00:59:19.081 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=1  
+2023-01-20 00:59:19.083 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:59:19.085 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 00:59:19.099 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 00:59:19.461 -05:00 [INF] Executed DbCommand (164ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Stores] AS [s]
+2023-01-20 00:59:19.463 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-01-20 00:59:19.722 -05:00 [INF] Executed DbCommand (249ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [t].[storeId]) AS [storeId], [t].[storeName], [t].[storeDescription], [s0].[categoryName] AS [Category]
+FROM (
+    SELECT [s].[storeId], [s].[CategorystoreCategoryId], [s].[storeDescription], [s].[storeName]
+    FROM [Stores] AS [s]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [StoreCategories] AS [s0] ON [t].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 00:59:20.728 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:84cb9317-09d5-4dc9-ac4a-da1cc6ddcba9
+Error Number:10742,State:1,Class:15
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:84cb9317-09d5-4dc9-ac4a-da1cc6ddcba9
+Error Number:10742,State:1,Class:15
+2023-01-20 00:59:22.449 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 3362.4951ms
+2023-01-20 00:59:22.582 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 00:59:22.902 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncEnumerable(ActionContext context, ObjectResult result, Object asyncEnumerable, Func`2 reader)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 00:59:22.927 -05:00 [INF] Request finished in 3847.4631ms 500 text/plain
+2023-01-20 01:00:42.747 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 01:00:46.059 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 01:00:46.075 -05:00 [INF] Hosting environment: Development
+2023-01-20 01:00:46.075 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 01:00:46.183 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 01:00:47.469 -05:00 [INF] Request finished in 1301.4228ms 200 text/html;charset=utf-8
+2023-01-20 01:00:48.660 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 01:00:48.708 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 01:00:49.975 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 01:00:50.183 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 01:00:50.183 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 01:00:50.184 -05:00 [INF] Request finished in 1475.9428ms 0 image/png
+2023-01-20 01:00:50.184 -05:00 [INF] Request finished in 1524.1752ms 0 text/css
+2023-01-20 01:00:50.766 -05:00 [INF] Request finished in 792.7788ms 200 application/json;charset=utf-8
+2023-01-20 01:01:07.775 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=1  
+2023-01-20 01:01:07.799 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:01:08.256 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:01:15.501 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:01:53.138 -05:00 [INF] Executed DbCommand (132ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:02:22.335 -05:00 [INF] Executed DbCommand (1,683ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Stores] AS [s]
+2023-01-20 01:02:22.636 -05:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results.
+2023-01-20 01:02:22.639 -05:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results.
+2023-01-20 01:02:22.984 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-01-20 01:02:24.069 -05:00 [INF] Executed DbCommand (1,161ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [t].[storeId]) AS [storeId], [t].[storeName], [t].[storeDescription], [s0].[categoryName] AS [Category]
+FROM (
+    SELECT [s].[storeId], [s].[CategorystoreCategoryId], [s].[storeDescription], [s].[storeName]
+    FROM [Stores] AS [s]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [StoreCategories] AS [s0] ON [t].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:02:25.431 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:03f133e0-cfa1-4b0b-b102-a096e6e07540
+Error Number:10742,State:1,Class:15
+Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](AAsyncCallContext`1 context)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:03f133e0-cfa1-4b0b-b102-a096e6e07540
+Error Number:10742,State:1,Class:15
+2023-01-20 01:02:25.858 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 77162.0307ms
+2023-01-20 01:02:26.544 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:02:27.123 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.AsyncEnumerableReader.ReadInternal[T](Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncEnumerable(ActionContext context, ObjectResult result, Object asyncEnumerable, Func`2 reader)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 01:02:27.214 -05:00 [INF] Request finished in 79439.412ms 500 text/plain
+2023-01-20 01:07:54.139 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 01:07:58.943 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 01:07:58.946 -05:00 [INF] Hosting environment: Development
+2023-01-20 01:07:58.947 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 01:07:59.126 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 01:08:00.936 -05:00 [INF] Request finished in 1825.4768ms 200 text/html;charset=utf-8
+2023-01-20 01:08:01.343 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 01:08:02.652 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 01:08:02.772 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 01:08:03.412 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 01:08:03.413 -05:00 [INF] Request finished in 2070.8266ms 0 text/css
+2023-01-20 01:08:03.535 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 01:08:03.536 -05:00 [INF] Request finished in 884.4847ms 0 image/png
+2023-01-20 01:08:04.057 -05:00 [INF] Request finished in 1284.5004ms 200 application/json;charset=utf-8
+2023-01-20 01:08:33.459 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=1  
+2023-01-20 01:08:33.525 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:08:33.900 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:08:40.554 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:08:48.186 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 01:08:50.138 -05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+2023-01-20 01:08:51.945 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 18026.2672ms
+2023-01-20 01:08:52.085 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:08:52.472 -05:00 [INF] Executed DbCommand (2,144ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Stores] AS [s]
+2023-01-20 01:08:52.472 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value, Type objectType)
+   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value, Type objectType)
+   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value)
+   at Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 01:08:52.611 -05:00 [INF] Request finished in 19152.4717ms 500 text/plain
+2023-01-20 01:22:22.276 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 01:22:27.299 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 01:22:27.301 -05:00 [INF] Hosting environment: Development
+2023-01-20 01:22:27.302 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 01:22:27.497 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 01:22:30.175 -05:00 [INF] Request finished in 2691.3131ms 200 text/html;charset=utf-8
+2023-01-20 01:22:31.439 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 01:22:32.504 -05:00 [INF] Request finished in 1066.4404ms 200 application/json;charset=utf-8
+2023-01-20 01:22:52.733 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=1  
+2023-01-20 01:22:52.779 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:22:53.346 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:23:00.366 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:23:00.941 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 01:23:06.506 -05:00 [INF] Executed DbCommand (250ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:23:06.774 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 13407.4932ms
+2023-01-20 01:23:06.779 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:23:06.800 -05:00 [INF] Request finished in 14067.0537ms 200 application/json; charset=utf-8
+2023-01-20 01:43:27.948 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=1  
+2023-01-20 01:43:28.222 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:43:28.330 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:43:28.789 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:43:29.453 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 01:43:29.982 -05:00 [INF] Executed DbCommand (120ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:43:30.011 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 1677.1106ms
+2023-01-20 01:43:30.012 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:43:30.013 -05:00 [INF] Request finished in 2152.6782ms 200 application/json; charset=utf-8
+2023-01-20 01:51:20.604 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 01:51:23.680 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 01:51:23.683 -05:00 [INF] Hosting environment: Development
+2023-01-20 01:51:23.684 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 01:51:23.849 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 01:51:24.936 -05:00 [INF] Request finished in 1100.4412ms 200 text/html;charset=utf-8
+2023-01-20 01:51:25.248 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 01:51:26.501 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 01:51:27.206 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 01:51:27.476 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 01:51:27.477 -05:00 [INF] Request finished in 976.3368ms 0 image/png
+2023-01-20 01:51:27.493 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 01:51:27.494 -05:00 [INF] Request finished in 2246.6346ms 0 text/css
+2023-01-20 01:51:28.035 -05:00 [INF] Request finished in 830.7443ms 200 application/json;charset=utf-8
+2023-01-20 01:52:05.665 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=5  
+2023-01-20 01:52:05.785 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:52:06.237 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:52:13.095 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:52:13.687 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 01:52:18.686 -05:00 [INF] Executed DbCommand (387ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:52:18.932 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 12675.5343ms
+2023-01-20 01:52:18.934 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:52:18.952 -05:00 [INF] Request finished in 13287.2687ms 200 application/json; charset=utf-8
+2023-01-20 01:53:41.773 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 01:53:46.801 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 01:53:46.803 -05:00 [INF] Hosting environment: Development
+2023-01-20 01:53:46.804 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 01:53:46.939 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 01:53:48.004 -05:00 [INF] Request finished in 1077.8982ms 200 text/html;charset=utf-8
+2023-01-20 01:53:48.646 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 01:53:49.333 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 01:53:49.739 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 01:53:50.484 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 01:53:50.485 -05:00 [INF] Request finished in 1152.2765ms 0 image/png
+2023-01-20 01:53:50.486 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 01:53:50.487 -05:00 [INF] Request finished in 1841.131ms 0 text/css
+2023-01-20 01:53:51.154 -05:00 [INF] Request finished in 1415.557ms 200 application/json;charset=utf-8
+2023-01-20 01:54:07.961 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=5  
+2023-01-20 01:54:08.005 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:54:09.038 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 01:54:15.346 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 01:54:15.788 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 01:54:19.322 -05:00 [INF] Executed DbCommand (114ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 01:54:19.493 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 10423.6774ms
+2023-01-20 01:54:19.503 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 01:54:19.520 -05:00 [INF] Request finished in 11561.2538ms 200 application/json; charset=utf-8
+2023-01-20 02:01:32.891 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 02:01:35.817 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 02:01:35.820 -05:00 [INF] Hosting environment: Development
+2023-01-20 02:01:35.820 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 02:01:35.969 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 02:01:37.104 -05:00 [INF] Request finished in 1148.862ms 200 text/html;charset=utf-8
+2023-01-20 02:01:37.431 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 02:01:38.068 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 02:01:38.833 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 02:01:38.848 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 02:01:38.849 -05:00 [INF] Request finished in 1418.2066ms 0 text/css
+2023-01-20 02:01:38.953 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 02:01:38.953 -05:00 [INF] Request finished in 885.8383ms 0 image/png
+2023-01-20 02:01:39.485 -05:00 [INF] Request finished in 652.4622ms 200 application/json;charset=utf-8
+2023-01-20 02:01:57.661 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=5  
+2023-01-20 02:01:57.700 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:01:58.470 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 02:02:08.500 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 02:02:10.214 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 11724.5206ms
+2023-01-20 02:02:10.348 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:02:10.689 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The source 'IQueryable' doesn't implement 'IAsyncEnumerable<allopromo.Core.Application.Dto.StoreDto>'. Only sources that implement 'IAsyncEnumerable' can be used for Entity Framework asynchronous operations.
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at allopromo.Api.Controllers.StoreController.GetStores(PaginationFilter filter) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 77
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-01-20 02:02:11.184 -05:00 [INF] Request finished in 13529.6271ms 500 text/plain
+2023-01-20 02:07:38.860 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 02:07:42.304 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 02:07:42.310 -05:00 [INF] Hosting environment: Development
+2023-01-20 02:07:42.310 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 02:07:42.513 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 02:07:43.706 -05:00 [INF] Request finished in 1207.7512ms 200 text/html;charset=utf-8
+2023-01-20 02:07:44.065 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 02:07:44.708 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 02:07:45.120 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 02:07:45.225 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 02:07:45.225 -05:00 [INF] Request finished in 1160.6862ms 0 text/css
+2023-01-20 02:07:45.393 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 02:07:45.393 -05:00 [INF] Request finished in 684.8622ms 0 image/png
+2023-01-20 02:07:46.214 -05:00 [INF] Request finished in 1093.8671ms 200 application/json;charset=utf-8
+2023-01-20 02:08:00.586 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=5  
+2023-01-20 02:08:00.634 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:08:00.934 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 02:08:07.831 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 02:08:08.068 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 02:08:14.074 -05:00 [INF] Executed DbCommand (341ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 02:08:14.302 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 13337.6882ms
+2023-01-20 02:08:14.304 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:08:14.329 -05:00 [INF] Request finished in 13748.4509ms 200 application/json; charset=utf-8
+2023-01-20 02:08:42.216 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=2&PageSize=5  
+2023-01-20 02:08:42.273 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:08:42.277 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 02:08:42.501 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 02:08:42.509 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 02:08:42.626 -05:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 02:08:42.633 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 354.9486ms
+2023-01-20 02:08:42.634 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:08:42.635 -05:00 [INF] Request finished in 422.2361ms 200 application/json; charset=utf-8
+2023-01-20 02:18:54.781 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-20 02:18:57.604 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-20 02:18:57.607 -05:00 [INF] Hosting environment: Development
+2023-01-20 02:18:57.608 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-01-20 02:18:57.800 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-01-20 02:18:59.006 -05:00 [INF] Request finished in 1216.8087ms 200 text/html;charset=utf-8
+2023-01-20 02:18:59.427 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-01-20 02:19:00.152 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-01-20 02:19:00.468 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-01-20 02:19:00.967 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-20 02:19:00.968 -05:00 [INF] Request finished in 1541.987ms 0 text/css
+2023-01-20 02:19:01.063 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-01-20 02:19:01.071 -05:00 [INF] Request finished in 919.1745ms 0 image/png
+2023-01-20 02:19:01.555 -05:00 [INF] Request finished in 1087.5197ms 200 application/json;charset=utf-8
+2023-01-20 02:19:35.460 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=1&PageSize=4  
+2023-01-20 02:19:35.480 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:19:36.059 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 02:19:42.672 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 02:19:42.872 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 02:19:46.740 -05:00 [INF] Executed DbCommand (127ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 02:19:46.998 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 10907.9902ms
+2023-01-20 02:19:46.999 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:19:47.032 -05:00 [INF] Request finished in 11572.0294ms 200 application/json; charset=utf-8
+2023-01-20 02:20:00.632 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/Store?PageNumber=2&PageSize=4  
+2023-01-20 02:20:00.656 -05:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:20:00.659 -05:00 [INF] Route matched with {action = "GetStores", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[allopromo.Core.Application.Dto.StoreDto]] GetStores(allopromo.Api.Model.Filter.PaginationFilter) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-01-20 02:20:00.823 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-01-20 02:20:00.865 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Api.Model.Wrappers.PagedResponse`1[[System.Collections.Generic.IEnumerable`1[[allopromo.Core.Application.Dto.StoreDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-01-20 02:20:00.951 -05:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CONVERT(VARCHAR(36), [s].[storeId]) AS [storeId], [s].[storeName], [s].[storeDescription], [s0].[categoryName] AS [Category]
+FROM [Stores] AS [s]
+LEFT JOIN [StoreCategories] AS [s0] ON [s].[CategorystoreCategoryId] = [s0].[categoryId]
+2023-01-20 02:20:00.958 -05:00 [INF] Executed action allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api) in 291.8217ms
+2023-01-20 02:20:00.959 -05:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.GetStores (allopromo.Api)'
+2023-01-20 02:20:00.959 -05:00 [INF] Request finished in 337.9942ms 200 application/json; charset=utf-8

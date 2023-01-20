@@ -75,10 +75,14 @@ namespace allopromo.Core.Model
         #region Public Properties - Getting Objects
         public async Task<IEnumerable<StoreDto>> GetStores()
         {
+            //PaginationFilter validFilter = new PaginationFilter();
             IEnumerable<StoreDto> stores = new List<StoreDto>();
             var tStoreObj = await _storeRepository.GetAllAsync();
             stores = tStoreObj.AsQueryable()
                 .Include(c=>c.Category)
+                //.Skip((validFilter.pageNumber - 1) * validFilter.pageSize)
+                //.Take(validFilter.pageSize)
+                .AsNoTracking()
                 .Select(s => new StoreDto
             {
                 storeId = s.storeId.ToString(),
@@ -109,11 +113,20 @@ namespace allopromo.Core.Model
             else
                 throw new NullReferenceException();
         }
-        public async Task<IEnumerable<StoreDto>> GetStores (string categoryId, string localizationId)
+        public async Task<IEnumerable<StoreDto>> GetStores (string categoryId, string localizationId, string sortingOrder)
         {
+            var validFilter = 10;
+            int pageNumber = 1;
+            int pageSize = 1;
+
             var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
-                .Include(c => c.Category)
-                .Include(v => v.City).Where(v => v.City.cityId.Equals(1))
+                .Include(c => c.Category).Where( category=>category.Category.storeCategoryId.Equals(categoryId))
+                .Include(v => v.City).Where(v => v.City.cityId.Equals(localizationId))
+
+                //.OrderBy()
+                //.Skip((validFilter.pageNumber-1) * validFilter.pageSize)
+                //.Take(validFilter.pageSize)
+                //AsNoTracking()
                 .Select(s => new StoreDto()
                 {
                     storeId = s.storeId.ToString(),
@@ -122,6 +135,20 @@ namespace allopromo.Core.Model
                     Category = s.Category.storeCategoryName,
                     City = s.City.cityName.ToString()
                 });
+            switch (sortingOrder)
+            {
+                case "Date":
+                   stores = stores.OrderByDescending(o => o.storeId);
+                   break;
+
+                case "popularityOrReview":
+                    stores = stores.OrderByDescending(o => o.storeId);
+                    break;
+                default:
+                    stores = stores.OrderByDescending(o => o.storeId);
+                    break;
+            }
+                
             if (stores!= null)
                 return stores;
             else

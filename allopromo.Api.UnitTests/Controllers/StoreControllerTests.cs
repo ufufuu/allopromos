@@ -17,7 +17,6 @@ namespace allopromo.Api.UnitTests
     {
         //StoreCreatedEventArgs storeCreatedEventArgs;
         private bool NotifySent { get; set; }
-
         Mock<IStoreService> _storeServiceMock;
         Mock<IProductService> _productService;
         Mock<INotifyService> _notificationServiceMock;
@@ -29,6 +28,13 @@ namespace allopromo.Api.UnitTests
             _productService = new Mock<IProductService>();
             _notificationServiceMock = new Mock<INotifyService>();
             SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+        }
+        [Test]
+        public void StoreController_Get_StoresWithLimit_Rerturns_OnlyLimitedStores()
+        {
+            var result = SUT.GetStoresByLocationIdAsync(1, 2, 2, 10).Result;
+            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
+            //Assert.AreEqual(result, 10);
         }
         [Test]
         public void StoreController_Put_StoreCategory_Null_SHOULD_ReturnStoreNotFoundResult()

@@ -10,6 +10,7 @@ using allopromo.Core.Abstract;
 using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Domain;
+using allopromo.Api;
 namespace allopromo.Api.UnitTests
 {
     //[TestFixture]
@@ -43,7 +44,7 @@ namespace allopromo.Api.UnitTests
         public void AccountController_CreateUser_UserPassword_Invalid_Or_Empty_ReturnsException()
         {
             _userServiceMock = new Mock<IUserService>();
-            var ApplicationUser = new Model.ViewModel.RegisterViewModel
+            var ApplicationUser = new Api.Model.ViewModel.RegisterViewModel
             {
                 Email = "alala@f.fr",
                 UserName = "ff",

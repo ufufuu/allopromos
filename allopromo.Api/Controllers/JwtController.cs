@@ -12,12 +12,12 @@ namespace allopromo.Controllers
 {
     public class JwtController:ControllerBase
     {
-        private SignInManager<RegisterViewModel> _signingManager { get; set; }
+        private SignInManager<Api.Model.ViewModel.RegisterViewModel> _signingManager { get; set; }
 
         [HttpGet]
 
         //[BasicAuthenticationFilter]
-        public IActionResult Get([FromBody] RegisterViewModel user)
+        public IActionResult Get([FromBody] Api.Model.ViewModel.RegisterViewModel user)
         {
             var logged = _signingManager.SignInAsync(user, isPersistent: false);
             //string userName = Threa.CurrentPrincipal.Identiy.Name;

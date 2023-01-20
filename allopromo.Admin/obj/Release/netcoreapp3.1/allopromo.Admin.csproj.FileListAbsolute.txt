@@ -425,3 +425,4 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Admin\obj\Release\netcoreapp3.1\
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin\obj\Release\netcoreapp3.1\allopromo.Admin.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin\obj\Release\netcoreapp3.1\allopromo.Admin.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Admin\obj\Release\netcoreapp3.1\allopromo.Admin.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Admin\obj\Release\netcoreapp3.1\allopromo.Admin.MvcApplicationPartsAssemblyInfo.cs

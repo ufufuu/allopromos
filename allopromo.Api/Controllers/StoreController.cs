@@ -17,6 +17,12 @@ using allopromo.Core.Entities;
 using System.Net;
 using System.ComponentModel;
 using System.Net.Http;
+using allopromo.Api.Model.ViewModel.Page;
+using System.Linq;
+using allopromo.Api.Model.Wrappers;
+using allopromo.Api.Model.Filter;
+using Microsoft.EntityFrameworkCore;
+
 namespace allopromo.Api.Controllers
 {
     public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
@@ -29,6 +35,14 @@ namespace allopromo.Api.Controllers
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
+
+        //tiktak.ca/en/store/62143| 
+        ////kijiji.ca/b-autos-vehicules/ville-de-quebec/c27l1700124
+        //api/customer?pageNumber=3&pageSize=10;
+        #region Constantes
+        public int pageNumber { get; set; }
+        public const int pageSize = 2;
+        #endregion
         #region Fields
         private readonly IStoreService _storeService;
         private readonly INotifyService _notificationService;
@@ -48,14 +62,20 @@ namespace allopromo.Api.Controllers
         #endregion
         #region GET
         [HttpGet]
-        public async Task<ActionResult<StoreDto>> GetStores()//tiktak.ca/en/store/62143| 
+        public async Task<ActionResult<StoreDto>> GetStores([FromQuery] PaginationFilter filter)
         {
-            ////kijiji.ca/b-autos-vehicules/ville-de-quebec/c27l1700124
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var stores = await _storeService.GetStores();
+            var paginatedResult = stores//.ToListAsync()
+                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                .Take(validFilter.PageSize).AsQueryable();
+                                //.ToListAsync();
+            //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
             if (stores == null)
                 return NotFound();
             else
-                return Ok(stores);
+                return Ok(new PagedResponse<IEnumerable<StoreDto>>
+                    (paginatedResult, validFilter.PageNumber, validFilter.PageSize));
         }
         [HttpGet]
         [Route("{LocalizationId}")]
@@ -68,11 +88,17 @@ namespace allopromo.Api.Controllers
         }
         [HttpGet]
         [Route("{categoryID}/{LocalizationID}")]
-        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string LocalizationID)
+        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string localizationID)
         {
-            var stores = await _storeService.GetStores(LocalizationID);
-            if (stores != null)
-                return Ok(stores);
+            String date = string.Empty;
+            if (string.IsNullOrEmpty(categoryID))
+                date = "Date";
+            var stores = await _storeService.GetStores(categoryID, localizationID, date);
+
+            //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
+
+            //if (stores != null)
+              //  return Ok(new IEnumerable<StoreDto>(stores));
             return BadRequest();
         }
         [HttpGet]

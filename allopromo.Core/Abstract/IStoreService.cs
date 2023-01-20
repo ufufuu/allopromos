@@ -13,9 +13,8 @@ namespace allopromo.Core.Abstract
         #region Public Methods - Get Objects
         Task<IEnumerable<StoreDto>> GetStores();
         Task<IEnumerable<StoreDto>> GetStores(string localizationId);
+        Task<IEnumerable<StoreDto>> GetStores(string categoryId, string localizationId, string sortingOrder);
 
-
-        //Task<IEnumerable<StoreDto>> GetStores(string categoryId, string localizationId);
         
         Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user);
         Task<StoreDto> CreateStore(StoreDto store);
