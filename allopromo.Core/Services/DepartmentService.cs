@@ -18,27 +18,23 @@ namespace allopromo.Core.Services
         IDepartmentService
     {
         public IRepository<tDepartment> _departmentRepository { get; set; }
-
         public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
-            int gr = 78;
             var tD = await GetEntities();
             var tDs = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tD);
-            int f = 54;
             return tDs;
+
             IEnumerable<tDepartment> tEntities = null;
             IEnumerable<DepartmentDto> departments = null;
             try
             {
                 var de = _departmentRepository;
-                int g = 56;
                 tEntities = await _departmentRepository.GetAllAsync();
                 departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
-                int re = 245;
             }
             catch (Exception ex)
             {
@@ -54,12 +50,7 @@ namespace allopromo.Core.Services
             try
             {
                 var de = _departmentRepository;
-                int g = 56;
                 tEntities = await _departmentRepository.GetAllAsync();
-
-                //departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
-                int l = 21;
-                //if (tEntities == null)
             }
             catch (Exception)
             {
