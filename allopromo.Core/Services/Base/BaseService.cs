@@ -8,31 +8,27 @@ namespace allopromo.Core.Services.Base
 {
     public class BaseService<TEntity>: IBaseService<TEntity> where TEntity:class
     {
-        IRepository<TEntity> _departmentRepo;
-        public BaseService(IRepository<TEntity> departmentRepo)
+        public IRepository<TEntity> _Repository { get; set; }
+        public BaseService(IRepository<TEntity> Repository)
         {
-            _departmentRepo = departmentRepo;
+            _Repository = Repository;
         }
-        public BaseService()
+        public virtual async Task<IEnumerable<TEntity>> GetEntities()
         {
+            var tEntities = await _Repository.GetAllAsync();
+            int g = 5;
+                return tEntities;
         }
         public void Add(TEntity entity)
         {
-            if(_departmentRepo !=null)
-            _departmentRepo.Add(entity);
+            if (_Repository != null)
+                _Repository.Add(entity);
         }
-        public async Task<IEnumerable<TEntity>> GetEntities()
-        {
-            if (_departmentRepo != null)
-                return await _departmentRepo.GetAllAsync();
-            else
-                throw new NullReferenceException();
-        }
-        public void Create(TEntity entity)
+        public void Update(TEntity entity)
         {
             if (entity!= null)
             {
-                _departmentRepo.Add(entity);
+                _Repository.Add(entity);
             }
         }
     }

@@ -51,7 +51,6 @@ namespace allopromo
             Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
@@ -84,7 +83,7 @@ namespace allopromo
                     ValidIssuer = Configuration["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
                 };
-                //Events
+#region Event
                 token.Events = new JwtBearerEvents
                 {
                     //OnChallenge= async ctx =>
@@ -96,12 +95,11 @@ namespace allopromo
                         // Add claim
                     //}
                 };
-
+#endregion
             });
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             );
@@ -112,12 +110,14 @@ namespace allopromo
 
             services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<ILocalisationService, LocalisationService>();
+
             services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
                 Core.Services.Base.BaseService<Core.Application.Dto.DepartmentDto>>();
+            services.AddScoped<IRepository<Core.Application.Dto.DepartmentDto>, TRepository<Core.Application.Dto.DepartmentDto>>();
 
-            //services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<Core.Services.IDepartmentService, Core.Services.DepartmentService>();
+
             //services.AddScoped<I>
-
             //services.AddScoped<IHttpClientFactory, IHttpClientFactory>();
 
             //services.AddScoped<>

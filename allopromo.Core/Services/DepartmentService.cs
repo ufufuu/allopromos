@@ -4,28 +4,68 @@ using allopromo.Core.Entities;
 using allopromo.Core.Services.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class DepartmentService : BaseService<tDepartment>                                                   //!!!
+    public interface IDepartmentService
     {
-        private IRepository<tDepartment> _departmentRepository;
-        public DepartmentService(IRepository<tDepartment> departmentRepository)
+        Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync();
+    }
+    public class DepartmentService  :// BaseService<tDepartment>
+        IDepartmentService
+    {
+        public IRepository<tDepartment> _departmentRepository { get; set; }
+
+        public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
-        public DepartmentService()
-        {}
-        public new IEnumerable<DepartmentDto> GetEntities()
+        public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
-            var tEntities = _departmentRepository.GetAllAsync();
-            var departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
-            if (tEntities == null)
-                return departments;
-            else
+            int gr = 78;
+            var tD = await GetEntities();
+            var tDs = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tD);
+            int f = 54;
+            return tDs;
+            IEnumerable<tDepartment> tEntities = null;
+            IEnumerable<DepartmentDto> departments = null;
+            try
+            {
+                var de = _departmentRepository;
+                int g = 56;
+                tEntities = await _departmentRepository.GetAllAsync();
+                departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+                int re = 245;
+            }
+            catch (Exception ex)
+            {
                 throw new NullReferenceException();
+            }
+            return departments;
+        }
+        //public override async Task<IEnumerable<tDepartment>> GetEntities()
+        public async Task<IEnumerable<tDepartment>> GetEntities()
+        {
+            IEnumerable <tDepartment> tEntities = null;
+            IEnumerable<DepartmentDto> departments = null;
+            try
+            {
+                var de = _departmentRepository;
+                int g = 56;
+                tEntities = await _departmentRepository.GetAllAsync();
+
+                //departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+                int l = 21;
+                //if (tEntities == null)
+            }
+            catch (Exception)
+            {
+                throw new NullReferenceException();
+            }
+            return tEntities;
         }
         public void Create()
         {

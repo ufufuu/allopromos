@@ -21,13 +21,17 @@ namespace allopromo.Core.Model
     public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
     public class StoreService : IStoreService
     {
+        #region Constantes
+        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
+        public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
+        #endregion
         #region Properties
+
         public event StoreCreatedEventHandler StoreCreated;
+
         public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
         public IRepository<tDepartment> _departmentRepository { get; set; }
-        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
-        public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         public IRepository<tStoreCategory> _categoryRepository { get; set; }
         #endregion
         #region Fields
@@ -47,8 +51,7 @@ namespace allopromo.Core.Model
             _departmentRepository = departmentRepository;
         }
         public StoreService()
-        {
-        }
+        { }
 
         event StoreCreatedEventHandler IStoreService.StoreCreated
         {

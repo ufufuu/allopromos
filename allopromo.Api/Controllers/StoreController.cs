@@ -66,10 +66,10 @@ namespace allopromo.Api.Controllers
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var stores = await _storeService.GetStores();
-            var paginatedResult = stores//.ToListAsync()
+            var paginatedResult = stores
                                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                                 .Take(validFilter.PageSize).AsQueryable();
-                                //.ToListAsync();
+
             //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
             if (stores == null)
                 return NotFound();
@@ -88,18 +88,24 @@ namespace allopromo.Api.Controllers
         }
         [HttpGet]
         [Route("{categoryID}/{LocalizationID}")]
-        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string localizationID)
+        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string localizationID, 
+            [FromQuery] PaginationFilter filter )
         {
+            PaginationFilter validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             String date = string.Empty;
             if (string.IsNullOrEmpty(categoryID))
                 date = "Date";
             var stores = await _storeService.GetStores(categoryID, localizationID, date);
 
+            var paginatedStores = stores
+                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                .Take(validFilter.PageSize).AsQueryable();
+                            
             //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
 
-            //if (stores != null)
-              //  return Ok(new IEnumerable<StoreDto>(stores));
-            return BadRequest();
+            if (paginatedStores != null)
+                return Ok(new PagedResponse<IEnumerable<StoreDto>>(paginatedStores, validFilter.PageNumber, validFilter.PageSize));
+            return NotFound();
         }
         [HttpGet]
         [Route("categories")]

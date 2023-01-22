@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using allopromo.Core.Services.Base;
 using allopromo.Core.Services;
 using allopromo.Core.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace allopromo.Api.Controllers
 {
@@ -25,10 +26,15 @@ namespace allopromo.Api.Controllers
         private readonly IConfiguration _config;
         private IBaseService<DepartmentDto> _departmentService;
         private readonly IExceptionWriter _exceptionWriter;
-        public DepartmentController(IConfiguration config, //IExceptionWriter exceptionWriter,
-        IBaseService<DepartmentDto> departmentService)
+
+        private readonly IDepartmentService _DepartmentService;
+        private readonly ILogger<DepartmentController> _logger;
+        public DepartmentController(IConfiguration config,//IExceptionWriter exceptionWriter,
+            IDepartmentService DepartmentService //IBaseService<DepartmentDto> departmentService
+        )
         {
-            _departmentService = departmentService;
+            _DepartmentService = DepartmentService;
+
             _config = config;
             //_exceptionWriter = exceptionWriter;
         }
@@ -36,8 +42,10 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<IActionResult> GetDepartments()
         {
-            var departments = await _departmentService.GetEntities();
-            return Ok(departments);
+            var departments = await _DepartmentService.GetDepartmentsAsync();
+            if(departments!=null)
+                return Ok(departments);
+            return NotFound();
         }
         [HttpPost]
         public IActionResult PostDepartment ([FromBody] DepartmentDto departmentDto)
@@ -48,7 +56,7 @@ namespace allopromo.Api.Controllers
                 var department = new tDepartment();
                 department.departmentId = departmentDto.departmentId.ToString();
                 department.departmentName = departmentDto.departmentName.ToString();
-                _departmentService.Create(departmentDto);
+                _departmentService.Update(departmentDto);
             }
             catch (Exception ex)
             {

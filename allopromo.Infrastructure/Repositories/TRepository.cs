@@ -140,20 +140,6 @@ namespace allopromo.Infrastructure.Repositories
 /*
         void GetStoresAsync()
         {
-            //using(var db = new AppDbContext())
-           //{
-                //var query8 = from q in db.Users
-                //    select new
-                //    {
-                //       Id = q.Email,
-                //    } 
-                //    into rtrt
-                //      where rtrt.Id=="0"
-                //         select new
-                //    {
-                //    };
-           // }
-
             //var query7= AppDbContex
            /* var query= from ct in AppDbContext.CT
                        where ct.DateDebut < dateDemande

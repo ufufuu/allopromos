@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace allopromo.Core.Model
 {
-    public class AccountMembershipService<TEntity>:BaseService <TEntity> where TEntity:class
+    public class AccountMembershipService<TEntity> //:BaseService <TEntity> where TEntity:class
     {
         public IAppDbContext<TEntity> db { get; set; }
         public new IEnumerable<TEntity> GetEntities()
