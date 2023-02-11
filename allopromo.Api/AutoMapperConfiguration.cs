@@ -1,4 +1,5 @@
-﻿using allopromo.Core.Application.Dto;
+﻿using allopromo.Api.ViewModel.ViewModels;
+using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using AutoMapper;
@@ -28,7 +29,8 @@ namespace allopromo.Api
                 //.ForMember(x=>x.storeCategoryId, opt=>opt)
 
                 configuration.CreateMap<tStoreCategory, StoreCategoryDto>();
-                    //.ForMember(dest => dest.storeCategoryImageUrl, opt => opt.MapFrom(src => src.storeCategoryName));
+
+                //.ForMember(dest => dest.storeCategoryImageUrl, opt => opt.MapFrom(src => src.storeCategoryName));
 
                 //configuration.CreateMap<tCity, CityDto>();
 
@@ -37,6 +39,21 @@ namespace allopromo.Api
                     .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore())
                     .ForMember(x => x.countryId, opt => opt.Ignore());
             });
+        }
+    }
+    public class AutoMapperProfile : Profile
+    {
+        public AutoMapperProfile()
+        {
+            CreateMap<ApplicationUser, RegisterViewModel>()
+                .ReverseMap();
+            CreateMap<RegisterViewModel, ApplicationUser>()
+                .ReverseMap();
+
+            CreateMap<tDepartment, DepartmentDto>()
+                .ReverseMap();
+            CreateMap<DepartmentDto, tDepartment>()
+                .ReverseMap();
         }
     }
 }

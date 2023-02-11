@@ -29,12 +29,12 @@ namespace allopromo.Api.Controllers
 
         private readonly IDepartmentService _DepartmentService;
         private readonly ILogger<DepartmentController> _logger;
-        public DepartmentController(IConfiguration config,//IExceptionWriter exceptionWriter,
-            IDepartmentService DepartmentService //IBaseService<DepartmentDto> departmentService
-        )
+        public DepartmentController(IConfiguration config,
+            IDepartmentService DepartmentService ,
+            IBaseService<DepartmentDto> departmentService)
         {
             _DepartmentService = DepartmentService;
-
+            _departmentService = departmentService;
             _config = config;
             //_exceptionWriter = exceptionWriter;
         }
@@ -50,7 +50,6 @@ namespace allopromo.Api.Controllers
         [HttpPost]
         public IActionResult PostDepartment ([FromBody] DepartmentDto departmentDto)
         {
-            String Id = String.Empty;
             try
             {
                 var department = new tDepartment();
@@ -64,7 +63,6 @@ namespace allopromo.Api.Controllers
             }
             return Ok(departmentDto);
         }
-        
         [HttpGet]
         [Route("cities+{cityId}")]
         public IActionResult GetDepartmentById(string cityId)

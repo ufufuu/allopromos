@@ -1,7 +1,6 @@
 ﻿using allopromo.Core.Domain;
 using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
-using allopromo.Core.Model.ViewModel;
 using System;
 using static allopromo.Core.Model.AccountService;
 namespace allopromo.Core.Abstract
@@ -22,7 +21,11 @@ namespace allopromo.Core.Abstract
         public delegate UserAuthenticateEventArgs onUserAuthenticates();
         public void OnUserAuthenticate(string userName);
         public void OnUserAuthenticated();
-        abstract LoginResponseModel Authenticate(LoginModel login);
+
+        abstract LoginResponseModel Authenticate(ApplicationUser login);
+
+
+        //abstract LoginResponseModel Authenticate(LoginViewModel login);
     }
 }
 /*The EventArgs class is the base type for all event data classes. ... The EventHandler delegate includes

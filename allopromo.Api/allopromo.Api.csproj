@@ -50,7 +50,7 @@
     <Compile Remove="Infrastructure\Providers\BasicAuthenticationFilter.cs" />
     <Compile Remove="Infrastructure\Services\ErrorService.cs" />
     <Compile Remove="Infrastructure\ToolKit\JwtSecurityTokenHandler.cs" />
-    <Compile Remove="Model\MappingProfile.cs" />
+    <Compile Remove="ViewModel\MappingProfile.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,7 +60,6 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Controllers\Errors\" />
-    <Folder Include="Infrastructure\Hubs\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Properties\" />

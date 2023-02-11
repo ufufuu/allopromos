@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authorization", "authorizat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcceptanceTests", "AcceptanceTests", "{2A6342CD-C07E-4787-94FA-3068B9A8CC8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "End2End", "End2End", "{02CDDCC6-EE4D-4807-B123-920D61D28805}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "e2eTests", "e2eTests", "{02CDDCC6-EE4D-4807-B123-920D61D28805}"
 	ProjectSection(SolutionItems) = preProject
 		WebBrowser.cs = WebBrowser.cs
 	EndProjectSection

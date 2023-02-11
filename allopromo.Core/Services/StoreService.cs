@@ -8,6 +8,7 @@ using allopromo.Core.Entities;
 using System.Net.Http;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Core.Domain;
+ 
 using AutoMapper;
 using System.Linq;
 using allopromo.Core.Services;
@@ -198,7 +199,6 @@ namespace allopromo.Core.Model
                 return null;
             return await _productService.GetProductsByStore(storeId);
         }
-
         private int GetStoresProducts(ApplicationUser user)
         {
             var Id = String.Empty;
@@ -221,14 +221,16 @@ namespace allopromo.Core.Model
             }
             return null;
         }
-        public async Task<IEnumerable<StoreDto>> GetStoresByLocationAsync(int locationId, int page, int size)
+        public async Task<IEnumerable<StoreDto>> GetStoresByLocalizationAsync(int locationId, int page, int size)
         {
-            if (locationId.Equals(null))
-                return null;
-            else
+            try
             {
-                var storesByLocation =
-                await _tGenericRepository.GetAllAsync();
+                var storesByLocation = await _tGenericRepository.GetAllAsync();
+                return AutoMapper.Mapper.Map<IEnumerable<StoreDto>>(storesByLocation);
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
             return null;
         }

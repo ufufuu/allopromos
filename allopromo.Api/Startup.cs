@@ -128,6 +128,8 @@ namespace allopromo
             //services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
 
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "my API", Version = "v1" });
@@ -251,11 +253,21 @@ namespace allopromo
 
                 endpoints.MapFallbackToFile("index.html");
             });
+
             app.UseSwagger();
+
             app.UseSwaggerUI(c =>{
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
             });
             AutoMapperConfiguration.Initialize();
+
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your Api V1");
+            //});
+
             /*
             app.UseMvc();
             app.UseCors(options =>options.AllowAnyMethod().AllowAnyHeader()

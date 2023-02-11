@@ -44,7 +44,7 @@ namespace allopromo.Core.UnitTests
         {
             
             // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
-            var result = await _userService.CreateUser(new ApplicationUser { }, "kjk788kkk");
+            var result = await _userService.CreateUser(new ApplicationUser().UserName, "kjk788kkk");
 
             Assert.IsTrue(result.Equals(false));
         }
@@ -63,7 +63,7 @@ namespace allopromo.Core.UnitTests
         //[Test]
         public void UserService_CreateUser_Returns_UserCreated()
         {
-           Task<bool> result= _userService.CreateUser(new ApplicationUser { }, "");
+           Task<bool> result= _userService.CreateUser(new ApplicationUser { }.UserName, "");
             Assert.IsNotNull(result);
         }
         //[Test]

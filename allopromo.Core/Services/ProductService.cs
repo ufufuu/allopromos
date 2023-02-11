@@ -18,8 +18,7 @@ namespace allopromo.Core.Services
     {
         #region Constructor & Properties
         private readonly IRepository<tProduct> _productRepository;
-        public ProductService(IRepository<tProduct> productRepository
-            )
+        public ProductService(IRepository<tProduct> productRepository)
         {
             _productRepository = productRepository;
             //_productQuery = productQuery;
@@ -70,8 +69,8 @@ namespace allopromo.Core.Services
             {
                 //var tProduct2 = 
                 await _productRepository.Add(product);
-                ProductDto pod = Mapper.Map<ProductDto>(product);
-                productDto = Mapper.Map<ProductDto>(product);
+                ProductDto pod = AutoMapper.Mapper.Map<ProductDto>(product);
+                productDto = AutoMapper.Mapper.Map<ProductDto>(product);
             }
             return productDto;
         }

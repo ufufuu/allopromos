@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using allopromo.Model.ViewModel;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Infrastructure;
 using allopromo.Core.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using allopromo.Infrastructure.Data;
 using Microsoft.Extensions.Logging;
+using allopromo.Api.ViewModel.ViewModels;
+
 namespace allopromo.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -30,18 +31,19 @@ namespace allopromo.Controllers
         {
             _userService = userService;
         }
-        public UserController(AccountService accountService,
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
-        {
-            _accountService = accountService;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-            _logger = logger;
-        }
+        //public UserController(AccountService accountService,
+        //    UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
+        //    SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
+        //{
+        //    _accountService = accountService;
+        //    _userManager = userManager;
+        //    _roleManager = roleManager;
+        //    _signInManager = signInManager;
+        //    _logger = logger;
+        //}
         [ActivatorUtilitiesConstructor]
-        public UserController(IUserService userService, UserManager<ApplicationUser> userManager, IAccountService accountService,
+        public UserController(IUserService userService, UserManager<ApplicationUser> userManager,
+            IAccountService accountService,
             RoleManager<IdentityRole> roleManager)
         {
             _userService = userService;
@@ -67,43 +69,36 @@ namespace allopromo.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(Core.Model.ViewModel.RegisterModel registerViewModel)
+        [Route("register")]
+        public async Task<IActionResult> CreateUser(RegisterViewModel registerViewModel)
         {
-            if (registerViewModel == null)
-                return null;
-            else
+            if (registerViewModel != null)
             {
                 if (string.IsNullOrEmpty(registerViewModel.UserPassword))
-                    throw new Exception("Password is invalid or Empty");
+                    return BadRequest();
                 else
                 {
                     if (ModelState.IsValid)
                     {
-
                         ApplicationUser appUser = AutoMapper.Mapper.Map<ApplicationUser>(registerViewModel);
-
-                        //var appUser = new ApplicationUser
-                        //{
-                        //    UserName = registerViewModel.UserName,
-                        //    NormalizedUserName=registerViewModel.UserName,
-                        //    PasswordHash=registerViewModel.UserPassword,
-                        //    Email = registerViewModel.Email,
-                        //    PhoneNumber = registerViewModel.PhoneNumber
-                        //};
-
-                        var result = await _userService.CreateUser(appUser, registerViewModel.UserPassword);
+                        var result = await _userService.CreateUser(appUser.UserName, registerViewModel.UserPassword);
                         if (result)
                         {
-                            _accountService.OnUserAuthenticate(registerViewModel.Email);
+                            //_accountService.OnUserAuthenticate(registerViewModel.UserEmail);
+                            //_userService.OnUserAuthenticate()
                             return Ok(appUser);
                         }
                         else
                         {
-                            return NotFound();
+                            return BadRequest();
                         }
                     }
                 }
                 return NotFound();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
         [HttpPost]

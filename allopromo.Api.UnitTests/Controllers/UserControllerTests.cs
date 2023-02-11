@@ -11,102 +11,100 @@ using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Domain;
 using allopromo.Api;
+using allopromo.Api.ViewModel.ViewModels;
+
 namespace allopromo.Api.UnitTests
 {
-    //[TestFixture]
+    [TestFixture]
     public class UserControllerTests
     {
+        private Mock<IUserService> _userServiceMock;
+        private UserController _SUT;
         public UserControllerTests()
         {
             _userServiceMock = new Mock<IUserService>();
-            _accountController = new UserController(_userServiceMock.Object);
-        }
-        private Mock<IUserService> _userServiceMock;
-        private UserController _accountController;
-        public void AccountController_CreateUser_UserIsInvalidOrNull_ReturnsNull()
-        {
-            ApplicationUser user1 = new ApplicationUser();
-            _userServiceMock = new Mock<IUserService>();
-            /*
-            _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), ""))
-                .ReturnsAsync(null);
-            */
-            _userServiceMock.Setup(m => m.CreateUser(null, "")); //.ReturnsAsync(null);
-            _accountController = new UserController(_userServiceMock.Object);
-            var actualResult = _accountController.CreateUser(null).Result; //Why Result ?
-            Assert.IsNull(actualResult);
-        }
-        void CreateUser()
-        {
-            throw new Exception("Password is invalid or Empty");
-        }
-        //[Test]
-        public void AccountController_CreateUser_UserPassword_Invalid_Or_Empty_ReturnsException()
-        {
-            _userServiceMock = new Mock<IUserService>();
-            var ApplicationUser = new Api.Model.ViewModel.RegisterViewModel
+            _SUT = new UserController(_userServiceMock.Object);
+            AutoMapper.Mapper.Initialize(cfg =>
             {
-                Email = "alala@f.fr",
-                UserName = "ff",
-                UserPassword = string.Empty,
-                PhoneNumber = ""
-            };
-            _accountController = new UserController(_userServiceMock.Object);
-            //Act 
-            //var actualResult = _accountController.CreateUser(ApplicationUser);
-           // Assert.ThrowsAsync<Exception>(async () => await _accountController.CreateUser(ApplicationUser)); ;
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
-        //Collection Initializer IEnumerable !?
-        //_userServiceMock.Setup(m => m.CreateUser(It.IsAny<ApplicationUser>,"")).Returns((Task<bool> result)=> {return result;});
-        //.Returns((Task<bool> result, string nr) => { return Task.FromResult(new bool()); });
-        //[Test]
-        public async Task AccountController_CreateUser_UserValid_ReturnsOkCreated()
+        [Test]
+        public async Task UserController_CreateUser_UserValid_PasswordValid_ReturnsOkCreated()
         {
-            _userServiceMock = new Mock<IUserService>();
-            var ApplicationUser = new Model.ViewModel.RegisterViewModel
+            var registerViewModel = new RegisterViewModel
             {
-                Email = "alala@freee.fr",
+                UserEmail = "alala@freee.fr",
                 UserName = "fdfkdkff",
                 UserPassword = "K@da120",
                 PhoneNumber = "581-578-4401"
             };
-            _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), ""))
-            .ReturnsAsync(true);
-            _accountController = new UserController(_userServiceMock.Object);
-            //Act
-            //var actualResult = _accountController.CreateUser(ApplicationUser);
-            //Assert
+
+            //_userServiceMock.Setup(m => m.CreateUser(new ApplicationUser().UserName, ""))
+            //.ReturnsAsync(true);
+            
             //var result = actualResult as IActionResult;
             //var res1 = await actualResult;
             //var okResult = await actualResult as OkObjectResult;
             // When Do we Need Setup of Mock ?
             //Assert.AreEqual(okResult.StatusCode, 200);
             //var userT = okResult.Value as ApplicationUser;
-            //Assert.IsNotNull(okResult);
+
+           _userServiceMock.Setup(x => x.CreateUser(It.IsAny<string>(), It.IsAny<string>()))
+              .Returns(Task.FromResult(true));
+            var okResult = await _SUT.CreateUser(registerViewModel);
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual(okResult.GetType(), typeof(OkObjectResult));
         }
-        public async Task AccountController_CreateUser_Returns_NotFound()
-        {   
-            //Arrange
-            var ApplicationUser = new Model.ViewModel.RegisterViewModel
-            {
-                Email = "fddssd",
-                UserName = "cvcvcv",
-                UserPassword = "rt5465",
-                PhoneNumber = "899-898-3566"
-            };
+        [Test]
+        public async Task UserController_CreateUser_UserValid_Password_Invalid_Or_Empty_ReturnsException()
+        {
             _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser(), "hjkjkjk6687"))
-                .ReturnsAsync(false);
-            //Act
-            _accountController = new UserController(_userServiceMock.Object);
-            //var actualResult = _accountController.CreateUser(ApplicationUser);
-            //var result = await actualResult;
-            //var notFoundResult =  result as NotFoundResult;  // vs NotFoundObjectResult ?
-            //Assert.IsNotNull(notFoundResult);
-            //Assert.IsInstanceOf<NotFoundResult>(notFoundResult);
+            var registerViewModel = new RegisterViewModel
+            {
+                UserEmail = "alala@f.fr",
+                UserName = "ff",
+                UserPassword = string.Empty,
+                PhoneNumber = ""
+            };
+            _SUT = new UserController(_userServiceMock.Object);
+            var actualResult = await _SUT.CreateUser(registerViewModel);
+            Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
+
+            //Assert.ThrowsAsync<Exception>(async () => await _SUT.CreateUser(registerViewModel));
         }
-        //[Test]
-        public void AccountController_GetUsers_ShouldReturnUsersByRole()
+        [Test]
+        public void UserController_CreateUser_UserIsInvalid_OrNull_ReturnsNull()
+        {
+            ApplicationUser user1 = new ApplicationUser();
+            _userServiceMock = new Mock<IUserService>();
+            _userServiceMock.Setup(m => m.CreateUser(null, ""));//.ReturnsAsync(null);
+            _SUT = new UserController(_userServiceMock.Object);
+            var actualResult = _SUT.CreateUser(null).Result;
+            Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
+        }
+        void CreateUser()
+        {
+            throw new Exception("Password is invalid or Empty");
+        }
+        [Test]
+        public async Task UserController_CreateUser_Returns_NotFound()
+        {   
+            _userServiceMock = new Mock<IUserService>();
+            _userServiceMock.Setup(m => m.CreateUser(new ApplicationUser().UserName, "hjkjkjk6687"))
+                .Returns(Task.FromResult(false));
+
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            var actualResult = await _SUT.CreateUser(registerViewModel);
+            
+            //var notFoundResult =  result as NotFoundResult;  // vs NotFoundObjectResult ?
+
+            Assert.IsNotNull(actualResult);
+            Assert.IsInstanceOf<BadRequestResult>(actualResult);
+        }
+
+        [Test]
+        public void UserController_GetUsers_ShouldReturnUsers_ByRole()
         {
             var actualUsersList = new List<ApplicationUser>
             {
@@ -127,8 +125,6 @@ namespace allopromo.Api.UnitTests
         [Test]
         public void AccountController_Login_Returns_User()
         {
-            //Arrange
-            //Mock<UserService> userServiceMock = new Mock<UserService>() @errAbaophone43;
             var ApplicationUser = new ApplicationUser
             {
                 UserName = "couli.mama@free.fr",
@@ -138,44 +134,30 @@ namespace allopromo.Api.UnitTests
             _userServiceMock.Setup(x => x.LoginUser(ApplicationUser)).Returns(true);
             _userServiceMock.Setup(y => y.GetUserIfExist(ApplicationUser.UserName)).Returns(ApplicationUser);
 
-            //var ApplicationUser = new ApplicationUser {Email = "couli.mama@free.fr"};
             var userDto = new ApplicationUser
             {
                 UserName = "couli.mama@free.fr",
-                //UserRole = "Merchant",
             };
             var userLoginResponse = new ApiResponseModel
             {
                 userResponse = userDto,
                 jwtToken = "TOEKEKEKNN"
             };
-            //var loginUser = null //new LoginModel{
-                //userName = "couli.mama@free.fr",
-                //userPassword= "@errAbaophone43",
-            //};
-            //Act
             var userController = new UserController(_userServiceMock.Object);//,GetUserManagerMock().Object);
-            //var okUser = userController.Login(loginUser);
-
             //Assert
-           // Assert.IsNotNull(okUser);
-
+            // Assert.IsNotNull(okUser);
             //Assert.IsInstanceOf<OkObjectResult>(okUser);
             //Assert.IsTrue(okUser.Equals((IActionResult)userDto));
         }
         [Test]
         public void AccountController_Login_ReturnsBad_Request_OrNotFound()
         {
-            //Arrange
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
-            //Act
-            //Assert
         }
         [Test]
         public void AccountController_Login_ReturnsNull()
         {
-            //Arrange
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
         }
@@ -245,13 +227,17 @@ namespace allopromo.Api.UnitTests
  * Consolidate f-40
  * //DealDash !q
  */
+
+//Collection Initializer IEnumerable !?
+//_userServiceMock.Setup(m => m.CreateUser(It.IsAny<ApplicationUser>,""))
+//.Returns((Task<bool> result)=> {return result;});
+//.Returns((Task<bool> result, string nr) => { return Task.FromResult(new bool()); });
+
 public class T1
 {
-
 }
 public class T2 : T1
 {
-
 }
 public class Vei
 {

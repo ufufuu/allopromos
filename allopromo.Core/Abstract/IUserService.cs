@@ -8,7 +8,7 @@ namespace allopromo.Core.Abstract
 {
     public interface IUserService
     {
-        Task<bool> CreateUser(ApplicationUser user, string password); // ? Task CreateUser(
+        Task<bool> CreateUser(string userName, string password); // ? Task CreateUser(
         Task<string> GetUser(ApplicationUser user);
         public Task<List<UserDto>> GetUsersWithRoles();
 

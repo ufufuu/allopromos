@@ -17,14 +17,19 @@ namespace allopromo.Api.UnitTests
         private Mock<Core.Services.IDepartmentService> _MockDepartmentService = new Mock<Core.Services.IDepartmentService>();
         public DepartmentControllerTests()
         {
-            SUT = new DepartmentController(_mockConfig.Object,
-                _MockDepartmentService.Object);
+            SUT = new DepartmentController(_mockConfig.Object, _MockDepartmentService.Object,
+                _mockDepartmentService.Object);
         }
         [Test]
         public void PostDepartment_SHOULD_Return_CreatedDeparmentDto()
         {
-            var result = SUT.PostDepartment(new DepartmentDto{departmentId = "89", 
-                departmentName = "kl lklk"
+            _MockDepartmentService.Setup(x => x.CreateDepartmentAsync())
+                .Returns(System.Threading.Tasks.Task.FromResult(new DepartmentDto()));
+            var result = SUT.PostDepartment(
+            new DepartmentDto
+            {
+                departmentId = "8998", 
+                departmentName = "Les Frasques de Comforte"
             });
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(OkObjectResult), result.GetType());
@@ -34,7 +39,7 @@ namespace allopromo.Api.UnitTests
         {
             var result = SUT.GetDepartments();
             Assert.IsNotNull(result);
-            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
+            Assert.AreEqual(typeof(System.Threading.Tasks.Task<IActionResult>), result.GetType());
         }
     }
 }

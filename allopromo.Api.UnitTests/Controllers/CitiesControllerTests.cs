@@ -30,8 +30,8 @@ namespace allopromo.Api.UnitTests
         {
             _localizeServiceMock.Setup(x => x.GetCities()).Returns(Task.FromResult(GetCities()));
             var cities = _sut.GetCities();
-            Assert.AreEqual(cities,typeof(Task<IActionResult>));
-             Assert.IsNotNull(cities);
+            Assert.AreEqual(cities.GetType(),typeof(Task<IActionResult>));
+            Assert.IsNotNull(cities);
         }
         [Test]
         public void CitiesController_GetCurrentCity_RETURN_City()

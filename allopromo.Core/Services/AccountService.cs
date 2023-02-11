@@ -2,7 +2,6 @@
 using allopromo.Core.Domain;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ApiResponse;
-using allopromo.Core.Model.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -45,10 +44,10 @@ namespace allopromo.Core.Model
             }
         }
         //public AuthenticateResponse Authenticate(AuthenticateRequest model)
-        public LoginResponseModel Authenticate(LoginModel loginModel)
+        public LoginResponseModel Authenticate(ApplicationUser loginModel)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName
-                        == loginModel.userPassword && x.PasswordHash == loginModel.userPassword);
+                        == loginModel.UserName);  //&& x.PasswordHash == loginModel.userPassword);
             if (user == null) return null;
 
             // authentication successful so generate jwt token

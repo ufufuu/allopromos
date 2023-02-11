@@ -1,4 +1,5 @@
-﻿using allopromo.Model.ViewModel;
+﻿
+using allopromo.Api.ViewModel.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +9,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-namespace allopromo.Controllers
+namespace allopromo.Api.Controllers
 {
     public class JwtController:ControllerBase
     {
-        private SignInManager<Api.Model.ViewModel.RegisterViewModel> _signingManager { get; set; }
+        private SignInManager<RegisterViewModel> _signingManager { get; set; }
 
         [HttpGet]
-
         //[BasicAuthenticationFilter]
-        public IActionResult Get([FromBody] Api.Model.ViewModel.RegisterViewModel user)
+        public IActionResult Get([FromBody] RegisterViewModel user)
         {
             var logged = _signingManager.SignInAsync(user, isPersistent: false);
             //string userName = Threa.CurrentPrincipal.Identiy.Name;

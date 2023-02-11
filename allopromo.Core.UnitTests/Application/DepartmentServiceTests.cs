@@ -16,10 +16,6 @@ namespace allopromo.Core.Application.UnitTests
         public Mock<IRepository<tDepartment>> RepositoryMock = new Mock<IRepository<tDepartment>>();
         public DeparmentServiceTests()
         {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            });
         }
         [SetUp]
         public void Init()
@@ -31,7 +27,7 @@ namespace allopromo.Core.Application.UnitTests
         {
             var result =await SUT.GetDepartmentsAsync();
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.GetType(), typeof(IEnumerable<DepartmentDto>));
+            Assert.AreEqual(result.GetType(), typeof(List<DepartmentDto>));
         }
     }
 }

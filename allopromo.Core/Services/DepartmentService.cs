@@ -13,6 +13,9 @@ namespace allopromo.Core.Services
     public interface IDepartmentService
     {
         Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync();
+        Task<DepartmentDto> GetDepartmentAsync();
+        Task<DepartmentDto> CreateDepartmentAsync();
+        Task<DepartmentDto> DeleteDepartmentAsync();
     }
     public class DepartmentService  :// BaseService<tDepartment>
         IDepartmentService
@@ -21,15 +24,19 @@ namespace allopromo.Core.Services
         public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfileCore>();
+            });
         }
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
-            var tD = await GetEntities();
-            var tDs = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tD);
-            return tDs;
+            var tDepartments = await GetEntities();
+            var departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tDepartments);
+            return departments;
 
             IEnumerable<tDepartment> tEntities = null;
-            IEnumerable<DepartmentDto> departments = null;
+            IEnumerable<DepartmentDto> departmentsDto= null;
             try
             {
                 var de = _departmentRepository;
@@ -77,6 +84,21 @@ namespace allopromo.Core.Services
         public new void Add(tDepartment department)
         {
             _departmentRepository.Add(new tDepartment { });
+        }
+
+        Task<DepartmentDto> IDepartmentService.GetDepartmentAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<DepartmentDto> IDepartmentService.CreateDepartmentAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<DepartmentDto> IDepartmentService.DeleteDepartmentAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

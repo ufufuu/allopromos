@@ -6,7 +6,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using allopromo.Core.Helpers;
-using allopromo.Core.Model.ViewModel;
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
 
@@ -25,7 +24,7 @@ namespace allopromo.Core.UnitTests
         public void AccountService_Raises_EventEmailSend_When_UserAuthenticates()
         {
             var mockAccountService = new Mock<IAccountService>();
-            mockAccountService.Setup(p => p.Authenticate(It.IsAny<LoginModel>()));
+            mockAccountService.Setup(p => p.Authenticate(It.IsAny<ApplicationUser>()));
                 //.Raises(e=>e.userAuthenticated+=null,
         }
         [Test]

@@ -1,7 +1,3 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\testhost.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\NUnit3.TestAdapter.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\NUnit3.TestAdapter.pdb
@@ -145,6 +141,10 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netco
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Release\netcoreapp3.1\allopromo.Core.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Release\netcoreapp3.1\allopromo.Core.UnitTests.pdb

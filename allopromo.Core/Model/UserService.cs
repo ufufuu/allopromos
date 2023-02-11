@@ -21,10 +21,8 @@ namespace allopromo.Core.Model
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
-
         private RoleManager<IdentityRole> _roleManager;
         private HttpContextAccessor _httpContextAccessor;
-        
         public UserService(IRepository<ApplicationUser> userRepo,
                            UserManager<ApplicationUser> userManager, 
                             SignInManager<ApplicationUser> signInManager)
@@ -32,10 +30,15 @@ namespace allopromo.Core.Model
             _userRepo= userRepo;
             _userManager = userManager;
             _signInManager = signInManager;
+
+           //AutoMapper.Mapper.Initialize(cfg =>
+           //{
+           //   cfg.AddProfile<AutoMapperProfileCore>();
+           //});
         }
         public async Task<List<UserDto>> GetUsersWithRoles()
         {
-            IQueryable<UserDto> users = null;
+            List<UserDto> users = null;
             try
             {
                 var tObj = await _userRepo.GetAllAsync();
@@ -44,13 +47,13 @@ namespace allopromo.Core.Model
                 var usersObj = tObj
                     .Include(u => u.UserRoles).AsQueryable();//.ThenInclude(ur => ur.Role);
                 
-                users = AutoMapper.Mapper.Map<IQueryable<UserDto>>(usersObj);
+                users = AutoMapper.Mapper.Map<List<UserDto>>(usersObj);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return users.ToList();
+            return users;
         }
         public ApplicationUser GetUserIfExist(string userName)
         {
@@ -119,57 +122,42 @@ namespace allopromo.Core.Model
             }
             return null;
         }
-        public async Task<bool> CreateUser(ApplicationUser user, string password)
+        public async Task<bool> CreateUser(string userName, string password)
         {
             bool created = false;
-            try
+            if (userName != null)
             {
-                if (user == null)
-                    return false;
-
-                user.Id = Guid.NewGuid().ToString();
-                //user.PasswordHash = _passwordHasher.HashPassword(user, password);
-
-                //user.NormalizedEmail=u
-                //ApplicationUser appUser = new ApplicationUser
-                //{
-                //    Id = user.Id,
-                //    Email = user.Email,
-                //    UserName = user.UserName,
-                //    PasswordHash = user.PasswordHash
-                //};
-
-                var result = await _userManager?.CreateAsync(user, password);
-
-                if(result!=null)// && result.Succeeded((bool)(result?.Succeeded))
+                try
                 {
-                    //AddUserRole(user, "Users");
-                    created = true;
+                    ApplicationUser appUser = new ApplicationUser
+                    {
+                        //Id = user.Id,
+                        Email = userName,
+                        UserName = userName
+                        //PasswordHash = _passwordHasher.HashPassword(appUser, password),
+                    };
+                    var appUse = _userManager?.CreateAsync(appUser, password);
 
-                    //await _userRepo.Add(user, password);
-                    //await _signInManager?.SignInAsync(user, isPersistent: false);
-                    //await _userManager.AddToRoleAsync(user, "SU");
+                    int t = 5;
+                    //var appUser = new UserManager<TUser>().CreateAsync(appUser);
+                    if (appUse != null)// && result.Succeeded((bool)(result?.Succeeded))
+                    {
+                        //AddUserRole(user, "Users");
+                        created = true;
 
-                    _userRepo.Save();
+                        //await _userRepo.Add(user, password);
+                        //await _signInManager?.SignInAsync(appUser, isPersistent: false);
+                        await _userManager.AddToRoleAsync(appUser, "SU");
+                        _userRepo.Save();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //_logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
+                    throw ex;
                 }
             }
-            //catch (InvalidOperationException)
-            //{
-            //    throw new Exception("Operations Non Valide !");
-            //}
-            //catch (ArgumentNullException ex)
-            //{
-            //    _logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
-            //    return default;
-            //}
-            
-            catch (Exception ex)
-            {
-                //throw new Exception(" Une erreur est survenur. Veuillez re(essayer)");
-                //return default;
-                throw ex;
-            }
-            return created;
+            return await Task.FromResult(created);
         }
         public bool ValidateUser(string userEmail, string userPassword)
         {
@@ -199,9 +187,9 @@ namespace allopromo.Core.Model
         public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
-                //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                //.Where(x => x.UserName == appUser.UserName)
-                //.FirstOrDefault());
+            //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+            //.Where(x => x.UserName == appUser.UserName)
+            //.FirstOrDefault());
 
             /*var user11= _userManager.Users.Select(x=>x.UserName.Equals(appUser.UserName))
                 .Join(_roleManager.Roles)
@@ -224,7 +212,8 @@ namespace allopromo.Core.Model
             /*
             ClaimsPrincipal currentUser = this.User;
             var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);*/
+            ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
+            */
         }
         
         public IList<ApplicationUser> GetUsersInRole(string roleName)

@@ -16,32 +16,39 @@ namespace allopromo.Core.UnitTests
         private UserService _sut;
         private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
         private Mock<UserManager<ApplicationUser>> _userManagerMock = new Mock<UserManager<ApplicationUser>>();
-        
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
         public UserServiceTest()
         {
+            //AutoMapper.Mapper.Initialize(cfg =>{ 
+              // cfg.AddProfile<AutoMapperProfileCore>();
+            //});
+
             //_sut = new UserService(_userRepoMock.Object, _userManagerMock.Object, _signInManager.Object);
             _sut = new UserService(_userRepoMock.Object,
                 MockUserManager().Object, null
            );
         }
-        [TearDown]
-        public void Init()
-        {
-            AutoMapper.Mapper.Reset();
-        }
+        //[SetUp]
+        //public void Init()
+        //{
+        //    AutoMapper.Mapper.Initialize(cfg => {
+        //        cfg.AddProfile<AutoMapperProfileCore>();
+        //    });
+        //}
+        //[TearDown]
+        //public void Reset()
+        //{
+        //   AutoMapper.Mapper.Reset();
+        //}
         private static Mock<SignInManager<ApplicationUser>> GetSignInManagerMock()
         {
             var signManagerMock = new Mock<IRoleStore<ApplicationUser>>();
             return (Mock<SignInManager<ApplicationUser>>)signManagerMock.Object;
-
-            //return new Mock<SignInManager<ApplicationUser>>();
         }
         private Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
         {
             var mockUsrMgr = MockUserManager();
-            //var mockAuthMgr = new Mock<AuthenticationManager>();
-            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);//, mockAuthMgr.Object);
+            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);
         }
         private static Mock<UserManager<ApplicationUser>> MockUserManager()
         {
@@ -55,7 +62,7 @@ namespace allopromo.Core.UnitTests
         {
             _userManagerMock.Setup(x => x.Users).Returns(GetUsers());
             _userRepoMock.Setup(x => x.GetAllAsync()).Returns(GetUsersAsync());
-            var usersWithRoles = await _sut.GetUsersWithRoles();//.Result.FirstOrDefault();
+            var usersWithRoles = await _sut.GetUsersWithRoles();
             //Assert.IsNotNull(usersWithRoles.Result.FirstOrDefault().UserRoles);
             Assert.IsNotNull(usersWithRoles);
             _userRepoMock.Verify(x => x.GetAllAsync(), Times.Once());
@@ -67,27 +74,20 @@ namespace allopromo.Core.UnitTests
         }
         private async Task<IQueryable<ApplicationUser>> GetUsersAsync()
         {
-            var result = await Task.Run(() => getUsers());
+            var result = await Task.Run(() => GetUsers());
                 return result.AsQueryable();
-        }
-        private List<ApplicationUser> getUsers()
-        {
-            IList<ApplicationUser> appUsers = new List<ApplicationUser>();
-                return appUsers.ToList();
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {
-            //Arrange
             ApplicationUser user = new ApplicationUser
             {
-                 Email="dgdgdg@hhdhddh.fr",
+                UserName="all@promo.fr",
+                Email="all@promo.fr",
             };
-            //Act
-            var result = await _sut?.CreateUser(user, "kjk788kkk");
-            //Assert
+            var result = await _sut?.CreateUser(user.UserName, "kjk788kkk");
             Assert.IsNotNull(result);
-            //Assert.IsTrue(result.Equals(true));
+            Assert.IsTrue(result);
         }
         [Test]
         public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
@@ -102,7 +102,7 @@ namespace allopromo.Core.UnitTests
         //[Test]
         public void UserService_CreateUser_Returns_UserCreated()
         {
-           Task<bool> result= _sut.CreateUser(new ApplicationUser { }, "");
+           Task<bool> result= _sut.CreateUser(new ApplicationUser { }.UserName, "");
             Assert.IsNotNull(result);
         }
         //[Test]
