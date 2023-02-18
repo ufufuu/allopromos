@@ -31,39 +31,38 @@ namespace allopromo.Core.Services
         }
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
+            IEnumerable<DepartmentDto> departmentsDto = null;
             var tDepartments = await GetEntities();
             var departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tDepartments);
-            return departments;
+            //return departments;
 
             IEnumerable<tDepartment> tEntities = null;
-            IEnumerable<DepartmentDto> departmentsDto= null;
+            
             try
             {
                 var de = _departmentRepository;
                 tEntities = await _departmentRepository.GetAllAsync();
-                departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+                departmentsDto = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
             }
             catch (Exception ex)
             {
-                throw new NullReferenceException();
+                throw ex;
             }
             return departments;
         }
-        //public override async Task<IEnumerable<tDepartment>> GetEntities()
         public async Task<IEnumerable<tDepartment>> GetEntities()
         {
-            IEnumerable <tDepartment> tEntities = null;
-            IEnumerable<DepartmentDto> departments = null;
+            IEnumerable <tDepartment> tObjs = null;
             try
             {
                 var de = _departmentRepository;
-                tEntities = await _departmentRepository.GetAllAsync();
+                tObjs = await _departmentRepository.GetAllAsync();
             }
             catch (Exception)
             {
                 throw new NullReferenceException();
             }
-            return tEntities;
+            return tObjs;
         }
         public void Create()
         {
@@ -81,11 +80,10 @@ namespace allopromo.Core.Services
                 throw ex;
             }
         }
-        public new void Add(tDepartment department)
+        public void Add(tDepartment department)
         {
             _departmentRepository.Add(new tDepartment { });
         }
-
         Task<DepartmentDto> IDepartmentService.GetDepartmentAsync()
         {
             throw new NotImplementedException();

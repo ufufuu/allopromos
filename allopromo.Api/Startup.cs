@@ -58,8 +58,13 @@ namespace allopromo
             services.AddDbContext<AppDbContext>(options =>
                  options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            { options.Stores.MaxLengthForKeys = 128;
+                //options.User.RequireUniqueEmail = false;
+                })
                 .AddEntityFrameworkStores<AppDbContext>()
+                .AddRoles<ApplicationRole>()
+                .AddRoleManager<RoleManager<ApplicationRole>>()
                 .AddDefaultTokenProviders();
             services.AddAuthentication(auth =>
             {
@@ -149,6 +154,8 @@ namespace allopromo
             services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
 
             services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
+            //services.AddScoped(sp=> ActivatorUtilities.CreateInstance<RoleManager<ApplicationRole>>(sp));
+
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());

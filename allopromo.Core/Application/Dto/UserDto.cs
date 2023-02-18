@@ -10,6 +10,7 @@ namespace allopromo.Core.Application.Dto
         public string userName { get; set; }
         public string userEmail { get; set; }
         public string Password { get; set; }
+        public string UserRoles { get; set; }
     }
     //public class UserConvertor
     //{

@@ -150,7 +150,7 @@ namespace allopromo.Api.Controllers
         [HttpGet]
         [Route("{categoryId}/{pageNumber}/{limitPerPage}")]
         //[Route("categoryId?limit=10&offSet=4")]
-        public async Task<IActionResult> GetStoresByCategoryIdAsync(int categoryId, int pageNumber, int limitPerPage)
+        public async Task<IActionResult> GetStoresByCategoryIdAsync(int? categoryId, int pageNumber, int limitPerPage)
         {
             limitPerPage = 10;
             if (categoryId == null)
@@ -158,7 +158,7 @@ namespace allopromo.Api.Controllers
             else
             {
                 var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
-                    .GetStoresByCategoryIdAsync(categoryId, pageNumber, limitPerPage));
+                    .GetStoresByCategoryIdAsync((int)categoryId, pageNumber, limitPerPage));
                 return Ok(stores);
             }
         }
@@ -182,7 +182,6 @@ namespace allopromo.Api.Controllers
             if (storeDtoName != null)
             {
                 var category = new StoreCategoryDto();
-                object user = null;
                 _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
                 var store = _storeService.CreateStore(storeDtoName);    //, category, (UserDto)user);
                 if (store != null)

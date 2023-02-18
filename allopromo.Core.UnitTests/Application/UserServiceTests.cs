@@ -17,15 +17,17 @@ namespace allopromo.Core.UnitTests
         private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
         private Mock<UserManager<ApplicationUser>> _userManagerMock = new Mock<UserManager<ApplicationUser>>();
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
+        private Mock<RoleManager<ApplicationRole>> _roleManager = new Mock<RoleManager<ApplicationRole>>();
         public UserServiceTest()
         {
             //AutoMapper.Mapper.Initialize(cfg =>{ 
               // cfg.AddProfile<AutoMapperProfileCore>();
             //});
-
             //_sut = new UserService(_userRepoMock.Object, _userManagerMock.Object, _signInManager.Object);
+
             _sut = new UserService(_userRepoMock.Object,
-                MockUserManager().Object, null
+                MockUserManager().Object,null, // _roleManager.Object
+                GetMockRoleManager().Object
            );
         }
         //[SetUp]
@@ -35,6 +37,7 @@ namespace allopromo.Core.UnitTests
         //        cfg.AddProfile<AutoMapperProfileCore>();
         //    });
         //}
+
         //[TearDown]
         //public void Reset()
         //{
@@ -56,6 +59,19 @@ namespace allopromo.Core.UnitTests
             return new Mock<UserManager<ApplicationUser>>(
                 storeMock.Object,null,null,null,null,null,null,null,null
          );
+        }
+
+        //private static Mock<RoleManager<IdentityRole>> MockRoleManager()
+        //{
+        //    var roleStore = new Mock<IUserStore<ApplicationUser>>();
+        //    return new RoleManager<IdentityRole>(roleStore.Object);
+        //}
+
+        private static Mock<RoleManager<ApplicationRole>> GetMockRoleManager()
+        {
+            var roleStore = new Mock<IRoleStore<ApplicationRole>>();
+            return new Mock<RoleManager<ApplicationRole>>(
+                roleStore.Object, null, null, null, null);
         }
         [Test]
         public async Task UserService_GetUsers_SHOULD_Return_Users_With_RolesAsync()
@@ -90,14 +106,9 @@ namespace allopromo.Core.UnitTests
             Assert.IsTrue(result);
         }
         [Test]
-        public async Task UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
+        public void UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
         {
-            var result = await _sut.CreateUser(null, "kjk788kkk");
-            //Assert.Throws<Exception>(async () => await _sut.CreateUser(null, "akaj4i"));
-            //Assert.ThrowsAsync<Exception>(async () =>await _sut.CreateUser(null, "kjk788kkk"));
-            //Assert.Throws<>("");
-            //User cann/ne eut etre null
-            Assert.IsTrue(result.Equals(false));
+            Assert.ThrowsAsync<Exception>(async() =>await _sut.CreateUser(null, "kjk788kkk"));
         }
         //[Test]
         public void UserService_CreateUser_Returns_UserCreated()

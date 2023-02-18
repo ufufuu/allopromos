@@ -11,15 +11,14 @@ namespace allopromo.Core.UnitTests
     //[TestFixture]
     public class AccountServiceTest
     {
-        private  UserService _userService;
         private Mock<IUserRepository> userRepo = new Mock<IUserRepository>();
         private Mock<IRepository<ApplicationUser>> _userRepo= new Mock<IRepository<ApplicationUser>>();
-        private AccountService _accountService;
-        //private Mock<UserManager<ApplicationUser>> _userManager= new Mock<UserManager<ApplicationUser>>();
-        //public static Mock<UserManager<TUser>> MockUserManager<TUser>(List<TUser> ls) where TUser : class
+        private UserService _SUT;
+
+        private Mock<UserManager<ApplicationUser>> _userManager= new Mock<UserManager<ApplicationUser>>();
         public AccountServiceTest()
         {
-            
+            //_SUT = new UserService(); // (userRepo.Object, _userManager.Object, );
         }
         /*
         private static Mock<UserManager<ApplicationUser>> MockUserManager()
@@ -37,14 +36,14 @@ namespace allopromo.Core.UnitTests
         }*/
 
         //[Test]
-        //[TestCase(null, "kdjfdkfj")]
-        //[TestCase("user" , "kdjfdkfj")]
+        //[TestCase(null, "kdjfdkfjCategorieService
+        //[TestCase("user" , "kdjfdkfjCategorieService
         public async Task UserService_CreateUser_Returns_UserNotCreated()
         //public async Task UserService_CreateUser_Returns_UserNotCreated(, "")
         {
             
             // ?  below null and null in constructor according to Tim Corey ins Mock youtube DB videos, Let's Try !
-            var result = await _userService.CreateUser(new ApplicationUser().UserName, "kjk788kkk");
+            var result = await _SUT.CreateUser(new ApplicationUser().UserName, "kjk788kkk");
 
             Assert.IsTrue(result.Equals(false));
         }
@@ -53,9 +52,10 @@ namespace allopromo.Core.UnitTests
         {
             _userRepo = new Mock<IRepository<ApplicationUser>>();
             
-            var result = await _userService.CreateUser(null, "kjk788kkk");
-            //Assert.Throws<Exception>(async () => await _userService.CreateUser(null, "akaj4i"));
-            //Assert.ThrowsAsync<Exception>(async () =>await _userService.CreateUser(null, "kjk788kkk"));
+            var result = await _SUT.CreateUser(null, "kjk788kkk");
+
+            //Assert.Throws<Exception>(async () => await _SUT.CreateUser(null, "akaj4i"));
+            //Assert.ThrowsAsync<Exception>(async () =>await _SUT.CreateUser(null, "kjk788kkk"));
             //Assert.Throws<>("");
             //User cann/ne eut etre null
             Assert.IsTrue(result.Equals(false));
@@ -63,7 +63,7 @@ namespace allopromo.Core.UnitTests
         //[Test]
         public void UserService_CreateUser_Returns_UserCreated()
         {
-           Task<bool> result= _userService.CreateUser(new ApplicationUser { }.UserName, "");
+           Task<bool> result= _SUT.CreateUser(new ApplicationUser { }.UserName, "");
             Assert.IsNotNull(result);
         }
         //[Test]

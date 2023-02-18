@@ -1,0 +1,7 @@
+﻿
+
+
+IMMPORTNT NOTES
+
+
+= right click on Project  -> Add -> New Scaffolded Item | Select Identity , it gives all for account management !

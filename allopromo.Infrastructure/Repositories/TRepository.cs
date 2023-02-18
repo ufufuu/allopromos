@@ -69,13 +69,12 @@ namespace allopromo.Infrastructure.Repositories
         {
             _dbContext.SaveChanges();
         }
-        public async Task<IQueryable<T>> GetAllAsync()
+        public Task<IQueryable<T>> GetAllAsync()
         {
             var tObjects = _table.AsQueryable();
-            //if(tObjects!=null)
 
-            int g= 6;
-                return tObjects;
+            //if(tObjects!=null)
+                return (Task<IQueryable<T>>)tObjects;
             //return null;
         }
         public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()

@@ -16,7 +16,6 @@ namespace allopromo.Core.Services.Base
         public virtual async Task<IEnumerable<TEntity>> GetEntities()
         {
             var tEntities = await _Repository.GetAllAsync();
-            int g = 5;
                 return tEntities;
         }
         public void Add(TEntity entity)

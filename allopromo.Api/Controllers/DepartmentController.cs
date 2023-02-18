@@ -25,10 +25,10 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private IBaseService<DepartmentDto> _departmentService;
-        private readonly IExceptionWriter _exceptionWriter;
-
         private readonly IDepartmentService _DepartmentService;
-        private readonly ILogger<DepartmentController> _logger;
+
+        //private readonly ILogger<DepartmentController> _logger;
+        //private readonly IExceptionWriter _exceptionWriter;
         public DepartmentController(IConfiguration config,
             IDepartmentService DepartmentService ,
             IBaseService<DepartmentDto> departmentService)

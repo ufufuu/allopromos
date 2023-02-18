@@ -9,7 +9,6 @@ namespace allopromo.Core.UnitTests.Application
 {
     public class BaseServiceTests
     {
-        private Mock<IRepository<TDpartment>> mockDepartment;
         public void  kj()
         {
             //var baseService = new BaseService<T>();

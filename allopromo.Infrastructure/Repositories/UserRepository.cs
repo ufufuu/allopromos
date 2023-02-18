@@ -41,15 +41,15 @@ namespace allopromo.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
-        public List<ApplicationUser> getUsers()
-        {
-            List<ApplicationUser> users = null;
-            using(var db = new AppDbContext())
-            {
-                users = db.ApplicationUsers.ToList();
-            }
-            return users;
-        }
+        //public List<ApplicationUser> getUsers()
+        //{
+        //    List<ApplicationUser> users = null;
+        //    using(var db = new AppDbContext())
+        //    {
+        //        users = db.ApplicationUsersS.ToList();
+        //    }
+        //    return users;
+        //}
         public void Saves()
         {
             using (var db = new AppDbContext())

@@ -21,7 +21,8 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILocalisationService _localisationService;
-        private readonly IExceptionWriter _exceptionWriter;
+
+        //private readonly IExceptionWriter _exceptionWriter;
         public CitiesController(IConfiguration config,
                            ILocalisationService localizeService)
                            //IExceptionWriter exceptionWriter)
@@ -64,7 +65,7 @@ namespace allopromo.Api.Controllers
             catch (Exception ex)
             {
                 //_exceptionWriter.WriteException(ex.ToString());
-                throw;
+                throw ex;
             }
             return Ok(city);
         }

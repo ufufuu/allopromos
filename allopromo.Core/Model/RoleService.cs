@@ -23,7 +23,6 @@ namespace allopromo.Core.Model
         public async Task<IQueryable<ApplicationRole>> GetRoles()
         {
             var roles = await _roleRepository.GetAllAsync();
-            int h = 5;
             return roles;
         }
     }

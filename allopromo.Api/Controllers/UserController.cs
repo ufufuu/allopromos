@@ -21,36 +21,40 @@ namespace allopromo.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IAccountService _accountService;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        UserManager<ApplicationUser> _userManager;
-        private ILogger<UserController> _logger { get; set; }
         private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
+        UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private ILogger<UserController> _logger { get; set; }
+        
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
-        //public UserController(AccountService accountService,
-        //    UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-        //    SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
-        //{
-        //    _accountService = accountService;
-        //    _userManager = userManager;
-        //    _roleManager = roleManager;
-        //    _signInManager = signInManager;
-        //    _logger = logger;
-        //}
+        public UserController(AccountService accountService,
+            UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
+            SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
+        {
+            _accountService = accountService;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _signInManager = signInManager;
+            _logger = logger;
+        }
+
         [ActivatorUtilitiesConstructor]
-        public UserController(IUserService userService, UserManager<ApplicationUser> userManager,
-            IAccountService accountService,
-            RoleManager<IdentityRole> roleManager)
+        public UserController(IUserService userService, IAccountService accountService, UserManager<ApplicationUser> userManager,
+            
+            RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             _userService = userService;
             _userManager = userManager;
             _roleManager = roleManager;
             _accountService = accountService;
+            _signInManager = signInManager;
         }
+
         [HttpGet("{role}")]
         public IActionResult GetUsers(string role)
         {
@@ -113,7 +117,7 @@ namespace allopromo.Controllers
                 ApplicationUser account = null;
                 try
                 {
-                    account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
+                    //account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
                 }
                 catch (Exception ex)
                 {
@@ -123,8 +127,8 @@ namespace allopromo.Controllers
                 //(account, loginModel.userPassword).Result))
                 if (account != null)
                 {
-                    var loginValid2 = _signInManager?.PasswordSignInAsync(
-                        loginViewModel.UserName.ToString(), loginViewModel.UserPassword.ToString(), true, true);
+                    //var loginValid2 = _signInManager?.PasswordSignInAsync(
+                      //  loginViewModel.UserName.ToString(), loginViewModel.UserPassword.ToString(), true, true);
                     var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
                     if (loginValid)
                     {
@@ -172,8 +176,11 @@ namespace allopromo.Controllers
         }
         private async Task<ApplicationUser> GetConnectedUser()
         {
-            var user = await _userManager.FindByIdAsync(User.Identity.Name);
-            return user;
+            ApplicationUser user = null;
+            //var user = await _userManager.FindByIdAsync(User.Identity.Name);
+            //return user;
+            return await Task.FromResult(user);
+
         }
     }
 }

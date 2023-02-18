@@ -11,6 +11,6 @@ namespace allopromo.Core.Abstract
         Task<tCity> Get(string cityId);
         Task<IEnumerable<CityDto>> GetCities();
         void Put(CityDto aisle);
-        Task<string> GetUserCurrentCity(string ip);
+        Task <string> GetUserCurrentCity(string ip);
     }
 }

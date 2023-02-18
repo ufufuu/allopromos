@@ -37,9 +37,12 @@ namespace allopromo.Core.Model
         #endregion
         #region Fields
         private IRepository<tStore> _storeRepository;
-        private IStoreManager _storeManager;
+
+
+        //private IStoreManager _storeManager;
         private IProductService _productService { get; set; }
-        IRepository<tStore> storeRepository;
+
+        private IRepository<tStore> StoreRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
         private UserService _userService { get; set; }
         #endregion
@@ -47,6 +50,7 @@ namespace allopromo.Core.Model
         public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepository,
             IRepository<tDepartment> departmentRepository)
         {
+            StoreRepository = storeRepository;
             _storeRepository = storeRepository;
             _categoryRepository = categoryRepository;
             _departmentRepository = departmentRepository;
@@ -119,9 +123,9 @@ namespace allopromo.Core.Model
         }
         public async Task<IEnumerable<StoreDto>> GetStores (string categoryId, string localizationId, string sortingOrder)
         {
-            var validFilter = 10;
-            int pageNumber = 1;
-            int pageSize = 1;
+            //var validFilter = 10;
+            //int pageNumber = 1;
+            //int pageSize = 1;
 
             var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
                 .Include(c => c.Category).Where( category=>category.Category.storeCategoryId.Equals(categoryId))
@@ -230,9 +234,8 @@ namespace allopromo.Core.Model
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
-            return null;
         }
         public async Task<StoreCategoryDto> GetStoreCategoryByIdAsync(string storeId)
         {
@@ -319,7 +322,7 @@ namespace allopromo.Core.Model
                 tStore.Category = tCategory;
                 tStore.user = tUser;
                 tStore.City = city;
-                _storeRepository.Add(tStore);
+                await _storeRepository.Add(tStore);
                 _storeRepository.Save();
                 _tGenericRepository.Save();
                 OnStoreCreated();
@@ -381,7 +384,7 @@ namespace allopromo.Core.Model
         #region DELETE Objects
         public void DeleteStore(StoreDto store)
         {
-            storeRepository.Delete(store);
+            StoreRepository.Delete(store);
         }
         public void DeleteStoreCategory(string categoryId)
         {
@@ -392,14 +395,14 @@ namespace allopromo.Core.Model
             {
                 var storeCategory = AutoMapper.Mapper.Map<tStoreCategory>(storeCategoryDto);
                 //_storeRepository.DeleteStoreCategory(storeCategory);
-                var category = storeRepository.GetByIdAsync("kjkjk");
+                var category = StoreRepository.GetByIdAsync("kjkjk");
                 if (storeCategory == null)
                 {
                     throw new NullReferenceException();
                 }
                 else
                 {
-                    storeRepository.Delete(storeCategory);
+                    StoreRepository.Delete(storeCategory);
                 }
             }
         }

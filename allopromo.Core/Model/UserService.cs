@@ -15,38 +15,37 @@ using allopromo.Core.Application.Dto;
 
 namespace allopromo.Core.Model
 {
-   public class UserService : IUserService 
+   public class UserService : IUserService                         //<ApplicationUsers>
    {
-        private readonly IRepository <ApplicationUser>_userRepo;
-        private readonly UserManager<ApplicationUser> _userManager;
+        public IRepository<ApplicationUser> _userRepo { get; set; }
+        public UserManager<ApplicationUser> _userManager { get; set; }
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly PasswordHasher<ApplicationUser> _passwordHasher;
-        private RoleManager<IdentityRole> _roleManager;
+        private RoleManager<ApplicationRole> _roleManager;
+
+        //private readonly PasswordHasher<ApplicationUser> _passwordHasher;
+
         private HttpContextAccessor _httpContextAccessor;
         public UserService(IRepository<ApplicationUser> userRepo,
                            UserManager<ApplicationUser> userManager, 
-                            SignInManager<ApplicationUser> signInManager)
+                            SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
         {
             _userRepo= userRepo;
             _userManager = userManager;
             _signInManager = signInManager;
-
-           //AutoMapper.Mapper.Initialize(cfg =>
-           //{
-           //   cfg.AddProfile<AutoMapperProfileCore>();
-           //});
+            _roleManager = roleManager;
         }
+        //public UserService()
+        //{ }
         public async Task<List<UserDto>> GetUsersWithRoles()
         {
             List<UserDto> users = null;
             try
             {
-                var tObj = await _userRepo.GetAllAsync();
                 //users = _userManager.Users;
-
-                var usersObj = tObj
-                    .Include(u => u.UserRoles).AsQueryable();//.ThenInclude(ur => ur.Role);
-                
+                var tRoles = _roleManager.Roles;
+                var tObj = _userManager.Users;
+                var usersObj = tObj;
+                //.Include(x=>x.UserRoles).AsQueryable();//.ThenInclude(ur => ur.Role);
                 users = AutoMapper.Mapper.Map<List<UserDto>>(usersObj);
             }
             catch (Exception ex)
@@ -129,26 +128,26 @@ namespace allopromo.Core.Model
             {
                 try
                 {
-                    ApplicationUser appUser = new ApplicationUser
+                   ApplicationUser appUser = new ApplicationUser
                     {
-                        //Id = user.Id,
+                        Id = Guid.NewGuid().ToString(), //.Id,
                         Email = userName,
-                        UserName = userName
+                        UserName = userName,
                         //PasswordHash = _passwordHasher.HashPassword(appUser, password),
+                        SecurityStamp = Guid.NewGuid().ToString()
                     };
-                    var appUse = _userManager?.CreateAsync(appUser, password);
 
-                    int t = 5;
-                    //var appUser = new UserManager<TUser>().CreateAsync(appUser);
-                    if (appUse != null)// && result.Succeeded((bool)(result?.Succeeded))
+                    var identityRole = new IdentityRole("Users");
+                    var applicationRole = (ApplicationRole)identityRole as ApplicationRole;
+                    await _roleManager.CreateAsync(applicationRole);
+
+                    var appUse =  await _userManager?.CreateAsync(appUser, password);
+                    
+                    if (appUse != null)// && result.Succeenrd((bool)(result?.Succeeded))
                     {
-                        //AddUserRole(user, "Users");
-                        created = true;
-
-                        //await _userRepo.Add(user, password);
-                        //await _signInManager?.SignInAsync(appUser, isPersistent: false);
-                        await _userManager.AddToRoleAsync(appUser, "SU");
+                          await _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement 
                         _userRepo.Save();
+                        created = true;
                     }
                 }
                 catch (Exception ex)
@@ -156,6 +155,11 @@ namespace allopromo.Core.Model
                     //_logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
                     throw ex;
                 }
+                
+            }
+            else
+            {
+                throw new Exception();
             }
             return await Task.FromResult(created);
         }

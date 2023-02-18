@@ -1,5 +1,5 @@
 ﻿using allopromo.Domain.Abstract;
-using allopromo.Domain.Model;
+//using allopromo.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +14,6 @@ namespace allopromo.Domain.Services
     //    //private Serilog.ILogger _logger;           // vs Microsoft Logging !
     //    public UserService()
     //    {
-
     //    }
     //    //public UserService(IUserRepository userRepo,
     //    //    UserManager<ApplicationUser> userManager,

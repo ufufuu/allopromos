@@ -51,16 +51,15 @@ namespace allopromo.Api.UnitTests
             var result = SUT.PutStoreCategory(It.IsAny<StoreCategoryDto>());
             Assert.IsNotNull(result);
         }
-        public void StoreCrontroller_CreateStore_ReturnsNotFound()
+        public void StoreCrontroller_CreateStore_Returns_BaqRequest_StoreIsNull()
         {
-            //Arrange
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
-            StoreDto store = null;
+            //StoreDto store = null;
             var SUT = new StoreController(_storeServiceMock.Object, _productService.Object,
                 _notificationServiceMock.Object);
-            //var result = SUT.CreateStoreAsync(store);
-            //Assert.IsInstanceOf<NotFoundResult>(result);
+            var result = SUT.CreateStoreAsync("store");
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]
         public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEventAsync()
@@ -229,7 +228,6 @@ namespace allopromo.Api.UnitTests
         {
             var sut = new StoreController(_storeServiceMock.Object,
                 _productService.Object, _notificationServiceMock.Object);
-            string categoryId = "";
             StoreCategoryDto category = new StoreCategoryDto
             {
                 storeCategoryId = "1",

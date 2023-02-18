@@ -1,7 +1,3 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\testhost.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\appsettings.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\libman.json
@@ -194,6 +190,10 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcor
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Core.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Release\netcoreapp3.1\allopromo.Api.UnitTests.pdb

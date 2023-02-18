@@ -41,18 +41,25 @@ namespace allopromo.Core.Contracts
         }
         public async Task<IEnumerable<CityDto>> GetCities()
         {
-            var tObjs =_cityRepository.GetAllAsync();
+            var tObjs =await _cityRepository.GetAllAsync();
             IEnumerable<CityDto> cities = AutoMapper.Mapper.Map<IEnumerable<CityDto>>(tObjs);
            if(cities !=null)
                 return cities;
             throw new NullReferenceException();
         }
-        public new async Task<string> GetUserCurrentCity(string ip)
+        public async Task<string> GetUserCurrentCity(string ip)
         {
             IpInfo ipInfo = new IpInfo();
             try
             {
                 string info = new WebClient().DownloadString(urlCityURL + ip);
+                System.Net.Http.HttpRequestMessage requestMessage = new System.Net.Http.HttpRequestMessage();
+
+                System.Net.Http.HttpResponseMessage responseMessage = new System.Net.Http.HttpResponseMessage();
+
+
+                //string info2 = new System.Net.Http.HttpClient().SendAsync(requestMessage, urlCityURL + ip);
+
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 RegionInfo myRIf = new RegionInfo(ipInfo.Country);
                 ipInfo.Country = myRIf.EnglishName;
@@ -61,7 +68,7 @@ namespace allopromo.Core.Contracts
             {
                 ipInfo.Country=null;
             }
-            return ipInfo.City;
+            return await Task.FromResult(ipInfo.City);
         }
         public void Put(AisleDto aisle)
         {

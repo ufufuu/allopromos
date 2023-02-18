@@ -5,18 +5,25 @@ using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Linq;
+
 namespace allopromo.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser> //, IAppDbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser> //, IAppDbContext VS <ApplicationUser>?
+
 
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
 
     {
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<ApplicationRole> Roles { get; set; }
+        //public DbSet<ApplicationUserRole> UserRoles { get; set; }
+
         public DbSet<tStore> Stores { get; set; }
         public DbSet<tStoreCategory> StoreCategories { get; set; }
         public DbSet<tCity> Cities { get; set; }
@@ -27,14 +34,26 @@ namespace allopromo.Infrastructure.Data
 
         public DbSet<tDepartment> Departments { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
+        { }
         public AppDbContext()
-        {
-        }
+        { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            var keysProperties = modelBuilder.Model.GetEntityTypes()
+                .Select(x => x.FindPrimaryKey()).SelectMany(x => x.Properties);
+            foreach (var property in keysProperties)
+            {
+                property.ValueGenerated = ValueGenerated.OnAdd;
+            }
+            //modelBuilder.Entity<ApplicationUser>(entity =>
+            //{
+            //    //entity
+            //    //    .HasMany(x => x.UserRoles)
+            //    //    .WithMany(ur => ur.UserId)
+            //    //    .HasForeignKey(x => x.UserId);
+            //})
             modelBuilder.Entity<tStoreCategory>(stores=>
             {
                 stores.HasKey(c => new { c.storeCategoryId });
@@ -54,10 +73,9 @@ namespace allopromo.Infrastructure.Data
                 .WithOne(p => p.ProductCategory);
             });
 
-            //modelBuilder.Entity<ApplicationUser>()
-            //    //.HasDiscriminator<int>("Type")
-            //    .HasValue<ApplicationUser>(1);
-
+            modelBuilder.Entity<ApplicationUser>()
+                .HasDiscriminator<int>("Type")
+                .HasValue<ApplicationUser>(1);
             //modelBuilder.Entity<ApplicationUserRole>(userRole =>
             //{
             //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -70,18 +88,29 @@ namespace allopromo.Infrastructure.Data
             //        .HasForeignKey(ur => ur.UserId)
             //        .IsRequired();
             //});
+            //modelBuilder.Entity<ApplicationUserRole>(entity =>
+            //{
+            //    entity
+            //        .HasOne(x => x.Role)
+            //        .WithMany(x => x.UserRoles)
+            //        .HasForeignKey(x => x.RoleId);
+            //    entity
+            //        .HasOne(x => x.User)
+            //        .WithMany(x => x.UserRoles)
+            //        .HasForeignKey(x => x.UserId);
+            //});
             //modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p =>
             //new { p.UserId, p.RoleId });
-            //modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
-            /*
-            modelBuilder.Entity<tStore>().HasNoKey();
-            modelBuilder.Entity<tStore>().ToTable("Store");
+            //modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey(); */
 
-            modelBuilder.Entity<tStore>(store =>
-            {
-                store.HasKey(s => new { s.storeId });
-            });
-            base.OnModelCreating(modelBuilder);*/
+            //modelBuilder.Entity<tStore>().HasNoKey();
+            //modelBuilder.Entity<tStore>().ToTable("Store");
+
+            //modelBuilder.Entity<tStore>(store =>
+            //{
+            //    store.HasKey(s => new { s.storeId });
+            //});
+            //base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -8,12 +8,11 @@ namespace allopromo.Core.Abstract
 {
     public interface IUserRepository
     {
+        //public List<ApplicationUser> getUsers();
         void CreateUser(ApplicationUser user, string password);
-        public List<ApplicationUser> getUsers();
         public void Saves();
     }
     public interface IRoleRepository
     {
     }
-
 }
