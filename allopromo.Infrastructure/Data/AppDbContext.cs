@@ -14,7 +14,6 @@ namespace allopromo.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser> //, IAppDbContext VS <ApplicationUser>?
 
-
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/

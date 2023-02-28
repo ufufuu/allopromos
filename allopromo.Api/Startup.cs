@@ -24,7 +24,6 @@ using allopromo.Core.Application;
 using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
-//using allopromo.Api.Model;
 using allopromo.Api;
 using allopromo.Core.Services;
 using allopromo.Api.Infrastructure.Abstract;
@@ -32,14 +31,6 @@ using allopromo.Api.Infrastructure.Logging;
 using Microsoft.Extensions.Hosting;
 using allopromo.Core.Contracts;
 using System.Net.Http;
-//using Ocelot.Middleware;
-//using Ocelot.DependencyInjection;
-
-//using allopromo.Api.Services.Factory;
-//using allopromo.Core.Application.Interface;
-//using allopromo.Core.Services;
-//using allopromo.Infrastructure.Helpers.Authentication;
-//[assembly:OwinStartup(typeof(allopromo.Startup))]
 
 namespace allopromo
 {
@@ -53,18 +44,18 @@ namespace allopromo
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection")));
-            services.AddDbContext<AppDbContext>(options =>
-                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            //services.AddDefaultIdentity<IdentityUser>()
+              //  .AddRoles<IdentityRole>()
+                //.AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-            { options.Stores.MaxLengthForKeys = 128;
-                //options.User.RequireUniqueEmail = false;
+            services.AddControllers();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            { 
+                options.Stores.MaxLengthForKeys = 128;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
-                .AddRoles<ApplicationRole>()
-                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultTokenProviders();
             services.AddAuthentication(auth =>
             {
@@ -124,7 +115,6 @@ namespace allopromo
 
             //services.AddScoped<I>
             //services.AddScoped<IHttpClientFactory, IHttpClientFactory>();
-
             //services.AddScoped<>
             //2 lines below vs 2 above ? or Addtransient vs addScoped ?
             //services.AddTransient<IStoreService, StoreService>();
@@ -133,11 +123,9 @@ namespace allopromo
             //services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
 
-
-
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "my API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "allopromo API", Version = "v1" });
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();

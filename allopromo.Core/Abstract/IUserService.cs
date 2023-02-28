@@ -8,12 +8,9 @@ namespace allopromo.Core.Abstract
 {
     public interface IUserService
     {
-        //public Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager { get; set; }
-
         Task<bool> CreateUser(string userName, string password);
         Task<string> GetUser(ApplicationUser user);
         public Task<List<UserDto>> GetUsersWithRoles();
-
         Task<IList<ApplicationUser>>GetUsersByRole(string userRole);
         public void DeleteUser(ApplicationUser user);
         public void UpdateUser(ApplicationUser user);

@@ -6,7 +6,6 @@ using System.Text;
 namespace allopromo.Core.Domain
 {
     //[Table("AspNetUsers")]
-
     public class ApplicationUser : Microsoft.AspNetCore.Identity.IdentityUser   //<string>
     {
 
@@ -16,6 +15,8 @@ namespace allopromo.Core.Domain
         //public string hId { get; set; }
 
         //public override string UserName { get; set; }
+
+
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }

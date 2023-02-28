@@ -17,19 +17,16 @@ namespace allopromo.Core.Model
 {
    public class UserService : IUserService                         //<ApplicationUsers>
    {
-        public IRepository<ApplicationUser> _userRepo { get; set; }
-        public UserManager<ApplicationUser> _userManager { get; set; }
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private RoleManager<ApplicationRole> _roleManager;
+        public UserManager<IdentityUser> _userManager { get; set; }
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         //private readonly PasswordHasher<ApplicationUser> _passwordHasher;
 
         private HttpContextAccessor _httpContextAccessor;
-        public UserService(IRepository<ApplicationUser> userRepo,
-                           UserManager<ApplicationUser> userManager, 
-                            SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
+        public UserService(UserManager<IdentityUser> userManager, 
+                            SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
-            _userRepo= userRepo;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -56,8 +53,8 @@ namespace allopromo.Core.Model
         }
         public ApplicationUser GetUserIfExist(string userName)
         {
-            var user = this._userManager.FindByNameAsync(userName);
-            return user.Result;
+            var user = _userManager.FindByNameAsync(userName);
+            return null;
         }
         private async Task<bool> UserExists(string userName)
         {
@@ -139,14 +136,14 @@ namespace allopromo.Core.Model
 
                     var identityRole = new IdentityRole("Users");
                     var applicationRole = (ApplicationRole)identityRole as ApplicationRole;
-                    await _roleManager.CreateAsync(applicationRole);
+                    await _roleManager.CreateAsync(identityRole);
 
-                    var appUse =  await _userManager?.CreateAsync(appUser, password);
+                    var appUse =  _userManager?.CreateAsync(appUser, password);
                     
                     if (appUse != null)// && result.Succeenrd((bool)(result?.Succeeded))
                     {
-                          await _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement 
-                        _userRepo.Save();
+                          _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement 
+                        //_userRepo.Save();
                         created = true;
                     }
                 }
@@ -176,8 +173,8 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-        public Task<IList<ApplicationUser>> GetUsersByRole(string roleName) =>
-         _userManager.GetUsersInRoleAsync(roleName);
+        public Task<IList<ApplicationUser>> GetUsersByRole(string roleName) => null;
+         //_userManager.GetUsersInRoleAsync(roleName);
 
         public Task<string> GetUser(ApplicationUser user)
         {
@@ -185,8 +182,8 @@ namespace allopromo.Core.Model
         }
         public UserDto GetUserById(string userId)
         {
-            var user = _userManager.FindByIdAsync(userId).Result;
-            return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user);
+            var user = _userManager.FindByIdAsync(userId).Result; return null;
+            //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user);
         }
         public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
         {
@@ -235,8 +232,8 @@ namespace allopromo.Core.Model
         }
         public UserDto GetUserbyId(string userId)
         {
-            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId));
-            return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
+            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId)); return null;
+            //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
         }
    }
 }

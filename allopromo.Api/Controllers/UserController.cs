@@ -23,30 +23,17 @@ namespace allopromo.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
-        UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private ILogger<UserController> _logger { get; set; }
-        
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
-        public UserController(AccountService accountService,
-            UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
-            SignInManager<ApplicationUser> signInManager, ILogger<UserController> logger)
-        {
-            _accountService = accountService;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-            _logger = logger;
-        }
-
         [ActivatorUtilitiesConstructor]
-        public UserController(IUserService userService, IAccountService accountService, UserManager<ApplicationUser> userManager,
-            
-            RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
+        public UserController(IUserService userService, IAccountService accountService, UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ILogger<UserController> logger)
         {
             _userService = userService;
             _userManager = userManager;
@@ -88,8 +75,6 @@ namespace allopromo.Controllers
                         var result = await _userService.CreateUser(appUser.UserName, registerViewModel.UserPassword);
                         if (result)
                         {
-                            //_accountService.OnUserAuthenticate(registerViewModel.UserEmail);
-                            //_userService.OnUserAuthenticate()
                             return Ok(appUser);
                         }
                         else
