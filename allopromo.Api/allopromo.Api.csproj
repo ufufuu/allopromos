@@ -55,6 +55,7 @@
 
   <ItemGroup>
     <Content Remove="appsettings.Development.json" />
+    <Content Remove="Ocelot.json" />
   </ItemGroup>
 
   <ItemGroup>

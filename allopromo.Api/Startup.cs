@@ -133,15 +133,13 @@ namespace allopromo
             services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<IAccountService, AccountService>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRepository<ApplicationUser>, TRepository<ApplicationUser>>();
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
             services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
             services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
 
-            services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
+            //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
             //services.AddScoped(sp=> ActivatorUtilities.CreateInstance<RoleManager<ApplicationRole>>(sp));
 
             services.AddSingleton<ILoggerManager, LoggerManager>();

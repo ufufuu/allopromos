@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace allopromo.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser> //, IAppDbContext VS <ApplicationUser>?
+    public class AppDbContext : IdentityDbContext<IdentityUser> //, IAppDbContext VS <ApplicationUser>?
 
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,
@@ -72,9 +72,13 @@ namespace allopromo.Infrastructure.Data
                 .WithOne(p => p.ProductCategory);
             });
 
+            modelBuilder.Entity<IdentityUser>()
+                .HasDiscriminator<int>("Type")
+                .HasValue<IdentityUser>(1);
+
             modelBuilder.Entity<ApplicationUser>()
                 .HasDiscriminator<int>("Type")
-                .HasValue<ApplicationUser>(1);
+                .HasValue<ApplicationUser>(2);
             //modelBuilder.Entity<ApplicationUserRole>(userRole =>
             //{
             //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });

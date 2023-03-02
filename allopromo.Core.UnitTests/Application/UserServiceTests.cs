@@ -14,8 +14,7 @@ namespace allopromo.Core.UnitTests
     public class UserServiceTest
     {
         private UserService _sut;
-        private Mock<IRepository<ApplicationUser>> _userRepoMock= new Mock<IRepository<ApplicationUser>>();
-        private Mock<UserManager<ApplicationUser>> _userManagerMock = new Mock<UserManager<ApplicationUser>>();
+        private Mock<UserManager<IdentityUser>> _userManagerMock = new Mock<UserManager<IdentityUser>>();
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
         private Mock<RoleManager<ApplicationRole>> _roleManager = new Mock<RoleManager<ApplicationRole>>();
         public UserServiceTest()
@@ -25,9 +24,9 @@ namespace allopromo.Core.UnitTests
             //});
             //_sut = new UserService(_userRepoMock.Object, _userManagerMock.Object, _signInManager.Object);
 
-            _sut = new UserService(_userRepoMock.Object,
-                MockUserManager().Object,null, // _roleManager.Object
-                GetMockRoleManager().Object
+            _sut = new UserService(MockUserManager().Object,
+                                    null, // _roleManager.Object
+                                    GetMockRoleManager().Object
            );
         }
         //[SetUp]
@@ -53,10 +52,10 @@ namespace allopromo.Core.UnitTests
             var mockUsrMgr = MockUserManager();
             return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);
         }
-        private static Mock<UserManager<ApplicationUser>> MockUserManager()
+        private static Mock<UserManager<IdentityUser>> MockUserManager()
         {
-            var storeMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(
+            var storeMock = new Mock<IUserStore<IdentityUser>>();
+            return new Mock<UserManager<IdentityUser>>(
                 storeMock.Object,null,null,null,null,null,null,null,null
          );
         }
@@ -67,28 +66,28 @@ namespace allopromo.Core.UnitTests
         //    return new RoleManager<IdentityRole>(roleStore.Object);
         //}
 
-        private static Mock<RoleManager<ApplicationRole>> GetMockRoleManager()
+        private static Mock<RoleManager<IdentityRole>> GetMockRoleManager()
         {
-            var roleStore = new Mock<IRoleStore<ApplicationRole>>();
-            return new Mock<RoleManager<ApplicationRole>>(
+            var roleStore = new Mock<IRoleStore<IdentityRole>>();
+            return new Mock<RoleManager<IdentityRole>>(
                 roleStore.Object, null, null, null, null);
         }
         [Test]
         public async Task UserService_GetUsers_SHOULD_Return_Users_With_RolesAsync()
         {
             _userManagerMock.Setup(x => x.Users).Returns(GetUsers());
-            _userRepoMock.Setup(x => x.GetAllAsync()).Returns(GetUsersAsync());
+            
             var usersWithRoles = await _sut.GetUsersWithRoles();
             //Assert.IsNotNull(usersWithRoles.Result.FirstOrDefault().UserRoles);
             Assert.IsNotNull(usersWithRoles);
-            _userRepoMock.Verify(x => x.GetAllAsync(), Times.Once());
+            _userManagerMock.Verify(x => x.GetUsersInRoleAsync("users"), Times.Once());
         }
-        private IQueryable<ApplicationUser> GetUsers()
+        private IQueryable<IdentityUser> GetUsers()
         {
-            IList<ApplicationUser> users = new List<ApplicationUser>();
+            IList<IdentityUser> users = new List<IdentityUser>();
             return users.AsQueryable();
         }
-        private async Task<IQueryable<ApplicationUser>> GetUsersAsync()
+        private async Task<IQueryable<IdentityUser>> GetUsersAsync()
         {
             var result = await Task.Run(() => GetUsers());
                 return result.AsQueryable();

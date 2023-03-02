@@ -9,7 +9,6 @@ namespace allopromo.Core.Domain
         public ApplicationUser User { get; set; }
         public ApplicationRole Role { get; set; }
 
-
         //public string roleId { get; set; }
     }
 }

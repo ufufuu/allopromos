@@ -125,7 +125,7 @@ namespace allopromo.Core.Model
             {
                 try
                 {
-                   ApplicationUser appUser = new ApplicationUser
+                   IdentityUser appUser = new IdentityUser
                     {
                         Id = Guid.NewGuid().ToString(), //.Id,
                         Email = userName,
@@ -138,11 +138,12 @@ namespace allopromo.Core.Model
                     var applicationRole = (ApplicationRole)identityRole as ApplicationRole;
                     await _roleManager.CreateAsync(identityRole);
 
-                    var appUse =  _userManager?.CreateAsync(appUser, password);
+                    var appUse = await  _userManager?.CreateAsync(appUser, password);
                     
                     if (appUse != null)// && result.Succeenrd((bool)(result?.Succeeded))
                     {
-                          _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement 
+                         await _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement
+
                         //_userRepo.Save();
                         created = true;
                     }

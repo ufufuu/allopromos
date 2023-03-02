@@ -3,6 +3,7 @@ using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace allopromo.Api
                 //.ForMember(x => x.storeId, opt => opt.Ignore());
 
                 configuration.CreateMap<UserDto, ApplicationUser>();
-                configuration.CreateMap<ApplicationUser, UserDto>();
+                configuration.CreateMap<IdentityUser, UserDto>();
                 configuration.CreateMap<StoreCategoryDto, tStoreCategory>();
                 //.ForMember(x=>x.storeCategoryId, opt=>opt)
 
@@ -45,9 +46,9 @@ namespace allopromo.Api
     {
         public AutoMapperProfile()
         {
-            CreateMap<ApplicationUser, RegisterViewModel>()
+            CreateMap<IdentityUser, RegisterViewModel>()
                 .ReverseMap();
-            CreateMap<RegisterViewModel, ApplicationUser>()
+            CreateMap<RegisterViewModel, IdentityUser>()
                 .ReverseMap();
 
             CreateMap<tDepartment, DepartmentDto>()

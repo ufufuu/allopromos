@@ -23,7 +23,7 @@ namespace allopromo.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
-        UserManager<IdentityUser> _userManager;
+        private UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private ILogger<UserController> _logger { get; set; }
@@ -71,7 +71,8 @@ namespace allopromo.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        ApplicationUser appUser = AutoMapper.Mapper.Map<ApplicationUser>(registerViewModel);
+                        IdentityUser appUser = 
+                            AutoMapper.Mapper.Map<IdentityUser>(registerViewModel);
                         var result = await _userService.CreateUser(appUser.UserName, registerViewModel.UserPassword);
                         if (result)
                         {
