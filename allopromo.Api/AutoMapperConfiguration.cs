@@ -25,8 +25,11 @@ namespace allopromo.Api
                 //.ForMember(x => x.storeId, opt => opt.Ignore());
 
                 configuration.CreateMap<UserDto, ApplicationUser>();
+
                 configuration.CreateMap<IdentityUser, UserDto>();
+                
                 configuration.CreateMap<StoreCategoryDto, tStoreCategory>();
+
                 //.ForMember(x=>x.storeCategoryId, opt=>opt)
 
                 configuration.CreateMap<tStoreCategory, StoreCategoryDto>();
@@ -58,6 +61,8 @@ namespace allopromo.Api
         }
     }
 }
+
+
 //Mapper.Initialize(x =>
 //{
 //    x.AddProfile<MappingProfile>();

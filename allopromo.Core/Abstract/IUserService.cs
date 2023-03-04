@@ -8,22 +8,41 @@ namespace allopromo.Core.Abstract
 {
     public interface IUserService
     {
+        #region Create
         Task<bool> CreateUser(string userName, string password);
+        #endregion
+
+        #region Read
         Task<string> GetUser(ApplicationUser user);
-        public Task<List<UserDto>> GetUsersWithRoles();
-        Task<IList<ApplicationUser>>GetUsersByRole(string userRole);
-        public void DeleteUser(ApplicationUser user);
-        public void UpdateUser(ApplicationUser user);
-        public bool ValidateUser(string userNane, string userPassword);
-        public bool LoginUser(ApplicationUser user);
 
+        public Task<List<UserDto>> GetUsersAsync();
 
-        //public Task<bool> UserExist(string userName);
-        //Task<bool> UserExist(string userName);
-
+        Task<IList<Microsoft.AspNetCore.Identity.IdentityUser>>GetUsersByRole(string userRole);
+        
         public ApplicationUser GetUserIfExist(string userName);
         public IList<ApplicationUser> GetUsersInRole(string roleName);
         public ApplicationUser GetUserRole(ApplicationUser user);
         public UserDto GetUserById(string userId);
+        #endregion
+
+        #region Update
+        public void UpdateUser(ApplicationUser user);
+        #endregion
+
+        #region Delete
+        public void DeleteUser(ApplicationUser user);
+        
+        public bool ValidateUser(string userNane, string userPassword);
+        public bool LoginUser(ApplicationUser user);
+
+        #endregion
+
+        #region Other Methods
+
+        //public Task<bool> UserExist(string userName);
+        //Task<bool> UserExist(string userName);
+
+        #endregion
+
     }
 }

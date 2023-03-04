@@ -15,15 +15,17 @@ using allopromo.Core.Application.Dto;
 
 namespace allopromo.Core.Model
 {
-   public class UserService : IUserService                         //<ApplicationUsers>
+   public class UserService : IUserService                                                              //<ApplicationUsers>
    {
+#region Properties
         public UserManager<IdentityUser> _userManager { get; set; }
         private readonly SignInManager<IdentityUser> _signInManager;
         private RoleManager<IdentityRole> _roleManager;
-
         //private readonly PasswordHasher<ApplicationUser> _passwordHasher;
-
         private HttpContextAccessor _httpContextAccessor;
+#endregion
+
+#region Constructors
         public UserService(UserManager<IdentityUser> userManager, 
                             SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
@@ -31,31 +33,55 @@ namespace allopromo.Core.Model
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        //public UserService()
-        //{ }
-        public async Task<List<UserDto>> GetUsersWithRoles()
+        public UserService()
+        {}
+#endregion
+
+#region Public Methods - Getting
+        public async Task<List<UserDto>> GetUsersAsync()
         {
-            List<UserDto> users = null;
+            IList<UserDto> users = new List<UserDto>();
             try
             {
-                //users = _userManager.Users;
-                var tRoles = _roleManager.Roles;
-                var tObj = _userManager.Users;
-                var usersObj = tObj;
-                //.Include(x=>x.UserRoles).AsQueryable();//.ThenInclude(ur => ur.Role);
-                users = AutoMapper.Mapper.Map<List<UserDto>>(usersObj);
+                var usersObj = _userManager.Users.ToListAsync().Result;
+                var role = GetRoleNameByUser(usersObj.FirstOrDefault());
+
+                int r = 9;
+                var Roless = GetRoleNameByUser(usersObj.FirstOrDefault());
+                int g = 7;
+                foreach (var userObj in usersObj)
+                {
+                    users.Add(new UserDto
+                    {
+                        userName=userObj.UserName,
+                        Email=userObj.Email,
+                        PhoneNumber=userObj.PhoneNumber,
+                        Name=role
+                    });
+                }
+                //users = AutoMapper.Mapper.Map<List<UserDto>>(usersObj);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return users;
+            return users.ToList();
         }
-        public ApplicationUser GetUserIfExist(string userName)
+        public IQueryable<IdentityRole> GetAllRoles()
         {
-            var user = _userManager.FindByNameAsync(userName);
-            return null;
+            var roles = _roleManager.Roles;
+            return roles;
         }
+        private string GetRoleNameByUser(IdentityUser user)
+        {
+            var roles = _userManager.GetRolesAsync(user).Result;
+            if (roles != null)
+            {
+                return roles.FirstOrDefault();
+            }
+            return string.Empty;
+        }
+        private async Task<List<IdentityRole>> GetRoles() => await _roleManager.Roles.ToListAsync();
         private async Task<bool> UserExists(string userName)
         {
             bool userExists = false;
@@ -65,35 +91,31 @@ namespace allopromo.Core.Model
                 if (user != null)
                     userExists = true;
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             return userExists;
         }
-        public bool LoginUser(ApplicationUser user)
+        public bool LoginUser(IdentityUser user)
         {
             try
             {
-                   var login =  _signInManager.SignInAsync(user, true, null);
-                    if (login != null)
-                        return true;
-                    return false;
+                var login =  _signInManager.SignInAsync(user, true, null);
+                if (login != null)
+                   return true;
+                return false;
             }
-            catch(InvalidOperationException ex)
+            catch(Exception ex)
             {
                 throw ex;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            //return false;
+            return false;
         }
         public ApplicationUser AuthenticateUser(string UserName, string PasswordHash)
         {
             // var user = _userRepo.GetUsers().FirstOrDefault(x => x.UserName == userName 
-            //       && x.PasswordHash == password);
+            // && x.PasswordHash == password);
             object user = null;
             if (user != null)
             {
@@ -118,49 +140,45 @@ namespace allopromo.Core.Model
             }
             return null;
         }
+#endregion
+
+
+#region Public Methods - Create
         public async Task<bool> CreateUser(string userName, string password)
         {
-            bool created = false;
+            bool userCreated = false;
             if (userName != null)
             {
                 try
                 {
-                   IdentityUser appUser = new IdentityUser
+                    IdentityUser user = new IdentityUser
                     {
-                        Id = Guid.NewGuid().ToString(), //.Id,
+                        Id = Guid.NewGuid().ToString(),
                         Email = userName,
                         UserName = userName,
-                        //PasswordHash = _passwordHasher.HashPassword(appUser, password),
-                        SecurityStamp = Guid.NewGuid().ToString()
                     };
-
                     var identityRole = new IdentityRole("Users");
-                    var applicationRole = (ApplicationRole)identityRole as ApplicationRole;
-                    await _roleManager.CreateAsync(identityRole);
-
-                    var appUse = await  _userManager?.CreateAsync(appUser, password);
-                    
-                    if (appUse != null)// && result.Succeenrd((bool)(result?.Succeeded))
+                    var role = await _roleManager.CreateAsync(identityRole);
+                    var appUser = _userManager?.CreateAsync(user, password);
+                    if (appUser != null)                 //&& result.Succeenrd((bool)(result?.Succeeded))
                     {
-                         await _userManager.AddToRoleAsync(appUser, "Users"); //re-cree l'enregistrement
-
-                        //_userRepo.Save();
-                        created = true;
+                        await _userManager.AddToRoleAsync(user, "Users");
+                        userCreated = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    //_logger.Information(ex.Message); //throw new ArgumentNullException("{Valeur ne peut etre nulle");
                     throw ex;
                 }
-                
             }
             else
-            {
                 throw new Exception();
-            }
-            return await Task.FromResult(created);
+            return await Task.FromResult(userCreated);
         }
+        #endregion
+
+
+#region Public Methods - Validation
         public bool ValidateUser(string userEmail, string userPassword)
         {
             var user = _userManager.FindByEmailAsync(userEmail);
@@ -174,35 +192,34 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-        public Task<IList<ApplicationUser>> GetUsersByRole(string roleName) => null;
-         //_userManager.GetUsersInRoleAsync(roleName);
+        public async Task<IList<IdentityUser>> GetUsersByRole(string roleName) 
+            => await _userManager.GetUsersInRoleAsync(roleName);
 
-        public Task<string> GetUser(ApplicationUser user)
+        public async Task<UserDto> GetUserById(string userId)
         {
-            return _userManager.GetUserNameAsync(user);
+            var user = await _userManager.FindByIdAsync(userId); 
+            return AutoMapper.Mapper.Map<IdentityUser, UserDto>(user);
         }
-        public UserDto GetUserById(string userId)
-        {
-            var user = _userManager.FindByIdAsync(userId).Result; return null;
-            //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user);
-        }
-        public ApplicationUser GetUserRole(ApplicationUser appUser) // vs ApplicationUser user ?=>
+        #endregion
+
+
+#region Public Methods - Others Methods
+
+        public ApplicationUser GetUserRole(ApplicationUser appUser)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
+
             //.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
             //.Where(x => x.UserName == appUser.UserName)
             //.FirstOrDefault());
-
             /*var user11= _userManager.Users.Select(x=>x.UserName.Equals(appUser.UserName))
                 .Join(_roleManager.Roles)
-
             var query23 = (from u in _userManager.Users
                            join r in _roleManager.Roles on u.Us equals r.Name);
                             //where u.Email=="alistcom" select u);
             var users32= _userManager.Users;
             var roles = _roleManager.Roles;
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
-
             return null;
         }
         public ClaimsPrincipal GetCurrentUser()
@@ -217,8 +234,7 @@ namespace allopromo.Core.Model
             ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
             */
         }
-        
-        public IList<ApplicationUser> GetUsersInRole(string roleName)
+        public IList<IdentityUser> GetUsersInRole(string roleName)
         {
             var users = GetUsersByRole(roleName);
             return users.Result;
@@ -233,11 +249,55 @@ namespace allopromo.Core.Model
         }
         public UserDto GetUserbyId(string userId)
         {
-            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId)); return null;
+            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId));
+            return null;
             //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
         }
-   }
+        Task<string> IUserService.GetUser(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IUserService.DeleteUser(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IUserService.UpdateUser(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.LoginUser(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        ApplicationUser IUserService.GetUserIfExist(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<ApplicationUser> IUserService.GetUsersInRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+        ApplicationUser IUserService.GetUserRole(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+        UserDto IUserService.GetUserById(string userId)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
 }
+
+
+
+
+
 // BuySellAds ?
 //Code Coverage ? Input Possibilities | User is Valid , 
 //password is Invalid - user is Valid, passwd is Valid -
@@ -258,6 +318,9 @@ Product: interface of the being Created Classes
 
 Credit: cardType - creditLimimt - annualCharge---
 MoneyBack: public MoneyBack(){_creditimit=creditLim, _an=anual, _cartYpe="Moeny Back"}...
+
+//_logger.Information(ex.Message); 
+//throw new ArgumentNullException("{Valeur ne peut etre nulle");
 
 in Client:
 CardFactory cardFactory =null;

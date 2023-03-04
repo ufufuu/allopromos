@@ -4,7 +4,7 @@ using System.Text;
 
 namespace allopromo.Core.Abstract.Interfaces
 {
-    public interface IAppDbContext<TEntity> 
+    public interface IAppDbContext<TEntity> //: AppDbContext<TEntity> where TEntity:class
     {
         public IEnumerable<TEntity> db { get; set; }
     }

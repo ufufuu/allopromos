@@ -1,0 +1,256 @@
+2023-03-04 00:49:55.470 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 00:50:01.994 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 00:50:02.023 -05:00 [INF] Hosting environment: Development
+2023-03-04 00:50:02.103 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 00:50:02.504 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 00:50:05.566 -05:00 [INF] Request finished in 3078.1303ms 200 text/html;charset=utf-8
+2023-03-04 00:50:07.380 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 00:50:08.505 -05:00 [INF] Request finished in 1128.2886ms 200 application/json;charset=utf-8
+2023-03-04 00:50:18.673 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/User  
+2023-03-04 00:50:18.751 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 00:50:19.437 -05:00 [INF] Route matched with {action = "GetUsers", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUsers() on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 00:50:30.742 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-03-04 00:50:36.987 -05:00 [INF] Executed DbCommand (1,222ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+2023-03-04 00:50:46.648 -05:00 [INF] Executed DbCommand (5,878ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 00:51:23.505 -05:00 [INF] Executed DbCommand (32ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 00:52:03.364 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Threading.Tasks.Task`1[[System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.UserDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-03-04 00:52:04.079 -05:00 [INF] Executed action allopromo.Controllers.UserController.GetUsers (allopromo.Api) in 104605.1369ms
+2023-03-04 00:52:04.081 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 00:52:04.098 -05:00 [INF] Request finished in 105426.6218ms 200 application/json; charset=utf-8
+2023-03-04 00:56:42.361 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 00:56:51.677 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 00:56:51.704 -05:00 [INF] Hosting environment: Development
+2023-03-04 00:56:51.705 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 00:56:52.024 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 00:56:54.024 -05:00 [INF] Request finished in 2011.0383ms 200 text/html;charset=utf-8
+2023-03-04 00:56:57.445 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 00:56:58.528 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 00:56:58.531 -05:00 [INF] Request finished in 1086.8155ms 0 text/css
+2023-03-04 00:57:00.527 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 00:57:00.850 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 00:57:00.852 -05:00 [INF] Request finished in 325.9306ms 0 image/png
+2023-03-04 00:57:12.463 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 00:57:13.241 -05:00 [INF] Request finished in 779.9778ms 200 application/json;charset=utf-8
+2023-03-04 01:00:58.486 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/User  
+2023-03-04 01:00:58.591 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 01:00:58.771 -05:00 [INF] Route matched with {action = "GetUsers", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUsers() on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:01:07.467 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-03-04 01:01:12.414 -05:00 [INF] Executed DbCommand (433ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+2023-03-04 01:01:14.372 -05:00 [INF] Executed DbCommand (177ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 01:01:14.550 -05:00 [INF] Executed DbCommand (128ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 01:01:14.585 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Threading.Tasks.Task`1[[System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.UserDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-03-04 01:01:15.985 -05:00 [INF] Executed action allopromo.Controllers.UserController.GetUsers (allopromo.Api) in 17194.1743ms
+2023-03-04 01:01:15.988 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 01:01:16.010 -05:00 [INF] Request finished in 17524.6288ms 200 application/json; charset=utf-8
+2023-03-04 01:05:03.345 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:05:07.564 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:05:07.566 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:05:07.566 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:05:07.941 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:05:10.358 -05:00 [INF] Request finished in 2426.4001ms 200 text/html;charset=utf-8
+2023-03-04 01:05:12.067 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 01:05:13.210 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:05:15.135 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:05:15.829 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:05:15.832 -05:00 [INF] Request finished in 2621.2968ms 0 image/png
+2023-03-04 01:05:15.834 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 01:05:15.834 -05:00 [INF] Request finished in 3769.4188ms 0 text/css
+2023-03-04 01:05:16.489 -05:00 [INF] Request finished in 1354.9037ms 200 application/json;charset=utf-8
+2023-03-04 01:06:49.794 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/api/v1/User  
+2023-03-04 01:06:49.929 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 01:06:51.742 -05:00 [INF] Route matched with {action = "GetUsers", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUsers() on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:07:03.095 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-03-04 01:07:07.560 -05:00 [INF] Executed DbCommand (186ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+2023-03-04 01:07:10.179 -05:00 [INF] Executed DbCommand (132ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 01:07:20.306 -05:00 [INF] Executed DbCommand (36ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2023-03-04 01:07:21.038 -05:00 [INF] Executing ObjectResult, writing value of type 'System.Threading.Tasks.Task`1[[System.Collections.Generic.List`1[[allopromo.Core.Application.Dto.UserDto, allopromo.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-03-04 01:07:22.177 -05:00 [INF] Executed action allopromo.Controllers.UserController.GetUsers (allopromo.Api) in 30417.2886ms
+2023-03-04 01:07:22.188 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.GetUsers (allopromo.Api)'
+2023-03-04 01:07:22.211 -05:00 [INF] Request finished in 32417.1051ms 200 application/json; charset=utf-8
+2023-03-04 01:09:03.004 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 97
+2023-03-04 01:09:03.191 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:09:03.196 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:09:03.291 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:09:03.658 -05:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2023-03-04 01:09:03.741 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 449.241ms
+2023-03-04 01:09:03.742 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:09:03.743 -05:00 [INF] Request finished in 759.067ms 401 application/json; charset=utf-8
+2023-03-04 01:15:14.266 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:15:20.331 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:15:20.441 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:15:20.442 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:15:20.745 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:15:22.507 -05:00 [INF] Request finished in 1783.3992ms 200 text/html;charset=utf-8
+2023-03-04 01:15:23.434 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 01:15:24.476 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:15:25.034 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:15:26.455 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 01:15:26.458 -05:00 [INF] Request finished in 3024.5323ms 0 text/css
+2023-03-04 01:15:26.666 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:15:26.667 -05:00 [INF] Request finished in 2198.9266ms 0 image/png
+2023-03-04 01:15:28.088 -05:00 [INF] Request finished in 3057.8963ms 200 application/json;charset=utf-8
+2023-03-04 01:16:55.693 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 78
+2023-03-04 01:16:55.772 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:16:55.777 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:16:56.123 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:16:59.606 -05:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2023-03-04 01:17:00.175 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 4007.9635ms
+2023-03-04 01:17:00.184 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:17:00.217 -05:00 [INF] Request finished in 4652.9593ms 401 application/json; charset=utf-8
+2023-03-04 01:17:26.445 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 79
+2023-03-04 01:17:26.516 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:17:26.518 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:17:26.525 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:17:26.564 -05:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2023-03-04 01:17:26.622 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 83.2148ms
+2023-03-04 01:17:26.622 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:17:26.624 -05:00 [INF] Request finished in 179.461ms 401 application/json; charset=utf-8
+2023-03-04 01:20:16.954 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:20:22.257 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:20:22.261 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:20:22.268 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:20:22.493 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:20:23.981 -05:00 [INF] Request finished in 1513.2162ms 200 text/html;charset=utf-8
+2023-03-04 01:20:24.915 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 01:20:25.817 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:20:25.818 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:20:26.804 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 01:20:26.805 -05:00 [INF] Request finished in 1890.4984ms 0 text/css
+2023-03-04 01:20:27.014 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:20:27.021 -05:00 [INF] Request finished in 1198.1548ms 0 image/png
+2023-03-04 01:20:27.593 -05:00 [INF] Request finished in 1775.1311ms 200 application/json;charset=utf-8
+2023-03-04 01:21:25.896 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 77
+2023-03-04 01:21:26.016 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:21:26.022 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:21:26.497 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:21:33.544 -05:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2023-03-04 01:21:34.055 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 7526.2782ms
+2023-03-04 01:21:34.068 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:21:34.075 -05:00 [INF] Request finished in 8193.2397ms 401 application/json; charset=utf-8
+2023-03-04 01:23:01.791 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:23:07.478 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:23:07.581 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:23:07.582 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:23:08.073 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:23:10.515 -05:00 [INF] Request finished in 2462.7056ms 200 text/html;charset=utf-8
+2023-03-04 01:23:11.351 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 01:23:11.905 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:23:12.779 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:23:13.727 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:23:13.729 -05:00 [INF] Request finished in 1823.8805ms 0 image/png
+2023-03-04 01:23:13.735 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 01:23:13.736 -05:00 [INF] Request finished in 2552.9585ms 0 text/css
+2023-03-04 01:23:14.402 -05:00 [INF] Request finished in 1626.7525ms 200 application/json;charset=utf-8
+2023-03-04 01:23:39.976 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 77
+2023-03-04 01:23:40.460 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:23:40.622 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:23:41.005 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:31:21.252 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:31:35.962 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:31:35.965 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:31:35.966 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:31:36.792 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:31:42.042 -05:00 [INF] Request finished in 5261.1193ms 200 text/html;charset=utf-8
+2023-03-04 01:31:43.107 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-03-04 01:31:44.786 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:31:46.263 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:31:48.126 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:31:48.128 -05:00 [INF] Request finished in 3341.6912ms 0 image/png
+2023-03-04 01:31:48.143 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-03-04 01:31:48.145 -05:00 [INF] Request finished in 5038.3705ms 0 text/css
+2023-03-04 01:31:48.939 -05:00 [INF] Request finished in 2685.3823ms 200 application/json;charset=utf-8
+2023-03-04 01:32:21.524 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 77
+2023-03-04 01:32:21.836 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:32:21.855 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:32:22.201 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:32:51.190 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-03-04 01:32:56.486 -05:00 [INF] Executed DbCommand (598ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2023-03-04 01:33:14.099 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 51863.6262ms
+2023-03-04 01:33:14.873 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:33:16.450 -05:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotImplementedException: The method or operation is not implemented.
+   at allopromo.Core.Model.UserService.allopromo.Core.Abstract.IUserService.ValidateUser(String userNane, String userPassword) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Model\UserService.cs:line 273
+   at allopromo.Controllers.UserController.Login(LoginViewModel loginViewModel) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\UserController.cs:line 125
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-03-04 01:33:18.460 -05:00 [INF] Request finished in 56948.6865ms 500 text/plain
+2023-03-04 01:38:13.184 -05:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-03-04 01:38:20.870 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-04 01:38:20.874 -05:00 [INF] Hosting environment: Development
+2023-03-04 01:38:20.875 -05:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-03-04 01:38:22.176 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-03-04 01:38:24.430 -05:00 [INF] Request finished in 2269.4997ms 200 text/html;charset=utf-8
+2023-03-04 01:38:25.743 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-03-04 01:38:26.758 -05:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-03-04 01:38:28.661 -05:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-03-04 01:38:28.663 -05:00 [INF] Request finished in 2920.6867ms 0 image/png
+2023-03-04 01:38:29.153 -05:00 [INF] Request finished in 2395.5288ms 200 application/json;charset=utf-8
+2023-03-04 01:39:04.615 -05:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/User/Login application/json-patch+json 77
+2023-03-04 01:39:04.916 -05:00 [INF] CORS policy execution successful.
+2023-03-04 01:39:04.923 -05:00 [INF] Executing endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:39:05.222 -05:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(allopromo.Api.ViewModel.ViewModels.LoginViewModel) on controller allopromo.Controllers.UserController (allopromo.Api).
+2023-03-04 01:39:27.605 -05:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-03-04 01:39:33.996 -05:00 [INF] Executed DbCommand (1,543ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2023-03-04 01:39:42.640 -05:00 [INF] Executed DbCommand (45ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[Type], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2023-03-04 01:39:51.528 -05:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Model.ApiResponse.ApiResponseModel'.
+2023-03-04 01:39:52.068 -05:00 [INF] Executed action allopromo.Controllers.UserController.Login (allopromo.Api) in 46828.5241ms
+2023-03-04 01:39:52.490 -05:00 [INF] Executed endpoint 'allopromo.Controllers.UserController.Login (allopromo.Api)'
+2023-03-04 01:39:53.117 -05:00 [INF] Request finished in 48575.0539ms 200 application/json; charset=utf-8

@@ -47,7 +47,6 @@ namespace allopromo
             //services.AddDefaultIdentity<IdentityUser>()
               //  .AddRoles<IdentityRole>()
                 //.AddEntityFrameworkStores<AppDbContext>();
-
             services.AddControllers();
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             { 

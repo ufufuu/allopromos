@@ -18,7 +18,7 @@ namespace allopromo.Core.UnitTests
         private Mock<UserManager<ApplicationUser>> _userManager= new Mock<UserManager<ApplicationUser>>();
         public AccountServiceTest()
         {
-            //_SUT = new UserService(); // (userRepo.Object, _userManager.Object, );
+            _SUT = new UserService();
         }
         /*
         private static Mock<UserManager<ApplicationUser>> MockUserManager()

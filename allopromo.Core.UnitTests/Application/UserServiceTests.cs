@@ -13,96 +13,64 @@ namespace allopromo.Core.UnitTests
 {
     public class UserServiceTest
     {
+        #region Properties
         private UserService _sut;
         private Mock<UserManager<IdentityUser>> _userManagerMock = new Mock<UserManager<IdentityUser>>();
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
-        private Mock<RoleManager<ApplicationRole>> _roleManager = new Mock<RoleManager<ApplicationRole>>();
+        private Mock<RoleManager<IdentityRole>> _roleManagerMock = new Mock<RoleManager<IdentityRole>>();
+        #endregion
+
+        #region Constructeurs
         public UserServiceTest()
         {
-            //AutoMapper.Mapper.Initialize(cfg =>{ 
-              // cfg.AddProfile<AutoMapperProfileCore>();
-            //});
-            //_sut = new UserService(_userRepoMock.Object, _userManagerMock.Object, _signInManager.Object);
-
             _sut = new UserService(MockUserManager().Object,
                                     null, // _roleManager.Object
                                     GetMockRoleManager().Object
            );
         }
-        //[SetUp]
-        //public void Init()
-        //{
-        //    AutoMapper.Mapper.Initialize(cfg => {
-        //        cfg.AddProfile<AutoMapperProfileCore>();
-        //    });
-        //}
+        #endregion
 
-        //[TearDown]
-        //public void Reset()
-        //{
-        //   AutoMapper.Mapper.Reset();
-        //}
-        private static Mock<SignInManager<ApplicationUser>> GetSignInManagerMock()
-        {
-            var signManagerMock = new Mock<IRoleStore<ApplicationUser>>();
-            return (Mock<SignInManager<ApplicationUser>>)signManagerMock.Object;
-        }
-        private Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
-        {
-            var mockUsrMgr = MockUserManager();
-            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);
-        }
-        private static Mock<UserManager<IdentityUser>> MockUserManager()
-        {
-            var storeMock = new Mock<IUserStore<IdentityUser>>();
-            return new Mock<UserManager<IdentityUser>>(
-                storeMock.Object,null,null,null,null,null,null,null,null
-         );
-        }
-
-        //private static Mock<RoleManager<IdentityRole>> MockRoleManager()
-        //{
-        //    var roleStore = new Mock<IUserStore<ApplicationUser>>();
-        //    return new RoleManager<IdentityRole>(roleStore.Object);
-        //}
-
-        private static Mock<RoleManager<IdentityRole>> GetMockRoleManager()
-        {
-            var roleStore = new Mock<IRoleStore<IdentityRole>>();
-            return new Mock<RoleManager<IdentityRole>>(
-                roleStore.Object, null, null, null, null);
-        }
+        #region Read
         [Test]
-        public async Task UserService_GetUsers_SHOULD_Return_Users_With_RolesAsync()
+        public async Task UserService_GetUsersAsync_SHOULD_Return_Users_With_RolesAsync()
         {
             _userManagerMock.Setup(x => x.Users).Returns(GetUsers());
-            
-            var usersWithRoles = await _sut.GetUsersWithRoles();
-            //Assert.IsNotNull(usersWithRoles.Result.FirstOrDefault().UserRoles);
+            var usersWithRoles = await _sut.GetUsersAsync();
             Assert.IsNotNull(usersWithRoles);
-            _userManagerMock.Verify(x => x.GetUsersInRoleAsync("users"), Times.Once());
+            Assert.IsNotNull(usersWithRoles);
+            _userManagerMock.Verify(x => x.GetUsersInRoleAsync("Users"), Times.Once());
         }
-        private IQueryable<IdentityUser> GetUsers()
+        [Test]
+        public void UserService_GetRoles_SHOULD_Return_Roles()
         {
-            IList<IdentityUser> users = new List<IdentityUser>();
-            return users.AsQueryable();
+            var roles = _sut.GetAllRoles();
+            Assert.IsNotNull(roles);
         }
-        private async Task<IQueryable<IdentityUser>> GetUsersAsync()
-        {
-            var result = await Task.Run(() => GetUsers());
-                return result.AsQueryable();
-        }
+        #endregion
+
+        #region Create
         [Test]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {
-            ApplicationUser user = new ApplicationUser
+            IdentityUser user = new IdentityUser
             {
                 UserName="all@promo.fr",
                 Email="all@promo.fr",
             };
-            var result = await _sut?.CreateUser(user.UserName, "kjk788kkk");
-            Assert.IsNotNull(result);
+            var result = await _sut?.CreateUser("support@allopromo.ca", "atlanticCons@78");
+            IdentityRole role = new IdentityRole
+            {
+                Name = "Merchants",
+                Id = Guid.NewGuid().ToString(),
+            };
+            var appUser = _userManagerMock.Setup(x => x.CreateAsync(user))
+                .Returns(Task.FromResult(new IdentityResult()));
+            var appRole = _roleManagerMock.Setup(x => x.CreateAsync(role))
+                .Returns(Task.FromResult(new IdentityResult()));
+            Assert.IsNotNull(result);            
             Assert.IsTrue(result);
+
+            //_userManagerMock.Verify(x => x.AddToRoleAsync(user, "Merchants"), Times.Once());
         }
         [Test]
         public void UserService_CreateUser_SHOULD_Returns_False_ifUserNull()
@@ -120,9 +88,55 @@ namespace allopromo.Core.UnitTests
         {
             throw new  ArgumentNullException();
         }
+
+        #endregion
+
+        #region Private Methods
+        private static Mock<SignInManager<ApplicationUser>> GetSignInManagerMock()
+        {
+            var signManagerMock = new Mock<IRoleStore<ApplicationUser>>();
+            return (Mock<SignInManager<ApplicationUser>>)signManagerMock.Object;
+        }
+        private Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
+        {
+            var mockUsrMgr = MockUserManager();
+            return new Mock<SignInManager<ApplicationUser>>(mockUsrMgr.Object);
+        }
+        private static Mock<UserManager<IdentityUser>> MockUserManager()
+        {
+            var storeMock = new Mock<IUserStore<IdentityUser>>();
+            return new Mock<UserManager<IdentityUser>>(
+                storeMock.Object, null, null, null, null, null, null, null, null
+         );
+        }
+        private IQueryable<IdentityUser> GetUsers()
+        {
+            IList<IdentityUser> users = new List<IdentityUser>();
+            return users.AsQueryable();
+        }
+        private async Task<IQueryable<IdentityUser>> GetUsersAsync()
+        {
+            var result = await Task.Run(() => GetUsers());
+            return result.AsQueryable();
+        }
+
+        private static Mock<RoleManager<IdentityRole>> GetMockRoleManager()
+        {
+            var roleStore = new Mock<IRoleStore<IdentityRole>>();
+            return new Mock<RoleManager<IdentityRole>>(
+                roleStore.Object, null, null, null, null);
+        }
+        //private static Mock<RoleManager<IdentityRole>> MockRoleManager()
+        //{
+        //    var roleStore = new Mock<IUserStore<IdentityUser>>();
+        //    return new RoleManager<IdentityRole>(roleStore.Object);
+        //}
+        #endregion
+
     }
-// C3 c2 = new C1();
-// C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS
+
+    // C3 c2 = new C1();
+    // C1 c3 = new C3() as C1; //XXXXX QUI PEUT LE PLUS PEUT LE MOINS
 }
 
 /// new , present myself - intro if the course

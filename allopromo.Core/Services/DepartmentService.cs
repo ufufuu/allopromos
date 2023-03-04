@@ -26,7 +26,7 @@ namespace allopromo.Core.Services
             _departmentRepository = departmentRepository;
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile<AutoMapperProfileCore>();
+                cfg.AddProfile<config.AutoMapperProfileCore>();
             });
         }
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()

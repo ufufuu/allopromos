@@ -29,6 +29,7 @@ namespace allopromo.Api.UnitTests
                 cfg.AddProfile<AutoMapperProfile>();
             });
         }
+        #region Create Tests
         [Test]
         public async Task UserController_CreateUser_UserValid_PasswordValid_ReturnsOkCreated()
         {
@@ -102,17 +103,14 @@ namespace allopromo.Api.UnitTests
             Assert.IsNotNull(actualResult);
             Assert.IsInstanceOf<BadRequestResult>(actualResult);
         }
-
+        #endregion
+        #region Read Tests
         [Test]
         public void UserController_GetUsers_ShouldReturnUsers_ByRole()
         {
-            var actualUsersList = new List<ApplicationUser>
-            {
-                new ApplicationUser{}, new ApplicationUser{}
-            };
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(service => service.GetUsersByRole("admin"))
-                            .Returns(Task.FromResult<IList<ApplicationUser>>(actualUsersList));
+                            .Returns(Task.FromResult<IList<IdentityUser>>(GetUsers()));
 
             //var userController = new RoleController(userServiceMock.Object);
             //var expectedUsersList = userController.GetUsersByRole("admin");
@@ -120,7 +118,13 @@ namespace allopromo.Api.UnitTests
             //Assert
             // Assert.AreEqual(expectedUsersList.Result.Count,2);
             //Are result result scenario equivalent to Test Scenario ?
-
+        }
+        private IList<IdentityUser> GetUsers()
+        {
+            return new List<IdentityUser>()
+            {
+                new IdentityUser{ }, new IdentityUser{ }
+            };
         }
         [Test]
         public void AccountController_Login_Returns_User()
@@ -174,6 +178,9 @@ namespace allopromo.Api.UnitTests
                 null,
                 null);
         }
+        #endregion
+        #region Update Tests
+        #endregion
     }
 }
 // Cash On Delivery - Wallets - Stored - Signup -- phone : -- Add to the Cart -->

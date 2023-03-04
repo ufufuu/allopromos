@@ -19,9 +19,10 @@ namespace allopromo.Infrastructure.Data
     IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
 
     {
-        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        //public DbSet<ApplicationRole> Roles { get; set; }
-        //public DbSet<ApplicationUserRole> UserRoles { get; set; }
+        /*
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationRole> Roles { get; set; }
+        public DbSet<ApplicationUserRole> UserRoles { get; set; }*/
 
         public DbSet<tStore> Stores { get; set; }
         public DbSet<tStoreCategory> StoreCategories { get; set; }

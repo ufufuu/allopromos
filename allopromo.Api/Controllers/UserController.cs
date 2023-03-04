@@ -21,12 +21,17 @@ namespace allopromo.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        #region Properties
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
         private UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private ILogger<UserController> _logger { get; set; }
+
+        #endregion
+
+        #region Constructors
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -41,23 +46,25 @@ namespace allopromo.Controllers
             _accountService = accountService;
             _signInManager = signInManager;
         }
+        #endregion
 
-        [HttpGet("{role}")]
-        public IActionResult GetUsers(string role)
-        {
-            if (role != null)
-            {
-                var roleUsers = _userService.GetUsersInRole(role);
-                return Ok(roleUsers);
-            }
-            return NotFound();
-        }
+        #region User Api
         [HttpGet]
+        [Route("")]
         public IActionResult GetUsers()
         {
-            var roleUsers = _userService.GetUsersWithRoles();
+            var roleUsers = _userService.GetUsersAsync();
             return Ok(roleUsers);
         }
+        private async Task<ApplicationUser> GetConnectedUser()
+        {
+            ApplicationUser user = null;
+            //var user = await _userManager.FindByIdAsync(User.Identity.Name);
+            //return user;
+            return await Task.FromResult(user);
+
+        }
+        
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
@@ -92,18 +99,18 @@ namespace allopromo.Controllers
             }
         }
         [HttpPost]
+        [AllowAnonymous]
         [Route("Login")]
-        public IActionResult Login(LoginViewModel loginViewModel) // mot de passe : @errAbaophone43|couli.mama@free.fr
+        public IActionResult Login(LoginViewModel loginViewModel) // @errAbaophone43|couli.mama@free.fr
         {
             //_accountService.Authenticate(loginModel);
             //_signInManager.PasswordSignInAsync
-            
             if (loginViewModel != null)
             {
-                ApplicationUser account = null;
+                IdentityUser account = null;
                 try
                 {
-                    //account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
+                    account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
                 }
                 catch (Exception ex)
                 {
@@ -118,14 +125,10 @@ namespace allopromo.Controllers
                     var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
                     if (loginValid)
                     {
-                        var role = _userService.GetUserRole(account).UserRoles;
-                        //if (role == null)
-                        //role = "hg";
                         ApplicationUser user = new ApplicationUser
                         {
                             UserName = loginViewModel.UserName,
                             Email = loginViewModel.UserName,
-                            UserRoles = role
                         };
                         return Ok(new ApiResponseModel
                         {
@@ -153,6 +156,9 @@ namespace allopromo.Controllers
             }
             return Unauthorized();
         }
+        #endregion
+
+        #region Account Api
         [HttpDelete]
         [HttpGet]
         [Route("/account")]
@@ -160,14 +166,27 @@ namespace allopromo.Controllers
         {
             return null;
         }
-        private async Task<ApplicationUser> GetConnectedUser()
-        {
-            ApplicationUser user = null;
-            //var user = await _userManager.FindByIdAsync(User.Identity.Name);
-            //return user;
-            return await Task.FromResult(user);
 
+        #endregion
+
+        #region Role Api
+        [HttpGet("{roleName}")]
+        public async Task<IActionResult> GetUsersByRole(string roleName)
+        {
+            if (roleName != null)
+            {
+                var roleUsers = await _userService.GetUsersByRole(roleName);
+                return Ok(roleUsers);
+            }
+            return NotFound();
         }
+        [HttpGet]
+        [Route("roles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            return null;
+        }
+        #endregion
     }
 }
 //nrt .api
