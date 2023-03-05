@@ -23,7 +23,7 @@ namespace allopromo.Controllers
         {
             try
             {
-                var defaultResult = "hello Default Controller this March, 05, 2023 - 3h 26 Am";
+                var defaultResult = "hello Default Controller this March, 05, 2023 - 3h 46 Am";
                 return Ok(defaultResult);
             }
             catch(Exception ex)
