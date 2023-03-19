@@ -13,7 +13,9 @@ namespace allopromo.Core.Abstract
 
         void Update(TEntity obj);
         void Save();
-        Task<IQueryable<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetEntitiesAsync();
+
         Task<TEntity> GetByIdAsync(object Id);
         Task<TEntity> GetByIdAsync(int categoryId);
         Task<TEntity> GetByIdAsync(string categoryId);

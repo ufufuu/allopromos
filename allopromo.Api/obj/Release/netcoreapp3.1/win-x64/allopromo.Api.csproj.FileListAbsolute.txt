@@ -1,6 +1,5 @@
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\appsettings.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\libman.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Ocelot.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\allopromo.Api.exe
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\allopromo.Api.deps.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\allopromo.Api.runtimeconfig.json
@@ -20,8 +19,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\wi
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Google.Apis.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Humanizer.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\MailKit.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Net.Http.Formatting.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Web.Http.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -80,7 +77,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\wi
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Diagnostics.DiagnosticSource.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Runtime.Caching.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\System.Text.Json.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Microsoft.Data.SqlClient.SNI.dll
@@ -105,3 +101,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\wi
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\win-x64\allopromo.Api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\win-x64\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\win-x64\allopromo.Api.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Microsoft.OpenApi.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\win-x64\Swashbuckle.AspNetCore.SwaggerUI.dll

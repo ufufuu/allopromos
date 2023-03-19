@@ -11,7 +11,7 @@ namespace allopromo.Core.Model
         Admin = 1,
         User = 2
     }
-    public class RoleService : IRoleService
+    public class RoleService //: IRoleService
     {
         public IRepository<ApplicationRole> _roleRepository { get; set; }
         public RoleService(IRepository<ApplicationRole> roleRepository)
@@ -20,11 +20,11 @@ namespace allopromo.Core.Model
         }
         public RoleService()
         {}
-        public async Task<IQueryable<ApplicationRole>> GetRoles()
-        {
-            var roles = await _roleRepository.GetAllAsync();
-            return roles;
-        }
+        //public async Task<IQueryable<ApplicationRole>> GetRoles()
+        //{
+        //    var roles = await _roleRepository.GetAllAsync();
+        //    return roles;
+        //}
     }
     public interface IRoleService
     {

@@ -6,11 +6,13 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http.Filters;
+//using System.Web.Http.Filters;
+
 //using System.Web.Http.Filters;
 //using System.Web.Http.Filters;
 //using IAuthenticationFilter=System.Web.
-namespace allopromo.Infrastructure.Providers
+
+namespace allopromo.Api.Infrastructure.Providers
 {
     //public class BasicAuthenticationFilter:AuthorizationFilterAttribute
 

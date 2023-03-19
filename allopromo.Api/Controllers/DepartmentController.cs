@@ -25,6 +25,7 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private IBaseService<DepartmentDto> _departmentService;
+        
         private readonly IDepartmentService _DepartmentService;
 
         //private readonly ILogger<DepartmentController> _logger;
@@ -40,9 +41,9 @@ namespace allopromo.Api.Controllers
         }
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetDepartments()
+        public IActionResult GetDepartments()
         {
-            var departments = await _DepartmentService.GetDepartmentsAsync();
+            var departments = _DepartmentService.GetDepartmentsAsync();
             if(departments!=null)
                 return Ok(departments);
             return NotFound();

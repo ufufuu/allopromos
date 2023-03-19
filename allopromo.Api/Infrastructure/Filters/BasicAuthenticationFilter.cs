@@ -7,8 +7,8 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http.Filters;
-namespace allopromo.Infrastructure.Filters
+//using System.Web.Http.Filters;
+namespace allopromo.Api.Infrastructure.Filters
 {
     public abstract class BasicAuthenticationFilter : Attribute, IAuthenticationFilter
     {

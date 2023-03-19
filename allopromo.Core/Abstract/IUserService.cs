@@ -19,7 +19,6 @@ namespace allopromo.Core.Abstract
 
         Task<IList<Microsoft.AspNetCore.Identity.IdentityUser>>GetUsersByRole(string userRole);
         
-        public ApplicationUser GetUserIfExist(string userName);
         public IList<ApplicationUser> GetUsersInRole(string roleName);
         public ApplicationUser GetUserRole(ApplicationUser user);
         public UserDto GetUserById(string userId);
@@ -33,7 +32,7 @@ namespace allopromo.Core.Abstract
         public void DeleteUser(ApplicationUser user);
         
         public bool ValidateUser(string userNane, string userPassword);
-        public bool LoginUser(ApplicationUser user);
+        public bool LoginUser(Microsoft.AspNetCore.Identity.IdentityUser user);
 
         #endregion
 

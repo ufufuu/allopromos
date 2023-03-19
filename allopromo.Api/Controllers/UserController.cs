@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using allopromo.Infrastructure.Data;
 using Microsoft.Extensions.Logging;
 using allopromo.Api.ViewModel.ViewModels;
+using System.Security.Claims;
+using System.Linq;
 
 namespace allopromo.Controllers
 {
@@ -64,7 +66,6 @@ namespace allopromo.Controllers
             return await Task.FromResult(user);
 
         }
-        
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
@@ -72,7 +73,7 @@ namespace allopromo.Controllers
         {
             if (registerViewModel != null)
             {
-                if (string.IsNullOrEmpty(registerViewModel.UserPassword))
+                if (string.IsNullOrEmpty(registerViewModel.UserEmail)|| string.IsNullOrEmpty(registerViewModel.UserPassword))
                     return BadRequest();
                 else
                 {
@@ -80,10 +81,12 @@ namespace allopromo.Controllers
                     {
                         IdentityUser appUser = 
                             AutoMapper.Mapper.Map<IdentityUser>(registerViewModel);
+                        var loggedUser = new LoginViewModel();
+
                         var result = await _userService.CreateUser(appUser.UserName, registerViewModel.UserPassword);
                         if (result)
                         {
-                            return Ok(appUser);
+                            return Ok(loggedUser);
                         }
                         else
                         {
@@ -95,16 +98,19 @@ namespace allopromo.Controllers
             }
             else
             {
-                return BadRequest();
+                System.Net.Http.HttpResponseMessage httpResponseMessage = 
+                    new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
+                return null;
+
+                //throw new HttpResponseException(httpResponseMessage);
+                //return BadRequest();
             }
         }
         [HttpPost]
         [AllowAnonymous]
         [Route("Login")]
-        public IActionResult Login(LoginViewModel loginViewModel) // @errAbaophone43|couli.mama@free.fr
+        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
         {
-            //_accountService.Authenticate(loginModel);
-            //_signInManager.PasswordSignInAsync
             if (loginViewModel != null)
             {
                 IdentityUser account = null;
@@ -116,12 +122,8 @@ namespace allopromo.Controllers
                 {
                     throw ex;
                 }
-                //&& (_signInManager.UserManager.CheckPasswordAsync
-                //(account, loginModel.userPassword).Result))
                 if (account != null)
                 {
-                    //var loginValid2 = _signInManager?.PasswordSignInAsync(
-                      //  loginViewModel.UserName.ToString(), loginViewModel.UserPassword.ToString(), true, true);
                     var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
                     if (loginValid)
                     {
@@ -130,6 +132,8 @@ namespace allopromo.Controllers
                             UserName = loginViewModel.UserName,
                             Email = loginViewModel.UserName,
                         };
+                        _signInManager.SignInAsync(user, true);
+                        
                         return Ok(new ApiResponseModel
                         {
                             userResponse = user,
@@ -138,10 +142,9 @@ namespace allopromo.Controllers
                     }
                     else
                     {
-                          return NotFound(new { message = "User name or Pwd UUY incorrect" });
+                          return NotFound(new {status="Failed",  message = "User name or Pwd UUY incorrect" });
                     }
                     
-                    //_signInManager.SignInAsync(new ApplicationUser{UserName = loginModel.userName }, true);
                     /*
                     using(var emailNotifyService= new EmailNotificationService())
                     {
@@ -154,7 +157,8 @@ namespace allopromo.Controllers
                     return Unauthorized();
                 }
             }
-            return Unauthorized();
+            return null;
+            //return Unauthorized();
         }
         #endregion
 

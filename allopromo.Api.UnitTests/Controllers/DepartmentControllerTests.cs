@@ -35,7 +35,7 @@ namespace allopromo.Api.UnitTests
             Assert.AreEqual(typeof(OkObjectResult), result.GetType());
         }
         [Test]
-        public void GetDepartmentS_SHOULD_RETURN_Deparments()
+        public void GetDepartmentS_SHOULD_RETURN_Departments()
         {
             var result = SUT.GetDepartments();
             Assert.IsNotNull(result);

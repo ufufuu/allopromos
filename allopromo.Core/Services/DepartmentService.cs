@@ -14,6 +14,8 @@ namespace allopromo.Core.Services
     {
         Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync();
         Task<DepartmentDto> GetDepartmentAsync();
+
+
         Task<DepartmentDto> CreateDepartmentAsync();
         Task<DepartmentDto> DeleteDepartmentAsync();
     }
@@ -24,31 +26,32 @@ namespace allopromo.Core.Services
         public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<config.AutoMapperProfileCore>();
-            });
         }
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
             IEnumerable<DepartmentDto> departmentsDto = null;
-            var tDepartments = await GetEntities();
-            var departments = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tDepartments);
-            //return departments;
 
-            IEnumerable<tDepartment> tEntities = null;
+            //var tDepartments = await GetEntities();
+
+            var departmentsObj = await _departmentRepository.GetEntitiesAsync();
+            var g = 7;
+            var department = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(departmentsObj.AsEnumerable());
+
+            return department;
+
+            IEnumerable <tDepartment> tEntities = null;
             
             try
             {
-                var de = _departmentRepository;
                 tEntities = await _departmentRepository.GetAllAsync();
+                var tObjs = tEntities.AsQueryable();
                 departmentsDto = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return departments;
+            return departmentsDto;
         }
         public async Task<IEnumerable<tDepartment>> GetEntities()
         {
@@ -58,9 +61,9 @@ namespace allopromo.Core.Services
                 var de = _departmentRepository;
                 tObjs = await _departmentRepository.GetAllAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new NullReferenceException();
+                throw ex;
             }
             return tObjs;
         }

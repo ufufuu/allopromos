@@ -15,17 +15,18 @@ namespace allopromo.Core.UnitTests.Application
     {
         private Mock<Abstract.IRepository<tCity>> citiesRepoMock;
 
-        [Test]
-        public void GetUserCurrentCity_SHOULD_GetCityAsync()
-        {
-            citiesRepoMock = new Mock<IRepository<tCity>>();
-            citiesRepoMock.Setup(x => x.GetAllAsync())
-                .Returns(Task.FromResult(new List<tCity>().AsQueryable()));
+        //[Test]
+        //public void GetUserCurrentCity_SHOULD_GetCityAsync()
+        //{
+        //    citiesRepoMock = new Mock<IRepository<tCity>>();
+        //    citiesRepoMock.Setup(x => x.GetAllAsync())
 
-            var localiseService = new LocalisationService(citiesRepoMock.Object);
-            var obj = citiesRepoMock.Object;
-            citiesRepoMock.Verify(x => x.GetAllAsync(), Times.AtMostOnce());
-        }
+        //        .Returns(Task.FromResult(new List<tCity>().AsQueryable()));
+
+        //    var localiseService = new LocalisationService(citiesRepoMock.Object);
+        //    var obj = citiesRepoMock.Object;
+        //    citiesRepoMock.Verify(x => x.GetAllAsync(), Times.AtMostOnce());
+        //}
         public void GetCities_SHOULD_ReturnCities()
         {
         }

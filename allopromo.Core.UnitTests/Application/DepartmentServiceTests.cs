@@ -16,13 +16,14 @@ namespace allopromo.Core.Application.UnitTests
         public Mock<IRepository<tDepartment>> RepositoryMock = new Mock<IRepository<tDepartment>>();
         public DeparmentServiceTests()
         {
+            
         }
         [SetUp]
         public void Init()
         {
             SUT = new DepartmentService(RepositoryMock.Object);
         }
-        [TestCase]
+        [Test]
         public async Task GetDepartments_SHOULD_Return_DepartmentsAsync()
         {
             var result =await SUT.GetDepartmentsAsync();

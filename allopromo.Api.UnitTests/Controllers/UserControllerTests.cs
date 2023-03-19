@@ -18,8 +18,13 @@ namespace allopromo.Api.UnitTests
     [TestFixture]
     public class UserControllerTests
     {
+
+    #region Properties
         private Mock<IUserService> _userServiceMock;
         private UserController _SUT;
+        #endregion
+
+    #region Constructors
         public UserControllerTests()
         {
             _userServiceMock = new Mock<IUserService>();
@@ -29,7 +34,9 @@ namespace allopromo.Api.UnitTests
                 cfg.AddProfile<AutoMapperProfile>();
             });
         }
-        #region Create Tests
+#endregion
+
+    #region Create Tests
         [Test]
         public async Task UserController_CreateUser_UserValid_PasswordValid_ReturnsOkCreated()
         {
@@ -71,7 +78,6 @@ namespace allopromo.Api.UnitTests
             _SUT = new UserController(_userServiceMock.Object);
             var actualResult = await _SUT.CreateUser(registerViewModel);
             Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
-
             //Assert.ThrowsAsync<Exception>(async () => await _SUT.CreateUser(registerViewModel));
         }
         [Test]
@@ -104,14 +110,14 @@ namespace allopromo.Api.UnitTests
             Assert.IsInstanceOf<BadRequestResult>(actualResult);
         }
         #endregion
-        #region Read Tests
+    #region Read Tests
+        
         [Test]
         public void UserController_GetUsers_ShouldReturnUsers_ByRole()
         {
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(service => service.GetUsersByRole("admin"))
                             .Returns(Task.FromResult<IList<IdentityUser>>(GetUsers()));
-
             //var userController = new RoleController(userServiceMock.Object);
             //var expectedUsersList = userController.GetUsersByRole("admin");
             //Act
@@ -119,6 +125,7 @@ namespace allopromo.Api.UnitTests
             // Assert.AreEqual(expectedUsersList.Result.Count,2);
             //Are result result scenario equivalent to Test Scenario ?
         }
+        
         private IList<IdentityUser> GetUsers()
         {
             return new List<IdentityUser>()
@@ -127,40 +134,38 @@ namespace allopromo.Api.UnitTests
             };
         }
         [Test]
-        public void AccountController_Login_Returns_User()
+        public void UserController_Login_SHOULD_Return_UserOK()
         {
-            var ApplicationUser = new ApplicationUser
+            var loginViewModel = new LoginViewModel
             {
                 UserName = "couli.mama@free.fr",
-                PasswordHash = "errAbaophone43"
+                UserPassword = "errAbaophone43"
             };
-            _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(x => x.LoginUser(ApplicationUser)).Returns(true);
-            _userServiceMock.Setup(y => y.GetUserIfExist(ApplicationUser.UserName)).Returns(ApplicationUser);
-
-            var userDto = new ApplicationUser
-            {
-                UserName = "couli.mama@free.fr",
-            };
+            _userServiceMock.Setup(x => x.LoginUser(new IdentityUser{})).Returns(true);
+            
             var userLoginResponse = new ApiResponseModel
             {
-                userResponse = userDto,
                 jwtToken = "TOEKEKEKNN"
             };
-            var userController = new UserController(_userServiceMock.Object);//,GetUserManagerMock().Object);
-            //Assert
-            // Assert.IsNotNull(okUser);
-            //Assert.IsInstanceOf<OkObjectResult>(okUser);
+            var result = _SUT.Login(loginViewModel);
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf<OkObjectResult>(result);
             //Assert.IsTrue(okUser.Equals((IActionResult)userDto));
         }
+        public void UserController_User_Login_SOULD_Return_OKLoggedUser()
+        {
+        }
+        public void UserController_User_Login_SOULD_Return_NotOKLoginOrInvalidPassword()
+        {
+        }
         [Test]
-        public void AccountController_Login_ReturnsBad_Request_OrNotFound()
+        public void UserController_Login_ReturnsBad_Request_OrNotFound()
         {
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
         }
         [Test]
-        public void AccountController_Login_ReturnsNull()
+        public void UserController_Login_ReturnsNull()
         {
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
@@ -179,8 +184,11 @@ namespace allopromo.Api.UnitTests
                 null);
         }
         #endregion
-        #region Update Tests
+
+    #region Update Tests
         #endregion
+
+
     }
 }
 // Cash On Delivery - Wallets - Stored - Signup -- phone : -- Add to the Cart -->

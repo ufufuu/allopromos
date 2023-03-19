@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>70a4f25b-41ed-403f-afb7-1d442fe1bb5d</UserSecretsId>
     <OutputType>Exe</OutputType>
+    <AssemblyName>allopromo.Api</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile></DocumentationFile>
@@ -36,6 +37,8 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\AccounttController.cs" />
+    <Compile Remove="Controllers\AuthenticationController.cs" />
+    <Compile Remove="Controllers\OdooController.cs" />
     <Compile Remove="Controllers\OrderStatus.cs" />
     <Compile Remove="Controllers\RoleController.cs" />
     <Compile Remove="Controllers\StoreCategorie.cs" />
@@ -61,6 +64,7 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Controllers\Errors\" />
+    <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Properties\" />

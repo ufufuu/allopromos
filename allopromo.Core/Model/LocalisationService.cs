@@ -43,6 +43,8 @@ namespace allopromo.Core.Contracts
         {
             var tObjs =await _cityRepository.GetAllAsync();
             IEnumerable<CityDto> cities = AutoMapper.Mapper.Map<IEnumerable<CityDto>>(tObjs);
+
+
            if(cities !=null)
                 return cities;
             throw new NullReferenceException();

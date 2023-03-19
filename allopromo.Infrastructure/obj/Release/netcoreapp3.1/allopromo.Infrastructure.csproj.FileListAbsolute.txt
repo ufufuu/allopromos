@@ -1,7 +1,3 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.deps.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.runtimeconfig.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.runtimeconfig.dev.json
@@ -9,6 +5,10 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netco
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Infrastructure.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\bin\Release\netcoreapp3.1\allopromo.Core.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.csproj.CopyComplete
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\obj\Release\netcoreapp3.1\allopromo.Infrastructure.pdb

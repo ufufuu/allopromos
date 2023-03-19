@@ -43,12 +43,9 @@ namespace allopromo.Core.Model
             IList<UserDto> users = new List<UserDto>();
             try
             {
-                var usersObj = _userManager.Users.ToListAsync().Result;
+                var usersObj = await _userManager.Users.ToListAsync();
                 var role = GetRoleNameByUser(usersObj.FirstOrDefault());
 
-                int r = 9;
-                var Roless = GetRoleNameByUser(usersObj.FirstOrDefault());
-                int g = 7;
                 foreach (var userObj in usersObj)
                 {
                     users.Add(new UserDto
@@ -59,7 +56,7 @@ namespace allopromo.Core.Model
                         Name=role
                     });
                 }
-                //users = AutoMapper.Mapper.Map<List<UserDto>>(usersObj);
+                
             }
             catch (Exception ex)
             {
@@ -80,6 +77,10 @@ namespace allopromo.Core.Model
                 return roles.FirstOrDefault();
             }
             return string.Empty;
+        }
+        public string GetUserRole(IdentityUser user)
+        {
+            return GetRoleNameByUser(user);
         }
         private async Task<List<IdentityRole>> GetRoles() => await _roleManager.Roles.ToListAsync();
         private async Task<bool> UserExists(string userName)
@@ -111,6 +112,11 @@ namespace allopromo.Core.Model
                 throw ex;
             }
             return false;
+        }
+        private bool LoggingUser(IdentityUser user)
+        {
+            //_signInManager.SignInAsync(user);
+            return true;
         }
         public ApplicationUser AuthenticateUser(string UserName, string PasswordHash)
         {
@@ -264,16 +270,6 @@ namespace allopromo.Core.Model
         }
 
         void IUserService.UpdateUser(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IUserService.LoginUser(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        ApplicationUser IUserService.GetUserIfExist(string userName)
         {
             throw new NotImplementedException();
         }

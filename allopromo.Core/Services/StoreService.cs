@@ -166,6 +166,7 @@ namespace allopromo.Core.Model
         {
             IEnumerable<StoreCategoryDto> categories = null;
             var categoriesRepo = await _categoryRepository.GetAllAsync();
+
             var categoriesObj = categoriesRepo.AsQueryable().Include(x => x.Department)
                 .Select(c => new StoreCategoryDto
                 {

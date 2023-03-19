@@ -69,18 +69,28 @@ namespace allopromo.Infrastructure.Repositories
         {
             _dbContext.SaveChanges();
         }
-        public Task<IQueryable<T>> GetAllAsync()
+        public Task<IQueryable<T>> GetAllAsync2()
         {
-            var tObjects = _table.AsQueryable();
+            var tObjects = _table; //.AsQueryable();
+
 
             //if(tObjects!=null)
-                return (Task<IQueryable<T>>)tObjects;
-            //return null;
+            
+            var f = 6;
+            return null;
+                //return (Task<IQueryable<T>>)tObjects;
+
         }
-        public async Task<IEnumerable<tStoreCategory>> GetStoreCategoriesAsync()
+        public Task<List<T>> GetAllAsync()
         {
-            var tCategories = await _dbContext.StoreCategories.ToListAsync();
-            return tCategories;
+            var tObjects = _table.ToListAsync();
+            int g = 5;
+            return tObjects;
+        }
+        public Task<IEnumerable<T>> GetEntitiesAsync()
+        {
+            var tObj = _dbContext.Set<T>();
+            return (Task.FromResult(tObj.AsEnumerable()));
         }
         public IQueryable<T> GetByIdAsync(int categoryId, int pageNumber, int offSet)
         {

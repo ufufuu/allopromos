@@ -31,6 +31,7 @@ using allopromo.Api.Infrastructure.Logging;
 using Microsoft.Extensions.Hosting;
 using allopromo.Core.Contracts;
 using System.Net.Http;
+using Microsoft.OpenApi.Models;
 
 namespace allopromo
 {
@@ -56,6 +57,15 @@ namespace allopromo
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultTokenProviders();
+            //For Session State Management
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+            });
+            services.AddHttpContextAccessor();
+            /*
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -90,8 +100,11 @@ namespace allopromo
                         // Add claim
                     //}
                 };
+                services
+                .AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options => options.SaveToken = true);
 #endregion
-            });
+            });*/
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
@@ -124,7 +137,30 @@ namespace allopromo
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "allopromo API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.
+                    OpenApiInfo { Title = "allopromo API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme="Bearer"
+                });
+            //c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //{
+            //    {
+            //        new OpenApiSecurityScheme
+            //        {
+            //            Reference = new OpenApiReference
+            //            {
+            //                Type = ReferenceType.SecurityScheme,
+            //                Id = "Bearer"
+            //            }
+            //        },
+            //        Array.Empty<string>()
+            //    }
+            //});
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
@@ -216,7 +252,8 @@ namespace allopromo
             }
             else
             {
-                //app.UseExceptionHandler("/error");
+                //Redirect to Error  When Error occurs  and when Not in Development 
+                app.UseExceptionHandler("/error");
                 //Or Below ?
                 app.UseHsts();
             }
@@ -227,6 +264,8 @@ namespace allopromo
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+
             //app.UseOcelot();
             //app.UseMvc();
             app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
@@ -235,6 +274,7 @@ namespace allopromo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
                 //Utilisez l’intergiciel decompression deréponseen haut dela
                 //configuration du pipeline detraitement.
                 //Entreles points determinaison pour les contrôleurs et lesecours 
@@ -253,12 +293,6 @@ namespace allopromo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
             });
             AutoMapperConfiguration.Initialize();
-
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your Api V1");
-            //});
 
             /*
             app.UseMvc();

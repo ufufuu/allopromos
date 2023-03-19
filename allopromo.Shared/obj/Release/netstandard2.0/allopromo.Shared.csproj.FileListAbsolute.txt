@@ -1,9 +1,9 @@
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netstandard2.0\allopromo.Shared.deps.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netstandard2.0\allopromo.Shared.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\bin\Release\netstandard2.0\allopromo.Shared.pdb
+C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.csprojAssemblyReference.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Shared\obj\Release\netstandard2.0\allopromo.Shared.csprojAssemblyReference.cache

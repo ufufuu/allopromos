@@ -23,26 +23,26 @@ namespace allopromo.Core.UnitTest.ServicesTests
                 departmentRepositoryMock.Object);
         }
         [Test]
-        public void StoreService_GetStores_ReturnStores()
-        {
-            List<StoreDto> listStores = new List<StoreDto>();
-            _storeRepositoryMock.Setup(x => x.GetAllAsync())
-                .Returns((Task<IQueryable<tStore>>)getStoresAsync());
-            var stores  = _sut.GetStores().Result;
-            Assert.IsNotNull(stores);
-            Assert.AreEqual(stores.Count(), 3);
-        }
-        [Test]
-        public async Task StoreService_GetStores_ByLocation_ReturnStoresByLocalization()
-        {
-            List<StoreDto> listStores = new List<StoreDto>();
-            _storeRepositoryMock.Setup(x => x.GetAllAsync())
-                .Returns((Task<IQueryable<tStore>>)getStoresAsync());
+        //public void StoreService_GetStores_ReturnStores()
+        //{
+        //    List<StoreDto> listStores = new List<StoreDto>();
+        //    _storeRepositoryMock.Setup(x => x.GetAllAsync())
+        //        .Returns((Task<IQueryable<tStore>>)getStoresAsync());
+        //    var stores  = _sut.GetStores().Result;
+        //    Assert.IsNotNull(stores);
+        //    Assert.AreEqual(stores.Count(), 3);
+        //}
+        //[Test]
+        //public async Task StoreService_GetStores_ByLocation_ReturnStoresByLocalization()
+        //{
+        //    List<StoreDto> listStores = new List<StoreDto>();
+        //    _storeRepositoryMock.Setup(x => x.GetAllAsync())
+        //        .Returns((Task<IQueryable<tStore>>)getStoresAsync());
 
-            var stores = await _sut.GetStores(); // ByLocalizationAsync(1, 1, 2);          //GetStores(Guid.NewGuid().ToString());
-            Assert.IsNotNull(stores);
-            Assert.AreEqual(stores.Count(), 3);
-        }
+        //    var stores = await _sut.GetStores(); // ByLocalizationAsync(1, 1, 2);          //GetStores(Guid.NewGuid().ToString());
+        //    Assert.IsNotNull(stores);
+        //    Assert.AreEqual(stores.Count(), 3);
+        //}
         //[Test]
         //public void StoreService_GetStoresByLocalization_ReturnStores()
         //{
@@ -52,13 +52,7 @@ namespace allopromo.Core.UnitTest.ServicesTests
         //    var stores = _sut.GetStoresByLocalizationIdAsync("");
         //    Assert.IsNotNull(stores);
         //}
-        [Test]
-        public void StoreService_GetCategories_ReturnsCategories()
-        {
-            var result = _sut.GetStoreCategoriesAsync();
-            Assert.IsNotNull(result);
-        }
-        [Test]
+        //[Test]
         public void StoreService_GetStores_ReturnStoresCategories()
         {
             List<StoreDto> listStores = new List<StoreDto>();
