@@ -43,11 +43,13 @@ namespace allopromo.Api.Controllers
         public int pageNumber { get; set; }
         public const int pageSize = 2;
         #endregion
+
         #region Fields
         private readonly IStoreService _storeService;
         private readonly INotifyService _notificationService;
         private readonly IProductService _productService;
         #endregion
+
         #region Constructors & Properties
         public delegate string mydelegate(string msg);
         public delegate string myGenericDelegate<T>(string msg);
@@ -60,22 +62,26 @@ namespace allopromo.Api.Controllers
             _notificationService = notificationService;
         }
         #endregion
+
         #region GET
         [HttpGet]
-        public async Task<ActionResult<StoreDto>> GetStores([FromQuery] PaginationFilter filter)
+        [Route("")]
+        public async Task<ActionResult> GetStores()//[FromQuery] PaginationFilter filter)
         {
-            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            //var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+
             var stores = await _storeService.GetStores();
-            var paginatedResult = stores
-                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                                .Take(validFilter.PageSize).AsQueryable();
+
+            //var paginatedResult = stores
+                                //.Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                //.Take(validFilter.PageSize).AsQueryable();
 
             //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
             if (stores == null)
                 return NotFound();
             else
-                return Ok(new PagedResponse<IEnumerable<StoreDto>>
-                    (paginatedResult, validFilter.PageNumber, validFilter.PageSize));
+                return Ok(stores); //new PagedResponse<IEnumerable<StoreDto>>
+                    //(paginatedResult, validFilter.PageNumber, validFilter.PageSize));
         }
         [HttpGet]
         [Route("{LocalizationId}")]
@@ -163,6 +169,7 @@ namespace allopromo.Api.Controllers
             }
         }
         #endregion
+
         #region POST
         [HttpPost]
         [Route("categories/create/")]
@@ -215,6 +222,7 @@ namespace allopromo.Api.Controllers
             }
         }
         #endregion
+
         #region PUT
         [HttpPut]
         [Route("categories/{catId}")]

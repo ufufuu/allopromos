@@ -29,14 +29,26 @@ namespace allopromo.Controllers
         private UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private ILogger<UserController> _logger { get; set; }
 
+        /*private ILogger<UserController> _logger { get; set; }
+        private Serilog.ILogger logger { get; set; }*/
         #endregion
 
         #region Constructors
+        public UserController(IUserService userService, IAccountService accountService)
+        {
+            _userService = userService;
+            _accountService = accountService;
+        }
         public UserController(IUserService userService)
         {
             _userService = userService;
+        }
+        public UserController(IUserService userService, 
+            UserManager<IdentityUser> userManager)
+        {
+            _userService = userService;
+            _userManager = userManager;
         }
         [ActivatorUtilitiesConstructor]
         public UserController(IUserService userService, IAccountService accountService, UserManager<IdentityUser> userManager,
@@ -100,10 +112,7 @@ namespace allopromo.Controllers
             {
                 System.Net.Http.HttpResponseMessage httpResponseMessage = 
                     new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
-                return null;
-
-                //throw new HttpResponseException(httpResponseMessage);
-                //return BadRequest();
+                throw new Exception();
             }
         }
         [HttpPost]
@@ -113,52 +122,49 @@ namespace allopromo.Controllers
         {
             if (loginViewModel != null)
             {
-                IdentityUser account = null;
                 try
                 {
-                    account = _userManager?.FindByEmailAsync(loginViewModel.UserName).Result;
+                    var account = _userService.ValidateUserAsync(loginViewModel.UserName).Result;
+                    if (account!= null)
+                    {
+                        var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
+                        if (loginValid)
+                        {
+                            IdentityUser user = new IdentityUser
+                            {
+                                UserName = loginViewModel.UserName,
+                                Email = loginViewModel.UserName,
+                            };
+                            return Ok(new ApiResponseModel
+                            {
+                                userResponse = user,
+                                jwtToken = _accountService.generateJwtToken(user),
+                            });
+                        }
+                        else
+                        //{
+                            return NotFound (new { status = "Failed", message = "User name or Pwd UUY incorrect" });
+                        //}
+                        /*
+                        using(var emailNotifyService= new EmailNotificationService())
+                        {
+                            _accountService.userAuthenticated += emailNotifyService.SendNotification;
+                            _accountService.OnUserAuthenticate(loginModel.userName);
+                        }*/
+                    }
+                    else
+                    //{
+                        return Unauthorized();
+                    //}
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
-                }
-                if (account != null)
-                {
-                    var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
-                    if (loginValid)
-                    {
-                        ApplicationUser user = new ApplicationUser
-                        {
-                            UserName = loginViewModel.UserName,
-                            Email = loginViewModel.UserName,
-                        };
-                        _signInManager.SignInAsync(user, true);
-                        
-                        return Ok(new ApiResponseModel
-                        {
-                            userResponse = user,
-                            jwtToken = _accountService.generateJwtToken(user),
-                        });
-                    }
-                    else
-                    {
-                          return NotFound(new {status="Failed",  message = "User name or Pwd UUY incorrect" });
-                    }
-                    
-                    /*
-                    using(var emailNotifyService= new EmailNotificationService())
-                    {
-                        _accountService.userAuthenticated += emailNotifyService.SendNotification;
-                        _accountService.OnUserAuthenticate(loginModel.userName);
-                    }*/
-                }
-                else
-                {
-                    return Unauthorized();
+                    //_logger.LogInformation("User Not Found");
+                    throw;
                 }
             }
-            return null;
-            //return Unauthorized();
+            else
+                throw new Exception();
         }
         #endregion
 

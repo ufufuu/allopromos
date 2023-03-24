@@ -11,7 +11,7 @@ namespace allopromo.Core.Abstract
     {
         //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
 
-        public string generateJwtToken(ApplicationUser user); // or Remove this Mehods from Interface and make it private in service.
+        public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user); 
 
         // method for handling event without any data
         public event UserAuthenticatedEventHandler userAuthenticated;

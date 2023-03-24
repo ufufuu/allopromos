@@ -39,7 +39,7 @@ namespace allopromo.Api.UnitTests
         {
             var result = SUT.GetDepartments();
             Assert.IsNotNull(result);
-            Assert.AreEqual(typeof(System.Threading.Tasks.Task<IActionResult>), result.GetType());
+            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
         }
     }
 }

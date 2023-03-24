@@ -16,7 +16,10 @@ namespace allopromo.Core.Application.UnitTests
         public Mock<IRepository<tDepartment>> RepositoryMock = new Mock<IRepository<tDepartment>>();
         public DeparmentServiceTests()
         {
-            
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
         [SetUp]
         public void Init()

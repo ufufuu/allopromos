@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.1979" branch-rate="0.0851" version="1.9" timestamp="1678835320" lines-covered="210" lines-valid="1061" branches-covered="8" branches-valid="94">
+<coverage line-rate="0.2003" branch-rate="0.0833" version="1.9" timestamp="1679531264" lines-covered="225" lines-valid="1123" branches-covered="8" branches-valid="96">
   <sources>
     <source>C:\Users\MonPC\</source>
   </sources>
   <packages>
-    <package name="allopromo.Core" line-rate="0.1255" branch-rate="0.076" complexity="394">
+    <package name="allopromo.Core" line-rate="0.12869999999999998" branch-rate="0.07440000000000001" complexity="399">
       <classes>
         <class name="allopromo.Model.Validation.HttpResponseException" filename="source\repos\allopromo\allopromo.Core\Validators\HttpResponseException.cs" line-rate="0" branch-rate="1" complexity="3">
           <methods>
@@ -92,6 +92,106 @@
             <line number="15" hits="0" branch="False" />
             <line number="16" hits="0" branch="False" />
             <line number="21" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Core.AutoMapperConfiguration" filename="source\repos\allopromo\allopromo.Core\AutoMapperConfiguration.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="Initialize" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="20" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="21" hits="0" branch="False" />
+                <line number="22" hits="0" branch="False" />
+                <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="False" />
+                <line number="25" hits="0" branch="False" />
+                <line number="26" hits="0" branch="False" />
+                <line number="27" hits="0" branch="False" />
+                <line number="28" hits="0" branch="False" />
+                <line number="29" hits="0" branch="False" />
+                <line number="30" hits="0" branch="False" />
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+                <line number="33" hits="0" branch="False" />
+                <line number="34" hits="0" branch="False" />
+                <line number="35" hits="0" branch="False" />
+                <line number="36" hits="0" branch="False" />
+                <line number="37" hits="0" branch="False" />
+                <line number="38" hits="0" branch="False" />
+                <line number="39" hits="0" branch="False" />
+                <line number="40" hits="0" branch="False" />
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="45" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+                <line number="48" hits="0" branch="False" />
+                <line number="49" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="20" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="21" hits="0" branch="False" />
+            <line number="22" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+            <line number="26" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="28" hits="0" branch="False" />
+            <line number="29" hits="0" branch="False" />
+            <line number="30" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="33" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+            <line number="35" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="39" hits="0" branch="False" />
+            <line number="40" hits="0" branch="False" />
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="45" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="48" hits="0" branch="False" />
+            <line number="49" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Core.AutoMapperProfile" filename="source\repos\allopromo\allopromo.Core\AutoMapperConfiguration.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="53" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+                <line number="61" hits="1" branch="False" />
+                <line number="62" hits="1" branch="False" />
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="53" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="61" hits="1" branch="False" />
+            <line number="62" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.ValueObjects.Address" filename="source\repos\allopromo\allopromo.Core\ValueObjects\Address.cs" line-rate="0" branch-rate="1" complexity="4">
@@ -496,7 +596,7 @@
             <line number="14" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0.1525" branch-rate="0" complexity="26">
+        <class name="allopromo.Core.Model.UserService" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0.14279999999999998" branch-rate="0" complexity="28">
           <methods>
             <method name="get__userManager" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -521,32 +621,35 @@
                 <line number="79" hits="0" branch="False" />
               </lines>
             </method>
+            <method name="GetUserRole" signature="(Microsoft.AspNetCore.Identity.IdentityUser)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="83" hits="0" branch="False" />
+              </lines>
+            </method>
             <method name="LoginUser" signature="(Microsoft.AspNetCore.Identity.IdentityUser)" line-rate="0" branch-rate="0" complexity="2">
               <lines>
-                <line number="101" hits="0" branch="False" />
-                <line number="102" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="105" hits="0" branch="False" />
+                <line number="106" hits="0" branch="True" condition-coverage="0% (0/2)">
                   <conditions>
                     <condition number="14" type="jump" coverage="0%" />
                   </conditions>
                 </line>
-                <line number="103" hits="0" branch="False" />
-                <line number="104" hits="0" branch="False" />
+                <line number="107" hits="0" branch="False" />
                 <line number="108" hits="0" branch="False" />
-                <line number="111" hits="0" branch="False" />
+                <line number="110" hits="0" branch="False" />
+                <line number="112" hits="0" branch="False" />
+                <line number="114" hits="0" branch="False" />
               </lines>
             </method>
             <method name="AuthenticateUser" signature="(System.String,System.String)" line-rate="0" branch-rate="0" complexity="2">
               <lines>
-                <line number="116" hits="0" branch="False" />
-                <line number="117" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="119" hits="0" branch="False" />
+                <line number="120" hits="0" branch="True" condition-coverage="0% (0/2)">
                   <conditions>
                     <condition number="1" type="jump" coverage="0%" />
                   </conditions>
                 </line>
-                <line number="120" hits="0" branch="False" />
-                <line number="122" hits="0" branch="False" />
                 <line number="123" hits="0" branch="False" />
-                <line number="124" hits="0" branch="False" />
                 <line number="125" hits="0" branch="False" />
                 <line number="126" hits="0" branch="False" />
                 <line number="127" hits="0" branch="False" />
@@ -556,93 +659,102 @@
                 <line number="131" hits="0" branch="False" />
                 <line number="132" hits="0" branch="False" />
                 <line number="133" hits="0" branch="False" />
-                <line number="138" hits="0" branch="False" />
+                <line number="134" hits="0" branch="False" />
+                <line number="135" hits="0" branch="False" />
+                <line number="136" hits="0" branch="False" />
+                <line number="141" hits="0" branch="False" />
               </lines>
             </method>
             <method name="ValidateUser" signature="(System.String,System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="181" hits="0" branch="False" />
-                <line number="182" hits="0" branch="False" />
+                <line number="184" hits="0" branch="False" />
+                <line number="186" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ValidateUserAsync" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="190" hits="0" branch="False" />
+                <line number="192" hits="0" branch="False" />
               </lines>
             </method>
             <method name="AddUserRole" signature="(allopromo.Core.Domain.ApplicationUser,System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="186" hits="0" branch="False" />
-                <line number="187" hits="0" branch="False" />
+                <line number="196" hits="0" branch="False" />
+                <line number="197" hits="0" branch="False" />
               </lines>
             </method>
             <method name="DeleteUser" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="190" hits="0" branch="False" />
+                <line number="200" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetUserRole" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="207" hits="0" branch="False" />
-                <line number="220" hits="0" branch="False" />
+                <line number="217" hits="0" branch="False" />
+                <line number="230" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetCurrentUser" signature="()" line-rate="0" branch-rate="0" complexity="2">
               <lines>
-                <line number="225" hits="0" branch="False" />
-                <line number="226" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="235" hits="0" branch="False" />
+                <line number="236" hits="0" branch="True" condition-coverage="0% (0/2)">
                   <conditions>
                     <condition number="23" type="jump" coverage="0%" />
                   </conditions>
                 </line>
-                <line number="227" hits="0" branch="False" />
+                <line number="237" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetUsersInRole" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="236" hits="0" branch="False" />
-                <line number="237" hits="0" branch="False" />
+                <line number="246" hits="0" branch="False" />
+                <line number="247" hits="0" branch="False" />
               </lines>
             </method>
             <method name="UpdateUser" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="241" hits="0" branch="False" />
+                <line number="251" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetUserByNameOrEmail" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="245" hits="0" branch="False" />
+                <line number="255" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetUserbyId" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="249" hits="0" branch="False" />
-                <line number="250" hits="0" branch="False" />
+                <line number="259" hits="0" branch="False" />
+                <line number="260" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.GetUser" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="255" hits="0" branch="False" />
+                <line number="265" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.DeleteUser" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="260" hits="0" branch="False" />
+                <line number="270" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.UpdateUser" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="265" hits="0" branch="False" />
+                <line number="275" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.GetUsersInRole" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="270" hits="0" branch="False" />
+                <line number="280" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.GetUserRole" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="274" hits="0" branch="False" />
+                <line number="284" hits="0" branch="False" />
               </lines>
             </method>
             <method name="allopromo.Core.Abstract.IUserService.GetUserById" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="278" hits="0" branch="False" />
+                <line number="288" hits="0" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Microsoft.AspNetCore.Identity.UserManager`1&lt;Microsoft.AspNetCore.Identity.IdentityUser&gt;,Microsoft.AspNetCore.Identity.SignInManager`1&lt;Microsoft.AspNetCore.Identity.IdentityUser&gt;,Microsoft.AspNetCore.Identity.RoleManager`1&lt;Microsoft.AspNetCore.Identity.IdentityRole&gt;)" line-rate="1" branch-rate="1" complexity="1">
@@ -674,26 +786,25 @@
             </line>
             <line number="77" hits="0" branch="False" />
             <line number="79" hits="0" branch="False" />
-            <line number="101" hits="0" branch="False" />
-            <line number="102" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="83" hits="0" branch="False" />
+            <line number="105" hits="0" branch="False" />
+            <line number="106" hits="0" branch="True" condition-coverage="0% (0/2)">
               <conditions>
                 <condition number="14" type="jump" coverage="0%" />
               </conditions>
             </line>
-            <line number="103" hits="0" branch="False" />
-            <line number="104" hits="0" branch="False" />
+            <line number="107" hits="0" branch="False" />
             <line number="108" hits="0" branch="False" />
-            <line number="111" hits="0" branch="False" />
-            <line number="116" hits="0" branch="False" />
-            <line number="117" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="110" hits="0" branch="False" />
+            <line number="112" hits="0" branch="False" />
+            <line number="114" hits="0" branch="False" />
+            <line number="119" hits="0" branch="False" />
+            <line number="120" hits="0" branch="True" condition-coverage="0% (0/2)">
               <conditions>
                 <condition number="1" type="jump" coverage="0%" />
               </conditions>
             </line>
-            <line number="120" hits="0" branch="False" />
-            <line number="122" hits="0" branch="False" />
             <line number="123" hits="0" branch="False" />
-            <line number="124" hits="0" branch="False" />
             <line number="125" hits="0" branch="False" />
             <line number="126" hits="0" branch="False" />
             <line number="127" hits="0" branch="False" />
@@ -703,33 +814,38 @@
             <line number="131" hits="0" branch="False" />
             <line number="132" hits="0" branch="False" />
             <line number="133" hits="0" branch="False" />
-            <line number="138" hits="0" branch="False" />
-            <line number="181" hits="0" branch="False" />
-            <line number="182" hits="0" branch="False" />
+            <line number="134" hits="0" branch="False" />
+            <line number="135" hits="0" branch="False" />
+            <line number="136" hits="0" branch="False" />
+            <line number="141" hits="0" branch="False" />
+            <line number="184" hits="0" branch="False" />
             <line number="186" hits="0" branch="False" />
-            <line number="187" hits="0" branch="False" />
             <line number="190" hits="0" branch="False" />
-            <line number="207" hits="0" branch="False" />
-            <line number="220" hits="0" branch="False" />
-            <line number="225" hits="0" branch="False" />
-            <line number="226" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="192" hits="0" branch="False" />
+            <line number="196" hits="0" branch="False" />
+            <line number="197" hits="0" branch="False" />
+            <line number="200" hits="0" branch="False" />
+            <line number="217" hits="0" branch="False" />
+            <line number="230" hits="0" branch="False" />
+            <line number="235" hits="0" branch="False" />
+            <line number="236" hits="0" branch="True" condition-coverage="0% (0/2)">
               <conditions>
                 <condition number="23" type="jump" coverage="0%" />
               </conditions>
             </line>
-            <line number="227" hits="0" branch="False" />
-            <line number="236" hits="0" branch="False" />
             <line number="237" hits="0" branch="False" />
-            <line number="241" hits="0" branch="False" />
-            <line number="245" hits="0" branch="False" />
-            <line number="249" hits="0" branch="False" />
-            <line number="250" hits="0" branch="False" />
+            <line number="246" hits="0" branch="False" />
+            <line number="247" hits="0" branch="False" />
+            <line number="251" hits="0" branch="False" />
             <line number="255" hits="0" branch="False" />
+            <line number="259" hits="0" branch="False" />
             <line number="260" hits="0" branch="False" />
             <line number="265" hits="0" branch="False" />
             <line number="270" hits="0" branch="False" />
-            <line number="274" hits="0" branch="False" />
-            <line number="278" hits="0" branch="False" />
+            <line number="275" hits="0" branch="False" />
+            <line number="280" hits="0" branch="False" />
+            <line number="284" hits="0" branch="False" />
+            <line number="288" hits="0" branch="False" />
             <line number="29" hits="1" branch="False" />
             <line number="30" hits="1" branch="False" />
             <line number="32" hits="1" branch="False" />
@@ -744,21 +860,21 @@
           <methods>
             <method name="MoveNext" signature="()" line-rate="0.2" branch-rate="0" complexity="2">
               <lines>
-                <line number="43" hits="1" branch="False" />
-                <line number="46" hits="1" branch="False" />
-                <line number="47" hits="0" branch="False" />
-                <line number="49" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="45" hits="1" branch="False" />
+                <line number="48" hits="1" branch="False" />
+                <line number="49" hits="0" branch="False" />
+                <line number="50" hits="0" branch="True" condition-coverage="0% (0/2)">
                   <conditions>
                     <condition number="250" type="jump" coverage="0%" />
                   </conditions>
                 </line>
-                <line number="51" hits="0" branch="False" />
                 <line number="52" hits="0" branch="False" />
                 <line number="53" hits="0" branch="False" />
                 <line number="54" hits="0" branch="False" />
                 <line number="55" hits="0" branch="False" />
                 <line number="56" hits="0" branch="False" />
                 <line number="57" hits="0" branch="False" />
+                <line number="58" hits="0" branch="False" />
                 <line number="60" hits="0" branch="False" />
                 <line number="63" hits="1" branch="False" />
                 <line number="65" hits="0" branch="False" />
@@ -767,171 +883,171 @@
             </method>
           </methods>
           <lines>
-            <line number="43" hits="1" branch="False" />
-            <line number="46" hits="1" branch="False" />
-            <line number="47" hits="0" branch="False" />
-            <line number="49" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="45" hits="1" branch="False" />
+            <line number="48" hits="1" branch="False" />
+            <line number="49" hits="0" branch="False" />
+            <line number="50" hits="0" branch="True" condition-coverage="0% (0/2)">
               <conditions>
                 <condition number="250" type="jump" coverage="0%" />
               </conditions>
             </line>
-            <line number="51" hits="0" branch="False" />
             <line number="52" hits="0" branch="False" />
             <line number="53" hits="0" branch="False" />
             <line number="54" hits="0" branch="False" />
             <line number="55" hits="0" branch="False" />
             <line number="56" hits="0" branch="False" />
             <line number="57" hits="0" branch="False" />
+            <line number="58" hits="0" branch="False" />
             <line number="60" hits="0" branch="False" />
             <line number="63" hits="1" branch="False" />
             <line number="65" hits="0" branch="False" />
             <line number="66" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService/&lt;GetRoles&gt;d__12" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="allopromo.Core.Model.UserService/&lt;GetRoles&gt;d__13" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="81" hits="0" branch="False" />
+                <line number="85" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="81" hits="0" branch="False" />
+            <line number="85" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService/&lt;UserExists&gt;d__13" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="0" complexity="2">
+        <class name="allopromo.Core.Model.UserService/&lt;UserExists&gt;d__14" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0" branch-rate="0" complexity="2">
               <lines>
-                <line number="84" hits="0" branch="False" />
-                <line number="87" hits="0" branch="False" />
-                <line number="88" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="88" hits="0" branch="False" />
+                <line number="91" hits="0" branch="False" />
+                <line number="92" hits="0" branch="True" condition-coverage="0% (0/2)">
                   <conditions>
                     <condition number="127" type="jump" coverage="0%" />
                   </conditions>
                 </line>
-                <line number="89" hits="0" branch="False" />
-                <line number="90" hits="0" branch="False" />
                 <line number="93" hits="0" branch="False" />
-                <line number="95" hits="0" branch="False" />
-                <line number="96" hits="0" branch="False" />
+                <line number="94" hits="0" branch="False" />
+                <line number="97" hits="0" branch="False" />
+                <line number="99" hits="0" branch="False" />
+                <line number="100" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="84" hits="0" branch="False" />
-            <line number="87" hits="0" branch="False" />
-            <line number="88" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="88" hits="0" branch="False" />
+            <line number="91" hits="0" branch="False" />
+            <line number="92" hits="0" branch="True" condition-coverage="0% (0/2)">
               <conditions>
                 <condition number="127" type="jump" coverage="0%" />
               </conditions>
             </line>
-            <line number="89" hits="0" branch="False" />
-            <line number="90" hits="0" branch="False" />
             <line number="93" hits="0" branch="False" />
-            <line number="95" hits="0" branch="False" />
-            <line number="96" hits="0" branch="False" />
+            <line number="94" hits="0" branch="False" />
+            <line number="97" hits="0" branch="False" />
+            <line number="99" hits="0" branch="False" />
+            <line number="100" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService/&lt;CreateUser&gt;d__16" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0.9473" branch-rate="0.8332999999999999" complexity="6">
+        <class name="allopromo.Core.Model.UserService/&lt;CreateUser&gt;d__17" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0.9473" branch-rate="0.8332999999999999" complexity="6">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0.9473" branch-rate="0.8332999999999999" complexity="6">
               <lines>
-                <line number="146" hits="2" branch="False" />
-                <line number="147" hits="2" branch="True" condition-coverage="100% (2/2)">
+                <line number="149" hits="2" branch="False" />
+                <line number="150" hits="2" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
                     <condition number="38" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="151" hits="1" branch="False" />
-                <line number="152" hits="1" branch="False" />
-                <line number="153" hits="1" branch="False" />
                 <line number="154" hits="1" branch="False" />
                 <line number="155" hits="1" branch="False" />
                 <line number="156" hits="1" branch="False" />
                 <line number="157" hits="1" branch="False" />
                 <line number="158" hits="1" branch="False" />
-                <line number="159" hits="1" branch="True" condition-coverage="50% (1/2)">
+                <line number="159" hits="1" branch="False" />
+                <line number="160" hits="1" branch="False" />
+                <line number="161" hits="1" branch="False" />
+                <line number="162" hits="1" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="237" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="160" hits="1" branch="True" condition-coverage="100% (2/2)">
+                <line number="163" hits="1" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
                     <condition number="260" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="162" hits="1" branch="False" />
-                <line number="163" hits="1" branch="False" />
                 <line number="165" hits="1" branch="False" />
-                <line number="168" hits="0" branch="False" />
-                <line number="172" hits="1" branch="False" />
-                <line number="173" hits="1" branch="False" />
-                <line number="174" hits="1" branch="False" />
+                <line number="166" hits="1" branch="False" />
+                <line number="168" hits="1" branch="False" />
+                <line number="171" hits="0" branch="False" />
+                <line number="175" hits="1" branch="False" />
+                <line number="176" hits="1" branch="False" />
+                <line number="177" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="146" hits="2" branch="False" />
-            <line number="147" hits="2" branch="True" condition-coverage="100% (2/2)">
+            <line number="149" hits="2" branch="False" />
+            <line number="150" hits="2" branch="True" condition-coverage="100% (2/2)">
               <conditions>
                 <condition number="38" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="151" hits="1" branch="False" />
-            <line number="152" hits="1" branch="False" />
-            <line number="153" hits="1" branch="False" />
             <line number="154" hits="1" branch="False" />
             <line number="155" hits="1" branch="False" />
             <line number="156" hits="1" branch="False" />
             <line number="157" hits="1" branch="False" />
             <line number="158" hits="1" branch="False" />
-            <line number="159" hits="1" branch="True" condition-coverage="50% (1/2)">
+            <line number="159" hits="1" branch="False" />
+            <line number="160" hits="1" branch="False" />
+            <line number="161" hits="1" branch="False" />
+            <line number="162" hits="1" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="237" type="jump" coverage="50%" />
               </conditions>
             </line>
-            <line number="160" hits="1" branch="True" condition-coverage="100% (2/2)">
+            <line number="163" hits="1" branch="True" condition-coverage="100% (2/2)">
               <conditions>
                 <condition number="260" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="162" hits="1" branch="False" />
-            <line number="163" hits="1" branch="False" />
             <line number="165" hits="1" branch="False" />
-            <line number="168" hits="0" branch="False" />
-            <line number="172" hits="1" branch="False" />
-            <line number="173" hits="1" branch="False" />
-            <line number="174" hits="1" branch="False" />
+            <line number="166" hits="1" branch="False" />
+            <line number="168" hits="1" branch="False" />
+            <line number="171" hits="0" branch="False" />
+            <line number="175" hits="1" branch="False" />
+            <line number="176" hits="1" branch="False" />
+            <line number="177" hits="1" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService/&lt;GetUsersByRole&gt;d__20" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="allopromo.Core.Model.UserService/&lt;GetUsersByRole&gt;d__22" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="193" hits="0" branch="False" />
+                <line number="203" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="193" hits="0" branch="False" />
+            <line number="203" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Model.UserService/&lt;GetUserById&gt;d__21" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="allopromo.Core.Model.UserService/&lt;GetUserById&gt;d__23" filename="source\repos\allopromo\allopromo.Core\Model\UserService.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="197" hits="0" branch="False" />
-                <line number="198" hits="0" branch="False" />
-                <line number="199" hits="0" branch="False" />
+                <line number="207" hits="0" branch="False" />
+                <line number="208" hits="0" branch="False" />
+                <line number="209" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="197" hits="0" branch="False" />
-            <line number="198" hits="0" branch="False" />
-            <line number="199" hits="0" branch="False" />
+            <line number="207" hits="0" branch="False" />
+            <line number="208" hits="0" branch="False" />
+            <line number="209" hits="0" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.Model.AccountMembershipService`1" filename="source\repos\allopromo\allopromo.Core\Services\AccountMembershipService.cs" line-rate="0" branch-rate="1" complexity="2">
@@ -990,7 +1106,7 @@
                 <line number="58" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="generateJwtToken" signature="(allopromo.Core.Domain.ApplicationUser)" line-rate="0" branch-rate="1" complexity="1">
+            <method name="generateJwtToken" signature="(Microsoft.AspNetCore.Identity.IdentityUser)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="63" hits="0" branch="False" />
                 <line number="64" hits="0" branch="False" />
@@ -3550,21 +3666,21 @@
             <line number="29" hits="1" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Services.DepartmentService/&lt;GetDepartmentsAsync&gt;d__5" filename="source\repos\allopromo\allopromo.Core\Services\DepartmentService.cs" line-rate="0.2727" branch-rate="1" complexity="1">
+        <class name="allopromo.Core.Services.DepartmentService/&lt;GetDepartmentsAsync&gt;d__5" filename="source\repos\allopromo\allopromo.Core\Services\DepartmentService.cs" line-rate="0.4545" branch-rate="1" complexity="1">
           <methods>
-            <method name="MoveNext" signature="()" line-rate="0.2727" branch-rate="1" complexity="1">
+            <method name="MoveNext" signature="()" line-rate="0.4545" branch-rate="1" complexity="1">
               <lines>
                 <line number="32" hits="1" branch="False" />
                 <line number="36" hits="1" branch="False" />
                 <line number="38" hits="1" branch="False" />
-                <line number="40" hits="0" branch="False" />
+                <line number="40" hits="1" branch="False" />
                 <line number="46" hits="0" branch="False" />
                 <line number="47" hits="0" branch="False" />
                 <line number="48" hits="0" branch="False" />
                 <line number="49" hits="0" branch="False" />
                 <line number="52" hits="0" branch="False" />
                 <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="False" />
+                <line number="55" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
@@ -3572,14 +3688,14 @@
             <line number="32" hits="1" branch="False" />
             <line number="36" hits="1" branch="False" />
             <line number="38" hits="1" branch="False" />
-            <line number="40" hits="0" branch="False" />
+            <line number="40" hits="1" branch="False" />
             <line number="46" hits="0" branch="False" />
             <line number="47" hits="0" branch="False" />
             <line number="48" hits="0" branch="False" />
             <line number="49" hits="0" branch="False" />
             <line number="52" hits="0" branch="False" />
             <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="False" />
+            <line number="55" hits="1" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.Services.DepartmentService/&lt;GetEntities&gt;d__6" filename="source\repos\allopromo\allopromo.Core\Services\DepartmentService.cs" line-rate="0" branch-rate="1" complexity="1">
@@ -4136,7 +4252,7 @@
         </class>
       </classes>
     </package>
-    <package name="allopromo.Core.UnitTests" line-rate="0.5798" branch-rate="0.5" complexity="57">
+    <package name="allopromo.Core.UnitTests" line-rate="0.6069" branch-rate="0.5" complexity="57">
       <classes>
         <class name="AutoGeneratedProgram" filename=".nuget\packages\microsoft.net.test.sdk\17.1.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
@@ -4364,42 +4480,50 @@
           <methods>
             <method name="Init" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="24" hits="1" branch="False" />
-                <line number="25" hits="1" branch="False" />
+                <line number="27" hits="1" branch="False" />
+                <line number="28" hits="1" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
                 <line number="16" hits="1" branch="False" />
                 <line number="17" hits="1" branch="False" />
+                <line number="19" hits="1" branch="False" />
                 <line number="20" hits="1" branch="False" />
+                <line number="21" hits="1" branch="False" />
+                <line number="22" hits="2" branch="False" />
+                <line number="23" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="24" hits="1" branch="False" />
-            <line number="25" hits="1" branch="False" />
+            <line number="27" hits="1" branch="False" />
+            <line number="28" hits="1" branch="False" />
             <line number="16" hits="1" branch="False" />
             <line number="17" hits="1" branch="False" />
+            <line number="19" hits="1" branch="False" />
             <line number="20" hits="1" branch="False" />
+            <line number="21" hits="1" branch="False" />
+            <line number="22" hits="2" branch="False" />
+            <line number="23" hits="1" branch="False" />
           </lines>
         </class>
-        <class name="allopromo.Core.Application.UnitTests.DeparmentServiceTests/&lt;GetDepartments_SHOULD_Return_DepartmentsAsync&gt;d__4" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\DepartmentServiceTests.cs" line-rate="0.25" branch-rate="1" complexity="1">
+        <class name="allopromo.Core.Application.UnitTests.DeparmentServiceTests/&lt;GetDepartments_SHOULD_Return_DepartmentsAsync&gt;d__4" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\DepartmentServiceTests.cs" line-rate="1" branch-rate="1" complexity="1">
           <methods>
-            <method name="MoveNext" signature="()" line-rate="0.25" branch-rate="1" complexity="1">
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="29" hits="1" branch="False" />
-                <line number="30" hits="0" branch="False" />
-                <line number="31" hits="0" branch="False" />
-                <line number="32" hits="0" branch="False" />
+                <line number="32" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="29" hits="1" branch="False" />
-            <line number="30" hits="0" branch="False" />
-            <line number="31" hits="0" branch="False" />
-            <line number="32" hits="0" branch="False" />
+            <line number="32" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="1" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.UnitTests.AccountServiceTest" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\AccountServiceTest.cs" line-rate="0" branch-rate="1" complexity="3">
@@ -4598,65 +4722,65 @@
           <methods>
             <method name="UserService_GetRoles_SHOULD_Return_Roles" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="46" hits="1" branch="False" />
-                <line number="47" hits="1" branch="False" />
-                <line number="48" hits="1" branch="False" />
+                <line number="50" hits="1" branch="False" />
+                <line number="51" hits="1" branch="False" />
+                <line number="52" hits="1" branch="False" />
               </lines>
             </method>
             <method name="UserService_CreateUser_SHOULD_Returns_False_ifUserNull" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="78" hits="2" branch="False" />
-                <line number="79" hits="1" branch="False" />
+                <line number="82" hits="2" branch="False" />
+                <line number="83" hits="1" branch="False" />
               </lines>
             </method>
             <method name="UserService_CreateUser_Returns_UserCreated" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="83" hits="0" branch="False" />
-                <line number="84" hits="0" branch="False" />
-                <line number="85" hits="0" branch="False" />
+                <line number="87" hits="0" branch="False" />
+                <line number="88" hits="0" branch="False" />
+                <line number="89" hits="0" branch="False" />
               </lines>
             </method>
             <method name="UserService_CreateUser_Returns_Exception" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="89" hits="0" branch="False" />
+                <line number="93" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetSignInManagerMock" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="97" hits="0" branch="False" />
-                <line number="98" hits="0" branch="False" />
+                <line number="101" hits="0" branch="False" />
+                <line number="102" hits="0" branch="False" />
               </lines>
             </method>
             <method name="GetMockSignInManager" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="102" hits="0" branch="False" />
-                <line number="103" hits="0" branch="False" />
+                <line number="106" hits="0" branch="False" />
+                <line number="107" hits="0" branch="False" />
               </lines>
             </method>
             <method name="MockUserManager" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="107" hits="1" branch="False" />
-                <line number="108" hits="1" branch="False" />
-                <line number="109" hits="1" branch="False" />
-                <line number="110" hits="1" branch="False" />
+                <line number="111" hits="1" branch="False" />
+                <line number="112" hits="1" branch="False" />
+                <line number="113" hits="1" branch="False" />
+                <line number="114" hits="1" branch="False" />
               </lines>
             </method>
             <method name="GetUsers" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="114" hits="1" branch="False" />
-                <line number="115" hits="1" branch="False" />
+                <line number="118" hits="1" branch="False" />
+                <line number="119" hits="1" branch="False" />
               </lines>
             </method>
             <method name="GetMockRoleManager" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="125" hits="1" branch="False" />
-                <line number="126" hits="1" branch="False" />
-                <line number="127" hits="1" branch="False" />
+                <line number="129" hits="1" branch="False" />
+                <line number="130" hits="1" branch="False" />
+                <line number="131" hits="1" branch="False" />
               </lines>
             </method>
             <method name="&lt;GetUsersAsync&gt;b__15_0" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="119" hits="0" branch="False" />
+                <line number="123" hits="0" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -4665,89 +4789,85 @@
                 <line number="19" hits="1" branch="False" />
                 <line number="20" hits="1" branch="False" />
                 <line number="24" hits="1" branch="False" />
-                <line number="26" hits="1" branch="False" />
-                <line number="27" hits="1" branch="False" />
-                <line number="28" hits="1" branch="False" />
-                <line number="29" hits="1" branch="False" />
                 <line number="30" hits="1" branch="False" />
+                <line number="31" hits="1" branch="False" />
+                <line number="32" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="46" hits="1" branch="False" />
-            <line number="47" hits="1" branch="False" />
-            <line number="48" hits="1" branch="False" />
-            <line number="78" hits="2" branch="False" />
-            <line number="79" hits="1" branch="False" />
-            <line number="83" hits="0" branch="False" />
-            <line number="84" hits="0" branch="False" />
-            <line number="85" hits="0" branch="False" />
+            <line number="50" hits="1" branch="False" />
+            <line number="51" hits="1" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="82" hits="2" branch="False" />
+            <line number="83" hits="1" branch="False" />
+            <line number="87" hits="0" branch="False" />
+            <line number="88" hits="0" branch="False" />
             <line number="89" hits="0" branch="False" />
-            <line number="97" hits="0" branch="False" />
-            <line number="98" hits="0" branch="False" />
+            <line number="93" hits="0" branch="False" />
+            <line number="101" hits="0" branch="False" />
             <line number="102" hits="0" branch="False" />
-            <line number="103" hits="0" branch="False" />
-            <line number="107" hits="1" branch="False" />
-            <line number="108" hits="1" branch="False" />
-            <line number="109" hits="1" branch="False" />
-            <line number="110" hits="1" branch="False" />
+            <line number="106" hits="0" branch="False" />
+            <line number="107" hits="0" branch="False" />
+            <line number="111" hits="1" branch="False" />
+            <line number="112" hits="1" branch="False" />
+            <line number="113" hits="1" branch="False" />
             <line number="114" hits="1" branch="False" />
-            <line number="115" hits="1" branch="False" />
-            <line number="125" hits="1" branch="False" />
-            <line number="126" hits="1" branch="False" />
-            <line number="127" hits="1" branch="False" />
-            <line number="119" hits="0" branch="False" />
+            <line number="118" hits="1" branch="False" />
+            <line number="119" hits="1" branch="False" />
+            <line number="129" hits="1" branch="False" />
+            <line number="130" hits="1" branch="False" />
+            <line number="131" hits="1" branch="False" />
+            <line number="123" hits="0" branch="False" />
             <line number="18" hits="1" branch="False" />
             <line number="19" hits="1" branch="False" />
             <line number="20" hits="1" branch="False" />
             <line number="24" hits="1" branch="False" />
-            <line number="26" hits="1" branch="False" />
-            <line number="27" hits="1" branch="False" />
-            <line number="28" hits="1" branch="False" />
-            <line number="29" hits="1" branch="False" />
             <line number="30" hits="1" branch="False" />
+            <line number="31" hits="1" branch="False" />
+            <line number="32" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.UnitTests.UserServiceTest/&lt;UserService_GetUsersAsync_SHOULD_Return_Users_With_RolesAsync&gt;d__5" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\UserServiceTests.cs" line-rate="0.3333" branch-rate="1" complexity="1">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0.3333" branch-rate="1" complexity="1">
               <lines>
-                <line number="37" hits="1" branch="False" />
-                <line number="38" hits="1" branch="False" />
-                <line number="39" hits="0" branch="False" />
-                <line number="40" hits="0" branch="False" />
-                <line number="41" hits="0" branch="False" />
-                <line number="42" hits="0" branch="False" />
+                <line number="41" hits="1" branch="False" />
+                <line number="42" hits="1" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="45" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="37" hits="1" branch="False" />
-            <line number="38" hits="1" branch="False" />
-            <line number="39" hits="0" branch="False" />
-            <line number="40" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="42" hits="0" branch="False" />
+            <line number="41" hits="1" branch="False" />
+            <line number="42" hits="1" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="45" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.UnitTests.UserServiceTest/&lt;UserService_CreateUser_SHOULD_Return_True_UserCreated&gt;d__7" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\UserServiceTests.cs" line-rate="1" branch-rate="0.5" complexity="2">
           <methods>
             <method name="MoveNext" signature="()" line-rate="1" branch-rate="0.5" complexity="2">
               <lines>
-                <line number="55" hits="1" branch="False" />
-                <line number="56" hits="1" branch="False" />
-                <line number="57" hits="1" branch="False" />
-                <line number="58" hits="1" branch="False" />
                 <line number="59" hits="1" branch="False" />
-                <line number="60" hits="1" branch="True" condition-coverage="50% (1/2)">
+                <line number="60" hits="1" branch="False" />
+                <line number="61" hits="1" branch="False" />
+                <line number="62" hits="1" branch="False" />
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="73" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="61" hits="1" branch="False" />
-                <line number="62" hits="1" branch="False" />
-                <line number="63" hits="1" branch="False" />
-                <line number="64" hits="1" branch="False" />
                 <line number="65" hits="1" branch="False" />
                 <line number="66" hits="1" branch="False" />
                 <line number="67" hits="1" branch="False" />
@@ -4755,25 +4875,25 @@
                 <line number="69" hits="1" branch="False" />
                 <line number="70" hits="1" branch="False" />
                 <line number="71" hits="1" branch="False" />
+                <line number="72" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
                 <line number="74" hits="1" branch="False" />
+                <line number="75" hits="1" branch="False" />
+                <line number="78" hits="1" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="55" hits="1" branch="False" />
-            <line number="56" hits="1" branch="False" />
-            <line number="57" hits="1" branch="False" />
-            <line number="58" hits="1" branch="False" />
             <line number="59" hits="1" branch="False" />
-            <line number="60" hits="1" branch="True" condition-coverage="50% (1/2)">
+            <line number="60" hits="1" branch="False" />
+            <line number="61" hits="1" branch="False" />
+            <line number="62" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="73" type="jump" coverage="50%" />
               </conditions>
             </line>
-            <line number="61" hits="1" branch="False" />
-            <line number="62" hits="1" branch="False" />
-            <line number="63" hits="1" branch="False" />
-            <line number="64" hits="1" branch="False" />
             <line number="65" hits="1" branch="False" />
             <line number="66" hits="1" branch="False" />
             <line number="67" hits="1" branch="False" />
@@ -4781,21 +4901,25 @@
             <line number="69" hits="1" branch="False" />
             <line number="70" hits="1" branch="False" />
             <line number="71" hits="1" branch="False" />
+            <line number="72" hits="1" branch="False" />
+            <line number="73" hits="1" branch="False" />
             <line number="74" hits="1" branch="False" />
+            <line number="75" hits="1" branch="False" />
+            <line number="78" hits="1" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.UnitTests.UserServiceTest/&lt;GetUsersAsync&gt;d__15" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\UserServiceTests.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="120" hits="0" branch="False" />
-                <line number="121" hits="0" branch="False" />
+                <line number="124" hits="0" branch="False" />
+                <line number="125" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="120" hits="0" branch="False" />
-            <line number="121" hits="0" branch="False" />
+            <line number="124" hits="0" branch="False" />
+            <line number="125" hits="0" branch="False" />
           </lines>
         </class>
         <class name="allopromo.Core.UnitTests.Application.BaseServiceTests" filename="source\repos\allopromo\allopromo.Core.UnitTests\Application\BaseServiceTests.cs" line-rate="0" branch-rate="1" complexity="1">
@@ -4850,6 +4974,122 @@
           <lines>
             <line number="12" hits="0" branch="False" />
             <line number="16" hits="1" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="allopromo.Shared" line-rate="0" branch-rate="1" complexity="10">
+      <classes>
+        <class name="allopromo.Shared.Constantes/CodeRechercheDemande" filename="source\repos\allopromo\allopromo.Shared\Constantes.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_RD_ALM" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Shared.Constantes/BoutonAppel" filename="source\repos\allopromo\allopromo.Shared\Constantes.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_MENU_GERER_QUALITE" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Shared.Constantes/CodeRechercher" filename="source\repos\allopromo\allopromo.Shared\Constantes.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_RD_CRQ" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_RD_GEN" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Shared.Constantes/Parametres/TypeDRC" filename="source\repos\allopromo\allopromo.Shared\Constantes.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_Valeurs" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Shared.Constantes/ApiInfo" filename="source\repos\allopromo\allopromo.Shared\Constantes.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_MyProperty" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="36" hits="0" branch="False" />
+                <line number="37" hits="0" branch="False" />
+                <line number="38" hits="0" branch="False" />
+                <line number="39" hits="0" branch="False" />
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="40" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="39" hits="0" branch="False" />
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="allopromo.Shared.Exceptions.HttpErrorException" filename="source\repos\allopromo\allopromo.Shared\Exceptions\HttpErrorException.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name="get_statusCode" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_errorMessage" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
           </lines>
         </class>
       </classes>

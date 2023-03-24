@@ -18,17 +18,22 @@ namespace allopromo.Api.UnitTests
     [TestFixture]
     public class UserControllerTests
     {
-
     #region Properties
         private Mock<IUserService> _userServiceMock;
+        private Mock<IAccountService> _accountService;
         private UserController _SUT;
         #endregion
-
+        private Mock<UserManager<IdentityUser>> userManagerMock;
+        
     #region Constructors
         public UserControllerTests()
         {
             _userServiceMock = new Mock<IUserService>();
-            _SUT = new UserController(_userServiceMock.Object);
+            _accountService = new Mock<IAccountService>();
+
+            //userManagerMock = new Mock<UserManager<IdentityUser>>();
+
+            _SUT = new UserController(_userServiceMock.Object, _accountService.Object);//, userManagerMock.Object);
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();
@@ -36,7 +41,7 @@ namespace allopromo.Api.UnitTests
         }
 #endregion
 
-    #region Create Tests
+    #region Create
         [Test]
         public async Task UserController_CreateUser_UserValid_PasswordValid_ReturnsOkCreated()
         {
@@ -47,22 +52,46 @@ namespace allopromo.Api.UnitTests
                 UserPassword = "K@da120",
                 PhoneNumber = "581-578-4401"
             };
-
-            //_userServiceMock.Setup(m => m.CreateUser(new ApplicationUser().UserName, ""))
-            //.ReturnsAsync(true);
-            
-            //var result = actualResult as IActionResult;
-            //var res1 = await actualResult;
-            //var okResult = await actualResult as OkObjectResult;
-            // When Do we Need Setup of Mock ?
-            //Assert.AreEqual(okResult.StatusCode, 200);
-            //var userT = okResult.Value as ApplicationUser;
-
            _userServiceMock.Setup(x => x.CreateUser(It.IsAny<string>(), It.IsAny<string>()))
               .Returns(Task.FromResult(true));
             var okResult = await _SUT.CreateUser(registerViewModel);
             Assert.IsNotNull(okResult);
             Assert.AreEqual(okResult.GetType(), typeof(OkObjectResult));
+        }
+        [Test]
+        public void UserController_LOGIN_SHOULD_Return_UserOK()
+        {
+            var loginViewModel = new LoginViewModel
+            {
+                UserName = "support@allopay.tech", UserPassword = "atlanticConso@78"
+            };
+            var user = new IdentityUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = loginViewModel.UserName,
+                PasswordHash = loginViewModel.UserPassword
+            };
+            _userServiceMock.Setup(x => x//.LoginUser(user))
+                                            //.LoginUser(It.IsAny<IdentityUser>()))
+                                        .ValidateUserAsync(loginViewModel.UserName))
+                .Returns(Task.FromResult(user));
+            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
+                                    .Returns(true);
+            
+            
+            /*
+            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
+                            .Returns(true);
+            userManagerMock.Setup(x => x.FindByEmailAsync(loginViewModel.UserName))
+                .Returns(Task.FromResult(user));*/
+            var result = _SUT.Login(loginViewModel);
+            Assert.IsNotNull(result);
+            //Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.AreEqual(result.GetType(), typeof(OkObjectResult));
+
+            //_userServiceMock.Verify(
+            //x => x.LoginUser(It.IsAny<IdentityUser>()), Times.Once());
+            //Verify((_SUT.Login(It.IsAny<LoginViewModel>), Times.Once());
         }
         [Test]
         public async Task UserController_CreateUser_UserValid_Password_Invalid_Or_Empty_ReturnsException()
@@ -81,14 +110,13 @@ namespace allopromo.Api.UnitTests
             //Assert.ThrowsAsync<Exception>(async () => await _SUT.CreateUser(registerViewModel));
         }
         [Test]
-        public void UserController_CreateUser_UserIsInvalid_OrNull_ReturnsNull()
+        public void UserController_CreateUser_UserIsInvalid_OrNull_SHOULD_ThrowAnException()
         {
             ApplicationUser user1 = new ApplicationUser();
             _userServiceMock = new Mock<IUserService>();
             _userServiceMock.Setup(m => m.CreateUser(null, ""));//.ReturnsAsync(null);
             _SUT = new UserController(_userServiceMock.Object);
-            var actualResult = _SUT.CreateUser(null).Result;
-            Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
+            Assert.ThrowsAsync<Exception>(() => _SUT.CreateUser(null));
         }
         void CreateUser()
         {
@@ -110,7 +138,8 @@ namespace allopromo.Api.UnitTests
             Assert.IsInstanceOf<BadRequestResult>(actualResult);
         }
         #endregion
-    #region Read Tests
+
+    #region Read
         
         [Test]
         public void UserController_GetUsers_ShouldReturnUsers_ByRole()
@@ -118,6 +147,7 @@ namespace allopromo.Api.UnitTests
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(service => service.GetUsersByRole("admin"))
                             .Returns(Task.FromResult<IList<IdentityUser>>(GetUsers()));
+
             //var userController = new RoleController(userServiceMock.Object);
             //var expectedUsersList = userController.GetUsersByRole("admin");
             //Act
@@ -133,42 +163,23 @@ namespace allopromo.Api.UnitTests
                 new IdentityUser{ }, new IdentityUser{ }
             };
         }
-        [Test]
-        public void UserController_Login_SHOULD_Return_UserOK()
-        {
-            var loginViewModel = new LoginViewModel
-            {
-                UserName = "couli.mama@free.fr",
-                UserPassword = "errAbaophone43"
-            };
-            _userServiceMock.Setup(x => x.LoginUser(new IdentityUser{})).Returns(true);
-            
-            var userLoginResponse = new ApiResponseModel
-            {
-                jwtToken = "TOEKEKEKNN"
-            };
-            var result = _SUT.Login(loginViewModel);
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            //Assert.IsTrue(okUser.Equals((IActionResult)userDto));
-        }
-        public void UserController_User_Login_SOULD_Return_OKLoggedUser()
-        {
-        }
-        public void UserController_User_Login_SOULD_Return_NotOKLoginOrInvalidPassword()
+        
+        public void UserController_User_LOGIN_SOULD_Return_NotOKLoginOrInvalidPassword()
         {
         }
         [Test]
-        public void UserController_Login_ReturnsBad_Request_OrNotFound()
+        public void UserController_LOGIN_ReturnsBad_Request_OrNotFound()
         {
             Mock<IUserService> userService = new Mock<IUserService>();
             Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
         }
         [Test]
-        public void UserController_Login_ReturnsNull()
+        public void UserController_LOGIN_SHOULD_ReturnsNull()
         {
             Mock<IUserService> userService = new Mock<IUserService>();
-            Mock<UserManager<IAccountService>> userManager = new Mock<UserManager<IAccountService>>();
+            Mock<UserManager<IAccountService>> userManager = 
+                new Mock<UserManager<IAccountService>>();
+
         }
         private static Mock<UserManager<ApplicationUser>> GetUserManagerMock()
         {
@@ -185,7 +196,7 @@ namespace allopromo.Api.UnitTests
         }
         #endregion
 
-    #region Update Tests
+    #region Update
         #endregion
 
 
@@ -214,13 +225,7 @@ namespace allopromo.Api.UnitTests
 // 2. Test 
 //3. Seed Roles 
 //4. Add Column or Create Table for Wallet ?
-//
-//Curriculum en Anglais !
 /*
- * Modification - in the 
- * Customize my Resume
- * After 3 months Probation Period -- Ready to Relocate to Montreal
- * Downtown Montreal | 
  * Grow to 2 more Back-end Developers - 2 more front-end 
  * Challenging 
  * Opportunity to Grow Professional | 

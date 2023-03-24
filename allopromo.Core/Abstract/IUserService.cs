@@ -30,8 +30,10 @@ namespace allopromo.Core.Abstract
 
         #region Delete
         public void DeleteUser(ApplicationUser user);
-        
+
         public bool ValidateUser(string userNane, string userPassword);
+        public Task<Microsoft.AspNetCore.Identity.IdentityUser> ValidateUserAsync(string userNane); 
+
         public bool LoginUser(Microsoft.AspNetCore.Identity.IdentityUser user);
 
         #endregion

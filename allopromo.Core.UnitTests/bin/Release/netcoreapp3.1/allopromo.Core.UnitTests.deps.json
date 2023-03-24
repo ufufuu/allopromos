@@ -8,12 +8,14 @@
     ".NETCoreApp,Version=v3.1": {
       "allopromo.Core.UnitTests/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7",
           "Microsoft.NET.Test.Sdk": "17.1.0",
           "Moq": "4.17.2",
           "NUnit": "3.13.3",
           "NUnit3TestAdapter": "3.16.1",
           "SpecFlow": "3.9.74",
           "allopromo.Core": "1.0.0",
+          "allopromo.Shared": "1.0.0",
           "coverlet.collector": "1.3.0"
         },
         "runtime": {
@@ -1798,6 +1800,14 @@
         "runtime": {
           "allopromo.Core.dll": {}
         }
+      },
+      "allopromo.Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7"
+        },
+        "runtime": {
+          "allopromo.Shared.dll": {}
+        }
       }
     }
   },
@@ -2914,6 +2924,11 @@
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "allopromo.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "allopromo.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -25,8 +25,7 @@ namespace allopromo.Core.Contracts
             tCity city = new tCity();
             city.cityName = cityDto.cityName.ToString();
             city.countryId = 2344;
-
-            //city.cityId = 4433;
+            
             await _cityRepository.Add(city);
             return true;
         }
@@ -41,10 +40,8 @@ namespace allopromo.Core.Contracts
         }
         public async Task<IEnumerable<CityDto>> GetCities()
         {
-            var tObjs =await _cityRepository.GetAllAsync();
-            IEnumerable<CityDto> cities = AutoMapper.Mapper.Map<IEnumerable<CityDto>>(tObjs);
-
-
+           var tObjs =await _cityRepository.GetAllAsync();
+           IEnumerable<CityDto> cities = AutoMapper.Mapper.Map<IEnumerable<CityDto>>(tObjs);
            if(cities !=null)
                 return cities;
             throw new NullReferenceException();

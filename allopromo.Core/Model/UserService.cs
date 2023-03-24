@@ -38,6 +38,8 @@ namespace allopromo.Core.Model
 #endregion
 
 #region Public Methods - Getting
+
+        //Constructor - base Methods - Constantes - Pptes - CRUD methods - Specific Method - Validation 
         public async Task<List<UserDto>> GetUsersAsync()
         {
             IList<UserDto> users = new List<UserDto>();
@@ -45,7 +47,6 @@ namespace allopromo.Core.Model
             {
                 var usersObj = await _userManager.Users.ToListAsync();
                 var role = GetRoleNameByUser(usersObj.FirstOrDefault());
-
                 foreach (var userObj in usersObj)
                 {
                     users.Add(new UserDto
@@ -56,7 +57,6 @@ namespace allopromo.Core.Model
                         Name=role
                     });
                 }
-                
             }
             catch (Exception ex)
             {
@@ -109,14 +109,8 @@ namespace allopromo.Core.Model
             }
             catch(Exception ex)
             {
-                throw ex;
+                throw;
             }
-            return false;
-        }
-        private bool LoggingUser(IdentityUser user)
-        {
-            //_signInManager.SignInAsync(user);
-            return true;
         }
         public ApplicationUser AuthenticateUser(string UserName, string PasswordHash)
         {
@@ -184,11 +178,18 @@ namespace allopromo.Core.Model
         #endregion
 
 
-#region Public Methods - Validation
+        #region Public Methods - Validation
         public bool ValidateUser(string userEmail, string userPassword)
         {
             var user = _userManager.FindByEmailAsync(userEmail);
-            return _signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
+            //_signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
+            return true;
+        }
+        public Task<IdentityUser> ValidateUserAsync(string userEmail)
+        {
+            var user = _userManager.FindByEmailAsync(userEmail);
+            //_signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
+            return user;
         }
         private void AddUserRole(ApplicationUser user, string roleName)
         {

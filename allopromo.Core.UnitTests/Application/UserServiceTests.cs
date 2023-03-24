@@ -23,8 +23,12 @@ namespace allopromo.Core.UnitTests
         #region Constructeurs
         public UserServiceTest()
         {
+            //AutoMapper.Mapper.Initialize(cfg =>
+            //{
+            //    cfg.AddProfile<AutoMapperProfile>();
+            //});
             _sut = new UserService(MockUserManager().Object,
-                                    null, // _roleManager.Object
+                                    null,
                                     GetMockRoleManager().Object
            );
         }

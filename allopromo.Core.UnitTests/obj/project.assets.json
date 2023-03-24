@@ -2649,6 +2649,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "allopromo.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.2"
+        },
+        "compile": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/allopromo.Shared.dll": {}
+        }
       }
     }
   },
@@ -8835,16 +8848,23 @@
       "type": "project",
       "path": "../allopromo.Core/allopromo.Core.csproj",
       "msbuildProject": "../allopromo.Core/allopromo.Core.csproj"
+    },
+    "allopromo.Shared/1.0.0": {
+      "type": "project",
+      "path": "../allopromo.Shared/allopromo.Shared.csproj",
+      "msbuildProject": "../allopromo.Shared/allopromo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.EntityFrameworkCore >= 5.0.7",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
       "Moq >= 4.17.2",
       "NUnit >= 3.13.3",
       "NUnit3TestAdapter >= 3.16.1",
       "SpecFlow >= 3.9.74",
       "allopromo.Core >= 1.0.0",
+      "allopromo.Shared >= 1.0.0",
       "coverlet.collector >= 1.3.0"
     ]
   },
@@ -8882,6 +8902,9 @@
           "projectReferences": {
             "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Core\\allopromo.Core.csproj": {
               "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Core\\allopromo.Core.csproj"
+            },
+            "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj": {
+              "projectPath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Shared\\allopromo.Shared.csproj"
             }
           }
         }
@@ -8896,6 +8919,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.7, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.1.0, )"

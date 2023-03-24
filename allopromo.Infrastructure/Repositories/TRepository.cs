@@ -72,10 +72,7 @@ namespace allopromo.Infrastructure.Repositories
         public Task<IQueryable<T>> GetAllAsync2()
         {
             var tObjects = _table; //.AsQueryable();
-
-
             //if(tObjects!=null)
-            
             var f = 6;
             return null;
                 //return (Task<IQueryable<T>>)tObjects;
@@ -84,8 +81,10 @@ namespace allopromo.Infrastructure.Repositories
         public Task<List<T>> GetAllAsync()
         {
             var tObjects = _table.ToListAsync();
-            int g = 5;
-            return tObjects;
+            if(tObjects!=null)
+                return tObjects;
+            else
+                throw new ArgumentNullException();
         }
         public Task<IEnumerable<T>> GetEntitiesAsync()
         {

@@ -26,6 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Infrastructure.Un
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Core.UnitTests", "allopromo.Core.UnitTests\allopromo.Core.UnitTests.csproj", "{E881FD4A-3644-4CCC-9E70-7FF4F0075F94}"
+	ProjectSection(ProjectDependencies) = postProject
+		{420B6808-04DB-4084-A707-1092FD1FB7B7} = {420B6808-04DB-4084-A707-1092FD1FB7B7}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "promos", "promos", "{0B76A71B-D5C4-4E05-9BE9-98C0221CF7D5}"
 EndProject
@@ -59,7 +62,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Admin", "alloprom
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentication", "{E91F79D3-E932-4E65-89F7-2DCDE838FAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "allopromo.Client", "allopromo.Client\allopromo.Client.csproj", "{E343A068-E538-44C5-A5C8-B058438B443F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Client", "allopromo.Client\allopromo.Client.csproj", "{E343A068-E538-44C5-A5C8-B058438B443F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

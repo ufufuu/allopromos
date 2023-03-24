@@ -21,6 +21,7 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILocalisationService _localisationService;
+        private static Serilog.ILogger logger; 
 
         //private readonly IExceptionWriter _exceptionWriter;
         public CitiesController(IConfiguration config,
@@ -51,7 +52,7 @@ namespace allopromo.Api.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
         [HttpPost]
@@ -65,7 +66,7 @@ namespace allopromo.Api.Controllers
             catch (Exception ex)
             {
                 //_exceptionWriter.WriteException(ex.ToString());
-                throw ex;
+                throw;
             }
             return Ok(city);
         }

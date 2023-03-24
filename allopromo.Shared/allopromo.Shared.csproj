@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <Compile Remove="Abstract\IRepository.cs" />
+    <Compile Remove="Mapping\AutoMapperConfiguration.cs" />
     <Compile Remove="Model\tUsers.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Mapping\" />
     <Folder Include="Model\" />
     <Folder Include="Security\" />
     <Folder Include="UtilitiesLinq\" />

@@ -2,7 +2,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\al
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.AssemblyInfoInputs.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.AssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Release\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\appsettings.json
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Release\netcoreapp3.1\libman.json

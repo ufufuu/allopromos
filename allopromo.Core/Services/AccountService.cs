@@ -57,7 +57,7 @@ namespace allopromo.Core.Model
             //return new AuthenticateResponse(user, token);
             return new LoginResponseModel(user, token);
         }
-        public string generateJwtToken(ApplicationUser user)
+        public string generateJwtToken(IdentityUser user)
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();

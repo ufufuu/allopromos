@@ -8,7 +8,6 @@ using allopromo.Core.Entities;
 using System.Net.Http;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Core.Domain;
- 
 using AutoMapper;
 using System.Linq;
 using allopromo.Core.Services;
@@ -38,8 +37,6 @@ namespace allopromo.Core.Model
         #region Fields
         private IRepository<tStore> _storeRepository;
 
-
-        //private IStoreManager _storeManager;
         private IProductService _productService { get; set; }
 
         private IRepository<tStore> StoreRepository;
@@ -87,17 +84,20 @@ namespace allopromo.Core.Model
             IEnumerable<StoreDto> stores = new List<StoreDto>();
             var tStoreObj = await _storeRepository.GetAllAsync();
             stores = tStoreObj.AsQueryable()
+
                 .Include(c=>c.Category)
+                
                 //.Skip((validFilter.pageNumber - 1) * validFilter.pageSize)
                 //.Take(validFilter.pageSize)
+
                 .AsNoTracking()
                 .Select(s => new StoreDto
-            {
+                {
                 storeId = s.storeId.ToString(),
                 storeName = s.storeName,
                 storeDescription = s.storeDescription,
                 Category= s.Category.storeCategoryName
-            });
+                });
             if (stores!= null)
                 return stores;
             else
@@ -162,10 +162,13 @@ namespace allopromo.Core.Model
             else
                 throw new NullReferenceException();
         }
+
+        
         public async Task<IEnumerable<StoreCategoryDto>> GetStoreCategoriesAsync()
         {
-            IEnumerable<StoreCategoryDto> categories = null;
-            var categoriesRepo = await _categoryRepository.GetAllAsync();
+            //IEnumerable<StoreCategoryDto> categories = null;
+            var categoriesRepo = await _categoryRepository?.GetAllAsync();
+
 
             var categoriesObj = categoriesRepo.AsQueryable().Include(x => x.Department)
                 .Select(c => new StoreCategoryDto
@@ -174,7 +177,8 @@ namespace allopromo.Core.Model
                     storeCategoryName = c.storeCategoryName,
                     DepartmentName = c.Department.departmentName
                 });
-            categories = AutoMapper.Mapper.Map
+
+            var categories = AutoMapper.Mapper.Map
                     <IEnumerable<StoreCategoryDto>>(categoriesObj);
             if (categories == null)
                 throw new ArgumentNullException();
