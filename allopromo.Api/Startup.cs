@@ -65,46 +65,9 @@ namespace allopromo
                 options.Cookie.HttpOnly = true;
             });
             services.AddHttpContextAccessor();
-            /*
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(token =>
-            {
-                token.SaveToken = true;
-                token.RequireHttpsMetadata = false;
-                token.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey=true,
-                    RequireExpirationTime=true,
-                    ValidateLifetime=true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ClockSkew=TimeSpan.Zero,                                    
-                    ValidAudience = Configuration["JWT:ValidAudience"],
-                    ValidIssuer = Configuration["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
-                };
-#region Event
-                token.Events = new JwtBearerEvents
-                {
-                    //OnChallenge= async ctx =>
-                    //{
-                        // get the app calling
-                        //get EF
-                        //can Read
-                        //check if 
-                        // Add claim
-                    //}
-                };
-                services
-                .AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options => options.SaveToken = true);
-#endregion
-            });*/
+            
+
+            
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
@@ -147,20 +110,20 @@ namespace allopromo
                     Type = SecuritySchemeType.ApiKey,
                     Scheme="Bearer"
                 });
-            //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            //{
-            //    {
-            //        new OpenApiSecurityScheme
-            //        {
-            //            Reference = new OpenApiReference
-            //            {
-            //                Type = ReferenceType.SecurityScheme,
-            //                Id = "Bearer"
-            //            }
-            //        },
-            //        Array.Empty<string>()
-            //    }
-            //});
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
@@ -171,6 +134,7 @@ namespace allopromo
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
+            services.AddScoped<IRepository<tProductCategory>, TRepository<tProductCategory>>();
             services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
             services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
 
@@ -205,11 +169,11 @@ namespace allopromo
                 new[] { "application/octet-stream" });
             });
 
-            //services.AddAuthentication(auth =>
-            //{
-            //auth.DefaultScheme = "Test";
-            //})
-            //.AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
+            services.AddAuthentication(auth =>
+            {
+            auth.DefaultScheme = "Test";
+            })
+            .AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
             //Adding E-mail Services
             services.AddFluentEmail("test-email@allopromo.test");
             //services.AddOcelot();
@@ -402,9 +366,7 @@ namespace allopromo
 
 /*
  * https://enlabsoftware.com/development/how-to-build-and-deploy-a-three-layer-architecture-application-with-c-sharp-net-in-practice.html
- *
  */
 
-/* systemes Embarques 
- *
+/* systemes Embarques
  */

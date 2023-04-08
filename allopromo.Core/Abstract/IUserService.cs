@@ -18,10 +18,9 @@ namespace allopromo.Core.Abstract
         public Task<List<UserDto>> GetUsersAsync();
 
         Task<IList<Microsoft.AspNetCore.Identity.IdentityUser>>GetUsersByRole(string userRole);
-        
         public IList<ApplicationUser> GetUsersInRole(string roleName);
         public ApplicationUser GetUserRole(ApplicationUser user);
-        public UserDto GetUserById(string userId);
+        public Task<UserDto> GetUserById(string userId);
         #endregion
 
         #region Update
@@ -35,6 +34,7 @@ namespace allopromo.Core.Abstract
         public Task<Microsoft.AspNetCore.Identity.IdentityUser> ValidateUserAsync(string userNane); 
 
         public bool LoginUser(Microsoft.AspNetCore.Identity.IdentityUser user);
+        public System.Security.Claims.ClaimsPrincipal GetCurrentUser();
 
         #endregion
 
@@ -44,6 +44,5 @@ namespace allopromo.Core.Abstract
         //Task<bool> UserExist(string userName);
 
         #endregion
-
     }
 }

@@ -70,6 +70,10 @@
               "target": "Package",
               "version": "[3.9.74, )"
             },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[1.3.0, )"
@@ -299,6 +303,10 @@
               "target": "Package",
               "version": "[5.0.7, )"
             },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            },
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.0.3, )"
@@ -409,6 +417,10 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

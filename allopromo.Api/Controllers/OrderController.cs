@@ -6,9 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
-    public class testAController : ControllerBase
+    public class OrderController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
@@ -16,8 +16,32 @@ namespace allopromo.Api.Controllers
             string hello = "hey";
             return Ok(hello);
         }
+        [HttpPost]
+        public IActionResult Post()
+        {
+            string hello = "hey";
+            return Ok(hello);
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
 
 // 6/ Test React - Login Automation

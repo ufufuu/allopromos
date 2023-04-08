@@ -1,0 +1,341 @@
+2023-04-08 15:56:57.006 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 15:57:08.267 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 15:57:08.271 -04:00 [INF] Hosting environment: Development
+2023-04-08 15:57:08.272 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 15:57:08.685 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 15:57:10.129 -04:00 [INF] Request finished in 1526.2662ms 200 text/html;charset=utf-8
+2023-04-08 15:57:12.769 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 15:57:14.173 -04:00 [INF] Request finished in 1405.5252ms 200 application/json;charset=utf-8
+2023-04-08 15:58:17.307 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 71
+2023-04-08 15:58:17.409 -04:00 [INF] CORS policy execution successful.
+2023-04-08 15:58:17.414 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 15:58:17.872 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 15:58:30.043 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 15:59:46.218 -04:00 [ERR] Failed executing DbCommand (2,439ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (Size = 450), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [StoreCategories] ([categoryId], [storeActive], [Created], [departmentId], [Expires], [categoryName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2023-04-08 15:59:49.414 -04:00 [ERR] An exception occurred in the database while saving changes for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeActive'.
+Invalid column name 'Created'.
+Invalid column name 'Expires'.
+Invalid column name 'categoryName'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:33fb3e1d-8312-44bd-9d10-66b9e4bc64a5
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeActive'.
+Invalid column name 'Created'.
+Invalid column name 'Expires'.
+Invalid column name 'categoryName'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:33fb3e1d-8312-44bd-9d10-66b9e4bc64a5
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2023-04-08 16:00:47.565 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api) in 149665.243ms
+2023-04-08 16:00:48.522 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 16:00:54.456 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'storeActive'.
+Invalid column name 'Created'.
+Invalid column name 'Expires'.
+Invalid column name 'categoryName'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:33fb3e1d-8312-44bd-9d10-66b9e4bc64a5
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at allopromo.Infrastructure.Repositories.TRepository`1.Add(T obj) in C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\Repositories\TRepository.cs:line 42
+   at allopromo.Core.Model.StoreService.CreateStoreCategoryAsync(StoreCategoryDto storeCategory) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 340
+   at allopromo.Api.Controllers.StoreController.PostStoreCategory(StoreCategoryDto storeCategory) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 77
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-08 16:00:55.126 -04:00 [INF] Request finished in 157914.0304ms 500 text/plain
+2023-04-08 16:14:46.361 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 16:14:51.209 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 16:14:51.221 -04:00 [INF] Hosting environment: Development
+2023-04-08 16:14:51.259 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 16:14:51.432 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 16:14:52.444 -04:00 [INF] Request finished in 1011.2819ms 200 text/html;charset=utf-8
+2023-04-08 16:14:53.047 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-04-08 16:14:53.842 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-04-08 16:14:54.226 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-04-08 16:14:54.317 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 16:14:54.240 -04:00 [INF] Request finished in 1182.3971ms 0 text/css
+2023-04-08 16:14:55.203 -04:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-04-08 16:14:55.205 -04:00 [INF] Request finished in 1362.9582ms 0 image/png
+2023-04-08 16:14:55.966 -04:00 [INF] Request finished in 1648.9351ms 200 application/json;charset=utf-8
+2023-04-08 16:16:56.843 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 71
+2023-04-08 16:16:57.107 -04:00 [INF] CORS policy execution successful.
+2023-04-08 16:16:57.142 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 16:16:57.518 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 16:17:05.633 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 16:17:47.762 -04:00 [INF] Executed DbCommand (1,387ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (Size = 450), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [StoreCategories] ([categoryId], [active], [storeCreated], [departmentId], [storeExpires], [storeCategoryName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2023-04-08 16:18:01.603 -04:00 [INF] Executing ObjectResult, writing value of type 'allopromo.Core.Application.Dto.StoreCategoryDto'.
+2023-04-08 16:18:01.968 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api) in 64429.2228ms
+2023-04-08 16:18:01.974 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 16:18:02.090 -04:00 [INF] Request finished in 65256.6543ms 200 application/json; charset=utf-8
+2023-04-08 18:18:40.468 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 18:18:45.937 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 18:18:45.939 -04:00 [INF] Hosting environment: Development
+2023-04-08 18:18:45.940 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 18:18:46.172 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 18:18:47.228 -04:00 [INF] Request finished in 1073.1134ms 200 text/html;charset=utf-8
+2023-04-08 18:18:47.651 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-04-08 18:18:48.642 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-04-08 18:18:49.229 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 18:18:49.703 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-04-08 18:18:49.703 -04:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-04-08 18:18:49.705 -04:00 [INF] Request finished in 2056.2923ms 0 text/css
+2023-04-08 18:18:49.705 -04:00 [INF] Request finished in 1064.0472ms 0 image/png
+2023-04-08 18:18:50.407 -04:00 [INF] Request finished in 1178.0505ms 200 application/json;charset=utf-8
+2023-04-08 18:19:58.422 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 70
+2023-04-08 18:19:58.475 -04:00 [INF] CORS policy execution successful.
+2023-04-08 18:19:58.482 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 18:19:59.104 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 18:20:17.189 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 18:23:35.943 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 18:23:39.612 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 18:23:39.637 -04:00 [INF] Hosting environment: Development
+2023-04-08 18:23:39.637 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 18:23:39.853 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 18:23:41.120 -04:00 [INF] Request finished in 1277.9066ms 200 text/html;charset=utf-8
+2023-04-08 18:23:41.704 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-04-08 18:23:42.616 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-04-08 18:23:43.296 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-04-08 18:23:43.303 -04:00 [INF] Request finished in 1600.645ms 0 text/css
+2023-04-08 18:23:43.535 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 18:23:43.853 -04:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-04-08 18:23:43.857 -04:00 [INF] Request finished in 1241.4926ms 0 image/png
+2023-04-08 18:23:44.808 -04:00 [INF] Request finished in 1273.2591ms 200 application/json;charset=utf-8
+2023-04-08 18:24:40.865 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 70
+2023-04-08 18:24:40.988 -04:00 [INF] CORS policy execution successful.
+2023-04-08 18:24:40.993 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 18:24:41.369 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 18:24:48.614 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 18:30:29.003 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 18:30:32.541 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 18:30:32.544 -04:00 [INF] Hosting environment: Development
+2023-04-08 18:30:32.576 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 18:30:32.740 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 18:30:33.758 -04:00 [INF] Request finished in 1003.6595ms 200 text/html;charset=utf-8
+2023-04-08 18:30:34.240 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-04-08 18:30:35.353 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-04-08 18:30:36.151 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 18:30:36.405 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-04-08 18:30:36.406 -04:00 [INF] Request finished in 2165.6279ms 0 text/css
+2023-04-08 18:30:36.698 -04:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-04-08 18:30:36.699 -04:00 [INF] Request finished in 1351.6092ms 0 image/png
+2023-04-08 18:30:37.377 -04:00 [INF] Request finished in 1226.7451ms 200 application/json;charset=utf-8
+2023-04-08 18:31:22.273 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 70
+2023-04-08 18:31:22.374 -04:00 [INF] CORS policy execution successful.
+2023-04-08 18:31:22.383 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 18:31:22.658 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 18:31:28.244 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 18:31:37.596 -04:00 [INF] Executed DbCommand (456ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[departmentId], [d].[departmentName], [d].[departmentThumbnail]
+FROM [Departments] AS [d]
+2023-04-08 18:35:51.317 -04:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-08 18:35:55.686 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-08 18:35:55.689 -04:00 [INF] Hosting environment: Development
+2023-04-08 18:35:55.690 -04:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-04-08 18:35:55.878 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-04-08 18:35:57.204 -04:00 [INF] Request finished in 1338.7768ms 200 text/html;charset=utf-8
+2023-04-08 18:35:57.641 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-04-08 18:35:59.523 -04:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-04-08 18:36:00.048 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-04-08 18:36:00.050 -04:00 [INF] Request finished in 2409.9539ms 0 text/css
+2023-04-08 18:36:01.155 -04:00 [INF] Request finished in 1633.2589ms 200 application/json;charset=utf-8
+2023-04-08 18:36:51.392 -04:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Store/categories/create application/json-patch+json 70
+2023-04-08 18:36:51.432 -04:00 [INF] CORS policy execution successful.
+2023-04-08 18:36:51.436 -04:00 [INF] Executing endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 18:36:51.893 -04:00 [INF] Route matched with {action = "PostStoreCategory", controller = "Store"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostStoreCategory(allopromo.Core.Application.Dto.StoreCategoryDto) on controller allopromo.Api.Controllers.StoreController (allopromo.Api).
+2023-04-08 18:37:01.251 -04:00 [INF] Entity Framework Core 5.0.7 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2023-04-08 18:37:17.307 -04:00 [INF] Executed DbCommand (185ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[departmentId], [d].[departmentName], [d].[departmentThumbnail]
+FROM [Departments] AS [d]
+2023-04-08 18:37:43.382 -04:00 [ERR] Failed executing DbCommand (3,112ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (Size = 450), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [StoreCategories] ([categoryId], [active], [storeCreated], [departmentId], [storeExpires], [storeCategoryName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2023-04-08 18:37:45.463 -04:00 [ERR] An exception occurred in the database while saving changes for context type 'allopromo.Infrastructure.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'storeExpires', table 'allopromo.dbo.StoreCategories'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:31575929-f501-4afd-ab8e-b0dad4fd7228
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'storeExpires', table 'allopromo.dbo.StoreCategories'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:31575929-f501-4afd-ab8e-b0dad4fd7228
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2023-04-08 18:37:52.640 -04:00 [INF] Executed action allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api) in 60727.5488ms
+2023-04-08 18:37:53.250 -04:00 [INF] Executed endpoint 'allopromo.Api.Controllers.StoreController.PostStoreCategory (allopromo.Api)'
+2023-04-08 18:37:56.556 -04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'storeExpires', table 'allopromo.dbo.StoreCategories'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:31575929-f501-4afd-ab8e-b0dad4fd7228
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at allopromo.Infrastructure.Repositories.TRepository`1.Add(T obj) in C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructure\Repositories\TRepository.cs:line 42
+   at allopromo.Core.Model.StoreService.CreateStoreCategoryAsync(StoreCategoryDto storeCategory) in C:\Users\MonPC\source\repos\allopromo\allopromo.Core\Services\StoreService.cs:line 135
+   at allopromo.Api.Controllers.StoreController.PostStoreCategory(StoreCategoryDto storeCategory) in C:\Users\MonPC\source\repos\allopromo\allopromo.Api\Controllers\StoreController.cs:line 76
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-08 18:37:57.637 -04:00 [INF] Request finished in 66278.9608ms 500 text/plain

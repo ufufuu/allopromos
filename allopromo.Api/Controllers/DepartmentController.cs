@@ -15,15 +15,17 @@ using allopromo.Core.Services.Base;
 using allopromo.Core.Services;
 using allopromo.Core.Entities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    [Produces("application/json")]
+    //[Produces("application/json")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
         private readonly IConfiguration _config;
+        private readonly AppDbContext _appDb;
         private IBaseService<DepartmentDto> _departmentService;
         
         private readonly IDepartmentService _DepartmentService;
@@ -39,6 +41,43 @@ namespace allopromo.Api.Controllers
             _config = config;
             //_exceptionWriter = exceptionWriter;
         }
+        [HttpPost]
+        
+        //[Authorize]
+        //[Core.Helpers.JwtBasicAuthorize]
+
+        public IActionResult PostDepartment([FromBody] DepartmentDto departmentDto)
+        {
+            try
+            {
+                //var httpContextAccessor = new HttpContextAccessor();
+                //var currentUser = httpContextAccessor.HttpContext.User.Identity;
+                //if (currentUser == null)
+                //{
+                //    return Unauthorized();
+                //}
+                //else
+                //{
+                    if (departmentDto != null)
+                    {
+                       var fr= _DepartmentService.CreateDepartmentAsync(departmentDto);
+                        if (fr != null)
+                        {
+                            return Ok(departmentDto);
+                        }
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return NoContent();
+                    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpGet]
         [Route("")]
         public IActionResult GetDepartments()
@@ -48,22 +87,7 @@ namespace allopromo.Api.Controllers
                 return Ok(departments);
             return NotFound();
         }
-        [HttpPost]
-        public IActionResult PostDepartment ([FromBody] DepartmentDto departmentDto)
-        {
-            try
-            {
-                var department = new tDepartment();
-                department.departmentId = departmentDto.departmentId.ToString();
-                department.departmentName = departmentDto.departmentName.ToString();
-                _departmentService.Update(departmentDto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return Ok(departmentDto);
-        }
+        
         [HttpGet]
         [Route("cities+{cityId}")]
         public IActionResult GetDepartmentById(string cityId)
@@ -84,9 +108,8 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var department = from c in await _departmentService.GetEntities()  //(Id)
-                           where c.departmentId.Equals(Id)
-                           select c;
+                var department = from c in await _departmentService.GetEntities()
+                                 select c;
                 return Ok();
             }
             catch (Exception ex)

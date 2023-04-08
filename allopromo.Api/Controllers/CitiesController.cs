@@ -57,7 +57,7 @@ namespace allopromo.Api.Controllers
         }
         [HttpPost]
         //[Route(ConstancesCommunes)]
-        public IActionResult PostCity([FromRoute] CityDto city)
+        public IActionResult PostCity([FromBody] CityDto city)
         {
             try
             {
@@ -77,10 +77,8 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var city = from c in await _localisationService.GetCities()
-                           where c.cityId.Equals(Id)
+                var city = from c in (await _localisationService.GetCities()) 
                            select c;
-                //_localizeService.Delete(city.FirstOrDefault());
                 return Ok();
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Z4e6z3Yrr2B8R6YykgFxbTJITCPbROt/ahFiyJ4AZmnIfd5kKOFmMzIFLfMZR153lgUSZ7YHZWCN3MxMsJtATw==",
+  "dgSpecHash": "h35kkYZ7eoebakHm0q6Y68QmKznpD+QycouCT2jDxP18WymUHUgdnlQPpmbMLopNcOHdpCn5N+Fj6vxBz1MeEw==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructures.UnitTest\\allopromo.Infrastructure.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.11\\microsoft.entityframeworkcore.abstractions.5.0.11.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.11\\microsoft.entityframeworkcore.analyzers.5.0.11.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.11\\microsoft.entityframeworkcore.inmemory.5.0.11.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.proxies\\5.0.0\\microsoft.entityframeworkcore.proxies.5.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.7\\microsoft.entityframeworkcore.relational.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.7\\microsoft.entityframeworkcore.sqlserver.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",

@@ -16,10 +16,11 @@ using allopromo.Api.ViewModel.ViewModels;
 using System.Security.Claims;
 using System.Linq;
 
-namespace allopromo.Controllers
+namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    [Produces("application/json")]
+
+    //[Produces("application/json")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -39,16 +40,20 @@ namespace allopromo.Controllers
         {
             _userService = userService;
             _accountService = accountService;
-        }
-        public UserController(IUserService userService)
-        {
-            _userService = userService;
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
         public UserController(IUserService userService, 
             UserManager<IdentityUser> userManager)
         {
             _userService = userService;
             _userManager = userManager;
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
         [ActivatorUtilitiesConstructor]
         public UserController(IUserService userService, IAccountService accountService, UserManager<IdentityUser> userManager,
@@ -65,9 +70,9 @@ namespace allopromo.Controllers
         #region User Api
         [HttpGet]
         [Route("")]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            var roleUsers = _userService.GetUsersAsync();
+            var roleUsers = await _userService.GetUsersAsync();
             return Ok(roleUsers);
         }
         private async Task<ApplicationUser> GetConnectedUser()
@@ -118,13 +123,14 @@ namespace allopromo.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Login")]
-        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
         {
             if (loginViewModel != null)
             {
                 try
                 {
                     var account = _userService.ValidateUserAsync(loginViewModel.UserName).Result;
+                    //_signInManager.SignInAsync(loginViewModel.UserName);
                     if (account!= null)
                     {
                         var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
@@ -135,6 +141,7 @@ namespace allopromo.Controllers
                                 UserName = loginViewModel.UserName,
                                 Email = loginViewModel.UserName,
                             };
+                            _signInManager.SignInAsync(new ApplicationUser { UserName = loginViewModel.UserName }, true);
                             return Ok(new ApiResponseModel
                             {
                                 userResponse = user,
@@ -143,7 +150,7 @@ namespace allopromo.Controllers
                         }
                         else
                         //{
-                            return NotFound (new { status = "Failed", message = "User name or Pwd UUY incorrect" });
+                            return NotFound (new { status = " Failed ", message = " User name or Pwd UUY incorrect " });
                         //}
                         /*
                         using(var emailNotifyService= new EmailNotificationService())

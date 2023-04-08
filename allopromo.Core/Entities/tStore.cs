@@ -12,28 +12,31 @@ namespace allopromo.Core.Entities
         [Key]
         [Column("storeId")]
         public Guid storeId { get; set; }
-
         //public string userId { get; set; }
+
         [Column("storeName")]
         public string storeName { get; set; }
+
         [Column("storeDescription")]
         public string storeDescription { get; set;}
+
         [Column("storeCreatedOn")]
         public DateTime storeCreatedOn{ get; set;}
+
         [Column("storeBecomesInactiveOn")]
         public DateTime storeBecomesInactiveOn { get; set; }
 
-        #region Navigation Properties
 
-        //[Column("CategorystoreCategoryId")]
+        /*
+        [Column("categoryId")]
+        public string categoryId { get; set; }*/
 
-        public tStoreCategory Category { get; set; }
-        public tCity City { get; set; }
-        public ApplicationUser user { get; set; }
 
-        //[Column("CategorystoreCategoryId")]
-        //public string CategorystoreCategoryId { get; set; }
+        public virtual tStoreCategory Category { get; set; }
+        public virtual tCity City { get; set; }
+        public virtual Microsoft.AspNetCore.Identity.IdentityUser User { get; set; }
 
+       
         //[Required]
         //public virtual int storeStatus
         //{
@@ -46,8 +49,8 @@ namespace allopromo.Core.Entities
         //        storeStatus = (int)value;
         //    }
         //}
+
         //[EnumDataType(typeof(StoreStatus))]
         //public StoreStatus StoreState { get; set; }
-        #endregion
     }
 }

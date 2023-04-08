@@ -12,17 +12,17 @@ namespace allopromo.Core.Services
 {
     public interface IDepartmentService
     {
+        Task<DepartmentDto> CreateDepartmentAsync(DepartmentDto departmentDto);
         Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync();
         Task<DepartmentDto> GetDepartmentAsync();
-
-
-        Task<DepartmentDto> CreateDepartmentAsync();
+        Task<IEnumerable<tDepartment>> GetEntities();
         Task<DepartmentDto> DeleteDepartmentAsync();
     }
     public class DepartmentService  :// BaseService<tDepartment>
         IDepartmentService
     {
         public IRepository<tDepartment> _departmentRepository { get; set; }
+        
         public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
@@ -92,11 +92,26 @@ namespace allopromo.Core.Services
             throw new NotImplementedException();
         }
 
-        Task<DepartmentDto> IDepartmentService.CreateDepartmentAsync()
+        public async Task<DepartmentDto> CreateDepartmentAsync(DepartmentDto departmentDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                tDepartment department = new tDepartment();
+                department.departmentId = Guid.NewGuid().ToString();
+                department.departmentName = departmentDto.departmentName;
+                if (department != null)
+                {
+                    _departmentRepository.Add(department);
+                    return await Task.FromResult(departmentDto);
+                }
+                else
+                    throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
         Task<DepartmentDto> IDepartmentService.DeleteDepartmentAsync()
         {
             throw new NotImplementedException();

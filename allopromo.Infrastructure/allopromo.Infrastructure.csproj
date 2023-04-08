@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
+    <Compile Remove="Extensions\DbContextExtension.cs" />
     <Compile Remove="Repositories\BaseRepository.cs" />
     <Compile Remove="Repositories\GenericRepository.cs" />
     <Compile Remove="Repositories\IStoreRepository.cs" />
@@ -32,6 +33,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>

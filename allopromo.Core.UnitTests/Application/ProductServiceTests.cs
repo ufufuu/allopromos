@@ -14,19 +14,33 @@ namespace alloPromo.Core.UnitTests.Application
     [TestFixture]
     public class ProductServiceTest
     {
+        Mock<IStoreService> _storeService = new Mock<IStoreService>();
         Mock<IRepository<tProduct>> _productRepository = new Mock<IRepository<tProduct>>();
+        Mock<IRepository<tProductCategory>> _productCategoryRepository = new Mock<IRepository<tProductCategory>>();
+        ProductService _SUT { get; set; }
+        public ProductServiceTest()
+        {
+            _SUT = new ProductService(_productRepository.Object, _productCategoryRepository.Object,
+                _storeService.Object);
+        }
+        [Test]
+        public void CreateProducts_SHOULD_Return_CreatedProduct()
+        {
+            var productObj = new allopromo.Core.Application.Dto.ProductDto(){ };
+            var result = _SUT.CreateProductAsync(productObj, "");
+            Assert.IsNotNull(result);
+        }
         [TestCase]
         public async Task ObtenirProduct_DEVRAIT_RetournerUneException()
         {
-            var productService = new ProductService(_productRepository.Object);
-            var result = await productService.GetProductById(null);
+            var result = await _SUT.GetProductById(null);
             //Assert.Throws<ArgumentNullException>(null);
             Assert.IsNull(result);
         }
         [TestCase]
         public void ObtenirProduct_DEVRAIT_RetournerProduitParId_Trouve()
         {
-            var productService = new ProductService(_productRepository.Object);
+            var productService = _SUT;
             var result = productService.GetProductById(It.IsAny<string>());
             Assert.IsNotNull(result);
         }

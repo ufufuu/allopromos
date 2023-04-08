@@ -10,7 +10,7 @@ namespace allopromo.Core.Application.Dto
         public string userName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string Name { get; set; }
+        public string userRoleName { get; set; }
 
 
         //public List<RoleDto> Roles { get; set; }

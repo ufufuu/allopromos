@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lxCE4dh+G7eYN2lSELxftifMF7rbtKD8b8z1DRWX3fAt843NqV3gP6UY543aQx/8a0D8KZZOEfSBz7Ucu2s1GA==",
+  "dgSpecHash": "W/fZ+46daTjo1TGa8svja3pWhkS2O6O/iOLs14I5AOePP1T9VdLrCtcdpAD9popXNDb7I66Sl3shhNdmfSOI4A==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Api.UnitTests\\allopromo.Api.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.7\\microsoft.entityframeworkcore.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.7\\microsoft.entityframeworkcore.abstractions.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.7\\microsoft.entityframeworkcore.analyzers.5.0.7.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.proxies\\5.0.0\\microsoft.entityframeworkcore.proxies.5.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.7\\microsoft.entityframeworkcore.relational.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.7\\microsoft.entityframeworkcore.sqlserver.5.0.7.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

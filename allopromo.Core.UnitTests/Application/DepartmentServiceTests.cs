@@ -27,6 +27,14 @@ namespace allopromo.Core.Application.UnitTests
             SUT = new DepartmentService(RepositoryMock.Object);
         }
         [Test]
+        public void CreateDepartment_SHOULD_CreateAndReturn()
+        {
+            var departmentDto = new DepartmentDto { departmentName = "La Planque a Thierry" };
+            var result = SUT.CreateDepartmentAsync(departmentDto);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.GetType(), typeof(Task<DepartmentDto>));
+        }
+        [Test]
         public async Task GetDepartments_SHOULD_Return_DepartmentsAsync()
         {
             var result =await SUT.GetDepartmentsAsync();

@@ -17,6 +17,6 @@ namespace allopromo.Core.Domain
         //public override string UserName { get; set; }
 
 
-        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }

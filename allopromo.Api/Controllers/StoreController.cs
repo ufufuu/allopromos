@@ -22,6 +22,7 @@ using System.Linq;
 using allopromo.Api.Model.Wrappers;
 using allopromo.Api.Model.Filter;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace allopromo.Api.Controllers
 {
@@ -35,10 +36,10 @@ namespace allopromo.Api.Controllers
         //public StoreCreatedEventArgs storeCreated { get; set; }
         //public event EventHandler<string> _storeCreated;
         // What would read-only change here vs private ?
-
         //tiktak.ca/en/store/62143| 
         ////kijiji.ca/b-autos-vehicules/ville-de-quebec/c27l1700124
         //api/customer?pageNumber=3&pageSize=10;
+
         #region Constantes
         public int pageNumber { get; set; }
         public const int pageSize = 2;
@@ -54,7 +55,8 @@ namespace allopromo.Api.Controllers
         public delegate string mydelegate(string msg);
         public delegate string myGenericDelegate<T>(string msg);
         public Core.Services.MediaService _mediaService { get; set; }
-        public StoreController(IStoreService storeService, IProductService productService,
+        public HttpContextAccessor _httpContextAccessor { get; set; }
+        public StoreController(IStoreService storeService, IProductService productService, 
             INotifyService notificationService)
         {
             _storeService = storeService;
@@ -63,7 +65,71 @@ namespace allopromo.Api.Controllers
         }
         #endregion
 
-        #region GET
+        #region POST create
+        [HttpPost]
+        [Route("categories/create/")]
+        public async Task<IActionResult> PostStoreCategory([FromBody]
+            StoreCategoryDto storeCategory)
+        {
+            if (storeCategory == null)
+                return BadRequest();
+            return Ok(await _storeService.CreateStoreCategoryAsync(storeCategory));
+        }
+        [HttpPost]
+        [Route("create")]
+
+        //[Authorize]
+        //[BasicJwtAuthorize]
+
+        public IActionResult CreateStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
+        {
+            if (storeDto != null)
+            {
+                var category = new StoreCategoryDto();
+
+                var currentIdentity = User.Identity;
+
+                //var userM = new UserManager<IdentityUser>();
+                //var tUser = userM.FindByNameAsync
+                //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
+
+                var store = _storeService.CreateStoreAsync(storeDto, currentIdentity.Name);
+                if (store != null)
+                {
+                    //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
+                    //_storeService.OnStoreCreated();
+
+                    return Ok(store);
+                }
+                return NotFound();
+            }
+            else
+                return NotFound();
+        }
+        [HttpPost]
+        [Route("products/create")]
+        //[SwaggerResponse(HttpStatusCode.OK,Description="CreateProduct", Type=typeof(StoreCategoryDto))]
+        [JwtBasicAuthorize]
+        public async Task<IActionResult> CreateProductAsync([FromBody] ProductDto product)
+        {
+            var httpContextAccessor = new HttpContextAccessor();
+            var currentUser = httpContextAccessor.HttpContext.User.Identity;
+            if (currentUser == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                var tObj = AutoMapper.Mapper.Map<tProduct>(product);
+                var productDto = await _productService.CreateProductAsync(product, currentUser.Name);
+                return CreatedAtAction(nameof(productDto), new { }, product);
+            }
+        }
+        #endregion create
+
+        #region GET read
         [HttpGet]
         [Route("")]
         public async Task<ActionResult> GetStores()//[FromQuery] PaginationFilter filter)
@@ -168,83 +234,32 @@ namespace allopromo.Api.Controllers
                 return Ok(stores);
             }
         }
-        #endregion
+        #endregion read
 
-        #region POST
-        [HttpPost]
-        [Route("categories/create/")]
-        public async Task<IActionResult> PostStoreCategory([FromBody] 
-            StoreCategoryDto storeCategory)
-        {
-            if (storeCategory == null)
-                return BadRequest();
-            return Ok(await _storeService.CreateStoreCategoryAsync(storeCategory));
-        }
-        [HttpPost]
-        [Route("create")]
-        //[BasicJwtAuthorize]
-        public IActionResult CreateStoreAsync(//[FromBody] StoreDto storeDto)
-            string  storeDtoName)
-        {
-            if (storeDtoName != null)
-            {
-                var category = new StoreCategoryDto();
-                _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                var store = _storeService.CreateStore(storeDtoName);    //, category, (UserDto)user);
-                if (store != null)
-                {
-                    _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                    _storeService.OnStoreCreated();
-                    return Ok(store);
-                }
-                return NotFound();
-            }
-            else
-                return NotFound();
-        }
-        [HttpPost]
-        [Route(ConstancesCommunes.BaseUrl+"{categories}/{products}/create")]
-        //[SwaggerResponse(HttpStatusCode.OK,Description="CreateProduct", Type=typeof(StoreCategoryDto))]
-        [JwtBasicAuthorize]
-        public async Task<IActionResult> CreateProductAsync([FromBody] tProduct product)
-        {
-            ApplicationUser user = null;
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            else
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-                var productDto = await _productService.CreateProductAsync(product);
-                return CreatedAtAction(nameof(productDto), new { }, product);
-            }
-        }
-        #endregion
-
-        #region PUT
+        #region PUT update
         [HttpPut]
         [Route("categories/{catId}")]
         public ActionResult PutStoreCategory([FromBody] StoreCategoryDto category)
         {
             string catId = string.Empty;
+
             //var store = await _storeService.GetStoreCategoryByIdAsync(catId); //storeData.storeCategoryId);
+
             if (category == null)
             {
                 return NotFound();
             }
             else
             {
-                catId = category.storeCategoryId;
+                catId = category.storeCategoryName;
                 _storeService.UpdateStoreCategory(catId.ToString(), category);
                 return Ok(category);
             }
         }
         
-        #endregion
+        #endregion update
 
-        #region DELETE
+        #region DELETE delete
         [HttpDelete]
         [Route("{locationId}/{pageNumber}/{limitPerPage}")]
         //[Route("categoryId?limit=10&offSet=4")]
@@ -274,9 +289,10 @@ namespace allopromo.Api.Controllers
                 return Ok(true);
             }
         }
-        #endregion  
+        #endregion   delete
     }
 }
+
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/
  * 

@@ -15,7 +15,7 @@ using allopromo.Core.Application.Dto;
 
 namespace allopromo.Core.Model
 {
-   public class UserService : IUserService                                                              //<ApplicationUsers>
+   public class UserService : IUserService                                                             
    {
 #region Properties
         public UserManager<IdentityUser> _userManager { get; set; }
@@ -54,7 +54,7 @@ namespace allopromo.Core.Model
                         userName=userObj.UserName,
                         Email=userObj.Email,
                         PhoneNumber=userObj.PhoneNumber,
-                        Name=role
+                        userRoleName=role
                     });
                 }
             }
@@ -102,7 +102,7 @@ namespace allopromo.Core.Model
         {
             try
             {
-                var login =  _signInManager.SignInAsync(user, true, null);
+                var login = _signInManager.SignInAsync(user, true, null);
                 if (login != null)
                    return true;
                 return false;
@@ -142,7 +142,6 @@ namespace allopromo.Core.Model
         }
 #endregion
 
-
 #region Public Methods - Create
         public async Task<bool> CreateUser(string userName, string password)
         {
@@ -176,8 +175,6 @@ namespace allopromo.Core.Model
             return await Task.FromResult(userCreated);
         }
         #endregion
-
-
         #region Public Methods - Validation
         public bool ValidateUser(string userEmail, string userPassword)
         {
@@ -209,9 +206,7 @@ namespace allopromo.Core.Model
         }
         #endregion
 
-
 #region Public Methods - Others Methods
-
         public ApplicationUser GetUserRole(ApplicationUser appUser)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(appUser.UserName));
@@ -231,15 +226,19 @@ namespace allopromo.Core.Model
         }
         public ClaimsPrincipal GetCurrentUser()
         {
-            //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             _httpContextAccessor = new HttpContextAccessor();
             var user = _httpContextAccessor.HttpContext?.User;
+
+            //return User.Identity.Name.ToString();
+
+            var gt = 56;
             return user;
-            /*
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
-            */
+            
+            //ClaimsPrincipal currentUser = this.User;
+            //var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
+
+            //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
         }
         public IList<IdentityUser> GetUsersInRole(string roleName)
         {
@@ -254,12 +253,14 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-        public UserDto GetUserbyId(string userId)
-        {
-            var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId));
-            return null;
-            //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
-        }
+
+        //public UserDto GetUserById(string userId)
+        //{
+        //    var user = _userManager.Users.FirstOrDefault(x => x.Id.Equals(userId));
+        //    return null;
+
+        //    //return AutoMapper.Mapper.Map<ApplicationUser, UserDto>(user); // Manager.Users.FirstOrDefault(x => x.Id.Equals(userId));
+        //}
         Task<string> IUserService.GetUser(ApplicationUser user)
         {
             throw new NotImplementedException();
@@ -280,10 +281,6 @@ namespace allopromo.Core.Model
             throw new NotImplementedException();
         }
         ApplicationUser IUserService.GetUserRole(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-        UserDto IUserService.GetUserById(string userId)
         {
             throw new NotImplementedException();
         }

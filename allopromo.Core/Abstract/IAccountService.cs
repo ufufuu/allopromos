@@ -9,22 +9,20 @@ namespace allopromo.Core.Abstract
     }
     public interface IAccountService
     {
-        //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
-
-        public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user); 
-
-        // method for handling event without any data
+        public string GetCurrentName();
+        public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user);
+               
         public event UserAuthenticatedEventHandler userAuthenticated;
-
-        //public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
-
+                
         public delegate UserAuthenticateEventArgs onUserAuthenticates();
         public void OnUserAuthenticate(string userName);
         public void OnUserAuthenticated();
 
         abstract LoginResponseModel Authenticate(ApplicationUser login);
 
-
+        //public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
+        //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
+        // method for handling event without any data
         //abstract LoginResponseModel Authenticate(LoginViewModel login);
     }
 }

@@ -7,15 +7,15 @@ namespace allopromo.Core.Application.Dto
 {
     public class StoreDto
     {
-        public string storeId { get; set; }
         public string  storeName { get; set; }
         public string storeDescription { get; set; }
-        public string Category { get; set; }
+        public string storeCategory { get; set; }
         public string City { get; set; }
 
         public StoreDto()
         {
         }
+
         //public StoreDto(string storeId, string storeName, int storeRefNumber)
         //{
         //    _storeId = storeId;

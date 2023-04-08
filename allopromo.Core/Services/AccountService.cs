@@ -2,6 +2,7 @@
 using allopromo.Core.Domain;
 using allopromo.Core.Helpers;
 using allopromo.Core.Model.ApiResponse;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -18,12 +19,12 @@ namespace allopromo.Core.Model
         public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);
 
         public event UserAuthenticatedEventHandler userAuthenticated;
-
-        //public event EventHandler<UserAuthenticateEventArgs> OnUserAuthenticated;
-
         private static UserManager<ApplicationUser> _userManager { get; set; }
 
         private readonly AppSettings _appSettings;
+        private HttpContextAccessor _httpContextAccessor;
+
+        //public event EventHandler<UserAuthenticateEventArgs> OnUserAuthenticated;
         public AccountService()
         {
         }
@@ -89,6 +90,32 @@ namespace allopromo.Core.Model
         void IAccountService.OnUserAuthenticated()
         {
             throw new NotImplementedException();
+        }
+        public string GetCurrentName()
+        {
+            var currentUser = _httpContextAccessor.HttpContext?.User;
+
+            //System.Security.Claims.ClaimsPrincipal currentUtils = this.User;
+            //ClaimsPrincipal currentUser = this.User;
+
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //var claimss = currentUser.Claims.FirstOrDefault();
+            //ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
+
+            bool isAdmin = currentUser.IsInRole("Admin");
+
+            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            IdentityUser utlisateur = _userManager.FindByNameAsync(currentUserName).Result;
+            
+            /*var nameIdentifier = User
+                .Claims
+                .FirstOrDefault(c => c.Type == System.Security.Claims
+                .ClaimTypes
+                .NameIdentifier)?.Value;*/
+            //var curUser = nameIdentifier.ToString();
+
+            return currentUser.Identity.Name.ToString();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using allopromo.Core.Abstract.Interfaces;
-using allopromo.Core.Domain;
+﻿using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
@@ -17,36 +16,45 @@ namespace allopromo.Infrastructure.Data
     /*ApplicationRole, string, IdentityUserClaim<string> ,
     ApplicationUserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>,IdentityUserToken<string>>//, IAppDbCoWntext*/
-
     {
         /*
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ApplicationRole> Roles { get; set; }
         public DbSet<ApplicationUserRole> UserRoles { get; set; }*/
 
-        public DbSet<tStore> Stores { get; set; }
-        public DbSet<tStoreCategory> StoreCategories { get; set; }
-        public DbSet<tCity> Cities { get; set; }
-        public DbSet<tCountry> Countries { get; set; }
-        public DbSet<tRegion> Regions { get; set; }
-        public DbSet<tProduct> Products { get; set; }
-        public DbSet<tProductCategory> ProductCategories { get; set; }
-
         public DbSet<tDepartment> Departments { get; set; }
+
+        public DbSet<tRegion> Regions { get; set; }
+        public DbSet<tCountry> Countries { get; set; }
+        public DbSet<tCity> Cities { get; set; }
+        public DbSet<tStoreCategory> StoreCategories { get; set; }
+        public DbSet<tStore> Stores { get; set; }
+        public DbSet<tProductCategory> ProductCategories { get; set; }
+        public DbSet<tProduct> Products { get; set; }
+        public DbSet<tOrder> Orders { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
         public AppDbContext()
         { }
+        #region Required
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             var keysProperties = modelBuilder.Model.GetEntityTypes()
                 .Select(x => x.FindPrimaryKey()).SelectMany(x => x.Properties);
             foreach (var property in keysProperties)
             {
                 property.ValueGenerated = ValueGenerated.OnAdd;
             }
+
+            #region Mapping To Tables
+            modelBuilder.Entity<tDepartment>()
+                .ToTable("Departments");
+            modelBuilder.Entity<tStoreCategory>()
+                .ToTable("StoreCategories");
+            #endregion
+
             //modelBuilder.Entity<ApplicationUser>(entity =>
             //{
             //    //entity
@@ -54,29 +62,29 @@ namespace allopromo.Infrastructure.Data
             //    //    .WithMany(ur => ur.UserId)
             //    //    .HasForeignKey(x => x.UserId);
             //})
-            modelBuilder.Entity<tStoreCategory>(stores=>
+
+            modelBuilder.Entity<tStoreCategory>(storesCategory=>
             {
-                stores.HasKey(c => new { c.storeCategoryId });
-                stores.HasMany(s => s.Stores)
+                storesCategory.HasKey(c => new { c.storeCategoryId });
+                storesCategory.HasMany(s => s.Stores)
                 .WithOne(s => s.Category);
             });
-            modelBuilder.Entity<tDepartment>(category =>
-            {
-                category.HasKey(c => new { c.departmentId });
-                category.HasMany(c => c.Categories)
-                .WithOne(s => s.Department);
-            });
+            //modelBuilder.Entity<tDepartment>(department =>
+            //{
+            //    department.HasKey(c => new { c.departmentId });
+            //    department.HasMany(c => c.Categories)
+            //    .WithOne(s => s.Department);
+            //});
             modelBuilder.Entity<tProductCategory>(products =>
             {
                 products.HasKey(p => new { p.productCategoryId });
-                products.HasMany(p => p.categoryProducts)
-                .WithOne(p => p.ProductCategory);
-            });
+                //products.HasMany(p => p.categoryProducts)
+                //.WithOne(p => p.ProductCategory);
 
+            });
             modelBuilder.Entity<IdentityUser>()
                 .HasDiscriminator<int>("Type")
                 .HasValue<IdentityUser>(1);
-
             modelBuilder.Entity<ApplicationUser>()
                 .HasDiscriminator<int>("Type")
                 .HasValue<ApplicationUser>(2);
@@ -110,12 +118,13 @@ namespace allopromo.Infrastructure.Data
             //modelBuilder.Entity<tStore>().HasNoKey();
             //modelBuilder.Entity<tStore>().ToTable("Store");
 
-            //modelBuilder.Entity<tStore>(store =>
-            //{
-            //    store.HasKey(s => new { s.storeId });
-            //});
-            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<tStore>(store =>
+            {
+                store.HasKey(s => new { s.storeId });
+            });
+            base.OnModelCreating(modelBuilder);
         }
+        #endregion
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -125,7 +134,8 @@ namespace allopromo.Infrastructure.Data
                    .AddJsonFile("appsettings.json")
                    .Build();
                 var connectionString = configuration.GetConnectionString("DefaultDevConnection");
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseLazyLoadingProxies()
+                              .UseSqlServer(connectionString);
             }
         }
     }

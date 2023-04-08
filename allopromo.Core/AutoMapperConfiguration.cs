@@ -43,8 +43,9 @@ namespace allopromo.Core
 
                 configuration.CreateMap<CityDto, tCity>()
                     .ForMember(x => x.cityGpsLatitude, opt => opt.Ignore())
-                    .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore())
-                    .ForMember(x => x.countryId, opt => opt.Ignore());
+                    .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore());
+                    
+
             });
         }
     }
@@ -61,6 +62,8 @@ namespace allopromo.Core
                 .ReverseMap();
             CreateMap<DepartmentDto, tDepartment>()
                 .ReverseMap();
+            CreateMap<tProduct, ProductDto>().ReverseMap();
+            CreateMap<ProductDto, tProduct>().ReverseMap();
         }
     }
 }

@@ -40,8 +40,8 @@ namespace allopromo.Api
 
                 configuration.CreateMap<CityDto, tCity>()
                     .ForMember(x => x.cityGpsLatitude, opt => opt.Ignore())
-                    .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore())
-                    .ForMember(x => x.countryId, opt => opt.Ignore());
+                    .ForMember(x => x.cityGpsLongitude, opt => opt.Ignore());
+                    //.ForMember(x => x.countryId, opt => opt.Ignore());
             });
         }
     }

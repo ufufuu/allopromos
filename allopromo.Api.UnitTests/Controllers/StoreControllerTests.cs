@@ -10,36 +10,48 @@ using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 using allopromo.Api.Controllers;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+
 namespace allopromo.Api.UnitTests
 {
     [TestFixture]
     public class StoreControllerTest
     {
-        //StoreCreatedEventArgs storeCreatedEventArgs;
+        
+        #region Constructor & Fields
         private bool NotifySent { get; set; }
         Mock<IStoreService> _storeServiceMock;
-        Mock<IProductService> _productService;
+        Mock<IProductService> _productServiceMock;
         Mock<INotifyService> _notificationServiceMock;
         StoreController SUT;
         [SetUp]
         public void Init()
         {
             _storeServiceMock = new Mock<IStoreService>();
-            _productService = new Mock<IProductService>();
+            _productServiceMock = new Mock<IProductService>();
             _notificationServiceMock = new Mock<INotifyService>();
-            SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+
+            SUT = new StoreController(_storeServiceMock.Object, 
+                _productServiceMock.Object, 
+                _notificationServiceMock.Object);
+            /*AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+                cfg.ValidateInlineMaps = false;
+            });*/
         }
-        [Test]
-        public void StoreController_Get_StoresWithLimit_Rerturns_OnlyLimitedStores()
-        {
-            var result = SUT.GetStoresByLocationIdAsync(1, 2, 2, 10).Result;
-            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
-            //Assert.AreEqual(result, 10);
-        }
+        
+        #endregion
+
+        #region cRead Tests
+
         [Test]
         public void StoreController_Put_StoreCategory_Null_SHOULD_ReturnStoreNotFoundResult()
         {
-            SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+            SUT = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, _notificationServiceMock.Object);
             var result = SUT.PutStoreCategory(null);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.GetType(), typeof(NotFoundResult));
@@ -47,44 +59,91 @@ namespace allopromo.Api.UnitTests
         [Test]
         public void StoreController_Put_StoreCategory_SHOULD_ModifyStoreCategory()
         {
-            SUT = new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object);
+            SUT = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, _notificationServiceMock.Object);
             var result = SUT.PutStoreCategory(It.IsAny<StoreCategoryDto>());
             Assert.IsNotNull(result);
         }
-        public void StoreCrontroller_CreateStore_Returns_BaqRequest_StoreIsNull()
+        #endregion
+
+        #region Create Tests
+        public static HttpContextAccessor GetHttpContextAccessor()
+        {
+            return new HttpContextAccessor();
+        }
+        [Test]
+        public void StoreController_CreateProductAsync_SHOULD_Return_UnauthorizedAccess()
+        {
+            var mockHttpContextAccessor = new Mock<Microsoft.AspNetCore.Http.HttpContextAccessor>();
+
+            mockHttpContextAccessor.Object.HttpContext =
+           Mock.Of<HttpContext>(x => x.User.Identity==null);
+            var result = SUT.CreateProductAsync(It.IsAny<ProductDto>()).Result;
+            Assert.AreEqual(result.GetType(), typeof(UnauthorizedResult));
+        }
+        [Test]
+        public void StoreController_CreateProductAsync_SHOULD_Return_CreatedProduct()
+        {
+            var mockHttpContextAccessor = new Mock<Microsoft.AspNetCore.Http.HttpContextAccessor>();
+            mockHttpContextAccessor.Object.HttpContext = 
+                Mock.Of<HttpContext>(x => x.User ==new System.Security.Claims.ClaimsPrincipal ());
+
+            mockHttpContextAccessor.Object.HttpContext =
+               Mock.Of<HttpContext>(x => x.User.Identity.IsAuthenticated==true);
+
+            var fakeIdentity = new System.Security.Principal.GenericIdentity("User");
+            var rolesList = new List<string>();
+            rolesList.Add("merchants"); 
+            rolesList.Add("users");
+            var roles = rolesList.ToArray();
+
+            //var principal = new System.Security.Principal.GenericPrincipal(fakeIdentity, roles);
+
+           // mockHttpContextAccessor
+               // .Setup(x => x.HttpContext.User.Identity.IsAuthenticated).Returns(true);
+
+            //.Returns(new System.Security.Principal.GenericPrincipal(fakeIdentity, roles)); // principal);
+
+            var productDto = new ProductDto { };
+            var result = SUT.CreateProductAsync(productDto);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Result.GetType(), typeof(CreatedAtActionResult));
+        }
+        [Test]
+        public void StoreController_CreateProductAsync_SHOULD_Return_NotAuthenticated_IfUserNotAuthenticated()
         {
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
-            Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
-            //StoreDto store = null;
-            var SUT = new StoreController(_storeServiceMock.Object, _productService.Object,
+            Mock<IProductService> _productServiceMock = new Mock<IProductService>();
+            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object,
                 _notificationServiceMock.Object);
-            var result = SUT.CreateStoreAsync("store");
+            //UserDto user = null;
+            var productdto = new ProductDto();
+            var result = _sut.CreateProductAsync(productdto);
+            Assert.AreEqual(result.Result.GetType(), typeof(UnauthorizedResult));
+        }
+        public void StoreCrontroller_CreateStore_Returns_BaqRequest_StoreIsNull()
+        {
+            StoreDto store = null;
+            var result = SUT.CreateStoreAsync(store);//, null);
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]
         public void StoreCrontroller_CreateStoreAsync_ReturnsStoreCreated_RaisesNotificationEventAsync()
         {
             //Arrange
-            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
-            Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
-            StoreController SUT =
-                new StoreController(_storeServiceMock.Object,
-                _productService.Object,
-                _notificationServiceMock.Object);//, _notificationService.Object);
             var store = new StoreDto
             {
                 //storeId = "dsd",
                 storeName = "Thierry Plank",
             };
 
-            _storeServiceMock.Setup(p => p.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
-                It.IsAny<UserDto>()))
+            _storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<StoreDto>(), 
+                It.IsAny<string>())) //UserDto>()))
                 .Returns(Task.FromResult(new StoreDto()))
 
                 .Raises(e => e.StoreCreated += null, (StoreDto store) => new EventArgs { });
 
-            _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
-                It.IsAny<UserDto>()))
+            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<StoreDto>(), 
+                It.IsAny<string>()))//UserDto>()))
                 .Returns(Task.FromResult(store));
             //Act
             _storeServiceMock.Object.StoreCreated += (o, e) => NotifySent = true;
@@ -102,8 +161,9 @@ namespace allopromo.Api.UnitTests
             };
             _storeServiceMock.Object.StoreCreated += StoreCreated;
 
-            _storeServiceMock.Setup(x => x.CreateStore(It.IsAny<StoreDto>(), It.IsAny<StoreCategoryDto>(),
-                It.IsAny<UserDto>())).Returns(Task.FromResult(new StoreDto()))
+            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<StoreDto>(), 
+                It.IsAny<string>())) //UserDto>()))
+                .Returns(Task.FromResult(new StoreDto()))
             //.Raises(e => e.StoreCreated += _notificationServiceMock.Object.StoreCreatedEventHandler)
             //.Raises(e =>
             //{
@@ -117,21 +177,19 @@ namespace allopromo.Api.UnitTests
                 NotifySent = true;
                 return true;
             };
-
-            //SUT.CreateStoreAsync(store);
-
-            //var result = SUT.CreateStoreAsync(store);
-
-            //Assert.IsNotNull(storeCreatedEventArgs);
-
-            //Assert.IsNotNull(result);
-
-            //Assert.IsTrue(notifySent);
-
-            //_notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
-            //return Task.CompletedTask;
         }
+        #endregion
 
+
+        #region Read Tests
+        [Test]
+        public void StoreController_Get_StoresWithLimit_Rerturns_OnlyLimitedStores()
+        {
+            var result = SUT.GetStoresByLocationIdAsync(1, 2, 2, 10).Result;
+            Assert.AreEqual(typeof(OkObjectResult), result.GetType());
+            //Assert.AreEqual(result, 10);
+        }
+        [Test]
         public void GetStoreByCategoryId_ShouldReturn_StoresbyCategoryId()
         {
             //int pageId = 2;
@@ -140,8 +198,12 @@ namespace allopromo.Api.UnitTests
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();//? is Core.Abstract ?How ?
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             var storeController = new StoreController(_storeServiceMock.Object,
-                _productService.Object,
+                _productServiceMock.Object,
                 _notificationServiceMock.Object);
+        }
+        [Test]
+        public void StoreController_GetStorCategoryThumbnail_SHOULD_ReTurnImageDirectory()
+        {
         }
         bool StoreCreated(object source, System.EventArgs e)
         {
@@ -156,11 +218,10 @@ namespace allopromo.Api.UnitTests
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             StoreController storeController = new StoreController(_storeServiceMock.Object,
-                _productService.Object,
+                _productServiceMock.Object,
                 _notificationServiceMock.Object);
             var store = new StoreDto
             {
-                storeId = Guid.NewGuid().ToString(),
                 storeName = "Thierry Plank",
                 //storeReferenceNumber = 9213
             };
@@ -174,37 +235,17 @@ namespace allopromo.Api.UnitTests
             Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
             StoreDto store = new StoreDto(); // null;
-            store.storeId = null;
             StoreController storeController = new StoreController(_storeServiceMock.Object,
-                _productService.Object,
+                _productServiceMock.Object,
                 _notificationServiceMock.Object);
             //var result = storeController.GetStoreByIdAsync("null");//store);//.storeId);
             //Assert.AreEqual(result.GetType(), new NotFoundResult().GetType());
         }
-        [Test]
-        public void StoreController_CreateProductAsync_SHOULDReturn_CreatedProduct()
-        {
-            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
-            Mock<IProductService> _productServiceMock = new Mock<IProductService>();
-            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, _notificationServiceMock.Object);
 
-            var productDto = new tProduct { };
+        #endregion
 
-            var result = _sut.CreateProductAsync(productDto);
-            Assert.IsNotNull(result);
-        }
-        [Test]
-        public void StoreController_CreateProductAsync_SHOULD_Return_NotAuthenticated_IfUserNotAuthenticated()
-        {
-            Mock<IStoreService> _storeServiceMock = new Mock<IStoreService>();
-            Mock<IProductService> _productServiceMock = new Mock<IProductService>();
-            var _sut = new StoreController(_storeServiceMock.Object, _productServiceMock.Object, 
-                _notificationServiceMock.Object);
-            //UserDto user = null;
-            tProduct tproduct = new tProduct();
-            var result = _sut.CreateProductAsync(tproduct);
-            Assert.AreEqual(result.Result.GetType(), typeof(UnauthorizedResult));
-        }
+
+        #region Delete testing
         [Test]
         public void PutStoreCategory_SHOULD_Update()
         {
@@ -217,7 +258,7 @@ namespace allopromo.Api.UnitTests
         public void StoreController_GetProductsByCategoryIdAsync_SHOULD_Return_Products()
         {
             SUT = new StoreController(_storeServiceMock.Object,
-                _productService.Object,
+                _productServiceMock.Object,
                 _notificationServiceMock.Object);
 
             //var products = SUT.GetProducts();
@@ -227,10 +268,9 @@ namespace allopromo.Api.UnitTests
         public void StoreController_ModifyStoreCategory_SHOULD_ReturnStatus()
         {
             var sut = new StoreController(_storeServiceMock.Object,
-                _productService.Object, _notificationServiceMock.Object);
+                _productServiceMock.Object, _notificationServiceMock.Object);
             StoreCategoryDto category = new StoreCategoryDto
             {
-                storeCategoryId = "1",
                 storeCategoryName = "", //storeCategoryStatus = true };
             };
             var storeStatus = sut.PutStoreCategory(category);
@@ -242,27 +282,26 @@ namespace allopromo.Api.UnitTests
         {
             StoreCategoryDto category = new StoreCategoryDto
             {
-                storeCategoryId = "1nmnm-kkjkk-kmkmkmk-jnjjv88",
                 storeCategoryName = "", //storeCategoryStatus = true };
             };
             var result = new StoreController(_storeServiceMock.Object,
-                _productService.Object, _notificationServiceMock.Object)
-                .DeleteStoreCategory(category.storeCategoryId);
+                _productServiceMock.Object, _notificationServiceMock.Object);
+                //.DeleteStoreCategory(category.storeCategoryId);
             Assert.IsNotNull(result);
         }
         [Test]
         public void StoreController_DeleteStoreCategory_SHOULD_NotReturnNotfound()
         {
             var result = new StoreController(_storeServiceMock.Object,
-                _productService.Object, _notificationServiceMock.Object)
+                _productServiceMock.Object, _notificationServiceMock.Object)
                 .DeleteStoreCategory(null);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.GetType(), typeof(BadRequestResult));
         }
-        [Test]
-        public void StoreController_GetStorCategoryThumbnail_SHOULD_ReTurnImageDirectory()
-        {
-        }
+        #endregion
+
+
+        #region Other Methods Testing
         [Test]
         public void PostCreateShouldSaveCustomerAndReturnDetailsView()
         {
@@ -275,10 +314,9 @@ namespace allopromo.Api.UnitTests
             Mock<INotifyService> _notificationServiceMock = new Mock<INotifyService>();
 
             StoreController storeController =
-                new StoreController(_storeServiceMock.Object, _productService.Object, _notificationServiceMock.Object); 
+                new StoreController(_storeServiceMock.Object, _productServiceMock.Object, _notificationServiceMock.Object); 
             var store = new StoreDto
             {
-                storeId = "dsd",
                 storeName = "Thierry Plank",
             };
             //Act
@@ -308,6 +346,8 @@ namespace allopromo.Api.UnitTests
 
             _notificationServiceMock.Verify(p => p.SendNotification(), Times.Once());
         }
+
+        #endregion
     }
 }
 
@@ -392,3 +432,5 @@ namespace allopromo.Api.UnitTests
  * Enurms
  * Custom Guards ? 
  */
+
+

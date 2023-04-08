@@ -23,10 +23,13 @@ namespace allopromo.Core.Contracts
         public async Task<bool> Create(CityDto cityDto)
         {
             tCity city = new tCity();
-            city.cityName = cityDto.cityName.ToString();
-            city.countryId = 2344;
-            
-            await _cityRepository.Add(city);
+            city.cityId = 324;
+            city.cityName = cityDto.cityName;
+            city.cityCountry = new tCountry { countryName = "togo" };
+            city.cityGpsLatitude = string.Empty;
+            city.cityGpsLongitude = string.Empty;
+            _cityRepository.Add(city);
+            _cityRepository.Save();
             return true;
         }
         public void Delete(CityDto city)

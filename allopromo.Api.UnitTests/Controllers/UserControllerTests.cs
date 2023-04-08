@@ -11,6 +11,7 @@ using allopromo.Core.Model;
 using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Domain;
 using allopromo.Api;
+using allopromo.Api.Controllers;
 using allopromo.Api.ViewModel.ViewModels;
 
 namespace allopromo.Api.UnitTests
@@ -23,21 +24,19 @@ namespace allopromo.Api.UnitTests
         private Mock<IAccountService> _accountService;
         private UserController _SUT;
         #endregion
-        private Mock<UserManager<IdentityUser>> userManagerMock;
-        
-    #region Constructors
+        private Mock<UserManager<IdentityUser>> userManagerMock= new Mock<UserManager<IdentityUser>>();
+
+        #region Constructors
         public UserControllerTests()
         {
             _userServiceMock = new Mock<IUserService>();
             _accountService = new Mock<IAccountService>();
+            _SUT = new UserController(_userServiceMock.Object, _accountService.Object);
 
-            //userManagerMock = new Mock<UserManager<IdentityUser>>();
-
-            _SUT = new UserController(_userServiceMock.Object, _accountService.Object);//, userManagerMock.Object);
-            AutoMapper.Mapper.Initialize(cfg =>
+            /*AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();
-            });
+            });*/
         }
 #endregion
 
@@ -77,8 +76,6 @@ namespace allopromo.Api.UnitTests
                 .Returns(Task.FromResult(user));
             _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
                                     .Returns(true);
-            
-            
             /*
             _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
                             .Returns(true);
@@ -104,7 +101,7 @@ namespace allopromo.Api.UnitTests
                 UserPassword = string.Empty,
                 PhoneNumber = ""
             };
-            _SUT = new UserController(_userServiceMock.Object);
+            
             var actualResult = await _SUT.CreateUser(registerViewModel);
             Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
             //Assert.ThrowsAsync<Exception>(async () => await _SUT.CreateUser(registerViewModel));
@@ -115,7 +112,7 @@ namespace allopromo.Api.UnitTests
             ApplicationUser user1 = new ApplicationUser();
             _userServiceMock = new Mock<IUserService>();
             _userServiceMock.Setup(m => m.CreateUser(null, ""));//.ReturnsAsync(null);
-            _SUT = new UserController(_userServiceMock.Object);
+            
             Assert.ThrowsAsync<Exception>(() => _SUT.CreateUser(null));
         }
         void CreateUser()

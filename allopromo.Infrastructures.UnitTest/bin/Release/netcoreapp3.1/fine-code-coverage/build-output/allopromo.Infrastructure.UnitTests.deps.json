@@ -438,6 +438,18 @@
           }
         }
       },
+      "Microsoft.EntityFrameworkCore.Proxies/5.0.0": {
+        "dependencies": {
+          "Castle.Core": "4.4.1",
+          "Microsoft.EntityFrameworkCore": "5.0.11"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Proxies.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.52303"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/5.0.7": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.11",
@@ -2313,6 +2325,7 @@
           "FirebaseAdmin": "1.2.0",
           "FluentEmail.Smtp": "3.0.2",
           "Microsoft.EntityFrameworkCore": "5.0.11",
+          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.11",
           "NETCore.MailKit": "2.0.3",
           "Newtonsoft.Json": "12.0.2",
           "Polly": "7.2.3",
@@ -2331,6 +2344,7 @@
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore": "5.0.11",
+          "Microsoft.EntityFrameworkCore.Proxies": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.7",
           "Microsoft.Extensions.Configuration": "5.0.0",
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
@@ -2611,6 +2625,13 @@
       "sha512": "sha512-qtrmHiREbqsFnwFhgpdLFkA8yBcvn/NxCGJ2nTR7hIYHfBYSphwEnSPgPhqIEdHV1Hjuu2vQJrI0aLi6oAme7w==",
       "path": "microsoft.entityframeworkcore.inmemory/5.0.11",
       "hashPath": "microsoft.entityframeworkcore.inmemory.5.0.11.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Proxies/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3GjUVonhHpx1n8vt5QO6E5Q1pbO2vUrNBSRXQDQzTNexRRdbO7eBMpr59skEWIjG1zt8SAVi0yzeCauTYI90yA==",
+      "path": "microsoft.entityframeworkcore.proxies/5.0.0",
+      "hashPath": "microsoft.entityframeworkcore.proxies.5.0.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/5.0.7": {
       "type": "package",

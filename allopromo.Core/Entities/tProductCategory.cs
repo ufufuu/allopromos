@@ -6,9 +6,12 @@ namespace allopromo.Core.Entities
     {
         [Key]
         public int productCategoryId { get; set; }
-        public string productCategoryName { get; set; }
-        //public virtual string storeId { get; set; }
+        public string productCategoryName { get; set; } = null!;
 
-        public ICollection<tProduct> categoryProducts { get; set; }
+
+
+
+        //public virtual string storeId { get; set; }
+        //public ICollection<tProduct> categoryProducts { get; set; }
     }
 }

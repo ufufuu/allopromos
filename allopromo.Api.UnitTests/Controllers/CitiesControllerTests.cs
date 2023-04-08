@@ -57,8 +57,8 @@ namespace allopromo.Api.UnitTests
         private IEnumerable<Core.Application.Dto.CityDto> GetCities()
         {
             var cities = new List<Core.Application.Dto.CityDto>();
-            cities.Add(new CityDto { cityId = 12, cityName = "" });
-            cities.Add(new CityDto { cityId = 21, cityName = "" });
+            cities.Add(new CityDto { cityName = "" });
+            cities.Add(new CityDto {  cityName = "" });
             return cities.AsEnumerable();
         }
         [TestCase()]

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace allopromo.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class v0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_ApplicationRole", x => x.Id);
                 });
-            
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -40,6 +40,7 @@ namespace allopromo.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -167,17 +168,19 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                   
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                   /* table.ForeignKey(
-                        name: "FK_AspNetUserRoles_ApplicationRole_RoleId",
-                        column: x => x.RoleId,
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_ApplicationRole_RoleId1",
+                        column: x => x.RoleId1,
                         principalTable: "ApplicationRole",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);*/
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
@@ -190,7 +193,12 @@ namespace allopromo.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,9 +226,9 @@ namespace allopromo.Infrastructure.Migrations
                 columns: table => new
                 {
                     categoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    categoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    expires = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    storeCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    storeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    storeExpires = table.Column<DateTime>(type: "datetime2", nullable: false),
                     active = table.Column<bool>(type: "bit", nullable: false),
                     departmentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -241,9 +249,8 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     countryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    countryRegionId = table.Column<int>(type: "int", nullable: false),
-                    regionId = table.Column<int>(type: "int", nullable: true)
+                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    regionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -262,20 +269,19 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     cityId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     cityGpsLongitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     cityGpsLatitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    countryId = table.Column<int>(type: "int", nullable: false),
-                    tCountrycountryId = table.Column<int>(type: "int", nullable: true)
+                    CountryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.cityId);
                     table.ForeignKey(
-                        name: "FK_Cities_Countries_tCountrycountryId",
-                        column: x => x.tCountrycountryId,
+                        name: "FK_Cities_Countries_CountryId",
+                        column: x => x.CountryId,
                         principalTable: "Countries",
-                        principalColumn: "countryId",
+                        principalColumn: "CountryId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -287,18 +293,19 @@ namespace allopromo.Infrastructure.Migrations
                     storeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     storeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     storeCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    storeBecomesInactiveOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategorystoreCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    storeExpires = table.Column<DateTime>(type: "datetime2", nullable: false),
+
+                    categoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     cityId = table.Column<int>(type: "int", nullable: true),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    storeStatus = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stores", x => x.storeId);
                     table.ForeignKey(
-                        name: "FK_Stores_AspNetUsers_userId",
-                        column: x => x.userId,
+                        name: "FK_Stores_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -309,8 +316,8 @@ namespace allopromo.Infrastructure.Migrations
                         principalColumn: "cityId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Stores_StoreCategories_CategorystoreCategoryId",
-                        column: x => x.CategorystoreCategoryId,
+                        name: "FK_Stores_StoreCategories_categoryId",
+                        column: x => x.categoryId,
                         principalTable: "StoreCategories",
                         principalColumn: "categoryId",
                         onDelete: ReferentialAction.Restrict);
@@ -320,14 +327,12 @@ namespace allopromo.Infrastructure.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    productId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    productId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     productName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    storeId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productStatus = table.Column<int>(type: "int", nullable: false),
                     productCategoryId = table.Column<int>(type: "int", nullable: true),
-                    storeId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    storeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -339,8 +344,8 @@ namespace allopromo.Infrastructure.Migrations
                         principalColumn: "productCategoryId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Products_Stores_storeId1",
-                        column: x => x.storeId1,
+                        name: "FK_Products_Stores_storeId",
+                        column: x => x.storeId,
                         principalTable: "Stores",
                         principalColumn: "storeId",
                         onDelete: ReferentialAction.Restrict);
@@ -373,7 +378,15 @@ namespace allopromo.Infrastructure.Migrations
                 table: "AspNetUserRoles",
                 column: "RoleId");
 
-            
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId1",
+                table: "AspNetUserRoles",
+                column: "RoleId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_UserId1",
+                table: "AspNetUserRoles",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -388,9 +401,9 @@ namespace allopromo.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_tCountrycountryId",
+                name: "IX_Cities_CountryId",
                 table: "Cities",
-                column: "tCountrycountryId");
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_regionId",
@@ -403,9 +416,9 @@ namespace allopromo.Infrastructure.Migrations
                 column: "productCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_storeId1",
+                name: "IX_Products_storeId",
                 table: "Products",
-                column: "storeId1");
+                column: "storeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StoreCategories_departmentId",
@@ -413,9 +426,9 @@ namespace allopromo.Infrastructure.Migrations
                 column: "departmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stores_CategorystoreCategoryId",
+                name: "IX_Stores_categoryId",
                 table: "Stores",
-                column: "CategorystoreCategoryId");
+                column: "categoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_cityId",
@@ -423,9 +436,9 @@ namespace allopromo.Infrastructure.Migrations
                 column: "cityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stores_userId",
+                name: "IX_Stores_UserId",
                 table: "Stores",
-                column: "userId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -448,8 +461,8 @@ namespace allopromo.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "Products");
 
-            /*migrationBuilder.DropTable(
-                name: "ApplicationRole");*/
+            migrationBuilder.DropTable(
+                name: "ApplicationRole");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

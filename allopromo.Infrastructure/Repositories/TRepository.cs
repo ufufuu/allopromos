@@ -27,17 +27,43 @@ namespace allopromo.Infrastructure.Repositories
             _dbContext = dbContext;
             _table = table;
         }
-        public Task Add(T obj)
+        public void Add(T obj)
         {
-            if (obj == null)
+            try
             {
-                throw new ArgumentNullException("obj");
+                _table.Add(obj);
+
+                //_dbContext.SaveChangesAsync();
+                _dbContext.SaveChanges();
+                //return obj as Task;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Task Add2(T obj)
+        {
+            if (obj != null)
+            {
+                using (var dbContext = new AppDbContext())
+                {
+                    try
+                    {
+                        dbContext.Entry<T>(obj);
+                        dbContext.SaveChanges();
+                        return obj as Task;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+
+                }
             }
             else
             {
-                _dbContext.Entry<T>(obj);
-                this.Save();
-                return obj as Task;
+                throw new ArgumentNullException("obj");
             }
         }
         Task IRepository<T>.Add(T obj, string imageUrl)
@@ -53,6 +79,7 @@ namespace allopromo.Infrastructure.Repositories
             }
             return Task.FromResult(obj);
         }
+
         Task IRepository<T>.Add(string obj, string imageUrl)
         {
             if (obj == null)
@@ -75,13 +102,13 @@ namespace allopromo.Infrastructure.Repositories
             //if(tObjects!=null)
             var f = 6;
             return null;
-                //return (Task<IQueryable<T>>)tObjects;
+            //return (Task<IQueryable<T>>)tObjects;
 
         }
         public Task<List<T>> GetAllAsync()
         {
             var tObjects = _table.ToListAsync();
-            if(tObjects!=null)
+            if (tObjects != null)
                 return tObjects;
             else
                 throw new ArgumentNullException();

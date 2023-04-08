@@ -19,19 +19,19 @@ namespace allopromo.Core.UnitTest.ServicesTests
         private StoreService _sut;
         public StoreServiceTests()
         {
-            _sut = new StoreService(_storeRepositoryMock.Object, categoryRepositoryMock.Object,
-                departmentRepositoryMock.Object);
+            //_sut = new StoreService(_storeRepositoryMock.Object, categoryRepositoryMock.Object,
+              //  departmentRepositoryMock.Object);
         }
         [Test]
-        //public void StoreService_GetStores_ReturnStores()
-        //{
-        //    List<StoreDto> listStores = new List<StoreDto>();
-        //    _storeRepositoryMock.Setup(x => x.GetAllAsync())
-        //        .Returns((Task<IQueryable<tStore>>)getStoresAsync());
-        //    var stores  = _sut.GetStores().Result;
-        //    Assert.IsNotNull(stores);
-        //    Assert.AreEqual(stores.Count(), 3);
-        //}
+        public void StoreService_GetStores_ReturnStores()
+        {
+            List<StoreDto> listStores = new List<StoreDto>();
+            _storeRepositoryMock.Setup(x => x.GetAllAsync())
+                .Returns(getStoresAsync());
+            var stores  = _sut.GetStores().Result;
+            Assert.IsNotNull(stores);
+            Assert.AreEqual(stores.Count(), 3);
+        }
         //[Test]
         //public async Task StoreService_GetStores_ByLocation_ReturnStoresByLocalization()
         //{
@@ -64,7 +64,6 @@ namespace allopromo.Core.UnitTest.ServicesTests
             StoreDto store = new StoreDto
             {
                 storeName = "La Planque a Thierry",
-                storeId = "348ireknf"
             };
         }
         [Test]
@@ -84,15 +83,15 @@ namespace allopromo.Core.UnitTest.ServicesTests
             categoryRepositoryMock.Setup(x => x.Update(It.IsAny<tStoreCategory>()));
             //var updated =storeService.UpdateStoreCategory() 
         }
-        private Task<IQueryable<tStore>> getStoresAsync()
+        private Task<List<tStore>> getStoresAsync()
         {
             tStoreCategory category = new tStoreCategory();
-            tCity city = new tCity { cityId = 21, cityName = "Quebec", countryId = 2 };
+            tCity city = new tCity { cityId = 21, cityName = "Quebec" };
             var storeList = new List<tStore>();
             storeList.Add(new tStore {storeId =Guid.Parse(Guid.NewGuid().ToString()), storeName = "por", Category=category, City=city});
             storeList.Add(new tStore {storeId =Guid.Parse(Guid.NewGuid().ToString()), storeName = "rrt", Category = category, City = city});
             storeList.Add(new tStore {storeId = Guid.Parse(Guid.NewGuid().ToString()), storeName = "ooi", Category = category, City = city });
-            return Task.FromResult(storeList.AsQueryable());
+            return Task.FromResult(storeList.ToList());
         }
     }
 }

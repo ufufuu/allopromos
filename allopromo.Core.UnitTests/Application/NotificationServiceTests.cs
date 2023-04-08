@@ -16,7 +16,8 @@ namespace alloPromoTests.Services
             //var notificationService = new NotifyService(storeServiceMock.Object);
 
             storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<StoreDto>(),
-                        It.IsAny<StoreCategoryDto>(), It.IsAny<UserDto>())).Returns(Task.FromResult(new StoreDto()));
+                        It.IsAny<string>())) //UserDto>()))
+                .Returns(Task.FromResult(new StoreDto()));
 
             //.Raises(p => p.storeCreated += new NotificationService(storeServiceMock.Object).StoreCreatedEventHandler);
 

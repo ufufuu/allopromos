@@ -17,70 +17,51 @@ namespace allopromo.Controllers
         private UserManager<IdentityUser> _userManager { get; set; }
         private IHttpContextAccessor _httpContextAccessor { get; set; }
         public AccountController(UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor)
-            //, IAccountService accountService)
+        //, IAccountService accountService)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
+        //public AccountController()
+        //{ }
         [HttpGet]
-
-        //[Authorize]//(AuthenticationSchemes = 
-          //Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)] //, Policy = "TENANT")]
-        //[HttpGet("issue-type-selection"), Produces("application/json")]
+        [Authorize]
         public string GetName([FromQuery] string name)
         {
             var userName = HttpContext.User.Identity.Name;
-
             var identity = User.Identity as ClaimsIdentity;
             if (identity != null)
             {
                 IEnumerable<Claim> claims = identity.Claims;
                 var nameu = claims.Where(p => p.Type == "name")
                     .FirstOrDefault()?.Value;
-                //return new
-                //{
-                //    data = nameu
-                //};
             }
-
-            var contextUser = _httpContextAccessor.HttpContext?.User; 
-            //var curentUser = userManager.GetUserAsync(HttpContext.User);
-
+            var contextUser = _httpContextAccessor.HttpContext?.User;
             var userCourant = HttpContext.Session.IsAvailable;
             var user = HttpContext.User;
             var g = HttpContext;
-
             System.Security.Claims.ClaimsPrincipal currentUtils = this.User;
             ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+            //var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             //var claimss = currentUser.Claims.FirstOrDefault();
             //ApplicationUser user = await _userManager.FindByNameAsync(currentUserName);
 
+
             bool isAdmin = currentUser.IsInRole("Admin");
             var id = _userManager.GetUserId(User);
-
             var helloUser = _userManager.GetUserAsync(HttpContext.User).Result;
-
             ClaimsPrincipal currUser = this.User;
 
-            var h = 56;
-            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            IdentityUser utlisateur = _userManager.FindByNameAsync(currentUserName).Result;
-            
-            
             var t = User.HasClaim("someClaim", "someValue");
-
-            /*var nameIdentifier = User
+            var nameIdentifier = User
                 .Claims
                 .FirstOrDefault(c => c.Type == System.Security.Claims
                 .ClaimTypes
-                .NameIdentifier)?.Value;*/
-            //var curUser = nameIdentifier.ToString();
-
+                .NameIdentifier)?.Value;
+            var curUser = nameIdentifier.ToString();
             return User.Identity.Name.ToString();
         }
-
         //public void Post([FromBody] RegisterModel registerModel)
         //{
         //}
@@ -96,13 +77,13 @@ namespace allopromo.Controllers
         //    {
         //    }
         //}
-       // public void Post([FromBody] RegisterModel registerModel)
-    //    {
-    //        //var createdAccount = _accountManager.CreateAccount(accountModel.userName);
-    //    }
-    //    [AllowAnonymous]
-    //    public void Get([FromBody] LoginModel login)
-    //    {
+        // public void Post([FromBody] RegisterModel registerModel)
+        //    {
+        //        //var createdAccount = _accountManager.CreateAccount(accountModel.userName);
+        //    }
+        //    [AllowAnonymous]
+        //    public void Get([FromBody] LoginModel login)
+        //    {
 
         //    }
         //    [HttpPut]

@@ -181,3 +181,4 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Rel
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Release\netcoreapp3.1\allopromo.Infrastructure.UnitTests.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll

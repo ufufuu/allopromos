@@ -11,10 +11,13 @@ namespace allopromo.Core.Entities
         [Key]
         [Column("departmentId")]
         public string departmentId { get; set; }
+
         [Column("departmentName")]
         public string departmentName { get; set; }
+
         [Column("departmentThumbnail")]
-        public string departmentThumbnail  { get; set; }
-        public ICollection<tStoreCategory> Categories { get; set; }
+        public string departmentThumbnail { get; set; }
+        
+        public virtual ICollection<tStoreCategory>? Categories { get; set; } //=  null!;
     }
 }

@@ -9,9 +9,11 @@ namespace allopromo.Core.Abstract
 {
     public interface IProductService
     {
+        Task<ProductCategoryDto> CreateProductCategory(ProductCategoryDto productCategoryDto);
+        Task<ProductDto> CreateProductAsync(ProductDto product, string Name);
         Task<IEnumerable<ProductDto>> GetProductsByStore(string storeId);
         Task<ProductDto> GetProductById(string productId);
         Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id);
-        Task<ProductDto> CreateProductAsync(tProduct product);
+        
     }
 }

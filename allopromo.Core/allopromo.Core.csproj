@@ -34,7 +34,6 @@
     <Compile Remove="Abstract\IStoreRepository.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
-    <Compile Remove="Entities\tOrder.cs" />
     <Compile Remove="Entities\tRole.cs" />
     <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
     <Compile Remove="Abstract\Interfaces\IRepository.cs" />
@@ -51,6 +50,7 @@
     <PackageReference Include="FirebaseAdmin" Version="1.2.0" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.7" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Polly" Version="7.2.3" />

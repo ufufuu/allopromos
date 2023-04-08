@@ -23,12 +23,11 @@ namespace allopromo.Api.UnitTests
         [Test]
         public void PostDepartment_SHOULD_Return_CreatedDeparmentDto()
         {
-            _MockDepartmentService.Setup(x => x.CreateDepartmentAsync())
+            _MockDepartmentService.Setup(x => x.CreateDepartmentAsync(It.IsAny<DepartmentDto>()))
                 .Returns(System.Threading.Tasks.Task.FromResult(new DepartmentDto()));
             var result = SUT.PostDepartment(
             new DepartmentDto
             {
-                departmentId = "8998", 
                 departmentName = "Les Frasques de Comforte"
             });
             Assert.IsNotNull(result);

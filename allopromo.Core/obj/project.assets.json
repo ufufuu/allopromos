@@ -7274,6 +7274,7 @@
       "FirebaseAdmin >= 1.2.0",
       "FluentEmail.Smtp >= 3.0.2",
       "Microsoft.EntityFrameworkCore >= 5.0.7",
+      "Microsoft.EntityFrameworkCore.Abstractions >= 5.0.7",
       "NETCore.MailKit >= 2.0.3",
       "Newtonsoft.Json >= 12.0.2",
       "Polly >= 7.2.3",
@@ -7341,6 +7342,10 @@
             "version": "[3.0.2, )"
           },
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.7, )"
+          },
+          "Microsoft.EntityFrameworkCore.Abstractions": {
             "target": "Package",
             "version": "[5.0.7, )"
           },

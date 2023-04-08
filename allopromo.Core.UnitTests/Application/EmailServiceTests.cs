@@ -27,7 +27,6 @@ namespace alloPromo.Core.UnitTests.Domain.Application
         public void GetStore_SHOULD_Return_StoreById()
         {
             var store = new allopromo.Core.Application.Dto.StoreDto();
-            store.storeId = "lklk";
             store.storeName = "SED Food";
 
             //var result = _sut.GetStoreByIdAsync(store.storeId);
