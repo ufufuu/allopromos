@@ -123,7 +123,7 @@ namespace allopromo.Api.UnitTests
         public void StoreCrontroller_CreateStore_Returns_BaqRequest_StoreIsNull()
         {
             StoreDto store = null;
-            var result = SUT.CreateStoreAsync(store);//, null);
+            var result = SUT.PostStoreAsync(store);//, null);
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
         [Test]

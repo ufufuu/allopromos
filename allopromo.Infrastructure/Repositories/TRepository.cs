@@ -32,10 +32,10 @@ namespace allopromo.Infrastructure.Repositories
             try
             {
                 _table.Add(obj);
-
-                //_dbContext.SaveChangesAsync();
-                _dbContext.SaveChanges();
-                //return obj as Task;
+                //using (var dbContext = new AppDbContext())
+                //{
+                    _dbContext.SaveChanges();
+                //}
             }
             catch (Exception ex)
             {

@@ -65,7 +65,7 @@ namespace allopromo.Api.Controllers
         }
         #endregion
 
-        #region POST create
+        #region POST create Categories and Stores
         [HttpPost]
         [Route("categories/create/")]
         public async Task<IActionResult> PostStoreCategory([FromBody]
@@ -81,31 +81,32 @@ namespace allopromo.Api.Controllers
         //[Authorize]
         //[BasicJwtAuthorize]
 
-        public IActionResult CreateStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
+        public IActionResult PostStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
         {
             if (storeDto != null)
             {
-                var category = new StoreCategoryDto();
-
                 var currentIdentity = User.Identity;
 
-                //var userM = new UserManager<IdentityUser>();
-                //var tUser = userM.FindByNameAsync
                 //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
 
-                var store = _storeService.CreateStoreAsync(storeDto, currentIdentity.Name);
+                var store = _storeService.CreateStoreAsync(storeDto, currentIdentity.Name).Result;
+
                 if (store != null)
                 {
+                    return Ok(store);
+
                     //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
                     //_storeService.OnStoreCreated();
-
-                    return Ok(store);
                 }
                 return NotFound();
             }
             else
                 return NotFound();
         }
+        #endregion
+
+        #region Create Products And Categories
+
         [HttpPost]
         [Route("products/create")]
         //[SwaggerResponse(HttpStatusCode.OK,Description="CreateProduct", Type=typeof(StoreCategoryDto))]
@@ -127,7 +128,7 @@ namespace allopromo.Api.Controllers
                 return CreatedAtAction(nameof(productDto), new { }, product);
             }
         }
-        #endregion create
+        #endregion create Products and Categories
 
         #region GET read
         [HttpGet]

@@ -12,12 +12,8 @@ namespace allopromo.Core.Entities
         public string cityGpsLatitude { get; set; }
 
 
-
-
         //public int countryId { get; set; } 
         // ? Remove ? because of belowed property, redundance !
-
-
 
         public virtual tCountry cityCountry { get; set; }
     }

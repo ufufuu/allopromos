@@ -23,7 +23,7 @@ namespace allopromo.Core.Entities
         [Column("storeCreatedOn")]
         public DateTime storeCreatedOn{ get; set;}
 
-        [Column("storeBecomesInactiveOn")]
+        [Column("storeExpires")]
         public DateTime storeBecomesInactiveOn { get; set; }
 
 

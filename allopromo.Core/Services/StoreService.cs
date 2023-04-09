@@ -47,11 +47,14 @@ namespace allopromo.Core.Model
         private IProductService _productService { get; set; }
         private IRepository<tStore> StoreRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
+
+        private ILocalisationService _localisationService { get; set; }
+
         #endregion
 
         #region Constructors
         public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepository,
-            IDepartmentService departmentService,
+            IDepartmentService departmentService, ILocalisationService LocalisationService,
             IUserService userService, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor,
             IRepository<tDepartment> departmentRepository)
         {
@@ -60,6 +63,7 @@ namespace allopromo.Core.Model
             _categoryRepository = categoryRepository;
             _userService = userService;
             _userManager = userManager;
+            _localisationService = LocalisationService;
             _departmentService = departmentService;
             _httpContextAccessor = httpContextAccessor;
             _departmentRepository = departmentRepository;
@@ -115,6 +119,7 @@ namespace allopromo.Core.Model
 
             var department = _departmentService.GetEntities().Result
                 .Where(x => x.departmentName == storeCategory.DepartmentName).FirstOrDefault();
+
             var tStoreCategory = new tStoreCategory();
             tStoreCategory.storeCategoryId = Guid.NewGuid();
             tStoreCategory.storeCategoryName = storeCategory.storeCategoryName;
@@ -130,50 +135,58 @@ namespace allopromo.Core.Model
             {
                 imageUrl = "http://www.noiamgesfornow.jpg";
             }
-            //tStoreCategory.storeCategoryImageUrl = imageUrl;
-            _categoryRepository.Add(tStoreCategory); //, imageUrl);
+            _categoryRepository.Add(tStoreCategory);
             return storeCategory;
         }
         
         private IdentityUser getCurrentUtili()
         {
-            var ty = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
-            return ty;
+            var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
+            return currentUser;
         }
-        public async Task<StoreDto> CreateStoreAsync(StoreDto store, string userDtoName)
+        public async Task<StoreDto> CreateStoreAsync(StoreDto storeDto, string userDtoName)
         {
             var y = getCurrentUtili();
             try
             {
-                if (store != null)
+                if (storeDto != null)
                 {
                     var currentUser = await _userManager.FindByNameAsync(userDtoName);
-                    var category = new StoreCategoryDto { storeCategoryName = "Stores" };
-                    StoreDto storeDto = null;
+                    var storeObj = new tStore();
+                    
+                    var category = (from q in _categoryRepository.GetAllAsync().Result.AsQueryable()
+                                   select q).Where(x => x.storeCategoryName.ToString() == storeDto.storeCategory).FirstOrDefault();
+                    var ci= (from q in _categoryRepository.GetAllAsync().Result.AsQueryable()
+                             select q).Where(x => x.storeCategoryName.ToString() == storeDto.storeCategory).FirstOrDefault();
 
                     var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-                    var tStoreObj = Mapper.Map<tStore>(store);
-                    var tCategory = AutoMapper.Mapper.Map<tStoreCategory>(category);
 
-                    storeDto = Mapper.Map<StoreDto>(store);
+                    //var tStoreObj = Mapper.Map<tStore>(store);
+                    //storeDto = Mapper.Map<StoreDto>(store);
+
                     var location = new tLocation();
+
                     var city = new tCity { cityName = "Kara" };
+
+                    tCity cityObj = new tCity();
+
+                    //using (ILocalisationService locService = new Contracts.LocalisationService())//_cityRepository, _countryRepository)) ;
+                    //{
+                    //    cityObj = await locService.GetCityByName("Kara");
+                    //}
+
+                    cityObj = await _localisationService.GetCityByName("Kara");
                     city.cityGpsLatitude = "";
                     city.cityGpsLongitude = "";
+                    city.cityCountry = null;
 
-                    tStoreObj.User = currentUser;
+                    storeObj.storeId = Guid.NewGuid();
+                    storeObj.storeName = storeDto.storeName;
+                    storeObj.User = currentUser;
+                    storeObj.Category = category;
+                    storeObj.City = cityObj;
 
-                    tStoreObj.Category = tCategory;
-                    tStoreObj.Category.Department = new tDepartment { };
-                    tStoreObj.Category.Stores = null;
-
-                    tStoreObj.City = city;
-
-                    _storeRepository.Add(tStoreObj);
-
-                    //_storeRepository.Save();
-                    //_tGenericRepository.Save();
-                    //using(var fd= AppDb)
+                    _storeRepository.Add(storeObj);
 
                     OnStoreCreated();
                     return storeDto;

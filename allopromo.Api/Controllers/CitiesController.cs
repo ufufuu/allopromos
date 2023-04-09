@@ -61,14 +61,15 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                _localisationService.Create(city);
+                var tci = _localisationService.CreateAsync(city).Result;
+                return Ok(city);
             }
             catch (Exception ex)
             {
                 //_exceptionWriter.WriteException(ex.ToString());
                 throw;
             }
-            return Ok(city);
+            return NotFound();
         }
         
         [HttpDelete]

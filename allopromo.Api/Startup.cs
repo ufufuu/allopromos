@@ -136,6 +136,7 @@ namespace allopromo
             services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
             services.AddScoped<IRepository<tProductCategory>, TRepository<tProductCategory>>();
             services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
+            services.AddScoped<IRepository<tCountry>, TRepository<tCountry>>();
             services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
 
             //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
