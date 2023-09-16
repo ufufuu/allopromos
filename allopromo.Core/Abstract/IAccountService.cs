@@ -10,7 +10,8 @@ namespace allopromo.Core.Abstract
     public interface IAccountService
     {
         public string GetCurrentName();
-        public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user);
+
+        //public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user);
                
         public event UserAuthenticatedEventHandler userAuthenticated;
                 
@@ -18,7 +19,9 @@ namespace allopromo.Core.Abstract
         public void OnUserAuthenticate(string userName);
         public void OnUserAuthenticated();
 
-        abstract LoginResponseModel Authenticate(ApplicationUser login);
+        //abstract LoginResponseModel Authenticate(ApplicationUser login);
+
+
 
         //public event EventHandler<UserAuthenticateEventArgs> onUserAuthenticated;
         //public delegate void UserAuthenticatedEventHandler(object source, EventArgs e);

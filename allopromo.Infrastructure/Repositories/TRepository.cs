@@ -10,13 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Infrastructure.Repositories
 {
-    public class TRepository<T> : IRepository<T> where T : class /// Unit of Work ? que doit retourner creeer categry ?
+    public class TRepository<T> : IRepository<T> where T : class
+        // Unit of Work ? que doit retourner creeer categry ?
     {
-        #region fields
+        #region Fields
         private readonly AppDbContext _dbContext;
         private DbSet<T> _table;
         #endregion
-        #region Public Method
+
+        #region Constructors
+
         public TRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -27,6 +30,9 @@ namespace allopromo.Infrastructure.Repositories
             _dbContext = dbContext;
             _table = table;
         }
+        #endregion
+
+        #region Create
         public void Add(T obj)
         {
             try
@@ -96,15 +102,9 @@ namespace allopromo.Infrastructure.Repositories
         {
             _dbContext.SaveChanges();
         }
-        public Task<IQueryable<T>> GetAllAsync2()
-        {
-            var tObjects = _table; //.AsQueryable();
-            //if(tObjects!=null)
-            var f = 6;
-            return null;
-            //return (Task<IQueryable<T>>)tObjects;
+        #endregion
 
-        }
+        #region Read
         public Task<List<T>> GetAllAsync()
         {
             var tObjects = _table.ToListAsync();
@@ -122,6 +122,17 @@ namespace allopromo.Infrastructure.Repositories
         {
             return null;
         }
+        public Task<T> GetByIdAsync(string Id)
+        {
+            //return _table.FindAsync(Id.ToString());  // Why Not Guid.Parse(Id) here ?
+
+            var tObj = (Task.FromResult(_table.Find(Id.ToString())));
+            return tObj;
+        }
+        public async Task<T> GetByName(string Name)
+        {
+            return await _table.FindAsync();
+        }
         public async Task<T> GetByIdAsync(int Id)
         {
             return await _table.FindAsync(Id.ToString());
@@ -131,19 +142,9 @@ namespace allopromo.Infrastructure.Repositories
             var obj = await _table.FindAsync(Id.ToString());
             return obj;
         }
-        public async Task<T> GetByIdAsync(string Id)
-        {
-            return await _table.FindAsync(Guid.Parse(Id));
-        }
-        public bool Delete(object Id)
-        {
-            T obj = _table.Find(Id);
-            _table.Remove(obj);
-            return true;
-        }
-        public void Delete(T obj)
-        {
-        }
+        #endregion
+
+        #region Update
         public void Update(T obj)
         {
             if (obj != null)
@@ -164,6 +165,19 @@ namespace allopromo.Infrastructure.Repositories
 
             _dbContext.SaveChanges();
         }
+        #endregion
+
+        #region Delete
+        public bool Delete(object Id)
+        {
+            T obj = _table.Find(Id);
+            _table.Remove(obj);
+            return true;
+        }
+        public void Delete(T obj)
+        {
+        }
+        
 
         //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
         //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)

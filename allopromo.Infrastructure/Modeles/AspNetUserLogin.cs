@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace allopromo.Api.Modeles
+namespace allopromo.Infrastructure.Modeles
 {
     public partial class AspNetUserLogin
     {

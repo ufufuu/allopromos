@@ -8,12 +8,14 @@
     ".NETCoreApp,Version=v3.1": {
       "allopromo.Core.UnitTests/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7",
           "Microsoft.NET.Test.Sdk": "17.1.0",
           "Moq": "4.17.2",
           "NUnit": "3.13.3",
           "NUnit3TestAdapter": "3.16.1",
           "SpecFlow": "3.9.74",
           "allopromo.Core": "1.0.0",
+          "allopromo.Shared": "1.0.0",
           "coverlet.collector": "1.3.0"
         },
         "runtime": {
@@ -83,25 +85,25 @@
           }
         }
       },
-      "FluentEmail.Core/3.0.0": {
+      "FluentEmail.Core/3.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/FluentEmail.Core.dll": {
-            "assemblyVersion": "3.0.0.0",
-            "fileVersion": "3.0.0.0"
+            "assemblyVersion": "3.0.2.0",
+            "fileVersion": "3.0.2.0"
           }
         }
       },
-      "FluentEmail.Smtp/3.0.0": {
+      "FluentEmail.Smtp/3.0.2": {
         "dependencies": {
-          "FluentEmail.Core": "3.0.0"
+          "FluentEmail.Core": "3.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/FluentEmail.Smtp.dll": {
-            "assemblyVersion": "3.0.0.0",
-            "fileVersion": "3.0.0.0"
+            "assemblyVersion": "3.0.2.0",
+            "fileVersion": "3.0.2.0"
           }
         }
       },
@@ -163,25 +165,6 @@
           "lib/netstandard2.0/MailKit.dll": {
             "assemblyVersion": "2.5.0.0",
             "fileVersion": "2.6.0.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.WebApi.Client/5.0.0": {
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.11001.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.WebApi.Core/5.0.0": {
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Client": "5.0.0"
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.11001.0"
           }
         }
       },
@@ -1803,9 +1786,9 @@
         "dependencies": {
           "AutoMapper": "6.2.2",
           "FirebaseAdmin": "1.2.0",
-          "FluentEmail.Smtp": "3.0.0",
-          "Microsoft.AspNet.WebApi.Core": "5.0.0",
+          "FluentEmail.Smtp": "3.0.2",
           "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.7",
           "NETCore.MailKit": "2.0.3",
           "Newtonsoft.Json": "12.0.2",
           "Polly": "7.2.3",
@@ -1817,6 +1800,14 @@
         },
         "runtime": {
           "allopromo.Core.dll": {}
+        }
+      },
+      "allopromo.Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7"
+        },
+        "runtime": {
+          "allopromo.Shared.dll": {}
         }
       }
     }
@@ -1862,19 +1853,19 @@
       "path": "firebaseadmin/1.2.0",
       "hashPath": "firebaseadmin.1.2.0.nupkg.sha512"
     },
-    "FluentEmail.Core/3.0.0": {
+    "FluentEmail.Core/3.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aR81GYqWS5qATQh1300BmnRnUukgB89THcYXOHs7YGuSHc827qZtWqrGJlV8k9Jk60hlcmm/O/9Vmoaw2ytD3g==",
-      "path": "fluentemail.core/3.0.0",
-      "hashPath": "fluentemail.core.3.0.0.nupkg.sha512"
+      "sha512": "sha512-uQFFbJgMhhCFUti7pfMi429fMNi7fLGMj+7uDtD7POlQzLxlhXJ6tmt4Y1SI51sZsA36GO5b7+o29eY/dKiICQ==",
+      "path": "fluentemail.core/3.0.2",
+      "hashPath": "fluentemail.core.3.0.2.nupkg.sha512"
     },
-    "FluentEmail.Smtp/3.0.0": {
+    "FluentEmail.Smtp/3.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/Oc/OeWavbdNcMsEDoQljw7QAkAMm67xil+RG/JwJct5i6/cdl8jHzNSsSSzTRskxMDydIoUk/1DYFGgM7AqmQ==",
-      "path": "fluentemail.smtp/3.0.0",
-      "hashPath": "fluentemail.smtp.3.0.0.nupkg.sha512"
+      "sha512": "sha512-Y5pZKS/mXSl7D5WJWecvfo1kpIMDc6U0VRU6wRbE9wEv2IqMH3cQXa/97Pwi+m31COepIqc6dMhGMtAJ2Qh7rw==",
+      "path": "fluentemail.smtp/3.0.2",
+      "hashPath": "fluentemail.smtp.3.0.2.nupkg.sha512"
     },
     "Gherkin/19.0.3": {
       "type": "package",
@@ -1910,20 +1901,6 @@
       "sha512": "sha512-fY2ulWfn5xzulQfqTW66pLOrL26Puzmhl+VsXuqrVBhv5dWFwwKerxQM4HmMwr5Pd/ak9/5xSiFhIeXeD+HC2w==",
       "path": "mailkit/2.6.0",
       "hashPath": "mailkit.2.6.0.nupkg.sha512"
-    },
-    "Microsoft.AspNet.WebApi.Client/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-OMTp9ot40TZgZxnFO+S0ac0EY5CtQs6KTHkMSHmNFDc+a0tWMCsSBuOG6HoH9+G95wNhEfZrZ20btAsHMlQe7w==",
-      "path": "microsoft.aspnet.webapi.client/5.0.0",
-      "hashPath": "microsoft.aspnet.webapi.client.5.0.0.nupkg.sha512"
-    },
-    "Microsoft.AspNet.WebApi.Core/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ZOVLLtFpSM8nkJopUM9upbJEUkAUS60j6Sj1hDKewHaekWMUnnoMX/i3Ee+7KgxMGk13yxxQRHtSwcjh1JpJ4w==",
-      "path": "microsoft.aspnet.webapi.core/5.0.0",
-      "hashPath": "microsoft.aspnet.webapi.core.5.0.0.nupkg.sha512"
     },
     "Microsoft.CodeCoverage/17.1.0": {
       "type": "package",
@@ -2948,6 +2925,11 @@
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "allopromo.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "allopromo.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

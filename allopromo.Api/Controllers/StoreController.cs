@@ -77,10 +77,8 @@ namespace allopromo.Api.Controllers
         }
         [HttpPost]
         [Route("create")]
-
         //[Authorize]
         //[BasicJwtAuthorize]
-
         public IActionResult PostStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
         {
             if (storeDto != null)

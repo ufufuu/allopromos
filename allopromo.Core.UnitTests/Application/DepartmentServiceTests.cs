@@ -6,7 +6,6 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 namespace allopromo.Core.Application.UnitTests
 {
     [TestFixture]
@@ -33,6 +32,18 @@ namespace allopromo.Core.Application.UnitTests
             var result = SUT.CreateDepartmentAsync(departmentDto);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.GetType(), typeof(Task<DepartmentDto>));
+        }
+        [Test]
+        public async Task GetDepartmentAsync_SHOULD_RETURN_Department_Async()
+        {
+            var departmentDto = new DepartmentDto
+            {
+                departmentId = new System.Guid().ToString(),
+                departmentName = "adk",
+                departmentThumbnail = "https://allo-promo.net/images/department/0.jpg"
+            };
+            var department = SUT.GetDepartmentAsync(new System.Guid().ToString());
+            Assert.IsNotNull(department);
         }
         [Test]
         public async Task GetDepartments_SHOULD_Return_DepartmentsAsync()

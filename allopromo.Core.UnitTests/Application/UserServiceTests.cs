@@ -18,18 +18,24 @@ namespace allopromo.Core.UnitTests
         private Mock<UserManager<IdentityUser>> _userManagerMock = new Mock<UserManager<IdentityUser>>();
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
         private Mock<RoleManager<IdentityRole>> _roleManagerMock = new Mock<RoleManager<IdentityRole>>();
+        Mock<Helpers.AppSettings> _appSettingsMock = new Mock<Helpers.AppSettings>();
         #endregion
 
         #region Constructeurs
         public UserServiceTest()
         {
+
             //AutoMapper.Mapper.Initialize(cfg =>
             //{
             //    cfg.AddProfile<AutoMapperProfile>();
             //});
+
             _sut = new UserService(MockUserManager().Object,
-                                    null,
-                                    GetMockRoleManager().Object
+                                   null,
+                                   GetMockRoleManager().Object
+
+                                    //_appSettingsMock.Object
+
            );
         }
         #endregion
@@ -53,6 +59,14 @@ namespace allopromo.Core.UnitTests
         #endregion
 
         #region Create
+        [Test]
+        public void UserServuce_GenerateToken_SHOULD_Generate_A_Token()
+        {
+            var user = new IdentityUser{ UserName="kjk", Email="klk@tfg.fr"};
+            var token = _sut.GenerateJwtToken(user);
+            Assert.IsNotNull(token);
+        }
+
         [Test]
         public async Task UserService_CreateUser_SHOULD_Return_True_UserCreated()
         {

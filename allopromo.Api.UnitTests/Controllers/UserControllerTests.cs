@@ -22,23 +22,35 @@ namespace allopromo.Api.UnitTests
     #region Properties
         private Mock<IUserService> _userServiceMock;
         private Mock<IAccountService> _accountService;
-        private UserController _SUT;
         #endregion
-        private Mock<UserManager<IdentityUser>> userManagerMock= new Mock<UserManager<IdentityUser>>();
+        private Mock<UserManager<IdentityUser>> _userManagerMock= new Mock<UserManager<IdentityUser>>();
+        public Mock<SignInManager<IdentityUser>> _signInManagerMock = new Mock<SignInManager<IdentityUser>>();
+        private UserController _SUT;
 
         #region Constructors
         public UserControllerTests()
         {
             _userServiceMock = new Mock<IUserService>();
-            _accountService = new Mock<IAccountService>();
-            _SUT = new UserController(_userServiceMock.Object, _accountService.Object);
+            _userManagerMock = new Mock<UserManager<IdentityUser>>();
 
-            /*AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            });*/
+            _SUT = new UserController(_userServiceMock.Object,
+                _userManagerMock.Object);
         }
-#endregion
+        //public UserControllerTests()
+        //{
+        //    _userServiceMock = new Mock<IUserService>();
+        //    _accountService = new Mock<IAccountService>();
+
+        //    _SUT = new UserController(_userServiceMock.Object,
+        //        _accountService.Object);
+
+        //    /*AutoMapper.Mapper.Initialize(cfg =>
+        //    {
+        //        cfg.AddProfile<AutoMapperProfile>();
+        //    });*/
+        //}
+    #endregion
+
 
     #region Create
         [Test]
@@ -49,7 +61,7 @@ namespace allopromo.Api.UnitTests
                 UserEmail = "alala@freee.fr",
                 UserName = "fdfkdkff",
                 UserPassword = "K@da120",
-                PhoneNumber = "581-578-4401"
+                UserPhoneNumber = "581-578-4401"
             };
            _userServiceMock.Setup(x => x.CreateUser(It.IsAny<string>(), It.IsAny<string>()))
               .Returns(Task.FromResult(true));
@@ -57,53 +69,23 @@ namespace allopromo.Api.UnitTests
             Assert.IsNotNull(okResult);
             Assert.AreEqual(okResult.GetType(), typeof(OkObjectResult));
         }
+        
         [Test]
-        public void UserController_LOGIN_SHOULD_Return_UserOK()
-        {
-            var loginViewModel = new LoginViewModel
-            {
-                UserName = "support@allopay.tech", UserPassword = "atlanticConso@78"
-            };
-            var user = new IdentityUser
-            {
-                Id = Guid.NewGuid().ToString(),
-                Email = loginViewModel.UserName,
-                PasswordHash = loginViewModel.UserPassword
-            };
-            _userServiceMock.Setup(x => x//.LoginUser(user))
-                                            //.LoginUser(It.IsAny<IdentityUser>()))
-                                        .ValidateUserAsync(loginViewModel.UserName))
-                .Returns(Task.FromResult(user));
-            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
-                                    .Returns(true);
-            /*
-            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
-                            .Returns(true);
-            userManagerMock.Setup(x => x.FindByEmailAsync(loginViewModel.UserName))
-                .Returns(Task.FromResult(user));*/
-            var result = _SUT.Login(loginViewModel);
-            Assert.IsNotNull(result);
-            //Assert.IsInstanceOf<OkObjectResult>(result);
-            Assert.AreEqual(result.GetType(), typeof(OkObjectResult));
-
-            //_userServiceMock.Verify(
-            //x => x.LoginUser(It.IsAny<IdentityUser>()), Times.Once());
-            //Verify((_SUT.Login(It.IsAny<LoginViewModel>), Times.Once());
-        }
-        [Test]
-        public async Task UserController_CreateUser_UserValid_Password_Invalid_Or_Empty_ReturnsException()
+        public async Task UserController_CreateUser_User_Or_Password_Invalid_ReturnsException()
         {
             _userServiceMock = new Mock<IUserService>();
+            var userManager = new Mock<UserManager<IdentityUser>>();
             var registerViewModel = new RegisterViewModel
             {
                 UserEmail = "alala@f.fr",
                 UserName = "ff",
                 UserPassword = string.Empty,
-                PhoneNumber = ""
+                UserPhoneNumber = ""
             };
             
             var actualResult = await _SUT.CreateUser(registerViewModel);
             Assert.AreEqual(actualResult.GetType(), typeof(BadRequestResult));
+
             //Assert.ThrowsAsync<Exception>(async () => await _SUT.CreateUser(registerViewModel));
         }
         [Test]
@@ -136,8 +118,57 @@ namespace allopromo.Api.UnitTests
         }
         #endregion
 
-    #region Read
-        
+        #region Read
+        [Test]
+        public async Task UserController_LOGIN_SHOULD_Return_Login_OrPassword_Incorrect_Error()
+        {
+            var result = _SUT.Login(new LoginViewModel());
+            Assert.Throws<Exception>(() => _SUT.Login(new LoginViewModel()));
+        }
+        [Test]
+        public async Task UserController_LOGIN_SHOULD_Return_UserOK()
+        {
+            var loginViewModel = new LoginViewModel
+            {
+                UserName = "support@allopay.tech",
+                UserPassword = "atlanticConso@78"
+            };
+            var user = new IdentityUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = loginViewModel.UserName,
+                PasswordHash = loginViewModel.UserPassword
+            };
+            //_userManagerMock.Setup(x => x.CreateAsync(new RegisterViewModel())).Returns().
+            var usersList = new List<IdentityUser>();
+
+            _SUT = new UserController(_userServiceMock.Object,
+                getUserManagerMock(usersList).Object);
+            var result = await _SUT.Login(loginViewModel);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.GetType(), typeof(OkObjectResult));
+
+            /*_userServiceMock.Setup(x => x//.LoginUser(user))
+                                            //.LoginUser(It.IsAny<IdentityUser>()))
+                                           .ValidateUserAsync(loginViewModel.UserName))
+                .Returns(Task.FromResult(user));        
+            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
+                                    .Returns(true);
+            */
+            /*
+            _userServiceMock.Setup(x => x.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword))
+                            .Returns(true);
+            */
+            /*
+            userManagerMock.Setup(x => x.FindByEmailAsync(loginViewModel.UserName))
+                .Returns(Task.FromResult(user));
+            */
+            //Assert.IsInstanceOf<OkObjectResult>(result);
+            //_userServiceMock.Verify(
+            //x => x.LoginUser(It.IsAny<IdentityUser>()), Times.Once());
+            //Verify((_SUT.Login(It.IsAny<LoginViewModel>), Times.Once());
+        }
+
         [Test]
         public void UserController_GetUsers_ShouldReturnUsers_ByRole()
         {
@@ -178,10 +209,10 @@ namespace allopromo.Api.UnitTests
                 new Mock<UserManager<IAccountService>>();
 
         }
-        private static Mock<UserManager<ApplicationUser>> GetUserManagerMock()
+        private static Mock<UserManager<IdentityUser>> GetUserManagerMock()
         {
-            var storeMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(storeMock.Object,
+            var storeMock = new Mock<IUserStore<IdentityUser>>();
+            return new Mock<UserManager<IdentityUser>>(storeMock.Object,
                 null,
                 null,
                 null,
@@ -192,12 +223,32 @@ namespace allopromo.Api.UnitTests
                 null);
         }
         #endregion
+        public static Mock<UserManager<TUser>> getUserManagerMock<TUser>(List <TUser> usersList) where TUser : class
+        {
+            var store = new Mock<IUserStore<TUser>>();
+            var manager = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+            manager.Object.UserValidators.Add(new UserValidator<TUser>());
+            manager.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+
+            manager.Setup(x => x.DeleteAsync(It.IsAny<TUser>())).ReturnsAsync((IdentityResult.Success));
+            manager.Setup(x=>x.CreateAsync(It.IsAny<TUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success)
+                .Callback<TUser, string>((x, y)=>usersList.Add(x));
+            manager.Setup(x => x.UpdateAsync(It.IsAny<TUser>())).ReturnsAsync(IdentityResult.Success);
+            return manager;
+
+        }
 
     #region Update
-        #endregion
+    #endregion
 
 
     }
+
+    #region DELETE
+    #endregion
+
+
+
 }
 // Cash On Delivery - Wallets - Stored - Signup -- phone : -- Add to the Cart -->
 // placing the order ---> driver Assigned -- > customer can track 

@@ -19,32 +19,33 @@ using System.Linq;
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-
     //[Produces("application/json")]
+
     [ApiController]
     public class UserController : ControllerBase
     {
         #region Properties
         private readonly IUserService _userService;
-        private readonly IAccountService _accountService;
+        //private readonly IAccountService _accountService;
+
         private UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         /*private ILogger<UserController> _logger { get; set; }
         private Serilog.ILogger logger { get; set; }*/
         #endregion
 
         #region Constructors
-        public UserController(IUserService userService, IAccountService accountService)
-        {
-            _userService = userService;
-            _accountService = accountService;
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            });
-        }
+        //public UserController(IUserService userService, IAccountService accountService)
+        //{
+        //    _userService = userService;
+        //    //_accountService = accountService;
+        //    AutoMapper.Mapper.Initialize(cfg =>
+        //    {
+        //        cfg.AddProfile<AutoMapperProfile>();
+        //    });
+        //}
         public UserController(IUserService userService, 
             UserManager<IdentityUser> userManager)
         {
@@ -62,7 +63,7 @@ namespace allopromo.Api.Controllers
             _userService = userService;
             _userManager = userManager;
             _roleManager = roleManager;
-            _accountService = accountService;
+            //_accountService = accountService;
             _signInManager = signInManager;
         }
         #endregion
@@ -72,8 +73,11 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<IActionResult> GetUsers()
         {
-            var roleUsers = await _userService.GetUsersAsync();
-            return Ok(roleUsers);
+            var users = await _userService.GetUsersAsync();
+            var Users = 
+                AutoMapper.Mapper.Map<System.Collections.Generic.List<Core.Application.Dto.UserDto>>
+                (_userManager.Users);
+            return Ok(Users);
         }
         private async Task<ApplicationUser> GetConnectedUser()
         {
@@ -88,9 +92,12 @@ namespace allopromo.Api.Controllers
         [Route("register")]
         public async Task<IActionResult> CreateUser(RegisterViewModel registerViewModel)
         {
+            //All Props Are Null  | Handle Exceptions And Test them 
+
             if (registerViewModel != null)
             {
-                if (string.IsNullOrEmpty(registerViewModel.UserEmail)|| string.IsNullOrEmpty(registerViewModel.UserPassword))
+                if (string.IsNullOrEmpty(registerViewModel.UserEmail)|| 
+                    string.IsNullOrEmpty(registerViewModel.UserPassword))
                     return BadRequest();
                 else
                 {
@@ -98,11 +105,15 @@ namespace allopromo.Api.Controllers
                     {
                         IdentityUser appUser = 
                             AutoMapper.Mapper.Map<IdentityUser>(registerViewModel);
+
                         var loggedUser = new LoginViewModel();
 
-                        var result = await _userService.CreateUser(appUser.UserName, registerViewModel.UserPassword);
-                        if (result)
+                        var resultat = await _userManager.CreateAsync(appUser, registerViewModel.UserPassword);
+                        //await _userManager.AddToRoleAsync(appUser, registerViewModel.UserRole);
+                        if (resultat.Succeeded)
                         {
+                            var currentUser = await _userManager.FindByNameAsync(registerViewModel.UserName);
+                            var roleResult =await _userManager.AddToRoleAsync(currentUser, "Merchants");
                             return Ok(loggedUser);
                         }
                         else
@@ -123,20 +134,24 @@ namespace allopromo.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login( LoginViewModel loginViewModel)
         {
             if (loginViewModel != null)
             {
                 try
                 {
-                    var account = _userService.ValidateUserAsync(loginViewModel.UserName).Result;
-                    //_signInManager.SignInAsync(loginViewModel.UserName);
-                    if (account!= null)
+                    var user = await _userManager.FindByEmailAsync(loginViewModel.UserName);
+
+                    if (user!= null)
                     {
-                        var loginValid = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
-                        if (loginValid)
+                        //var loginValid21 = _userService.ValidateUser(loginViewModel.UserName, loginViewModel.UserPassword);
+
+                        Task <bool> loginValid = _signInManager.UserManager.CheckPasswordAsync(user,
+                        loginViewModel.UserPassword);
+
+                        if (loginValid.Result)
                         {
-                            IdentityUser user = new IdentityUser
+                            IdentityUser user32 = new IdentityUser
                             {
                                 UserName = loginViewModel.UserName,
                                 Email = loginViewModel.UserName,
@@ -145,7 +160,8 @@ namespace allopromo.Api.Controllers
                             return Ok(new ApiResponseModel
                             {
                                 userResponse = user,
-                                jwtToken = _accountService.generateJwtToken(user),
+                                jwtToken = _userService.GenerateJwtToken(user),
+                                userRole = "administrator",
                             });
                         }
                         else
@@ -167,6 +183,7 @@ namespace allopromo.Api.Controllers
                 catch (Exception ex)
                 {
                     //_logger.LogInformation("User Not Found");
+
                     throw;
                 }
             }

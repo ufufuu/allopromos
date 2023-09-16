@@ -21,6 +21,7 @@ namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     //[Produces("application/json")]
+
     [ApiController]
     public class DepartmentController : ControllerBase
     {
@@ -32,6 +33,7 @@ namespace allopromo.Api.Controllers
 
         //private readonly ILogger<DepartmentController> _logger;
         //private readonly IExceptionWriter _exceptionWriter;
+
         public DepartmentController(IConfiguration config,
             IDepartmentService DepartmentService ,
             IBaseService<DepartmentDto> departmentService)
@@ -41,12 +43,13 @@ namespace allopromo.Api.Controllers
             _config = config;
             //_exceptionWriter = exceptionWriter;
         }
+        #region Create
         [HttpPost]
         
         //[Authorize]
-        //[Core.Helpers.JwtBasicAuthorize]
-
-        public IActionResult PostDepartment([FromBody] DepartmentDto departmentDto)
+        //[Core.Helpers.JwtBasicAuthorize]n,n,
+        [Route("")]
+        public IActionResult CreateDepartment([FromBody] DepartmentDto departmentDto)
         {
             try
             {
@@ -78,6 +81,9 @@ namespace allopromo.Api.Controllers
                 throw ex;
             }
         }
+        #endregion
+
+        #region Read
         [HttpGet]
         [Route("")]
         public IActionResult GetDepartments()
@@ -87,7 +93,18 @@ namespace allopromo.Api.Controllers
                 return Ok(departments);
             return NotFound();
         }
-        
+        [HttpGet]
+        [Route("{departmentName}")]
+        public IActionResult GetDepartmentByName(string departmentName)
+        {
+            if (departmentName != null)
+            {
+                var department = _DepartmentService.GetDepartmentAsync(departmentName);
+                return Ok(department);
+            }
+            else
+                return NotFound();
+        }
         [HttpGet]
         [Route("cities+{cityId}")]
         public IActionResult GetDepartmentById(string cityId)
@@ -102,6 +119,33 @@ namespace allopromo.Api.Controllers
                 throw ex;
             }
         }
+        #endregion
+
+        #region Update
+        [HttpPut]
+        [Route("departmentId")]
+        public async Task<IActionResult> Put(string departmentId, 
+            [FromBody] DepartmentDto departmentDto)
+      {
+            try
+            {
+                if (departmentId != null)
+                {
+                    var department = await _DepartmentService.GetDepartmentAsync(
+                        departmentDto.departmentId);
+                    await _DepartmentService.UpdateDepartmentAsync(departmentId, departmentDto);
+                return Ok(department);
+                }
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+        #region Delete
         [HttpDelete]
         [Route("department+{Id}")]
         public async Task<IActionResult> Delete(string Id)
@@ -117,5 +161,6 @@ namespace allopromo.Api.Controllers
                 throw ex;
             }
         }
+        #endregion
     }
 }

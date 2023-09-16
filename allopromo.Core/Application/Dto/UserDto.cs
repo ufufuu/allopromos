@@ -8,17 +8,21 @@ namespace allopromo.Core.Application.Dto
     public class UserDto
     {
         public string userName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public string userEmail { get; set; }
+        public string userPhoneNumber { get; set; }
         public string userRoleName { get; set; }
+        public string userPassword { get; set; }
+
 
 
         //public List<RoleDto> Roles { get; set; }
         //public string UserRoles { get; set; }
 
+
         public UserDto()
         {}
     }
+
     //public class UserConvertor
     //{
     //    public UserDto ConvertToDto(ApplicationUser appUser)

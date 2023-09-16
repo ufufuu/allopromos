@@ -9,6 +9,7 @@ namespace allopromo.Core.Model.ApiResponse
         public Microsoft.AspNetCore.Identity.IdentityUser userResponse { get; set; }
         public string jwtToken { get; set; }
 
+        public string userRole { get; set; }
 
     }
 }

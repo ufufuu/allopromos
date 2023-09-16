@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 #nullable disable
-namespace allopromo.Api.Modeles
+namespace allopromo.Infrastructure.Modeles
 {
 //    public partial class promosF7Context : DbContext
 //    {

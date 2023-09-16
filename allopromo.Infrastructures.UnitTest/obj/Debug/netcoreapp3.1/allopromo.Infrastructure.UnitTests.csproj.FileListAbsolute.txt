@@ -22,8 +22,6 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Google.Apis.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\MailKit.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -33,6 +31,7 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll

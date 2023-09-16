@@ -13,7 +13,7 @@ namespace allopromo.Admin.UnitTests.Controllers
     public class DepartmentControllerTests
     {
         private event delRe deEvent;
-        private DepartmentController SUT;
+        private DepartmentController _SUT;
         private Mock<ILogger<Admin.Controllers.DepartmentController>> _loggerMock =
             new Mock<ILogger<Admin.Controllers.DepartmentController>>();
         
@@ -22,7 +22,7 @@ namespace allopromo.Admin.UnitTests.Controllers
         [SetUp]
         public void Init()
         {
-            SUT = new DepartmentController() 
+            _SUT = new DepartmentController();
         }
         //[Test]
         //public void DepartmentController_
@@ -31,15 +31,15 @@ namespace allopromo.Admin.UnitTests.Controllers
         {
             _httpFactoryMock.Setup(x => x.CreateClient(It.IsAny<string>()))
                 .Returns(new HttpClient()).Verifiable();
-            var result = departmentController.Create(It.IsAny<DepartmentDto>());
+            var result = _SUT.CreateDepartment(It.IsAny<>());
             Assert.IsNotNull(result);
         }
         [Test]
         public void DepartmentController_Create_Should_Return_BadRequest_When_Department_IS_Null()
         {
-            var result = departmentController.Create(null);
+            var result = _SUT.CreateDepartment(null);
             Assert.AreEqual(typeof(BadRequestResult), result.GetType());
-            Assert.Throws<NullReferenceException>(() => departmentController.Create(null));
+            Assert.Throws<NullReferenceException>(() => _SUT.CreateDepartment(null));
 
             //Assert.That(() => departmentController.Create(null), Throws.TypeOf<NullReferenceException>());
             //Assert.IsNull(result);
@@ -50,7 +50,7 @@ namespace allopromo.Admin.UnitTests.Controllers
         {
             _httpFactoryMock.Setup(x => x.CreateClient(It.IsAny<string>()))
                 .Returns(deEvent);
-            var result = _SUT.Index();
+            var result = _SUT.GetDepartments();
             Assert.IsNotNull(result);
 
             /*

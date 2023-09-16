@@ -19,15 +19,18 @@ namespace allopromo.Core.Abstract
         Task<TEntity> GetByIdAsync(object Id);
         Task<TEntity> GetByIdAsync(int categoryId);
         Task<TEntity> GetByIdAsync(string categoryId);
+        IQueryable<TEntity> GetByIdAsync(int categoryId, int pageNumber, int offSet);
         #endregion
 
+        #region Update
         void Update(TEntity obj);
         void Save();
-        
+        #endregion
+
+        #region Delete
         bool Delete(object Id);
         void Delete(TEntity obj);
-        IQueryable<TEntity> GetByIdAsync(int categoryId, int pageNumber, int offSet);
-        
+        #endregion
     }
 }
 

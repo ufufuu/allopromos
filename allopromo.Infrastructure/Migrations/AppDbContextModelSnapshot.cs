@@ -291,15 +291,15 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("RegionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("countryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("regionId")
+                        .HasColumnType("int");
+
                     b.HasKey("countryId");
 
-                    b.HasIndex("RegionId");
+                    b.HasIndex("regionId");
 
                     b.ToTable("Countries");
                 });
@@ -311,6 +311,10 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("departmentId");
 
+                    b.Property<DateTime>("createdDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdDate");
+
                     b.Property<string>("departmentName")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("departmentName");
@@ -319,9 +323,31 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("departmentThumbnail");
 
+                    b.Property<DateTime?>("updatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedDate");
+
                     b.HasKey("departmentId");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("allopromo.Core.Entities.tOrder", b =>
+                {
+                    b.Property<int>("orderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("orderDate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("orderNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("orderId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("allopromo.Core.Entities.tProduct", b =>
@@ -361,8 +387,17 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("createdDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("productCategoryName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("productCategoryId");
 
@@ -371,15 +406,21 @@ namespace allopromo.Infrastructure.Migrations
 
             modelBuilder.Entity("allopromo.Core.Entities.tRegion", b =>
                 {
-                    b.Property<int>("RegionId")
+                    b.Property<int>("regionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("createdDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("regionName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RegionId");
+                    b.Property<DateTime?>("updatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("regionId");
 
                     b.ToTable("Regions");
                 });
@@ -402,7 +443,7 @@ namespace allopromo.Infrastructure.Migrations
 
                     b.Property<DateTime>("storeBecomesInactiveOn")
                         .HasColumnType("datetime2")
-                        .HasColumnName("storeBecomesInactiveOn");
+                        .HasColumnName("storeExpires");
 
                     b.Property<DateTime>("storeCreatedOn")
                         .HasColumnType("datetime2")
@@ -435,20 +476,23 @@ namespace allopromo.Infrastructure.Migrations
                         .HasColumnName("categoryId");
 
                     b.Property<bool>("active")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("active");
 
                     b.Property<DateTime>("created")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("storeCreated");
 
                     b.Property<string>("departmentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("expires")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("expires")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("storeExpires");
 
                     b.Property<string>("storeCategoryName")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("categoryName");
+                        .HasColumnName("storeCategoryName");
 
                     b.HasKey("storeCategoryId");
 
@@ -545,7 +589,7 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     b.HasOne("allopromo.Core.Entities.tRegion", "Region")
                         .WithMany("Countries")
-                        .HasForeignKey("RegionId");
+                        .HasForeignKey("regionId");
 
                     b.Navigation("Region");
                 });
@@ -553,7 +597,7 @@ namespace allopromo.Infrastructure.Migrations
             modelBuilder.Entity("allopromo.Core.Entities.tProduct", b =>
                 {
                     b.HasOne("allopromo.Core.Entities.tProductCategory", "ProductCategory")
-                        .WithMany("categoryProducts")
+                        .WithMany()
                         .HasForeignKey("productCategoryId");
 
                     b.HasOne("allopromo.Core.Entities.tStore", "Store")
@@ -623,11 +667,6 @@ namespace allopromo.Infrastructure.Migrations
             modelBuilder.Entity("allopromo.Core.Entities.tDepartment", b =>
                 {
                     b.Navigation("Categories");
-                });
-
-            modelBuilder.Entity("allopromo.Core.Entities.tProductCategory", b =>
-                {
-                    b.Navigation("categoryProducts");
                 });
 
             modelBuilder.Entity("allopromo.Core.Entities.tRegion", b =>

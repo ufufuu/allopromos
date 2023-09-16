@@ -30,8 +30,8 @@ namespace allopromo.Core.Abstract
         #region Delete
         public void DeleteUser(ApplicationUser user);
 
-        public bool ValidateUser(string userNane, string userPassword);
-        public Task<Microsoft.AspNetCore.Identity.IdentityUser> ValidateUserAsync(string userNane); 
+        //public bool ValidateUser(string userNane, string userPassword);
+        //public Task<Microsoft.AspNetCore.Identity.IdentityUser> ValidateUserAsync(string userNane); 
 
         public bool LoginUser(Microsoft.AspNetCore.Identity.IdentityUser user);
         public System.Security.Claims.ClaimsPrincipal GetCurrentUser();
@@ -39,6 +39,8 @@ namespace allopromo.Core.Abstract
         #endregion
 
         #region Other Methods
+
+        public string GenerateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user);
 
         //public Task<bool> UserExist(string userName);
         //Task<bool> UserExist(string userName);

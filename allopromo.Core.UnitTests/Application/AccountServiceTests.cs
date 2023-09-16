@@ -23,8 +23,8 @@ namespace allopromo.Core.UnitTests
         [TestCase]
         public void AccountService_Raises_EventEmailSend_When_UserAuthenticates()
         {
-            var mockAccountService = new Mock<IAccountService>();
-            mockAccountService.Setup(p => p.Authenticate(It.IsAny<ApplicationUser>()));
+            //var mockAccountService = new Mock<IAccountService>();
+            //mockAccountService.Setup(p => p.Authenticate(It.IsAny<ApplicationUser>()));
                 //.Raises(e=>e.userAuthenticated+=null,
         }
         [Test]

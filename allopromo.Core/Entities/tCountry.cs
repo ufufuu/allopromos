@@ -10,8 +10,16 @@ namespace allopromo.Core.Entities
         [Key]
         public int countryId { get; set; }
         public string countryName { get; set; }
-        public virtual tRegion Region { get; set; } = null;
-        public virtual List<tCity> Cities { get; set; } = null!;
+
+        [ForeignKey("regionId")]
+        public virtual tRegion Region { get; set; } = null !;
+        public virtual List<tCity> Cities { get; set; } = null !;
+
+
     }
 }
+
+
+
+
 

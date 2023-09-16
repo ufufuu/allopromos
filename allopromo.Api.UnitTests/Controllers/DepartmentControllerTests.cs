@@ -25,7 +25,7 @@ namespace allopromo.Api.UnitTests
         {
             _MockDepartmentService.Setup(x => x.CreateDepartmentAsync(It.IsAny<DepartmentDto>()))
                 .Returns(System.Threading.Tasks.Task.FromResult(new DepartmentDto()));
-            var result = SUT.PostDepartment(
+            var result = SUT.CreateDepartment(
             new DepartmentDto
             {
                 departmentName = "Les Frasques de Comforte"
@@ -39,6 +39,24 @@ namespace allopromo.Api.UnitTests
             var result = SUT.GetDepartments();
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(OkObjectResult), result.GetType());
+        }
+        [Test]
+        public void GetDepartment_byName_SHOULD_RETURN_Department()
+        {
+            DepartmentDto departmentDto = new DepartmentDto
+            {
+                departmentName = "SuperMarkets",
+                departmentId = System.Guid.NewGuid().ToString(),
+            };
+            var department = SUT.GetDepartmentByName(departmentDto.departmentName);
+            Assert.IsNotNull(department);
+        }
+        [Test]
+        public void Put_SHOULD_Mofify_Department()
+        {
+            var dto = new DepartmentDto();
+            var result = SUT.Put(new System.Guid().ToString(), dto); // new DepartmentDto departmentDto());
+            Assert.IsNotNull(result);
         }
     }
 }

@@ -47,7 +47,25 @@ namespace allopromo.Infrastructure.Data
             {
                 property.ValueGenerated = ValueGenerated.OnAdd;
             }
+            var entities = modelBuilder.Model.GetEntityTypes();
 
+            System.Type[] identityObs = { 
+                typeof(allopromo.Infrastructure.Modeles.AspNetUser),
+                
+            };
+            foreach(var entity in entities)
+            {
+                System.Type typeEntity = entities.GetType();
+                bool exist = System.Array.Exists(identityObs, x => x == entity);
+                if (exist)
+
+                // typeof(allopromo.Infrastructure.Modeles.AspNetUser))
+
+                {
+                    entity.AddProperty("createdDate", typeof(System.DateTime));
+                    entity.AddProperty("updatedDate", typeof(System.DateTime));
+                }
+            }
             #region Mapping To Tables
             modelBuilder.Entity<tDepartment>()
                 .ToTable("Departments");

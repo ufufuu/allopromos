@@ -22,9 +22,12 @@ namespace allopromo.Core.Model
         private static UserManager<ApplicationUser> _userManager { get; set; }
 
         private readonly AppSettings _appSettings;
+
         private HttpContextAccessor _httpContextAccessor;
 
+
         //public event EventHandler<UserAuthenticateEventArgs> OnUserAuthenticated;
+
         public AccountService()
         {
         }
@@ -34,8 +37,7 @@ namespace allopromo.Core.Model
         }
         public void OnUserAuthenticate(string userName)
         {
-            //....
-            OnUserAuthenticated();  //userAuthenticated(new object(), new EventArgs());
+            OnUserAuthenticated();
         }
         protected virtual void OnUserAuthenticated()
         {
@@ -45,34 +47,20 @@ namespace allopromo.Core.Model
             }
         }
         //public AuthenticateResponse Authenticate(AuthenticateRequest model)
-        public LoginResponseModel Authenticate(ApplicationUser loginModel)
-        {
-            var user = _userManager.Users.FirstOrDefault(x => x.UserName
-                        == loginModel.UserName);  //&& x.PasswordHash == loginModel.userPassword);
-            if (user == null) return null;
 
-            // authentication successful so generate jwt token
-            OnUserAuthenticated();
+        //public LoginResponseModel Authenticate(ApplicationUser loginModel)
+        //{
+        //    var user = _userManager.Users.FirstOrDefault(x => x.UserName
+        //                == loginModel.UserName);  //&& x.PasswordHash == loginModel.userPassword);
+        //    if (user == null) return null;
+        //    // authentication successful so generate jwt token
+        //    OnUserAuthenticated();
 
-            var token = generateJwtToken(user);
-            //return new AuthenticateResponse(user, token);
-            return new LoginResponseModel(user, token);
-        }
-        public string generateJwtToken(IdentityUser user)
-        {
-            // generate token that is valid for 7 days
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserName.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials=new SigningCredentials(
-                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
+        //    var token = generateJwtToken(user);
+        //    //return new AuthenticateResponse(user, token);
+        //    return new LoginResponseModel(user, token);
+        //}
+        
         public async Task CreatesAccount(ApplicationUser user, string userpwd)
         {
             await new Task(null);

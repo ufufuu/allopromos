@@ -12,7 +12,7 @@ using allopromo.Core.Domain;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using allopromo.Core.Application.Dto;
-
+using allopromo.Core.Helpers;
 namespace allopromo.Core.Model
 {
    public class UserService : IUserService                                                             
@@ -21,20 +21,29 @@ namespace allopromo.Core.Model
         public UserManager<IdentityUser> _userManager { get; set; }
         private readonly SignInManager<IdentityUser> _signInManager;
         private RoleManager<IdentityRole> _roleManager;
+
         //private readonly PasswordHasher<ApplicationUser> _passwordHasher;
         private HttpContextAccessor _httpContextAccessor;
+
+        //private AppSettings _appSettings;
 #endregion
 
 #region Constructors
-        public UserService(UserManager<IdentityUser> userManager, 
-                            SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public UserService(
+            UserManager<IdentityUser> userManager, 
+                            SignInManager<IdentityUser> signInManager,
+                            RoleManager<IdentityRole> roleManager
+
+                            //AppSettings appSettings
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            //_appSettings = appSettings;
         }
-        public UserService()
-        {}
+        //public UserService()
+        //{}
 #endregion
 
 #region Public Methods - Getting
@@ -52,8 +61,8 @@ namespace allopromo.Core.Model
                     users.Add(new UserDto
                     {
                         userName=userObj.UserName,
-                        Email=userObj.Email,
-                        PhoneNumber=userObj.PhoneNumber,
+                        userEmail=userObj.Email,
+                        userPhoneNumber=userObj.PhoneNumber,
                         userRoleName=role
                     });
                 }
@@ -120,7 +129,9 @@ namespace allopromo.Core.Model
             if (user != null)
             {
                 //var  _appSettings = new AppSettings();
+
                 var tokenHandler = new JwtSecurityTokenHandler();
+
                 //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
                 var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFsaXdpeWFvQGdtYWlsLmNvbSIsIm5iZiI6MTYzMTY1MDQxMCwiZXhwIjoxNjMxNjUwNDMwLCJpYXQiOjE2MzE2NTA0MTF9.9oLqiHV66WvxkEJTq3lZWaEqBW1a5CkNZLtbTz53IBA");
                 var tokenDescriptor = new SecurityTokenDescriptor
@@ -176,18 +187,7 @@ namespace allopromo.Core.Model
         }
         #endregion
         #region Public Methods - Validation
-        public bool ValidateUser(string userEmail, string userPassword)
-        {
-            var user = _userManager.FindByEmailAsync(userEmail);
-            //_signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
-            return true;
-        }
-        public Task<IdentityUser> ValidateUserAsync(string userEmail)
-        {
-            var user = _userManager.FindByEmailAsync(userEmail);
-            //_signInManager.UserManager.CheckPasswordAsync(user.Result, userPassword).Result;
-            return user;
-        }
+       
         private void AddUserRole(ApplicationUser user, string roleName)
         {
             _userManager.AddToRoleAsync(user, roleName);
@@ -265,7 +265,6 @@ namespace allopromo.Core.Model
         {
             throw new NotImplementedException();
         }
-
         void IUserService.DeleteUser(ApplicationUser user)
         {
             throw new NotImplementedException();
@@ -283,6 +282,26 @@ namespace allopromo.Core.Model
         ApplicationUser IUserService.GetUserRole(ApplicationUser user)
         {
             throw new NotImplementedException();
+        }
+        public string GenerateJwtToken(IdentityUser user)
+        {
+            // generate token that is valid for 7 days
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            AppSettings apSettings = new AppSettings
+            {
+                Secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+            };
+            var key = Encoding.ASCII.GetBytes(apSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserName.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
         #endregion
     }

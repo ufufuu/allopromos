@@ -6,7 +6,7 @@ using System.Text;
 namespace allopromo.Core.Entities
 {
     [Table("Departments")]
-    public class tDepartment
+    public class tDepartment //: allopromo.Core.Entities.Base.BaseEntity
     {
         [Key]
         [Column("departmentId")]
@@ -17,7 +17,13 @@ namespace allopromo.Core.Entities
 
         [Column("departmentThumbnail")]
         public string departmentThumbnail { get; set; }
-        
+
+        [Column("createdDate")]
+        public DateTime createdDate { get; set; }
+
+        [Column("updatedDate")]
+        public DateTime? updatedDate { get; set;}
+
         public virtual ICollection<tStoreCategory>? Categories { get; set; } //=  null!;
     }
 }

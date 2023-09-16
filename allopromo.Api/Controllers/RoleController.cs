@@ -16,65 +16,85 @@ namespace allopromo.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        private readonly UserManager<ApplicationUser> _userManager;
+
+        //private readonly UserManager<ApplicationUser> _userManager;
+
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly SignInManager<ApplicationUser> _signInManager;
+
         private readonly IUserService _userService;
-        public RoleController(IUserService userService)
-        {
-            _userService = userService;
-        }
+
+        //public RoleController(IUserService userService)
+        //{
+        //    _userService = userService;
+        //}
+
         public RoleController(IAccountService accountService,
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, 
-            SignInManager<ApplicationUser> signInManager)
+             RoleManager<IdentityRole> roleManager 
+            //SignInManager<ApplicationUser> signInManager
+            )
         {
-            _accountService = accountService;
-            _userManager = userManager;
             _roleManager = roleManager;
-            _signInManager = signInManager;
+
+            //_userManager = userManager;
+            _accountService = accountService;
+            
+            //_signInManager = signInManager;
         }
+
         [ActivatorUtilitiesConstructor]
-        public RoleController(IUserService userService, UserManager<ApplicationUser> userManager)
+
+        //public RoleController(IUserService userService,UserManager<ApplicationUser> userManager)
+        //{
+        //    _userService = userService;
+        //    //_userManager = userManager;
+        //}
+
+        [HttpPost]
+        [Route("{roleName}")]
+        public async Task<IActionResult> CreateRole(string roleName)
         {
-            _userService = userService;
-            _userManager = userManager;
+            //if (roleName != null)
+            //{
+                var role = new IdentityRole(roleName);
+                var Role = await _roleManager.CreateAsync(role);
+                return Ok(Role);
+            //}
+            //else 
+              //  return NoContent();
         }
         [HttpGet("{role}")]
-        public IActionResult GetUsers(string role)
+        public IActionResult GetUsers(string roleName)
         {
-            if(role!=null)
+            if(roleName!=null)
             {
-                var users = _userService.GetUsersInRole(role);
+                var users = _userService.GetUsersInRole(roleName);
                 return Ok(users);
             }
             return NotFound();
         }
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            var users = _userService.GetUsers();
-            return Ok(users);
-        }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(User user)
+        public async Task<IActionResult> CreateUser(Core.Application.Dto.UserDto user)
+
             //Task<ActionResult<User>> cU(u) , task<bool> cU(u)
+
         {
             //throw new AccessViolationException();
             if (user == null)
                 return null;
             else
             {
-                if(string.IsNullOrEmpty(user.userPassword))
+                if(string.IsNullOrEmpty(user.userName))
                      throw new Exception("Password is invalid or Empty");
                 // How to throw as an ActionResult Exception ?
                     var appUser = new ApplicationUser
                     {
-                        UserName = user.userEmail,
-                        Email = user.userEmail,
-                        PhoneNumber = user.userPhoneNumber
+                        UserName = user.userName,
+                        Email = user.userName,
+                        PhoneNumber = user.userName
                     };
-                    var result = await _userService.CreateUser(appUser, user.userPassword);
+                    var result = await _userService.CreateUser(appUser.UserName, user.userPassword);
                     if (result)
                         return Ok(appUser);
                 return NotFound();
