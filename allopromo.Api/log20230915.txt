@@ -1,0 +1,60 @@
+2023-09-15 21:28:17.791 +00:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-09-15 21:28:41.325 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-15 21:28:41.329 +00:00 [INF] Hosting environment: Development
+2023-09-15 21:28:41.330 +00:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-09-15 21:28:41.511 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-09-15 21:28:44.122 +00:00 [INF] Request finished in 2626.7652ms 200 text/html;charset=utf-8
+2023-09-15 21:28:45.633 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui-bundle.js  
+2023-09-15 21:28:45.901 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui-standalone-preset.js  
+2023-09-15 21:28:46.235 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-09-15 21:28:46.649 +00:00 [INF] The file /swagger-ui-bundle.js was not modified
+2023-09-15 21:28:46.655 +00:00 [INF] The file /swagger-ui-standalone-preset.js was not modified
+2023-09-15 21:28:46.668 +00:00 [INF] Request finished in 766.2104ms 304 application/javascript
+2023-09-15 21:28:46.668 +00:00 [INF] Request finished in 1035.9145ms 304 application/javascript
+2023-09-15 21:28:47.270 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-09-15 21:28:47.284 +00:00 [INF] Request finished in 1048.9886ms 200 text/css
+2023-09-15 21:28:48.007 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-09-15 21:28:48.019 +00:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-09-15 21:28:48.021 +00:00 [INF] Request finished in 15.8963ms 200 image/png
+2023-09-15 21:28:52.261 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-09-15 21:28:53.100 +00:00 [INF] Request finished in 839.7081ms 200 application/json;charset=utf-8
+2023-09-15 21:30:55.518 +00:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-09-15 21:31:00.840 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-15 21:31:00.843 +00:00 [INF] Hosting environment: Development
+2023-09-15 21:31:00.844 +00:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-09-15 21:31:00.876 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-09-15 21:31:01.868 +00:00 [INF] Request finished in 1009.4551ms 200 text/html;charset=utf-8
+2023-09-15 21:31:02.263 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-09-15 21:31:02.993 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-09-15 21:31:05.155 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-09-15 21:31:05.159 +00:00 [INF] Request finished in 2895.1139ms 0 text/css
+2023-09-15 21:31:05.162 +00:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-09-15 21:31:05.163 +00:00 [INF] Request finished in 2169.69ms 0 image/png
+2023-09-15 21:31:05.169 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-09-15 21:31:06.061 +00:00 [INF] Request finished in 892.4617ms 200 application/json;charset=utf-8
+2023-09-15 21:32:01.898 +00:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Messages/inbox  0
+2023-09-15 21:32:01.932 +00:00 [INF] CORS policy execution successful.
+2023-09-15 21:32:01.940 +00:00 [INF] Executing endpoint 'allopromo.Api.Controllers.MessagesController.Get (allopromo.Api)'
+2023-09-15 21:32:02.204 +00:00 [INF] Route matched with {action = "Get", controller = "Messages"}. Executing controller action with signature System.String Get() on controller allopromo.Api.Controllers.MessagesController (allopromo.Api).
+2023-09-15 21:34:05.347 +00:00 [INF] User profile is available. Using 'C:\Users\MonPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-09-15 21:34:10.344 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-15 21:34:10.347 +00:00 [INF] Hosting environment: Development
+2023-09-15 21:34:10.347 +00:00 [INF] Content root path: C:\Users\MonPC\source\repos\allopromo\allopromo.Api
+2023-09-15 21:34:10.387 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/index.html  
+2023-09-15 21:34:11.385 +00:00 [INF] Request finished in 1025.151ms 200 text/html;charset=utf-8
+2023-09-15 21:34:12.206 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/swagger-ui.css  
+2023-09-15 21:34:12.977 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/favicon-16x16.png  
+2023-09-15 21:34:13.948 +00:00 [INF] Request starting HTTP/2.0 GET https://localhost:44306/swagger/v1/swagger.json  
+2023-09-15 21:34:15.143 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-09-15 21:34:15.143 +00:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2023-09-15 21:34:15.147 +00:00 [INF] Request finished in 2169.1434ms 0 image/png
+2023-09-15 21:34:15.147 +00:00 [INF] Request finished in 2940.5464ms 0 text/css
+2023-09-15 21:34:15.753 +00:00 [INF] Request finished in 1806.3933ms 200 application/json;charset=utf-8
+2023-09-15 21:34:37.431 +00:00 [INF] Request starting HTTP/2.0 POST https://localhost:44306/api/v1/Messages/inbox  0
+2023-09-15 21:34:37.742 +00:00 [INF] CORS policy execution successful.
+2023-09-15 21:34:37.748 +00:00 [INF] Executing endpoint 'allopromo.Api.Controllers.MessagesController.Get (allopromo.Api)'
+2023-09-15 21:34:38.076 +00:00 [INF] Route matched with {action = "Get", controller = "Messages"}. Executing controller action with signature System.String Get() on controller allopromo.Api.Controllers.MessagesController (allopromo.Api).
+2023-09-15 21:34:38.321 +00:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2023-09-15 21:34:38.381 +00:00 [INF] Executed action allopromo.Api.Controllers.MessagesController.Get (allopromo.Api) in 267.0578ms
+2023-09-15 21:34:38.400 +00:00 [INF] Executed endpoint 'allopromo.Api.Controllers.MessagesController.Get (allopromo.Api)'
+2023-09-15 21:34:38.401 +00:00 [INF] Request finished in 1064.9366ms 200 text/plain; charset=utf-8

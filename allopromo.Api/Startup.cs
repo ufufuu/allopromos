@@ -35,7 +35,7 @@ using Microsoft.OpenApi.Models;
 
 namespace allopromo
 {
-    public class  Startup
+    public class Startup
     {
         public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
         public Startup(IConfiguration configuration)
@@ -65,16 +65,15 @@ namespace allopromo
                 options.Cookie.HttpOnly = true;
             });
             services.AddHttpContextAccessor();
-            
-
-            
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
             services.AddDbContext<AppDbContext>(options =>
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             );
+
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
@@ -146,19 +145,21 @@ namespace allopromo
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
-            //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<tUser>>(sp)); //?Instead of <ApplicationUser>>
+
+            //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<tUser>>(sp));
+            //?Instead of <ApplicationUser>>
+
             services.AddCors(
-                            x => x.AddPolicy("AllowOrigin", 
-                                //options => options.AllowAnyOrigin()
-                            builder =>
-                            {
-                                builder
-                                    .AllowAnyOrigin()
-                                    //.AllowCredentials()
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-                            }
-                ));
+                      x => x.AddPolicy("AllowOrigin",
+                     //options => options.AllowAnyOrigin()
+                     builder =>
+                     {
+                         builder
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .AllowAnyOrigin();
+                    }));
             services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
             services.AddControllers().AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -246,13 +247,12 @@ namespace allopromo
                 //côtéclient,ajoutez un point de
                 //terminaison pour le Hub
 
-                ///endpoints.MapHub<ChatHub>("/chathub");
-
+                endpoints.MapHub<Api.Infrastructure.Hubs.ChatHub>("/chathub");
+                endpoints.MapHub<Api.Infrastructure.Hubs.NotifyHub>("notifications");
                 endpoints.MapFallbackToFile("index.html");
             });
 
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>{
                 c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
