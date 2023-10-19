@@ -197,3 +197,11 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Debug\netcorea
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Api.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Api.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Api.UnitTests.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\MediatR.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\MediatR.Contracts.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api.UnitTests\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll

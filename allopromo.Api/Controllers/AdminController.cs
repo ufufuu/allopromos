@@ -12,13 +12,24 @@ namespace allopromo.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class AdminController : Controller   //Base
     {
         private UserManager<IdentityUser> _userManager { get; set; }
         private IHttpContextAccessor _httpContextAccessor { get; set; }
-        public AdminController(UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor)
-        
+        public Infrastructure.Data.AppDbContext _dbContext { get; set; }
+
+        public Microsoft.AspNetCore.SignalR.
+            IHubContext<Api.Infrastructure.Hubs.ChatHub> _notificationHub { get; set; }
+        public Microsoft.AspNetCore.SignalR.
+            IHubContext<Api.Infrastructure.Hubs.MessageHub,Api.Infrastructure.Hubs.IMessageHubClient>
+                _messageHub { get; set; }
+        public AdminController(UserManager<IdentityUser> userManager, 
+            IHttpContextAccessor httpContextAccessor,
+            Microsoft.AspNetCore.SignalR.
+            IHubContext<Api.Infrastructure.Hubs.ChatHub> notificationHub
+            )
         {
+            _notificationHub = notificationHub;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -55,6 +66,23 @@ namespace allopromo.Controllers
             var curUser = nameIdentifier.ToString();
             return User.Identity.Name.ToString();
         }
-        
+
+        //[HttpPost]
+        //public async Task<>
+        //[HttpPost]
+        //public async Task<IActionResult> Index()
+        //{
+        //    // await _messageHub.Clients.All.SendOffersToUser(sendToUser", model.Id, model.Content);
+        //    // await _notificationHub.Clients.All.SendCoreAsync("");
+
+        //    return null;
+        //}
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> Login()
+        //{
+        //    return View();
+        //}
     }
 }

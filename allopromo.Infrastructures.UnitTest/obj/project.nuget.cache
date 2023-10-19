@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "h35kkYZ7eoebakHm0q6Y68QmKznpD+QycouCT2jDxP18WymUHUgdnlQPpmbMLopNcOHdpCn5N+Fj6vxBz1MeEw==",
+  "dgSpecHash": "5UPu1u0q9N+KieSPSB8j8FFiPa9od8pgbyieVVy/7K78XbITNj/EyWcw/3dx0GI/AbuKZzCvVKhuJ2aaBNYhSw==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructures.UnitTest\\allopromo.Infrastructure.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -158,6 +158,8 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.private.uri\\4.3.2\\system.private.uri.4.3.2.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive.core\\6.0.0\\system.reactive.core.6.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",

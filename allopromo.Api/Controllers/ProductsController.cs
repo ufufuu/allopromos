@@ -14,16 +14,38 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        #region Fields
         IProductService _productService { get; set; }
+
+        //private allopromo.Infrastructure.Repositories.TRepository<ProductDto> _prodRepo{ get; set; }
+
+        private IRepository<ProductDto> _prodRepository { get; set; }
+
+        Validators.IValidationService _validationService { get; set; }
+
+        #endregion
+
+        #region constructors
+    
         public ProductsController(IProductService productService) 
         {
             _productService = productService;
         }
-        [HttpPost]
-        [Route("category/create")]
+        #endregion
+
+        #region Public Methods
+        [HttpPost("create-product")]
+        //[Route("category/create")]
         public async Task<IActionResult> PostCategory([FromBody] ProductCategoryDto productCategoryDto)
         {
+
+            //validationService.Validate<ProductDto>();
+
             await _productService.CreateProductCategory(productCategoryDto);
+
+            //await _productRepository.Create()
+
+
             return Ok(productCategoryDto);
         }
         [HttpPost]
@@ -43,5 +65,6 @@ namespace allopromo.Api.Controllers
         {
             return new List<StoreDto>();
         }
+        #endregion
     }
 }

@@ -151,3 +151,5 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcore
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll

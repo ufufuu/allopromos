@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "z4kkNW+x9DnIGqNtczWZ+8kHXtffAQeDm4K+xyooTOXYGyc751KHzwqjw19S/oa6QfGJK6+mJwHEYKc6hlZ3Zg==",
+  "dgSpecHash": "4uCgNm4vPrZ5zfVdQ9fSmoFo97cQ0J51bgVr3t7Ju2+fWpFOA1LEMtfygzsT5Q8XM3iKqaAi1Acx4riidZtoeA==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Core.UnitTests\\allopromo.Core.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -118,6 +118,8 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.net.security\\4.3.2\\system.net.security.4.3.2.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive.core\\6.0.0\\system.reactive.core.6.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace allopromo.Infrastructure.Repositories
+namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repositories
 {
     public class TRepository<T> : IRepository<T> where T : class
         // Unit of Work ? que doit retourner creeer categry ?

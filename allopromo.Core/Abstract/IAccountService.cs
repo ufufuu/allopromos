@@ -1,6 +1,6 @@
 ﻿using allopromo.Core.Domain;
 using allopromo.Core.Model;
-using allopromo.Core.Model.ApiResponse;
+//using allopromo.Core.Model.ApiResponse;
 using System;
 using static allopromo.Core.Model.AccountService;
 namespace allopromo.Core.Abstract
@@ -11,13 +11,21 @@ namespace allopromo.Core.Abstract
     {
         public string GetCurrentName();
 
+
+
         //public string generateJwtToken(Microsoft.AspNetCore.Identity.IdentityUser user);
+
+
+
                
         public event UserAuthenticatedEventHandler userAuthenticated;
                 
         public delegate UserAuthenticateEventArgs onUserAuthenticates();
         public void OnUserAuthenticate(string userName);
         public void OnUserAuthenticated();
+
+
+
 
         //abstract LoginResponseModel Authenticate(ApplicationUser login);
 

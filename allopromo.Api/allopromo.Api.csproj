@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Remove="Controllers\AccounttController.cs" />
     <Compile Remove="Controllers\AuthenticationController.cs" />
-    <Compile Remove="Controllers\MessagesController.cs" />
     <Compile Remove="Controllers\OdooController.cs" />
     <Compile Remove="Controllers\OrderStatus.cs" />
     <Compile Remove="Controllers\StoreCategorie.cs" />
@@ -54,7 +53,7 @@
     <Compile Remove="Infrastructure\MailService.cs" />
     <Compile Remove="Infrastructure\Middleware\Exceptions\ExceptionHandlingMiddleware.cs" />
     <Compile Remove="Infrastructure\Providers\BasicAuthenticationFilter.cs" />
-    <Compile Remove="Infrastructure\Services\ErrorService.cs" />
+    <Compile Remove="Services\ErrorService.cs" />
     <Compile Remove="Infrastructure\ToolKit\JwtSecurityTokenHandler.cs" />
     <Compile Remove="ViewModel\MappingProfile.cs" />
   </ItemGroup>
@@ -69,16 +68,19 @@
     <Folder Include="Controllers\Errors\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
-    <Folder Include="Infrastructure\Services\" />
     <Folder Include="Properties\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+    
+    <PackageReference Include="MediatR" Version="12.1.1" />
     
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     

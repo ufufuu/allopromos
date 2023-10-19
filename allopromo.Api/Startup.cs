@@ -29,13 +29,13 @@ using allopromo.Core.Services;
 using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Logging;
 using Microsoft.Extensions.Hosting;
-using allopromo.Core.Contracts;
+//using allopromo.Core.Contracts;
 using System.Net.Http;
 using Microsoft.OpenApi.Models;
 
 namespace allopromo
 {
-    public class  Startup
+    public class Startup
     {
         public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
         public Startup(IConfiguration configuration)
@@ -46,13 +46,14 @@ namespace allopromo
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDefaultIdentity<IdentityUser>()
-              //  .AddRoles<IdentityRole>()
-                //.AddEntityFrameworkStores<AppDbContext>();
+            //  .AddRoles<IdentityRole>()
+            //.AddEntityFrameworkStores<AppDbContext>();
+
             services.AddControllers();
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            { 
+            {
                 options.Stores.MaxLengthForKeys = 128;
-                })
+            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
@@ -65,9 +66,9 @@ namespace allopromo
                 options.Cookie.HttpOnly = true;
             });
             services.AddHttpContextAccessor();
-            
 
-            
+
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
@@ -79,7 +80,7 @@ namespace allopromo
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
 
-            services.AddScoped<INotifyService, EmailNotificationService>();
+            
             services.AddScoped<ILocalisationService, LocalisationService>();
 
             services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
@@ -97,7 +98,7 @@ namespace allopromo
             //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
             //services.AddScoped<IUserRepository, UserRepository>();
             //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
-
+                
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.
@@ -108,7 +109,7 @@ namespace allopromo
                     In = ParameterLocation.Header,
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme="Bearer"
+                    Scheme = "Bearer"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -128,7 +129,7 @@ namespace allopromo
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
-            services.AddScoped<INotifyService, EmailNotificationService>();
+            //services.AddScoped<INotifyService, EmailNotificationService>();
             services.AddScoped<IAccountService, AccountService>();
 
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
@@ -146,19 +147,34 @@ namespace allopromo
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
+
             //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<tUser>>(sp)); //?Instead of <ApplicationUser>>
+
+            services.AddSignalRCore();
+
+            //services.AddPolicy("CORSPolicy",
+            //    builder => builder
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //    .AllowCredentials()
+            //    .SetIsOriginAllowed(hosts => true));
+            ////});
+            
             services.AddCors(
-                            x => x.AddPolicy("AllowOrigin", 
-                                //options => options.AllowAnyOrigin()
+            x => x.AddPolicy("AllowOrigin", 
+             //options => options.AllowAnyOrigin()
                             builder =>
                             {
                                 builder
-                                    .AllowAnyOrigin()
+                                    .AllowAnyOrigin() // ? Be Careful With this One 
                                     //.AllowCredentials()
                                     .AllowAnyHeader()
+                                    .WithOrigins("http://localhost:4200")
                                     .AllowAnyMethod();
                             }
                 ));
+
+
             services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
             services.AddControllers().AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -198,10 +214,10 @@ namespace allopromo
                 return policy;
             });
         }
+
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             /*
-            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context => {
@@ -210,10 +226,12 @@ namespace allopromo
             });
             */
             
-            if (env.IsDevelopment()) //if(env.IsProduction() || ens.IsStaging() || env.IsEnvironnement("Staging_2"))
+            if (env.IsDevelopment()) // || env.IsProduction()
             {
                 //app.UserExceptionHandler("/Home/Error-local-development");
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             else
             {
@@ -236,6 +254,7 @@ namespace allopromo
             app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
             .SetIsOriginAllowed((host) => true).AllowCredentials() //vs alloAnyOrigin
             );
+            app.UseCors("CORSPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -245,44 +264,50 @@ namespace allopromo
                 //Entreles points determinaison pour les contrôleurs et lesecours 
                 //côtéclient,ajoutez un point de
                 //terminaison pour le Hub
+                //endpoints.MapFallbackToFile("index.html");
 
-                ///endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<Api.Infrastructure.Hubs.ChatHub>("/chathub");
+                endpoints.MapHub<Api.Infrastructure.Hubs.MessageHub>("/api/v1/Message/inbox");
 
-                endpoints.MapFallbackToFile("index.html");
+                //endpoints.MapHub<Api.Infrastructure.Hubs.NotificationHub>("/notify");
+                //endpoints.MapHub<Api.Infrastructure.Hubs.NotifyHub>("/notification");
             });
 
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>{
                 c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
             });
-            AutoMapperConfiguration.Initialize();
 
-            /*
-            app.UseMvc();
-            app.UseCors(options =>options.AllowAnyMethod().AllowAnyHeader()
-            .SetIsOriginAllowed((host)=>true).AllowCredentials()
+            //AutoMapperConfiguration.Initialize();
+            app.UseCors(options =>options
+            .AllowAnyMethod()
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .SetIsOriginAllowed((host)=>true)
+            .AllowCredentials()
             );
             //Register MiddleWare for the Signal R Middleware("/signalrr", new HubConfiguration(
             app.UseCors("AllowCors");
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<allopromoServers.Hubs.Chat>("/chathub");
-            });
+
+            //IApplicationBuilder applicationBuilder = app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<Api.Infrastructure.Hubs.ChatHub>("/chat");
+            //    routes.MapHub<Api.Infrastructure.Hubs.NotifyHub>("/chathub");
+            //    routes.MapHub<Api.Infrastructure.Hubs.MessageHub>("/api/v1/Message/inbox");
+            //});
+
             app.UseMvc();
-            /*
-             app.Map("signalr", map=>
+            app.Map("/signalr", map=>
             {
-                map.UseCors(CorsOptions.AllowAll);
-                var hubConfiguration = new HubConfiguration
+                //map.UseCors(Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions);
+                var hubConfiguration = new Microsoft.AspNet.SignalR.HubConfiguration
                 {
                     EnableDetailedErrors = true,
-                    EnableJSONP = true,
+                    EnableCrossDomain=true
                 };
                 //map.RunSignalR(hubConfiguration);
             }); 
-            */
             //HANDLING GLOBALLY EXCEPTIONS
             //app.UseMiddleware(typeof(ExceptionHandling));
             //app.UseMiddleware<ExceptionHandler>();

@@ -15,12 +15,11 @@
   <ItemGroup>
     <Compile Remove="AppDbContext.cs" />
     <Compile Remove="Mapping\AutoMapperConfiguration.cs" />
-    <Compile Remove="Model\tUsers.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Model\" />
+    <Folder Include="Extensions\" />
     <Folder Include="Security\" />
     <Folder Include="UtilitiesLinq\" />
   </ItemGroup>

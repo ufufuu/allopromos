@@ -23,6 +23,8 @@ namespace allopromo.Core.Aggregates
         [DataMember]
         public Address address { get; set; }
     }
+
+
     //public class OrderPlacedEventArgs : EventArgs
     //{
     //}

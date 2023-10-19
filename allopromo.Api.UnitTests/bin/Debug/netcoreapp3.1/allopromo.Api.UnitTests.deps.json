@@ -21,6 +21,17 @@
           "allopromo.Api.UnitTests.dll": {}
         }
       },
+      "Autofac/7.1.0": {
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Autofac.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.0.0"
+          }
+        }
+      },
       "AutoMapper/6.2.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -86,7 +97,7 @@
       },
       "FluentEmail.Core/3.0.2": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/FluentEmail.Core.dll": {
@@ -129,7 +140,7 @@
       "FluentValidation.DependencyInjectionExtensions/11.1.0": {
         "dependencies": {
           "FluentValidation": "11.1.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
@@ -199,6 +210,27 @@
           }
         }
       },
+      "MediatR/12.1.1": {
+        "dependencies": {
+          "MediatR.Contracts": "2.0.1",
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.1.1.0"
+          }
+        }
+      },
+      "MediatR.Contracts/2.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Contracts.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
@@ -244,7 +276,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0"
         }
@@ -273,7 +305,7 @@
           "Microsoft.AspNetCore.Cryptography.Internal": "5.0.7",
           "Microsoft.AspNetCore.DataProtection.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
           "Microsoft.Win32.Registry": "4.7.0",
@@ -372,6 +404,14 @@
         "dependencies": {
           "Microsoft.Net.Http.Headers": "2.2.0",
           "System.Text.Encodings.Web": "4.5.0"
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
         }
       },
       "Microsoft.CodeCoverage/17.1.0": {
@@ -557,7 +597,7 @@
       "Microsoft.Extensions.Caching.Memory/5.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Caching.Abstractions": "5.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -629,7 +669,7 @@
       },
       "Microsoft.Extensions.DependencyInjection/5.0.1": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll": {
@@ -638,11 +678,11 @@
           }
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20.51904"
+          "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
@@ -692,7 +732,7 @@
       "Microsoft.Extensions.Hosting.Abstractions/3.1.8": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "5.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0"
         },
@@ -733,7 +773,7 @@
       "Microsoft.Extensions.Logging/5.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "5.0.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
           "System.Diagnostics.DiagnosticSource": "5.0.1"
@@ -756,7 +796,7 @@
       "Microsoft.Extensions.ObjectPool/2.2.0": {},
       "Microsoft.Extensions.Options/5.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Primitives": "5.0.0"
         },
         "runtime": {
@@ -770,7 +810,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.Configuration.Binder": "2.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Options": "5.0.0"
         }
       },
@@ -784,7 +824,7 @@
       },
       "Microsoft.Extensions.WebEncoders/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
           "System.Text.Encodings.Web": "4.5.0"
         }
@@ -1340,7 +1380,7 @@
       },
       "Serilog.Extensions.Hosting/4.1.2": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "3.1.8",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Serilog": "2.10.0",
@@ -1940,6 +1980,29 @@
           "Microsoft.NETCore.Targets": "1.1.3"
         }
       },
+      "System.Reactive/6.0.0": {
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reactive.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.1"
+          }
+        }
+      },
+      "System.Reactive.Core/6.0.0": {
+        "dependencies": {
+          "System.Reactive": "6.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reactive.Core.dll": {
+            "assemblyVersion": "3.0.6000.0",
+            "fileVersion": "3.0.6000.0"
+          }
+        }
+      },
       "System.Reflection/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -2448,7 +2511,9 @@
       "allopromo.Api/1.0.0": {
         "dependencies": {
           "AutoMapper": "6.2.2",
+          "Autofac": "7.1.0",
           "FluentValidation.AspNetCore": "11.1.2",
+          "MediatR": "12.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.10",
           "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
@@ -2484,7 +2549,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.16.0"
+          "System.IdentityModel.Tokens.Jwt": "6.16.0",
+          "System.Reactive.Core": "6.0.0"
         },
         "runtime": {
           "allopromo.Core.dll": {}
@@ -2509,6 +2575,14 @@
         "runtime": {
           "allopromo.Infrastructure.dll": {}
         }
+      },
+      "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
+        "runtime": {
+          "Microsoft.AspNet.SignalR.Core.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.21022.0"
+          }
+        }
       }
     }
   },
@@ -2517,6 +2591,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Autofac/7.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XCXmpxhOnuztTTRkzG+8B8KU8SR8WjBYwSntndjlsFR5lM3K/g43r9hUwewIPDBJwDrmZU3TjmNdH6s8IF3VFQ==",
+      "path": "autofac/7.1.0",
+      "hashPath": "autofac.7.1.0.nupkg.sha512"
     },
     "AutoMapper/6.2.2": {
       "type": "package",
@@ -2622,6 +2703,20 @@
       "sha512": "sha512-fY2ulWfn5xzulQfqTW66pLOrL26Puzmhl+VsXuqrVBhv5dWFwwKerxQM4HmMwr5Pd/ak9/5xSiFhIeXeD+HC2w==",
       "path": "mailkit/2.6.0",
       "hashPath": "mailkit.2.6.0.nupkg.sha512"
+    },
+    "MediatR/12.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1AbwzzeS6gn4NdcO6A9LfKS5TXXgAiUQM3J18dREHa7O7TrdCXJ5dNFeRBpzPZY7UWl5Kby+n9pWrPJe3SDiMA==",
+      "path": "mediatr/12.1.1",
+      "hashPath": "mediatr.12.1.1.nupkg.sha512"
+    },
+    "MediatR.Contracts/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ==",
+      "path": "mediatr.contracts/2.0.1",
+      "hashPath": "mediatr.contracts.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
       "type": "package",
@@ -2770,6 +2865,13 @@
       "path": "microsoft.aspnetcore.webutilities/2.2.0",
       "hashPath": "microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512"
     },
+    "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
+      "path": "microsoft.bcl.asyncinterfaces/6.0.0",
+      "hashPath": "microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512"
+    },
     "Microsoft.CodeCoverage/17.1.0": {
       "type": "package",
       "serviceable": true,
@@ -2910,12 +3012,12 @@
       "path": "microsoft.extensions.dependencyinjection/5.0.1",
       "hashPath": "microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512"
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
+    "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ORj7Zh81gC69TyvmcUm9tSzytcy8AVousi+IVRAI8nLieQjOFryRusSFh7+aLk16FN9pQNqJAiMd7BTKINK0kA==",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/5.0.0",
-      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+      "sha512": "sha512-xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyModel/3.0.0": {
       "type": "package",
@@ -3694,6 +3796,20 @@
       "path": "system.private.uri/4.3.2",
       "hashPath": "system.private.uri.4.3.2.nupkg.sha512"
     },
+    "System.Reactive/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-31kfaW4ZupZzPsI5PVe77VhnvFF55qgma7KZr/E0iFTs6fmdhhG8j0mgEx620iLTey1EynOkEfnyTjtNEpJzGw==",
+      "path": "system.reactive/6.0.0",
+      "hashPath": "system.reactive.6.0.0.nupkg.sha512"
+    },
+    "System.Reactive.Core/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UBiaW+0Aq+Q6U71JwnmUWcxe+09lWKFqMt9BFALoPJz/qdHt3HdK4j2c7FdriEwwEi2Yww/7Yre0SgQk5pIbIg==",
+      "path": "system.reactive.core/6.0.0",
+      "hashPath": "system.reactive.core.6.0.0.nupkg.sha512"
+    },
     "System.Reflection/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -4084,6 +4200,11 @@
     },
     "allopromo.Infrastructure/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNet.SignalR.Core/1.1.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

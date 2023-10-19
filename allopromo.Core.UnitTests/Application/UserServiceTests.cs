@@ -14,7 +14,7 @@ namespace allopromo.Core.UnitTests
     public class UserServiceTest
     {
         #region Properties
-        private UserService _sut;
+        private allopromo.Core.Services.UserService _sut;
         private Mock<UserManager<IdentityUser>> _userManagerMock = new Mock<UserManager<IdentityUser>>();
         private Mock<SignInManager<ApplicationUser>> _signInManager = new Mock<SignInManager<ApplicationUser>>();
         private Mock<RoleManager<IdentityRole>> _roleManagerMock = new Mock<RoleManager<IdentityRole>>();
@@ -30,7 +30,7 @@ namespace allopromo.Core.UnitTests
             //    cfg.AddProfile<AutoMapperProfile>();
             //});
 
-            _sut = new UserService(MockUserManager().Object,
+            _sut = new allopromo.Core.Services.UserService(MockUserManager().Object,
                                    null,
                                    GetMockRoleManager().Object
 

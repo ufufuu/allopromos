@@ -11,22 +11,34 @@ using System.IO;
 using System.Net.Http;
 using allopromo.Core.Services;
 using allopromo.Core.Abstract;
-using allopromo.Core.Model.ApiResponse;
-using allopromo.Core.Model.Notifications;
+
+//using allopromo.Core.Model.ApiResponse;
+
+//using allopromo.Core.Model.Notifications;
+
 using Microsoft.Extensions.Options;
 namespace allopromo.Core.Infrastructure
 {
-    public class PushNotificationService :  INotifyService
+    public class PushNotificationService //:  INotifyService
     {
         private AccountService _accountService { get; set; }
-        NotificationSettings _notificationSettings { get; set; }
-        public PushNotificationService(IOptions<NotificationSettings> notificationSettings)
+
+        //NotificationSettings _notificationSettings { get; set; }
+
+
+
+        //public PushNotificationService(IOptions<NotificationSettings> notificationSettings)
+        //{
+        //    _notificationSettings = notificationSettings.Value;
+        //}
+
+
+        //public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
+        public void SendNotification()
         {
-            _notificationSettings = notificationSettings.Value;
-        }
-        public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
-        {
-            ApiResponseModel apiResponseModel = new ApiResponseModel();
+            //ApiResponseModel apiResponseModel = new ApiResponseModel();
+
+
             {
                 try
                 {
@@ -41,7 +53,7 @@ namespace allopromo.Core.Infrastructure
                     throw ex;
                 }
             }
-            return null;
+            //return null;
         }
         public void SendNotification(object source, EventArgs e)
         {
@@ -105,11 +117,10 @@ namespace allopromo.Core.Infrastructure
             return false;
         }
 
-        public bool SendNotification()
-        {
-            throw new NotImplementedException();
-        }
-        public Task<ApiResponseModel> SendNotificationsD(NotificationModel notificationModel)
+        
+
+        //public Task<ApiResponseModel> SendNotificationsD(NotificationModel notificationModel)
+        public void Send()
         {
             throw new NotImplementedException();
         }

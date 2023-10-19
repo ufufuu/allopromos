@@ -17,11 +17,16 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 
-namespace allopromo.Core.Model
+namespace allopromo.Core.Services
 {
-    public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
+    public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
+    
+    
+    // PUBLISHER 
     public class StoreService : IStoreService
     {
+        public event StoreCreatedEventHandler storeCreated;
+
         #region Constantes
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
@@ -42,15 +47,20 @@ namespace allopromo.Core.Model
         public IDepartmentService _departmentService { get;set; }
         public IRepository<tDepartment> _departmentRepository { get; set; }
         public IRepository<tStoreCategory> _categoryRepository { get; set; }
+
         #region Fields
         private IRepository<tStore> _storeRepository;
         private IProductService _productService { get; set; }
         private IRepository<tStore> StoreRepository;
         private IRepository<tStore> _tGenericRepository { get; set; }
-
         private ILocalisationService _localisationService { get; set; }
 
+
+
+        public INotifyService _notificationService { get; set; }
+
         #endregion
+
 
         #region Constructors
         public StoreService(IRepository<tStore> storeRepository, IRepository<tStoreCategory> categoryRepository,
@@ -70,36 +80,29 @@ namespace allopromo.Core.Model
         }
         public StoreService()
         {}
-        event StoreCreatedEventHandler IStoreService.StoreCreated
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
+        //event StoreCreatedEventHandler IStoreService.StoreCreated
+        //{
+        //    add
+        //    {
+        //        throw new NotImplementedException();
+        //    }
 
-            remove
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //    remove
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
         #endregion
 
+
         #region Events
-        public void OnStoreCreated()
-        {
-            if (StoreCreated != null)
-            {
-                StoreCreated(this, EventArgs.Empty);
-            }
-        }
+        
         #endregion
 
         #region Creating Objects 
         public async Task<StoreDto> CreateStore(string storeDtoName)
         {
-            if (storeDtoName == null)
-                return null;
-            else
+            if (storeDtoName != null)
             {
                 tStore store = new tStore();
                 tStoreCategory category = null;
@@ -107,10 +110,35 @@ namespace allopromo.Core.Model
                 store.storeName = storeDtoName;
                 store.City = new tCity { cityName = "Lome", cityId = 679 };
                 store.Category = category;
+
+                // Publishing the Store Creation Event 
                 _storeRepository.Add(store);
+
+                StoreCreated += _notificationService.StoreCreatedEventHandler;
+
+                OnStoreCreated();
+                //StoreCreated += _notificationService.SendNotification;
+            }
+            else
+            {
+                throw new Exception();
             }
             return new StoreDto();
         }
+        protected virtual void OnStoreCreated()
+        {
+            if (StoreCreated != null)
+            {
+                StoreCreated(this, EventArgs.Empty);
+            }
+        }
+        //protected virtual void onStoreCreated(StoreCreatedEventArgs storeCreated)
+        //{
+        //    if (StoreCreated != null)
+        //    {
+        //        StoreCreated(this, new StoreCreatedEventArgs(){store=storeCreated.store});
+        //    }
+        //}
         public async Task<StoreCategoryDto> CreateStoreCategoryAsync(StoreCategoryDto storeCategory)
         {
             if (storeCategory == null)
@@ -200,7 +228,6 @@ namespace allopromo.Core.Model
             }
         }
         #endregion
-
 
 
         #region Public Properties - Getting Objects
@@ -411,7 +438,6 @@ namespace allopromo.Core.Model
         }
         #endregion
 
-       
 
         #region Updating Entities
         public void UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
@@ -427,7 +453,6 @@ namespace allopromo.Core.Model
             _categoryRepository.Update(obj);
         }
         #endregion
-
 
 
         //public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
@@ -536,17 +561,25 @@ namespace allopromo.Core.Model
                 //if (result.IsSuccessStatusCode)
                 //{
                     response = result.StatusCode.ToString();
-                    var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
-                    MediaApiResponseModel dataObj = obj.data;
-                    var image = JsonConvert.SerializeObject(dataObj);
-                    var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
-                    imageUrl = media.url;
+                //var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
+
+                var obj = true;
+
+                //MediaApiResponseModel dataObj = obj.data;
+
+                var image = JsonConvert.SerializeObject(null); // dataObj);
+                //var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
+
+                string media = null;
+                imageUrl = null; // media.url;
             }
             return imageUrl;
         }
         public async Task<string> getImageUrl()
         {
-            MediaApiResponseModel data1 = new MediaApiResponseModel();
+
+            //MediaApiResponseModel data1 = new MediaApiResponseModel();
+
             string img = string.Empty;
             var response = await this.postStoreCategoryImage();
             if (response == null)
@@ -582,11 +615,6 @@ namespace allopromo.Core.Model
                 }
             }
         }
-        void IStoreService.OnStoreCreated()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<StoreDto> CreateStore(StoreDto store)
         {
             throw new NotImplementedException();
@@ -646,10 +674,6 @@ namespace allopromo.Core.Model
     //{
     //}
 }
-
-
-
-
 
 
 /* 1. table jointure

@@ -26,7 +26,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace allopromo.Api.Controllers
 {
-    public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
+    //public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
+
+
     [ApiController]
     [Route("api/v1/[controller]")]
     public class StoreController : ControllerBase
@@ -49,6 +51,8 @@ namespace allopromo.Api.Controllers
         private readonly IStoreService _storeService;
         private readonly INotifyService _notificationService;
         private readonly IProductService _productService;
+
+        private readonly Infrastructure.Hubs.MessageHub _messageHub;
         #endregion
 
         #region Constructors & Properties
@@ -85,7 +89,13 @@ namespace allopromo.Api.Controllers
             {
                 var currentIdentity = User.Identity;
 
-                //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
+                //Raising Events 
+                _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
+
+                //_storeService.StoreCreated +=
+                //_messageHub.Clients.All.SendOffersToUser(new ListstoreDto.storeName);
+
+                //RxNet ?
 
                 var store = _storeService.CreateStoreAsync(storeDto, currentIdentity.Name).Result;
 

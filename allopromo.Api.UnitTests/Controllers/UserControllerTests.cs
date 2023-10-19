@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Core.Abstract;
 using allopromo.Core.Model;
-using allopromo.Core.Model.ApiResponse;
+//using allopromo.Core.Model.ApiResponse;
 using allopromo.Core.Domain;
 using allopromo.Api;
 using allopromo.Api.Controllers;

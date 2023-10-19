@@ -7,10 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Core.Abstract
 {
+    //public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
+
     public interface IStoreService
     {
-        event StoreCreatedEventHandler StoreCreated;
-        void OnStoreCreated();
+        event Services.StoreCreatedEventHandler StoreCreated;
+        //void OnStoreCreated();
+
+
         #region Getting Objects
         
         #endregion

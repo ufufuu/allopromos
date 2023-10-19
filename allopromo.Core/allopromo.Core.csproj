@@ -8,40 +8,44 @@
   <ItemGroup>
     <Compile Remove="Concrete\**" />
     <Compile Remove="Contracts\**" />
+    <Compile Remove="Domain\**" />
     <Compile Remove="DTO\**" />
     <Compile Remove="Helpers\Convertors\**" />
+    <Compile Remove="Model\ApiResponse\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Services\Threads\**" />
     <EmbeddedResource Remove="Concrete\**" />
     <EmbeddedResource Remove="Contracts\**" />
+    <EmbeddedResource Remove="Domain\**" />
     <EmbeddedResource Remove="DTO\**" />
     <EmbeddedResource Remove="Helpers\Convertors\**" />
+    <EmbeddedResource Remove="Model\ApiResponse\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Services\Threads\**" />
     <None Remove="Concrete\**" />
     <None Remove="Contracts\**" />
+    <None Remove="Domain\**" />
     <None Remove="DTO\**" />
     <None Remove="Helpers\Convertors\**" />
+    <None Remove="Model\ApiResponse\**" />
     <None Remove="Repositories\**" />
     <None Remove="Services\Threads\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Abstract\Interfaces\IRoleRepository.cs" />
     <Compile Remove="Abstract\Interfaces\IUserRepository.cs" />
+    <Compile Remove="Abstract\IOrderManager.cs" />
     <Compile Remove="Abstract\IProductRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
     <Compile Remove="Abstract\ISmsNotificationService.cs" />
     <Compile Remove="Abstract\IStoreRepository.cs" />
+    <Compile Remove="Abstract\IUserRepository.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
     <Compile Remove="Entities\tRole.cs" />
     <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
     <Compile Remove="Abstract\Interfaces\IRepository.cs" />
-    <Compile Remove="Model\ApplicationUser.cs" />
-    <Compile Remove="Model\Restaurant.cs" />
-    <Compile Remove="Model\Role.cs" />
-    <Compile Remove="Model\Store.cs" />
-    <Compile Remove="Model\StoreCategory.cs" />
+    <Compile Remove="Model\UserService.cs" />
     <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />
   </ItemGroup>
@@ -59,8 +63,15 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+    <PackageReference Include="System.Reactive.Core" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregates\Specifications\" />
+    <Folder Include="Caching\Constants\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Events\StoreCreatedEvents\" />
+    <Folder Include="Catalog\Vendor\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Services\Catalog\" />
   </ItemGroup>
 </Project>

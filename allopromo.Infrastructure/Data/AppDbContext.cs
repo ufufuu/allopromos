@@ -50,7 +50,7 @@ namespace allopromo.Infrastructure.Data
             var entities = modelBuilder.Model.GetEntityTypes();
 
             System.Type[] identityObs = { 
-                typeof(allopromo.Infrastructure.Modeles.AspNetUser),
+                typeof(allopromo.Core.Entities.Identity.AspNetUser),
                 
             };
             foreach(var entity in entities)

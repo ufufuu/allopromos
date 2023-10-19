@@ -1,7 +1,7 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
 using allopromo.Core.Helpers;
-using allopromo.Core.Model.ApiResponse;
+//using allopromo.Core.Model.ApiResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -70,7 +70,8 @@ namespace allopromo.Core.Model
             throw new NotImplementedException();
         }
 
-        public LoginResponseModel Authenticate(string userName)
+        //public LoginResponseModel Authenticate(string userName)
+        public void Auth(string user)
         {
             throw new NotImplementedException();
         }

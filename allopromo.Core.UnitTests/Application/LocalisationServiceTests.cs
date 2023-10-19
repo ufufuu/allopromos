@@ -1,5 +1,5 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Contracts;
+//using allopromo.Core.Contracts;
 using allopromo.Core.Entities;
 using Moq;
 using NUnit.Framework;

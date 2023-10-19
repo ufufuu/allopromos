@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace alloPromoTests.Services
 {
-    //[TestFixture] Fifi Aimee Afi - Dadzie- Adjalle 
+    //[TestFixture] 
     public class NotificationServiceTests
     {
-        private Mock<StoreService> storeServiceMock = new Mock<StoreService>();
+        private Mock<allopromo.Core.Services.StoreService> storeServiceMock = 
+            new Mock<allopromo.Core.Services.StoreService>();
         //[Test]
         public void NotificationService_SendsNotification_When_Stores_Is_Created()
         {

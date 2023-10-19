@@ -7,12 +7,15 @@
 
   <ItemGroup>
     <Compile Remove="Entities\**" />
+    <Compile Remove="Modeles\**" />
     <Compile Remove="Model\**" />
     <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Entities\**" />
+    <EmbeddedResource Remove="Modeles\**" />
     <EmbeddedResource Remove="Model\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="Entities\**" />
+    <None Remove="Modeles\**" />
     <None Remove="Model\**" />
     <None Remove="Services\**" />
   </ItemGroup>

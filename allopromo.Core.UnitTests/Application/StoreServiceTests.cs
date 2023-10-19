@@ -16,7 +16,7 @@ namespace allopromo.Core.UnitTest.ServicesTests
         private Mock<IRepository<tStore>> _storeRepositoryMock= new Mock<IRepository<tStore>>();
         private Mock<IRepository<tStoreCategory>> categoryRepositoryMock = new Mock<IRepository<tStoreCategory>>();
         private Mock<IRepository<tDepartment>> departmentRepositoryMock = new Mock<IRepository<tDepartment>>();
-        private StoreService _sut;
+        private allopromo.Core.Services.StoreService _sut;
         public StoreServiceTests()
         {
             //_sut = new StoreService(_storeRepositoryMock.Object, categoryRepositoryMock.Object,

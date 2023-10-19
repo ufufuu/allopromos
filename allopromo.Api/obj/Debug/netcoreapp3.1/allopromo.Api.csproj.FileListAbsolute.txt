@@ -116,4 +116,9 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allo
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\MediatR.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\MediatR.Contracts.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Api\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll

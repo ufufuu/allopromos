@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JgiIUbhglw9jGCWXpdq8UeSuYkh508vcVoVPfubNxeM0UKrrHbLUB5AmOgf+SJcfreVBDIkbYxf7+dKYyzi1ag==",
+  "dgSpecHash": "m045XmJQFMEtlDEVJV8IMC1AbfeBRTI4AMmZ+6mN5x5JdOb81sTKm8yp6/cIX4nv6Fk0p0rZMoryJxcU6kWRiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\MonPC\\source\\repos\\allopromo\\allopromo.Infrastructure\\allopromo.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -150,6 +150,8 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.private.uri\\4.3.2\\system.private.uri.4.3.2.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.reactive.core\\6.0.0\\system.reactive.core.6.0.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
@@ -192,7 +194,7 @@
     "C:\\Users\\MonPC\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
-    "C:\\Users\\MonPC\\.nuget\\packages\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\MonPC\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.threading.threadpool\\4.3.0\\system.threading.threadpool.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\MonPC\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",

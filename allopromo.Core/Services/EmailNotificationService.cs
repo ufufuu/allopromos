@@ -1,16 +1,17 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Model.ApiResponse;
+//using allopromo.Core.Model.ApiResponse;
 using FluentEmail.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 namespace allopromo.Core.Model
 {
-    public class EmailNotificationService:INotifyService
+    public class EmailNotificationService//:INotifyService
     {
         private readonly IStoreService _storeService;
 
         //private readonly IFluentEmail _email;
+
         public EmailNotificationService(IStoreService storeService)
         {
             _storeService = storeService;
@@ -47,10 +48,14 @@ namespace allopromo.Core.Model
             return true;
         }
 
-        public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<ApiResponseModel> SendNotification(NotificationModel notificationModel)
+
+
+        //public void SendNotification()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
     }
 }
 

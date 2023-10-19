@@ -2487,6 +2487,31 @@
           "ref/netstandard/_._": {}
         }
       },
+      "System.Reactive/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Reactive.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reactive.dll": {}
+        }
+      },
+      "System.Reactive.Core/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive": "6.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reactive.Core.dll": {}
+        }
+      },
       "System.Reflection/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3425,7 +3450,8 @@
           "Serilog.Settings.Configuration": "3.2.0",
           "Serilog.Sinks.Console": "4.0.0",
           "Serilog.Sinks.File": "5.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.16.0"
+          "System.IdentityModel.Tokens.Jwt": "6.16.0",
+          "System.Reactive.Core": "6.0.0"
         },
         "compile": {
           "bin/placeholder/allopromo.Core.dll": {}
@@ -8244,6 +8270,54 @@
         "ref/netstandard/_._",
         "system.private.uri.4.3.2.nupkg.sha512",
         "system.private.uri.nuspec"
+      ]
+    },
+    "System.Reactive/6.0.0": {
+      "sha512": "31kfaW4ZupZzPsI5PVe77VhnvFF55qgma7KZr/E0iFTs6fmdhhG8j0mgEx620iLTey1EynOkEfnyTjtNEpJzGw==",
+      "type": "package",
+      "path": "system.reactive/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net6.0-windows10.0.19041/_._",
+        "build/net6.0/_._",
+        "buildTransitive/net6.0-windows10.0.19041/_._",
+        "buildTransitive/net6.0/_._",
+        "icon.png",
+        "lib/net472/System.Reactive.dll",
+        "lib/net472/System.Reactive.xml",
+        "lib/net6.0-windows10.0.19041/System.Reactive.dll",
+        "lib/net6.0-windows10.0.19041/System.Reactive.xml",
+        "lib/net6.0/System.Reactive.dll",
+        "lib/net6.0/System.Reactive.xml",
+        "lib/netstandard2.0/System.Reactive.dll",
+        "lib/netstandard2.0/System.Reactive.xml",
+        "lib/uap10.0.18362/System.Reactive.dll",
+        "lib/uap10.0.18362/System.Reactive.pri",
+        "lib/uap10.0.18362/System.Reactive.xml",
+        "readme.md",
+        "system.reactive.6.0.0.nupkg.sha512",
+        "system.reactive.nuspec"
+      ]
+    },
+    "System.Reactive.Core/6.0.0": {
+      "sha512": "UBiaW+0Aq+Q6U71JwnmUWcxe+09lWKFqMt9BFALoPJz/qdHt3HdK4j2c7FdriEwwEi2Yww/7Yre0SgQk5pIbIg==",
+      "type": "package",
+      "path": "system.reactive.core/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net472/System.Reactive.Core.dll",
+        "lib/net472/System.Reactive.Core.xml",
+        "lib/netstandard2.0/System.Reactive.Core.dll",
+        "lib/netstandard2.0/System.Reactive.Core.xml",
+        "lib/uap10.0.18362/System.Reactive.Core.dll",
+        "lib/uap10.0.18362/System.Reactive.Core.pri",
+        "lib/uap10.0.18362/System.Reactive.Core.xml",
+        "readme.md",
+        "system.reactive.core.6.0.0.nupkg.sha512",
+        "system.reactive.core.nuspec"
       ]
     },
     "System.Reflection/4.3.0": {

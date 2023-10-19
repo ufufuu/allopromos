@@ -19,6 +19,8 @@ namespace allopromo.Core.Services
     public class CatalogService<TEntity> //:BaseService <TEntity> where TEntity:class
     {
         //public IAppDbContext<TEntity> db { get; set; }
+
+
         public IEnumerable<TEntity> GetEntities()
         {
             return null;

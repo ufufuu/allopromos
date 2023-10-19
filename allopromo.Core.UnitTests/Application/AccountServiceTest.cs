@@ -11,7 +11,7 @@ namespace allopromo.Core.UnitTests
     //[TestFixture]
     public class AccountServiceTest
     {
-        private Mock<IUserRepository> userRepo = new Mock<IUserRepository>();
+        //private Mock<IUserRepository> userRepo = new Mock<IUserRepository>();
         private Mock<IRepository<ApplicationUser>> _userRepo= new Mock<IRepository<ApplicationUser>>();
         private AccountService _SUT;
 

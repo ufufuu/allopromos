@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using Microsoft.AspNetCore.Authorization;
-using allopromo.Core.Contracts;
+//using allopromo.Core.Contracts;
 using allopromo.Core.Abstract;
 using allopromo.Core.Exceptions;
 using allopromo.Core.Application.Dto;

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using allopromo.Core.Model.ApiResponse;
+//using allopromo.Core.Model.ApiResponse;
+
 using allopromo.Core.Infrastructure;
 using allopromo.Core.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -157,7 +158,7 @@ namespace allopromo.Api.Controllers
                                 Email = loginViewModel.UserName,
                             };
                             _signInManager.SignInAsync(new ApplicationUser { UserName = loginViewModel.UserName }, true);
-                            return Ok(new ApiResponseModel
+                            return Ok(new Model.ApiResponse
                             {
                                 userResponse = user,
                                 jwtToken = _userService.GenerateJwtToken(user),
