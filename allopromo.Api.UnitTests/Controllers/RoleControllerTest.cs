@@ -2,7 +2,7 @@
 using allopromo.Core.Abstract;
 using Moq;
 using NUnit.Framework;
-namespace alloPromoTests.ApiControllers
+namespace allopromo.Api.UnitTests
 {
 
     //[TestFixture]

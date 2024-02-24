@@ -51,9 +51,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "AutoMapper": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[6.2.2, )"
+              "version": "[12.0.1, )"
             },
             "Autofac": {
               "target": "Package",

@@ -1,5 +1,8 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
+using allopromo.Core.Entities;
+
+//using allopromo.Core.Application.Dto;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,22 +17,23 @@ namespace allopromo.Core.Services
         //    {
         //        OrderPlaced?.Invoke(this, new OrderPlacedEventArgs());
         //    }
-        Task<ProductCategoryDto> IOrderService.CreateOrder(ProductCategoryDto productCategoryDto)
+
+        //Task<ProductCategoryDto> IOrderService.CreateOrder(ProductCategoryDto productCategoryDto)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public Task CreateOrderAsync(Entities.tProduct product, string Name)
         {
             throw new NotImplementedException();
         }
 
-        Task<ProductDto> IOrderService.CreateOrderAsync(ProductDto product, string Name)
+        public Task<Entities.tOrder> GetOrderById(string productId)
         {
             throw new NotImplementedException();
         }
 
-        Task<ProductDto> IOrderService.GetOrderById(string productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<ProductDto>> IOrderService.GetOrdersByStore(string storeId)
+        public Task<IEnumerable<tOrder>> GetOrdersByStore(string storeId)
         {
             throw new NotImplementedException();
         }

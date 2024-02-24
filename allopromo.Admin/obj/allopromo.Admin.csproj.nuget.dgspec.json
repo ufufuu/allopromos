@@ -125,13 +125,21 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "AutoMapper": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[6.2.2, )"
+              "version": "[12.0.1, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[7.1.0, )"
             },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.1.2, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -315,6 +323,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.16.0, )"
+            },
+            "System.Reactive.Core": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [

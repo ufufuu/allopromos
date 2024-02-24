@@ -1,6 +1,7 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Application;
-using allopromo.Core.Application.Dto;
+using allopromo.Core.Entities;
+//using allopromo.Core.Application.Dto;
 using allopromo.Core.Model;
 using Moq;
 //using NSubstitute;
@@ -18,7 +19,7 @@ namespace alloPromo.Core.UnitTests.Domain.Application
         [TestCase]
         public void CreateStore_SHOULD_CreateAndReturnStoreDto()
         {
-            StoreDto storeDto = new StoreDto { };
+            tStore storeDto = new tStore { };
 
             //var sut = new StoreService(_storeQuery.Object);
             //var store = sut.CreateStore(storeDto);
@@ -26,7 +27,7 @@ namespace alloPromo.Core.UnitTests.Domain.Application
         //[TestCase]
         public void GetStore_SHOULD_Return_StoreById()
         {
-            var store = new allopromo.Core.Application.Dto.StoreDto();
+            var store = new tStore();
             store.storeName = "SED Food";
 
             //var result = _sut.GetStoreByIdAsync(store.storeId);

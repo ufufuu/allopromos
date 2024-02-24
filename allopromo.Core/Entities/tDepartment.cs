@@ -24,6 +24,6 @@ namespace allopromo.Core.Entities
         [Column("updatedDate")]
         public DateTime? updatedDate { get; set;}
 
-        public virtual ICollection<tStoreCategory>? Categories { get; set; } //=  null!;
+        public virtual ICollection<tStoreCategory>? Categories { get; set; }
     }
 }

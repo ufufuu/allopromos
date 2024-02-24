@@ -8,7 +8,7 @@ namespace allopromo.Core.Entities
     [Table("StoreCategories")]
     public class tStoreCategory
     {
-        private readonly ILazyLoader _lazyLoader;
+        //private readonly ILazyLoader _lazyLoader;
 
         [Key]
         //[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -29,9 +29,9 @@ namespace allopromo.Core.Entities
         [Column("active")]
         public bool active { get; set; }
 
-        private ICollection <tStore> _books;
+        //private ICollection <tStore> _books;
 
-        public virtual ICollection<tStore>? Stores
+        public virtual ICollection<tStore> Stores
         {
             get;// => _lazyLoader.Load(this, ref _books);
             set;// => _books = value;

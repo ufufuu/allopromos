@@ -136,13 +136,13 @@ namespace allopromo.Api.UnitTests
                 storeName = "Thierry Plank",
             };
 
-            _storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<StoreDto>(), 
+            _storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<tStore>(), 
                 It.IsAny<string>())) //UserDto>()))
                 .Returns(Task.FromResult(new StoreDto()))
 
                 .Raises(e => e.StoreCreated += null, (StoreDto store) => new EventArgs { });
 
-            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<StoreDto>(), 
+            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<tStore>(), 
                 It.IsAny<string>()))//UserDto>()))
                 .Returns(Task.FromResult(store));
             //Act
@@ -160,10 +160,11 @@ namespace allopromo.Api.UnitTests
                 return true;
             };
             _storeServiceMock.Object.StoreCreated += StoreCreated;
+            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<tStore>(),
 
-            _storeServiceMock.Setup(x => x.CreateStoreAsync(It.IsAny<StoreDto>(), 
                 It.IsAny<string>())) //UserDto>()))
                 .Returns(Task.FromResult(new StoreDto()))
+
             //.Raises(e => e.StoreCreated += _notificationServiceMock.Object.StoreCreatedEventHandler)
             //.Raises(e =>
             //{
@@ -368,7 +369,6 @@ namespace allopromo.Api.UnitTests
 /*https://www.justia.com/criminal/offenses/drug-crimes/drug-trafficking/
  * 1 store service raising event ? 2. notification subscribing 3. signalRing ? 4. Refactoring, Generic ing , Performance Testing */
 //EnvironmentVariableTarget
-
 
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/

@@ -1,5 +1,4 @@
-﻿using allopromo.Core.Application.Dto;
-using allopromo.Core.Entities;
+﻿using allopromo.Core.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

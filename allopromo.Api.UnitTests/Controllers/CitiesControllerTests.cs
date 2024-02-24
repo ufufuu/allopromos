@@ -54,7 +54,7 @@ namespace allopromo.Api.UnitTests
 
             localiseServiceMock.Verify(x => x.GetUserCurrentCity(ip), Times.AtMostOnce());
         }
-        private IEnumerable<Core.Application.Dto.CityDto> GetCities()
+       private IEnumerable<Core.Application.Dto.CityDto> GetCities()
         {
             var cities = new List<Core.Application.Dto.CityDto>();
             cities.Add(new CityDto { cityName = "" });

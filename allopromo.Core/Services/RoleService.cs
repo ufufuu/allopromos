@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Core.Model
 {
-    public enum RoleEnumer
+    public enum ApplicationRoles
     {
         Admin = 1,
         User = 2
@@ -20,11 +20,8 @@ namespace allopromo.Core.Model
         }
         public RoleService()
         {}
+
         //public async Task<IQueryable<ApplicationRole>> GetRoles()
-        //{
-        //    var roles = await _roleRepository.GetAllAsync();
-        //    return roles;
-        //}
     }
     public interface IRoleService
     {

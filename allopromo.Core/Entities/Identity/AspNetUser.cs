@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace allopromo.Core.Entities.Identity
 {
+
+    public class tUser : AspNetUser
+    {}
     public partial class AspNetUser
     {
         public AspNetUser()

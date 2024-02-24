@@ -16,56 +16,48 @@ using Microsoft.Extensions.Logging;
 using allopromo.Api.ViewModel.ViewModels;
 using System.Security.Claims;
 using System.Linq;
+using allopromo.Core.Application.Dto;
 
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    //[Produces("application/json")]
+    [Produces("application/json")]
 
     [ApiController]
     public class UserController : ControllerBase
     {
         #region Properties
         private readonly IUserService _userService;
-        //private readonly IAccountService _accountService;
-
+        
+        private readonly AutoMapper.IMapper _mapper;
         private UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        /*private ILogger<UserController> _logger { get; set; }
-        private Serilog.ILogger logger { get; set; }*/
+        private readonly IPermissionService _permissionService;
+
+        private Serilog.ILogger logger { get; set; }
         #endregion
 
         #region Constructors
-        //public UserController(IUserService userService, IAccountService accountService)
-        //{
-        //    _userService = userService;
-        //    //_accountService = accountService;
-        //    AutoMapper.Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.AddProfile<AutoMapperProfile>();
-        //    });
-        //}
         public UserController(IUserService userService, 
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, AutoMapper.IMapper mapper)
         {
             _userService = userService;
             _userManager = userManager;
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            });
+            _mapper = mapper;
         }
         [ActivatorUtilitiesConstructor]
-        public UserController(IUserService userService, IAccountService accountService, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ILogger<UserController> logger)
+        public UserController(IUserService userService, IMembershipService accountService, UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ILogger<UserController> logger,
+            AutoMapper.IMapper Mapper)
         {
             _userService = userService;
             _userManager = userManager;
             _roleManager = roleManager;
-            //_accountService = accountService;
+            
             _signInManager = signInManager;
+            _mapper = Mapper;
         }
         #endregion
 
@@ -74,9 +66,9 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userService.GetUsersAsync();
+            var users = await _userService.GetUsersAsync();// UI layer Should Know Nothing About Domai Object !
             var Users = 
-                AutoMapper.Mapper.Map<System.Collections.Generic.List<Core.Application.Dto.UserDto>>
+                _mapper.Map<System.Collections.Generic.List<UserDto>>
                 (_userManager.Users);
             return Ok(Users);
         }
@@ -86,50 +78,49 @@ namespace allopromo.Api.Controllers
             //var user = await _userManager.FindByIdAsync(User.Identity.Name);
             //return user;
             return await Task.FromResult(user);
-
         }
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateUser(RegisterViewModel registerViewModel)
         {
-            //All Props Are Null  | Handle Exceptions And Test them 
-
-            if (registerViewModel != null)
+            if ((registerViewModel == null) || 
+                (string.IsNullOrEmpty(registerViewModel.UserEmail) ||
+                    string.IsNullOrEmpty(registerViewModel.UserPassword)))
             {
-                if (string.IsNullOrEmpty(registerViewModel.UserEmail)|| 
-                    string.IsNullOrEmpty(registerViewModel.UserPassword))
-                    return BadRequest();
-                else
-                {
-                    if (ModelState.IsValid)
-                    {
-                        IdentityUser appUser = 
-                            AutoMapper.Mapper.Map<IdentityUser>(registerViewModel);
+                return BadRequest(ModelState);
 
-                        var loggedUser = new LoginViewModel();
-
-                        var resultat = await _userManager.CreateAsync(appUser, registerViewModel.UserPassword);
-                        //await _userManager.AddToRoleAsync(appUser, registerViewModel.UserRole);
-                        if (resultat.Succeeded)
-                        {
-                            var currentUser = await _userManager.FindByNameAsync(registerViewModel.UserName);
-                            var roleResult =await _userManager.AddToRoleAsync(currentUser, "Merchants");
-                            return Ok(loggedUser);
-                        }
-                        else
-                        {
-                            return BadRequest();
-                        }
-                    }
-                }
-                return NotFound();
-            }
-            else
-            {
+                /*
                 System.Net.Http.HttpResponseMessage httpResponseMessage = 
                     new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
                 throw new Exception();
+                */
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    IdentityUser appUser = null;
+                        appUser = _mapper.Map<IdentityUser>(registerViewModel);
+                    var result = await _userManager.CreateAsync(appUser, registerViewModel.UserPassword);
+                    await _userManager.AddToRoleAsync(appUser, registerViewModel.UserRole);
+
+                    int g = 7;
+                    if (result.Succeeded)
+                    {
+                        var currentUser =
+                            await _userManager.FindByNameAsync(registerViewModel.UserName);
+                        var roleResult =
+                            await _userManager.AddToRoleAsync(currentUser, "Merchants");
+                        return Ok(registerViewModel);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                return BadRequest();
             }
         }
         [HttpPost]
@@ -157,7 +148,7 @@ namespace allopromo.Api.Controllers
                                 UserName = loginViewModel.UserName,
                                 Email = loginViewModel.UserName,
                             };
-                            _signInManager.SignInAsync(new ApplicationUser { UserName = loginViewModel.UserName }, true);
+                            await _signInManager.SignInAsync(new ApplicationUser { UserName = loginViewModel.UserName }, true);
                             return Ok(new Model.ApiResponse
                             {
                                 userResponse = user,
@@ -169,6 +160,7 @@ namespace allopromo.Api.Controllers
                         //{
                             return NotFound (new { status = " Failed ", message = " User name or Pwd UUY incorrect " });
                         //}
+                        
                         /*
                         using(var emailNotifyService= new EmailNotificationService())
                         {
@@ -185,7 +177,7 @@ namespace allopromo.Api.Controllers
                 {
                     //_logger.LogInformation("User Not Found");
 
-                    throw;
+                    throw ex;
                 }
             }
             else

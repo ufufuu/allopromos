@@ -1,5 +1,6 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
+
+//using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using Moq;
@@ -25,7 +26,7 @@ namespace allopromo.Core.UnitTest.ServicesTests
         [Test]
         public void StoreService_GetStores_ReturnStores()
         {
-            List<StoreDto> listStores = new List<StoreDto>();
+            List<tStore> listStores = new List<tStore>();
             _storeRepositoryMock.Setup(x => x.GetAllAsync())
                 .Returns(getStoresAsync());
             var stores  = _sut.GetStores().Result;
@@ -55,13 +56,13 @@ namespace allopromo.Core.UnitTest.ServicesTests
         //[Test]
         public void StoreService_GetStores_ReturnStoresCategories()
         {
-            List<StoreDto> listStores = new List<StoreDto>();
+            List<tStore> listStores = new List<tStore>();
             var stores = _sut.GetStoreCategoriesAsync();
         }
         [TestCase]
         public void StoreService_CreateStores_ReturnsStores_AndRaisesNotification()
         {
-            StoreDto store = new StoreDto
+            tStore store = new tStore
             {
                 storeName = "La Planque a Thierry",
             };

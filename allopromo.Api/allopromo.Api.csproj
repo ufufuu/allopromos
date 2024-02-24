@@ -13,29 +13,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="bin\ViewModel\**" />
+    <Compile Remove="DTOs\**" />
     <Compile Remove="Infrastructure\ExceptionHandlers\**" />
     <Compile Remove="Infrastructure\Excetions\**" />
     <Compile Remove="Infrastructure\Filters\**" />
-    <Compile Remove="Infrastructure\Middlewares\**" />
-    <Compile Remove="Infrastructure\Notifications\**" />
     <Content Remove="bin\ViewModel\**" />
+    <Content Remove="DTOs\**" />
     <Content Remove="Infrastructure\ExceptionHandlers\**" />
     <Content Remove="Infrastructure\Excetions\**" />
     <Content Remove="Infrastructure\Filters\**" />
-    <Content Remove="Infrastructure\Middlewares\**" />
-    <Content Remove="Infrastructure\Notifications\**" />
     <EmbeddedResource Remove="bin\ViewModel\**" />
+    <EmbeddedResource Remove="DTOs\**" />
     <EmbeddedResource Remove="Infrastructure\ExceptionHandlers\**" />
     <EmbeddedResource Remove="Infrastructure\Excetions\**" />
     <EmbeddedResource Remove="Infrastructure\Filters\**" />
-    <EmbeddedResource Remove="Infrastructure\Middlewares\**" />
-    <EmbeddedResource Remove="Infrastructure\Notifications\**" />
     <None Remove="bin\ViewModel\**" />
+    <None Remove="DTOs\**" />
     <None Remove="Infrastructure\ExceptionHandlers\**" />
     <None Remove="Infrastructure\Excetions\**" />
     <None Remove="Infrastructure\Filters\**" />
-    <None Remove="Infrastructure\Middlewares\**" />
-    <None Remove="Infrastructure\Notifications\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +42,7 @@
     <Compile Remove="Controllers\StoreCategorie.cs" />
     <Compile Remove="Controllers\StoreCreatedSingleton.cs" />
     <Compile Remove="Controllers\StoreData.cs" />
+    <Compile Remove="Infrastructure\AutoMapper\Profiles\MappingProfile.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthHandler.cs" />
@@ -65,9 +62,11 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="Commands\Handlers\" />
     <Folder Include="Controllers\Errors\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
+    <Folder Include="Constants\" />
     <Folder Include="Properties\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -76,7 +75,7 @@
     
     <PackageReference Include="Autofac" Version="7.1.0" />
     
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
     

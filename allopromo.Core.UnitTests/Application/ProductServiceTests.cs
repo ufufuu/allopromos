@@ -26,7 +26,7 @@ namespace alloPromo.Core.UnitTests.Application
         [Test]
         public void CreateProducts_SHOULD_Return_CreatedProduct()
         {
-            var productObj = new allopromo.Core.Application.Dto.ProductDto(){ };
+            var productObj = new tProduct(){ };
             var result = _SUT.CreateProductAsync(productObj, "");
             Assert.IsNotNull(result);
         }

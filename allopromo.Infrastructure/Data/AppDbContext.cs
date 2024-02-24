@@ -1,6 +1,7 @@
 ﻿using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Core.Model;
+using allopromo.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -141,6 +142,7 @@ namespace allopromo.Infrastructure.Data
                 store.HasKey(s => new { s.storeId });
             });
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
         #endregion
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

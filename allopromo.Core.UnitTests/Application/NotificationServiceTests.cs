@@ -1,4 +1,7 @@
-﻿using allopromo.Core.Application.Dto;
+﻿//using allopromo.Core.Application.Dto;
+
+
+using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using Moq;
 using NUnit.Framework;
@@ -16,9 +19,9 @@ namespace alloPromoTests.Services
         {
             //var notificationService = new NotifyService(storeServiceMock.Object);
 
-            storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<StoreDto>(),
+            storeServiceMock.Setup(p => p.CreateStoreAsync(It.IsAny<tStore>(),
                         It.IsAny<string>())) //UserDto>()))
-                .Returns(Task.FromResult(new StoreDto()));
+                .Returns(Task.FromResult(new tStore()));
 
             //.Raises(p => p.storeCreated += new NotificationService(storeServiceMock.Object).StoreCreatedEventHandler);
 

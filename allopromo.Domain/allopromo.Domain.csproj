@@ -6,8 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="Model\**" />
+    <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="Model\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
 </Project>

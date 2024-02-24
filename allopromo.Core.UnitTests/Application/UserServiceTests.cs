@@ -1,5 +1,7 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
+
+//using allopromo.Core.Application.Dto;
+
 using allopromo.Core.Domain;
 using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
@@ -24,19 +26,14 @@ namespace allopromo.Core.UnitTests
         #region Constructeurs
         public UserServiceTest()
         {
-
             //AutoMapper.Mapper.Initialize(cfg =>
             //{
             //    cfg.AddProfile<AutoMapperProfile>();
             //});
-
             _sut = new allopromo.Core.Services.UserService(MockUserManager().Object,
                                    null,
-                                   GetMockRoleManager().Object
-
-                                    //_appSettingsMock.Object
-
-           );
+                                   GetMockRoleManager().Object);
+            //_appSettingsMock.Object
         }
         #endregion
 

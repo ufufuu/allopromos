@@ -42,6 +42,7 @@
     <Compile Remove="Abstract\IUserRepository.cs" />
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
+    <Compile Remove="AutoMapperConfiguration.cs" />
     <Compile Remove="Entities\tRole.cs" />
     <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
     <Compile Remove="Abstract\Interfaces\IRepository.cs" />
@@ -72,6 +73,5 @@
     <Folder Include="Events\StoreCreatedEvents\" />
     <Folder Include="Catalog\Vendor\" />
     <Folder Include="Commands\" />
-    <Folder Include="Services\Catalog\" />
   </ItemGroup>
 </Project>

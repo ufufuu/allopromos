@@ -1,21 +1,27 @@
 ﻿using allopromo.Core.Abstract;
+using allopromo.Core.Aggregates;
 using allopromo.Core.Application.Dto;
+//using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 namespace allopromo.Core.Services
 {
-    public class LocalisationService: ILocalisationService//, IDisposable
+    public class LocalisationService : ILocalisationService//, IDisposable
     {
-        private IRepository<tCity> _cityRepository { get; set;}
+        private IRepository<tCity> _cityRepository { get; set; }
         private IRepository<tCountry> _countryRepository { get; set; }
         private static string urlCityURL = "http://ipinfo.io/";
 
@@ -26,17 +32,18 @@ namespace allopromo.Core.Services
             _countryRepository = countryRepository;
         }
         public LocalisationService()
-        { } 
+        { }
         #endregion
 
         #region CREATE
-        public async Task<bool> CreateAsync(CityDto cityDto)
+        public async Task<bool> CreateAsync(tCity cityDto)
         {
             tCity city = new tCity();
             //city.cityId = 324;
             city.cityName = cityDto.cityName;
             var country = (from q in _countryRepository.GetAllAsync().Result.AsQueryable()
-                          .Where(x=>x.countryName.ToString()=="Togo") select q).FirstOrDefault();
+                          .Where(x => x.countryName.ToString() == "Togo")
+                           select q).FirstOrDefault();
             city.cityCountry = country;
             city.cityGpsLatitude = string.Empty;
             city.cityGpsLongitude = string.Empty;
@@ -44,11 +51,11 @@ namespace allopromo.Core.Services
             //_cityRepository.Save();
             return true;
         }
-       
-        public Task<bool> CreateAisle(AisleDto aisle)
-        {
-            return null;
-        }
+
+        //public Task<bool> CreateAisle(AisleDto aisle)
+        //{
+        //    return null;
+        //}
         #endregion
 
         #region READ
@@ -96,41 +103,20 @@ namespace allopromo.Core.Services
             return await Task.FromResult(ipInfo.City);
         }
 
-        public Task<string> GetAisle(AisleDto aisles)
-        {
-            return null;
-        }
-        public List<AisleDto> GetAisles()
-        {
-            var ailesRepository = new List<allopromo.Core.Entities.tAisle>();
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Boucherie" });
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Charcuterie" });
-            ailesRepository.Add(new Entities.tAisle { tAisleId = new Guid(), tAisleName = "Boulangerie" });
-            //return TConvertor.ConverToListObj((ailesRepository)) as List<AisleDto>;
-            return null;
-        }
         #endregion
 
         #region Update
-        public void Put(CityDto aisle)
+        public void Update(tCity aisle)
         {
             throw new NotImplementedException();
         }
-        public void Put(AisleDto aisle)
-        {
-        }
-        public void UpdateAisle(AisleDto aisle)
-        {
-        }
+
         #endregion
 
         #region Delete
-        public void Delete(CityDto city)
+        public void Delete(tCity city)
         {
             _cityRepository.Delete(city);
-        }
-        public void DeleteAisle(AisleDto aisle)
-        {
         }
 
         public Task<tCity> Get(string cityId)
@@ -143,8 +129,56 @@ namespace allopromo.Core.Services
 
         public void Dispose()
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
         #endregion
+    }
+
+    public class StoreLocator
+    {
+        HttpClient _httpClient { get; set; }
+        private ILogger _logger { get; set; }
+        public StoreLocator(HttpClient httpClient, ILogger logger)
+        {
+            _httpClient = httpClient;
+            _logger = logger;
+        }
+        public string GetLocation()
+        {
+            var location = getAddress(23.5270797, 77.2548046);
+            return location.ToString();
+        }
+        private string ReturnGPSCoordinates()
+        {
+            var rootObjc = getAddress(23.5270797, 77.2548046);
+            return ""; //rootObj.display_Name;
+        }
+        private static RootObject getAddress(double Longitude, double Latitude)
+
+        //getAddress(23.5270797, 77.2548046);
+        {
+            //onst double longitude = Longitude;
+            //const double latitude = Latitude;
+
+            //const string pathUrl = " https://nominatim.openstreetmap.org/reverse?format=json&lat=30.4573699&lon=-97.8247654";
+
+            //const string  mapBox= " https://api.mapbox.com/geocoding/v5/{endpoint}/";
+
+            const string reverseGeoCodingApiEndPoint = " http://nominatim.openstreetmap.org/reverse?format=json&lat= "; // + Latitude + "&lon=" + Longitude;
+
+            HttpResponseMessage msg = new HttpResponseMessage();
+            RootObject obj = null;
+            using (var httpClient = new HttpClient())
+            {
+                //msg = await httpClient.GetFromJsonAsync(pathUrl);
+            }
+            using (var webClient = new WebClient())
+            {
+                var jsonData = webClient.DownloadData(reverseGeoCodingApiEndPoint);
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RootObject));
+                obj = (RootObject)ser.ReadObject(new MemoryStream(jsonData));
+            }
+            return obj;
+        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using allopromo.Core.Domain;
-using allopromo.Core.Application.Dto;
 
 namespace allopromo.Core.Abstract
 {
@@ -15,12 +14,12 @@ namespace allopromo.Core.Abstract
         #region Read
         Task<string> GetUser(ApplicationUser user);
 
-        public Task<List<UserDto>> GetUsersAsync();
+        public Task<List<Entities.Identity.tUser>> GetUsersAsync();
 
         Task<IList<Microsoft.AspNetCore.Identity.IdentityUser>>GetUsersByRole(string userRole);
         public IList<ApplicationUser> GetUsersInRole(string roleName);
         public ApplicationUser GetUserRole(ApplicationUser user);
-        public Task<UserDto> GetUserById(string userId);
+        public Task<Microsoft.AspNetCore.Identity.IdentityUser> GetUserById(string userId);
         #endregion
 
         #region Update

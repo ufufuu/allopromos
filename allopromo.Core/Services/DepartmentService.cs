@@ -14,8 +14,8 @@ namespace allopromo.Core.Services
     public class DepartmentService : // BaseService<tDepartment>
         IDepartmentService
     {
-        public IRepository<tDepartment> _departmentRepository { get; set; }
-        public DepartmentService(IRepository<tDepartment> departmentRepository) //:base(departmentRepository)
+        public IRepository<tDepartment> _departmentRepository {get; set;}
+        public DepartmentService(IRepository<tDepartment> departmentRepository)//:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
@@ -40,7 +40,7 @@ namespace allopromo.Core.Services
         {
             _departmentRepository.Add(new tDepartment { });
         }
-        public async Task<DepartmentDto> CreateDepartmentAsync(DepartmentDto departmentDto)
+        public async Task CreateDepartmentAsync(DepartmentDto departmentDto)
         {
             try
             {
@@ -49,13 +49,14 @@ namespace allopromo.Core.Services
                 department.departmentName = departmentDto.departmentName;
                 department.createdDate = System.DateTime.Now;
                 department.updatedDate = null;
+
                 if (department != null)
                 {
                     _departmentRepository.Add(department);
-                    return await Task.FromResult(departmentDto);
+                    return; // Task.FromResult(departmentDto);// Dto);
                 }
                 else
-                    throw new Exception();
+                    throw new NullReferenceException();
             }
             catch (Exception ex)
             {
@@ -66,81 +67,90 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Read
-        public async Task<DepartmentDto> GetDepartmentAsync(string Name)
+        public async Task<tDepartment> GetDepartmentAsync(string Name)
         {
             try
             {
                 var departmentObj = await _departmentRepository.GetByIdAsync(Name);
-                
-                return AutoMapper.Mapper.Map<DepartmentDto>(departmentObj);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
-        {
-            IEnumerable<DepartmentDto> departmentsDto = null;
+                //return AutoMapper.Mapper.Map<DepartmentDto>(departmentObj);
 
-            var departmentsObj = await _departmentRepository.GetEntitiesAsync();
-            var g = 7;
-            var department = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(departmentsObj.AsEnumerable());
-            return department;
-            IEnumerable<tDepartment> tEntities = null;
-            try
-            {
-                tEntities = await _departmentRepository.GetAllAsync();
-                var tObjs = tEntities.AsQueryable();
-                departmentsDto = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+                return departmentObj;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return departmentsDto;
         }
-        public async Task<IEnumerable<tDepartment>> GetEntities()
+
+        //public async Task<IEnumerable<tDepartment>> GetEntities()
+        //{
+        //    IEnumerable<tDepartment> tObjs = null;
+        //    try
+        //    {
+        //        var de = _departmentRepository;
+        //        tObjs = await _departmentRepository.GetAllAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return tObjs;
+        //}
+
+        public async Task<IEnumerable<tDepartment>> GetDepartmentsAsync()
         {
-            IEnumerable<tDepartment> tObjs = null;
+            IEnumerable<tDepartment> departments = null;
             try
             {
-                var de = _departmentRepository;
-                tObjs = await _departmentRepository.GetAllAsync();
+                var departmentsObj = await _departmentRepository.GetAllAsync();// GetEntitiesAsync();
+                departments = AutoMapper.Mapper.Map<IEnumerable<tDepartment>>(departmentsObj.AsEnumerable());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+
+                throw;
             }
-            return tObjs;
+            return departments;
+
+            //IEnumerable<tDepartment> tEntities = null;
+            //try
+            //{
+            //    tEntities = await _departmentRepository.GetAllAsync();
+            //    var tObjs = tEntities.AsQueryable();
+
+            //    //departmentsDto = AutoMapper.Mapper.Map<IEnumerable<DepartmentDto>>(tEntities);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+            //return departments;
         }
-        public Task<DepartmentDto> GetDepartmentAsync(Guid departmentId)
+
+        public Task<tDepartment> GetDepartmentAsync(Guid departmentId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DepartmentDto> GetDepartmentAsync(int departmentReference)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region Update
-        public async Task<DepartmentDto> UpdateDepartmentAsync(string departmentId,
-            DepartmentDto departmentDto
+        public async Task<tDepartment> UpdateDepartmentAsync(string departmentId,
+            tDepartment department
             )
         {
-            var department = await _departmentRepository.GetByIdAsync(departmentId);
+            var tObj = await _departmentRepository.GetByIdAsync(departmentId);
 
-            department.departmentName = departmentDto.departmentName;
-            department.departmentThumbnail = departmentDto.departmentThumbnail;
+            department.departmentName = tObj.departmentName;
+            department.departmentThumbnail = tObj.departmentThumbnail;
 
             _departmentRepository.Update(department);
-            departmentDto = AutoMapper.Mapper.Map<DepartmentDto>(department);
-            return departmentDto;
+            //departmentDto = AutoMapper.Mapper.Map<DepartmentDto>(department);
+
+            return tObj;
         }
-        public async Task<DepartmentDto> UpdateDepartmentAsync(tDepartment department, 
-            DepartmentDto departmentDto
+        public async Task<tDepartment> UpdateDepartmentAsync(tDepartment department, 
+            tDepartment departmentDto
             )
         {
             department = await _departmentRepository.GetByIdAsync(department.departmentId);
@@ -153,14 +163,13 @@ namespace allopromo.Core.Services
 
             _departmentRepository.Update(department);
 
-            int g = 56;
-            departmentDto = AutoMapper.Mapper.Map<DepartmentDto>(department);
+            departmentDto = AutoMapper.Mapper.Map<tDepartment>(department);
             return departmentDto;
         }
         #endregion
 
         #region Delete
-        Task<DepartmentDto> IDepartmentService.DeleteDepartmentAsync()
+        Task<tDepartment> IDepartmentService.DeleteDepartmentAsync()
         {
             throw new NotImplementedException();
         }

@@ -10,6 +10,8 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -24,6 +26,9 @@ namespace allopromo.Api.Controllers
         }
     }
 }
+
+/*
+ * CQRS : Commmands - Queries - Handlers 
 
 
 

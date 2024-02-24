@@ -1,8 +1,0 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.csprojAssemblyReference.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\bin\Release\net46\allopromo.Domain.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\bin\Release\net46\allopromo.Domain.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Domain\obj\Release\net46\allopromo.Domain.pdb

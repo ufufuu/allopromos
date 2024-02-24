@@ -1,6 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application;
-using allopromo.Core.Application.Dto;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Services.Abstract;
@@ -40,28 +38,32 @@ namespace allopromo.Core.Services
 
         #region CREATE
 
-        public async Task<ProductCategoryDto> CreateProductCategory(ProductCategoryDto productCategoryDto)
-        {
-            if(productCategoryDto != null)
-            {
-                var productCategory = AutoMapper.Mapper.Map<tProductCategory>(productCategoryDto);
-                productCategory.productCategoryId = 1;//Guid.NewGuid().ToString(),
-                productCategory.productCategoryName = productCategoryDto.categoryName;
-                _productCategoryRepository.Add(productCategory);
-                return await Task.FromResult(productCategoryDto);
-            }
-            throw new Exception();
-        }
-        public async Task<ProductDto> CreateProductAsync(ProductDto productDto, string userName)
+
+        //public async Task CreateProductCategory(tProductCategory productCategoryDto)
+        //{
+        //    if(productCategoryDto != null)
+        //    {
+        //        var productCategory = AutoMapper.Mapper.Map<tProductCategory>(productCategoryDto);
+
+        //        productCategory.productCategoryId = 1;//Guid.NewGuid().ToString(),
+        //        productCategory.productCategoryName = productCategoryDto.productCategoryName;
+        //        _productCategoryRepository.Add(productCategory);
+        //        return await Task.FromResult(productCategoryDto);
+        //    }
+        //    throw new NullReferenceException();
+        //}
+
+
+        public async Task<tProduct> CreateProductAsync(tProduct productDto, string userName)
         {
             if (productDto != null)
             {
-                userName = "alistcom@free.fr";
+                userName = "";
                 var productObj = AutoMapper.Mapper.Map<tProduct>(productDto);
-                var storeObj = (_storeService.GetStoresByUserName("alistcom@free.fr")).Result.FirstOrDefault();
+                var storeObj = (_storeService.GetStoresByUserName("")).Result.FirstOrDefault();
 
                 productObj.Store = storeObj;
-                var category = await GetProductCategoryByName(productDto.productCategoryName);
+                var category = await GetProductCategoryByName(productDto.productName);
                 productObj.ProductCategory = category;
 
                 productObj.productId = Guid.NewGuid().ToString();
@@ -74,7 +76,7 @@ namespace allopromo.Core.Services
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw ex;
                 }
             }
             return productDto;
@@ -83,33 +85,43 @@ namespace allopromo.Core.Services
 
         #region READ
 
-        public async Task<IEnumerable<ProductDto>> GetProductsByStore(string storeId)
+        public async Task<IEnumerable<tProduct>> GetProductsByStore(string storeId)
         {
-            var products = new List<ProductDto>();
+            var products = new List<tProduct>();
             if (storeId != null)
             {
                 var tObjProducts = (await _productRepository.GetAllAsync()).AsQueryable()//GetProductsByStoreIdAsync(storeId);//GetByIdAsync(storeId);
                                         .Include(c => c.ProductCategory)
-                                        .Select(p => new ProductDto
+                                        .Select(p => new tProduct
                                         {
                                             productName = p.productName,
                                             productDescription = p.productDescription,
-                                            productCategoryName= p.ProductCategory.productCategoryName
+                                            //= p.ProductCategory.productCategoryName
                                         });
-                products = AutoMapper.Mapper.Map<List<ProductDto>>(tObjProducts);
+                products = AutoMapper.Mapper.Map<List<tProduct>>(tObjProducts);
             }
             return products;
         }
-        public async Task<ProductDto> GetProductById(string productId)
+        //public async Task<ProductDto> GetProductById(string productId)
+        //{
+        //    if (productId == null)
+        //        return null;
+        //    return AutoMapper.Mapper.Map<tProduct, ProductDto>(
+        //    await _productRepository.GetByIdAsync(productId));
+        //}
+        public async Task<tProduct> GetProductById(string productId)
         {
             if (productId == null)
-                return null;
-            return AutoMapper.Mapper.Map<tProduct, ProductDto>(
-            await _productRepository.GetByIdAsync(productId));
+                throw new NullReferenceException();
+
+            //return AutoMapper.Mapper.Map<tProduct, ProductDto>(
+
+            var product = await _productRepository.GetByIdAsync(productId);
+            return product;
         }
-        public async Task<IEnumerable<ProductDto>> GetProductsByCategoryId(string id)
+        public async Task<IEnumerable<tProduct>> GetProductsByCategoryId(string id)
         {
-            var products = Mapper.Map<IEnumerable<ProductDto>>(
+            var products = Mapper.Map<IEnumerable<tProduct>>(
                 await _productRepository.//GetProductsByStoreIdAsync(id));
                 GetByIdAsync(id));
             return products;
@@ -132,10 +144,25 @@ namespace allopromo.Core.Services
 
         #region UPDATE
 
-        #endregion
+        #endregion 
 
         #region DELETE
+        public async Task<tProductCategory> Delete(int Id)
+        {
+            var productCategory = from q in await _productCategoryRepository.GetAllAsync()
+                                  where q.productCategoryId.Equals(Id)
+                                  select q;
+            _productCategoryRepository.Delete(productCategory);
+            return productCategory.FirstOrDefault();
+        }
+        #endregion
 
+        #region Product Categories
+        public async Task<IEnumerable<tProductCategory>> GetProductCategories()
+        {
+            var productCategories = await _productCategoryRepository.GetAllAsync();
+            return AutoMapper.Mapper.Map<IList<tProductCategory>>(productCategories);
+        }
         #endregion
 
         #region Autres Methodes - Validation
@@ -145,6 +172,7 @@ namespace allopromo.Core.Services
             return true;
         }
         #endregion
+        
     }
 }
 /*  IDataErrorInfo c# -

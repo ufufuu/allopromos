@@ -12,5 +12,9 @@ namespace allopromo.Api.ViewModel.ViewModels
         public string UserPhoneNumber { get; set; }
         public string UserEmail { get; set; }
         public string UserRole { get; set; }
+        public RegisterViewModel()
+        {
+
+        }
     }
 }

@@ -71,6 +71,8 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcore
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
@@ -151,5 +153,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcore
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\obj\Debug\netcoreapp3.1\allopromo.Core.UnitTests.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Core.UnitTests\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll

@@ -1,5 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -2,17 +2,17 @@
 
 namespace allopromo.Api.Controllers
 {
-    public class SingleObject
-    {
-        private static SingleObject instance = new SingleObject();
-        private SingleObject()
-        {
-        }
-        public static SingleObject getInstance()
-        {
-            return instance;
-        }
-    }
+    //public class SingleObject
+    //{
+    //    private static SingleObject instance = new SingleObject();
+    //    private SingleObject()
+    //    {
+    //    }
+    //    public static SingleObject getInstance()
+    //    {
+    //        return instance;
+    //    }
+    //}
 }
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/

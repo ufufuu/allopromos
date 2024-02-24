@@ -89,6 +89,8 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Text.Json.dll
@@ -182,5 +184,3 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Deb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\obj\Debug\netcoreapp3.1\allopromo.Infrastructure.UnitTests.genruntimeconfig.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Reactive.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Infrastructures.UnitTest\bin\Debug\netcoreapp3.1\System.Reactive.Core.dll

@@ -21,7 +21,7 @@ namespace allopromo.Core.Infrastructure
 {
     public class PushNotificationService //:  INotifyService
     {
-        private AccountService _accountService { get; set; }
+        private MembershipService _accountService { get; set; }
 
         //NotificationSettings _notificationSettings { get; set; }
 
@@ -58,7 +58,7 @@ namespace allopromo.Core.Infrastructure
         public void SendNotification(object source, EventArgs e)
         {
             var currentUser = 
-            _accountService = new AccountService();
+            _accountService = new MembershipService();
 
             //Send Email through MailKIt or Other Service 
             //Pub.Event += Sub.Method;

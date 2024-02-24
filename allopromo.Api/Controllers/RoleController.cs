@@ -15,7 +15,7 @@ namespace allopromo.Controllers
     //[EnableCors("*")]
     public class RoleController : ControllerBase
     {
-        private readonly IAccountService _accountService;
+        private readonly IMembershipService _accountService;
 
         //private readonly UserManager<ApplicationUser> _userManager;
 
@@ -29,7 +29,7 @@ namespace allopromo.Controllers
         //    _userService = userService;
         //}
 
-        public RoleController(IAccountService accountService,
+        public RoleController(IMembershipService accountService,
              RoleManager<IdentityRole> roleManager 
             //SignInManager<ApplicationUser> signInManager
             )
@@ -73,32 +73,29 @@ namespace allopromo.Controllers
             }
             return NotFound();
         }
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(Core.Application.Dto.UserDto user)
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> CreateUser(Core.Application.Dto.UserDto user)
 
-            //Task<ActionResult<User>> cU(u) , task<bool> cU(u)
-
-        {
-            //throw new AccessViolationException();
-            if (user == null)
-                return null;
-            else
-            {
-                if(string.IsNullOrEmpty(user.userName))
-                     throw new Exception("Password is invalid or Empty");
-                // How to throw as an ActionResult Exception ?
-                    var appUser = new ApplicationUser
-                    {
-                        UserName = user.userName,
-                        Email = user.userName,
-                        PhoneNumber = user.userName
-                    };
-                    var result = await _userService.CreateUser(appUser.UserName, user.userPassword);
-                    if (result)
-                        return Ok(appUser);
-                return NotFound();
-            }
-        }
+        //{
+        //    if (user == null)
+        //        return null;
+        //    else
+        //    {
+        //        if(string.IsNullOrEmpty(user.userName))
+        //             throw new Exception("Password is invalid or Empty");
+        //        // How to throw as an ActionResult Exception ?
+        //            var appUser = new ApplicationUser
+        //            {
+        //                UserName = user.userName,
+        //                Email = user.userName,
+        //                PhoneNumber = user.userName
+        //            };
+        //            var result = await _userService.CreateUser(appUser.UserName, user.userPassword);
+        //            if (result)
+        //                return Ok(appUser);
+        //        return NotFound();
+        //    }
+        //}
     }
 }

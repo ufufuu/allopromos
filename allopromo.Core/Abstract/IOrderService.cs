@@ -1,4 +1,5 @@
-﻿using allopromo.Core.Application.Dto;
+﻿
+
 using allopromo.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,10 +10,10 @@ namespace allopromo.Core.Abstract
 {
     public interface IOrderService
     {
-        Task<ProductCategoryDto> CreateOrder(ProductCategoryDto productCategoryDto);
-        Task<ProductDto> CreateOrderAsync(ProductDto product, string Name);
-        Task<IEnumerable<ProductDto>> GetOrdersByStore(string storeId);
-        Task<ProductDto> GetOrderById(string productId);
-        
+        //Task<tOrder> CreateOrderAsync(tOrder order, string Name);
+
+        Task<IEnumerable<tOrder>> GetOrdersByStore(string storeId);
+
+        Task<tOrder> GetOrderById(string productId);
     }
 }

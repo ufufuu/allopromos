@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using Microsoft.AspNetCore.Authorization;
-//using allopromo.Core.Contracts;
 using allopromo.Core.Abstract;
 using allopromo.Core.Exceptions;
 using allopromo.Core.Application.Dto;
@@ -16,40 +15,46 @@ using allopromo.Core.Services;
 using allopromo.Core.Entities;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    //[Produces("application/json")]
 
+    //[Produces("application/json")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IConfiguration _config;
-        private readonly AppDbContext _appDb;
-        private IBaseService<DepartmentDto> _departmentService;
-        
-        private readonly IDepartmentService _DepartmentService;
+        public readonly IConfiguration _config;
+        public readonly AppDbContext _appDb;
+        public readonly IDepartmentService _DepartmentService;
+        public IBaseService<DepartmentDto> _departmentService;
+        public readonly IRepository<tDepartment> _deparmentRepository;
 
+        private readonly AutoMapper.IMapper _mapper;
         //private readonly ILogger<DepartmentController> _logger;
         //private readonly IExceptionWriter _exceptionWriter;
 
-        public DepartmentController(IConfiguration config,
-            IDepartmentService DepartmentService ,
-            IBaseService<DepartmentDto> departmentService)
+    #region Constructors
+        public DepartmentController(
+            IDepartmentService DepartmentService,
+            IBaseService<DepartmentDto> departmentService,
+            IConfiguration config)
         {
             _DepartmentService = DepartmentService;
             _departmentService = departmentService;
             _config = config;
-            //_exceptionWriter = exceptionWriter;
+
         }
-        #region Create
+        #endregion
+    #region Create
         [HttpPost]
-        
+
         //[Authorize]
         //[Core.Helpers.JwtBasicAuthorize]n,n,
+
         [Route("")]
-        public IActionResult CreateDepartment([FromBody] DepartmentDto departmentDto)
+        public async Task<IActionResult> CreateDepartment([FromBody] DepartmentDto departmentDto)
         {
             try
             {
@@ -63,16 +68,18 @@ namespace allopromo.Api.Controllers
                 //{
                     if (departmentDto != null)
                     {
-                       var fr= _DepartmentService.CreateDepartmentAsync(departmentDto);
-                        if (fr != null)
-                        {
+                    //Task department = 
+                        await _DepartmentService.CreateDepartmentAsync(departmentDto);
+
+                       // if (department != null)
+                        //{
                             return Ok(departmentDto);
-                        }
-                        return NoContent();
+                        //}
+                        //return NoContent();
                     }
                     else
                     {
-                        return NoContent();
+                        return BadRequest();
                     }
                 //}
             }
@@ -83,23 +90,23 @@ namespace allopromo.Api.Controllers
         }
         #endregion
 
-        #region Read
+    #region Read
         [HttpGet]
         [Route("")]
-        public IActionResult GetDepartments()
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartments()
         {
-            var departments = _DepartmentService.GetDepartmentsAsync();
+            var departments = await _DepartmentService.GetDepartmentsAsync();
             if(departments!=null)
                 return Ok(departments);
             return NotFound();
         }
         [HttpGet]
         [Route("{departmentName}")]
-        public IActionResult GetDepartmentByName(string departmentName)
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartmentByName(string departmentName)
         {
             if (departmentName != null)
             {
-                var department = _DepartmentService.GetDepartmentAsync(departmentName);
+                var department = await _DepartmentService.GetDepartmentAsync(departmentName);
                 return Ok(department);
             }
             else
@@ -121,31 +128,32 @@ namespace allopromo.Api.Controllers
         }
         #endregion
 
-        #region Update
-        [HttpPut]
-        [Route("departmentId")]
-        public async Task<IActionResult> Put(string departmentId, 
-            [FromBody] DepartmentDto departmentDto)
-      {
-            try
-            {
-                if (departmentId != null)
+    #region Update
+     [HttpPut]
+     [Route("departmentId")]
+        public async Task<IActionResult> Put(string departmentId, [FromBody] DepartmentDto departmentDto)
+        {
+                try
                 {
-                    var department = await _DepartmentService.GetDepartmentAsync(
-                        departmentDto.departmentId);
-                    await _DepartmentService.UpdateDepartmentAsync(departmentId, departmentDto);
-                return Ok(department);
+                    if (departmentId != null)
+                    {
+                        var department = await _DepartmentService.GetDepartmentAsync(
+                            departmentDto.departmentId);
+                        await _DepartmentService.UpdateDepartmentAsync(departmentId, 
+                            _mapper.Map<tDepartment>(departmentDto));
+                    return Ok(department);
+                    }
+                    else
+                        return NotFound();
                 }
-                else
-                    return NotFound();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                catch (Exception)
+                {
+                    throw;
+                }
         }
         #endregion
-        #region Delete
+
+    #region Delete
         [HttpDelete]
         [Route("department+{Id}")]
         public async Task<IActionResult> Delete(string Id)

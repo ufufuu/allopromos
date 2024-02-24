@@ -8,19 +8,23 @@ using allopromo.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using allopromo.Model.Validation;
 using allopromo.Api.Infrastructure;
+using allopromo.Api.Infrastructure.AutoMapper;
 using Polly;
+using AutoMapper;
 using allopromo.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using allopromo.Infrastructure.Helpers.Authentication;
 using allopromo.Core.Infrastructure.Abstract;
+
 //using Owin;
 //using Microsoft.Owin;
+
 using Microsoft.AspNetCore.ResponseCompression;
 using System.Linq;
 using System;
-using allopromo.Core.Application;
+//using allopromo.Core.Application;
 using allopromo.Infrastructure.Repositories;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
@@ -32,8 +36,9 @@ using Microsoft.Extensions.Hosting;
 //using allopromo.Core.Contracts;
 using System.Net.Http;
 using Microsoft.OpenApi.Models;
+using allopromo.Core.Application.Dto;
 
-namespace allopromo
+namespace allopromo.Api
 {
     public class Startup
     {
@@ -45,10 +50,16 @@ namespace allopromo
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+
             //services.AddDefaultIdentity<IdentityUser>()
             //  .AddRoles<IdentityRole>()
             //.AddEntityFrameworkStores<AppDbContext>();
+            //services.AddAutoMapper(typeof(Program));
 
+            //services.AutoMapperCollectionExtensions.AddAutoMapper();
+            AutoMapperConfig.Configure();
+
+            services.AddAutoMapper(typeof(Program));
             services.AddControllers();
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -67,8 +78,6 @@ namespace allopromo
             });
             services.AddHttpContextAccessor();
 
-
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
             );
@@ -79,13 +88,12 @@ namespace allopromo
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.AddScoped<IStoreService, StoreService>();
-
             
             services.AddScoped<ILocalisationService, LocalisationService>();
 
-            services.AddScoped<Core.Services.Base.IBaseService<Core.Application.Dto.DepartmentDto>,
-                Core.Services.Base.BaseService<Core.Application.Dto.DepartmentDto>>();
-            services.AddScoped<IRepository<Core.Application.Dto.DepartmentDto>, TRepository<Core.Application.Dto.DepartmentDto>>();
+            services.AddScoped<Core.Services.Base.IBaseService<DepartmentDto>,
+                Core.Services.Base.BaseService<DepartmentDto>>();
+            services.AddScoped<IRepository<DepartmentDto>, TRepository<DepartmentDto>>();
 
             services.AddScoped<Core.Services.IDepartmentService, Core.Services.DepartmentService>();
 
@@ -130,7 +138,7 @@ namespace allopromo
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
             //services.AddScoped<INotifyService, EmailNotificationService>();
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IMembershipService, MembershipService>();
 
             services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
             services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
@@ -147,11 +155,10 @@ namespace allopromo
             services.AddSingleton<EmailConfiguration>
                 (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
-
             //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<tUser>>(sp)); //?Instead of <ApplicationUser>>
-
             services.AddSignalRCore();
-
+            services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly)
+            );
             //services.AddPolicy("CORSPolicy",
             //    builder => builder
             //    .AllowAnyMethod()
@@ -159,7 +166,13 @@ namespace allopromo
             //    .AllowCredentials()
             //    .SetIsOriginAllowed(hosts => true));
             ////});
-            
+            // 60 000 1682  300 1000
+            //Add Role Service to Identity
+            services.AddAuthenticationCore();
+            services.AddAuthorizationCore();
+
+            //services.AddDefaultIdentity<IdentityUser>()
+              //  .AddRoles<IdentityRole>();
             services.AddCors(
             x => x.AddPolicy("AllowOrigin", 
              //options => options.AllowAnyOrigin()
@@ -279,7 +292,9 @@ namespace allopromo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
             });
 
-            //AutoMapperConfiguration.Initialize();
+            //AutoMapper
+            //AutoMapperConfig.Initialize();
+
             app.UseCors(options =>options
             .AllowAnyMethod()
             .WithOrigins("http://localhost:4200")

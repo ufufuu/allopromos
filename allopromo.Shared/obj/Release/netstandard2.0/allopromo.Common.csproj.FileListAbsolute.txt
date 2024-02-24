@@ -1,9 +1,0 @@
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.AssemblyInfoInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.AssemblyInfo.cs
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.csproj.CoreCompileInputs.cache
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\bin\Release\netstandard2.0\allopromo.Common.deps.json
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\bin\Release\netstandard2.0\allopromo.Common.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\bin\Release\netstandard2.0\allopromo.Common.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.dll
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.pdb
-C:\Users\MonPC\source\repos\allopromo\allopromo.Common\obj\Release\netstandard2.0\allopromo.Common.csprojAssemblyReference.cache

@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Http;
 using allopromo.Core.Domain;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using allopromo.Core.Application.Dto;
 using allopromo.Core.Helpers;
+using allopromo.Core.Entities.Identity;
+
 namespace allopromo.Core.Services
 {
    public class UserService : IUserService                                                             
@@ -49,21 +50,21 @@ namespace allopromo.Core.Services
 #region Public Methods - Getting
 
         //Constructor - base Methods - Constantes - Pptes - CRUD methods - Specific Method - Validation 
-        public async Task<List<UserDto>> GetUsersAsync()
+        public async Task<List<Entities.Identity.tUser>> GetUsersAsync()
         {
-            IList<UserDto> users = new List<UserDto>();
+            IList<tUser> users = new List<tUser>();
             try
             {
                 var usersObj = await _userManager.Users.ToListAsync();
                 var role = GetRoleNameByUser(usersObj.FirstOrDefault());
                 foreach (var userObj in usersObj)
                 {
-                    users.Add(new UserDto
+                    users.Add(new tUser
                     {
-                        userName=userObj.UserName,
-                        userEmail=userObj.Email,
-                        userPhoneNumber=userObj.PhoneNumber,
-                        userRoleName=role
+                         UserName=userObj.UserName,
+                         Email=userObj.Email,
+                         PhoneNumber=userObj.PhoneNumber,
+                         //AspNetUserRoles=role
                     });
                 }
             }
@@ -118,7 +119,7 @@ namespace allopromo.Core.Services
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         public ApplicationUser AuthenticateUser(string UserName, string PasswordHash)
@@ -199,10 +200,10 @@ namespace allopromo.Core.Services
         public async Task<IList<IdentityUser>> GetUsersByRole(string roleName) 
             => await _userManager.GetUsersInRoleAsync(roleName);
 
-        public async Task<UserDto> GetUserById(string userId)
+        public async Task<IdentityUser> GetUserById(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId); 
-            return AutoMapper.Mapper.Map<IdentityUser, UserDto>(user);
+            var user = await _userManager.FindByIdAsync(userId);
+            return user; // as tUser;
         }
         #endregion
 
@@ -231,7 +232,6 @@ namespace allopromo.Core.Services
 
             //return User.Identity.Name.ToString();
 
-            var gt = 56;
             return user;
             
             //ClaimsPrincipal currentUser = this.User;

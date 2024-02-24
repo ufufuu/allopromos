@@ -10,7 +10,7 @@ namespace allopromo.Core.Model
         //public string storeName { get; set; }
 
 
-        public Application.Dto.StoreDto store { get; set; }
+        
     }
     public class StoreCreatedEventArgsSSS
     {

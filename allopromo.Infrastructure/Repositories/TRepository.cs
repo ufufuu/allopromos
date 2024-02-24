@@ -1,5 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using allopromo.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

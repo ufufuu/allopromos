@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using Microsoft.AspNetCore.Authorization;
-//using allopromo.Core.Contracts;
 using allopromo.Core.Abstract;
 using allopromo.Core.Exceptions;
-using allopromo.Core.Application.Dto;
 using System.Linq;
 using System.Threading.Tasks;
+using allopromo.Core.Application.Dto;
+
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -21,7 +21,8 @@ namespace allopromo.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILocalisationService _localisationService;
-        private static Serilog.ILogger logger; 
+        //private static Serilog.ILogger logger; 
+        private AutoMapper.IMapper _mapper;
 
         //private readonly IExceptionWriter _exceptionWriter;
         public CitiesController(IConfiguration config,
@@ -52,24 +53,24 @@ namespace allopromo.Api.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         [HttpPost]
         //[Route(ConstancesCommunes)]
-        public IActionResult PostCity([FromBody] CityDto city)
+        public IActionResult PostCity([FromBody] CityDto cityDto)
         {
             try
             {
+                var city = _mapper.Map<Core.Entities.tCity>(cityDto);
                 var tci = _localisationService.CreateAsync(city).Result;
-                return Ok(city);
+                return Ok(cityDto);
             }
             catch (Exception ex)
             {
                 //_exceptionWriter.WriteException(ex.ToString());
-                throw;
+                throw ex;
             }
-            return NotFound();
         }
         
         [HttpDelete]

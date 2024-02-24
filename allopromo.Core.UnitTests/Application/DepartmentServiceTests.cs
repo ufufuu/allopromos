@@ -1,5 +1,6 @@
 using allopromo.Core.Abstract;
 using allopromo.Core.Application.Dto;
+//using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using allopromo.Core.Services;
 using Moq;
@@ -12,35 +13,49 @@ namespace allopromo.Core.Application.UnitTests
     public class DeparmentServiceTests
     {
         public DepartmentService SUT;
-        public Mock<IRepository<tDepartment>> RepositoryMock = new Mock<IRepository<tDepartment>>();
+        public Mock<IRepository<tDepartment>> repositoryMock = new Mock<IRepository<tDepartment>>();
         public DeparmentServiceTests()
         {
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile<AutoMapperProfile>();
+                //cfg.AddProfile<AutoMapperProfile>();
             });
         }
         [SetUp]
+
+        #region Init
         public void Init()
         {
-            SUT = new DepartmentService(RepositoryMock.Object);
+            SUT = new DepartmentService(repositoryMock.Object);
         }
+        #endregion
+
+        /// <summary>
+        /// Create Tests
+        /// </summary>
         [Test]
         public void CreateDepartment_SHOULD_CreateAndReturn()
         {
-            var departmentDto = new DepartmentDto { departmentName = "La Planque a Thierry" };
-            var result = SUT.CreateDepartmentAsync(departmentDto);
+            var departmentDto = new tDepartment { departmentName = "La Planque a Thierry" };
+            var department = new DepartmentDto { departmentName = "La Plank" };
+            var result = SUT.CreateDepartmentAsync(department);
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.GetType(), typeof(Task<DepartmentDto>));
+            Assert.AreEqual(result.GetType(), typeof(Task));// tDepartment >); ; //);
         }
+        /// <summary>
+        /// Get Departement Tests
+        /// </summary>
+
+
+        #region Read
         [Test]
         public async Task GetDepartmentAsync_SHOULD_RETURN_Department_Async()
         {
-            var departmentDto = new DepartmentDto
+            var departmentDto = new tDepartment
             {
                 departmentId = new System.Guid().ToString(),
                 departmentName = "adk",
-                departmentThumbnail = "https://allo-promo.net/images/department/0.jpg"
+                departmentThumbnail = "https://www.allopromo.com/images/department/0.jpg"
             };
             var department = SUT.GetDepartmentAsync(new System.Guid().ToString());
             Assert.IsNotNull(department);
@@ -48,9 +63,22 @@ namespace allopromo.Core.Application.UnitTests
         [Test]
         public async Task GetDepartments_SHOULD_Return_DepartmentsAsync()
         {
+            repositoryMock.Setup(x => x.GetAllAsync())
+                .Returns(Task.FromResult(new List<tDepartment>()));
+
             var result =await SUT.GetDepartmentsAsync();
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.GetType(), typeof(List<DepartmentDto>));
+            Assert.AreEqual(result.GetType(), typeof(List<tDepartment>));
         }
+        #endregion
+
+        /// <summary>
+        /// Delete Department Tests
+        /// </summary>
+        /// 
+        #region Delete
+        public async Task Delete()
+        {}
+        #endregion
     }
 }

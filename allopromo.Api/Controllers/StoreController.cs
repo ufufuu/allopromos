@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using allopromo.Core.Helpers;
 using System.Threading.Tasks;
-using allopromo.Core.Application;
+//using allopromo.Core.Application;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Filters;
-using allopromo.Core.Application.Dto;
+//using allopromo.Core.Application.Dto;
+
 using allopromo.Core.Domain;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
@@ -23,6 +25,10 @@ using allopromo.Api.Model.Wrappers;
 using allopromo.Api.Model.Filter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+
+using allopromo.Core.Application.Dto;
+
+//using allopromo.Api.DTOs;
 
 namespace allopromo.Api.Controllers
 {
@@ -51,8 +57,8 @@ namespace allopromo.Api.Controllers
         private readonly IStoreService _storeService;
         private readonly INotifyService _notificationService;
         private readonly IProductService _productService;
-
-        private readonly Infrastructure.Hubs.MessageHub _messageHub;
+        private AutoMapper.IMapper _mapper;
+        //private readonly Infrastructure.Hubs.MessageHub _messageHub;
         #endregion
 
         #region Constructors & Properties
@@ -60,6 +66,7 @@ namespace allopromo.Api.Controllers
         public delegate string myGenericDelegate<T>(string msg);
         public Core.Services.MediaService _mediaService { get; set; }
         public HttpContextAccessor _httpContextAccessor { get; set; }
+        //public IWorkContext _iWorkContext { get; set; }
         public StoreController(IStoreService storeService, IProductService productService, 
             INotifyService notificationService)
         {
@@ -73,17 +80,19 @@ namespace allopromo.Api.Controllers
         [HttpPost]
         [Route("categories/create/")]
         public async Task<IActionResult> PostStoreCategory([FromBody]
-            StoreCategoryDto storeCategory)
+            StoreCategoryDto storeCategoryDto)
         {
-            if (storeCategory == null)
+            if (storeCategoryDto == null)
                 return BadRequest();
-            return Ok(await _storeService.CreateStoreCategoryAsync(storeCategory));
+            var category = _mapper.Map<tStoreCategory>(storeCategoryDto);
+            //return  (await _storeService.CreateStoreCategoryAsync(category));
+            return Ok(storeCategoryDto);
         }
         [HttpPost]
         [Route("create")]
         //[Authorize]
         //[BasicJwtAuthorize]
-        public IActionResult PostStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
+        public async Task<IActionResult> PostStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
         {
             if (storeDto != null)
             {
@@ -94,14 +103,14 @@ namespace allopromo.Api.Controllers
 
                 //_storeService.StoreCreated +=
                 //_messageHub.Clients.All.SendOffersToUser(new ListstoreDto.storeName);
-
                 //RxNet ?
 
-                var store = _storeService.CreateStoreAsync(storeDto, currentIdentity.Name).Result;
+                await _storeService.CreateStoreAsync(_mapper.Map<tStore>(storeDto),  //var store =?
+                    currentIdentity.Name);
 
-                if (store != null)
+                if (storeDto != null)
                 {
-                    return Ok(store);
+                    return Ok(storeDto);
 
                     //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
                     //_storeService.OnStoreCreated();
@@ -131,8 +140,9 @@ namespace allopromo.Api.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var tObj = AutoMapper.Mapper.Map<tProduct>(product);
-                var productDto = await _productService.CreateProductAsync(product, currentUser.Name);
+                var tObj = _mapper.Map<tProduct>(product);
+                var productDto = await _productService.CreateProductAsync(
+                    _mapper.Map<tProduct>(product), currentUser.Name);
                 return CreatedAtAction(nameof(productDto), new { }, product);
             }
         }
@@ -178,14 +188,14 @@ namespace allopromo.Api.Controllers
                 date = "Date";
             var stores = await _storeService.GetStores(categoryID, localizationID, date);
 
-            var paginatedStores = stores
+            var paginatedStores = _mapper.Map<IEnumerable<StoreDto>>(stores
                                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                                .Take(validFilter.PageSize).AsQueryable();
-                            
+                                .Take(validFilter.PageSize).AsQueryable());
             //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
 
             if (paginatedStores != null)
-                return Ok(new PagedResponse<IEnumerable<StoreDto>>(paginatedStores, validFilter.PageNumber, validFilter.PageSize));
+                return Ok(new PagedResponse<IEnumerable<StoreDto>>(paginatedStores, 
+                    validFilter.PageNumber, validFilter.PageSize));
             return NotFound();
         }
         [HttpGet]
@@ -238,8 +248,8 @@ namespace allopromo.Api.Controllers
                 return NotFound();
             else
             {
-                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
-                    .GetStoresByCategoryIdAsync((int)categoryId, pageNumber, limitPerPage));
+                var stores = await _storeService
+                    .GetStoresByCategoryIdAsync((int)categoryId, pageNumber, limitPerPage);
                 return Ok(stores);
             }
         }
@@ -248,21 +258,24 @@ namespace allopromo.Api.Controllers
         #region PUT update
         [HttpPut]
         [Route("categories/{catId}")]
-        public ActionResult PutStoreCategory([FromBody] StoreCategoryDto category)
+        public ActionResult PutStoreCategory([FromBody] StoreCategoryDto storeCategoryDto)
         {
             string catId = string.Empty;
 
             //var store = await _storeService.GetStoreCategoryByIdAsync(catId); //storeData.storeCategoryId);
 
-            if (category == null)
+            if (storeCategoryDto == null)
             {
                 return NotFound();
             }
             else
             {
-                catId = category.storeCategoryName;
-                _storeService.UpdateStoreCategory(catId.ToString(), category);
-                return Ok(category);
+                catId = storeCategoryDto.storeCategoryName;
+                
+                //var category = AutoMapper.
+
+                _storeService.UpdateStoreCategory(catId.ToString(), storeCategoryDto);
+                return Ok(storeCategoryDto);
             }
         }
         
@@ -272,7 +285,7 @@ namespace allopromo.Api.Controllers
         [HttpDelete]
         [Route("{locationId}/{pageNumber}/{limitPerPage}")]
         //[Route("categoryId?limit=10&offSet=4")]
-        public async Task<IActionResult> GetStoresByLocationIdAsync(int locationId, int categoryId, int pageNumber, int limitPerPage)
+        public async Task<ActionResult<StoreDto>> GetStoresByLocationIdAsync(int locationId, int categoryId, int pageNumber, int limitPerPage)
         {
             limitPerPage = 10;
             if (categoryId.Equals(null))

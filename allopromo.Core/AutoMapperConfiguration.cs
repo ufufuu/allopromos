@@ -1,8 +1,9 @@
 ﻿
 
 //using allopromo.Api.ViewModel.ViewModels;
+//using allopromo.Core.Application.Dto;
 
-using allopromo.Core.Application.Dto;
+
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using AutoMapper;
