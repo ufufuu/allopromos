@@ -14,6 +14,6 @@ namespace allopromo.Core.Model
     }
     public class StoreCreatedEventArgsSSS
     {
-        public HashSet<tStore> Stores { get; set; }
+        public HashSet<Store> stores { get; set; }
     }
 }

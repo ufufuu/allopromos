@@ -1,413 +1,225 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using allopromo.Core.Abstract;
-using allopromo.Core.Model;
-using Microsoft.AspNetCore.Identity;
-using allopromo.Model.Validation;
-using allopromo.Api.Infrastructure;
-using allopromo.Api.Infrastructure.AutoMapper;
-using Polly;
-using AutoMapper;
-using allopromo.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using allopromo.Infrastructure.Helpers.Authentication;
-using allopromo.Core.Infrastructure.Abstract;
+﻿// Decompiled with JetBrains decompiler
+// Type: allopromo.Api.Startup
+// Assembly: allopromo.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: D9E70BF9-6813-49CA-B8B2-EE280C9B986F
+// Assembly location: C:\Users\MonPC\Downloads\allopromo.Api.dll
 
-//using Owin;
-//using Microsoft.Owin;
-
-using Microsoft.AspNetCore.ResponseCompression;
-using System.Linq;
-using System;
-//using allopromo.Core.Application;
-using allopromo.Infrastructure.Repositories;
-using allopromo.Core.Domain;
-using allopromo.Core.Entities;
-using allopromo.Api;
-using allopromo.Core.Services;
+using allopromo.Api.DTOs;
 using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Logging;
+using allopromo.Api.Infrastructure.Mapping;
+using allopromo.Api.Infrastructure.Mapping.Profiles;
+using allopromo.Api.Validators;
+using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
+using allopromo.Core.Entities;
+using allopromo.Core.Helpers;
+using allopromo.Core.Infrastructure.Abstract;
+using allopromo.Core.Model;
+using allopromo.Core.Services;
+using allopromo.Core.Services.Base;
+using allopromo.Core.Services.Media;
+using allopromo.Infrastructure.Data;
+using allopromo.Infrastructure.Repositories;
+using AutoMapper;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using allopromo.Core.Contracts;
-using System.Net.Http;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using allopromo.Core.Application.Dto;
+using Polly;
+using Polly.Retry;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Reflection;
+using System.Text;
 
+#nullable enable
 namespace allopromo.Api
 {
     public class Startup
     {
-        public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public readonly
+#nullable disable
+    string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
+
+        public Startup(IConfiguration configuration) => this.Configuration = configuration;
+
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //services.AddDefaultIdentity<IdentityUser>()
-            //  .AddRoles<IdentityRole>()
-            //.AddEntityFrameworkStores<AppDbContext>();
-            //services.AddAutoMapper(typeof(Program));
-
-            //services.AutoMapperCollectionExtensions.AddAutoMapper();
-            AutoMapperConfig.Configure();
-
-            services.AddAutoMapper(typeof(Program));
             services.AddControllers();
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddMvc((Action<MvcOptions>)(options => options.EnableEndpointRouting = false));
+            this.Configuration.GetSection("JwtSettings");
+            this.Configuration.GetSection("Jwt").Get<AppSettings>();
+            byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
+            services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(options => options.UseSqlServer(this.Configuration.GetConnectionString("dockerConnection"))));
+            services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
                 options.Stores.MaxLengthForKeys = 128;
-            })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddRoleManager<RoleManager<IdentityRole>>()
-                .AddDefaultTokenProviders();
-            //For Session State Management
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddRoleManager<RoleManager<IdentityRole>>().AddDefaultTokenProviders();
+            services.AddAuthentication("Bearer").AddJwtBearer((Action<JwtBearerOptions>)(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-            });
-            services.AddHttpContextAccessor();
-
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))
-            );
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-            );
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddOptions();
-            services.AddScoped<IStoreService, StoreService>();
-            
-            services.AddScoped<ILocalisationService, LocalisationService>();
-
-            services.AddScoped<Core.Services.Base.IBaseService<DepartmentDto>,
-                Core.Services.Base.BaseService<DepartmentDto>>();
-            services.AddScoped<IRepository<DepartmentDto>, TRepository<DepartmentDto>>();
-
-            services.AddScoped<Core.Services.IDepartmentService, Core.Services.DepartmentService>();
-
-            //services.AddScoped<I>
-            //services.AddScoped<IHttpClientFactory, IHttpClientFactory>();
-            //services.AddScoped<>
-            //2 lines below vs 2 above ? or Addtransient vs addScoped ?
-            //services.AddTransient<IStoreService, StoreService>();
-            //services.AddTransient<INotificationService, NotificationService>();
-            //services.AddScoped<IRepository<T>, Repository<T>> where T:class();
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //Action<Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions> c= null;
-                
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.
-                    OpenApiInfo { Title = "allopromo API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
+                    ValidateIssuer = false,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = this.Configuration["Jwt:ValidIssuer"],
+                    ValidAudience = this.Configuration["Jwt:ValidAudience"],
+                    IssuerSigningKey = (SecurityKey)new SymmetricSecurityKey(key),
+                    RequireExpirationTime = false
+                };
+            }));
+            services.AddAuthorization((Action<AuthorizationOptions>)(options =>
+            {
+                options.AddPolicy("MerchantsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Merchants")));
+                options.AddPolicy("ClientsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Clients")));
+            }));
+            IMapper mapper = new MapperConfiguration((Action<IMapperConfigurationExpression>)(mc =>
+            {
+                mc.AddProfile<UserProfile>();
+                mc.AddProfile<StoreProfile>();
+                mc.AddProfile<ProductProfile>();
+                mc.AddProfile<StoreCategoryProfile>();
+                mc.AddProfile<CityProfile>();
+                mc.AddProfile<ProductCategoryProfile>();
+                mc.ValidateInlineMaps = new bool?(false);
+            })).CreateMapper();
+            services.AddSingleton<IMapper>(mapper);
+            AutoMapperConfig.Configure();
+            services.AddAutoMapper(typeof(Program));
+            services.AddDistributedMemoryCache();
+            services.AddSession((Action<SessionOptions>)(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10.0);
+                options.Cookie.HttpOnly = true;
+            }));
+            services.AddHttpContextAccessor();
+            services.AddOptions();
+            services.AddControllers();
+            SwaggerGenServiceCollectionExtensions.AddSwaggerGen(services, (Action<SwaggerGenOptions>)(c =>
+            {
+                SwaggerGenOptionsExtensions.SwaggerDoc(c, "v1", new OpenApiInfo()
+                {
+                    Title = "allopromo API",
+                    Version = "v1"
+                });
+                SwaggerGenOptionsExtensions.AddSecurityDefinition(c, "Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
                     Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
                     In = ParameterLocation.Header,
-                    Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
-            });
+                SwaggerGenOptions swaggerGenOptions = c;
+                SwaggerGenOptionsExtensions.AddSecurityRequirement(swaggerGenOptions, new OpenApiSecurityRequirement()
+        {
+          {
+            new OpenApiSecurityScheme()
+            {
+              Reference = new OpenApiReference()
+              {
+                Type = new ReferenceType?(ReferenceType.SecurityScheme),
+                Id = "Bearer"
+              }
+            },
+            (IList<string>) Array.Empty<string>()
+          }
+        });
+            }));
+            services.AddScoped<IVendorService, VendorService>();
+            services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<ILocalisationService, LocalisationService>();
+            services.AddScoped<IBaseService<DepartmentDto>, BaseService<DepartmentDto>>();
+            services.AddScoped<IRepository<DepartmentDto>, TRepository<DepartmentDto>>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<INotifyService, NotifyService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IVendorService, VendorService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
-            //services.AddScoped<INotifyService, EmailNotificationService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<IValidationService, ValidationService>();
             services.AddScoped<IMembershipService, MembershipService>();
-
-            services.AddScoped<IRepository<tStore>, TRepository<tStore>>();
-            services.AddScoped<IRepository<tStoreCategory>, TRepository<tStoreCategory>>();
-            services.AddScoped<IRepository<tProduct>, TRepository<tProduct>>();
-            services.AddScoped<IRepository<tProductCategory>, TRepository<tProductCategory>>();
-            services.AddScoped<IRepository<tCity>, TRepository<tCity>>();
-            services.AddScoped<IRepository<tCountry>, TRepository<tCountry>>();
-            services.AddScoped<IRepository<tDepartment>, TRepository<tDepartment>>();
-
-            //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<ApplicationUser>>(sp));
-            //services.AddScoped(sp=> ActivatorUtilities.CreateInstance<RoleManager<ApplicationRole>>(sp));
-
+            services.AddScoped<IImageUploadService, ImageUploadService>();
+            services.AddScoped<IMediaService, ImageUploadMediaService>();
+            services.AddScoped<IRepository<Store>, TRepository<Store>>();
+            services.AddScoped<IRepository<StoreCategory>, TRepository<StoreCategory>>();
+            services.AddScoped<IRepository<Product>, TRepository<Product>>();
+            services.AddScoped<IRepository<ProductCategory>, TRepository<ProductCategory>>();
+            services.AddScoped<IRepository<City>, TRepository<City>>();
+            services.AddScoped<IRepository<Country>, TRepository<Country>>();
+            services.AddScoped<IRepository<Department>, TRepository<Department>>();
+            services.AddScoped<IValidator<CreateUserDto>, CreateUserValidator>();
             services.AddSingleton<ILoggerManager, LoggerManager>();
-            services.AddSingleton<EmailConfiguration>
-                (Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddSingleton<EmailConfiguration>(this.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
-            //services.AddScoped(sp => ActivatorUtilities.CreateInstance<UserManager<tUser>>(sp)); //?Instead of <ApplicationUser>>
             services.AddSignalRCore();
-            services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly)
-            );
-            //services.AddPolicy("CORSPolicy",
-            //    builder => builder
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .AllowCredentials()
-            //    .SetIsOriginAllowed(hosts => true));
-            ////});
-            // 60 000 1682  300 1000
-            //Add Role Service to Identity
-            services.AddAuthenticationCore();
-            services.AddAuthorizationCore();
-
-            //services.AddDefaultIdentity<IdentityUser>()
-              //  .AddRoles<IdentityRole>();
-            services.AddCors(
-            x => x.AddPolicy("AllowOrigin", 
-             //options => options.AllowAnyOrigin()
-                            builder =>
-                            {
-                                builder
-                                    .AllowAnyOrigin() // ? Be Careful With this One 
-                                    //.AllowCredentials()
-                                    .AllowAnyHeader()
-                                    .WithOrigins("http://localhost:4200")
-                                    .AllowAnyMethod();
-                            }
-                ));
-
-
-            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
-            services.AddControllers().AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSignalR();
-            services.AddControllersWithViews();
-            services.AddResponseCompression(opts =>
-            {
-                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                new[] { "application/octet-stream" });
-            });
-
-            services.AddAuthentication(auth =>
-            {
-            auth.DefaultScheme = "Test";
-            })
-            .AddScheme<ValidateHashAuthenticationSchemeOptions, ValidateHashAuthenticationHandler>("Test", null);
-            //Adding E-mail Services
-            services.AddFluentEmail("test-email@allopromo.test");
-            //services.AddOcelot();
-
-            //Polly Retry 1
-            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>
-                (Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-                .WaitAndRetryAsync(3, retryAttemps => TimeSpan.FromSeconds(retryAttemps)));
+            ServiceCollectionExtensions.AddMediatR(services, (Action<MediatRServiceConfiguration>)(cfg => cfg.RegisterServicesFromAssemblies(new Assembly[1]
+           {
+        typeof (Program).Assembly
+           })));
+            services.AddCors((Action<CorsOptions>)(policyBuilder => policyBuilder.AddDefaultPolicy((Action<CorsPolicyBuilder>)(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader()))));
+            FluentEmailServiceCollectionExtensions.AddFluentEmail(services, "test-email@allopromo.test", "");
+            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>((IAsyncPolicy<HttpResponseMessage>)AsyncRetryTResultSyntax.WaitAndRetryAsync<HttpResponseMessage>(Policy.HandleResult<HttpResponseMessage>((Func<HttpResponseMessage, bool>)(r => !r.IsSuccessStatusCode)), 3, (Func<int, TimeSpan>)(retryAttemps => TimeSpan.FromSeconds((double)retryAttemps))));
             HttpClient httpClient = new HttpClient();
-            //Polly Retry 2
-            services.AddSingleton<Polly.Retry.AsyncRetryPolicy>(x =>
-            {
-                var policy = Policy.Handle<Exception>().WaitAndRetryAsync(
-                    retryCount: 3,
-                    sleepDurationProvider: (retryCount) => TimeSpan.FromMilliseconds( 500 * retryCount),
-                    onRetry: (result, timeSpan, retryCount, context) =>
-                    {
-                        System.Console.WriteLine($"begin {retryCount} retry {context.CorrelationId} " +
-                            $"with {timeSpan.TotalSeconds} seconds of delays");
-                    });
-                return policy;
-            });
+            services.AddSingleton<AsyncRetryPolicy>((Func<IServiceProvider, AsyncRetryPolicy>)(x => AsyncRetrySyntax.WaitAndRetryAsync(Policy.Handle<Exception>(), 3, (Func<int, TimeSpan>)(retryCount => TimeSpan.FromMilliseconds((double)(500 * retryCount))), (Action<Exception, TimeSpan, int, Context>)((result, timeSpan, retryCount, context) => Console.WriteLine(string.Format("begin {0} retry {1} ", (object)retryCount, (object)context.CorrelationId) + string.Format("with {0} seconds of delays", (object)timeSpan.TotalSeconds))))));
+            services.BuildServiceProvider();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            /*
-            app.UseEndpoints(endpoints =>
+            if (env.IsDevelopment())
             {
-                endpoints.MapGet("/", async context => {
-                    await context.Response.WriteAsync("Hello From ASP.NET Core Web API");
-                });
-            });
-            */
-            
-            if (env.IsDevelopment()) // || env.IsProduction()
-            {
-                //app.UserExceptionHandler("/Home/Error-local-development");
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                SwaggerBuilderExtensions.UseSwagger(app, (Action<SwaggerOptions>)null);
+                SwaggerUIBuilderExtensions.UseSwaggerUI(app, (Action<SwaggerUIOptions>)null);
             }
             else
             {
-                //Redirect to Error  When Error occurs  and when Not in Development 
                 app.UseExceptionHandler("/error");
-                //Or Below ?
                 app.UseHsts();
             }
-            //app.ConfigureExceptionHandler(logger);// OR Below 
-            //app.ConfigureCustomExceptionMiddleware();
-
             app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseSession();
-
-            //app.UseOcelot();
-            //app.UseMvc();
-            app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
-            .SetIsOriginAllowed((host) => true).AllowCredentials() //vs alloAnyOrigin
-            );
+            app.UseCors((Action<CorsPolicyBuilder>)(options => options.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
             app.UseCors("CORSPolicy");
-            app.UseEndpoints(endpoints =>
+            app.UseRouting();
+            app.UseSession();
+            app.UseAuthorization();
+            app.UseEndpoints((Action<IEndpointRouteBuilder>)(endpoint => endpoint.MapControllers()));
+            SwaggerBuilderExtensions.UseSwagger(app, (Action<SwaggerOptions>)null);
+            SwaggerUIBuilderExtensions.UseSwaggerUI(app, (Action<SwaggerUIOptions>)(c =>
             {
-                endpoints.MapControllers();
-
-                //Utilisez l’intergiciel decompression deréponseen haut dela
-                //configuration du pipeline detraitement.
-                //Entreles points determinaison pour les contrôleurs et lesecours 
-                //côtéclient,ajoutez un point de
-                //terminaison pour le Hub
-                //endpoints.MapFallbackToFile("index.html");
-
-                endpoints.MapHub<Api.Infrastructure.Hubs.ChatHub>("/chathub");
-                endpoints.MapHub<Api.Infrastructure.Hubs.MessageHub>("/api/v1/Message/inbox");
-
-                //endpoints.MapHub<Api.Infrastructure.Hubs.NotificationHub>("/notify");
-                //endpoints.MapHub<Api.Infrastructure.Hubs.NotifyHub>("/notification");
-            });
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>{
-                c.DefaultModelExpandDepth(-1); //Disable Swagger Schemas At Bottom
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My-- API V1");
-            });
-
-            //AutoMapper
-            //AutoMapperConfig.Initialize();
-
-            app.UseCors(options =>options
-            .AllowAnyMethod()
-            .WithOrigins("http://localhost:4200")
-            .AllowAnyHeader()
-            .SetIsOriginAllowed((host)=>true)
-            .AllowCredentials()
-            );
-            //Register MiddleWare for the Signal R Middleware("/signalrr", new HubConfiguration(
-            app.UseCors("AllowCors");
-
-            //IApplicationBuilder applicationBuilder = app.UseSignalR(routes =>
-            //{
-            //    routes.MapHub<Api.Infrastructure.Hubs.ChatHub>("/chat");
-            //    routes.MapHub<Api.Infrastructure.Hubs.NotifyHub>("/chathub");
-            //    routes.MapHub<Api.Infrastructure.Hubs.MessageHub>("/api/v1/Message/inbox");
-            //});
-
+                SwaggerUIOptionsExtensions.DefaultModelExpandDepth(c, -1);
+                SwaggerUIOptionsExtensions.SwaggerEndpoint(c, "/swagger/v1/swagger.json", "My-- API V1");
+            }));
+            app.UseCors((Action<CorsPolicyBuilder>)(options => options.AllowAnyMethod().WithOrigins("http://localhost:44306").AllowAnyHeader().SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
             app.UseMvc();
-            app.Map("/signalr", map=>
-            {
-                //map.UseCors(Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions);
-                var hubConfiguration = new Microsoft.AspNet.SignalR.HubConfiguration
-                {
-                    EnableDetailedErrors = true,
-                    EnableCrossDomain=true
-                };
-                //map.RunSignalR(hubConfiguration);
-            }); 
-            //HANDLING GLOBALLY EXCEPTIONS
-            //app.UseMiddleware(typeof(ExceptionHandling));
-            //app.UseMiddleware<ExceptionHandler>();
         }
     }
 }
-/*//https://www.infoworld.com/article/3545304/how-to-handle-404-errors-in-aspnet-core-mvc.html
- * app.Use(async (context, next) =>
-    {
-    await next();
-    if (context.Response.StatusCode == 404)
-       {
-         context.Request.Path = "/Home";
-         await next();
-       }
-    });
-*/
-// order creates delivery when is it delivery , not if picking up
-// sotre COntroller Unauthorized , redirect to User to Login , if Unauthorized send to User Auth
-// if Authorized ?
-/*
- * Functional Document Specification : Test Cases 
- */
-/*
- * 1 -- Account Asp.net Identity + fb+ tiwtter !
- * 2-- create store scenario <- account login and register
- * business Login for Account registration
- * 3- Test Unit for bl account Registration             3-- Code Versionning    4
- * 4 - TDD / Buzz Fizz
- * Reapeat !
- * 
- */
-/*Adapter -> Facade ! */
-// NET CORE vs .NET ?
-//https://markheath.net/post/asserting-events-with-nunit
-//https://pluralsight.pxf.io/c/1192349/424552/7490?u=www%2Epluralsight%2Ecom%2Fcourses%2Fazure-container-instances-getting-started
-
-// What is Proxy Class ? - Factory Pattern - Factory Methods patterns | Strategy |
-//Luke Lowery
-//Top Best 14 libraries:
-// MediatR: mediator pattern X
-//Serilog X
-//Hangfire X
-//Fluentemail
-//LazyCache: thread safe wrapper for in-memory caching - requesting an item from the cache - or add the item to cache
-//Dapper: EF access being too slow - Run raw SQL and getting object mapping wiht Dapper
-//Miniprofiler X
-//LinqKit
-//FluentMigrator or DBUp
-//SVHelper
-//Hashids
-//Humanizer: turning dates, numbers , enums to more huma readable strings 
-//Bogus
-//Automapper X - FluentValidation X - Autofac X
-
-/* From User Stories to Unit testing cases to making Passe the tests -> TDD
- */
-
-// Top 10 C# Librairies: 
-//Autofac - AutoMapper - FLuentValidation - Hangfire - MediatR - Swagger(Swashbuckle) - OpenAPI -
-//Serilog - xUnit - Moq - FluentAssertions - AutoFixture - MiniProfiler - EPPlus - 
-//1-> jwt 2-> sending msg 3-> roles based access 4->
-
-// 
-/* store service business layer: if it existe, date time, is
- * 
- * project libre
- * Gant roject ?
- * 
- * Ioc through DIP --- other means ???? XXXXXX ----- AutoFac ---AutoMapper ----Onion---vs LAyered Architeture --- return good Store *******
- * Planning 
- * 
- *  Delegates - Actions  - Functions  - using lambda expr - anonymous types
- *  Testing thoses 
- *  
- *  auth - filitering - idetity server 4 - jwt - filtering - caching - 
- *  collection generic & non generic 
- *  
- *  Push Notification - SignalR - Identiy Server 4 ? ---> Dapper vs E.F !
- *  Tasking <Asynchronous>
- */
-
-/*
- * https://enlabsoftware.com/development/how-to-build-and-deploy-a-three-layer-architecture-application-with-c-sharp-net-in-practice.html
- */
-
-/* systemes Embarques
- */

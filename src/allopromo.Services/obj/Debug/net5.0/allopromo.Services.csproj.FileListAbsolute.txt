@@ -1,0 +1,12 @@
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\bin\Debug\net5.0\allopromo.Services.deps.json
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\bin\Debug\net5.0\allopromo.Services.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\bin\Debug\net5.0\ref\allopromo.Services.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\bin\Debug\net5.0\allopromo.Services.pdb
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.csproj.CoreCompileInputs.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\ref\allopromo.Services.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Services\obj\Debug\net5.0\allopromo.Services.pdb

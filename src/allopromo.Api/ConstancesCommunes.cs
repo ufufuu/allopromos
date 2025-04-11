@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// Decompiled with JetBrains decompiler
+// Type: allopromo.Api.ConstancesCommunes
+// Assembly: allopromo.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: D9E70BF9-6813-49CA-B8B2-EE280C9B986F
+// Assembly location: C:\Users\MonPC\Downloads\allopromo.Api.dll
+
+#nullable disable
 namespace allopromo.Api
 {
     public static class ConstancesCommunes

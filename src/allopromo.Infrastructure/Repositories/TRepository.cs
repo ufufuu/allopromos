@@ -13,18 +13,18 @@ namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repo
         // Unit of Work ? que doit retourner creeer categry ?
     {
         #region Fields
-        private readonly AppDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private DbSet<T> _table;
         #endregion
 
         #region Constructors
 
-        public TRepository(AppDbContext dbContext)
+        public TRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
             _table = _dbContext.Set<T>();
         }
-        public TRepository(AppDbContext dbContext, DbSet<T> table)
+        public TRepository(ApplicationDbContext dbContext, DbSet<T> table)
         {
             _dbContext = dbContext;
             _table = table;
@@ -49,142 +49,117 @@ namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repo
         }
         public Task Add2(T obj)
         {
-            if (obj != null)
+            if ((object)obj == null)
+                throw new ArgumentNullException(nameof(obj));
+            using (ApplicationDbContext applicationDbContext = new ApplicationDbContext())
             {
-                using (var dbContext = new AppDbContext())
+                try
                 {
-                    try
-                    {
-                        dbContext.Entry<T>(obj);
-                        dbContext.SaveChanges();
-                        return obj as Task;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw;
-                    }
-
+                    applicationDbContext.Entry<T>(obj);
+                    applicationDbContext.SaveChanges();
+                    return (object)obj as Task;
+                }
+                catch (Exception ex)
+                {
+                    throw;
                 }
             }
-            else
-            {
-                throw new ArgumentNullException("obj");
-            }
         }
-        Task IRepository<T>.Add(T obj, string imageUrl)
-        {
-            if (obj != null)
-            {
-                _dbContext.Add(obj);
-                this.Save();
-            }
-            else
-            {
-                throw new NullReferenceException();
-            }
-            return Task.FromResult(obj);
-        }
-
         Task IRepository<T>.Add(string obj, string imageUrl)
         {
             if (obj == null)
-            {
                 throw new NullReferenceException();
-            }
-            else
-            {
-                _dbContext.Add(obj);
-            }
-            return Task.FromResult(obj);
+            this._dbContext.Add<string>(obj);
+            return (Task)Task.FromResult<string>(obj);
         }
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-        #endregion
+        public void Save() => this._dbContext.SaveChanges();
 
-        #region Read
         public Task<List<T>> GetAllAsync()
         {
-            var tObjects = _table.ToListAsync();
-            if (tObjects != null)
-                return tObjects;
-            else
-                throw new ArgumentNullException();
+            return this._table.ToListAsync<T>() ?? throw new ArgumentNullException();
         }
+
         public Task<IEnumerable<T>> GetEntitiesAsync()
         {
-            var tObj = _dbContext.Set<T>();
-            return (Task.FromResult(tObj.AsEnumerable()));
+            return Task.FromResult<IEnumerable<T>>(this._dbContext.Set<T>().AsEnumerable<T>());
         }
+
         public IQueryable<T> GetByIdAsync(int categoryId, int pageNumber, int offSet)
         {
-            return null;
+            return (IQueryable<T>)null;
         }
+
         public Task<T> GetByIdAsync(string Id)
         {
-            //return _table.FindAsync(Id.ToString());  // Why Not Guid.Parse(Id) here ?
+            return Task.FromResult<T>(this._table.Find((object)Id.ToString()));
+        }
 
-            var tObj = (Task.FromResult(_table.Find(Id.ToString())));
-            return tObj;
-        }
-        public async Task<T> GetByName(string Name)
-        {
-            return await _table.FindAsync();
-        }
+        public async Task<T> GetByName(string Name) => await this._table.FindAsync();
+
         public async Task<T> GetByIdAsync(int Id)
         {
-            return await _table.FindAsync(Id.ToString());
+            return await this._table.FindAsync((object)Id.ToString());
         }
+
         async Task<T> IRepository<T>.GetByIdAsync(object Id)
         {
-            var obj = await _table.FindAsync(Id.ToString());
-            return obj;
+            return await this._table.FindAsync((object)Id.ToString());
         }
-        #endregion
 
-        #region Update
         public void Update(T obj)
         {
-            if (obj != null)
-            {
-                //throw new ArgumentNullException();
-
-                _table.Attach(obj);
-                _dbContext.Entry(obj).State = EntityState.Modified;
-            }
+            if ((object)obj == null)
+                return;
+            this._table.Attach(obj);
+            this._dbContext.Entry<T>(obj).State = EntityState.Modified;
         }
+
         void IRepository<T>.Update(T obj)
         {
-            var Id = GetByIdAsync(obj.GetHashCode());
-            _dbContext.Entry(obj).State = EntityState.Modified;
-            _dbContext.Entry(obj).CurrentValues.SetValues(obj);
-
-            //_table.Update(obj);
-
-            _dbContext.SaveChanges();
+            this.GetByIdAsync(obj.GetHashCode());
+            this._dbContext.Entry<T>(obj).State = EntityState.Modified;
+            this._dbContext.Entry<T>(obj).CurrentValues.SetValues((object)obj);
+            this._dbContext.SaveChanges();
         }
-        #endregion
 
-        #region Delete
         public bool Delete(object Id)
         {
-            T obj = _table.Find(Id);
-            _table.Remove(obj);
+            this._table.Remove(this._table.Find(Id));
             return true;
         }
+
         public void Delete(T obj)
         {
         }
-        
-
-        //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
-        //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
-        //void IRepository<T>.DeleteStoreCategory(T obj)
-        #endregion
     }
 
-}//Generics : code reuse - type safety - performance -
+
+    //Task<ProductDto> IRepository<T>.GetProductAsync(string productId)
+    //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
+    //void IRepository<T>.DeleteStoreCategory(T obj)
+    #endregion
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Generics : code reuse - type safety - performance -
 /*
         void GetStoresAsync()
         {

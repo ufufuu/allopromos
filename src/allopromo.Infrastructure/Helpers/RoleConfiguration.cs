@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace allopromo.Infrastructure.Helpers
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+    {
+  public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
     {
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
-            builder.HasData(
-                new IdentityRole
-                {
-                    Name = "Administrators",
-                    NormalizedName = "ADMINISTRATORS"
-                },
-                new IdentityRole
-                {
-                    Name = "Merchants",
-                    NormalizedName = "MERCHANTS"
-                },
-                new IdentityRole
-                {
-                    Name = "Users",
-                    NormalizedName = "USERS"
-                });
+            EntityTypeBuilder<IdentityRole> entityTypeBuilder = builder;
+            IdentityRole[] identityRoleArray = new IdentityRole[3];
+            IdentityRole identityRole1 = new IdentityRole();
+            identityRole1.Name = "Administrators";
+            identityRole1.NormalizedName = "ADMINISTRATORS";
+            identityRoleArray[0] = identityRole1;
+            IdentityRole identityRole2 = new IdentityRole();
+            identityRole2.Name = "Merchants";
+            identityRole2.NormalizedName = "MERCHANTS";
+            identityRoleArray[1] = identityRole2;
+            IdentityRole identityRole3 = new IdentityRole();
+            identityRole3.Name = "Users";
+            identityRole3.NormalizedName = "USERS";
+            identityRoleArray[2] = identityRole3;
+            entityTypeBuilder.HasData(identityRoleArray);
         }
     }
 }

@@ -9,7 +9,7 @@ using allopromo.Infrastructure.Data;
 
 namespace allopromo.Infrastructure.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230907115243_v0")]
     partial class v0
     {

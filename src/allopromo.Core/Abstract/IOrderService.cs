@@ -12,8 +12,8 @@ namespace allopromo.Core.Abstract
     {
         //Task<tOrder> CreateOrderAsync(tOrder order, string Name);
 
-        Task<IEnumerable<tOrder>> GetOrdersByStore(string storeId);
+        Task<IEnumerable<Order>> GetOrdersByStore(string storeId);
 
-        Task<tOrder> GetOrderById(string productId);
+        Task<Order> GetOrderById(string productId);
     }
 }

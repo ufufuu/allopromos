@@ -6,34 +6,41 @@
     <RootNamespace>allopromo.Core</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Aggregates\Specifications\**" />
     <Compile Remove="Concrete\**" />
     <Compile Remove="Contracts\**" />
     <Compile Remove="Domain\**" />
     <Compile Remove="DTO\**" />
     <Compile Remove="Helpers\Convertors\**" />
     <Compile Remove="Model\ApiResponse\**" />
+    <Compile Remove="Model\Notifications\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Services\Threads\**" />
+    <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Aggregates\Specifications\**" />
     <EmbeddedResource Remove="Concrete\**" />
     <EmbeddedResource Remove="Contracts\**" />
     <EmbeddedResource Remove="Domain\**" />
     <EmbeddedResource Remove="DTO\**" />
     <EmbeddedResource Remove="Helpers\Convertors\**" />
     <EmbeddedResource Remove="Model\ApiResponse\**" />
+    <EmbeddedResource Remove="Model\Notifications\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Services\Threads\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Aggregates\Specifications\**" />
     <None Remove="Concrete\**" />
     <None Remove="Contracts\**" />
     <None Remove="Domain\**" />
     <None Remove="DTO\**" />
     <None Remove="Helpers\Convertors\**" />
     <None Remove="Model\ApiResponse\**" />
+    <None Remove="Model\Notifications\**" />
     <None Remove="Repositories\**" />
     <None Remove="Services\Threads\**" />
+    <None Remove="ValueObjects\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Abstract\Interfaces\IRoleRepository.cs" />
-    <Compile Remove="Abstract\Interfaces\IUserRepository.cs" />
     <Compile Remove="Abstract\IOrderManager.cs" />
     <Compile Remove="Abstract\IProductRepository.cs" />
     <Compile Remove="Abstract\IRoleService.cs" />
@@ -43,12 +50,29 @@
     <Compile Remove="Abstract\StoreRepository.cs" />
     <Compile Remove="Application\StoreQuery.cs" />
     <Compile Remove="AutoMapperConfiguration.cs" />
+    <Compile Remove="Entities\Domain\IpInfo.cs" />
     <Compile Remove="Entities\tRole.cs" />
-    <Compile Remove="Abstract\Interfaces\IIRepository.cs" />
-    <Compile Remove="Abstract\Interfaces\IRepository.cs" />
+    <Compile Remove="Helpers\BasicJwtAuthorizeAttribute.cs" />
+    <Compile Remove="Infrastructure\EmailConfig\EmailConfig.cs" />
+    <Compile Remove="Logic\ShoppingCartActions.cs" />
+    <Compile Remove="Model\Adress.cs" />
+    <Compile Remove="Model\CartItem.cs" />
+    <Compile Remove="Model\IpInfo.cs" />
+    <Compile Remove="Model\MemberShipService.cs" />
+    <Compile Remove="Model\Order.cs" />
+    <Compile Remove="Model\OrderStatus.cs" />
+    <Compile Remove="Model\Restaurant.cs" />
+    <Compile Remove="Model\Role.cs" />
+    <Compile Remove="Model\Store.cs" />
+    <Compile Remove="Model\StoreCategory.cs" />
+    <Compile Remove="Model\StoreCreatedEventArgs.cs" />
+    <Compile Remove="Model\User.cs" />
     <Compile Remove="Model\UserService.cs" />
+    <Compile Remove="Services\EmailNotificationService.cs" />
     <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />
+    <Compile Remove="Services\LocalisationService.cs" />
+    <Compile Remove="Services\MediaServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
@@ -67,11 +91,14 @@
     <PackageReference Include="System.Reactive.Core" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregates\Specifications\" />
+    <Folder Include="Aggregates\" />
+    <Folder Include="Application\" />
     <Folder Include="Caching\Constants\" />
+    <Folder Include="Caching\Redis\" />
     <Folder Include="Domain\" />
     <Folder Include="Events\StoreCreatedEvents\" />
     <Folder Include="Catalog\Vendor\" />
     <Folder Include="Commands\" />
+    <Folder Include="Infrastructure\EmailConfig\" />
   </ItemGroup>
 </Project>

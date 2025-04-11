@@ -5,24 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.DTOs
 {
-    public class StoreDto
-    {
-        public string  storeName { get; set; }
-        public string storeDescription { get; set; }
-        public string storeCategory { get; set; }
-        public string City { get; set; }
-
-        public StoreDto()
+        public class StoreDto
         {
-        }
+            public string StoreId { get; set; }
 
-        //public StoreDto(string storeId, string storeName, int storeRefNumber)
-        //{
-        //    _storeId = storeId;
-        //    _storeName = storeName;
-        //    _storeReferenceNumber = storeRefNumber;
-        //}
-    }
+            public string StoreName { get; set; }
+
+            public string StoreDescription { get; set; }
+
+            public string CategoryName { get; set; }
+
+            public string City { get; set; }
+
+            public string ProprioName { get; set; }
+        }
     public class CreateStoreDto
     {
         [Required(ErrorMessage = "Name Required")]
@@ -36,6 +32,18 @@ namespace allopromo.Api.DTOs
         [Required]
         public string storeName { get; set; }
         public bool storeIsEnabled { get; set; }
+        public bool storeIsDeleted { get; set; }
+    }
+
+    public class UpdateStoreDto22
+    {
+        public Guid storeGuid { get; set; }
+
+        [Required]
+        public string storeName { get; set; }
+
+        public bool storeIsEnabled { get; set; }
+
         public bool storeIsDeleted { get; set; }
     }
     //public class UserDTO

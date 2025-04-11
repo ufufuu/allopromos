@@ -41,10 +41,10 @@ namespace allopromo.Core.Services
         #endregion
 
         public IDepartmentService _departmentService { get;set; }
-        public IRepository<tDepartment> _departmentRepository { get; set; }
+        public IRepository<Department> _departmentRepository { get; set; }
 
         public UserManager<ApplicationUser> userManager { get; set; }
-        public IRepository<tStoreCategory> _categoryRepository { get; set; }
+        public IRepository<StoreCategory> _categoryRepository { get; set; }
 
 
         #region Fields
@@ -64,7 +64,7 @@ namespace allopromo.Core.Services
 
         #region Creating Objects 
         
-        public Task<tStore> CreateStore(tStore store)
+        public Task<Store> CreateStore(Store store)
         {
             throw new NotImplementedException();
         }

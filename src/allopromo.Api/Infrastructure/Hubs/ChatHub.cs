@@ -5,9 +5,19 @@ namespace allopromo.Api.Infrastructure.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SendConnectionId(string connectionId)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await this.Clients.All.SendAsync("setClientMessage", (object)("Aconnection with ID " + connectionId + "  has just connected"));
+        }
+
+        public async Task SendMessage(string message)
+        {
+            await this.Clients.All.SendAsync("ReceiveMessage", (object)message);
+        }
+
+        public async Task SendMessageUse(string user, string message)
+        {
+            await this.Clients.All.SendAsync("ReceiveMessage", (object)user, (object)message);
         }
     }
 }

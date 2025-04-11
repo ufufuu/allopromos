@@ -1,319 +1,203 @@
 ﻿using allopromo.Core.Model;
+using allopromo.Api.DTOs;
+using allopromo.Api.Model.Filter;
+using allopromo.Api.Model.ViewModel.Page;
+using allopromo.Api.Model.Wrappers;
 using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
+using allopromo.Core.Entities;
+using allopromo.Core.Services;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using allopromo.Core.Helpers;
-using System.Threading.Tasks;
-//using allopromo.Core.Application;
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc.Filters;
-//using allopromo.Core.Application.Dto;
-
-using allopromo.Core.Domain;
-using Microsoft.AspNetCore.Identity;
-using AutoMapper;
-using allopromo.Core.Entities;
-using System.Net;
-using System.ComponentModel;
-using System.Net.Http;
-using allopromo.Api.Model.ViewModel.Page;
 using System.Linq;
-using allopromo.Api.Model.Wrappers;
-using allopromo.Api.Model.Filter;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
-using allopromo.Core.Application.Dto;
-
-//using allopromo.Api.DTOs;
-
+#nullable enable
 namespace allopromo.Api.Controllers
 {
-    //public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
-
-
     [ApiController]
     [Route("api/v1/[controller]")]
     public class StoreController : ControllerBase
     {
-        //public event StoreCreatedEventHandler StoreCreated; 
-        //, IConfiguration config
-        //public StoreCreatedEventArgs storeCreated { get; set; }
-        //public event EventHandler<string> _storeCreated;
-        // What would read-only change here vs private ?
-        //tiktak.ca/en/store/62143| 
-        ////kijiji.ca/b-autos-vehicules/ville-de-quebec/c27l1700124
-        //api/customer?pageNumber=3&pageSize=10;
-
-        #region Constantes
-        public int pageNumber { get; set; }
         public const int pageSize = 2;
-        #endregion
-
-        #region Fields
-        private readonly IStoreService _storeService;
-        private readonly INotifyService _notificationService;
+        private readonly
+#nullable disable
+    IStoreService _storeService;
         private readonly IProductService _productService;
-        private AutoMapper.IMapper _mapper;
-        //private readonly Infrastructure.Hubs.MessageHub _messageHub;
-        #endregion
+        private readonly INotifyService _notificationService;
+        private IMapper _mapper;
 
-        #region Constructors & Properties
-        public delegate string mydelegate(string msg);
-        public delegate string myGenericDelegate<T>(string msg);
-        public Core.Services.MediaService _mediaService { get; set; }
+        public int pageNumber { get; set; }
+
+        public IUserService _userService { get; set; }
+
         public HttpContextAccessor _httpContextAccessor { get; set; }
-        //public IWorkContext _iWorkContext { get; set; }
-        public StoreController(IStoreService storeService, IProductService productService, 
-            INotifyService notificationService)
-        {
-            _storeService = storeService;
-            _productService = productService;
-            _notificationService = notificationService;
-        }
-        #endregion
 
-        #region POST create Categories and Stores
-        [HttpPost]
-        [Route("categories/create/")]
-        public async Task<IActionResult> PostStoreCategory([FromBody]
-            StoreCategoryDto storeCategoryDto)
+        public IMediaService _mediaService { get; set; }
+
+        public IImageUploadService _uploadService { get; set; }
+
+        public StoreController(
+          IStoreService storeService,
+          IProductService productService,
+          IUserService userService,
+          IMediaService mediaService,
+          IImageUploadService uploadService,
+          INotifyService notificationService,
+          IMapper mapper)
         {
-            if (storeCategoryDto == null)
-                return BadRequest();
-            var category = _mapper.Map<tStoreCategory>(storeCategoryDto);
-            //return  (await _storeService.CreateStoreCategoryAsync(category));
-            return Ok(storeCategoryDto);
+            this._userService = userService;
+            this._storeService = storeService;
+            this._productService = productService;
+            this._notificationService = notificationService;
+            this._mediaService = mediaService;
+            this._uploadService = uploadService;
+            this._mapper = mapper;
         }
+
         [HttpPost]
         [Route("create")]
-        //[Authorize]
-        //[BasicJwtAuthorize]
-        public async Task<IActionResult> PostStoreAsync([FromBody] StoreDto storeDto)//,UserDto userDto)
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> PostStore([FromForm] CreateStoreDto dto)
         {
-            if (storeDto != null)
+            StoreController storeController = this;
+            if (dto == null)
+                return (IActionResult)storeController.Content(" Invalid Data Store Info ");
+            string str = await storeController._mediaService.SaveProductImage(dto.storeFiles.ToList<IFormFile>().FirstOrDefault<IFormFile>());
+            ApplicationUser currentUser = await storeController._userService.GetCurrentUser();
+            dto.ProprioName = currentUser.UserName;
+            string categoryName = dto.CategoryName;
+            string city = dto.City;
+            Store store = storeController._mapper.Map<Store>((object)dto);
+            store.storeName = dto.StoreName;
+            store.storeDescription = dto.StoreDescription;
+            if (await storeController._storeService.CreateStoreAsync(store, currentUser.UserName, city, categoryName))
             {
-                var currentIdentity = User.Identity;
-
-                //Raising Events 
-                _storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-
-                //_storeService.StoreCreated +=
-                //_messageHub.Clients.All.SendOffersToUser(new ListstoreDto.storeName);
-                //RxNet ?
-
-                await _storeService.CreateStoreAsync(_mapper.Map<tStore>(storeDto),  //var store =?
-                    currentIdentity.Name);
-
-                if (storeDto != null)
-                {
-                    return Ok(storeDto);
-
-                    //_storeService.StoreCreated += _notificationService.StoreCreatedEventHandler;
-                    //_storeService.OnStoreCreated();
-                }
-                return NotFound();
+                int num = await storeController._userService.UpdateUserRole("Merchants", currentUser.UserName) ? 1 : 0;
+                return (IActionResult)storeController.Ok((object)dto);
             }
-            else
-                return NotFound();
+            return (IActionResult)storeController.Ok((object)new allopromo.Api.Model.Response()
+            {
+                Status = "400",
+                Message = "User Already Has A Store "
+            });
         }
-        #endregion
 
-        #region Create Products And Categories
-
-        [HttpPost]
-        [Route("products/create")]
-        //[SwaggerResponse(HttpStatusCode.OK,Description="CreateProduct", Type=typeof(StoreCategoryDto))]
-        [JwtBasicAuthorize]
-        public async Task<IActionResult> CreateProductAsync([FromBody] ProductDto product)
-        {
-            var httpContextAccessor = new HttpContextAccessor();
-            var currentUser = httpContextAccessor.HttpContext.User.Identity;
-            if (currentUser == null)
-            {
-                return Unauthorized();
-            }
-            else
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-                var tObj = _mapper.Map<tProduct>(product);
-                var productDto = await _productService.CreateProductAsync(
-                    _mapper.Map<tProduct>(product), currentUser.Name);
-                return CreatedAtAction(nameof(productDto), new { }, product);
-            }
-        }
-        #endregion create Products and Categories
-
-        #region GET read
         [HttpGet]
-        [Route("")]
-        public async Task<ActionResult> GetStores()//[FromQuery] PaginationFilter filter)
+        public async Task<ActionResult> GetStores([FromQuery] PaginationFilter filter)
         {
-            //var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-
-            var stores = await _storeService.GetStores();
-
-            //var paginatedResult = stores
-                                //.Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                                //.Take(validFilter.PageSize).AsQueryable();
-
-            //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
-            if (stores == null)
-                return NotFound();
-            else
-                return Ok(stores); //new PagedResponse<IEnumerable<StoreDto>>
-                    //(paginatedResult, validFilter.PageNumber, validFilter.PageSize));
+            StoreController storeController = this;
+            PaginationFilter validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            IEnumerable<Store> storesAsync = await storeController._storeService.GetStoresAsync();
+            IEnumerable<StoreDto> source = storeController._mapper.Map<IEnumerable<StoreDto>>((object)storesAsync);
+            IQueryable<StoreDto> queryable = source.Skip<StoreDto>((validFilter.PageNumber - 1) * validFilter.PageSize).Take<StoreDto>(validFilter.PageSize).AsQueryable<StoreDto>();
+            PaginatedList<StoreDto>.CreateAsync(source.AsQueryable<StoreDto>(), storeController.pageNumber, 2);
+            ActionResult stores = source != null ? (ActionResult)storeController.Ok((object)queryable) : (ActionResult)storeController.NotFound();
+            validFilter = (PaginationFilter)null;
+            return stores;
         }
+
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetStore(string Id)
+        {
+            StoreController storeController = this;
+            if (Id == null)
+                return (IActionResult)storeController.BadRequest();
+            Store storeByIdAsync = await storeController._storeService.GetStoreByIdAsync(Id);
+            return storeByIdAsync != null ? (IActionResult)storeController.Ok((object)storeByIdAsync) : (IActionResult)storeController.NotFound();
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{userName}")]
+        public async Task<IActionResult> GetStoresByUser(string userName)
+        {
+            StoreController storeController = this;
+            if (userName == null)
+                return (IActionResult)storeController.BadRequest();
+            IQueryable<Store> storesByUserName = await storeController._storeService.GetStoresByUserName(userName);
+            return storesByUserName != null ? (IActionResult)storeController.Ok((object)storesByUserName) : (IActionResult)storeController.NotFound();
+        }
+
         [HttpGet]
         [Route("{LocalizationId}")]
-        public async Task<IActionResult> GetStoresByLocationId(string LocalizationId)
+        public async Task<IActionResult> GetStoresByCategoryAndByLocation(
+          string categoryId,
+          string localizationId,
+          [FromQuery] PaginationFilter filter)
         {
-            var stores = await _storeService.GetStores(LocalizationId);
-            if (stores != null)
-                return Ok(stores);
-            return BadRequest();
-        }
-        [HttpGet]
-        [Route("{categoryID}/{LocalizationID}")]
-        public async Task<IActionResult> GetStoresByCategoryAndByLocation(string categoryID, string localizationID, 
-            [FromQuery] PaginationFilter filter )
-        {
+            StoreController storeController = this;
             PaginationFilter validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            String date = string.Empty;
-            if (string.IsNullOrEmpty(categoryID))
-                date = "Date";
-            var stores = await _storeService.GetStores(categoryID, localizationID, date);
-
-            var paginatedStores = _mapper.Map<IEnumerable<StoreDto>>(stores
-                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                                .Take(validFilter.PageSize).AsQueryable());
-            //var result = PaginatedList<StoreDto>.CreateAsync(stores.AsQueryable(), pageNumber, pageSize);
-
-            if (paginatedStores != null)
-                return Ok(new PagedResponse<IEnumerable<StoreDto>>(paginatedStores, 
-                    validFilter.PageNumber, validFilter.PageSize));
-            return NotFound();
+            string sortingOrder = string.Empty;
+            if (string.IsNullOrEmpty(categoryId))
+                sortingOrder = "Date";
+            IEnumerable<Store> stores = await storeController._storeService.GetStores(categoryId, localizationId, sortingOrder);
+            IEnumerable<StoreDto> data = storeController._mapper.Map<IEnumerable<StoreDto>>((object)stores.Skip<Store>((validFilter.PageNumber - 1) * validFilter.PageSize).Take<Store>(validFilter.PageSize).AsQueryable<Store>());
+            IActionResult categoryAndByLocation = data == null ? (IActionResult)storeController.NotFound() : (IActionResult)storeController.Ok((object)new PagedResponse<IEnumerable<StoreDto>>(data, validFilter.PageNumber, validFilter.PageSize));
+            validFilter = (PaginationFilter)null;
+            return categoryAndByLocation;
         }
+
         [HttpGet]
         [Route("categories")]
         public async Task<IActionResult> GetStoreCategories()
         {
-            var storeCategories = await _storeService.GetStoreCategoriesAsync();
-            if (storeCategories != null)
-                return Ok(storeCategories);
-            return BadRequest();
+            StoreController storeController = this;
+            IEnumerable<StoreCategory> storeCategoriesAsync = await storeController._storeService.GetStoreCategoriesAsync();
+            return storeCategoriesAsync == null ? (IActionResult)storeController.BadRequest() : (IActionResult)storeController.Ok((object)storeCategoriesAsync);
         }
-        [HttpGet]
-        [Route("{Id}/category/{products}")]
-        public async Task<IActionResult> GetProductsByCategoryAsync(string storeId)
-        {
-            var products = await _productService.GetProductsByCategoryId(storeId);
-            if (products == null)
-                throw new NullReferenceException();
-            else
-                return Ok(products);
-        }
-        [HttpGet]
-        [Route("products/{storeId}")]
-        public async Task<IActionResult> GetProductsAsync(string storeId)
-        {
-            
-            var products = await _productService.GetProductsByStore(storeId);
-            if (products == null)
-                throw new NullReferenceException();
-            else
-                return Ok(products);
-        }
-        //[HttpGet]
-        //[Route("{products}/{categories}")]
-        //public async Task<IActionResult> GetProducts(string storeId)
-        //{
-        //    var products = await _productService.GetProductsByStore(storeId);
-        //    if (products == null)
-        //        throw new NullReferenceException();
-        //    else
-        //        return Ok(products);
-        //}
-        [HttpGet]
-        [Route("{categoryId}/{pageNumber}/{limitPerPage}")]
-        //[Route("categoryId?limit=10&offSet=4")]
-        public async Task<IActionResult> GetStoresByCategoryIdAsync(int? categoryId, int pageNumber, int limitPerPage)
-        {
-            limitPerPage = 10;
-            if (categoryId == null)
-                return NotFound();
-            else
-            {
-                var stores = await _storeService
-                    .GetStoresByCategoryIdAsync((int)categoryId, pageNumber, limitPerPage);
-                return Ok(stores);
-            }
-        }
-        #endregion read
 
-        #region PUT update
+        [HttpGet]
+        [Route("{categoryName}/{pageNumber}/{limitPerPage}")]
+        public async Task<IActionResult> GetStoresByCategory(
+          string categoryName,
+          int pageNumber,
+          int pageSize)
+        {
+            StoreController storeController = this;
+            if (categoryName == null)
+                return (IActionResult)storeController.NotFound();
+            IEnumerable<Store> source = (await storeController._storeService.GetStoresByCategoryNameAsync(categoryName, pageNumber, pageSize)).Skip<Store>((pageNumber - 1) * pageSize).Take<Store>(pageSize);
+            IEnumerable<StoreDto> storeDtos = storeController._mapper.Map<IEnumerable<StoreDto>>((object)source);
+            return (IActionResult)storeController.Ok((object)storeDtos);
+        }
+
         [HttpPut]
-        [Route("categories/{catId}")]
+        [Route("{storeId}")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Merchants")]
+        public ActionResult PutStore(string storeId, [FromBody] StoreCategoryDto storeCategoryDto)
+        {
+            return (ActionResult)this.Ok();
+        }
+
+        [HttpPut]
+        [Route("{storeCategoryId}")]
         public ActionResult PutStoreCategory([FromBody] StoreCategoryDto storeCategoryDto)
         {
-            string catId = string.Empty;
-
-            //var store = await _storeService.GetStoreCategoryByIdAsync(catId); //storeData.storeCategoryId);
-
+            string str = string.Empty;
             if (storeCategoryDto == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                catId = storeCategoryDto.storeCategoryName;
-                
-                //var category = AutoMapper.
+                return (ActionResult)this.NotFound();
+            str = storeCategoryDto.storeCategoryName;
+            return (ActionResult)this.Ok((object)Mapper.Map<StoreDto>((object)storeCategoryDto));
+        }
 
-                _storeService.UpdateStoreCategory(catId.ToString(), storeCategoryDto);
-                return Ok(storeCategoryDto);
-            }
+        private async Task<bool> ValidateImageFile(FormFile file)
+        {
+            return file.ContentType.ToLower() != "image/jpeg" && file.ContentType.ToLower() != "image/jpg" && file.ContentType.ToLower() != "image/png";
         }
-        
-        #endregion update
 
-        #region DELETE delete
-        [HttpDelete]
-        [Route("{locationId}/{pageNumber}/{limitPerPage}")]
-        //[Route("categoryId?limit=10&offSet=4")]
-        public async Task<ActionResult<StoreDto>> GetStoresByLocationIdAsync(int locationId, int categoryId, int pageNumber, int limitPerPage)
-        {
-            limitPerPage = 10;
-            if (categoryId.Equals(null))
-                return NotFound();
-            else
-            {
-                var stores = await ((Task<IEnumerable<StoreDto>>)_storeService
-                    .GetStoresByCategoryIdAsync(categoryId, pageNumber, limitPerPage));
-                return Ok(stores);
-            }
-        }
-        [HttpDelete]
-        [Route("categories/delete/id")]
-        public IActionResult DeleteStoreCategory(string categoryId)
-        {
-            if (categoryId == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                _storeService.DeleteStoreCategory(categoryId);
-                return Ok(true);
-            }
-        }
-        #endregion   delete
+        private IActionResult PostImage([FromForm] string location) => (IActionResult)null;
+
+        public delegate string mydelegate(string msg);
+
+        public delegate string myGenericDelegate<T>(string msg);
     }
 }
+
 
 /*
  * https://www.c-sharpcorner.com/article/learn-about-web-api-validation/

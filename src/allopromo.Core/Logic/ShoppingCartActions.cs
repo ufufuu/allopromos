@@ -18,7 +18,7 @@ namespace allopromo.Core.Logic
         public void Dispose()
         {}
 
-        public void AddToCart(allopromo.Core.Entities.tProduct product)
+        public void AddToCart(allopromo.Core.Entities.Product product)
         {
             var cartItem = cartRepository.GetAllAsync().Result.AsEnumerable().SingleOrDefault(
                 c => c.CartId == ShoppingCartId

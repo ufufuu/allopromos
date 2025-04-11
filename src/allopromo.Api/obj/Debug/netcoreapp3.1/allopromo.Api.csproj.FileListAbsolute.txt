@@ -125,3 +125,11 @@ C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allo
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.dll
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.pdb
 C:\Users\MonPC\source\repos\allopromo\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.genruntimeconfig.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.csprojAssemblyReference.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.AssemblyInfoInputs.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.AssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.csproj.CoreCompileInputs.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Api\obj\Debug\netcoreapp3.1\allopromo.Api.pdb

@@ -1,174 +1,133 @@
-﻿using allopromo.Model.Validation;
+﻿
+using allopromo.Api.DTOs;
+using allopromo.Core.Abstract;
+using allopromo.Core.Entities;
+using allopromo.Core.Services;
+using allopromo.Core.Services.Base;
 using allopromo.Infrastructure.Data;
-using Microsoft.AspNetCore.Cors;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using Microsoft.AspNetCore.Authorization;
-using allopromo.Core.Abstract;
-using allopromo.Core.Exceptions;
-using allopromo.Core.Application.Dto;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using allopromo.Core.Services.Base;
-using allopromo.Core.Services;
-using allopromo.Core.Entities;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 
+#nullable enable
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-
-    //[Produces("application/json")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        public readonly IConfiguration _config;
-        public readonly AppDbContext _appDb;
+        public readonly
+#nullable disable
+    IConfiguration _config;
+        public readonly ApplicationDbContext _appDb;
         public readonly IDepartmentService _DepartmentService;
         public IBaseService<DepartmentDto> _departmentService;
-        public readonly IRepository<tDepartment> _deparmentRepository;
+        public readonly IRepository<Department> _deparmentRepository;
+        private readonly IMapper _mapper;
 
-        private readonly AutoMapper.IMapper _mapper;
-        //private readonly ILogger<DepartmentController> _logger;
-        //private readonly IExceptionWriter _exceptionWriter;
-
-    #region Constructors
         public DepartmentController(
-            IDepartmentService DepartmentService,
-            IBaseService<DepartmentDto> departmentService,
-            IConfiguration config)
+          IDepartmentService DepartmentService,
+          IBaseService<DepartmentDto> departmentService,
+          IConfiguration config)
         {
-            _DepartmentService = DepartmentService;
-            _departmentService = departmentService;
-            _config = config;
-
+            this._DepartmentService = DepartmentService;
+            this._departmentService = departmentService;
+            this._config = config;
         }
-        #endregion
-    #region Create
+
         [HttpPost]
-
-        //[Authorize]
-        //[Core.Helpers.JwtBasicAuthorize]n,n,
-
         [Route("")]
         public async Task<IActionResult> CreateDepartment([FromBody] DepartmentDto departmentDto)
         {
+            DepartmentController departmentController = this;
             try
             {
-                //var httpContextAccessor = new HttpContextAccessor();
-                //var currentUser = httpContextAccessor.HttpContext.User.Identity;
-                //if (currentUser == null)
-                //{
-                //    return Unauthorized();
-                //}
-                //else
-                //{
-                    if (departmentDto != null)
-                    {
-                    //Task department = 
-                        await _DepartmentService.CreateDepartmentAsync(departmentDto);
-
-                       // if (department != null)
-                        //{
-                            return Ok(departmentDto);
-                        //}
-                        //return NoContent();
-                    }
-                    else
-                    {
-                        return BadRequest();
-                    }
-                //}
+                if (departmentDto == null)
+                    return (IActionResult)departmentController.BadRequest();
+                Department departmentDto1 = Mapper.Map<Department>((object)departmentDto);
+                await departmentController._DepartmentService.CreateDepartmentAsync(departmentDto1);
+                return (IActionResult)departmentController.Ok((object)departmentDto);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        #endregion
 
-    #region Read
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartments()
         {
-            var departments = await _DepartmentService.GetDepartmentsAsync();
-            if(departments!=null)
-                return Ok(departments);
-            return NotFound();
+            DepartmentController departmentController = this;
+            IEnumerable<Department> departmentsAsync = await departmentController._DepartmentService.GetDepartmentsAsync();
+            return departmentsAsync == null ? (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.NotFound() : (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.Ok((object)departmentsAsync);
         }
+
         [HttpGet]
         [Route("{departmentName}")]
-        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartmentByName(string departmentName)
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartmentByName(
+          string departmentName)
         {
-            if (departmentName != null)
-            {
-                var department = await _DepartmentService.GetDepartmentAsync(departmentName);
-                return Ok(department);
-            }
-            else
-                return NotFound();
+            DepartmentController departmentController = this;
+            if (departmentName == null)
+                return (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.NotFound();
+            Department departmentAsync = await departmentController._DepartmentService.GetDepartmentAsync(departmentName);
+            return (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.Ok((object)departmentAsync);
         }
+
         [HttpGet]
         [Route("cities+{cityId}")]
-        public IActionResult GetDepartmentById(string cityId)
+        public IActionResult GeTDepartmentById(string cityId)
         {
             try
             {
-                String city= string.Empty;
-                return Ok(city);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
-    #region Update
-     [HttpPut]
-     [Route("departmentId")]
-        public async Task<IActionResult> Put(string departmentId, [FromBody] DepartmentDto departmentDto)
-        {
-                try
-                {
-                    if (departmentId != null)
-                    {
-                        var department = await _DepartmentService.GetDepartmentAsync(
-                            departmentDto.departmentId);
-                        await _DepartmentService.UpdateDepartmentAsync(departmentId, 
-                            _mapper.Map<tDepartment>(departmentDto));
-                    return Ok(department);
-                    }
-                    else
-                        return NotFound();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-        }
-        #endregion
-
-    #region Delete
-        [HttpDelete]
-        [Route("department+{Id}")]
-        public async Task<IActionResult> Delete(string Id)
-        {
-            try
-            {
-                var department = from c in await _departmentService.GetEntities()
-                                 select c;
-                return Ok();
+                return (IActionResult)this.Ok((object)string.Empty);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        #endregion
+
+        [HttpPut]
+        [Route("departmentId")]
+        public async Task<IActionResult> Put(string departmentId, [FromBody] DepartmentDto departmentDto)
+        {
+            DepartmentController departmentController = this;
+            try
+            {
+                if (departmentId == null)
+                    return (IActionResult)departmentController.NotFound();
+                Department department = await departmentController._DepartmentService.GetDepartmentAsync(departmentDto.departmentId);
+                Department department1 = await departmentController._DepartmentService.UpdateDepartmentAsync(departmentId, departmentController._mapper.Map<Department>((object)departmentDto));
+                return (IActionResult)departmentController.Ok((object)department);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        [Route("department+{Id}")]
+        public async Task<IActionResult> Delete(string Id)
+        {
+            DepartmentController departmentController = this;
+            IActionResult actionResult;
+            try
+            {
+                (await departmentController._departmentService.GetEntities()).Select<DepartmentDto, DepartmentDto>((Func<DepartmentDto, DepartmentDto>)(c => c));
+                actionResult = (IActionResult)departmentController.Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return actionResult;
+        }
     }
 }

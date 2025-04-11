@@ -11,18 +11,18 @@ namespace allopromo.Core.Abstract
         //Task CreateProductCategory(tProductCategory productCategory);
 
         #region Create
-        Task<tProduct> CreateProductAsync(tProduct product, string Name);
+        Task<Product> CreateProductAsync(Product product, string Name);
         #endregion
 
         #region Read
-        Task<IEnumerable<tProduct>> GetProductsByStore(string storeId);
-        Task<tProduct> GetProductById(string productId);
-        Task<IEnumerable<tProduct>> GetProductsByCategoryId(string id);
-        Task<IEnumerable<tProductCategory>> GetProductCategories();
+        Task<IEnumerable<Product>> GetProductsByStore(string storeId);
+        Task<Product> GetProductById(string productId);
+        Task<IEnumerable<Product>> GetProductsByCategoryId(string id);
+        Task<IEnumerable<ProductCategory>> GetProductCategories();
         #endregion
 
         #region Delete
-        Task<tProductCategory> Delete(int Id);
+        Task<ProductCategory> Delete(int Id);
         #endregion
     }
 }

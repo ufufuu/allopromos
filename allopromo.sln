@@ -19,6 +19,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Core", "src\allopromo.Core\allopromo.Core.csproj", "{B1E5AF4E-A6B3-4141-A694-CA7F981DD206}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Infrastructure", "src\allopromo.Infrastructure\allopromo.Infrastructure.csproj", "{2B86ADDD-2103-424A-897C-33481AA395F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5AF5E47F-C0FD-4591-8B53-52A0B72CF5CF} = {5AF5E47F-C0FD-4591-8B53-52A0B72CF5CF}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "allopromo.Domain", "src\allopromo.Domain\allopromo.Domain.csproj", "{5AF5E47F-C0FD-4591-8B53-52A0B72CF5CF}"
 EndProject

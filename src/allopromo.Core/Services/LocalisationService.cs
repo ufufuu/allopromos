@@ -21,12 +21,12 @@ namespace allopromo.Core.Services
 {
     public class LocalisationService : ILocalisationService//, IDisposable
     {
-        private IRepository<tCity> _cityRepository { get; set; }
-        private IRepository<tCountry> _countryRepository { get; set; }
+        private IRepository<City> _cityRepository { get; set; }
+        private IRepository<Country> _countryRepository { get; set; }
         private static string urlCityURL = "http://ipinfo.io/";
 
         #region Constructors
-        public LocalisationService(IRepository<tCity> cityRepository, IRepository<tCountry> countryRepository)
+        public LocalisationService(IRepository<City> cityRepository, IRepository<Country> countryRepository)
         {
             _cityRepository = cityRepository;
             _countryRepository = countryRepository;
@@ -36,9 +36,9 @@ namespace allopromo.Core.Services
         #endregion
 
         #region CREATE
-        public async Task<bool> CreateAsync(tCity cityDto)
+        public async Task<bool> CreateAsync(City cityDto)
         {
-            tCity city = new tCity();
+            City city = new City();
             //city.cityId = 324;
             city.cityName = cityDto.cityName;
             var country = (from q in _countryRepository.GetAllAsync().Result.AsQueryable()
@@ -59,12 +59,12 @@ namespace allopromo.Core.Services
         #endregion
 
         #region READ
-        public async Task<tCity> GetCity(string cityId)
+        public async Task<City> GetCity(string cityId)
         {
             var city = await _cityRepository.GetByIdAsync(cityId);
             return city;
         }
-        public async Task<tCity> GetCityByName(string Name)
+        public async Task<City> GetCityByName(string Name)
         {
             var city = (await _cityRepository.GetAllAsync()).AsQueryable()
                 .Where(x => x.cityName.ToString() == "Kara").FirstOrDefault();
@@ -106,7 +106,7 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Update
-        public void Update(tCity aisle)
+        public void Update(City aisle)
         {
             throw new NotImplementedException();
         }
@@ -114,12 +114,12 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Delete
-        public void Delete(tCity city)
+        public void Delete(City city)
         {
             _cityRepository.Delete(city);
         }
 
-        public Task<tCity> Get(string cityId)
+        public Task<City> Get(string cityId)
         {
             throw new NotImplementedException();
         }
@@ -153,7 +153,7 @@ namespace allopromo.Core.Services
             var rootObjc = getAddress(23.5270797, 77.2548046);
             return ""; //rootObj.display_Name;
         }
-        private static RootObject getAddress(double Longitude, double Latitude)
+        //private static RootObject getAddress(double Longitude, double Latitude)
 
         //getAddress(23.5270797, 77.2548046);
         {

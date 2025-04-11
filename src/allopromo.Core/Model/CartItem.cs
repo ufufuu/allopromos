@@ -13,6 +13,6 @@ namespace allopromo.Core.Model
         public int Quantity { get; set; }
         public DateTime DateCreated { get; set; }
         public string ProductId { get; set; }
-        public Entities.tProduct product { get; set; }
+        public Entities.Product product { get; set; }
     }  
 }

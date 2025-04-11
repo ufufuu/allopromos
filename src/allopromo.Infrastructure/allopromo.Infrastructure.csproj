@@ -6,14 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Config\**" />
     <Compile Remove="Entities\**" />
     <Compile Remove="Modeles\**" />
     <Compile Remove="Model\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Data\Config\**" />
     <EmbeddedResource Remove="Entities\**" />
     <EmbeddedResource Remove="Modeles\**" />
     <EmbeddedResource Remove="Model\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Data\Config\**" />
     <None Remove="Entities\**" />
     <None Remove="Modeles\**" />
     <None Remove="Model\**" />
@@ -21,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\ApplicationDbContext.cs" />
     <Compile Remove="Extensions\DbContextExtension.cs" />
     <Compile Remove="Repositories\BaseRepository.cs" />
     <Compile Remove="Repositories\GenericRepository.cs" />
@@ -49,10 +51,6 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Config\" />
   </ItemGroup>
 
   <ItemGroup>

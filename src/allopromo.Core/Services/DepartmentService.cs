@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class DepartmentService : // BaseService<tDepartment>
+    public class DepartmentService : // BaseService<Department>
         IDepartmentService
     {
-        public IRepository<tDepartment> _departmentRepository {get; set;}
-        public DepartmentService(IRepository<tDepartment> departmentRepository)//:base(departmentRepository)
+        public IRepository<Department> _departmentRepository {get; set;}
+        public DepartmentService(IRepository<Department> departmentRepository)//:base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
@@ -24,7 +24,7 @@ namespace allopromo.Core.Services
         {
             try
             {
-                _departmentRepository.Add(new tDepartment
+                _departmentRepository.Add(new Department
                 {
                     departmentId = Guid.NewGuid().ToString(),
                     departmentName = "",
@@ -36,17 +36,17 @@ namespace allopromo.Core.Services
                 throw ex;
             }
         }
-        public void Add(tDepartment department)
+        public void Add(Department department)
         {
-            _departmentRepository.Add(new tDepartment { });
+            _departmentRepository.Add(new Department { });
         }
-        public async Task CreateDepartmentAsync(DepartmentDto departmentDto)
+        public async Task CreateDepartmentAsync(Department department)
         {
             try
             {
-                tDepartment department = new tDepartment();
+                Department department1 = new Department();
                 department.departmentId = Guid.NewGuid().ToString();
-                department.departmentName = departmentDto.departmentName;
+                department.departmentName = "";
                 department.createdDate = System.DateTime.Now;
                 department.updatedDate = null;
 
@@ -67,7 +67,7 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Read
-        public async Task<tDepartment> GetDepartmentAsync(string Name)
+        public async Task<Department> GeDepartmentAsync(string Name)
         {
             try
             {
@@ -82,9 +82,9 @@ namespace allopromo.Core.Services
             }
         }
 
-        //public async Task<IEnumerable<tDepartment>> GetEntities()
+        //public async Task<IEnumerable<Department>> GetEntities()
         //{
-        //    IEnumerable<tDepartment> tObjs = null;
+        //    IEnumerable<Department> tObjs = null;
         //    try
         //    {
         //        var de = _departmentRepository;
@@ -97,13 +97,13 @@ namespace allopromo.Core.Services
         //    return tObjs;
         //}
 
-        public async Task<IEnumerable<tDepartment>> GetDepartmentsAsync()
+        public async Task<IEnumerable<Department>> GeDepartmentsAsync()
         {
-            IEnumerable<tDepartment> departments = null;
+            IEnumerable<Department> departments = null;
             try
             {
                 var departmentsObj = await _departmentRepository.GetAllAsync();// GetEntitiesAsync();
-                departments = AutoMapper.Mapper.Map<IEnumerable<tDepartment>>(departmentsObj.AsEnumerable());
+                departments = AutoMapper.Mapper.Map<IEnumerable<Department>>(departmentsObj.AsEnumerable());
             }
             catch (Exception)
             {
@@ -112,7 +112,7 @@ namespace allopromo.Core.Services
             }
             return departments;
 
-            //IEnumerable<tDepartment> tEntities = null;
+            //IEnumerable<Department> tEntities = null;
             //try
             //{
             //    tEntities = await _departmentRepository.GetAllAsync();
@@ -127,7 +127,7 @@ namespace allopromo.Core.Services
             //return departments;
         }
 
-        public Task<tDepartment> GetDepartmentAsync(Guid departmentId)
+        public Task<Department> GeDepartmentAsync(Guid departmentId)
         {
             throw new NotImplementedException();
         }
@@ -135,8 +135,8 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Update
-        public async Task<tDepartment> UpdateDepartmentAsync(string departmentId,
-            tDepartment department
+        public async Task<Department> UpdateDepartmentAsync(string departmentId,
+            Department department
             )
         {
             var tObj = await _departmentRepository.GetByIdAsync(departmentId);
@@ -149,27 +149,27 @@ namespace allopromo.Core.Services
 
             return tObj;
         }
-        public async Task<tDepartment> UpdateDepartmentAsync(tDepartment department, 
-            tDepartment departmentDto
+        public async Task<Department> UpdateDepartmentAsync(Department department, 
+            Department departmentDto
             )
         {
             department = await _departmentRepository.GetByIdAsync(department.departmentId);
             department.departmentName = departmentDto.departmentName;
             department.departmentThumbnail = departmentDto.departmentThumbnail;
 
-            //tDepartment.Categories = department.
+            //Department.Categories = department.
             //department.departmentId = departmentId;
             //department
 
             _departmentRepository.Update(department);
 
-            departmentDto = AutoMapper.Mapper.Map<tDepartment>(department);
+            departmentDto = AutoMapper.Mapper.Map<Department>(department);
             return departmentDto;
         }
         #endregion
 
         #region Delete
-        Task<tDepartment> IDepartmentService.DeleteDepartmentAsync()
+        Task<Department> IDepartmentService.DeleteDepartmentAsync()
         {
             throw new NotImplementedException();
         }

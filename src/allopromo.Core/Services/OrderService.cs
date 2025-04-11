@@ -23,17 +23,17 @@ namespace allopromo.Core.Services
         //    throw new NotImplementedException();
         //}
 
-        public Task CreateOrderAsync(Entities.tProduct product, string Name)
+        public Task CreateOrderAsync(Entities.Product product, string Name)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Entities.tOrder> GetOrderById(string productId)
+        public Task<Entities.Order> GetOrderById(string productId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<tOrder>> GetOrdersByStore(string storeId)
+        public Task<IEnumerable<Order>> GetOrdersByStore(string storeId)
         {
             throw new NotImplementedException();
         }

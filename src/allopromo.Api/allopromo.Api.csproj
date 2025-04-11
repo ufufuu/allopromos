@@ -13,22 +13,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="bin\ViewModel\**" />
-    <Compile Remove="DTOs\**" />
+    <Compile Remove="Controllers\Errors\**" />
     <Compile Remove="Infrastructure\ExceptionHandlers\**" />
     <Compile Remove="Infrastructure\Excetions\**" />
     <Compile Remove="Infrastructure\Filters\**" />
     <Content Remove="bin\ViewModel\**" />
-    <Content Remove="DTOs\**" />
+    <Content Remove="Controllers\Errors\**" />
     <Content Remove="Infrastructure\ExceptionHandlers\**" />
     <Content Remove="Infrastructure\Excetions\**" />
     <Content Remove="Infrastructure\Filters\**" />
     <EmbeddedResource Remove="bin\ViewModel\**" />
-    <EmbeddedResource Remove="DTOs\**" />
+    <EmbeddedResource Remove="Controllers\Errors\**" />
     <EmbeddedResource Remove="Infrastructure\ExceptionHandlers\**" />
     <EmbeddedResource Remove="Infrastructure\Excetions\**" />
     <EmbeddedResource Remove="Infrastructure\Filters\**" />
     <None Remove="bin\ViewModel\**" />
-    <None Remove="DTOs\**" />
+    <None Remove="Controllers\Errors\**" />
     <None Remove="Infrastructure\ExceptionHandlers\**" />
     <None Remove="Infrastructure\Excetions\**" />
     <None Remove="Infrastructure\Filters\**" />
@@ -42,7 +42,6 @@
     <Compile Remove="Controllers\StoreCategorie.cs" />
     <Compile Remove="Controllers\StoreCreatedSingleton.cs" />
     <Compile Remove="Controllers\StoreData.cs" />
-    <Compile Remove="Infrastructure\AutoMapper\Profiles\MappingProfile.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthHandler.cs" />
@@ -63,7 +62,6 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Commands\Handlers\" />
-    <Folder Include="Controllers\Errors\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Constants\" />

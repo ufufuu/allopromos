@@ -5,6 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.DTOs
 {
+
+    public class UserDto33
+    {
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string lastName { get; set; }
+
+        public string firstName { get; set; }
+
+        public string roleName { get; set; }
+
+        public IList<RoleDto> UserRoles { get; set; }
+    }
     public class UserDto
     {
         public string userName { get; set; }
@@ -22,6 +41,9 @@ namespace allopromo.Api.DTOs
         public UserDto()
         {}
     }
+
+
+    public class 
 
     //public class UserConvertor
     //{

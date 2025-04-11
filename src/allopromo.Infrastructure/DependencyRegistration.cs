@@ -10,10 +10,10 @@ namespace allopromo.Infrastructure
     {
         public void Register(IServiceCollection services, string connectString)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectString)
              );
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
              );
         }

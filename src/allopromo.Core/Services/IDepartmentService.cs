@@ -1,5 +1,4 @@
 ﻿
-using allopromo.Core.Application.Dto;
 
 
 using allopromo.Core.Entities;
@@ -12,29 +11,29 @@ namespace allopromo.Core.Services
     public interface IDepartmentService
     {
     #region Create
-        Task CreateDepartmentAsync(DepartmentDto departmentDto);
+        Task CreateDepartmentAsync(Department department);
     #endregion
 
     #region Read
-        Task<IEnumerable<tDepartment>> GetDepartmentsAsync();
-        Task<tDepartment> GetDepartmentAsync(string departmentName); //GetDepartmentAsync
-        Task<tDepartment> GetDepartmentAsync(Guid departmentId);
+        Task<IEnumerable<Department>> GeDepartmentsAsync();
+        Task<Department> GeDepartmentAsync(string departmentName); //GeDepartmentAsync
+        Task<Department> GeDepartmentAsync(Guid departmentId);
 
-        //Task<IEnumerable<tDepartment>> GetEntities();
+        //Task<IEnumerable<Department>> GetEntities();
 
     #endregion
 
     #region Update
 
-    //public Task<tDepartment> UpdateDepartmentAsync(tDepartment department, tDepartment departmentDto);
+    //public Task<Department> UpdateDepartmentAsync(Department department, Department departmentDto);
 
-    public Task<tDepartment> UpdateDepartmentAsync(string departmentID, tDepartment departmentDto);
+    public Task<Department> UpdateDepartmentAsync(string departmentID, Department departmentDto);
 
     #endregion
 
 
     #region Delete
-    Task<tDepartment> DeleteDepartmentAsync();
+    Task<Department> DeleteDepartmentAsync();
     #endregion
 
     }

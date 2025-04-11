@@ -1,101 +1,100 @@
-﻿using allopromo.Model.Validation;
-using allopromo.Infrastructure.Data;
-using Microsoft.AspNetCore.Cors;
+﻿
+using allopromo.Api.DTOs;
+using allopromo.Core.Abstract;
+using allopromo.Core.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using Microsoft.AspNetCore.Authorization;
-using allopromo.Core.Abstract;
-using allopromo.Core.Exceptions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using allopromo.Core.Application.Dto;
 
+#nullable enable
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    [Produces("application/json")]
+    [Produces("application/json", new string[] { })]
     [ApiController]
     public class CitiesController : ControllerBase
-       // ApiController
     {
-        private readonly IConfiguration _config;
+        private readonly
+#nullable disable
+    IConfiguration _config;
         private readonly ILocalisationService _localisationService;
-        //private static Serilog.ILogger logger; 
-        private AutoMapper.IMapper _mapper;
+        private IMapper _mapper;
 
-        //private readonly IExceptionWriter _exceptionWriter;
-        public CitiesController(IConfiguration config,
-                           ILocalisationService localizeService)
-                           //IExceptionWriter exceptionWriter)
+        public CitiesController(
+          IConfiguration config,
+          IMapper mapper,
+          ILocalisationService localizeService)
         {
-            _config = config;
-            _localisationService = localizeService;
-            //_exceptionWriter = exceptionWriter;
+            this._config = config;
+            this._localisationService = localizeService;
+            this._mapper = mapper;
         }
+
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetCities()
         {
-            var cities = await _localisationService.GetCities();
-            if (cities != null)
-                return Ok(cities);
-            return BadRequest();
+            CitiesController citiesController = this;
+            IEnumerable<City> cities = await citiesController._localisationService.GetCities();
+            return cities == null ? (IActionResult)citiesController.BadRequest() : (IActionResult)citiesController.Ok((object)cities);
         }
+
         [HttpGet]
         [Route("cities+{cityId}")]
         public IActionResult GetCityById(string cityId)
         {
             try
             {
-                var city = _localisationService.GetCities();
-                return Ok(city);
+                return (IActionResult)this.Ok((object)this._localisationService.GetCities());
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
         [HttpPost]
-        //[Route(ConstancesCommunes)]
         public IActionResult PostCity([FromBody] CityDto cityDto)
         {
             try
             {
-                var city = _mapper.Map<Core.Entities.tCity>(cityDto);
-                var tci = _localisationService.CreateAsync(city).Result;
-                return Ok(cityDto);
+                bool result = this._localisationService.CreateAsync(this._mapper.Map<City>((object)cityDto)).Result;
+                return (IActionResult)this.Ok((object)cityDto);
             }
             catch (Exception ex)
             {
-                //_exceptionWriter.WriteException(ex.ToString());
                 throw ex;
             }
         }
-        
+
         [HttpDelete]
         [Route("cities+{cityId}")]
         public async Task<IActionResult> Delete(string Id)
         {
+            CitiesController citiesController = this;
+            IActionResult actionResult;
             try
             {
-                var city = from c in (await _localisationService.GetCities()) 
-                           select c;
-                return Ok();
+                (await citiesController._localisationService.GetCities()).Select<City, City>((Func<City, City>)(c => c));
+                actionResult = (IActionResult)citiesController.Ok();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return actionResult;
         }
+
         [HttpGet]
         [Route("city")]
         public IActionResult getCurrentCity(string currentIp)
         {
-            //currentIp = "74.57.247.6";
             currentIp = "41.207.160.90";
-            var city = _localisationService.GetUserCurrentCity(currentIp);
-            return Ok(city);
+            return (IActionResult)this.Ok((object)this._localisationService.GetUserCurrentCity(currentIp));
         }
     }
 }

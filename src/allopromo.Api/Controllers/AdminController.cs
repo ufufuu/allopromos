@@ -16,7 +16,7 @@ namespace allopromo.Controllers
     {
         private UserManager<IdentityUser> _userManager { get; set; }
         private IHttpContextAccessor _httpContextAccessor { get; set; }
-        public Infrastructure.Data.AppDbContext _dbContext { get; set; }
+        public Infrastructure.Data.ApplicationDbContext _dbContext { get; set; }
 
         public Microsoft.AspNetCore.SignalR.
             IHubContext<Api.Infrastructure.Hubs.ChatHub> _notificationHub { get; set; }

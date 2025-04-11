@@ -1,132 +1,182 @@
-﻿
+﻿// Decompiled with JetBrains decompiler
+// Type: allopromo.Api.Controllers.ProductsController
+// Assembly: allopromo.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: D9E70BF9-6813-49CA-B8B2-EE280C9B986F
+// Assembly location: C:\Users\MonPC\Downloads\allopromo.Api.dll
+
+using allopromo.Api.Commands.Model;
+using allopromo.Api.DTOs;
+using allopromo.Api.Queries.Models;
+using allopromo.Api.Validators;
+using allopromo.Core.Abstract;
+using allopromo.Core.Domain;
+using allopromo.Core.Entities;
 using allopromo.Core.Model;
+using allopromo.Core.Services;
+using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using allopromo.Core.Abstract;
-using allopromo.Core.Entities;
-using allopromo.Api.Queries.Models;
-using allopromo.Api.Commands.Model;
-using allopromo.Core.Application.Dto;
-using allopromo.Api.Validators;
 
+#nullable enable
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        #region Fields
-        IProductService _productService { get; set; }
-        private MediatR.IMediator _mediator { get; set; }
+        private readonly
+#nullable disable
+    IPermissionService _permissionService;
+        private readonly IMapper _mapper;
 
-        private readonly IPermissionService _permissionService;
-        private IRepository<tProduct> _prodRepository { get; set; }
-        IValidationService _validationService { get; set; }
-        private readonly AutoMapper.IMapper _mapper; 
+        private IProductService _productService { get; set; }
 
-        #endregion
+        private IUserService _userService { get; set; }
 
-        #region constructors
-    
-        public ProductsController(IProductService productService) 
+        private IStoreService _storeService { get; set; }
+
+        private IMediaService _mediaService { get; set; }
+
+        private IMediator _mediator { get; set; }
+
+        private IRepository<Product> _productRepo { get; set; }
+
+        private IValidationService _validationService { get; set; }
+
+        public ProductsController(
+          IProductService productService,
+          IUserService userService,
+          IPermissionService permissionService,
+          IRepository<Product> productRepo,
+          IStoreService storeService,
+          IMediaService mediaService,
+          IValidationService validationService,
+          IMapper mapper)
         {
-            _productService = productService;
+            this._productService = productService;
+            this._userService = userService;
+            this._storeService = storeService;
+            this._mediaService = mediaService;
+            this._permissionService = permissionService;
+            this._productRepo = productRepo;
+            this._mapper = mapper;
         }
-        #endregion
-
-        #region Public Methods
-        [HttpPost("create-product")]
-
-        //[Route("category/create")]
-        //public async Task<IActionResult> PostCategory([FromBody] ProductCategoryDto productCategoryDto)
-        //{
-        //    if (productCategoryDto == null)
-        //        return BadRequest();
-        //    await _productService.CreateProductCategory(productCategoryDto);
-
-        //    //await _productRepository.Create()
-
-        //    return Ok(productCategoryDto);
-        //}
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> PostProduct([FromBody] ProductDto productDto)
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> PostProduct([FromForm] ProductDto productDto)
         {
-            if (await _permissionService.Authorize(allopromo.Core.Security.PermissionSystemName.ManageCountries))
-            {
-                return Forbid();
-            }
-            if (productDto != null)
-            {
-                await _productService.CreateProductAsync(
-                    _mapper.Map<tProduct>(productDto), "alistcom@free.fr");
-                return Ok(productDto);
-            }
-            else
-            {
-                return NoContent();
-            }
+            ProductsController productsController = this;
+            return !productsController.ModelState.IsValid ? (IActionResult)productsController.StatusCode(500, (object)"") : (IActionResult)productsController.Ok((object)"Ok");
+        }
+
+        [HttpPut]
+        [Route("{storeName}")]
+        public async Task<IActionResult> GetProducts(string storeName)
+        {
+            ProductsController productsController = this;
+            IEnumerable<ProductInStoreBusinessModel> productsByStore = await productsController._productService.GetProductsByStore(storeName.ToString());
+            IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>((object)productsByStore);
+            return (IActionResult)productsController.Ok((object)productDtos);
         }
 
         [Route("({key})/[action]")]
-
-        //[SwaggerOperation(summary: "Invoke action UpdateProductPicture", OperationId = "UpdateProductPicture")]
-
-        [HttpPost]
-        public async Task<IActionResult> UpdateProductPicture(string key,
-            [FromBody] allopromo.Core.Application.Dto.AisleDto productPictureDto)
+        [HttpPut]
+        public async Task<IActionResult> UpdateProductPicture(string key, [FromBody] AisleDto productPictureDto)
         {
+            ProductsController productsController = this;
             if (productPictureDto == null)
-                return BadRequest();
-            if (!await _permissionService.Authorize(allopromo.Core.Security.PermissionSystemName.ManageProducts))
-                return Unauthorized();
-
-            var product = await _mediator.Send(new GetQuery<ProductDto>(){Id = key });
-            if (!product.Any())
-                return NotFound();
-
-            if (ModelState.IsValid)
+                return (IActionResult)productsController.BadRequest();
+            if (!await productsController._permissionService.Authorize("ManageProducts"))
+                return (IActionResult)productsController.Unauthorized();
+            IMediator mediator1 = productsController._mediator;
+            GetQuery<ProductDto> getQuery = new GetQuery<ProductDto>();
+            getQuery.Id = key;
+            CancellationToken cancellationToken1 = new CancellationToken();
+            IQueryable<ProductDto> source = await ((ISender)mediator1).Send<IQueryable<ProductDto>>((IRequest<IQueryable<ProductDto>>)getQuery, cancellationToken1);
+            if (!source.Any<ProductDto>())
+                return (IActionResult)productsController.NotFound();
+            if (productsController.ModelState.IsValid)
             {
-                var result = await _mediator.Send(new AddProductPictureCommand()
+                IMediator mediator2 = productsController._mediator;
+                AddProductPictureCommand productPictureCommand = new AddProductPictureCommand();
+                productPictureCommand.Product = source.FirstOrDefault<ProductDto>();
+                CancellationToken cancellationToken2 = new CancellationToken();
+                bool flag = await ((ISender)mediator2).Send<bool>((IRequest<bool>)productPictureCommand, cancellationToken2);
+            }
+            return (IActionResult)productsController.BadRequest(productsController.ModelState);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(string Id, [FromForm] ProductUpdateDto productToUpdate)
+        {
+            ProductsController productsController = this;
+            try
+            {
+                Product byIdAsync = await productsController._productRepo.GetByIdAsync(Id);
+                if (byIdAsync == null)
+                    return (IActionResult)productsController.StatusCode(404, (object)(" product  with id " + Id + " Not Found"));
+                if (productToUpdate.productImages != null)
                 {
-                     Product = product.FirstOrDefault(),
-                });
+                    IFormFile productImageFiles = productToUpdate.productImageFiles;
+                    if ((productImageFiles != null ? (productImageFiles.Length > 1048576L ? 1 : 0) : 0) != 0)
+                        return (IActionResult)productsController.StatusCode(400, (object)" File size shoud not exceed 1 MB");
+                    string[] strArray = new string[3]
+                    {
+            ".jpg",
+            ".jpeg",
+            ".png"
+                    };
+                }
+                productsController._productRepo.Update(byIdAsync);
+                return (IActionResult)productsController.Ok((object)byIdAsync);
             }
-            return BadRequest(ModelState);
+            catch (Exception ex)
+            {
+                return (IActionResult)productsController.StatusCode(500, (object)ex.Message);
+            }
         }
-        [HttpGet]
-        public List<StoreDto> GetProducts()
-        {
-            return new List<StoreDto>();
-        }
-        #endregion
 
-        #region Product Categories
-        [Route("api/v1/[Controller]/categories")]
-        [HttpPost]
-        public async Task<IActionResult> GetProductCategories()
-        {
-            if (ModelState.IsValid)
-            {
-                return Ok(await _productService.GetProductCategories());
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-        #endregion
+        [Route("id")]
         [HttpDelete]
-        
         public async Task<IActionResult> Delete(string Id)
         {
+            ProductsController productsController = this;
+            try
+            {
+                Product byIdAsync = await productsController._productRepo.GetByIdAsync(Id);
+                if (byIdAsync == null)
+                    return (IActionResult)productsController.StatusCode(404, (object)("product with " + Id + " Not Found "));
+                productsController._productRepo.Delete(byIdAsync);
+                return (IActionResult)productsController.NoContent();
+            }
+            catch (Exception ex)
+            {
+                return (IActionResult)productsController.StatusCode(500, (object)ex.Message);
+            }
+        }
 
-            return Ok ( await _productService.Delete(int.Parse(Id)));
+        private async Task<IActionResult> gr([FromForm] MultipartFormDataContent formData)
+        {
+            return (IActionResult)null;
+        }
+
+        private IActionResult gt([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length <= 0L)
+                return (IActionResult)this.BadRequest((object)" No FIle uploaded");
+            string fileName = file.FileName;
+            long length = file.Length;
+            return (IActionResult)this.Ok((object)" file Uploaded");
         }
     }
 }

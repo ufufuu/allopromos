@@ -13,7 +13,7 @@ namespace allopromo.Core.Services
     }
     public class ProductCategoryService<TEntity> //:BaseService <TEntity> where TEntity:class
     {
-        private IRepository<allopromo.Core.Entities.tProductCategory> _productCategoryRepository { get; set; }
+        private IRepository<allopromo.Core.Entities.ProductCategory> _productCategoryRepository { get; set; }
         public IEnumerable<TEntity> GetEntities()
         {
             return (IEnumerable<TEntity>)_productCategoryRepository.GetAllAsync();
