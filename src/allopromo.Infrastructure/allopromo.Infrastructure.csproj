@@ -30,6 +30,7 @@
     <Compile Remove="Repositories\IStoreRepository.cs" />
     <Compile Remove="Repositories\ProductRepository.cs" />
     <Compile Remove="Repositories\StoreRepository.cs" />
+    <Compile Remove="Repositories\UnitOfWork.cs" />
     <Compile Remove="Repositories\UserRepository.cs" />
     <Compile Remove="UnitofWork.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using allopromo.Api.DTOs;
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
+using allopromo.Core.Entities;
 using allopromo.Core.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -23,16 +24,13 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly
-#nullable disable
-    IUserService _userService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IPermissionService _permissionService;
 
-        private ILogger logger { get; set; }
+        //private ILogger logger { get; set; }
 
         public AccountController(
           IUserService userService,
@@ -49,7 +47,7 @@ namespace allopromo.Api.Controllers
         [ActivatorUtilitiesConstructor]
         public AccountController(
           IUserService userService,
-          IMembershipService accountService,
+          
           UserManager<ApplicationUser> userManager,
           RoleManager<IdentityRole> roleManager,
           SignInManager<ApplicationUser> signInManager,
@@ -125,7 +123,7 @@ namespace allopromo.Api.Controllers
                 response1.Status = "Success";
                 response1.Message = "User Created Successfully!";
                 allopromo.Api.Model.Response response2 = response1;
-                response2.jwtToken = await accountController._userService.GenerateJwtToken(user);
+                response2.jwtToken = await _userService.GenerateJwtToken(user);
                 return (IActionResult)accountController.Ok((object)response1);
             }
             return (IActionResult)accountController.StatusCode(500, (object)new allopromo.Api.Model.Response()
@@ -169,7 +167,7 @@ namespace allopromo.Api.Controllers
             user1.UserName = dto.UserName;
             await signInManager.SignInAsync(user1, true);
             UserDto userDto = accountController._mapper.Map<UserDto>((object)user);
-            string jwtToken = await accountController._userService.GenerateJwtToken(user);
+            string jwtToken = await _userService.GenerateJwtToken(user);
             return (IActionResult)accountController.Ok((object)new
             {
                 user = userDto,
@@ -213,7 +211,7 @@ namespace allopromo.Api.Controllers
         public async Task<IActionResult> GetCurrentUserName()
         {
             AccountController accountController = this;
-            ApplicationUser currentUser = await accountController._userService.GetCurrentUser();
+            ApplicationUser currentUser = await _userService.GetCurrentUser();
             ApplicationUser byNameAsync = await accountController._userManager.FindByNameAsync(currentUser.UserName);
             UserDto userDto = accountController._mapper.Map<UserDto>((object)byNameAsync);
             return (IActionResult)accountController.Ok((object)userDto);

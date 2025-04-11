@@ -34,9 +34,9 @@ namespace allopromo.Api.Controllers
           IBaseService<DepartmentDto> departmentService,
           IConfiguration config)
         {
-            this._DepartmentService = DepartmentService;
-            this._departmentService = departmentService;
-            this._config = config;
+            _DepartmentService = DepartmentService;
+            _departmentService = departmentService;
+            _config = config;
         }
 
         [HttpPost]
@@ -48,8 +48,8 @@ namespace allopromo.Api.Controllers
             {
                 if (departmentDto == null)
                     return (IActionResult)departmentController.BadRequest();
-                Department departmentDto1 = Mapper.Map<Department>((object)departmentDto);
-                await departmentController._DepartmentService.CreateDepartmentAsync(departmentDto1);
+                Department departmentDto1 = _mapper.Map<Department>(departmentDto);
+                await _DepartmentService.CreateDepartmentAsync(departmentDto1);
                 return (IActionResult)departmentController.Ok((object)departmentDto);
             }
             catch (Exception ex)
@@ -62,9 +62,10 @@ namespace allopromo.Api.Controllers
         [Route("")]
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartments()
         {
-            DepartmentController departmentController = this;
-            IEnumerable<Department> departmentsAsync = await departmentController._DepartmentService.GetDepartmentsAsync();
-            return departmentsAsync == null ? (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.NotFound() : (ActionResult<IEnumerable<DepartmentDto>>)(ActionResult)departmentController.Ok((object)departmentsAsync);
+            var departments= await _DepartmentService.GetDepartmentsAsync();
+            if (departments != null)
+                return Ok(departments);
+            return NoContent();
         }
 
         [HttpGet]

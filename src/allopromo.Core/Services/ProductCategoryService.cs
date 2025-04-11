@@ -7,6 +7,7 @@ namespace allopromo.Core.Services
 {
     public interface IProductCategoryService
     {
+
     }
     public class ProductCategoryService : IProductCategoryService
     {

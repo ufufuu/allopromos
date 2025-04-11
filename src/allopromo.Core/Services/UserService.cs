@@ -13,10 +13,252 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using allopromo.Core.Helpers;
 using allopromo.Core.Entities.Identity;
+using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using allopromo.Core.Entities;
 
 namespace allopromo.Core.Services
 {
-   public class UserService : IUserService                                                             
+    public class UserService : IUserService
+    {
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private RoleManager<IdentityRole> _roleManager;
+        private HttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration Configuration;
+        public UserManager<ApplicationUser> _userManager { get; set; }
+        private IMapper _mapper { get; set; }
+
+        public UserService(
+          UserManager<ApplicationUser> userManager,
+          SignInManager<ApplicationUser> signInManager,
+          RoleManager<IdentityRole> roleManager,
+          IMapper mapper,
+          IConfiguration configuration)
+        {
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._roleManager = roleManager;
+            this._mapper = mapper;
+            this.Configuration = configuration;
+        }
+
+        public async Task<bool> CreateUser(string userName, string password)
+        {
+            bool userCreated = false;
+            if (userName == null)
+                throw new Exception();
+            try
+            {
+                ApplicationUser applicationUser = new ApplicationUser();
+                applicationUser.Id = Guid.NewGuid().ToString();
+                applicationUser.Email = userName;
+                applicationUser.UserName = userName;
+                ApplicationUser user = applicationUser;
+                IdentityResult async = await this._roleManager.CreateAsync(new IdentityRole("Users"));
+                if (this._userManager?.CreateAsync(user, password) != null)
+                {
+                    IdentityResult roleAsync = await this._userManager.AddToRoleAsync(user, "Users");
+                    userCreated = true;
+                }
+                user = (ApplicationUser)null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return await Task.FromResult<bool>(userCreated);
+        }
+
+        public async Task<List<ApplicationUser>> GetUsersWithRolesAsync()
+        {
+            return null;
+            IList<ApplicationUser> applicationUserList = (IList<ApplicationUser>)new List<ApplicationUser>();
+            IList<ApplicationUser> listAsync;
+            try
+            {
+                listAsync = (IList<ApplicationUser>)await this._userManager.Users.ToListAsync<ApplicationUser>();
+
+                // ISSUE: method reference
+                // ISSUE: type reference
+                // ISSUE: method reference
+                // ISSUE: type reference
+                // ISSUE: method reference
+                // ISSUE: type reference
+                // ISSUE: method reference
+                // ISSUE: method reference
+
+                /*this..Users
+                    .AsQueryable<ApplicationUser>().Select<ApplicationUser, ApplicationUser>(Expression.Lambda<Func<ApplicationUser, ApplicationUser>>((Expression)Expression.MemberInit(Expression.New(typeof(ApplicationUser)), (MemberBinding)Expression.Bind((MethodInfo)MethodBase.GetMethodFromHandle(__methodref(IdentityUser<string>.set_UserName), __typeref(IdentityUser<string>)), )))); // Unable to render the statement
+                ((IIncludableQueryable<ApplicationUser, IEnumerable<ApplicationRole>>)this._userManager.Users.Include<ApplicationUser, IList<ApplicationRole>>((Expression<Func<ApplicationUser, IList<ApplicationRole>>>)(u => u.UserRoles))).ThenInclude<ApplicationUser, ApplicationRole, string>((Expression<Func<ApplicationRole, string>>)(ur => ur.roleName));
+                */
+                return (List<ApplicationUser>)listAsync;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return listAsync.ToList<ApplicationUser>();
+        }
+
+        private void AddUserRole(ApplicationUser user, string roleName)
+        {
+            this._userManager.AddToRoleAsync(user, roleName);
+        }
+
+        public void DeleteUser(ApplicationUser user) => throw new NotImplementedException();
+
+        public async Task<IList<ApplicationUser>> GetUsersByRole(string roleName)
+        {
+            return await this._userManager.GetUsersInRoleAsync(roleName);
+        }
+
+        public async Task<ApplicationUser> GetUserById(string userId)
+        {
+            return await this._userManager.FindByIdAsync(userId);
+        }
+
+        public async Task<bool> UpdateUserRole(string newRoleName, string userName)
+        {
+            if (newRoleName == null)
+                throw new ArgumentNullException("roleName");
+            if (userName == null)
+                throw new ArgumentNullException("userName ");
+            ApplicationUser user = await _userManager.FindByNameAsync(userName);
+            string oldRoleName = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            var roleAsync = await _userManager.AddToRoleAsync(user, newRoleName);
+            if (roleAsync.Succeeded)
+            {
+                await _userManager.RemoveFromRoleAsync(user, oldRoleName);
+                return true;
+            }
+            return false;   
+        }
+
+        public async Task<ApplicationUser> GetCurrentUser()
+        {
+            string currentLogin = new HttpContextAccessor().HttpContext?.User.Claims.First<Claim>((Func<Claim, bool>)(x => x.Type == "id")).Value;
+            return (await this._userManager.Users.AsQueryable<ApplicationUser>().ToListAsync<ApplicationUser>()).Where<ApplicationUser>((Func<ApplicationUser, bool>)(user => user.UserName.Equals(currentLogin))).FirstOrDefault<ApplicationUser>();
+        }
+
+        public async Task<string> GenerateJwtTokentt597(ApplicationUser user)
+        {
+            JwtSecurityTokenHandler securityTokenHandler = new JwtSecurityTokenHandler();
+            byte[] bytes = Encoding.ASCII.GetBytes(new AppSettings()
+            {
+                Secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            }.Secret);
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[1]
+              {
+          new Claim("id", user.UserName.ToString())
+              }),
+                Expires = new DateTime?(DateTime.UtcNow.AddDays(7.0)),
+                SigningCredentials = new SigningCredentials((SecurityKey)new SymmetricSecurityKey(bytes), "HS256")
+            };
+            SecurityToken token = securityTokenHandler.CreateToken(tokenDescriptor);
+            return securityTokenHandler.WriteToken(token);
+        }
+
+        public async Task<string> GenerateJwtToken(ApplicationUser user)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Secret"]);
+            IList<string> rolesAsync = await this._userManager.GetRolesAsync(user);
+            string jwtToken = tokenHandler.WriteToken(tokenHandler.CreateToken(new SecurityTokenDescriptor()
+            {
+                Issuer = this.Configuration["Jwt:ValidIssuer"],
+                Audience = this.Configuration["Jwt:ValidAudience"],
+                Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[2]
+              {
+          new Claim("id", user.UserName.ToString()),
+          new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", rolesAsync.FirstOrDefault<string>())
+              }),
+                Expires = new DateTime?(DateTime.UtcNow.AddHours(2.0)),
+                SigningCredentials = new SigningCredentials((SecurityKey)new SymmetricSecurityKey(key), "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256")
+            }));
+            tokenHandler = (JwtSecurityTokenHandler)null;
+            key = (byte[])null;
+            return jwtToken;
+        }
+
+        public async Task<string> GenerateJwtToken123(allopromo.Core.Entities.ApplicationUser user)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Secret"]);
+            Encoding.ASCII.GetBytes(new AppSettings()
+            {
+                Secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            }.Secret);
+            List<Claim> claims = new List<Claim>()
+      {
+        new Claim("aud", "https://localhost:44306"),
+        new Claim("iss", "http://www.allo.promo"),
+        new Claim("email", user.Email ?? ""),
+        new Claim("name", user.firstName?? ""),
+        new Claim("nameid", user.Id ?? "")
+      };
+            foreach (string str in (IEnumerable<string>)await this._userManager.GetRolesAsync(user))
+                claims.Add(new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", str));
+            string jwtToken123 = tokenHandler.WriteToken(tokenHandler.CreateToken(new SecurityTokenDescriptor()
+            {
+                Issuer = this.Configuration["Jwt:ValidIssuer"],
+                Audience = this.Configuration["Jwt:ValidAudience"],
+                Expires = new DateTime?(DateTime.UtcNow.AddDays(1.0)),
+                Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[1]
+              {
+          new Claim("id", user.UserName.ToString())
+              }),
+                SigningCredentials = new SigningCredentials((SecurityKey)new SymmetricSecurityKey(key), "HS256")
+            }));
+            tokenHandler = (JwtSecurityTokenHandler)null;
+            key = (byte[])null;
+            claims = (List<Claim>)null;
+            return jwtToken123;
+        }
+
+        public string GenerateJwtToken456(string email, string role)
+        {
+            string str1 = this.Configuration["Jwt:Issuer"];
+            string str2 = this.Configuration["Jwt:Audience"];
+            byte[] bytes = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Key"]);
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[5]
+              {
+          new Claim("Id", Guid.NewGuid().ToString()),
+          new Claim("sub", email),
+          new Claim(nameof (email), email),
+          new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", role),
+          new Claim("jti", Guid.NewGuid().ToString())
+              }),
+                Expires = new DateTime?(DateTime.UtcNow.AddMinutes(5.0)),
+                Issuer = str1,
+                Audience = str2,
+                SigningCredentials = new SigningCredentials((SecurityKey)new SymmetricSecurityKey(bytes), "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512")
+            };
+            JwtSecurityTokenHandler securityTokenHandler = new JwtSecurityTokenHandler();
+            return securityTokenHandler.WriteToken(securityTokenHandler.CreateToken(tokenDescriptor));
+        }
+
+        private IList<IdentityRole> getUserRoles(ApplicationUser user)
+        {
+            IList<IdentityRole> userRoles = (IList<IdentityRole>)new List<IdentityRole>();
+            if (user == null)
+                throw new Exception("user NUll");
+            foreach (string str in (IEnumerable<string>)this._userManager.GetRolesAsync(user).Result)
+            {
+                IList<IdentityRole> identityRoleList = userRoles;
+                IdentityRole identityRole = new IdentityRole();
+                identityRole.Name = str;
+                identityRoleList.Add(identityRole);
+            }
+            return userRoles;
+        }
+    }
+
+    /*
+    public class UserService12 : IUserService                                                             
    {
 #region Properties
         public UserManager<IdentityUser> _userManager { get; set; }
@@ -30,7 +272,7 @@ namespace allopromo.Core.Services
 #endregion
 
 #region Constructors
-        public UserService(
+        public UserService12 (
             UserManager<IdentityUser> userManager, 
                             SignInManager<IdentityUser> signInManager,
                             RoleManager<IdentityRole> roleManager
@@ -223,7 +465,7 @@ namespace allopromo.Core.Services
             var users32= _userManager.Users;
             var roles = _roleManager.Roles;
             users32.Include(u => u.UserRoles).ThenInclude(ur=>ur.Role);*/
-            return null;
+            /*return null;
         }
         public ClaimsPrincipal GetCurrentUser()
         {
@@ -304,7 +546,7 @@ namespace allopromo.Core.Services
             return tokenHandler.WriteToken(token);
         }
         #endregion
-    }
+    }*/
 }
 
 

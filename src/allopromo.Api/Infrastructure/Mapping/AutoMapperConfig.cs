@@ -1,9 +1,6 @@
-﻿//using allopromo.Api.DTOs;
-using allopromo.Api.Infrastructure.AutoMapper.Profiles;
-using allopromo.Api.Infrastructure.Mapper.Profiles;
+﻿
+using allopromo.Api.Infrastructure.Mapping.Profiles;
 using allopromo.Api.ViewModel.ViewModels;
-using allopromo.Core.Application.Dto;
-
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using AutoMapper;

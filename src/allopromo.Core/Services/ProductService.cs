@@ -62,13 +62,13 @@ namespace allopromo.Core.Services
                 var productObj = AutoMapper.Mapper.Map<Product>(productDto);
                 var storeObj = (_storeService.GetStoresByUserName("")).Result.FirstOrDefault();
 
-                productObj.Store = storeObj;
+                productObj.store = storeObj;
                 var category = await GetProductCategoryByName(productDto.productName);
                 productObj.ProductCategory = category;
 
                 productObj.productId = Guid.NewGuid().ToString();
                 productObj.productName = productDto.productName;
-                productObj.Store = storeObj;
+                productObj.store = storeObj;
                 try
                 {
                     _productRepository.Add(productObj);

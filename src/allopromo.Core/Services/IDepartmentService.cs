@@ -10,31 +10,17 @@ namespace allopromo.Core.Services
 {
     public interface IDepartmentService
     {
-    #region Create
-        Task CreateDepartmentAsync(Department department);
-    #endregion
+        Task CreateDepartmentAsync(Department departmentDto);
 
-    #region Read
-        Task<IEnumerable<Department>> GeDepartmentsAsync();
-        Task<Department> GeDepartmentAsync(string departmentName); //GeDepartmentAsync
-        Task<Department> GeDepartmentAsync(Guid departmentId);
+        Task<IEnumerable<Department>> GetDepartmentsAsync();
 
-        //Task<IEnumerable<Department>> GetEntities();
+        Task<Department> GetDepartmentAsync(string departmentName);
 
-    #endregion
+        Task<Department> GetDepartmentAsync(Guid departmentId);
 
-    #region Update
+        Task<Department> UpdateDepartmentAsync(string departmentID, Department departmentDto);
 
-    //public Task<Department> UpdateDepartmentAsync(Department department, Department departmentDto);
-
-    public Task<Department> UpdateDepartmentAsync(string departmentID, Department departmentDto);
-
-    #endregion
-
-
-    #region Delete
-    Task<Department> DeleteDepartmentAsync();
-    #endregion
+        Task<Department> DeleteDepartmentAsync();
 
     }
 }

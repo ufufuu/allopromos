@@ -1,13 +1,16 @@
-﻿//using allopromo.Core.Abstract.Interfaces;
+﻿
+using allopromo.Core.Entities;
+using allopromo.Core.Interfaces;
+using allopromo.Core.Services.Base;
 using System.Collections.Generic;
 namespace allopromo.Core.Model
 {
-    public class PartnershipRegistrationService<TEntity> //:BaseService <TEntity> where TEntity:class
-    {
-        public IEnumerable<TEntity> GetEntities()
-        {
-            return null;
-        }
-    }
+    //public class VendorService34 :IVendorService
+    //{
+    //    public IEnumerable<Vendor> GetVendors()
+    //    {
+    //        return null;
+    //    }
+    //}
 }
 

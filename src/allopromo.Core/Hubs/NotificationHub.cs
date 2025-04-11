@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace allopromo.Core.Hubs
 {
 
-    public class NotificationHub:Hub<Abstract.Interfaces.INotificationHubClient>
+    public class NotificationHub:Hub<Abstract.INotificationHubClient>
     {
         public async Task SendOffersToUser(List<string> message)
         {

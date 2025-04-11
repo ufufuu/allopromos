@@ -14,5 +14,7 @@ namespace allopromo.Core.Abstract
         Task <string> GetUserCurrentCity(string ip);
         void Update(City aisle);
         void Delete(City aisle);
+
+        //Task<City> GetCityByName(string cityName);
     }
 }

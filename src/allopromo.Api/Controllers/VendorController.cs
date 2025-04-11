@@ -1,6 +1,8 @@
 ﻿
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
+using allopromo.Core.Entities;
+using allopromo.Core.Interfaces;
 using allopromo.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -44,10 +46,12 @@ namespace allopromo.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public IActionResult GetVendor(string Id)
+        public async Task<IActionResult> GetVendor(string Id)
         {
-            Task<IdentityUser> merchant = this._vendorService.GetMerchant(Id);
-            return merchant != null ? (IActionResult)this.Ok((object)merchant) : (IActionResult)this.NoContent();
+            var vendor = await _vendorService.GetVendor(Id);
+            if (vendor != null)
+                return Ok(vendor);
+            return NotFound();
         }
 
         [Authorize]

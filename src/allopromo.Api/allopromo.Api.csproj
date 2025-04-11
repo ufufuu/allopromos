@@ -38,11 +38,16 @@
     <Compile Remove="Controllers\AccounttController.cs" />
     <Compile Remove="Controllers\AuthenticationController.cs" />
     <Compile Remove="Controllers\OdooController.cs" />
+    <Compile Remove="Controllers\OrdersController.cs" />
     <Compile Remove="Controllers\OrderStatus.cs" />
+    <Compile Remove="Controllers\RoleController.cs" />
+    <Compile Remove="Controllers\ShoppingCartController.cs" />
     <Compile Remove="Controllers\StoreCategorie.cs" />
     <Compile Remove="Controllers\StoreCreatedSingleton.cs" />
     <Compile Remove="Controllers\StoreData.cs" />
+    <Compile Remove="Controllers\UserController.cs" />
     <Compile Remove="Infrastructure\Extensions\AuthenticationBuilderExtensions.cs" />
+    <Compile Remove="Infrastructure\Extensions\ExceptionMiddlewareExtension.cs" />
     <Compile Remove="Infrastructure\Helpers\AppSettings.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthHandler.cs" />
     <Compile Remove="Infrastructure\Helpers\Authentication\CustomAuthOptions.cs" />
@@ -62,6 +67,7 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Commands\Handlers\" />
+    <Folder Include="Infrastructure\Extensions\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Constants\" />

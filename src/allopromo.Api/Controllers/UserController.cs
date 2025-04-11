@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using allopromo.Api.ViewModel.ViewModels;
 using System.Security.Claims;
 using System.Linq;
-using allopromo.Core.Application.Dto;
+using allopromo.Api.DTOs;
 
 namespace allopromo.Api.Controllers
 {
@@ -48,7 +48,7 @@ namespace allopromo.Api.Controllers
             _mapper = mapper;
         }
         [ActivatorUtilitiesConstructor]
-        public UserController(IUserService userService, IMembershipService accountService, UserManager<IdentityUser> userManager,
+        public UserController(IUserService userService, UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, ILogger<UserController> logger,
             AutoMapper.IMapper Mapper)
         {

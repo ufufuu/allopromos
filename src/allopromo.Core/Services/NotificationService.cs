@@ -1,5 +1,5 @@
-﻿using allopromo.Core.Abstract.Interfaces;
-//using allopromo.Core.Model.ApiResponse;
+﻿
+using allopromo.Core.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class NotificationService //: Abstract.INotifyService
+    public class NotificationService : Abstract.INotifyService
     {
-        public Microsoft.AspNetCore.SignalR.IHubContext<Hubs.NotificationHub, INotificationHubClient> 
+        public Microsoft.AspNetCore.SignalR.IHubContext <Hubs.NotificationHub, INotificationHubClient> 
             notificationHub { get; set; }
         public NotificationService()
         {

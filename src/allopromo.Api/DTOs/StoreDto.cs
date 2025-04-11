@@ -5,21 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.DTOs
 {
-        public class StoreDto
-        {
-            public string StoreId { get; set; }
+    public class StoreDto
+    {
+         public string StoreId { get; set; }
 
-            public string StoreName { get; set; }
+         public string StoreName { get; set; }
 
-            public string StoreDescription { get; set; }
+         public string StoreDescription { get; set; }
 
-            public string CategoryName { get; set; }
+         public string CategoryName { get; set; }
 
-            public string City { get; set; }
+         public string City { get; set; }
 
-            public string ProprioName { get; set; }
-        }
-    public class CreateStoreDto
+         public string ProprioName { get; set; }
+    }
+    public class CreateStoreDto45
     {
         [Required(ErrorMessage = "Name Required")]
         [MinLength(2, ErrorMessage = "Company Name canot not be less than 2 char")]

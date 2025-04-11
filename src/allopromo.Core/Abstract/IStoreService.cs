@@ -7,46 +7,48 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Abstract
 {
-    //public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
-
     public interface IStoreService
     {
-        event Services.StoreCreatedEventHandler StoreCreated;
-        //void OnStoreCreated();
+        Task<bool> CreateStoreAsync(Store store, string name, string city, string category);
 
-        Task CreateStoreAsync(Store store, string userName); // UserDto user);
-
-        Task CreateStore(string storeDtoName);
         Task CreateStoreCategoryAsync(StoreCategory storeCategoryName);
 
+        Task<IEnumerable<Store>> GetStoresAsync();
 
-        Task<IEnumerable<Store>> GetStores();
         Task<IEnumerable<Store>> GetStores(string localizationId);
-        Task<IEnumerable<Store>> GetStores(string categoryId, string localizationId, string sortingOrder);
 
+        Task<IEnumerable<Store>> GetStores(
+          string categoryId,
+          string localizationId,
+          string sortingOrder);
 
-        Task<IEnumerable<Store>> GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet);
+        Task<IEnumerable<Store>> GetStoresByCategoryNameAsync(
+          string categoryName,
+          int pageNumber,
+          int offSet);
+
         Task<Store> GetStoreByIdAsync(string storeId);
+
         Task<StoreCategory> GetStoreCategoryByIdAsync(string catId);
+
         Task<IEnumerable<StoreCategory>> GetStoreCategoriesAsync();
 
-
-        //Task<StoreDto> GetStoresByLocationIdAsync();
-
         Task<StoreCategory> GetStoreCategoriesAsyncById(string Id);
-        Task<IQueryable<Store>> GetStoresByUserName(string userName);
-        
 
-        public void UpdateStoreCategory(string Id, StoreCategory category);
+        Task<IQueryable<Store>> GetStoresByUserName(string userName);
+
+        Task<bool> UpdateStoreCategoryAsync(string Id, StoreCategory category);
+
+        Task<bool> UpdateStoreAsync(string Id, Store category);
 
         void DeleteStoreCategory(StoreCategory storeCategory);
+
         void DeleteStoreCategory(string categoryId);
-        
+
+        event Services.StoreService.StoreCreatedEventHandler StoreCreated;
+
         Task<string> getImageUrl();
+
         Task<string> getImageInformationAsync();
-        
-        //Action<bool> StoreCreatedDel;
-        //public Func<bool, int> StoreCreatedDel2;
-        //IEnumerable<StoreDto> GetStores(int page, int size);
     }
 }

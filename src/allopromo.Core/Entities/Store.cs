@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using allopromo.Core.Domain;
 using allopromo.Core.Model;
-using allopromo.Core.ValueObjects;
 namespace allopromo.Core.Entities
 {
     [Table("Stores")]

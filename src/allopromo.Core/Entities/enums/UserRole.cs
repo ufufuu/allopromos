@@ -5,12 +5,12 @@ using System.Text;
 namespace allopromo.Core.Entities.enums
 {
 
-    public enum Role
+    /*public enum Role
     {
         Merchant,
         Admin,
         Client,
-    }
+    }*/
 
     public static class UserRole
     {
@@ -19,10 +19,9 @@ namespace allopromo.Core.Entities.enums
         public const string Admin = "Admin";
     }
 
-    internal enum ShoppingCartType
+    /*internal enum ShoppingCartType
     {
         ShoppingCart = 1,
         WishList = 2,
-    }
-}
+    }*/
 }

@@ -1,4 +1,9 @@
-﻿using System;
+﻿using allopromo.Core.Domain;
+using allopromo.Core.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

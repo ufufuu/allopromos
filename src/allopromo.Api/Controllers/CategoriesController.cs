@@ -1,6 +1,7 @@
 ﻿
 using allopromo.Api.DTOs;
 using allopromo.Core.Entities;
+using allopromo.Core.Interfaces;
 using allopromo.Core.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -15,14 +16,12 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly
-#nullable disable
-    ICategoryService _categoryService;
+        private readonly ICatalogService _catalogService;
         private readonly IMapper _mapper;
 
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICatalogService catalogService, IMapper mapper)
         {
-            this._categoryService = categoryService;
+            this._catalogService = catalogService;
             this._mapper = mapper;
         }
 
@@ -31,7 +30,7 @@ namespace allopromo.Api.Controllers
         {
             if (productCategoryDto == null)
                 return (IActionResult)this.BadRequest();
-            this._categoryService.CreateCategory(this._mapper.Map<ProductCategory>((object)productCategoryDto));
+            _catalogService.CreateProductCategory(_mapper.Map<ProductCategory>((object)productCategoryDto));
             return (IActionResult)this.Ok((object)productCategoryDto);
         }
 
@@ -39,16 +38,16 @@ namespace allopromo.Api.Controllers
         [Authorize(Roles = "Administrators")]
         public IActionResult GetCategories()
         {
-            IEnumerable<ProductCategory> entities = this._categoryService.GetEntities();
+            IEnumerable<ProductCategory> entities = _catalogService.GetProducsEntities();
             return entities == null ? (IActionResult)this.NotFound() : (IActionResult)this.Ok((object)entities);
         }
 
         [HttpGet]
         [Route("[action]/{categoryId}")]
         [Authorize(Roles = "Administrators")]
-        public IActionResult GetCategory(string categoryId)
+        public async Task<IActionResult> GetCategory(string categoryId)
         {
-            ProductCategory category = this._categoryService.GetCategory(categoryId);
+            ProductCategory category = await _catalogService.GetProductCategory(categoryId);
             return category == null ? (IActionResult)this.NotFound() : (IActionResult)this.Ok((object)category);
         }
 
@@ -63,7 +62,7 @@ namespace allopromo.Api.Controllers
         [Authorize(Roles = "Administrators")]
         public IActionResult DeleteCategory(string Id)
         {
-            this._categoryService.DeleteCategory(Id);
+            this._catalogService.DeleteProductCategory(Id);
             return (IActionResult)this.Ok((object)Id);
         }
 

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using allopromo.Core.Interfaces;
 
 #nullable enable
 namespace allopromo.Api.Controllers
@@ -23,39 +24,36 @@ namespace allopromo.Api.Controllers
     public class StoreController : ControllerBase
     {
         public const int pageSize = 2;
-        private readonly
-#nullable disable
-    IStoreService _storeService;
+        private readonly IStoreService _storeService;
         private readonly IProductService _productService;
-        private readonly INotifyService _notificationService;
+        private readonly INotifyService _notificationService; 
+        private readonly allopromo.Core.Interfaces.ICatalogService _catalogService;
         private IMapper _mapper;
-
+        
         public int pageNumber { get; set; }
-
         public IUserService _userService { get; set; }
-
         public HttpContextAccessor _httpContextAccessor { get; set; }
-
         public IMediaService _mediaService { get; set; }
-
         public IImageUploadService _uploadService { get; set; }
 
         public StoreController(
           IStoreService storeService,
           IProductService productService,
+          allopromo.Core.Interfaces.ICatalogService catalogService,
           IUserService userService,
           IMediaService mediaService,
           IImageUploadService uploadService,
           INotifyService notificationService,
           IMapper mapper)
         {
-            this._userService = userService;
-            this._storeService = storeService;
-            this._productService = productService;
-            this._notificationService = notificationService;
-            this._mediaService = mediaService;
-            this._uploadService = uploadService;
-            this._mapper = mapper;
+            _userService = userService;
+            _storeService = storeService;
+            _productService = productService;
+            _catalogService = catalogService;
+            _notificationService = notificationService;
+            _mediaService = mediaService;
+            _uploadService = uploadService;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -65,20 +63,23 @@ namespace allopromo.Api.Controllers
         {
             StoreController storeController = this;
             if (dto == null)
-                return (IActionResult)storeController.Content(" Invalid Data Store Info ");
-            string str = await storeController._mediaService.SaveProductImage(dto.storeFiles.ToList<IFormFile>().FirstOrDefault<IFormFile>());
-            ApplicationUser currentUser = await storeController._userService.GetCurrentUser();
+                return Ok (" Invalid Data Store Info ");
+            string str = await _mediaService.SaveProductImage(dto.storeFiles.ToList<IFormFile>().FirstOrDefault<IFormFile>());
+            ApplicationUser currentUser = await _userService.GetCurrentUser();
             dto.ProprioName = currentUser.UserName;
             string categoryName = dto.CategoryName;
+
+            var category = _catalogService.GetProductCategory(categoryName);
+
             string city = dto.City;
             Store store = storeController._mapper.Map<Store>((object)dto);
+            
             store.storeName = dto.StoreName;
             store.storeDescription = dto.StoreDescription;
-            if (await storeController._storeService.CreateStoreAsync(store, currentUser.UserName, city, categoryName))
-            {
-                int num = await storeController._userService.UpdateUserRole("Merchants", currentUser.UserName) ? 1 : 0;
-                return (IActionResult)storeController.Ok((object)dto);
-            }
+            await _storeService.CreateStoreAsync(store, currentUser.UserName, city, dto.CategoryName);
+
+            if(await _userService.UpdateUserRole("Merchants", currentUser.UserName))
+                return Ok(dto);
             return (IActionResult)storeController.Ok((object)new allopromo.Api.Model.Response()
             {
                 Status = "400",
@@ -94,10 +95,13 @@ namespace allopromo.Api.Controllers
             IEnumerable<Store> storesAsync = await storeController._storeService.GetStoresAsync();
             IEnumerable<StoreDto> source = storeController._mapper.Map<IEnumerable<StoreDto>>((object)storesAsync);
             IQueryable<StoreDto> queryable = source.Skip<StoreDto>((validFilter.PageNumber - 1) * validFilter.PageSize).Take<StoreDto>(validFilter.PageSize).AsQueryable<StoreDto>();
-            PaginatedList<StoreDto>.CreateAsync(source.AsQueryable<StoreDto>(), storeController.pageNumber, 2);
-            ActionResult stores = source != null ? (ActionResult)storeController.Ok((object)queryable) : (ActionResult)storeController.NotFound();
-            validFilter = (PaginationFilter)null;
-            return stores;
+
+            //PaginatedList<StoreDto>.CreateAsync(source.AsQueryable<StoreDto>(), storeController.pageNumber, 2);
+            //var stores = source != null ? (ActionResult)storeController.Ok((object)queryable) 
+              //  : (ActionResult)storeController.NotFound();
+            //validFilter = (PaginationFilter)null;
+
+            return Ok(queryable);
         }
 
         [HttpGet]
@@ -180,9 +184,9 @@ namespace allopromo.Api.Controllers
         {
             string str = string.Empty;
             if (storeCategoryDto == null)
-                return (ActionResult)this.NotFound();
+                return NotFound();
             str = storeCategoryDto.storeCategoryName;
-            return (ActionResult)this.Ok((object)Mapper.Map<StoreDto>((object)storeCategoryDto));
+            return Ok(_mapper.Map<StoreDto>((object)storeCategoryDto));
         }
 
         private async Task<bool> ValidateImageFile(FormFile file)

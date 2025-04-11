@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace allopromo.Infrastructure.Helpers
 {
-    {
   public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
     {
         public void Configure(EntityTypeBuilder<IdentityRole> builder)

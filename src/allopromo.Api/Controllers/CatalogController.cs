@@ -1,5 +1,6 @@
 ﻿
 using allopromo.Core.Abstract;
+using allopromo.Core.Interfaces;
 using allopromo.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,18 +17,18 @@ namespace allopromo.Controllers
 #nullable disable
     IConfiguration _config;
         private readonly IProductService _productService;
-        private readonly ICategoryService _categoryService;
+        private readonly ICatalogService _catalogService;
         private readonly IVendorService _merchantService;
 
         public CatalogController(
           IConfiguration config,
           IProductService productService,
-          ICategoryService categoryService,
+          ICatalogService catalogService,
           IVendorService merchantService)
         {
-            this._config = config;
-            this._productService = productService;
-            this._categoryService = categoryService;
+            _config = config;
+            _productService = productService;
+            _catalogService = catalogService;
         }
 
         [HttpGet]

@@ -1,5 +1,4 @@
 ﻿using allopromo.Core.Abstract;
-using allopromo.Core.Application.Dto;
 using allopromo.Core.Entities;
 using allopromo.Core.Services.Base;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services
 {
-    public class DepartmentService : // BaseService<Department>
-        IDepartmentService
+    public class DepartmentService : IDepartmentService
     {
         public IRepository<Department> _departmentRepository {get; set;}
         public DepartmentService(IRepository<Department> departmentRepository)//:base(departmentRepository)
@@ -102,12 +100,11 @@ namespace allopromo.Core.Services
             IEnumerable<Department> departments = null;
             try
             {
-                var departmentsObj = await _departmentRepository.GetAllAsync();// GetEntitiesAsync();
+                var departmentsObj = await _departmentRepository.GetAllAsync();
                 departments = AutoMapper.Mapper.Map<IEnumerable<Department>>(departmentsObj.AsEnumerable());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
             return departments;
@@ -170,6 +167,31 @@ namespace allopromo.Core.Services
 
         #region Delete
         Task<Department> IDepartmentService.DeleteDepartmentAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IDepartmentService.CreateDepartmentAsync(Department departmentDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<Department>> IDepartmentService.GetDepartmentsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Department> IDepartmentService.GetDepartmentAsync(string departmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Department> IDepartmentService.GetDepartmentAsync(Guid departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Department> IDepartmentService.UpdateDepartmentAsync(string departmentID, Department departmentDto)
         {
             throw new NotImplementedException();
         }

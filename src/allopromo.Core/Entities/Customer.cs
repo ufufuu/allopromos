@@ -4,7 +4,7 @@ using System.Text;
 
 namespace allopromo.Core.Entities
 {
-    class Customer
+    public class Customer
     {
     }
 }

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using allopromo.Core.Caching;
+using allopromo.Core.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace allopromo.Core.Model.Model
 {
@@ -40,6 +43,4 @@ namespace allopromo.Core.Model.Model
             return !string.IsNullOrEmpty(permissionRecordSystemName);
         }
     }
-}
-
 }

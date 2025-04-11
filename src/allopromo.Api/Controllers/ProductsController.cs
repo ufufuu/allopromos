@@ -32,17 +32,10 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly
-#nullable disable
-    IPermissionService _permissionService;
         private readonly IMapper _mapper;
-
         private IProductService _productService { get; set; }
-
         private IUserService _userService { get; set; }
-
         private IStoreService _storeService { get; set; }
-
         private IMediaService _mediaService { get; set; }
 
         private IMediator _mediator { get; set; }
@@ -54,20 +47,20 @@ namespace allopromo.Api.Controllers
         public ProductsController(
           IProductService productService,
           IUserService userService,
-          IPermissionService permissionService,
+          
           IRepository<Product> productRepo,
           IStoreService storeService,
           IMediaService mediaService,
           IValidationService validationService,
           IMapper mapper)
         {
-            this._productService = productService;
-            this._userService = userService;
-            this._storeService = storeService;
-            this._mediaService = mediaService;
-            this._permissionService = permissionService;
-            this._productRepo = productRepo;
-            this._mapper = mapper;
+            _productService = productService;
+            _userService = userService;
+            _storeService = storeService;
+            _mediaService = mediaService;
+            
+            _productRepo = productRepo;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -84,8 +77,10 @@ namespace allopromo.Api.Controllers
         public async Task<IActionResult> GetProducts(string storeName)
         {
             ProductsController productsController = this;
-            IEnumerable<ProductInStoreBusinessModel> productsByStore = await productsController._productService.GetProductsByStore(storeName.ToString());
-            IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>((object)productsByStore);
+
+            var productsByStore = await _productService.GetProductsByStore(storeName.ToString());
+
+            IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>(productsByStore);
             return (IActionResult)productsController.Ok((object)productDtos);
         }
 
@@ -95,9 +90,8 @@ namespace allopromo.Api.Controllers
         {
             ProductsController productsController = this;
             if (productPictureDto == null)
-                return (IActionResult)productsController.BadRequest();
-            if (!await productsController._permissionService.Authorize("ManageProducts"))
-                return (IActionResult)productsController.Unauthorized();
+                return BadRequest();
+
             IMediator mediator1 = productsController._mediator;
             GetQuery<ProductDto> getQuery = new GetQuery<ProductDto>();
             getQuery.Id = key;

@@ -17,595 +17,267 @@ using Microsoft.AspNetCore.Http;
 
 namespace allopromo.Core.Services
 {
-    public delegate bool StoreCreatedEventHandler (object source, EventArgs e);
-
-    public class StoreService : IStoreService
+    public class StoreService: IStoreService
     {
-        //public event StoreCreatedEventHandler storeCreated;
+        public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
 
-        #region Constantes
-        public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
-        #endregion
+        public Action<string> _StoreCreated;
+        public HttpClient _httpClient { get; set; }
 
-        #region Properties
+        public IRepository<Store> _storeRepository { get; set; }
 
         public event StoreCreatedEventHandler StoreCreated;
-
-        public Action<string> _StoreCreated;
         public static int _storesNumber { get; set; }
-       
-        public IMembershipService _accountService { get; set; }
         public IUserService _userService { get; set; }
-        public UserManager<IdentityUser> _userManager { get; set; }
+        
+        public UserManager<ApplicationUser> _userManager { get; set; }
         public IHttpContextAccessor _httpContextAccessor { get; set; }
-        #endregion
-        public IDepartmentService _departmentService { get;set; }
+        public IDepartmentService _departmentService { get; set; }
         public IRepository<Department> _departmentRepository { get; set; }
         public IRepository<StoreCategory> _categoryRepository { get; set; }
-
-        #region Fields
-        private IRepository<Store> _storeRepository;
+        public IRepository<City> _citiesRepository { get; set; }
         private IProductService _productService { get; set; }
-        private IRepository<Store> StoreRepository;
-        private IRepository<Store> _tGenericRepository { get; set; }
-        private ILocalisationService _localisationService { get; set; }
-
-
+        private ILocationService _locationService { get; set; }
 
         public INotifyService _notificationService { get; set; }
-
-        #endregion
-
-
-        #region Constructors
-        public StoreService(IRepository<Store> storeRepository, IRepository<StoreCategory> categoryRepository,
-            IDepartmentService departmentService, ILocalisationService LocalisationService,
-            IUserService userService, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor,
-            IRepository<Department> departmentRepository)
+        public StoreService(
+          IRepository<Store> storeRepository,
+          IRepository<StoreCategory> categoryRepository,
+          IDepartmentService departmentService,
+          ILocationService locationService,
+          IUserService userService,
+          IRepository<City> citiesRepository,
+          UserManager<ApplicationUser> userManager,
+          IHttpContextAccessor httpContextAccessor,
+          IRepository<Department> departmentRepository)
         {
-            StoreRepository = storeRepository;
             _storeRepository = storeRepository;
             _categoryRepository = categoryRepository;
             _userService = userService;
             _userManager = userManager;
-            _localisationService = LocalisationService;
+            _locationService = locationService;
             _departmentService = departmentService;
             _httpContextAccessor = httpContextAccessor;
             _departmentRepository = departmentRepository;
+            _citiesRepository = citiesRepository;
         }
-        public StoreService()
-        {}
-        //event StoreCreatedEventHandler IStoreService.StoreCreated
-        //{
-        //    add
-        //    {
-        //        throw new NotImplementedException();
-        //    }
 
-        //    remove
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
-        #endregion
-
-
-        #region Events
-        
-        #endregion
-
-        #region Creating Objects 
-        public async Task CreateStore(string storeDtoName)
-        {
-            if (storeDtoName != null)
-            {
-                Store store = new Store();
-                StoreCategory category = null;
-                store.storeId = Guid.NewGuid();
-                store.storeName = storeDtoName;
-                store.City = new City { cityName = "Lome", cityId = 679 };
-                store.Category = category;
-
-                // Publishing the Store Creation Event 
-                _storeRepository.Add(store);
-
-                StoreCreated += _notificationService.StoreCreatedEventHandler;
-
-                OnStoreCreated();
-                //StoreCreated += _notificationService.SendNotification;
-            }
-            else
-            {
-                throw new Exception();
-            }
-            return; 
-        }
         protected virtual void OnStoreCreated()
         {
-            if (StoreCreated != null)
+            if (this.StoreCreated == null)
+                return;
+            int num = this.StoreCreated((object)this, EventArgs.Empty) ? 1 : 0;
+        }
+
+        public async Task<bool> CreateStoreAsync( Store store, string proprioName, 
+            string storeCityName, string storeCategoryName)
+        {
+            try
             {
-                StoreCreated(this, EventArgs.Empty);
+                if (store == null)
+                    return false;
+                ApplicationUser currentUser = await this._userManager.FindByNameAsync(proprioName);
+                if ((await this._userManager.GetRolesAsync(currentUser)).FirstOrDefault<string>().ToString() == "Merchants")
+                    return false;
+
+                Store storeObj = new Store();
+                StoreCategory category = (await _categoryRepository.GetAllAsync()).Where(x => x.storeCategoryName.Equals(storeCategoryName)).FirstOrDefault();
+                                
+                City cityByName = await _locationService.GetCityByName(storeCityName);
+                storeObj.storeId = Guid.NewGuid();
+                storeObj.storeName = store.storeName;
+                storeObj.storeDescription = store.storeDescription;
+                storeObj.User = currentUser;
+                storeObj.storeCreatedOn = DateTime.UtcNow;
+                storeObj.Category = category;
+                this._storeRepository.Add(storeObj);
+                this.OnStoreCreated();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
-        //protected virtual void onStoreCreated(StoreCreatedEventArgs storeCreated)
-        //{
-        //    if (StoreCreated != null)
-        //    {
-        //        StoreCreated(this, new StoreCreatedEventArgs(){store=storeCreated.store});
-        //    }
-        //}
+
+        public Task<bool> UpdateStoreAsync(string Id, Store store) => Task.FromResult<bool>(true);
+
+        public Task<bool> UpdateStoreCategoryAsync(string Id, StoreCategory category)
+        {
+            return Task.FromResult<bool>(true);
+        }
+
         public async Task CreateStoreCategoryAsync(StoreCategory storeCategory)
         {
             if (storeCategory == null)
                 throw new NullReferenceException();
-            var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-
-            var department = _departmentService.GeDepartmentsAsync().Result
-                .Where(x => x.departmentName == storeCategory.Department.departmentName).FirstOrDefault();
-
-            var StoreCategory = new StoreCategory();
+            DateTime dateTime = DateTime.Now;
+            dateTime = dateTime.AddMonths(6);
+            dateTime.Day.ToString("00");
+            Department department = this._departmentService.GetDepartmentsAsync().Result.Where<Department>((Func<Department, bool>)(x => x.departmentName == storeCategory.Department.departmentName)).FirstOrDefault<Department>();
+            StoreCategory StoreCategory = new StoreCategory();
             StoreCategory.storeCategoryId = Guid.NewGuid();
             StoreCategory.storeCategoryName = storeCategory.storeCategoryName;
             StoreCategory.created = DateTime.Now;
-            StoreCategory.expires = DateTime.Now;
+            StoreCategory.expires = new DateTime?(DateTime.Now);
             StoreCategory.Department = department;
-            var imageUrl = string.Empty;
-            if (posStoreCategoryImage() != null)
+            string empty = string.Empty;
+            if (this.posStoreCategoryImage() != null)
             {
-                imageUrl = await this.getImageUrl();
+                string imageUrl = await this.getImageUrl();
             }
-            else
-            {
-                imageUrl = "http://www.noiamgesfornow.jpg";
-            }
-            _categoryRepository.Add(StoreCategory);
-            return; // storeCategory;
+            this._categoryRepository.Add(StoreCategory);
+            StoreCategory = (StoreCategory)null;
         }
-        
-        private IdentityUser getCurrentUtili()
+
+
+        public async Task<IEnumerable<Store>> GetStoresAsyncss()
         {
-            var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
-            return currentUser;
-        }
-        public async Task CreateStoreAsync(Store store, string userDtoName)
-        {
-            var y = getCurrentUtili();
+            IList<Store> storeList = (IList<Store>)new List<Store>();
+            IList<Store> allAsync;
             try
             {
-                if (store != null)
-                {
-                    var currentUser = await _userManager.FindByNameAsync(userDtoName);
-                    var storeObj = new Store();
-                    
-                    var category = (from q in _categoryRepository.GetAllAsync().Result.AsQueryable()
-                                   select q).Where(x => x.storeCategoryName.ToString() == 
-                                   store.Category.storeCategoryName).FirstOrDefault();
-                    var ci= (from q in _categoryRepository.GetAllAsync()
-                             .Result.AsQueryable()
-                             select q).Where(x => x.storeCategoryName.ToString() == store.Category.storeCategoryName).FirstOrDefault();
-
-                    var dateExpiring = DateTime.Now.AddMonths(6).Day.ToString("00");
-
-                    //var StoreObj = Mapper.Map<Store>(store);
-                    //storeDto = Mapper.Map<StoreDto>(store);
-
-                    var location = new tLocation();
-
-                    var city = new City { cityName = "Kara" };
-
-                    City cityObj = new City();
-
-                    //using (ILocalisationService locService = new Contracts.LocalisationService())//_cityRepository, _countryRepository)) ;
-                    //{
-                    //    cityObj = await locService.GetCityByName("Kara");
-                    //}
-
-                    cityObj = await _localisationService.GetCityByName("Kara");
-                    city.cityGpsLatitude = "";
-                    city.cityGpsLongitude = "";
-                    city.cityCountry = null;
-
-                    storeObj.storeId = Guid.NewGuid();
-                    storeObj.storeName = store.storeName;
-                    storeObj.User = currentUser;
-                    storeObj.Category = category;
-                    storeObj.City = cityObj;
-
-                    _storeRepository.Add(storeObj);
-
-                    OnStoreCreated();
-                    return; // store;
-                }
-                else
-                    throw new Exception();
+                allAsync = (IList<Store>)await this._storeRepository.GetAllAsync();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return allAsync.AsEnumerable<Store>();
         }
-        #endregion
 
 
-        #region Public Properties - Getting Objects
-        public async Task<IEnumerable<Store>> GeStores()
-        {
-            //PaginationFilter validFilter = new PaginationFilter();
-            IEnumerable<Store> stores = new List<Store>();
-
-            var StoreObj = await _storeRepository.GetAllAsync();
-            stores = StoreObj.AsQueryable()
-                //.Include(c=>c.Category)
-                //.Skip((validFilter.pageNumber - 1) * validFilter.pageSize)
-                //.Take(validFilter.pageSize)
-                .AsNoTracking()
-                .Select(s => new Store
-                {
-                storeName = s.storeName,
-                storeDescription = s.storeDescription,
-                Category= new StoreCategory(),                        //s.Category.storeCategoryName
-                });
-            if (stores!= null)
-                return stores;
-            else
-                throw new NullReferenceException();
-        }
-        public async Task<List<Store>> GeStoresAsync()
-        {
-            IList<Store> stores = new List<Store>();
-            try
-            {
-                var storeObjs = await _storeRepository.GetAllAsync();
-                foreach (var storeObj in storeObjs)
-                {
-                    stores.Add(new Store
-                    {
-                        storeName=storeObj.storeName,
-                        Category= new StoreCategory(),
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return stores.ToList();
-        }
-        public async Task<IEnumerable<Store>> GeStores(string categoryId)
-        {
-            var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
-                .Include(c => c.Category)
-                .Include(v => v.City).Where(v => v.City.cityId.Equals(1))
-                .Select(s => new Store()
-                {
-                    storeName = s.storeName,
-                    storeDescription = s.storeDescription,
-                    Category = new StoreCategory(), //s.Category.storeCategoryName,
-                    City = new City(), //s.City.cityName.ToString()
-                });
-            if (stores != null)
-                return stores;
-            else
-                throw new NullReferenceException();
-        }
-        public async Task<IEnumerable<Store>> GeStores (string categoryId, string localizationId, string sortingOrder)
-        {
-            //var validFilter = 10;
-            //int pageNumber = 1;
-            //int pageSize = 1;
-
-            var stores = (await _storeRepository.GetAllAsync()).AsQueryable()
-                .Include(c => c.Category).Where( category=>category.Category.storeCategoryId.Equals(categoryId))
-                .Include(v => v.City).Where(v => v.City.cityId.Equals(localizationId))
-
-                //.OrderBy()
-                //.Skip((validFilter.pageNumber-1) * validFilter.pageSize)
-                //.Take(validFilter.pageSize)
-                //AsNoTracking()
-                .Select(s => new Store()
-                {
-                    storeName = s.storeName,
-                    storeDescription = s.storeDescription,
-                    Category = new StoreCategory { storeCategoryName = s.Category.storeCategoryName },
-                    City = new City { cityName = s.City.cityName.ToString() }
-                });
-            switch (sortingOrder)
-            {
-                case "Date":
-                   //stores = stores.OrderByDescending(o => o.storeId);
-                   break;
-
-                case "popularityOrReview":
-                    stores = stores.OrderByDescending(o => o.City);
-                    break;
-                default:
-                    stores = stores.OrderByDescending(o => o.City); // storeCategory);
-                    break;
-            }
-                
-            if (stores!= null)
-                return stores;
-            else
-                throw new NullReferenceException();
-        }
-        public async Task<IEnumerable<StoreCategory>> GeStoreCategoriesAsync()
-        {
-            //IEnumerable<StoreCategoryDto> categories = null;
-            var categoriesRepo = await _categoryRepository?.GetAllAsync();
-            var categoriesObj = categoriesRepo.AsQueryable().Include(x => x.Department)
-                .Select(c => new StoreCategory
-                {
-                    storeCategoryName = c.storeCategoryName,
-                    Department = c.Department, //.departmentName
-                });
-            //var categories = AutoMapper.Mapper.Map
-                    //<IEnumerable<StoreCategoryDto>>(categoriesObj);
-
-            if (categoriesObj == null)
-                throw new ArgumentNullException();
-            return categoriesObj.AsEnumerable();
-        }
-        
-        public async Task<StoreCategory> GeStoreCategoriesAsyncById(string Id)
-        {
-            var categories = await this.GeStoreCategoriesAsync();
-            var query = from q in categories
-                        where q.storeCategoryName==Id
-                        select q;
-            return query.FirstOrDefault();
-        }
-        private async Task<int> GetUserStoresAsync(ApplicationUser user)
-        {
-            var Id = _userService.GetUserById(user.Id);
-            var query = from q in await _storeRepository.GetAllAsync()
-                        where q.User.Equals(user)
-                        select q;
-            int numberStores = query.Count();
-            return numberStores;
-        }
-        //public async Task<IEnumerable<ProductDto>> GetProductsByStoresAndCategories(string storeId)
-        //{
-        //    if (storeId == null)
-        //        return null;
-        //    return await _productService.GetProductsByStore(storeId);
-        //}
-        private int GeStoresProducts(ApplicationUser user)
-        {
-            var Id = String.Empty;
-            var productQuery = from q
-                               in _productService.GetProductsByStore(Id).Result
-                               select q;
-            return productQuery.Count();
-        }
-        public async Task<IEnumerable<Store>> GeStoresByCategoryIdAsync(int categoryId,
-            int pageNumber, int offSet)
+        public async Task<IEnumerable<Store>> GeStoresByCategoryIdAsync( int categoryId, int pageNumber, int offSet)
         {
             offSet = 10;
-            if (categoryId.Equals(null))
-                return null;
-            else
-            {
-                var storesByCategory = await _storeRepository.GetByIdAsync(categoryId);
-                //pageNumber, offSet);
-                //return (IEnumerable<StoreDto>)storesByCategory;
-            }
-            return null;
+            if (categoryId == null)
+                throw new NullReferenceException();
+
+            var stores = await this._storeRepository.GetByIdAsync(categoryId);
+            return (IEnumerable<Store>)stores;
         }
-        public async Task<IEnumerable<Store>> GeStoresByLocalizationAsync(int locationId, int page, int size)
+
+        public async Task<IEnumerable<Store>> GeStoresByLocalizationAsync(
+          int locationId,
+          int page,
+          int size)
         {
+            IEnumerable<Store> stores;
             try
             {
-                var stores = await _tGenericRepository.GetAllAsync();
-
-                return stores.AsEnumerable();
+                stores = (await this._storeRepository.GetAllAsync()).AsEnumerable<Store>();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return stores;
         }
+
         public async Task<StoreCategory> GeStoreCategoryByIdAsync(string storeId)
         {
-            if (storeId == null)
-                return null;
-            var cat = await _categoryRepository.GetByIdAsync(storeId);
-            return AutoMapper.Mapper.Map<StoreCategory>(cat);
+            return storeId == null ? (StoreCategory)null : Mapper.Map<StoreCategory>((object)await this._categoryRepository.GetByIdAsync(storeId));
         }
+
         public async Task<Store> GeStoreByIdAsync(string storeId)
         {
             if (storeId == null)
-                return null;
-            StoreCreatedEventHandler del = delegate
-            {
-                return true;
-            };
-            var store = await _storeRepository.GetByIdAsync(storeId);
-
-            return store;
+                return (Store)null;
+            StoreCreatedEventHandler createdEventHandler = (StoreCreatedEventHandler)((_param1, _param2) => true);
+            return await this._storeRepository.GetByIdAsync(storeId);
         }
+
         public async Task<IQueryable<Store>> GeStoresByUserName(string Name)
         {
             if (string.IsNullOrEmpty(Name))
                 throw new Exception();
-            else
-            {
-                var tObjs = _storeRepository.GetEntitiesAsync().Result;
-                var tObjsg = (await _storeRepository.GetEntitiesAsync()).AsQueryable()
-                    .Where(x => x.User.Email.Equals(Name));
-                return (IQueryable<Store>)tObjs;
-            }
+            IEnumerable<Store> tObjs = this._storeRepository.GetEntitiesAsync().Result;
+            (await this._storeRepository.GetEntitiesAsync()).AsQueryable<Store>()
+                .Where (x => x.User.Email.Equals(Name));
+            return (IQueryable<Store>)tObjs;
         }
-        #endregion
 
-
-        #region Updating Entities
-        public void UpdateStoreCategory(string Id, StoreCategory storeCategoryDto)
+        public void UpdateStoreCategory(string Id, StoreCategory storeCategory)
         {
-            var tObj = AutoMapper.Mapper.Map<StoreCategory>(storeCategoryDto);
-            //obj.storeCategoryId = Guid.Parse(Id);
-            //obj.storeCategoryName = categoryDto.storeCategoryName;
-            _categoryRepository.Update(tObj);
+            this._categoryRepository.Update(Mapper.Map<StoreCategory>((object)storeCategory));
         }
+
         public void UpdateStoreCategory(StoreCategory category)
         {
-            var obj = AutoMapper.Mapper.Map<StoreCategory>(category);
-            _categoryRepository.Update(obj);
+            this._categoryRepository.Update(Mapper.Map<StoreCategory>((object)category));
         }
-        #endregion
 
+        public void DeleteStore(Store store) => this._storeRepository.Delete(store);
 
-        //public Task<StoreDto> CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public async Task<IEnumerable<ProductDto>> GeStoresByLocalizationIdAsync(string storeId)
-        //{
-        //    return null;
-        //}
-        //Task<IEnumerable<StoreDto>> IStoreService.GeStoresByCategoryIdAsync(int catId, int pageNumber, int offSet)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<StoreDto> IStoreService.GeStoreByIdAsync(string storeId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<StoreCategoryDto> IStoreService.GeStoreCategoryByIdAsync(string catId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<StoreDto> IStoreService.GeStoresByLocationIdAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //Task<StoreCategoryDto> IStoreService.GeStoreCategoriesAsyncById(string Id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        
-        #region DELETE Objects
-        public void DeleteStore(Store store)
-        {
-            StoreRepository.Delete(store);
-        }
         public void DeleteStoreCategory(string categoryId)
         {
         }
+
         public void DeleteStoreCategory(StoreCategory storeCategoryDto)
         {
-            if (storeCategoryDto == null)
-            {
-                var storeCategory = AutoMapper.Mapper.Map<StoreCategory>(storeCategoryDto);
-                //_storeRepository.DeleteStoreCategory(storeCategory);
-                var category = StoreRepository.GetByIdAsync("kjkjk");
-                if (storeCategory == null)
-                {
-                    throw new NullReferenceException();
-                }
-                else
-                {
-                    StoreRepository.Delete(storeCategory);
-                }
-            }
+            if (storeCategoryDto != null)
+                return;
+            StoreCategory Id = Mapper.Map<StoreCategory>((object)storeCategoryDto);
+            this._storeRepository.GetByIdAsync("kjkjk");
+            if (Id == null)
+                throw new NullReferenceException();
+            this._storeRepository.Delete((object)Id);
         }
-        #endregion
 
-        #region Utilities Methods
         public async Task<string> getImageInformationAsync()
         {
-            using (var httpClient = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
-                var imageInformationUlr = new Uri("https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893");
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, imageInformationUlr);
-                var httpResponseMsg = await httpClient.SendAsync(httpRequest);
-                var content = await httpResponseMsg.Content.ReadAsStringAsync();//httpResponseMsg
-                var response = Newtonsoft.Json.JsonConvert.SerializeObject(httpResponseMsg);
-                var image = (string)response;
+                HttpResponseMessage httpResponseMsg = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, new Uri("https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893")));
+                string str = await httpResponseMsg.Content.ReadAsStringAsync();
+                JsonConvert.SerializeObject((object)httpResponseMsg);
+                httpResponseMsg = (HttpResponseMessage)null;
             }
-            //var data = new metaData { Id = "1232", Url = "https//allo.promo/images/92bw23fhj.jpg" };
-
-            var res = Newtonsoft.Json.JsonConvert.SerializeObject(new 
+            return JsonConvert.SerializeObject((object)new
             {
-                Id="2332", 
-                Url= "https//allo.promo/images/92bw23fhj.jpg" }
-            );
-            return res;
+                Id = "2332",
+                Url = "https//allo.promo/images/92bw23fhj.jpg"
+            });
         }
+
         private async Task<string> posStoreCategoryImage()
         {
-            string response = string.Empty;
-            //var jsonObj = "{" +
-            //    " \"data\": {" +
-            //    " \"id\": \"soLHmGdX\", " +
-            //    " \"url\": \"https://thumbsnap.com/soLHmGdX\", " +
-            //    " \"media\": \"https://thumbsnap.com/i/soLHmGdX.png\", " +
-            //    " \"thumb\": \"https://thumbsnap.com/t/soLHmGdX.jpg\", " +
-            //    " \"width\": 224, " +
-            //    " \"height\": 224 " +
-            //    "}," +
-            //    " \"success\": true, " +
-            //    "  \"status\": 200 " +
-            //" }";
-            //var jsonData = JObject.Parse(jsonObj);
-            string imageUrl = string.Empty;
-            using (var httpClient = new HttpClient())
+            string empty = string.Empty;
+            string str = string.Empty;
+            using (HttpClient httpClient = new HttpClient())
             {
-                var Url = new Uri
-                    ("https://thumbsnap.com/api/upload");
-                var httpRequest = new HttpRequestMessage(HttpMethod.Post, Url);
-                var result = await httpClient.PostAsync("https://thumbsnap.com/api/upload", null);
-                //if (result.IsSuccessStatusCode)
-                //{
-                    response = result.StatusCode.ToString();
-                //var obj = JsonConvert.DeserializeObject<ThumbyModel>(jsonObj);
-
-                //MediaApiResponseModel dataObj = obj.data;
-
-                var image = JsonConvert.SerializeObject(null); // dataObj);
-                //var media = JsonConvert.DeserializeObject<MediaApiResponseModel>(image);
-
-                imageUrl = null; // media.url;
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri("https://thumbsnap.com/api/upload"));
+                (await httpClient.PostAsync("https://thumbsnap.com/api/upload", (HttpContent)null)).StatusCode.ToString();
+                JsonConvert.SerializeObject((object)null);
+                str = (string)null;
             }
-            return imageUrl;
+            return str;
         }
+
         public async Task<string> getImageUrl()
         {
-
-            //MediaApiResponseModel data1 = new MediaApiResponseModel();
-
-            string img = string.Empty;
-            var response = await this.posStoreCategoryImage();
-            if (response == null)
-            {
-                throw new Exception();
-            }
-            else
-            {
-                img = response;
-            }
-            return img;
+            string empty = string.Empty;
+            return await this.posStoreCategoryImage() ?? throw new Exception();
         }
-        #endregion
 
-        #region Other
+        private ApplicationUser getCurrentUtili()
+        {
+            return this._userManager.GetUserAsync(this._httpContextAccessor.HttpContext.User).Result;
+        }
+
         public T GetJsonInstance<T>(string propertyName, string json)
         {
-            using (var stringReader = new StringReader(json))
+            using (StringReader stringReader = new StringReader(json))
             {
-                using (var jsonReader = new JsonTextReader(stringReader))
+                using (JsonTextReader jsonTextReader = new JsonTextReader((TextReader)stringReader))
                 {
-                    while (jsonReader.Read())
+                    while (((JsonReader)jsonTextReader).Read())
                     {
-                        if (jsonReader.TokenType == JsonToken.PropertyName
-                            && (string)jsonReader.Value == propertyName)
+                        if (jsonTextReader.TokenType.Equals(4) && (string)((JsonReader)jsonTextReader).Value == propertyName)
                         {
-                            jsonReader.Read();
-                            var serializer = new JsonSerializer();
-                            return serializer.Deserialize<T>(jsonReader);
+                            ((JsonReader)jsonTextReader).Read();
+                            return new JsonSerializer().Deserialize<T>((JsonReader)jsonTextReader);
                         }
                     }
                     return default(T);
@@ -613,133 +285,70 @@ namespace allopromo.Core.Services
             }
         }
 
-        Task<IEnumerable<Store>> IStoreService.GetStores()
+        public async Task<IEnumerable<Store>> GetStoresByCategoryNameAsync(
+          string categoryName,
+          int pageNumber,
+          int offSet)
+        {
+            IEnumerable<Store> storesAsync = await this.GetStoresAsync();
+            int count = 3;
+            Func<Store, bool> predicate = (Func<Store, bool>)(x => x.Category.storeCategoryName.Equals(categoryName.ToString()));
+            IEnumerable<Store> source = storesAsync.Where<Store>(predicate);
+            source.Skip<Store>(offSet - 1).Take<Store>(count).AsQueryable<Store>();
+            return source;
+        }
+        public async Task<IEnumerable<Store>> GetStoresAsync()
+        {
+            List<Store> storeList1 = new List<Store>();
+            List<ApplicationUser> users = await this._userManager.Users.ToListAsync<ApplicationUser>();
+            List<Store> storesObj = await this._storeRepository.GetAllAsync();
+            List<StoreCategory> categories = await this._categoryRepository.GetAllAsync();
+            List<City> allAsync = await this._citiesRepository.GetAllAsync();
+            return storeList1;
+
+        }
+        public Task<Store> GetStoreByIdAsync(string storeId) => throw new NotImplementedException();
+
+        public Task<StoreCategory> GetStoreCategoryByIdAsync(string catId)
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Store>> IStoreService.GetStores(string localizationId)
+        public async Task<IQueryable<Store>> GetStoresByUserName(string userName)
+        {
+            if (userName == null)
+                return (IQueryable<Store>)null;
+            return (await this._storeRepository.GetEntitiesAsync()).AsQueryable<Store>()
+                .Where(x => x.User.UserName.Equals(userName));
+        }
+
+        public Task<IEnumerable<Store>> GetStores(string localizationId)
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Store>> IStoreService.GetStores(string categoryId, string localizationId, string sortingOrder)
+        public Task<IEnumerable<Store>> GetStores(string categoryId, string localizationId, string sortingOrder)
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Store>> IStoreService.GetStoresByCategoryIdAsync(int catId, int pageNumber, int offSet)
+        public Task<IEnumerable<StoreCategory>> GetStoreCategoriesAsync()
         {
             throw new NotImplementedException();
         }
 
-        Task<Store> IStoreService.GetStoreByIdAsync(string storeId)
+        public Task<StoreCategory> GetStoreCategoriesAsyncById(string Id)
         {
             throw new NotImplementedException();
         }
-
-        Task<StoreCategory> IStoreService.GetStoreCategoryByIdAsync(string catId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<StoreCategory>> IStoreService.GetStoreCategoriesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<StoreCategory> IStoreService.GetStoreCategoriesAsyncById(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IQueryable<Store>> IStoreService.GetStoresByUserName(string userName)
-        {
-            throw new NotImplementedException();
-        }
-        //public Task<StoreDto> CreateStore(StoreDto store)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<StoreDto> IStoreService.CreateStore(StoreDto store, StoreCategoryDto category, UserDto user)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        //Task<StoreDto> IStoreService.CreateStore(StoreDto store)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        //Task<StoreDto> IStoreService.CreateStore(string storeDtoName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        /*Task<StoreCategoryDto> IStoreService.CreateStoreCategoryAsync(StoreCategoryDto storeCategoryName)
-        {
-            throw new NotImplementedException();
-        }*/
-
-
-        //void IStoreService.UpdateStoreCategory(string Id, StoreCategoryDto categoryDto)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IStoreService.DeleteStoreCategory(StoreCategoryDto storeCategoryDto)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IStoreService.DeleteStoreCategory(string categoryId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<string> IStoreService.getImageUrl()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<string> IStoreService.getImageInformationAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
-        #endregion
     }
-    
-    //public class OrderPlacedEventArgs : EventArgs
-    //{
-    //}
+
 }
 
 
-/* 1. table jointure
- * 2. re architecture
- * 3. I QUery Patterns
- */
-
-// ? Builder !
-
-//public delegate bool StoreCreatedEventHandler(object source, EventArgs e);
-//What are Service Layers in Practice anyway ?
-//public UnitOfWork _unitOfWork { get; set; }
-// IOC by DIP
-//IGenericsRepository _repo = GenericRepositoryFactory.GetRepository();
-
-
-
-
-
-
-
-
-
-
+//public class OrderPlacedEventArgs : EventArgs
+//{
+//}
 
 
 /*

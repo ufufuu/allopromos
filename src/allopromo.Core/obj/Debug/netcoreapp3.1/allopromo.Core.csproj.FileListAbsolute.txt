@@ -13,3 +13,6 @@ C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\obj\Debug\netcoreapp3.1
 C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\obj\Debug\netcoreapp3.1\allopromo.Core.csproj.CoreCompileInputs.cache
 C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\obj\Debug\netcoreapp3.1\allopromo.Core.dll
 C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\obj\Debug\netcoreapp3.1\allopromo.Core.pdb
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\bin\Debug\netcoreapp3.1\allopromo.Core.deps.json
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\bin\Debug\netcoreapp3.1\allopromo.Core.dll
+C:\Users\MonPC\source\repos\allopromo\src\allopromo.Core\bin\Debug\netcoreapp3.1\allopromo.Core.pdb

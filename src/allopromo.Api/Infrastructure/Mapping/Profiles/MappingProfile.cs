@@ -1,5 +1,5 @@
-﻿using allopromo.Api.ViewModel.ViewModels;
-using allopromo.Core.Application.Dto;
+﻿using allopromo.Api.DTOs;
+using allopromo.Api.ViewModel.ViewModels;
 using allopromo.Core.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -23,16 +23,16 @@ namespace allopromo.Api.Infrastructure.Mapper.Profiles
             CreateMap<RegisterViewModel, IdentityUser>()
                 .ReverseMap();
 
-            CreateMap<tDepartment, DepartmentDto>()
+            CreateMap<Department, DepartmentDto>()
                 .ReverseMap();
-            CreateMap<DepartmentDto, tDepartment>()
+            CreateMap<DepartmentDto, Department>()
                 .ReverseMap();
-            CreateMap<tDepartment, DepartmentDto>()
+            CreateMap<Department, DepartmentDto>()
                 .ReverseMap();
-            CreateMap<DepartmentDto, tDepartment>()
+            CreateMap<DepartmentDto, Department>()
                 .ReverseMap();
-            CreateMap<tProduct, ProductDto>().ReverseMap();
-            CreateMap<ProductDto, tProduct>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductDto, Product>().ReverseMap();
         }
     }
 }

@@ -19,21 +19,19 @@ namespace allopromo.Core.Services
 {   
     public class MerchantService : IMerchantService
     {
-        public event StoreCreatedEventHandler storeCreated;
-
-
         #region Constantes
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         #endregion
-
 
         #region Properties
 
         //public event StoreCreatedEventHandler StoreCreated;
 
         public Action<string> _StoreCreated;
-        public IMembershipService _accountService { get; set; }
+
+
+        //public IMembershipService _accountService { get; set; }
         public IUserService _userService { get; set; }
 
         public UserManager<IdentityUser> _userManager { get; set; }
@@ -51,7 +49,7 @@ namespace allopromo.Core.Services
         private IProductService _productService { get; set; }
 
         //private IRepository<tStore> StoreRepository;
-        private ILocalisationService _localisationService { get; set; }
+        private ILocationService _locationService { get; set; }
         public INotifyService _notificationService { get; set; }
 
         #endregion

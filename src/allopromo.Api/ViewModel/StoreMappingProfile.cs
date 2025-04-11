@@ -1,9 +1,7 @@
 ﻿
-
 //using allopromo.Core.Application.Dto;
 //using allopromo.Api.DTOs;
-
-using allopromo.Core.Application.Dto;
+using allopromo.Api.DTOs;
 using allopromo.Core.Entities;
 using AutoMapper;
 using System;
@@ -16,9 +14,9 @@ namespace allopromo.Api.Model
     {
         public StoreMappingProfile()
         {
-            CreateMap<StoreDto, tStore>()
+            CreateMap<StoreDto, Store>()
                 .ForMember(vm => vm.storeId, map => 
-                map.MapFrom(m => m.storeName));
+                map.MapFrom(m => m.StoreName));
         }
     }
 }

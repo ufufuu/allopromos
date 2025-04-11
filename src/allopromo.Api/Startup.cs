@@ -6,6 +6,7 @@
 
 using allopromo.Api.DTOs;
 using allopromo.Api.Infrastructure.Abstract;
+using allopromo.Api.Infrastructure.Mapping.Profiles;
 using allopromo.Api.Infrastructure.Logging;
 using allopromo.Api.Infrastructure.Mapping;
 using allopromo.Api.Infrastructure.Mapping.Profiles;
@@ -15,6 +16,7 @@ using allopromo.Core.Domain;
 using allopromo.Core.Entities;
 using allopromo.Core.Helpers;
 using allopromo.Core.Infrastructure.Abstract;
+using allopromo.Core.Interfaces;
 using allopromo.Core.Model;
 using allopromo.Core.Services;
 using allopromo.Core.Services.Base;
@@ -104,7 +106,8 @@ namespace allopromo.Api
                 mc.AddProfile<StoreCategoryProfile>();
                 mc.AddProfile<CityProfile>();
                 mc.AddProfile<ProductCategoryProfile>();
-                mc.ValidateInlineMaps = new bool?(false);
+
+                //mc.ValidateInlineMaps = new bool?(false);
             })).CreateMapper();
             services.AddSingleton<IMapper>(mapper);
             AutoMapperConfig.Configure();
@@ -151,22 +154,22 @@ namespace allopromo.Api
             }));
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<IStoreService, StoreService>();
-            services.AddScoped<ILocalisationService, LocalisationService>();
+            services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IBaseService<DepartmentDto>, BaseService<DepartmentDto>>();
             services.AddScoped<IRepository<DepartmentDto>, TRepository<DepartmentDto>>();
             services.AddScoped<IDepartmentService, DepartmentService>();
-            services.AddScoped<INotifyService, NotifyService>();
+            services.AddScoped<INotifyService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IVendorService, VendorService>();
-            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICatalogService, CatalogService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
-            services.AddScoped<IPermissionService, PermissionService>();
+            
             services.AddScoped<IValidationService, ValidationService>();
-            services.AddScoped<IMembershipService, MembershipService>();
+            
             services.AddScoped<IImageUploadService, ImageUploadService>();
-            services.AddScoped<IMediaService, ImageUploadMediaService>();
+            //services.AddScoped<IMediaService, ImageUploadService>();
             services.AddScoped<IRepository<Store>, TRepository<Store>>();
             services.AddScoped<IRepository<StoreCategory>, TRepository<StoreCategory>>();
             services.AddScoped<IRepository<Product>, TRepository<Product>>();
@@ -174,16 +177,21 @@ namespace allopromo.Api
             services.AddScoped<IRepository<City>, TRepository<City>>();
             services.AddScoped<IRepository<Country>, TRepository<Country>>();
             services.AddScoped<IRepository<Department>, TRepository<Department>>();
-            services.AddScoped<IValidator<CreateUserDto>, CreateUserValidator>();
+
+            //services.AddScoped<IValidator<CreateUserDto>, CreateUserValidator>();
+
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<EmailConfiguration>(this.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
             services.AddSignalRCore();
             services.AddSignalR();
-            ServiceCollectionExtensions.AddMediatR(services, (Action<MediatRServiceConfiguration>)(cfg => cfg.RegisterServicesFromAssemblies(new Assembly[1]
-           {
-        typeof (Program).Assembly
-           })));
+            /*
+            ServiceCollectionExtensions.AddMediatR(services, (Action<MediatRServiceConfiguration>)
+                (cfg => cfg.RegisterServicesFromAssemblies(new Assembly[1]
+                {
+                    typeof (Program).Assembly
+                })));*/
+
             services.AddCors((Action<CorsOptions>)(policyBuilder => policyBuilder.AddDefaultPolicy((Action<CorsPolicyBuilder>)(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader()))));
             FluentEmailServiceCollectionExtensions.AddFluentEmail(services, "test-email@allopromo.test", "");
             services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>((IAsyncPolicy<HttpResponseMessage>)AsyncRetryTResultSyntax.WaitAndRetryAsync<HttpResponseMessage>(Policy.HandleResult<HttpResponseMessage>((Func<HttpResponseMessage, bool>)(r => !r.IsSuccessStatusCode)), 3, (Func<int, TimeSpan>)(retryAttemps => TimeSpan.FromSeconds((double)retryAttemps))));

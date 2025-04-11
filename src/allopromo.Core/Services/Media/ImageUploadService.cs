@@ -1,10 +1,15 @@
-﻿using System;
+﻿using allopromo.Core.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace allopromo.Core.Services.Media
 {
-    public class ImageUploadMediaService : IMediaService
+    public class ImageUploadService : IImageUploadService
     {
         private const
 #nullable disable
@@ -62,7 +67,7 @@ namespace allopromo.Core.Services.Media
 
         public async Task<string> CreateAttachmentAsync(string fileName)
         {
-            HttpClient httpClient = ImageUploadMediaService.getHttpClient();
+            HttpClient httpClient = ImageUploadService.getHttpClient();
             MultipartFormDataContent content = new MultipartFormDataContent()
       {
         {

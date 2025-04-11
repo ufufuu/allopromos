@@ -5,8 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.DTOs
 {
-
-    public class UserDto33
+    public class UserDto
     {
         public string UserName { get; set; }
 
@@ -24,7 +23,7 @@ namespace allopromo.Api.DTOs
 
         public IList<RoleDto> UserRoles { get; set; }
     }
-    public class UserDto
+    public class UserDto45
     {
         public string userName { get; set; }
         public string userEmail { get; set; }
@@ -36,14 +35,9 @@ namespace allopromo.Api.DTOs
 
         //public List<RoleDto> Roles { get; set; }
         //public string UserRoles { get; set; }
-
-
-        public UserDto()
-        {}
+        //public UserDto45()
+        //{}
     }
-
-
-    public class 
 
     //public class UserConvertor
     //{

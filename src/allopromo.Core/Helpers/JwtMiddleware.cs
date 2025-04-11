@@ -1,6 +1,14 @@
-﻿using System;
+﻿using allopromo.Core.Abstract;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace allopromo.Core.Helpers
 {
@@ -17,7 +25,7 @@ namespace allopromo.Core.Helpers
             this._appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context, allopromo.Core.Abstract.IUserService userService)
         {
             string str = context.Request.Headers["Authorization"].FirstOrDefault<string>();
             string token = str != null ? ((IEnumerable<string>)str.Split("")).Last<string>() : (string)null;
@@ -39,7 +47,7 @@ namespace allopromo.Core.Helpers
                 validationParameters.ValidateIssuer = false;
                 validationParameters.ValidateAudience = false;
                 validationParameters.ClockSkew = TimeSpan.Zero;
-                SecurityToken securityToken2;
+                SecurityToken securityToken2 =null;
                 ref SecurityToken local = ref securityToken2;
                 securityTokenHandler.ValidateToken(securityToken1, validationParameters, out local);
                 string userId = ((JwtSecurityToken)securityToken2).Claims.First<Claim>((Func<Claim, bool>)(x => x.Type == "id")).Value;

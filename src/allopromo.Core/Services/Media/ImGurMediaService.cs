@@ -1,6 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace allopromo.Core.Services.Media
 {
@@ -17,7 +23,9 @@ namespace allopromo.Core.Services.Media
 
         public async Task<string> SaveProductImages(ICollection<IFormFile> imagesFiles)
         {
-            ImgurClient imgurClient = new ImgurClient("9b56b331436f6b4", "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa");
+            //ImgurClient imgurClient = new ImgurClient("9b56b331436f6b4", "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa");
+
+            String imgurCLient = null;
             HttpClient httpClient = new HttpClient();
             using (IEnumerator<IFormFile> enumerator = imagesFiles.GetEnumerator())
             {
@@ -62,7 +70,7 @@ namespace allopromo.Core.Services.Media
 
         private async Task<bool> ValidateImageFilesSize(string files)
         {
-            bool flag;
+            bool flag =true;
             return flag;
         }
     }

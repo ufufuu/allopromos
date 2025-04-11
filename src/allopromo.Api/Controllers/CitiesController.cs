@@ -21,13 +21,13 @@ namespace allopromo.Api.Controllers
         private readonly
 #nullable disable
     IConfiguration _config;
-        private readonly ILocalisationService _localisationService;
+        private readonly ILocationService _localisationService;
         private IMapper _mapper;
 
         public CitiesController(
           IConfiguration config,
           IMapper mapper,
-          ILocalisationService localizeService)
+          ILocationService localizeService)
         {
             this._config = config;
             this._localisationService = localizeService;

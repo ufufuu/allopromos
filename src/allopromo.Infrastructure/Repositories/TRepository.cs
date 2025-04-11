@@ -131,6 +131,11 @@ namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repo
         public void Delete(T obj)
         {
         }
+
+        public Task Add(T obj, string imageUrl)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -138,8 +143,6 @@ namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repo
     //Task<IEnumerable<ProductDto>> IRepository<T>.GetProductsByStoreIdAsync(string Id)
     //void IRepository<T>.DeleteStoreCategory(T obj)
     #endregion
-}
-
 }
 
 
