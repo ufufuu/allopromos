@@ -9,10 +9,11 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace allopromo.Api.Infrastructure.Mapper.Profiles
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
+            /*
             CreateMap<IdentityUser, RegisterViewModel>()
                 .ReverseMap();
             CreateMap<RegisterViewModel, IdentityUser>()
@@ -33,6 +34,7 @@ namespace allopromo.Api.Infrastructure.Mapper.Profiles
                 .ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<ProductDto, Product>().ReverseMap();
+            */
         }
     }
 }

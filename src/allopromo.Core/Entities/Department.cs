@@ -6,11 +6,14 @@ using System.Text;
 namespace allopromo.Core.Entities
 {
     [Table("Departments")]
-    public class Department //: allopromo.Core.Entities.Base.BaseEntity
+    public class Department
     {
         [Key]
         [Column("departmentId")]
-        public string departmentId { get; set; }
+        public
+#nullable disable
+    string departmentId
+        { get; set; }
 
         [Column("departmentName")]
         public string departmentName { get; set; }
@@ -22,8 +25,15 @@ namespace allopromo.Core.Entities
         public DateTime createdDate { get; set; }
 
         [Column("updatedDate")]
-        public DateTime? updatedDate { get; set;}
+        public DateTime? updatedDate { get; set; }
 
-        public virtual ICollection<StoreCategory>? Categories { get; set; }
+        public virtual
+#nullable enable
+    ICollection<
+#nullable disable
+    StoreCategory>
+#nullable enable
+    ? Categories
+        { get; set; }
     }
 }

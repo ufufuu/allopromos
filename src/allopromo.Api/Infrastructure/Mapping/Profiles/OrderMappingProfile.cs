@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using allopromo.Api.DTOs;
+using allopromo.Core.Entities;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +12,8 @@ namespace allopromo.Api.Infrastructure.Mapping.Profiles
     {
         public OrderMappingProfile()
         {
-
-
-            /*
-            CreateMap<OrderDto, Order>().ForMember<int>((Expression<Func<Order, int>>)(vm => vm.orderDate), (Action<IMemberConfigurationExpression<OrderDto, Order, int>>)(map => map.MapFrom<string>((Expression<Func<OrderDto, string>>)(m => m.OrderId))));
-
-            */
+            CreateMap<OrderDto, Order>()
+                .ForMember(vm => vm.orderDate , map => map.MapFrom (m => m.OrderId));
         }
     }
 }

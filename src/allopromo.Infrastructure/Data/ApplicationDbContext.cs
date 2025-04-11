@@ -60,7 +60,7 @@ namespace allopromo.Infrastructure.Data
                 {
                     storeCategoryId = c.storeCategoryId
                 }));
-                storesCategory.HasMany<Store>((Expression<Func<StoreCategory, IEnumerable<Store>>>)(s => s.stores)).WithOne((Expression<Func<Store, StoreCategory>>)(s => s.Category));
+                storesCategory.HasMany<Store>((Expression<Func<StoreCategory, IEnumerable<Store>>>)(s => s.Stores)).WithOne((Expression<Func<Store, StoreCategory>>)(s => s.Category));
             }));
             modelBuilder.Entity<ProductCategory>((Action<EntityTypeBuilder<ProductCategory>>)(products => products.HasKey((Expression<Func<ProductCategory, object>>)(p => new
             {

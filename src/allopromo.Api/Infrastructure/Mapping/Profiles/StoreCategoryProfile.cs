@@ -13,8 +13,18 @@ namespace allopromo.Api.Infrastructure.Mapping.Profiles
     {
         public StoreCategoryProfile()
         {
-            //this.CreateMap<StoreCategory, StoreCategoryDto>().ForMember<string>((Expression<Func<StoreCategoryDto, string>>)(x => x.DepartmentName), (Action<IMemberConfigurationExpression<StoreCategory, StoreCategoryDto, string>>)(m => m.Ignore()));
-            //this.CreateMap<StoreCategoryDto, StoreCategory>().ForMember<Guid>((Expression<Func<StoreCategory, Guid>>)(dest => dest.storeCategoryId), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, Guid>>)(m => m.Ignore())).ForMember<string>((Expression<Func<StoreCategory, string>>)(dest => dest.storeCategoryName), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, string>>)(m => m.Ignore())).ForMember<DateTime>((Expression<Func<StoreCategory, DateTime>>)(dest => dest.created), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, DateTime>>)(m => m.Ignore())).ForMember<DateTime?>((Expression<Func<StoreCategory, DateTime?>>)(dest => dest.expires), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, DateTime?>>)(m => m.Ignore())).ForMember<bool>((Expression<Func<StoreCategory, bool>>)(dest => dest.active), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, bool>>)(m => m.Ignore())).ForMember<ICollection<Store>>((Expression<Func<StoreCategory, ICollection<Store>>>)(dest => dest.Stores), (Action<IMemberConfigurationExpression<StoreCategoryDto, StoreCategory, ICollection<Store>>>)(m => m.Ignore())).ForPath<string>((Expression<Func<StoreCategory, string>>)(dest => dest.Department.departmentName), (Action<IPathConfigurationExpression<StoreCategoryDto, StoreCategory, string>>)(m => m.MapFrom<string>((Expression<Func<StoreCategoryDto, string>>)(src => src.DepartmentName))));
+            CreateMap<StoreCategory, StoreCategoryDto>()
+                .ForMember(x => x.DepartmentName, m => m.Ignore());
+            
+            
+            CreateMap<StoreCategoryDto, StoreCategory>()
+                .ForMember (src => src.storeCategoryId, m=> m.Ignore())
+                .ForMember ( dest => dest.storeCategoryName , m => m.Ignore())
+                .ForMember (dest => dest.created, m => m.Ignore())
+                .ForMember (dest => dest.expires, m => m.Ignore())
+                .ForMember (dest => dest.active, m => m.Ignore())
+                .ForMember (dest => dest.Stores, m => m.Ignore())
+                .ForPath (dest => dest.Department.departmentName, m => m.MapFrom(src => src.DepartmentName));
         }
     }
 }

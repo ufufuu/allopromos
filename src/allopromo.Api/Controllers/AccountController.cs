@@ -38,10 +38,10 @@ namespace allopromo.Api.Controllers
           RoleManager<IdentityRole> roleManager,
           IMapper mapper)
         {
-            this._userService = userService;
-            this._userManager = userManager;
-            this._roleManager = roleManager;
-            this._mapper = mapper;
+            _userService = userService;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _mapper = mapper;
         }
 
         [ActivatorUtilitiesConstructor]
@@ -54,21 +54,21 @@ namespace allopromo.Api.Controllers
           ILogger<AccountController> logger,
           IMapper Mapper)
         {
-            this._userService = userService;
-            this._userManager = userManager;
-            this._roleManager = roleManager;
-            this._signInManager = signInManager;
-            this._mapper = Mapper;
+            _userService = userService;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _signInManager = signInManager;
+            _mapper = Mapper;
         }
 
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetUsers()
         {
-            AccountController accountController = this;
-            List<ApplicationUser> usersWithRolesAsync = await accountController._userService.GetUsersWithRolesAsync();
-            List<UserDto> userDtoList = accountController._mapper.Map<List<UserDto>>((object)usersWithRolesAsync);
-            return (IActionResult)accountController.Ok((object)userDtoList);
+            var users = await _userService.GetUsersWithRolesAsync();
+            List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
+            var userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
+            return Ok(userDtoList);
         }
 
         [HttpPost]
@@ -76,15 +76,14 @@ namespace allopromo.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> PasswordRecovery(string telephoneNumber, string userName)
         {
-            AccountController accountController = this;
             if (telephoneNumber != null)
             {
-                ApplicationUser byNameAsync = await accountController._userManager.FindByNameAsync(userName);
+                ApplicationUser byNameAsync = await _userManager.FindByNameAsync(userName);
                 if (byNameAsync == null)
-                    return (IActionResult)accountController.BadRequest();
+                    return BadRequest();
                 int num = byNameAsync.PhoneNumber == telephoneNumber ? 1 : 0;
             }
-            return (IActionResult)accountController.NotFound();
+            return NotFound();
         }
 
         [HttpPut]
@@ -92,10 +91,9 @@ namespace allopromo.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ChangePassword(UpdateUserDto udpateUserDto)
         {
-            AccountController accountController = this;
-            List<ApplicationUser> usersWithRolesAsync = await accountController._userService.GetUsersWithRolesAsync();
-            List<UserDto> userDtoList = accountController._mapper.Map<List<UserDto>>((object)usersWithRolesAsync);
-            return (IActionResult)accountController.Ok((object)userDtoList);
+            List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
+            List<UserDto> userDtoList = _mapper.Map<List<UserDto>>((object)usersWithRolesAsync);
+            return Ok(userDtoList);
         }
 
         [HttpPost]
@@ -103,30 +101,31 @@ namespace allopromo.Api.Controllers
         [Route("register")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
         {
-            AccountController accountController = this;
+            
             if (dto == null || string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Password))
-                return (IActionResult)accountController.BadRequest(accountController.ModelState);
-            if (await accountController._userManager.FindByEmailAsync(dto.UserName) != null)
-                return (IActionResult)accountController.StatusCode(500, (object)new allopromo.Api.Model.Response()
+                return BadRequest(ModelState);
+
+            if (await _userManager.FindByEmailAsync(dto.UserName) != null)
+                return StatusCode(500, (object)new allopromo.Api.Model.Response()
                 {
                     Status = "Error",
                     Message = "User Already Exist!"
                 });
-            if (!accountController.ModelState.IsValid)
-                return (IActionResult)accountController.BadRequest();
-            ApplicationUser user = accountController._mapper.Map<ApplicationUser>((object)dto);
-            if ((await accountController._userManager.CreateAsync(user, dto.Password)).Succeeded)
+            if (ModelState.IsValid)
+                return BadRequest();
+            ApplicationUser user = _mapper.Map<ApplicationUser>(dto);
+            if ((await _userManager.CreateAsync(user, dto.Password)).Succeeded)
             {
-                accountController._roleManager.Roles.Where<IdentityRole>((Expression<Func<IdentityRole, bool>>)(x => x.Name == dto.roleName));
-                IdentityResult roleAsync = await accountController._userManager.AddToRoleAsync(user, dto.roleName);
+                _roleManager.Roles.Where<IdentityRole>((Expression<Func<IdentityRole, bool>>)(x => x.Name == dto.roleName));
+                IdentityResult roleAsync = await _userManager.AddToRoleAsync(user, dto.roleName);
                 allopromo.Api.Model.Response response1 = new allopromo.Api.Model.Response();
                 response1.Status = "Success";
                 response1.Message = "User Created Successfully!";
                 allopromo.Api.Model.Response response2 = response1;
                 response2.jwtToken = await _userService.GenerateJwtToken(user);
-                return (IActionResult)accountController.Ok((object)response1);
+                return Ok(response1);
             }
-            return (IActionResult)accountController.StatusCode(500, (object)new allopromo.Api.Model.Response()
+            return StatusCode(500, (object)new allopromo.Api.Model.Response()
             {
                 Status = "Error",
                 Message = "User Creation Failed, Check user Details"
@@ -139,10 +138,9 @@ namespace allopromo.Api.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Logout()
         {
-            AccountController accountController = this;
-            await accountController._signInManager.SignOutAsync();
-            accountController.HttpContext.Session.Clear();
-            return (IActionResult)accountController.Ok();
+            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
+            return Ok();
         }
 
         [HttpPost]
@@ -150,25 +148,25 @@ namespace allopromo.Api.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginUserDto dto)
         {
-            AccountController accountController = this;
+            
             if (dto == null)
                 throw new Exception();
-            ApplicationUser user = await accountController._userManager.FindByEmailAsync(dto.UserName);
+            ApplicationUser user = await _userManager.FindByEmailAsync(dto.UserName);
             if (user == null)
-                return (IActionResult)accountController.Unauthorized();
-            if (!accountController._signInManager.UserManager.CheckPasswordAsync(user, dto.Password).Result)
-                return (IActionResult)accountController.NotFound((object)new
+                return Unauthorized();
+            if (!_signInManager.UserManager.CheckPasswordAsync(user, dto.Password).Result)
+                return NotFound(new
                 {
                     status = " Failed ",
                     message = " User name or Pwd UUY incorrect "
                 });
-            SignInManager<ApplicationUser> signInManager = accountController._signInManager;
+            SignInManager<ApplicationUser> signInManager = _signInManager;
             ApplicationUser user1 = new ApplicationUser();
             user1.UserName = dto.UserName;
             await signInManager.SignInAsync(user1, true);
-            UserDto userDto = accountController._mapper.Map<UserDto>((object)user);
+            UserDto userDto = _mapper.Map<UserDto>((object)user);
             string jwtToken = await _userService.GenerateJwtToken(user);
-            return (IActionResult)accountController.Ok((object)new
+            return Ok(new
             {
                 user = userDto,
                 jwtToken = jwtToken
@@ -179,26 +177,26 @@ namespace allopromo.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin([FromBody] CreateUserDto dto)
         {
-            AccountController accountController = this;
-            if (await accountController._userManager.FindByNameAsync(dto.UserName) != null)
-                return (IActionResult)accountController.StatusCode(500, (object)new allopromo.Api.Model.Response()
+            
+            if (await _userManager.FindByNameAsync(dto.UserName) != null)
+                return StatusCode(500, (object)new allopromo.Api.Model.Response()
                 {
                     Status = "Error",
                     Message = "user Already Exists"
                 });
-            ApplicationUser user = accountController._mapper.Map<ApplicationUser>((object)dto.UserName);
-            if (!(await accountController._userManager.CreateAsync(user, dto.Password)).Succeeded)
-                return (IActionResult)accountController.StatusCode(500, (object)new allopromo.Api.Model.Response()
+            ApplicationUser user = _mapper.Map<ApplicationUser>((object)dto.UserName);
+            if (!(await _userManager.CreateAsync(user, dto.Password)).Succeeded)
+                return StatusCode(500, (object)new allopromo.Api.Model.Response()
                 {
                     Status = "Error",
                     Message = "User already Exist"
                 });
-            if (await accountController._roleManager.RoleExistsAsync(dto.roleName))
+            if (await _roleManager.RoleExistsAsync(dto.roleName))
             {
-                IdentityRole byIdAsync = await accountController._roleManager.FindByIdAsync("");
-                IdentityResult roleAsync = await accountController._userManager.AddToRoleAsync(user, byIdAsync.Name);
+                IdentityRole byIdAsync = await _roleManager.FindByIdAsync("");
+                IdentityResult roleAsync = await _userManager.AddToRoleAsync(user, byIdAsync.Name);
             }
-            return (IActionResult)accountController.Ok((object)new allopromo.Api.Model.Response()
+            return Ok(new allopromo.Api.Model.Response()
             {
                 Status = "Success",
                 Message = "Admin User Created Successfully!"
@@ -210,11 +208,10 @@ namespace allopromo.Api.Controllers
         [Route("current-user")]
         public async Task<IActionResult> GetCurrentUserName()
         {
-            AccountController accountController = this;
             ApplicationUser currentUser = await _userService.GetCurrentUser();
-            ApplicationUser byNameAsync = await accountController._userManager.FindByNameAsync(currentUser.UserName);
-            UserDto userDto = accountController._mapper.Map<UserDto>((object)byNameAsync);
-            return (IActionResult)accountController.Ok((object)userDto);
+            ApplicationUser byNameAsync = await _userManager.FindByNameAsync(currentUser.UserName);
+            UserDto userDto = _mapper.Map<UserDto>((object)byNameAsync);
+            return Ok(userDto);
         }
 
         [HttpPut]
@@ -222,15 +219,14 @@ namespace allopromo.Api.Controllers
         [Route("update-user")]
         public async Task<IActionResult> UpdateUser(string Id, [FromBody] UserDto updateUserDto)
         {
-            AccountController accountController = this;
-            if (await accountController._userManager.FindByEmailAsync(updateUserDto.UserName) == null)
-                return (IActionResult)accountController.NotFound((object)"User Not Found");
-            ApplicationUser byNameAsync = await accountController._userManager.FindByNameAsync(updateUserDto.UserName);
+            if (await _userManager.FindByEmailAsync(updateUserDto.UserName) == null)
+                return NotFound("User Not Found");
+            ApplicationUser byNameAsync = await _userManager.FindByNameAsync(updateUserDto.UserName);
             byNameAsync.UserName = updateUserDto.UserName;
             byNameAsync.Email = updateUserDto.Email;
             byNameAsync.PhoneNumber = updateUserDto.PhoneNumber;
-            UserDto userDto = accountController._mapper.Map<UserDto>((object)byNameAsync);
-            return (IActionResult)accountController.Ok((object)userDto);
+            UserDto userDto = _mapper.Map<UserDto>((object)byNameAsync);
+            return Ok(userDto);
         }
 
         [HttpDelete]
@@ -238,36 +234,34 @@ namespace allopromo.Api.Controllers
         [Route("detele-user/{id}")]
         public async Task<IActionResult> DeleteCurrenUser(UserDto model)
         {
-            AccountController accountController = this;
-            ApplicationUser currentUser = await accountController._userService.GetCurrentUser();
-            ApplicationUser byNameAsync = await accountController._userManager.FindByNameAsync(currentUser.UserName);
-            UserDto userDto = accountController._mapper.Map<UserDto>((object)byNameAsync);
-            return (IActionResult)accountController.Ok((object)userDto);
+            ApplicationUser currentUser = await _userService.GetCurrentUser();
+            ApplicationUser byNameAsync = await _userManager.FindByNameAsync(currentUser.UserName);
+            UserDto userDto = _mapper.Map<UserDto>((object)byNameAsync);
+            return Ok(userDto);
         }
 
         [HttpPost]
         [Route("{adressId}")]
-        public async Task<IActionResult> AddAdress() => (IActionResult)this.Ok();
+        public async Task<IActionResult> AddAdress() => Ok();
 
         [HttpDelete]
         [Route("{adressId}")]
-        public async Task<IActionResult> AdressDelete() => (IActionResult)this.Ok();
+        public async Task<IActionResult> AdressDelete() => Ok();
 
         [HttpPut]
         [Route("{adressId}")]
-        public async Task<IActionResult> AdressEdit() => (IActionResult)this.Ok();
+        public async Task<IActionResult> AdressEdit() => Ok();
 
         [HttpPatch]
-        public async Task<IActionResult> ConfirmCurrentLocalization() => (IActionResult)this.Ok();
+        public async Task<IActionResult> ConfirmCurrentLocalization() => Ok();
 
         [HttpGet]
         [Route("CheckUserName")]
         public async Task<IActionResult> CheckUserAvailability()
         {
-            AccountController accountController = this;
-            List<ApplicationUser> usersWithRolesAsync = await accountController._userService.GetUsersWithRolesAsync();
-            List<UserDto> userDtoList = accountController._mapper.Map<List<UserDto>>((object)usersWithRolesAsync);
-            return (IActionResult)accountController.Ok((object)userDtoList);
+            List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
+            List<UserDto> userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
+            return Ok(userDtoList);
         }
     }
 }

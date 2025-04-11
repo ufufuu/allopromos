@@ -7,13 +7,8 @@ namespace allopromo.Core.Entities
     {
         [Key]
         public int cityId { get; set; }
+
         public string cityName { get; set; }
-        public string cityGpsLongitude { get; set; }
-        public string cityGpsLatitude { get; set; }
-
-
-        //public int countryId { get; set; } 
-        // ? Remove ? because of belowed property, redundance !
 
         public virtual Country cityCountry { get; set; }
     }

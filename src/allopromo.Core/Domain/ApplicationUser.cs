@@ -19,6 +19,6 @@ namespace allopromo.Core.Entities
 
         public bool isMerchant { get; set; }
 
-        public virtual IList<ApplicationRole> UserRoles { get; set; }
+        public virtual IList<IdentityRole> UserRoles { get; set; }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace allopromo.Core.Entities
 {
-    public class ProductCategory: Base.BaseEntity
+    public class ProductCategory
     {
         [Key]
         public int productCategoryId { get; set; }
-        public string productCategoryName { get; set; } = null!;
-        public System.DateTime Created { get; set; }  
 
+        public string productCategoryName { get; set; }
 
-        //public virtual string storeId { get; set; }
-        //public ICollection<tProduct> categoryProducts { get; set; }
+        public DateTime Created { get; set; }
+
+        public DateTime updatedDate { get; set; }
     }
 }
