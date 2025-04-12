@@ -11,9 +11,7 @@ namespace allopromo.Core.Services.Media
 {
     public class ImageUploadService : IImageUploadService
     {
-        private const
-#nullable disable
-    string client_Id = "9b56b331436f6b4";
+        private const string client_Id = "9b56b331436f6b4";
         private const string client_Secret = "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa";
         private const string pin = "";
         public const string imgGurUrl = "https://api.imgur.com/";
@@ -22,13 +20,13 @@ namespace allopromo.Core.Services.Media
 
         private static HttpClient getHttpClient() => new HttpClient();
 
-        public async Task<string> SaveProductImage(IFormFile imageFile)
+        public async Task<string> SaveImage(IFormFile imageFile)
         {
             HttpClient httpClient = new HttpClient();
             return "http://api.imggur.com/3/xfepppe.jpg";
         }
 
-        public async Task<string> SaveProductImages(ICollection<IFormFile> imageFiles)
+        public async Task<string> SaveImages(ICollection<IFormFile> imageFiles)
         {
             if (imageFiles != null)
             {
@@ -47,7 +45,7 @@ namespace allopromo.Core.Services.Media
                     while (current.Length <= 0L);
                     using (File.Create(Path.GetTempFileName()))
                     {
-                        str = await this.SaveProductImage(current);
+                        str = await this.SaveImage(current);
                         goto label_16;
                     }
                 }

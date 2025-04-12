@@ -6,8 +6,8 @@ namespace allopromo.Core.Services
 {
     public interface IMediaService
     {
-        Task<string> SaveProductImages(ICollection<IFormFile> imageFiles);
+        Task<string> SaveImages(ICollection<IFormFile> imageFiles);
 
-        Task<string> SaveProductImage(IFormFile imageFile);
+        Task<string> SaveImage(IFormFile imageFile);
     }
 }

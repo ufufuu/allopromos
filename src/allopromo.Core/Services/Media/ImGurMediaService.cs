@@ -21,7 +21,7 @@ namespace allopromo.Core.Services.Media
 
         public HttpClient _httpClient { get; set; }
 
-        public async Task<string> SaveProductImages(ICollection<IFormFile> imagesFiles)
+        public async Task<string> SaveImages(ICollection<IFormFile> imagesFiles)
         {
             //ImgurClient imgurClient = new ImgurClient("9b56b331436f6b4", "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa");
 
@@ -54,7 +54,7 @@ namespace allopromo.Core.Services.Media
             return informationUrlAsync;
         }
 
-        public async Task<string> SaveProductImage(IFormFile fileName)
+        public async Task<string> SaveImage(IFormFile fileName)
         {
             if (fileName == null)
                 throw new NullReferenceException(nameof(fileName));

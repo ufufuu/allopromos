@@ -33,16 +33,15 @@ namespace allopromo.Api.Controllers
         public int pageNumber { get; set; }
         public IUserService _userService { get; set; }
         public HttpContextAccessor _httpContextAccessor { get; set; }
+        public IImageUploadService _imageUploadService { get; set; }
         public IMediaService _mediaService { get; set; }
-        public IImageUploadService _uploadService { get; set; }
-
         public StoreController(
           IStoreService storeService,
           IProductService productService,
           allopromo.Core.Interfaces.ICatalogService catalogService,
           IUserService userService,
+          IImageUploadService imageUploadService,
           IMediaService mediaService,
-          IImageUploadService uploadService,
           INotifyService notificationService,
           IMapper mapper)
         {
@@ -51,8 +50,8 @@ namespace allopromo.Api.Controllers
             _productService = productService;
             _catalogService = catalogService;
             _notificationService = notificationService;
+            _imageUploadService = imageUploadService;
             _mediaService = mediaService;
-            _uploadService = uploadService;
             _mapper = mapper;
         }
 
@@ -64,7 +63,11 @@ namespace allopromo.Api.Controllers
             StoreController storeController = this;
             if (dto == null)
                 return Ok (" Invalid Data Store Info ");
-            string str = await _mediaService.SaveProductImage(dto.storeFiles.ToList<IFormFile>().FirstOrDefault<IFormFile>());
+            var fdf = await _mediaService.SaveImages(dto.storeFiles);
+
+
+            string str = await _imageUploadService.SaveImages(dto.storeFiles);
+
             ApplicationUser currentUser = await _userService.GetCurrentUser();
             dto.ProprioName = currentUser.UserName;
             string categoryName = dto.CategoryName;

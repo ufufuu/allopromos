@@ -4,6 +4,9 @@
     <UserSecretsId>70a4f25b-41ed-403f-afb7-1d442fe1bb5d</UserSecretsId>
     <OutputType>Exe</OutputType>
     <AssemblyName>allopromo.Api</AssemblyName>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile></DocumentationFile>
@@ -108,6 +111,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     

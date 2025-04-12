@@ -58,7 +58,7 @@ namespace allopromo.Api
 #nullable disable
     string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
 
-        public Startup(IConfiguration configuration) => this.Configuration = configuration;
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -69,14 +69,19 @@ namespace allopromo.Api
             this.Configuration.GetSection("JwtSettings");
             this.Configuration.GetSection("Jwt").Get<AppSettings>();
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
-            services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(options => options.UseSqlServer(this.Configuration.GetConnectionString("dockerConnection"))));
+            services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
+                options => options.UseSqlServer(Configuration.GetConnectionString("dockerConnection"))));
+
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
                 options.Stores.MaxLengthForKeys = 128;
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-            })).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddRoleManager<RoleManager<IdentityRole>>().AddDefaultTokenProviders();
+            })).AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddRoleManager<RoleManager<IdentityRole>>()
+            .AddDefaultTokenProviders();
             services.AddAuthentication("Bearer").AddJwtBearer((Action<JwtBearerOptions>)(options =>
             {
                 options.SaveToken = true;
@@ -167,9 +172,9 @@ namespace allopromo.Api
             services.AddScoped<IStoreService, StoreService>();
             
             services.AddScoped<IValidationService, ValidationService>();
-            
             services.AddScoped<IImageUploadService, ImageUploadService>();
-            //services.AddScoped<IMediaService, ImageUploadService>();
+            services.AddScoped<IMediaService, ImGurMediaService>();
+
             services.AddScoped<IRepository<Store>, TRepository<Store>>();
             services.AddScoped<IRepository<StoreCategory>, TRepository<StoreCategory>>();
             services.AddScoped<IRepository<Product>, TRepository<Product>>();

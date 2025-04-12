@@ -160,11 +160,10 @@ namespace allopromo.Api.Controllers
                     status = " Failed ",
                     message = " User name or Pwd UUY incorrect "
                 });
-            SignInManager<ApplicationUser> signInManager = _signInManager;
-            ApplicationUser user1 = new ApplicationUser();
-            user1.UserName = dto.UserName;
-            await signInManager.SignInAsync(user1, true);
-            UserDto userDto = _mapper.Map<UserDto>((object)user);
+
+            //var signedIn = await _signInManager.SignInAsync(user, true);
+
+            UserDto userDto = _mapper.Map<UserDto>(user);
             string jwtToken = await _userService.GenerateJwtToken(user);
             return Ok(new
             {

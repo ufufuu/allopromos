@@ -76,7 +76,7 @@ namespace allopromo.Core.Services
             IList<ApplicationUser> listAsync;
             try
             {
-                listAsync = (IList<ApplicationUser>)await this._userManager.Users.ToListAsync<ApplicationUser>();
+                listAsync = (IList<ApplicationUser>)await _userManager.Users.ToListAsync<ApplicationUser>();
 
                 // ISSUE: method reference
                 // ISSUE: type reference
