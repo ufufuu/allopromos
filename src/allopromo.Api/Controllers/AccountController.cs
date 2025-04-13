@@ -17,7 +17,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-#nullable enable
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -61,17 +60,19 @@ namespace allopromo.Api.Controllers
             _mapper = Mapper;
         }
         [HttpGet]
-        [Route("")]
+        //[Route("")]
         public async Task<IActionResult> GetUsers()
         {
+			return Ok("kevin ALi");
             var users = await _userService.GetUsersWithRolesAsync();
             List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
             var userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
             return Ok(userDtoList);
         }
         [HttpPost]
-        [Route("password-recovery")]
-        [AllowAnonymous]
+        //[Route("password-recovery")]
+        //[AllowAnonymous]
+		
         public async Task<IActionResult> PasswordRecovery(string telephoneNumber, string userName)
         {
             if (telephoneNumber != null)
