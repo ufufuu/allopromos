@@ -63,7 +63,7 @@ namespace allopromo.Api.Controllers
         //[Route("")]
         public async Task<IActionResult> GetUsers()
         {
-			return Ok("kevin ALi");
+	    return Ok("kevin ALi");
             var users = await _userService.GetUsersWithRolesAsync();
             List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
             var userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
