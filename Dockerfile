@@ -1,18 +1,5 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-#First Install Sql image
-FROM mcr.microsoft.com/mssql/server:2017-latest
-# create directory within SQL container for database files
-RUN powershell -Command (mkdir C:\\SQLServer)
- 
-#copy the database files from host to container
-COPY DatabaseA.mdf C:\\SQLServer
-COPY DatabaseA_log.ldf C:\\SQLServer
-# set environment variables
-ENV sa_password=Testing11@@
-ENV ACCEPT_EULA=Y
-
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80

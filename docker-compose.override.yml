@@ -1,3 +1,5 @@
+networks:
+  allopromoApi:
 
 services:
   allopromoApi:

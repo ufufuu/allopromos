@@ -71,12 +71,11 @@ namespace allopromo.Core.Services
 
         public async Task<List<ApplicationUser>> GetUsersWithRolesAsync()
         {
-            return null;
             IList<ApplicationUser> applicationUserList = (IList<ApplicationUser>)new List<ApplicationUser>();
             IList<ApplicationUser> listAsync;
             try
             {
-                listAsync = (IList<ApplicationUser>)await _userManager.Users.ToListAsync<ApplicationUser>();
+                var listofUsers = await _userManager.Users.ToListAsync();
 
                 // ISSUE: method reference
                 // ISSUE: type reference
@@ -91,13 +90,12 @@ namespace allopromo.Core.Services
                     .AsQueryable<ApplicationUser>().Select<ApplicationUser, ApplicationUser>(Expression.Lambda<Func<ApplicationUser, ApplicationUser>>((Expression)Expression.MemberInit(Expression.New(typeof(ApplicationUser)), (MemberBinding)Expression.Bind((MethodInfo)MethodBase.GetMethodFromHandle(__methodref(IdentityUser<string>.set_UserName), __typeref(IdentityUser<string>)), )))); // Unable to render the statement
                 ((IIncludableQueryable<ApplicationUser, IEnumerable<ApplicationRole>>)this._userManager.Users.Include<ApplicationUser, IList<ApplicationRole>>((Expression<Func<ApplicationUser, IList<ApplicationRole>>>)(u => u.UserRoles))).ThenInclude<ApplicationUser, ApplicationRole, string>((Expression<Func<ApplicationRole, string>>)(ur => ur.roleName));
                 */
-                return (List<ApplicationUser>)listAsync;
+                return listofUsers;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return listAsync.ToList<ApplicationUser>();
         }
 
         private void AddUserRole(ApplicationUser user, string roleName)

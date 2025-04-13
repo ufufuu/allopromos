@@ -60,7 +60,6 @@ namespace allopromo.Api.Controllers
             _signInManager = signInManager;
             _mapper = Mapper;
         }
-
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetUsers()
@@ -70,7 +69,6 @@ namespace allopromo.Api.Controllers
             var userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
             return Ok(userDtoList);
         }
-
         [HttpPost]
         [Route("password-recovery")]
         [AllowAnonymous]

@@ -1,0 +1,17 @@
+
+
+
+
+# Exported from Render on 2025-04-12T17:52:53Z 
+
+# COPY --from=builder /initialized-db /var/lib/mysql
+services:
+- type: web
+  name: allopromos
+  runtime: docker
+  repo: https://github.com/ufufuu/allopromos
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: src/allopromo.Api/Dockerfile
+version: "1"

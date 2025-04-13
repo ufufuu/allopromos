@@ -1,0 +1,63 @@
+
+
+
+version: '3.8'
+
+services:
+  db: &db
+    image: 'postgres:14.2-alpine'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  redis:
+    image: 'redis:5-alpine'
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
+
+  ws:
+    image: anycable/anycable-go:1.2
+    ports:
+      - '8080:8080'
+    environment:
+      ANYCABLE_HOST: "0.0.0.0"
+      ANYCABLE_REDIS_URL: redis://redis:6379/0
+      ANYCABLE_RPC_HOST: anycable:50051
+      ANYCABLE_DEBUG: 1
+    depends_on:
+      - 'redis'
+
+  web: &backend
+    depends_on:
+      - 'db'
+      - 'redis'
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - '3000:3000'
+    environment: &backend_environment
+      DATABASE_HOST: db
+      ANYCABLE_REDIS_URL: redis://redis:6379/0
+
+  anycable:
+    <<: *backend
+    command: bundle exec anycable
+    environment:
+      <<: *backend_environment
+      ANYCABLE_REDIS_URL: redis://redis:6379/0
+      ANYCABLE_RPC_HOST: 0.0.0.0:50051
+      ANYCABLE_DEBUG: 1
+    ports:
+      - '50051'
+    depends_on:
+      ws:
+        condition: service_started
+
+volumes:
+  redis:

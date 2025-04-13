@@ -1,0 +1,69 @@
+
+
+
+databases:
+  - name: db # Render PG14
+    databaseName: db
+    user: dbuser
+    postgresMajorVersion: 14
+
+services:
+  - type: redis # Render Redis
+    name: anycable-redis
+    ipAllowList: []
+
+  - type: web
+    name: ws
+    env: docker
+    dockerfilePath: ./Dockerfile.anycable
+    envVars:
+      - key: ANYCABLE_HOST
+        value: "0.0.0.0"
+      - key: ANYCABLE_REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - key: ANYCABLE_HOST
+        fromService:
+          type: web
+          name: anycable
+          envVarKey: RENDER_SERVICE_NAME #internal address of anycable used in Dockerfile to set ANYCABLE_RPC_HOST
+        value: anycable:50051 # need to reference anycable service
+      - key : ANYCABLE_DEBUG
+        value: 1
+
+  - type: web
+    name: web
+    env: ruby
+    buildCommand: ...
+    startCommand: "bundle exec rails s"
+    envVars:
+      - key: DATABASE_HOST
+        fromDatabase:
+          type: database
+          name: db
+          envVarKey: RENDER_SERVICE_NAME
+      - key: ANYCABLE_REDIS_URL
+        fromService:
+          type: redis
+          name: anycable-redis
+          property: connectionString
+
+  - type: web
+    name: anycable
+    env: ruby
+    buildCommand: ...
+    startCommand: bundle exec anycable
+    envVars:
+      - key: ANYCABLE_REDIS_URL
+        fromService:
+          type: redis
+          name: anycable-redis
+          property: connectionString
+      - key: ANYCABLE_RPC_HOST
+        value: "0.0.0.0:50051"
+      - key: ANYCABLE_DEBUG
+        value: 1
+      - key: PORT
+        value: 50051
