@@ -63,11 +63,12 @@ namespace allopromo.Api.Controllers
         //[Route("")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userService.GetUsersWithRolesAsync();
+			var users = new List<UserDto>();
+            var usersObj = await _userService.GetUsersWithRolesAsync();
 			
             List<ApplicationUser> usersWithRolesAsync = await _userService.GetUsersWithRolesAsync();
-            var userDtoList = _mapper.Map<List<UserDto>>(usersWithRolesAsync);
-            return Ok(userDtoList);
+            users = _mapper.Map<List<UserDto>>(usersObj);
+            return Ok(users);
         }
         [HttpPost]
         //[Route("password-recovery")]
