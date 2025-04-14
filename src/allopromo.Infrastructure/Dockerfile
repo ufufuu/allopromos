@@ -1,6 +1,16 @@
 
-
 FROM mcr.microsoft.com/mssql/server:2019-latest
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+
+ENV SA_PASSWORD password123!
+ENV ACCEPT_EULA Y
+ENV MSSQL_PID Express
+
+EXPOSE 1433
+
+CMD /bin/bash ./entrypoint.sh
+
 
 # RUN useradd -M -s /bin/bash -u 10001 -g 0 mssql
 # RUN mkdir -p -m 770 /var/opt/mssql && chgrp -R 0 /var/opt/mssql
