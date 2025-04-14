@@ -14,7 +14,6 @@ services:
   - type: web
     runtime: docker
     name: allopromoDB
-    image: mcr.microsoft.com/mssql/server:2019-latest
     repo: https://github.com/ufufuu/allopromos/src/allopromo.Infrastructure
     plan: free
     region: oregon
