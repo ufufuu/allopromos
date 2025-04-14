@@ -14,7 +14,7 @@ services:
   - type: web
     runtime: docker
     name: allopromoDB
-    repo: https://github.com/ufufuu/allopromos/src/allopromo.Infrastructure
+    repo: https://github.com/ufufuu/allopromos
     plan: free
     region: oregon
     dockerContext: .
