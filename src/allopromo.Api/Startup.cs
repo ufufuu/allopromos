@@ -168,7 +168,6 @@ namespace allopromo.Api
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<ICatalogService, CatalogService>();
-            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStoreService, StoreService>();
             
             services.AddScoped<IValidationService, ValidationService>();

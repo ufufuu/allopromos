@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using allopromo.Core.Interfaces;
 
 namespace allopromo.Core.Services
 {
@@ -37,7 +38,7 @@ namespace allopromo.Core.Services
         public IRepository<Department> _departmentRepository { get; set; }
         public IRepository<StoreCategory> _categoryRepository { get; set; }
         public IRepository<City> _citiesRepository { get; set; }
-        private IProductService _productService { get; set; }
+        private ICatalogService _catalogService { get; set; }
         private ILocationService _locationService { get; set; }
 
         public INotifyService _notificationService { get; set; }

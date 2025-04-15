@@ -25,7 +25,7 @@ namespace allopromo.Api.Controllers
     {
         public const int pageSize = 2;
         private readonly IStoreService _storeService;
-        private readonly IProductService _productService;
+        //private readonly ICatalogService _catalogService;
         private readonly INotifyService _notificationService; 
         private readonly allopromo.Core.Interfaces.ICatalogService _catalogService;
         private IMapper _mapper;
@@ -37,7 +37,7 @@ namespace allopromo.Api.Controllers
         public IMediaService _mediaService { get; set; }
         public StoreController(
           IStoreService storeService,
-          IProductService productService,
+          ICatalogService productService,
           allopromo.Core.Interfaces.ICatalogService catalogService,
           IUserService userService,
           IImageUploadService imageUploadService,
@@ -47,7 +47,8 @@ namespace allopromo.Api.Controllers
         {
             _userService = userService;
             _storeService = storeService;
-            _productService = productService;
+            //_productService = productService;
+
             _catalogService = catalogService;
             _notificationService = notificationService;
             _imageUploadService = imageUploadService;

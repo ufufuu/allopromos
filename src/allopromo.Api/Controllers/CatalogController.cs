@@ -13,21 +13,17 @@ namespace allopromo.Controllers
     [ApiController]
     public class CatalogController : ControllerBase
     {
-        private readonly
-#nullable disable
-    IConfiguration _config;
-        private readonly IProductService _productService;
+        private readonly IConfiguration _config;
         private readonly ICatalogService _catalogService;
         private readonly IVendorService _merchantService;
 
         public CatalogController(
           IConfiguration config,
-          IProductService productService,
           ICatalogService catalogService,
           IVendorService merchantService)
         {
             _config = config;
-            _productService = productService;
+            //_productService = productService;
             _catalogService = catalogService;
         }
 

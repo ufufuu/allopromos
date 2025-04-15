@@ -12,13 +12,31 @@ namespace allopromo.Core.Interfaces
         Task<StoreCategory> CreateStoreCategory(StoreCategory storeCategory );
         #endregion
         Task<StoreCategory> GetStoreCategory(string name); 
+
         #region Product Categories
         void CreateProductCategory(ProductCategory productCategory);
         Task<ProductCategory> GetProductCategory(string Id);
         ProductCategory UpdateProductCategory(string Id);
-        IEnumerable<ProductCategory> GetProducsEntities();
+
+        Task<Product> UpdateProductAsync(string Id, Object obj);
+
+
+        //Task<IEnumerable<Product>> GetProductsAync();
         ProductCategory DeleteProductCategory(ProductCategory productCategory);
         Task DeleteProductCategory(string categoryId);
+        #endregion
+
+        #region Products
+        
+        Task<Product> CreateProductAsync(Product product, string Name);
+        Task<IEnumerable<Product>> GetProductsByStore(string storeId);
+        //Task<Product> GetProductByIdAsync(string productId);
+
+
+
+        Task<IEnumerable<Product>> GetProductsByCategoryId(string id);
+        Task<IEnumerable<ProductCategory>> GetProductCategories();
+        Task<ProductCategory> Delete(object obj);
         #endregion
     }
 }

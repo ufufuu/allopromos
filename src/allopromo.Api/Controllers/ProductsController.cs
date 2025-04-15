@@ -5,6 +5,7 @@ using allopromo.Api.Validators;
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
 using allopromo.Core.Entities;
+using allopromo.Core.Interfaces;
 using allopromo.Core.Model;
 using allopromo.Core.Services;
 using AutoMapper;
@@ -25,34 +26,28 @@ namespace allopromo.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private IProductService _productService { get; set; }
+        private ICatalogService _catalogService { get; set; }
         private IUserService _userService { get; set; }
         private IStoreService _storeService { get; set; }
         private IMediaService _mediaService { get; set; }
-
         private IMediator _mediator { get; set; }
-
-        private IRepository<Product> _productRepo { get; set; }
-
+        private readonly IMapper _mapper;
         private IValidationService _validationService { get; set; }
 
         public ProductsController(
-          IProductService productService,
+          ICatalogService catalogService,
           IUserService userService,
-          
-          IRepository<Product> productRepo,
           IStoreService storeService,
           IMediaService mediaService,
           IValidationService validationService,
           IMapper mapper)
         {
-            _productService = productService;
+            //_productService = productService;
+
             _userService = userService;
             _storeService = storeService;
             _mediaService = mediaService;
-            
-            _productRepo = productRepo;
+            _catalogService = catalogService;
             _mapper = mapper;
         }
 
@@ -64,13 +59,15 @@ namespace allopromo.Api.Controllers
             if(dto != null)
             {
                 var product = _mapper.Map<Product>(dto);
-                var category = (await _productService.GetProductCategories()).FirstOrDefault();
+                var category = (await _catalogService.GetProductCategories()).FirstOrDefault();
                 product.ProductCategory = category;
                 product.productDescription = dto.Description;
                 product.productName = dto.Name;
                 product.productStatus = (int)dto.productPrice;
+
+
                 //product.Price
-                _productService.CreateProductAsync(product, dto.categoryName);
+                _catalogService.CreateProductAsync(product, dto.categoryName);
                 return Ok(dto);
             }
             return BadRequest();
@@ -82,8 +79,7 @@ namespace allopromo.Api.Controllers
         {
             ProductsController productsController = this;
 
-            var productsByStore = await _productService.GetProductsByStore(storeName.ToString());
-
+            var productsByStore = await _catalogService.GetProductsByStore(storeName.ToString());
             IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>(productsByStore);
             return (IActionResult)productsController.Ok((object)productDtos);
         }
@@ -117,17 +113,17 @@ namespace allopromo.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(string Id, [FromForm] ProductUpdateDto productToUpdate)
         {
-            ProductsController productsController = this;
             try
             {
-                Product byIdAsync = await productsController._productRepo.GetByIdAsync(Id);
-                if (byIdAsync == null)
-                    return (IActionResult)productsController.StatusCode(404, (object)(" product  with id " + Id + " Not Found"));
+                var productById = (await _catalogService.GetProductsByStore(Id));
+                                //.Where(x => x.productId.Equals(Id));
+                if (productById == null)
+                    return NotFound(" product  with id " + Id + " Not Found");
                 if (productToUpdate.productImages != null)
                 {
                     IFormFile productImageFiles = productToUpdate.productImageFiles;
                     if ((productImageFiles != null ? (productImageFiles.Length > 1048576L ? 1 : 0) : 0) != 0)
-                        return (IActionResult)productsController.StatusCode(400, (object)" File size shoud not exceed 1 MB");
+                        return BadRequest();  //StatusCode(400, (object)" File size shoud not exceed 1 MB");
                     string[] strArray = new string[3]
                     {
                         ".jpg",
@@ -135,12 +131,12 @@ namespace allopromo.Api.Controllers
                         ".png"
                     };
                 }
-                productsController._productRepo.Update(byIdAsync);
-                return (IActionResult)productsController.Ok((object)byIdAsync);
+                //_catalogService.UpdateProductAsync(productById);
+                return Ok(productById);
             }
             catch (Exception ex)
             {
-                return (IActionResult)productsController.StatusCode(500, (object)ex.Message);
+                return BadRequest();
             }
         }
 
@@ -148,18 +144,20 @@ namespace allopromo.Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(string Id)
         {
-            ProductsController productsController = this;
             try
             {
-                Product byIdAsync = await productsController._productRepo.GetByIdAsync(Id);
-                if (byIdAsync == null)
-                    return (IActionResult)productsController.StatusCode(404, (object)("product with " + Id + " Not Found "));
-                productsController._productRepo.Delete(byIdAsync);
-                return (IActionResult)productsController.NoContent();
+                var productToDelete = await _catalogService.GetProductsByStore(Id);
+                                          //.Where(x => x.productCategoryId.Equals(Id));
+                if (productToDelete == null)
+                    //return (IActionResult)productsController.StatusCode(404, (object)("product with " + Id + " Not Found "));
+                    return BadRequest();
+                _catalogService.Delete(productToDelete);
+
+                return NoContent();
             }
             catch (Exception ex)
             {
-                return (IActionResult)productsController.StatusCode(500, (object)ex.Message);
+                return BadRequest(); // StatusCode(500, (object)ex.Message);
             }
         }
 

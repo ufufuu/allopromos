@@ -38,8 +38,7 @@ namespace allopromo.Api.Controllers
         [Authorize(Roles = "Administrators")]
         public IActionResult GetCategories()
         {
-            IEnumerable<ProductCategory> entities = _catalogService.GetProducsEntities();
-            return entities == null ? (IActionResult)this.NotFound() : (IActionResult)this.Ok((object)entities);
+            return null;
         }
 
         [HttpGet]

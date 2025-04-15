@@ -83,6 +83,7 @@
     <Compile Remove="Services\LocalisationService.cs" />
     <Compile Remove="Services\MediaServices.cs" />
     <Compile Remove="Services\MembershipService.cs" />
+    <Compile Remove="Services\ProductService.cs" />
     <Compile Remove="Services\PushNotificationService.cs" />
   </ItemGroup>
   <ItemGroup>
