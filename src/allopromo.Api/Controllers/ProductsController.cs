@@ -146,7 +146,7 @@ namespace allopromo.Api.Controllers
         {
             try
             {
-                var productToDelete = await _catalogService.GetProductsByStore(Id);
+                var productToDelete = await _catalogService.GetProductsByStore(Id); 
                                           //.Where(x => x.productCategoryId.Equals(Id));
                 if (productToDelete == null)
                     //return (IActionResult)productsController.StatusCode(404, (object)("product with " + Id + " Not Found "));
