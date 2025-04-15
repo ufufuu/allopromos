@@ -1,8 +1,20 @@
-
+# The official Microsoft Sql Server
 FROM mcr.microsoft.com/mssql/server:2019-latest
-WORKDIR /usr/src/app
-COPY . /usr/src/app
 
+#Directory to store the data, which can be referenced as the starting point.
+
+RUN mkdir -p /var/opt/mysql
+
+# Copy files to User Directory
+COPY . /usr/local/bin
+
+
+CMD ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["sh"]
+
+
+
+#CMD /bin/bash ./entrypoint.sh
 ENV SA_PASSWORD password123!
 ENV ACCEPT_EULA Y
 ENV MSSQL_PID Express

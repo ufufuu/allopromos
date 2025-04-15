@@ -1,9 +1,9 @@
 
 
-CREATE DATABASE [product-db]
+CREATE DATABASE [promosDb]
 GO
 
-USE [product-db];
+USE [promosDb];
 GO
 
 CREATE TABLE product (

@@ -16,17 +16,11 @@ namespace allopromo.Api.DTOs
         [MinLength(2, ErrorMessage = "Company Name canot not be less than 2 char")]
         [MaxLength(150, ErrorMessage = "Namme too Longr")]
         public string StoreName { get; set; }
-
         public string CategoryName { get; set; }
-
         public string storeIsResto { get; set; }
-
         public string City { get; set; }
-
         public string StoreDescription { get; set; }
-
         public IList<IFormFile> storeFiles { get; set; }
-
         public string ProprioName { get; set; }
     }
 }

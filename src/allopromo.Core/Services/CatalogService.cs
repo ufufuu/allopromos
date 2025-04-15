@@ -1,27 +1,38 @@
 ﻿using allopromo.Core.Abstract;
 using allopromo.Core.Entities;
 using allopromo.Core.Interfaces;
-//using allopromo.Core.Abstract.Interfaces;
 using allopromo.Core.Services.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace allopromo.Core.Services
 {
     public class CatalogService : ICatalogService
     {
+        private IRepository<StoreCategory> _storeCategoryRepository { get; set; }
         private IRepository<ProductCategory> _productCategoryRepository { get; set; }
         public CatalogService(IRepository<ProductCategory> productCategoryRepository)
         {
             _productCategoryRepository = productCategoryRepository;
+            
         }
 
         #region Stores Categories
-        public StoreCategory GetStoreCategory()
+        public Task<StoreCategory> CreateStoreCategoryAsync(StoreCategory storeCategory)
         {
-            return null;
+            _storeCategoryRepository.Add(storeCategory);
+            _storeCategoryRepository.Save();
+            return Task.FromResult(storeCategory);
+        }
+
+        public async Task<StoreCategory> GetStoreCategory( string name)
+        {
+            var category = (await _storeCategoryRepository.GetAllAsync())
+                            .Where(x => x.storeCategoryName.Equals(name));
+            return category.FirstOrDefault();
         }
         #endregion
 
@@ -29,6 +40,7 @@ namespace allopromo.Core.Services
         public void CreateProductCategory(ProductCategory tProductCategory)
         {
             _productCategoryRepository.Add(tProductCategory);
+            _productCategoryRepository.Save();
         }
 
         public async Task<ProductCategory> GetProductCategory(string Id)
@@ -66,6 +78,12 @@ namespace allopromo.Core.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<StoreCategory> CreateStoreCategory(StoreCategory storeCategory)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
     }

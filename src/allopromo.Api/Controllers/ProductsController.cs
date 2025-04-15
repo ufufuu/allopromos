@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: allopromo.Api.Controllers.ProductsController
-// Assembly: allopromo.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: D9E70BF9-6813-49CA-B8B2-EE280C9B986F
-// Assembly location: C:\Users\MonPC\Downloads\allopromo.Api.dll
-
-using allopromo.Api.Commands.Model;
+﻿using allopromo.Api.Commands.Model;
 using allopromo.Api.DTOs;
 using allopromo.Api.Queries.Models;
 using allopromo.Api.Validators;
@@ -25,7 +19,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-#nullable enable
 namespace allopromo.Api.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -66,10 +59,21 @@ namespace allopromo.Api.Controllers
         [HttpPost]
         [Route("create")]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> PostProduct([FromForm] ProductDto productDto)
+        public async Task<IActionResult> PostProduct([FromForm] ProductDto dto)
         {
-            ProductsController productsController = this;
-            return !productsController.ModelState.IsValid ? (IActionResult)productsController.StatusCode(500, (object)"") : (IActionResult)productsController.Ok((object)"Ok");
+            if(dto != null)
+            {
+                var product = _mapper.Map<Product>(dto);
+                var category = (await _productService.GetProductCategories()).FirstOrDefault();
+                product.ProductCategory = category;
+                product.productDescription = dto.Description;
+                product.productName = dto.Name;
+                product.productStatus = (int)dto.productPrice;
+                //product.Price
+                _productService.CreateProductAsync(product, dto.categoryName);
+                return Ok(dto);
+            }
+            return BadRequest();
         }
 
         [HttpPut]
@@ -126,9 +130,9 @@ namespace allopromo.Api.Controllers
                         return (IActionResult)productsController.StatusCode(400, (object)" File size shoud not exceed 1 MB");
                     string[] strArray = new string[3]
                     {
-            ".jpg",
-            ".jpeg",
-            ".png"
+                        ".jpg",
+                        ".jpeg",
+                        ".png"
                     };
                 }
                 productsController._productRepo.Update(byIdAsync);
@@ -159,7 +163,7 @@ namespace allopromo.Api.Controllers
             }
         }
 
-        private async Task<IActionResult> gr([FromForm] MultipartFormDataContent formData)
+        private async Task<IActionResult> gr ([FromForm] MultipartFormDataContent formData)
         {
             return (IActionResult)null;
         }

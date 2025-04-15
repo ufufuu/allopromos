@@ -60,30 +60,30 @@ namespace allopromo.Api.Controllers
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> PostStore([FromForm] CreateStoreDto dto)
         {
-            StoreController storeController = this;
             if (dto == null)
-                return Ok (" Invalid Data Store Info ");
+                return BadRequest();
+
             var fdf = await _mediaService.SaveImages(dto.storeFiles);
-
-
             string str = await _imageUploadService.SaveImages(dto.storeFiles);
 
-            ApplicationUser currentUser = await _userService.GetCurrentUser();
+            var currentUser = await _userService.GetCurrentUser();
             dto.ProprioName = currentUser.UserName;
             string categoryName = dto.CategoryName;
 
-            var category = _catalogService.GetProductCategory(categoryName);
+            var category = await _catalogService.GetStoreCategory(dto.CategoryName);
 
             string city = dto.City;
-            Store store = storeController._mapper.Map<Store>((object)dto);
+            Store store = _mapper.Map<Store>(dto);
             
             store.storeName = dto.StoreName;
             store.storeDescription = dto.StoreDescription;
+            store.User = currentUser;
+            store.Category = category;
             await _storeService.CreateStoreAsync(store, currentUser.UserName, city, dto.CategoryName);
 
             if(await _userService.UpdateUserRole("Merchants", currentUser.UserName))
                 return Ok(dto);
-            return (IActionResult)storeController.Ok((object)new allopromo.Api.Model.Response()
+            return Ok((object)new allopromo.Api.Model.Response()
             {
                 Status = "400",
                 Message = "User Already Has A Store "
