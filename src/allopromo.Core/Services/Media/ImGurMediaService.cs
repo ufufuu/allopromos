@@ -12,21 +12,25 @@ namespace allopromo.Core.Services.Media
 {
     public class ImGurMediaService : IMediaService
     {
-        private const
-#nullable disable
-    string URL = "http://api.imgur/com/3";
+        private const string URL = "http://api.imgur/com/3";
         private const string CLIENT_ID = "9b56b331436f6b4";
         private const string CLIENT_SECRET = "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa";
         private const string pin = "";
 
         public HttpClient _httpClient { get; set; }
 
-        public async Task<string> SaveImages(ICollection<IFormFile> imagesFiles)
+        public async Task <IList<string>> SaveImages(ICollection<IFormFile> imagesFiles)
         {
             //ImgurClient imgurClient = new ImgurClient("9b56b331436f6b4", "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa");
 
+            IList<string> URLs = new List<string>();
             String imgurCLient = null;
             HttpClient httpClient = new HttpClient();
+            foreach(var imageFile in imagesFiles)
+            {
+                var url = this.SaveImage(imageFile);
+                URLs.Add(String.Empty);
+            }
             using (IEnumerator<IFormFile> enumerator = imagesFiles.GetEnumerator())
             {
                 if (enumerator.MoveNext())
@@ -35,15 +39,18 @@ namespace allopromo.Core.Services.Media
                     using (WebClient webClient = new WebClient())
                     {
                         webClient.Headers.Add("Authorization", "CLIENT_ID9b56b331436f6b4");
-                        return Encoding.ASCII.GetString(webClient.UploadValues("http://api/imgur.com/3/image/", "POST", new NameValueCollection()
+
+                        /*return Encoding.ASCII.GetString(webClient.UploadValues("http://api/imgur.com/3/image/", "POST", new NameValueCollection()
                         {
                             ["image"] = "base64",
                             ["type"] = "base64"
-                        }));
+                        }));*/
+                        return URLs;
                     }
                 }
             }
-            return (string)null;
+            return URLs;
+            //return imgurCLient;
         }
 
         public async Task<string> getImageInformationUrlAsync()

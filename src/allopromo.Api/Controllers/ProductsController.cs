@@ -56,21 +56,26 @@ namespace allopromo.Api.Controllers
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> PostProduct([FromForm] ProductDto dto)
         {
-            if(dto != null)
+            if( ModelState.IsValid )
             {
                 var product = _mapper.Map<Product>(dto);
                 var category = (await _catalogService.GetProductCategories()).FirstOrDefault();
+                var productPictures = ( await _mediaService.SaveImages(dto.productImages));
+
+                var currentUserName = (await _userService.GetCurrentUser()).UserName;
+                var store = (await _storeService.GetStoresByUserName(currentUserName))
+                                .FirstOrDefault();
                 product.ProductCategory = category;
                 product.productDescription = dto.Description;
                 product.productName = dto.Name;
                 product.productStatus = (int)dto.productPrice;
+                product.Store = store;
+                product.productImages = productPictures;
 
-
-                //product.Price
-                _catalogService.CreateProductAsync(product, dto.categoryName);
+                await _catalogService.CreateProductAsync(product, dto.categoryName);
                 return Ok(dto);
             }
-            return BadRequest();
+            return BadRequest(ModelState);
         }
 
         [HttpPut]
@@ -121,8 +126,8 @@ namespace allopromo.Api.Controllers
                     return NotFound(" product  with id " + Id + " Not Found");
                 if (productToUpdate.productImages != null)
                 {
-                    IFormFile productImageFiles = productToUpdate.productImageFiles;
-                    if ((productImageFiles != null ? (productImageFiles.Length > 1048576L ? 1 : 0) : 0) != 0)
+                    IList<IFormFile> productImages = productToUpdate.productImages;
+                    if ((productImages != null ? (productImages.FirstOrDefault().Length > 1048576L ? 1 : 0) : 0) != 0)
                         return BadRequest();  //StatusCode(400, (object)" File size shoud not exceed 1 MB");
                     string[] strArray = new string[3]
                     {
