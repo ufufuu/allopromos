@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services.Media
 {
-    public class ImGurMediaService : IMediaService
+    public class ImGurMediaService : IMediaService //mmfhh949
     {
         private const string URL = "http://api.imgur/com/3";
         private const string CLIENT_ID = "9b56b331436f6b4";
