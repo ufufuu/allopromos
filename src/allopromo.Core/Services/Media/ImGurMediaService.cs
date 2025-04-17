@@ -10,15 +10,13 @@ using System.Threading.Tasks;
 
 namespace allopromo.Core.Services.Media
 {
-    public class ImGurMediaService : IMediaService //mmfhh949
+    public class ImgurMediaService : IMediaService //mmfhh949
     {
         private const string URL = "http://api.imgur/com/3";
         private const string CLIENT_ID = "9b56b331436f6b4";
         private const string CLIENT_SECRET = "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa";
         private const string pin = "";
-
         public HttpClient _httpClient { get; set; }
-
         public async Task <IList<string>> SaveImages(ICollection<IFormFile> imagesFiles)
         {
             //ImgurClient imgurClient = new ImgurClient("9b56b331436f6b4", "8a17cfb28060c0202ba7cff9b5172cd0a56f26fa");

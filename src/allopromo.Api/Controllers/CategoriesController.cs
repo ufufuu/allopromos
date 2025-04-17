@@ -18,7 +18,6 @@ namespace allopromo.Api.Controllers
     {
         private readonly ICatalogService _catalogService;
         private readonly IMapper _mapper;
-
         public CategoriesController(ICatalogService catalogService, IMapper mapper)
         {
             this._catalogService = catalogService;
@@ -38,7 +37,7 @@ namespace allopromo.Api.Controllers
         [Authorize(Roles = "Administrators")]
         public IActionResult GetCategories()
         {
-            return null;
+            return Ok();
         }
 
         [HttpGet]
@@ -69,11 +68,11 @@ namespace allopromo.Api.Controllers
         [Route("categories/create/")]
         public async Task<IActionResult> PostStoreCategory([FromBody] StoreCategoryDto storeCategoryDto)
         {
-            CategoriesController categoriesController = this;
             if (storeCategoryDto == null)
-                return (IActionResult)categoriesController.BadRequest();
-            categoriesController._mapper.Map<StoreCategory>((object)storeCategoryDto);
-            return (IActionResult)categoriesController.Ok((object)storeCategoryDto);
+                return BadRequest();
+            var category = _mapper.Map<StoreCategory>(storeCategoryDto);
+            await _catalogService.CreateStoreCategory(category);
+            return Ok(storeCategoryDto);
         }
     }
 }

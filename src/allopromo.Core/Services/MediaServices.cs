@@ -96,6 +96,11 @@ namespace allopromo.Core.Services
                 return image;
             }
         }
+        private Task<bool> ValidateImageFile(FormFile file)
+        {
+            return (file.ContentType.ToLower() != "image/jpeg" && file.ContentType.ToLower() != "image/jpg" && file.ContentType.ToLower() != "image/png");
+        }
+
     }
 }
 

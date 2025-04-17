@@ -9,7 +9,6 @@ using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Mapping.Profiles;
 using allopromo.Api.Infrastructure.Logging;
 using allopromo.Api.Infrastructure.Mapping;
-using allopromo.Api.Infrastructure.Mapping.Profiles;
 using allopromo.Api.Validators;
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
@@ -172,7 +171,7 @@ namespace allopromo.Api
             
             services.AddScoped<IValidationService, ValidationService>();
             services.AddScoped<IImageUploadService, ImageUploadService>();
-            services.AddScoped<IMediaService, ImGurMediaService>();
+            services.AddScoped<IMediaService, ImgurMediaService>();
 
             services.AddScoped<IRepository<Store>, TRepository<Store>>();
             services.AddScoped<IRepository<StoreCategory>, TRepository<StoreCategory>>();
@@ -194,14 +193,15 @@ namespace allopromo.Api
                 (cfg => cfg.RegisterServicesFromAssemblies(new Assembly[1]
                 {
                     typeof (Program).Assembly
-                })));*/
+                })));
+            */
 
             services.AddCors((Action<CorsOptions>)(policyBuilder => policyBuilder.AddDefaultPolicy((Action<CorsPolicyBuilder>)(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader()))));
             FluentEmailServiceCollectionExtensions.AddFluentEmail(services, "test-email@allopromo.test", "");
             services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>((IAsyncPolicy<HttpResponseMessage>)AsyncRetryTResultSyntax.WaitAndRetryAsync<HttpResponseMessage>(Policy.HandleResult<HttpResponseMessage>((Func<HttpResponseMessage, bool>)(r => !r.IsSuccessStatusCode)), 3, (Func<int, TimeSpan>)(retryAttemps => TimeSpan.FromSeconds((double)retryAttemps))));
             HttpClient httpClient = new HttpClient();
             services.AddSingleton<AsyncRetryPolicy>((Func<IServiceProvider, AsyncRetryPolicy>)(x => AsyncRetrySyntax.WaitAndRetryAsync(Policy.Handle<Exception>(), 3, (Func<int, TimeSpan>)(retryCount => TimeSpan.FromMilliseconds((double)(500 * retryCount))), (Action<Exception, TimeSpan, int, Context>)((result, timeSpan, retryCount, context) => Console.WriteLine(string.Format("begin {0} retry {1} ", (object)retryCount, (object)context.CorrelationId) + string.Format("with {0} seconds of delays", (object)timeSpan.TotalSeconds))))));
-            services.BuildServiceProvider();
+            //services.BuildServiceProvider();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)

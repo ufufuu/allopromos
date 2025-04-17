@@ -118,58 +118,50 @@ namespace allopromo.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(string Id, [FromForm] ProductUpdateDto productToUpdate)
         {
-            try
-            {
-                var productById = (await _catalogService.GetProductsByStore(Id));
+            if (Id == null || productToUpdate == null)
+                return BadRequest();
+
+            var productById = (await _catalogService.GetProductsByStore(Id));
                                 //.Where(x => x.productId.Equals(Id));
-                if (productById == null)
-                    return NotFound(" product  with id " + Id + " Not Found");
-                if (productToUpdate.productImages != null)
-                {
-                    IList<IFormFile> productImages = productToUpdate.productImages;
-                    if ((productImages != null ? (productImages.FirstOrDefault().Length > 1048576L ? 1 : 0) : 0) != 0)
-                        return BadRequest();  //StatusCode(400, (object)" File size shoud not exceed 1 MB");
-                    string[] strArray = new string[3]
-                    {
-                        ".jpg",
-                        ".jpeg",
-                        ".png"
-                    };
-                }
+            if (productById == null)
+               return NotFound(" product  with id " + Id + " Not Found");
+            if (productToUpdate.productImages != null)
+            {
+                IList<IFormFile> productImages = productToUpdate.productImages;
+                if ((productImages != null ? (productImages.FirstOrDefault().Length > 1048576L ? 1 : 0) : 0) != 0)
+                      return BadRequest();  //StatusCode(400, (object)" File size shoud not exceed 1 MB");
+                 string[] strArray = new string[3]
+                 {
+                     ".jpg",
+                     ".jpeg",
+                     ".png"
+                 };
+            }
                 //_catalogService.UpdateProductAsync(productById);
                 return Ok(productById);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
         }
 
         [Route("id")]
         [HttpDelete]
         public async Task<IActionResult> Delete(string Id)
         {
-            try
-            {
-                var productToDelete = await _catalogService.GetProductsByStore(Id); 
+            if (Id == null)
+                return BadRequest();
+                    
+            var productToDelete = await _catalogService.GetProductsByStore(Id); 
                                           //.Where(x => x.productCategoryId.Equals(Id));
-                if (productToDelete == null)
+            if (productToDelete == null)
                     //return (IActionResult)productsController.StatusCode(404, (object)("product with " + Id + " Not Found "));
-                    return BadRequest();
-                _catalogService.Delete(productToDelete);
-
                 return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(); // StatusCode(500, (object)ex.Message);
-            }
+            await _catalogService.Delete(productToDelete);
+            return BadRequest(); // StatusCode(500, (object)ex.Message);
         }
 
+        /*
         private async Task<IActionResult> gr ([FromForm] MultipartFormDataContent formData)
         {
-            return (IActionResult)null;
-        }
+            return Ok(null);
+        }*/
 
         private IActionResult gt([FromForm] IFormFile file)
         {

@@ -38,7 +38,7 @@ namespace allopromo.Core.Services
         {
             _departmentRepository.Add(new Department { });
         }
-        public async Task CreateDepartmentAsync(Department department)
+        public Task CreateDepartmentAsync(Department department)
         {
             try
             {
@@ -51,7 +51,9 @@ namespace allopromo.Core.Services
                 if (department != null)
                 {
                     _departmentRepository.Add(department);
-                    return; // Task.FromResult(departmentDto);// Dto);
+                    //return Task.FromResult(departmentDto);// Dto);
+
+                    return Task.FromResult(department);
                 }
                 else
                     throw new NullReferenceException();

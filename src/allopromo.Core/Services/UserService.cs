@@ -71,8 +71,8 @@ namespace allopromo.Core.Services
 
         public async Task<List<ApplicationUser>> GetUsersWithRolesAsync()
         {
-            IList<ApplicationUser> applicationUserList = (IList<ApplicationUser>)new List<ApplicationUser>();
-            IList<ApplicationUser> listAsync;
+            IList<ApplicationUser> applicationUserList = 
+                (IList<ApplicationUser>)new List<ApplicationUser>();
             try
             {
                 var listofUsers = await _userManager.Users.ToListAsync();
@@ -137,7 +137,7 @@ namespace allopromo.Core.Services
             string currentLogin = new HttpContextAccessor().HttpContext?.User.Claims.First<Claim>((Func<Claim, bool>)(x => x.Type == "id")).Value;
             return (await this._userManager.Users.AsQueryable<ApplicationUser>().ToListAsync<ApplicationUser>()).Where<ApplicationUser>((Func<ApplicationUser, bool>)(user => user.UserName.Equals(currentLogin))).FirstOrDefault<ApplicationUser>();
         }
-
+        /*
         public async Task<string> GenerateJwtTokentt597(ApplicationUser user)
         {
             JwtSecurityTokenHandler securityTokenHandler = new JwtSecurityTokenHandler();
@@ -147,9 +147,9 @@ namespace allopromo.Core.Services
             }.Secret);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[1]
+              Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[1]
               {
-          new Claim("id", user.UserName.ToString())
+                new Claim("id", user.UserName.ToString())
               }),
                 Expires = new DateTime?(DateTime.UtcNow.AddDays(7.0)),
                 SigningCredentials = new SigningCredentials((SecurityKey)new SymmetricSecurityKey(bytes), "HS256")
@@ -157,7 +157,7 @@ namespace allopromo.Core.Services
             SecurityToken token = securityTokenHandler.CreateToken(tokenDescriptor);
             return securityTokenHandler.WriteToken(token);
         }
-
+        */
         public async Task<string> GenerateJwtToken(ApplicationUser user)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();

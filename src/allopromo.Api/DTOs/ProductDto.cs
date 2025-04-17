@@ -13,7 +13,6 @@ namespace allopromo.Api.DTOs
         public float productPrice { get; set; }
         public IList<IFormFile> productImages { get; set; }
     }
-
     public class CreateProductDto
     {
         [Required]

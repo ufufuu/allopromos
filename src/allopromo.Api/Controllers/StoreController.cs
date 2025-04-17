@@ -28,13 +28,12 @@ namespace allopromo.Api.Controllers
         //private readonly ICatalogService _catalogService;
         private readonly INotifyService _notificationService; 
         private readonly allopromo.Core.Interfaces.ICatalogService _catalogService;
-        private IMapper _mapper;
-        
         public int pageNumber { get; set; }
         public IUserService _userService { get; set; }
-        public HttpContextAccessor _httpContextAccessor { get; set; }
         public IImageUploadService _imageUploadService { get; set; }
         public IMediaService _mediaService { get; set; }
+        public HttpContextAccessor _httpContextAccessor { get; set; }
+        private IMapper _mapper;
         public StoreController(
           IStoreService storeService,
           ICatalogService productService,
@@ -43,17 +42,19 @@ namespace allopromo.Api.Controllers
           IImageUploadService imageUploadService,
           IMediaService mediaService,
           INotifyService notificationService,
+          HttpContextAccessor httpContextAccessor,
           IMapper mapper)
         {
             _userService = userService;
             _storeService = storeService;
             //_productService = productService;
-
             _catalogService = catalogService;
             _notificationService = notificationService;
             _imageUploadService = imageUploadService;
             _mediaService = mediaService;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            
         }
 
         [HttpPost]
@@ -193,13 +194,10 @@ namespace allopromo.Api.Controllers
             return Ok(_mapper.Map<StoreDto>((object)storeCategoryDto));
         }
 
-        private async Task<bool> ValidateImageFile(FormFile file)
+        private IActionResult PostImage([FromForm] string location) //=> (IActionResult)null;
         {
-            return file.ContentType.ToLower() != "image/jpeg" && file.ContentType.ToLower() != "image/jpg" && file.ContentType.ToLower() != "image/png";
+            return Ok();
         }
-
-        private IActionResult PostImage([FromForm] string location) => (IActionResult)null;
-
         public delegate string mydelegate(string msg);
 
         public delegate string myGenericDelegate<T>(string msg);

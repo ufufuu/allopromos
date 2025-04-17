@@ -241,18 +241,30 @@ namespace allopromo.Api.Controllers
 
         [HttpPost]
         [Route("{adressId}")]
-        public async Task<IActionResult> AddAdress() => Ok();
+        public IActionResult AddAdress()
+        {
+            return Ok();
+        }
 
         [HttpDelete]
         [Route("{adressId}")]
-        public async Task<IActionResult> AdressDelete() => Ok();
+        public IActionResult AdressDelete()
+        {
+            return Ok();
+        }
 
         [HttpPut]
         [Route("{adressId}")]
-        public async Task<IActionResult> AdressEdit() => Ok();
+        public IActionResult AdressEdit()
+        {
+            return Ok();
+        }
 
         [HttpPatch]
-        public async Task<IActionResult> ConfirmCurrentLocalization() => Ok();
+        public IActionResult ConfirmCurrentLocalization()
+        {
+            return Ok();
+        }
 
         [HttpGet]
         [Route("CheckUserName")]

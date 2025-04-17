@@ -32,7 +32,7 @@ namespace allopromo.Infrastructure.Repositories ///allopromo.Infrastructure.Repo
         #endregion
 
         #region Create
-        public void Add(T obj)
+        public void Add (T obj)
         {
             try
             {
