@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: allopromo.Api.Startup
-// Assembly: allopromo.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: D9E70BF9-6813-49CA-B8B2-EE280C9B986F
-// Assembly location: C:\Users\MonPC\Downloads\allopromo.Api.dll
-
-using allopromo.Api.DTOs;
+﻿using allopromo.Api.DTOs;
 using allopromo.Api.Infrastructure.Abstract;
 using allopromo.Api.Infrastructure.Mapping.Profiles;
 using allopromo.Api.Infrastructure.Logging;
@@ -115,6 +109,7 @@ namespace allopromo.Api
             })).CreateMapper();
             services.AddSingleton<IMapper>(mapper);
             AutoMapperConfig.Configure();
+            services.AddMediatR(typeof(CreateCommandHandler));
             services.AddAutoMapper(typeof(Program));
             services.AddDistributedMemoryCache();
             services.AddSession((Action<SessionOptions>)(options =>

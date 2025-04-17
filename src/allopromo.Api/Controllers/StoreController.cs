@@ -33,6 +33,7 @@ namespace allopromo.Api.Controllers
         public IImageUploadService _imageUploadService { get; set; }
         public IMediaService _mediaService { get; set; }
         public HttpContextAccessor _httpContextAccessor { get; set; }
+        private readonly MediatR.IMediator _mediator; 
         private IMapper _mapper;
         public StoreController(
           IStoreService storeService,
@@ -81,10 +82,13 @@ namespace allopromo.Api.Controllers
             store.storeDescription = dto.StoreDescription;
             store.User = currentUser;
             store.Category = category;
+
+            //model = await _mediator.Send(new AddCategoryCommand() { Model = model });
             await _storeService.CreateStoreAsync(store, currentUser.UserName, city, dto.CategoryName);
 
             if(await _userService.UpdateUserRole("Merchants", currentUser.UserName))
                 return Ok(dto);
+
             return Ok((object)new allopromo.Api.Model.Response()
             {
                 Status = "400",

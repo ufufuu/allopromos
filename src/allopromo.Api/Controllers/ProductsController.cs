@@ -1,6 +1,5 @@
-﻿using allopromo.Api.Commands.Model;
+﻿
 using allopromo.Api.DTOs;
-using allopromo.Api.Queries.Models;
 using allopromo.Api.Validators;
 using allopromo.Core.Abstract;
 using allopromo.Core.Domain;
@@ -9,7 +8,6 @@ using allopromo.Core.Interfaces;
 using allopromo.Core.Model;
 using allopromo.Core.Services;
 using AutoMapper;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +28,8 @@ namespace allopromo.Api.Controllers
         private IUserService _userService { get; set; }
         private IStoreService _storeService { get; set; }
         private IMediaService _mediaService { get; set; }
-        private IMediator _mediator { get; set; }
         private readonly IMapper _mapper;
         private IValidationService _validationService { get; set; }
-
         public ProductsController(
           ICatalogService catalogService,
           IUserService userService,
@@ -87,32 +83,6 @@ namespace allopromo.Api.Controllers
             var productsByStore = await _catalogService.GetProductsByStore(storeName.ToString());
             IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>(productsByStore);
             return (IActionResult)productsController.Ok((object)productDtos);
-        }
-
-        [Route("({key})/[action]")]
-        [HttpPut]
-        public async Task<IActionResult> UpdateProductPicture(string key, [FromBody] AisleDto productPictureDto)
-        {
-            ProductsController productsController = this;
-            if (productPictureDto == null)
-                return BadRequest();
-
-            IMediator mediator1 = productsController._mediator;
-            GetQuery<ProductDto> getQuery = new GetQuery<ProductDto>();
-            getQuery.Id = key;
-            CancellationToken cancellationToken1 = new CancellationToken();
-            IQueryable<ProductDto> source = await ((ISender)mediator1).Send<IQueryable<ProductDto>>((IRequest<IQueryable<ProductDto>>)getQuery, cancellationToken1);
-            if (!source.Any<ProductDto>())
-                return (IActionResult)productsController.NotFound();
-            if (productsController.ModelState.IsValid)
-            {
-                IMediator mediator2 = productsController._mediator;
-                AddProductPictureCommand productPictureCommand = new AddProductPictureCommand();
-                productPictureCommand.Product = source.FirstOrDefault<ProductDto>();
-                CancellationToken cancellationToken2 = new CancellationToken();
-                bool flag = await ((ISender)mediator2).Send<bool>((IRequest<bool>)productPictureCommand, cancellationToken2);
-            }
-            return (IActionResult)productsController.BadRequest(productsController.ModelState);
         }
 
         [HttpPut("{id}")]
