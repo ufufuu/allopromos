@@ -1,7 +1,7 @@
 
 FROM ubuntu:20.04
 
-SHELL ["/bin/bash", "-c"]
+RUN ["/bin/bash", "-c", "source /opt/ros/melodic/setup.bash"]
 
 RUN apt-get update && apt-get install -y wget software-properties-common
 
