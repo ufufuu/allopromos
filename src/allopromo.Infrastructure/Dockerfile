@@ -3,14 +3,14 @@ FROM mcr.microsoft.com/mssql/server:2019-latest
 
 #Directory to store the data, which can be referenced as the starting point.
 
-RUN mkdir -p /var/opt/mysql
+# RUN mkdir -p /var/opt/mysql
 
 # Copy files to User Directory
-COPY . /usr/local/bin
+# COPY . /usr/local/bin
 
 
-CMD ["/usr/local/bin/start.sh"]
-ENTRYPOINT ["sh"]
+# CMD ["/usr/local/bin/start.sh"]
+# ENTRYPOINT ["sh"]
 
 # CMD /bin/bash ./entrypoint.sh
 ENV SA_PASSWORD password123!
