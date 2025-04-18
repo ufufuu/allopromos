@@ -1,0 +1,45 @@
+
+# Exported from Render on 2025-04-12T17:52:53Z 
+# https://www.bytebase.com/docs/get-started/install/deploy-to-render/
+# COPY --from=builder /initialized-db /var/lib/mysql
+# https://marketplace.stripe.com/
+# https://render.com/docs/stripe
+
+services:
+  - type: web
+    name: allopromoApi
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: src/allopromo.Api/Dockerfile
+    numInstances:1
+    healthCheckPath: /healthz
+    envVars:
+        - key: SQLHOST
+          fromDatabase:
+            name: allopromoDB
+            property:connectionString
+        - key : SQLPORT
+          fromDatabase:
+            name: allopromoDB
+            property: PORT
+        - key: PGUSER
+          fromDatabase:
+            name: lightdash-database
+            property: user
+      - key: PGPASSWORD
+          fromDatabase:
+            name: lightdash-database
+            property: password
+  - type: web
+    name: allopromoDB
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: src/allopromo.Infrastructure/Dockerfile
+    
+databases:

@@ -12,16 +12,14 @@ COPY . /usr/local/bin
 CMD ["/usr/local/bin/start.sh"]
 ENTRYPOINT ["sh"]
 
-
-
-#CMD /bin/bash ./entrypoint.sh
+# CMD /bin/bash ./entrypoint.sh
 ENV SA_PASSWORD password123!
 ENV ACCEPT_EULA Y
 ENV MSSQL_PID Express
 
 EXPOSE 1433
 
-CMD /bin/bash ./entrypoint.sh
+# CMD /bin/bash ./entrypoint.sh
 
 
 # RUN useradd -M -s /bin/bash -u 10001 -g 0 mssql
