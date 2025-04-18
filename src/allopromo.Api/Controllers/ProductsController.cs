@@ -39,7 +39,6 @@ namespace allopromo.Api.Controllers
           IMapper mapper)
         {
             //_productService = productService;
-
             _userService = userService;
             _storeService = storeService;
             _mediaService = mediaService;
@@ -66,7 +65,7 @@ namespace allopromo.Api.Controllers
                 product.productName = dto.Name;
                 product.productStatus = (int)dto.productPrice;
                 product.Store = store;
-                product.productImages = productPictures;
+                //product.productImages = productPictures;
 
                 await _catalogService.CreateProductAsync(product, dto.categoryName);
                 return Ok(dto);
