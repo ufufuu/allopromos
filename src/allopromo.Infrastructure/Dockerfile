@@ -15,11 +15,7 @@ ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
 
 EXPOSE 1433
 
-# Copy all SQL Server runtime files from build drop into image.
-COPY ./install /
 
-# Run SQL Server process.
-CMD [ "/opt/mssql/bin/sqlservr" ]
 
 
 
