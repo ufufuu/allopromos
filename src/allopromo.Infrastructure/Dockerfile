@@ -10,12 +10,6 @@ run docker run -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=yourStrong(!)Password’
 
 
 
-# https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-configure-mssql-conf?view=sql-server-ver16
-ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
-
-EXPOSE 1433
-
-
 
 
 
