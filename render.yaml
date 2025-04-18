@@ -1,21 +1,37 @@
-services:
-  - type: pserv
-    name: mssql
-    
-    # env: image
-    # image:
-    #   url: mcr.microsoft.com/mssql/server:2017-latest
 
-    env: docker
-    repo: https://github.com/jonahgeorge/render-examples-mssql.git
-    branch: main
-    
-    plan: standard
-    autoDeploy: false
+services:
+  - type: web
+    name: allopromoApi
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: src/allopromo.Api/Dockerfile
+    numInstances:1
+    healthCheckPath: /healthz
     envVars:
-      - key: ACCEPT_EULA value: 'Y'
-      - key: MSSQL_SA_PASSWORD value: 'YourStrong@Passw0rd'
-    disk:
-      name: data
-      mountPath: /var/opt/mssql
-      sizeGB: 10
+        - key: SQLHOST
+          fromDatabase:
+            name: allopromoDB
+            property:connectionString
+        - key : SQLPORT
+          fromDatabase:
+            name: allopromoDB
+            property: PORT
+        - key: PGUSER
+          fromDatabase:
+            name: lightdash-database
+            property: user
+      - key: PGPASSWORD
+          fromDatabase:
+            name: lightdash-database
+            property: password
+  - type: web
+    name: allopromoDB
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: src/allopromo.Infrastructure/Dockerfile

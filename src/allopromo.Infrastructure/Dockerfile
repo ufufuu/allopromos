@@ -1,7 +1,7 @@
 
 FROM ubuntu:20.04
 
-SHELL ["/bin/bash", "-c"]
+# SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && apt-get install -y wget software-properties-common
 
