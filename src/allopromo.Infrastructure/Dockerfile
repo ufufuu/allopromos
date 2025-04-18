@@ -1,7 +1,7 @@
 # The official Microsoft Sql Server
 FROM mcr.microsoft.com/mssql/server:2019-latest
 
-RUN docker run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword” -p 1433:1433  --restart=always --name MSSQLSERVER -v /home/docker/dockervolumes/MSSQL/:/var/opt/mssql -d [mcr.microsoft.com/mssql/server:2019-latest](http://mcr.microsoft.com/mssql/server:2019-latest)
+RUN docker run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword” -p 1433:1433  --restart=always --name MSSQLSERVER -v /home/docker/dockervolumes/MSSQL/:/var/opt/mssql -d [mcr.microsoft.com/mssql/server:2019-latest]
 
 #Directory to store the data, which can be referenced as the starting point.
 # RUN mkdir -p /var/opt/mysql
@@ -20,8 +20,6 @@ ENV MSSQL_PID Express
 # EXPOSE 1433
 
 # CMD /bin/bash ./entrypoint.sh
-
-
 # RUN useradd -M -s /bin/bash -u 10001 -g 0 mssql
 # RUN mkdir -p -m 770 /var/opt/mssql && chgrp -R 0 /var/opt/mssql
 # RUN setcap 'cap_net_bind_service+ep' /opt/mssql/bin/sqlservr
