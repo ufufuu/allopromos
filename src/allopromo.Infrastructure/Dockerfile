@@ -1,3 +1,4 @@
+
 FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y wget software-properties-common
@@ -7,11 +8,3 @@ RUN apt-get update && apt-get install -y mssql-server
 
 # https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-configure-mssql-conf?view=sql-server-ver16
 ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
-
-
-docker run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword”
--p 1433:1433  --restart=always --name MSSQLSERVER
--v /home/docker/dockervolumes/MSSQL/:/var/opt/mssql
--d [mcr.microsoft.com/mssql/server:2019-latest](http://mcr.microsoft.com/mssql/server:2019-latest)
-
-
