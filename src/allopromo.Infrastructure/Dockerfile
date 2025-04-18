@@ -6,3 +6,5 @@ RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu
 RUN apt-get update && apt-get install -y mssql-server
 
 run docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d "microsoft/mssql-server-linux:2019-latest"
+
+run docker exec -it -u root my-jentkins /bin/bash
