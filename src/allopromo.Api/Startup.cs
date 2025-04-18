@@ -108,8 +108,14 @@ namespace allopromo.Api
                 //mc.ValidateInlineMaps = new bool?(false);
             })).CreateMapper();
             services.AddSingleton<IMapper>(mapper);
+            /// <summary>
+            /// Add MediatR
+            /// </summary>
+            //services.AddMediatR(typeof(CreateCommandHandler));
+            /// <summary>
+            /// Add AutoMapper
+            /// </summary>
             AutoMapperConfig.Configure();
-            services.AddMediatR(typeof(CreateCommandHandler));
             services.AddAutoMapper(typeof(Program));
             services.AddDistributedMemoryCache();
             services.AddSession((Action<SessionOptions>)(options =>
