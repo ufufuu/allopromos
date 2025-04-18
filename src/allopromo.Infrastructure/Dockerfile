@@ -1,6 +1,5 @@
 
 # FROM ubuntu:20.04
-FROM microsoft/mssql-server-linux/
 RUN apt-get update && apt-get install -y wget software-properties-common
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
 RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
