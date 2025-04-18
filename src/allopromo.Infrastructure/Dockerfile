@@ -1,5 +1,8 @@
 
 FROM ubuntu:20.04
+
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update && apt-get install -y wget software-properties-common
 
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
