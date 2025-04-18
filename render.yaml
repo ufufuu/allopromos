@@ -13,10 +13,8 @@ services:
     plan: standard
     autoDeploy: false
     envVars:
-      - key: ACCEPT_EULA
-        value: "Y"
-      - key: MSSQL_SA_PASSWORD
-        value: "YourStrong@Passw0rd"
+      - key: ACCEPT_EULA value: 'Y'
+      - key: MSSQL_SA_PASSWORD value: 'YourStrong@Passw0rd'
     disk:
       name: data
       mountPath: /var/opt/mssql
