@@ -1,10 +1,4 @@
 
-# Exported from Render on 2025-04-12T17:52:53Z 
-# https://www.bytebase.com/docs/get-started/install/deploy-to-render/
-# COPY --from=builder /initialized-db /var/lib/mysql
-# https://marketplace.stripe.com/
-# https://render.com/docs/stripe
-
 services:
   - type: web
     name: allopromoApi
@@ -43,3 +37,11 @@ services:
     dockerfilePath: src/allopromo.Infrastructure/Dockerfile
     
 databases:
+
+# Exported from Render on 2025-04-12T17:52:53Z 
+# https://www.bytebase.com/docs/get-started/install/deploy-to-render/
+# COPY --from=builder /initialized-db /var/lib/mysql
+# https://marketplace.stripe.com/
+# https://render.com/docs/stripe
+
+# https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-deployment?view=sql-server-ver15&pivots=cs1-bash
