@@ -3,7 +3,7 @@ services:
 - type: pserv
   name: sqlserver
   plan: free
-  env:docker
+  env: docker
   autoDeploy:false
   disk:
     name: mysql
