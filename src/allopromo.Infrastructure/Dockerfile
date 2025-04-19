@@ -1,15 +1,13 @@
-# mssql-server-linux
-# Maintainers: Microsoft Corporation (LuisBosquez and twright-msft on GitHub)
-# GitRepo: https://github.com/Microsoft/mssql-docker
 
-# Base OS layer: Latest Ubuntu LTS.
-FROM ubuntu:16.04
+FROM ubuntu:20.04
+RUN apt-get update && \
+ apt-get install -y wget software-properties-common
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
+RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
+RUN apt-get update && apt-get install -y mssql-server
+sudo docker run && \
+-e ACCEPT_EULA=Y -e SA_PASSWORD=123456a@ -p 1433:1433 --restart=always --name sqlserver -d mcr.microsoft.com/mssql/server:2019-latest 
 
-# Default SQL Server TCP/Port.
-EXPOSE 1433
+ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
 
-# Copy all SQL Server runtime files from build drop into image.
-COPY ./install /
-
-# Run SQL Server process.
-CMD [ "/opt/mssql/bin/sqlservr" ]
+# run sudo docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=myPassword -p 1433:1433  --restart=always --name MSSQLSERVER
