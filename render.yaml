@@ -32,13 +32,13 @@ services:
   region: oregon
   dockerContext: .
   dockerfilePath: src/allopromo.Api/Dockerfile
-  numInstances:1
+  numInstances: 1
   healthCheckPath: /healthz
   envVars:
     - key: SQLHOST
       fromDatabase:
         name: allopromoDB
-        property:connectionString
+        property:c onnectionString
     - key : SQLPORT
       fromDatabase:
         name: allopromoDB
