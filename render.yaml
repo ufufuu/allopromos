@@ -18,3 +18,7 @@ services:
   dockerfilePath: src/allopromo.Api/Dockerfile
   numInstances: 1
   healthCheckPath: /healthz
+  
+  
+  
+# https://vijayasimhabr.medium.com/running-microsoft-sql-database-server-with-docker-5a879ef06adb
