@@ -4,7 +4,7 @@ services:
   name: sqlserver
   plan: free
   env: docker
-  autoDeploy:false
+  autoDeploy: false
   disk:
     name: mysql
     mountPath: /var/lib/mysql
