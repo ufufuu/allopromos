@@ -5,10 +5,7 @@ services:
   plan: free
   env: docker
   autoDeploy: false
-  disk:
-    name: mysql
-    mountPath: /var/lib/mysql
-    sizeGB: 10
+ 
   envVars:
   - fromGroup: mysql
   
