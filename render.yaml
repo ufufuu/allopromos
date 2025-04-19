@@ -5,8 +5,6 @@ services:
   plan: free
   env: docker
   autoDeploy: false
-  envVars:
-  - fromGroup: mssql
   
 - type: web
   name: allopromoApi
