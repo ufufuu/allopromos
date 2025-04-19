@@ -10,4 +10,4 @@ RUN apt-get update && \
 
 ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
 
-# run sudo docker run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword” -p 1433:1433  --restart=always --name MSSQLSERVER
+# run sudo docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=myPassword -p 1433:1433  --restart=always --name MSSQLSERVER
