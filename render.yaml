@@ -5,11 +5,9 @@ services:
   plan: free
   env: docker
   autoDeploy: false
- 
   envVars:
   - fromGroup: mysql
   
-
 - type: web
   name: allopromoApi
   runtime: docker
