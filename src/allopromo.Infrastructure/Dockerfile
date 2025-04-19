@@ -13,3 +13,6 @@ COPY ./install /
 
 # Run SQL Server process.
 CMD [ "/opt/mssql/bin/sqlservr" ]
+
+
+#https://github.com/microsoft/mssql-docker/blob/master/linux/mssql-server-linux/Dockerfile
