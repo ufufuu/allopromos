@@ -47,3 +47,5 @@ services:
 # https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-configure-mssql-conf?view=sql-server-ver16
 
 # https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-configure-mssql-conf?view=sql-server-ver16
+
+# https://vijayasimhabr.medium.com/running-microsoft-sql-database-server-with-docker-5a879ef06adb
