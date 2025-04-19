@@ -8,4 +8,4 @@ RUN apt-get update && apt-get install -y mssql-server
 
 ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
 
-run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword” -p 1433:1433  --restart=always --name MSSQLSERVER
+run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=myPassword' -p 1433:1433  --restart=always --name MSSQLSERVER
