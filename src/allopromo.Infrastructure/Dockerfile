@@ -6,7 +6,7 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/t
 RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
 RUN apt-get update && apt-get install -y mssql-server
 RUN apt-get update && \
--e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=123456a@' -p 1433:1433
+-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=123456a@' -p 1433:1433 --name sqlserver
 ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]
 
 # run sudo docker run -e “ACCEPT_EULA=Y” -e “SA_PASSWORD=myPassword” -p 1433:1433  --restart=always --name MSSQLSERVER
