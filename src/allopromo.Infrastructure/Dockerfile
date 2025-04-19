@@ -5,7 +5,8 @@ RUN apt-get update && \
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
 RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
 RUN apt-get update && apt-get install -y mssql-server
-run && \
+RUN apt-get update && \
+	apt-get install && \
 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=123456a@" -p 1433:1433 --restart=always --name sqlserver -d mcr.microsoft.com/mssql/server:2019-latest 
 
 ENTRYPOINT [ "/opt/mssql/bin/sqlservr" ]

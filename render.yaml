@@ -18,7 +18,16 @@ services:
   dockerfilePath: src/allopromo.Api/Dockerfile
   numInstances: 1
   healthCheckPath: /healthz
-  
-  
-  
+
+
+
+# https://www.howtoforge.com/how-to-create-docker-images-with-dockerfile-ubuntu-20-04/
+
+# https://github.com/render-examples/mysql/blob/master/render.yaml
+# https://github.com/jonahgeorge/render-examples-mssql/blob/main/render.yaml
+
+
+# https://forums.docker.com/t/sql-server-for-linux-exits-aborts-immediately-after-start/88509
+# https://stackoverflow.com/questions/78194000/docker-container-running-mssql-server-in-ubuntu-20-04-base-image-not-starting
+    
 # https://vijayasimhabr.medium.com/running-microsoft-sql-database-server-with-docker-5a879ef06adb
