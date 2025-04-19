@@ -6,7 +6,7 @@ services:
   env: docker
   autoDeploy: false
   envVars:
-  - fromGroup: mysql
+  - fromGroup: mssql
   
 - type: web
   name: allopromoApi
