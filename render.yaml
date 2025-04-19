@@ -1,5 +1,28 @@
 
 services:
+ - type: pserv
+    name: sqlserver
+    plan: free
+    env:docker
+    autoDeploy:false
+    disk:
+        name: mysql
+        mountPath: /var/lib/mysql
+        sizeGB: 10
+    envVars:
+    - fromGroup: mysql
+    envVarGroups:
+    - name: mysql
+      envVars:
+      - key: MYSQL_DATABASE
+        value: mysql
+      - key: MYSQL_USER
+        value: mysql
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+    repo: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
   - type: web
     name: allopromoApi
     runtime: docker
@@ -11,27 +34,19 @@ services:
     numInstances:1
     healthCheckPath: /healthz
     envVars:
-        - key: SQLHOST
-          fromDatabase:
-            name: allopromoDB
-            property:connectionString
-        - key : SQLPORT
-          fromDatabase:
-            name: allopromoDB
-            property: PORT
-        - key: PGUSER
-          fromDatabase:
-            name: lightdash-database
-            property: user
-      - key: PGPASSWORD
-          fromDatabase:
-            name: lightdash-database
-            property: password
-  - type: web
-    name: allopromoDB
-    runtime: docker
-    repo: https://github.com/ufufuu/allopromos
-    plan: free
-    region: oregon
-    dockerContext: .
-    dockerfilePath: src/allopromo.Infrastructure/Dockerfile
+     - key: SQLHOST
+        fromDatabase:
+          name: allopromoDB
+          property:connectionString
+     - key : SQLPORT
+        fromDatabase:
+          name: allopromoDB
+          property: PORT
+     - key: PGUSER
+        fromDatabase:
+          name: lightdash-database
+          property: user
+     - key: PGPASSWORD
+        fromDatabase:
+          name: lightdash-database
+          property: password
