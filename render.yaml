@@ -38,7 +38,7 @@ services:
     - key: SQLHOST
       fromDatabase:
         name: allopromoDB
-        property:c onnectionString
+        property: connectionString
     - key : SQLPORT
       fromDatabase:
         name: allopromoDB
