@@ -155,10 +155,15 @@ namespace allopromo.Core.Services
         #endregion
 
         #region Products Categories
-        public void CreateProductCategory(ProductCategory tProductCategory)
+        public async Task<bool> CreateProductCategory(ProductCategory tProductCategory)
         {
-            _productCategoryRepository.Add(tProductCategory);
-            _productCategoryRepository.Save();
+            if(tProductCategory != null)
+            {
+                _productCategoryRepository.Add(tProductCategory);
+                _productCategoryRepository.Save();
+                return true;
+            }
+            throw new ArgumentException(" product Category");
         }
 
         public async Task<ProductCategory> GetProductCategory(string Id)

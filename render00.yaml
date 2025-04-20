@@ -36,6 +36,13 @@ services:
     dockerContext: .
     dockerfilePath: src/allopromo.Infrastructure/Dockerfile
 
+
+To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
+/opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Operation not permitted
+/opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Success
+
+
+
 # Exported from Render on 2025-04-12T17:52:53Z 
 # https://www.bytebase.com/docs/get-started/install/deploy-to-render/
 # COPY --from=builder /initialized-db /var/lib/mysql

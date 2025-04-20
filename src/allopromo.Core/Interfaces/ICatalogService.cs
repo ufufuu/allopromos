@@ -14,7 +14,7 @@ namespace allopromo.Core.Interfaces
         Task<StoreCategory> GetStoreCategory(string name); 
 
         #region Product Categories
-        void CreateProductCategory(ProductCategory productCategory);
+        Task<bool> CreateProductCategory(ProductCategory productCategory);
         Task<ProductCategory> GetProductCategory(string Id);
         ProductCategory UpdateProductCategory(string Id);
 
