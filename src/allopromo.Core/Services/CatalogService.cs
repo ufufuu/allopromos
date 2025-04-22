@@ -63,6 +63,7 @@ namespace allopromo.Core.Services
         public async Task<IEnumerable<Product>> GetProductsByStore(string storeId)
         {
             var products = new List<Product>();
+
             if (storeId != null)
             {
                 var tObjProducts = (await _productRepository.GetAllAsync()).AsQueryable()//GetProductsByStoreIdAsync(storeId);//GetByIdAsync(storeId);
@@ -75,6 +76,8 @@ namespace allopromo.Core.Services
                                         });
                 products = AutoMapper.Mapper.Map<List<Product>>(tObjProducts);
             }
+            else
+                throw new ArgumentNullException("storeId");
             return products;
         }
 
@@ -163,7 +166,7 @@ namespace allopromo.Core.Services
                 _productCategoryRepository.Save();
                 return true;
             }
-            throw new ArgumentException(" product Category");
+            throw new ArgumentNullException(" product Category");
         }
 
         public async Task<ProductCategory> GetProductCategory(string Id)

@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 using allopromo.Core.Entities;
 using System.Net.Http;
 using Microsoft.AspNetCore.Identity;
-using allopromo.Core.Domain;
 using AutoMapper;
 using System.Linq;
-using allopromo.Core.Services;
-using System.Text;
 using Newtonsoft.Json;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
@@ -25,45 +22,33 @@ namespace allopromo.Core.Services
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         public Action<string> _StoreCreated;
         public HttpClient _httpClient { get; set; }
-
         public IRepository<Store> _storeRepository { get; set; }
 
         public event StoreCreatedEventHandler StoreCreated;
         public static int _storesNumber { get; set; }
         public IUserService _userService { get; set; }
-        
         public UserManager<ApplicationUser> _userManager { get; set; }
         public IHttpContextAccessor _httpContextAccessor { get; set; }
         public IDepartmentService _departmentService { get; set; }
-        public IRepository<Department> _departmentRepository { get; set; }
-        public IRepository<StoreCategory> _categoryRepository { get; set; }
-        public IRepository<City> _citiesRepository { get; set; }
-        private ICatalogService _catalogService { get; set; }
+       // public IRepository<Department> _departmentRepository { get; set; }
+        public IRepository<StoreCategory> _storeCategoryRepository { get; set; }
+        //private ICatalogService _catalogService { get; set; }
         private ILocationService _locationService { get; set; }
-
         public INotifyService _notificationService { get; set; }
         public StoreService(
           IRepository<Store> storeRepository,
-          IRepository<StoreCategory> categoryRepository,
+          IRepository<StoreCategory> storeCategoryRepository,
           IDepartmentService departmentService,
           ILocationService locationService,
-          IUserService userService,
-          IRepository<City> citiesRepository,
-          UserManager<ApplicationUser> userManager,
-          IHttpContextAccessor httpContextAccessor,
-          IRepository<Department> departmentRepository)
+          IUserService userService
+            )
         {
             _storeRepository = storeRepository;
-            _categoryRepository = categoryRepository;
-            _userService = userService;
-            _userManager = userManager;
+            _storeCategoryRepository = storeCategoryRepository;
             _locationService = locationService;
             _departmentService = departmentService;
-            _httpContextAccessor = httpContextAccessor;
-            _departmentRepository = departmentRepository;
-            _citiesRepository = citiesRepository;
+            _userService = userService;
         }
-
         protected virtual void OnStoreCreated()
         {
             if (this.StoreCreated == null)
@@ -83,7 +68,9 @@ namespace allopromo.Core.Services
                     return false;
 
                 Store storeObj = new Store();
-                StoreCategory category = (await _categoryRepository.GetAllAsync()).Where(x => x.storeCategoryName.Equals(storeCategoryName)).FirstOrDefault();
+                StoreCategory category = (await _storeCategoryRepository
+                    .GetAllAsync()).Where(x => x.storeCategoryName.Equals(storeCategoryName))
+                    .FirstOrDefault();
                                 
                 City cityByName = await _locationService.GetCityByName(storeCityName);
                 storeObj.storeId = Guid.NewGuid();
@@ -116,7 +103,9 @@ namespace allopromo.Core.Services
             DateTime dateTime = DateTime.Now;
             dateTime = dateTime.AddMonths(6);
             dateTime.Day.ToString("00");
-            Department department = this._departmentService.GetDepartmentsAsync().Result.Where<Department>((Func<Department, bool>)(x => x.departmentName == storeCategory.Department.departmentName)).FirstOrDefault<Department>();
+            Department department = _departmentService.GetDepartmentsAsync()
+                .Result.Where(x => x.departmentName == storeCategory.Department.departmentName)
+                .FirstOrDefault<Department>();
             StoreCategory StoreCategory = new StoreCategory();
             StoreCategory.storeCategoryId = Guid.NewGuid();
             StoreCategory.storeCategoryName = storeCategory.storeCategoryName;
@@ -128,7 +117,7 @@ namespace allopromo.Core.Services
             {
                 string imageUrl = await this.getImageUrl();
             }
-            this._categoryRepository.Add(StoreCategory);
+            _storeCategoryRepository.Add(StoreCategory);
             StoreCategory = (StoreCategory)null;
         }
 
@@ -178,7 +167,8 @@ namespace allopromo.Core.Services
 
         public async Task<StoreCategory> GeStoreCategoryByIdAsync(string storeId)
         {
-            return storeId == null ? (StoreCategory)null : Mapper.Map<StoreCategory>((object)await this._categoryRepository.GetByIdAsync(storeId));
+            return storeId == null ? (StoreCategory)null 
+                : Mapper.Map<StoreCategory>(await _storeCategoryRepository.GetByIdAsync(storeId));
         }
 
         public async Task<Store> GeStoreByIdAsync(string storeId)
@@ -201,12 +191,12 @@ namespace allopromo.Core.Services
 
         public void UpdateStoreCategory(string Id, StoreCategory storeCategory)
         {
-            this._categoryRepository.Update(Mapper.Map<StoreCategory>((object)storeCategory));
+            _storeCategoryRepository.Update(Mapper.Map<StoreCategory>((object)storeCategory));
         }
 
         public void UpdateStoreCategory(StoreCategory category)
         {
-            this._categoryRepository.Update(Mapper.Map<StoreCategory>((object)category));
+            _storeCategoryRepository.Update(Mapper.Map<StoreCategory>((object)category));
         }
 
         public void DeleteStore(Store store) => this._storeRepository.Delete(store);
@@ -261,12 +251,6 @@ namespace allopromo.Core.Services
             string empty = string.Empty;
             return await this.posStoreCategoryImage() ?? throw new Exception();
         }
-
-        private ApplicationUser getCurrentUtili()
-        {
-            return this._userManager.GetUserAsync(this._httpContextAccessor.HttpContext.User).Result;
-        }
-
         public T GetJsonInstance<T>(string propertyName, string json)
         {
             using (StringReader stringReader = new StringReader(json))
@@ -303,10 +287,8 @@ namespace allopromo.Core.Services
             List<Store> storeList1 = new List<Store>();
             List<ApplicationUser> users = await this._userManager.Users.ToListAsync<ApplicationUser>();
             List<Store> storesObj = await this._storeRepository.GetAllAsync();
-            List<StoreCategory> categories = await this._categoryRepository.GetAllAsync();
-            List<City> allAsync = await this._citiesRepository.GetAllAsync();
+            List<StoreCategory> categories = await _storeCategoryRepository.GetAllAsync();
             return storeList1;
-
         }
         public Task<Store> GetStoreByIdAsync(string storeId) => throw new NotImplementedException();
 
@@ -346,11 +328,9 @@ namespace allopromo.Core.Services
 
 }
 
-
 //public class OrderPlacedEventArgs : EventArgs
 //{
 //}
-
 
 /*
 * MapBox token: pk.eyJ1IjoiYWxpd2l5YW8iLCJhIjoiY2twaXo5bnVvMHYzNTJucGUzbTE3NXRodSJ9.qGOJOXU4ys9x_LU9Arj_MA
