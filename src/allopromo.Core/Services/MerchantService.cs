@@ -1,18 +1,9 @@
 ﻿using allopromo.Core.Abstract;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using allopromo.Core.Entities;
 using System.Net.Http;
 using Microsoft.AspNetCore.Identity;
-using allopromo.Core.Domain;
-using AutoMapper;
-using System.Linq;
-using allopromo.Core.Services;
-using System.Text;
-using Newtonsoft.Json;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using allopromo.Core.Interfaces;
 
@@ -24,45 +15,28 @@ namespace allopromo.Core.Services
         public HttpClient _httpClient { get; set; }//https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg
         public string Url = "https://pixabay.com/api/?key=30135386-22f4f69d3b7c4b13c6e111db7&id=195893";
         #endregion
-
         #region Properties
-
         //public event StoreCreatedEventHandler StoreCreated;
 
         public Action<string> _StoreCreated;
-
-
         //public IMembershipService _accountService { get; set; }
         public IUserService _userService { get; set; }
-
         public UserManager<IdentityUser> _userManager { get; set; }
         public IHttpContextAccessor _httpContextAccessor { get; set; }
         #endregion
-
         public IDepartmentService _departmentService { get;set; }
         public IRepository<Department> _departmentRepository { get; set; }
-
         public UserManager<ApplicationUser> userManager { get; set; }
         public IRepository<StoreCategory> _categoryRepository { get; set; }
-
-
         #region Fields
         private ICatalogService _catalogService { get; set; }
-
         //private IRepository<tStore> StoreRepository;
         private ILocationService _locationService { get; set; }
         public INotifyService _notificationService { get; set; }
-
         #endregion
-
-
         #region Events
-        
         #endregion
-
-
         #region Creating Objects 
-        
         public Task<Store> CreateStore(Store store)
         {
             throw new NotImplementedException();

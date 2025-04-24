@@ -30,9 +30,7 @@ namespace allopromo.Core.Services
         public UserManager<ApplicationUser> _userManager { get; set; }
         public IHttpContextAccessor _httpContextAccessor { get; set; }
         public IDepartmentService _departmentService { get; set; }
-       // public IRepository<Department> _departmentRepository { get; set; }
         public IRepository<StoreCategory> _storeCategoryRepository { get; set; }
-        //private ICatalogService _catalogService { get; set; }
         private ILocationService _locationService { get; set; }
         public INotifyService _notificationService { get; set; }
         public StoreService(
@@ -285,7 +283,8 @@ namespace allopromo.Core.Services
         public async Task<IEnumerable<Store>> GetStoresAsync()
         {
             List<Store> storeList1 = new List<Store>();
-            List<ApplicationUser> users = await this._userManager.Users.ToListAsync<ApplicationUser>();
+            //List<ApplicationUser> users = await _userManager.Users.ToListAsync<ApplicationUser>();
+
             List<Store> storesObj = await this._storeRepository.GetAllAsync();
             List<StoreCategory> categories = await _storeCategoryRepository.GetAllAsync();
             return storeList1;

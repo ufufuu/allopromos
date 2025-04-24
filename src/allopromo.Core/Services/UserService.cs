@@ -26,20 +26,16 @@ namespace allopromo.Core.Services
         private HttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration Configuration;
         public UserManager<ApplicationUser> _userManager { get; set; }
-        private IMapper _mapper { get; set; }
-
         public UserService(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           RoleManager<IdentityRole> roleManager,
-          IMapper mapper,
           IConfiguration configuration)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
-            this._roleManager = roleManager;
-            this._mapper = mapper;
-            this.Configuration = configuration;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            Configuration = configuration;
         }
 
         public async Task<bool> CreateUser(string userName, string password)
@@ -161,12 +157,12 @@ namespace allopromo.Core.Services
         public async Task<string> GenerateJwtToken(ApplicationUser user)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Secret"]);
+            byte[] key = Encoding.ASCII.GetBytes(Configuration["Jwt:Secret"]);
             IList<string> rolesAsync = await this._userManager.GetRolesAsync(user);
             string jwtToken = tokenHandler.WriteToken(tokenHandler.CreateToken(new SecurityTokenDescriptor()
             {
-                Issuer = this.Configuration["Jwt:ValidIssuer"],
-                Audience = this.Configuration["Jwt:ValidAudience"],
+                Issuer = Configuration["Jwt:ValidIssuer"],
+                Audience = Configuration["Jwt:ValidAudience"],
                 Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[2]
               {
           new Claim("id", user.UserName.ToString()),
@@ -183,7 +179,7 @@ namespace allopromo.Core.Services
         public async Task<string> GenerateJwtToken123(allopromo.Core.Entities.ApplicationUser user)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Secret"]);
+            byte[] key = Encoding.ASCII.GetBytes(Configuration["Jwt:Secret"]);
             Encoding.ASCII.GetBytes(new AppSettings()
             {
                 Secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
@@ -200,8 +196,8 @@ namespace allopromo.Core.Services
                 claims.Add(new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", str));
             string jwtToken123 = tokenHandler.WriteToken(tokenHandler.CreateToken(new SecurityTokenDescriptor()
             {
-                Issuer = this.Configuration["Jwt:ValidIssuer"],
-                Audience = this.Configuration["Jwt:ValidAudience"],
+                Issuer = Configuration["Jwt:ValidIssuer"],
+                Audience = Configuration["Jwt:ValidAudience"],
                 Expires = new DateTime?(DateTime.UtcNow.AddDays(1.0)),
                 Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[1]
               {
@@ -217,9 +213,9 @@ namespace allopromo.Core.Services
 
         public string GenerateJwtToken456(string email, string role)
         {
-            string str1 = this.Configuration["Jwt:Issuer"];
-            string str2 = this.Configuration["Jwt:Audience"];
-            byte[] bytes = Encoding.ASCII.GetBytes(this.Configuration["Jwt:Key"]);
+            string str1 = Configuration["Jwt:Issuer"];
+            string str2 = Configuration["Jwt:Audience"];
+            byte[] bytes = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity((IEnumerable<Claim>)new Claim[5]
