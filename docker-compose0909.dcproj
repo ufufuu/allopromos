@@ -3,16 +3,16 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>cbc00ad8-97c6-4dea-8f24-1eded3170500</ProjectGuid>
+    <ProjectGuid>86447add-acd8-4026-a3c0-068867e7b2b8</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger/index.html</DockerServiceUrl>
     <DockerServiceName>allopromo.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.override.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
+    <None Include="docker-compose0909.override.yml">
+      <DependentUpon>docker-compose0909.yml</DependentUpon>
     </None>
-    <None Include="docker-compose.yml" />
+    <None Include="docker-compose0909.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
 </Project>

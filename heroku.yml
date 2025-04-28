@@ -1,10 +1,9 @@
 
 # https://coralogix.com/blog/heroku-continuous-integration-deployment-with-docker-hands-on-tutorial/
 # https://medium.com/@justkrup/deploy-a-docker-container-free-on-heroku-5c803d2fdeb1
-
 # https://www.reddit.com/r/docker/comments/ov4tr5/deploy_dockercompose_to_heroku_for_data_labelling/
-
 #https://stackoverflow.com/questions/58200327/how-can-i-run-a-docker-hub-container-on-heroku-via-app-json
+
 
 setup:
   addons:
