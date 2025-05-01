@@ -30,3 +30,5 @@ services:
         - ACCEPT_EULA= Y
       networks:
         - allopromo_network
+volumes:
+    allopromo_data:

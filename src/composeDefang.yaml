@@ -8,7 +8,7 @@ services:
     image: ${DOCKER_REGISTRY-}allopromoapi
     build:
       context: .
-      dockerfile: /allopromo.Api/Dockerfile
+      dockerfile: allopromo.Api/Dockerfile
     ports:
         - 8001:80
     environment:
