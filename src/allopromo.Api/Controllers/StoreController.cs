@@ -32,28 +32,27 @@ namespace allopromo.Api.Controllers
         public IUserService _userService { get; set; }
         public IImageUploadService _imageUploadService { get; set; }
         public IMediaService _mediaService { get; set; }
-        public HttpContextAccessor _httpContextAccessor { get; set; }
+        //public HttpContextAccessor _httpContextAccessor { get; set; }
         private readonly MediatR.IMediator _mediator; 
         private IMapper _mapper;
         public StoreController(
           IStoreService storeService,
-          ICatalogService productService,
           allopromo.Core.Interfaces.ICatalogService catalogService,
           IUserService userService,
           IImageUploadService imageUploadService,
           IMediaService mediaService,
           INotifyService notificationService,
-          HttpContextAccessor httpContextAccessor,
+          //HttpContextAccessor httpContextAccessor,
           IMapper mapper)
         {
-            _userService = userService;
             _storeService = storeService;
-            //_productService = productService;
             _catalogService = catalogService;
+            _userService = userService;
             _notificationService = notificationService;
             _imageUploadService = imageUploadService;
             _mediaService = mediaService;
-            _httpContextAccessor = httpContextAccessor;
+
+            //_httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             
         }
@@ -160,23 +159,28 @@ namespace allopromo.Api.Controllers
         public async Task<IActionResult> GetStoreCategories()
         {
             StoreController storeController = this;
-            IEnumerable<StoreCategory> storeCategoriesAsync = await storeController._storeService.GetStoreCategoriesAsync();
+            IEnumerable<StoreCategory> storeCategoriesAsync = await _storeService.GetStoreCategoriesAsync();
             return storeCategoriesAsync == null ? (IActionResult)storeController.BadRequest() : (IActionResult)storeController.Ok((object)storeCategoriesAsync);
         }
 
         [HttpGet]
-        [Route("{categoryName}/{pageNumber}/{limitPerPage}")]
+        [Route("{categoryName}/{pageNumber}/{limitPerPageSize}")]
         public async Task<IActionResult> GetStoresByCategory(
           string categoryName,
           int pageNumber,
-          int pageSize)
+          int limitPerPageSize)
         {
-            StoreController storeController = this;
             if (categoryName == null)
-                return (IActionResult)storeController.NotFound();
-            IEnumerable<Store> source = (await storeController._storeService.GetStoresByCategoryNameAsync(categoryName, pageNumber, pageSize)).Skip<Store>((pageNumber - 1) * pageSize).Take<Store>(pageSize);
-            IEnumerable<StoreDto> storeDtos = storeController._mapper.Map<IEnumerable<StoreDto>>((object)source);
-            return (IActionResult)storeController.Ok((object)storeDtos);
+                return NotFound();
+            var storesObj = await _storeService.GetStoresByCategoryNameAsync(categoryName, pageNumber, limitPerPageSize);
+
+            IEnumerable<Store> source = (await _storeService
+                .GetStoresByCategoryNameAsync(categoryName, pageNumber, limitPerPageSize))
+                .Skip<Store>((pageNumber - 1) * limitPerPageSize).Take<Store>(limitPerPageSize);
+
+            var storesDto = _mapper.Map<IEnumerable<StoreDto>>(storesObj);
+
+            return Ok(storesDto);
         }
 
         [HttpPut]

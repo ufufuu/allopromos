@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  allopromo.api:
-    image: ${DOCKER_REGISTRY-}allopromoapi
-    build:
-      context: .
-      dockerfile: src/allopromo.Api/Dockerfile

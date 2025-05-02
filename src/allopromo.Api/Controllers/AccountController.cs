@@ -148,9 +148,9 @@ namespace allopromo.Api.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginUserDto dto)
         {
-            
+
             if (dto == null)
-                throw new Exception();
+                return BadRequest();
             ApplicationUser user = await _userManager.FindByEmailAsync(dto.UserName);
             if (user == null)
                 return Unauthorized();
@@ -160,15 +160,16 @@ namespace allopromo.Api.Controllers
                     status = " Failed ",
                     message = " User name or Pwd UUY incorrect "
                 });
-
             //var signedIn = await _signInManager.SignInAsync(user, true);
 
             UserDto userDto = _mapper.Map<UserDto>(user);
             string jwtToken = await _userService.GenerateJwtToken(user);
+            var userRole = await _userManager.GetRolesAsync(user);
             return Ok(new
             {
                 user = userDto,
-                jwtToken = jwtToken
+                jwtToken = jwtToken,
+                role = userRole.FirstOrDefault().ToString(),
             });
         }
 

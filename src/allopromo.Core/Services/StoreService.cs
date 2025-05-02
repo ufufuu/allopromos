@@ -267,27 +267,35 @@ namespace allopromo.Core.Services
                 }
             }
         }
-
         public async Task<IEnumerable<Store>> GetStoresByCategoryNameAsync(
           string categoryName,
           int pageNumber,
           int offSet)
         {
-            IEnumerable<Store> storesAsync = await this.GetStoresAsync();
+            IEnumerable<Store> storesAsync = await GetStoresAsync();
+
             int count = 3;
-            Func<Store, bool> predicate = (Func<Store, bool>)(x => x.Category.storeCategoryName.Equals(categoryName.ToString()));
+            offSet = 5;
+            Func<Store, bool> predicate = (Func<Store, bool>)(x => x.Category.storeCategoryName
+            .Equals(categoryName.ToString()));
+
+            var stoers = storesAsync
+                        .Where(x => x.Category.storeCategoryName.Equals(categoryName.ToString()));
+
+                        //.Take(count)
+                        //.Skip(offSet);
+
             IEnumerable<Store> source = storesAsync.Where<Store>(predicate);
             source.Skip<Store>(offSet - 1).Take<Store>(count).AsQueryable<Store>();
-            return source;
+            return stoers;
         }
         public async Task<IEnumerable<Store>> GetStoresAsync()
         {
             List<Store> storeList1 = new List<Store>();
-            //List<ApplicationUser> users = await _userManager.Users.ToListAsync<ApplicationUser>();
 
-            List<Store> storesObj = await this._storeRepository.GetAllAsync();
+            List<Store> storesObj = await _storeRepository.GetAllAsync();
             List<StoreCategory> categories = await _storeCategoryRepository.GetAllAsync();
-            return storeList1;
+            return storesObj;
         }
         public Task<Store> GetStoreByIdAsync(string storeId) => throw new NotImplementedException();
 
