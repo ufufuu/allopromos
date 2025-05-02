@@ -62,11 +62,9 @@ namespace allopromo.Core.Services
         }
         public async Task<IEnumerable<Product>> GetProductsByStore(string storeId)
         {
-            var products = new List<Product>();
-
             if (storeId != null)
             {
-                var tObjProducts = (await _productRepository.GetAllAsync()).AsQueryable()//GetProductsByStoreIdAsync(storeId);//GetByIdAsync(storeId);
+                var productsObj = (await _productRepository.GetAllAsync()).AsQueryable()//GetProductsByStoreIdAsync(storeId);//GetByIdAsync(storeId);
                                         .Include(c => c.ProductCategory)
                                         .Select(p => new Product
                                         {
@@ -74,11 +72,13 @@ namespace allopromo.Core.Services
                                             productDescription = p.productDescription,
                                             //= p.ProductCategory.productCategoryName
                                         });
-                products = AutoMapper.Mapper.Map<List<Product>>(tObjProducts);
+                //products = AutoMapper.Mapper.Map<List<Product>>(productsObj);
+
+                return productsObj;
             }
             else
                 throw new ArgumentNullException("storeId");
-            return products;
+            //return productsObj;
         }
 
         /*public async Task<Product> GetProductByIdAsync(string productId)

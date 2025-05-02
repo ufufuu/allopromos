@@ -14,8 +14,6 @@ namespace allopromo.Api.Infrastructure.Mapping.Profiles
         {
             CreateMap<City, CityDto>()
                 .ForMember(dto => dto.cityName, y => y.MapFrom(city => city.cityName));
-
-
             CreateMap<CityDto, City>()
                 .ForMember (city => city.cityId, m => m.Ignore())
                 .ForMember (city => city.cityCountry, m => m.Ignore());

@@ -17,13 +17,13 @@ namespace allopromo.Api.Infrastructure.Mapping.Profiles
         public UserProfile()
         {
             CreateMap<ApplicationUser, UserDto>()
-            .ForMember(src => src.Password, mo => mo.Ignore())
-            .ForMember(x => x.PhoneNumber, pn => pn.Ignore())
-            .ForMember(x => x.roleName, role => role.Ignore())
-            .ForMember(x => x.firstName, p => p.Ignore())
-            .ForMember(x => x.lastName, m => m.MapFrom(y => y.lastName))
-            .ForMember(x => x.firstName, m => m.MapFrom(y => y.firstName))
-            .ForMember(x => x.UserRoles, m => m.Ignore());
+                .ForMember(src => src.Password, mo => mo.Ignore())
+                .ForMember(x => x.PhoneNumber, pn => pn.Ignore())
+                .ForMember(x => x.roleName, role => role.Ignore())
+                .ForMember(x => x.firstName, p => p.Ignore())
+                .ForMember(x => x.lastName, m => m.MapFrom(y => y.lastName))
+                .ForMember(x => x.firstName, m => m.MapFrom(y => y.firstName))
+                .ForMember(x => x.UserRoles, m => m.Ignore());
 
             //.ForMember(x => x.UserRoles, m => m.MapFrom( y=>y.UserRoles));
 

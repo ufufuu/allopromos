@@ -172,7 +172,8 @@ namespace allopromo.Api.Controllers
         {
             if (categoryName == null)
                 return NotFound();
-            var storesObj = await _storeService.GetStoresByCategoryNameAsync(categoryName, pageNumber, limitPerPageSize);
+            var storesObj = await _storeService.GetStoresByCategoryNameAsync(categoryName, 
+                pageNumber, limitPerPageSize);
 
             IEnumerable<Store> source = (await _storeService
                 .GetStoresByCategoryNameAsync(categoryName, pageNumber, limitPerPageSize))

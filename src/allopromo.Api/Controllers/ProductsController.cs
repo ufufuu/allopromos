@@ -73,15 +73,17 @@ namespace allopromo.Api.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpGet]
         [Route("{storeName}")]
-        public async Task<IActionResult> GetProducts(string storeName)
+        public async Task<IActionResult> GetProductsByStore(string storeName)
         {
-            ProductsController productsController = this;
+            var productsObj = await _catalogService.GetProductsByStore(storeName);
+            
+            //IEnumerable<ProductDto> productDtos = productsController._mapper
+                //.Map<IEnumerable<ProductDto>>(productsByStore);
 
-            var productsByStore = await _catalogService.GetProductsByStore(storeName.ToString());
-            IEnumerable<ProductDto> productDtos = productsController._mapper.Map<IEnumerable<ProductDto>>(productsByStore);
-            return (IActionResult)productsController.Ok((object)productDtos);
+            var productsByStore = _mapper.Map<IEnumerable<ProductDto>>(productsObj);
+            return Ok(productsByStore);
         }
 
         [HttpPut("{id}")]
