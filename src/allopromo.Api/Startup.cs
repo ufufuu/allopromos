@@ -63,7 +63,7 @@ namespace allopromo.Api
             this.Configuration.GetSection("Jwt").Get<AppSettings>();
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
             services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionDev"))));
+                options => options.UseSqlServer(Configuration.GetConnectionString("dockerConnectionProd0"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {

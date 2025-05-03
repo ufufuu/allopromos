@@ -79,9 +79,6 @@ namespace allopromo.Api.Controllers
         {
             var productsObj = await _catalogService.GetProductsByStore(storeName);
             
-            //IEnumerable<ProductDto> productDtos = productsController._mapper
-                //.Map<IEnumerable<ProductDto>>(productsByStore);
-
             var productsByStore = _mapper.Map<IEnumerable<ProductDto>>(productsObj);
             return Ok(productsByStore);
         }
