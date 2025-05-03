@@ -6,11 +6,11 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["allopromo.Api/allopromo.Api.csproj", "src/allopromo.Api/"]
-COPY ["allopromo.Core/allopromo.Core.csproj", "src/allopromo.Core/"]
-COPY ["allopromo.Infrastructure/allopromo.Infrastructure.csproj", "src/allopromo.Infrastructure/"]
-COPY ["allopromo.Domain/allopromo.Domain.csproj", "src/allopromo.Domain/"]
-RUN dotnet restore "src/allopromo.Api/allopromo.Api.csproj"
+COPY ["allopromo.Api/allopromo.Api.csproj", "../src/allopromo.Api/"]
+COPY ["allopromo.Core/allopromo.Core.csproj", "../src/allopromo.Core/"]
+COPY ["allopromo.Infrastructure/allopromo.Infrastructure.csproj", "../src/allopromo.Infrastructure/"]
+COPY ["allopromo.Domain/allopromo.Domain.csproj", "../src/allopromo.Domain/"]
+RUN dotnet restore "../src/allopromo.Api/allopromo.Api.csproj"
 COPY . .
 WORKDIR "/src/allopromo.Api"
 RUN dotnet build "allopromo.Api.csproj" -c Release -o /app/build
