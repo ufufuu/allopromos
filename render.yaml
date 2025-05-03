@@ -1,6 +1,6 @@
 
 services:
-- type: pserv
+- type: web
   name: sqlserver
   plan: free
   env: docker
@@ -23,7 +23,6 @@ services:
 
 # https://github.com/render-examples/mysql/blob/master/render.yaml
 # https://github.com/jonahgeorge/render-examples-mssql/blob/main/render.yaml
-
 
 # https://forums.docker.com/t/sql-server-for-linux-exits-aborts-immediately-after-start/88509
 # https://stackoverflow.com/questions/78194000/docker-container-running-mssql-server-in-ubuntu-20-04-base-image-not-starting
