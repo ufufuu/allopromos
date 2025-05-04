@@ -60,6 +60,7 @@ namespace allopromo.Api.Controllers
             _mapper = Mapper;
         }
         [HttpGet]
+
         //[Route("")]
         public async Task<IActionResult> GetUsers()
         {

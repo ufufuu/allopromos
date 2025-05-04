@@ -74,12 +74,6 @@ namespace allopromo.Core.Services
                 var listofUsers = await _userManager.Users.ToListAsync();
 
                 // ISSUE: method reference
-                // ISSUE: type reference
-                // ISSUE: method reference
-                // ISSUE: type reference
-                // ISSUE: method reference
-                // ISSUE: type reference
-                // ISSUE: method reference
                 // ISSUE: method reference
 
                 /*this..Users

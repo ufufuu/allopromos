@@ -28,6 +28,9 @@ services:
         - SA_PASSWORD=Kad@1207
         - MSSQL_MEMORY_LIMIT_MB=4098
         - ACCEPT_EULA= Y
+      volumes:
+        - allopromo_data:/var/lib/mssql
+        - ./init-scripts:/docker-entrypoint-initdb.d
       networks:
         - allopromo_network
 volumes:
