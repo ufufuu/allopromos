@@ -80,6 +80,7 @@ namespace allopromo.Core.Services
                     .AsQueryable<ApplicationUser>().Select<ApplicationUser, ApplicationUser>(Expression.Lambda<Func<ApplicationUser, ApplicationUser>>((Expression)Expression.MemberInit(Expression.New(typeof(ApplicationUser)), (MemberBinding)Expression.Bind((MethodInfo)MethodBase.GetMethodFromHandle(__methodref(IdentityUser<string>.set_UserName), __typeref(IdentityUser<string>)), )))); // Unable to render the statement
                 ((IIncludableQueryable<ApplicationUser, IEnumerable<ApplicationRole>>)this._userManager.Users.Include<ApplicationUser, IList<ApplicationRole>>((Expression<Func<ApplicationUser, IList<ApplicationRole>>>)(u => u.UserRoles))).ThenInclude<ApplicationUser, ApplicationRole, string>((Expression<Func<ApplicationRole, string>>)(ur => ur.roleName));
                 */
+
                 return listofUsers;
             }
             catch (Exception ex)
