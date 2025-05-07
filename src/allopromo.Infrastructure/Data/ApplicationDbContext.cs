@@ -79,7 +79,9 @@ namespace allopromo.Infrastructure.Data
         {
             if (optionsBuilder.IsConfigured)
                 return;
-            new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json").Build();
         }
     }
 }
@@ -92,7 +94,7 @@ namespace allopromo.Infrastructure.Data
           {
               IConfigurationRoot configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
-                 .AddJsonFile("appsettings.Development.json")
+                 .AddJsonFile("appsettings.json")
                  .Build();
               var connectionString = configuration.GetConnectionString("DefaultConnection");
               optionsBuilder.UseSqlServer(connectionString); //or any other DB provider*/

@@ -1,37 +1,32 @@
 
 networks:
-  allopromo_network:
+  allopromoApi:
 
 services:
-  allopromo_api:
-    container_name: allopromo
+  allopromoApi:
+    container_name: allopromo_Api
     image: ${DOCKER_REGISTRY-}allopromoapi
     build:
       context: .
-      dockerfile: allopromo.Api/Dockerfile
+      dockerfile: src/allopromo.Api/Dockerfile
     ports:
         - 8001:80
     environment:
         - ASPNETCORE_ENVIRONMENT=Development
     restart: always
     depends_on:
-        - allopromo_database
+        - allopromoDb
     networks:
-      - allopromo_network
-  allopromo_database:
-      container_name: allopromo_mssql_server
+      - allopromoApi
+  allopromoDb:
+      container_name: allopromo_database 
       image: mcr.microsoft.com/mssql/server:2019-latest
       mem_limit: 4GB
       ports:
         - 1400:1433
       environment:
-        - SA_PASSWORD=Kad@1207
+        - SA_PASSWORD=Kad@12071990
         - MSSQL_MEMORY_LIMIT_MB=4098
         - ACCEPT_EULA= Y
-      volumes:
-        - allopromo_data:/var/lib/mssql
-        - ./init-scripts:/docker-entrypoint-initdb.d
       networks:
-        - allopromo_network
-volumes:
-    allopromo_data:
+        - allopromoApi

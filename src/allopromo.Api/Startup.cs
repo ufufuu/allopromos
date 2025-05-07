@@ -63,7 +63,7 @@ namespace allopromo.Api
             this.Configuration.GetSection("Jwt").Get<AppSettings>();
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
             services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
-                options => options.UseSqlServer(Configuration.GetConnectionString("dockerConnectionProd0"))));
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultProdDocker1"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
@@ -169,7 +169,7 @@ namespace allopromo.Api
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<ICatalogService, CatalogService>();
             services.AddScoped<IStoreService, StoreService>();
-            
+
             services.AddScoped<IValidationService, ValidationService>();
             services.AddScoped<IImageUploadService, ImageUploadService>();
             services.AddScoped<IMediaService, ImgurMediaService>();
@@ -232,9 +232,9 @@ namespace allopromo.Api
                 SwaggerUIOptionsExtensions.SwaggerEndpoint(c, "/swagger/v1/swagger.json", "My-- API V1");
             }));
             app.UseCors((Action<CorsPolicyBuilder>)(options => options.AllowAnyMethod()
-			.WithOrigins("http://localhost:44306")
-			.AllowAnyHeader()
-			.SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
+            .WithOrigins("http://localhost:44306")
+            .AllowAnyHeader()
+            .SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
             app.UseMvc();
         }
     }

@@ -1,6 +1,4 @@
 ﻿
-//using allopromo.Core.Application.Dto;
-//using allopromo.Api.DTOs;
 using allopromo.Api.DTOs;
 using allopromo.Core.Entities;
 using AutoMapper;

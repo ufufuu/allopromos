@@ -1,4 +1,5 @@
-﻿//using allopromoex;
+﻿
+//using allopromoex;
 using allopromo.Api;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +21,6 @@ namespace allopromo
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                //.AddJsonFile("Ocelot.json")
                 .Build();
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()
