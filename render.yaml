@@ -12,24 +12,7 @@ services:
     dockerfilePath: src/allopromo.Api/Dockerfile
     numInstances: 1
     healthCheckPath: /healthz
-    envVars:
-        - key: SQLHOST
-          fromDatabase:
-            name: allopromoDB
-            property: connectionString
-        - key : SQLPORT
-          fromDatabase:
-            name: allopromoDB
-            property: port
-        - key: PGUSER
-          fromDatabase:
-            name: lightdash-database
-            property: user
-        - key: PGPASSWORD
-          fromDatabase:
-            name: lightdash-database
-            property: password
-        
+    
   - type: web
     name: allopromo_DBServer
     runtime: docker

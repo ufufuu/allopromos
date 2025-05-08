@@ -35,3 +35,23 @@ services:
 # COPY --from=builder /initialized-db /var/lib/mysql
 # https://marketplace.stripe.com/
 # https://render.com/docs/stripe
+
+
+envVars:
+        - key: SQLHOST
+          fromDatabase:
+            name: allopromoDB
+            property: connectionString
+        - key : SQLPORT
+          fromDatabase:
+            name: allopromoDB
+            property: port
+        - key: PGUSER
+          fromDatabase:
+            name: lightdash-database
+            property: user
+        - key: PGPASSWORD
+          fromDatabase:
+            name: lightdash-database
+            property: password
+        
