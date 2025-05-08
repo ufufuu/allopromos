@@ -8,8 +8,4 @@ services:
   autoDeploy: false
   env: docker
   dockerfilePath: ./src/allopromo.Infrastructure/Dockerfile
-  envVars:
-    - key: ACCEPT_EULA
-      value: "Y"
-    - key : MSSQL_SA_PASSWORD
-      value: "myStrong@Passw0rd"
+  
