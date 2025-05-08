@@ -21,10 +21,8 @@ services:
         name: data
         mountPath: /var/opt/mssql
         sizeGB: 10
-    disk:
-      - name: data
-      - mountPath: /var/opt/mssql
-      - sizeGB: 10
+    
+    
 # To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
 # /opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Operation not permitted
 # /opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Success

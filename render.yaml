@@ -1,29 +1,26 @@
 
 
 services:
-  - type: web
+- type: web
+    name: allopromoDB
+    runtime: image
+    plan: free
+    region: oregon
+    envVars:
+    - fromGroup: allopromo_mssql_server
+- type: web
     name: allopromoApi
     runtime: docker
-    repo: https://github.com/ufufuu/allopromos
     plan: free
     region: oregon
     autoDeploy: false
-    dockerContext: .
-    dockerfilePath: src/allopromo.Api/Dockerfile
     numInstances: 1
     healthCheckPath: /healthz
     
-  - type: web
-    name: allopromo_DBServer
-    runtime: docker
-    repo: https://github.com/ufufuu/allopromos
-    plan: free
-    region: oregon
-    dockerContext: .
-    dockerfilePath: src/allopromo.Infrastructure/Dockerfile
-    envVars:
-      - key: ACCEPT_EULA
-        value: "Y"
-      - key: MSSQL_SA_PASSWORD
-        value: "YourStrong@Passw0rd"
-    
+envVarGroups:
+    - name : allopromo_mssql_server
+     envVars:
+     - key: ACCEPT_EULA
+     value: "Y"
+     - key: MSSQL_SA_PASSWORD
+     value: "YourStrong@Passw0rd"
