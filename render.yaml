@@ -16,7 +16,7 @@ services:
         - key: SQLHOST
           fromDatabase:
             name: allopromoDB
-            property:connectionString
+            property: connectionString
         - key : SQLPORT
           fromDatabase:
             name: allopromoDB
