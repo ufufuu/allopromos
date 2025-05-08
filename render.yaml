@@ -10,7 +10,7 @@ services:
     autoDeploy: false
     dockerContext: .
     dockerfilePath: src/allopromo.Api/Dockerfile
-    numInstances:1
+    numInstances: 1
     healthCheckPath: /healthz
     envVars:
         - key: SQLHOST
