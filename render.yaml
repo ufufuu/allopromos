@@ -7,7 +7,7 @@ services:
   plan: free
   region: oregon
   image:
-    url: mcr.microsoft.com/mssql/server:2019-latest
+    url: mcr.microsoft.com/mssql/server:2017-latest
   envVars:
     - key: ACCEPT_EULA
       value: "Y"
