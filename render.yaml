@@ -9,17 +9,7 @@ services:
   image:
     url: mcr.microsoft.com/mssql/server:2019-latest
   envVars:
-    -key: ACCEPT_EULA
-     value: "Y"
-    -key : MSSQL_SA_PASSWORD
-     value: "myStrong@Passw0rd"
-- type: web
-  name: allopromo_Api
-  runtime: docker
-  repo: https://github.com/ufufuu/allopromos
-  plan: free
-  region: oregon
-  autoDeploy: false
-  numInstances: 1
-  healthCheckPath: /healthz
-envVarGroups:
+    - key: ACCEPT_EULA
+      value: "Y"
+    - key : MSSQL_SA_PASSWORD
+      value: "myStrong@Passw0rd"
