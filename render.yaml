@@ -6,11 +6,7 @@ services:
   runtime: image    
   plan: free
   region: oregon
-  envVars:
-    - key: ACCEPT_EULA
-    value: "Y"
-    - key: MSSQL_SA_PASSWORD
-    value: "YourStrong@Passw0rd"
+  
   
 - type: web
   name: allopromo_Api
