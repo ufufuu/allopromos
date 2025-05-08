@@ -20,7 +20,7 @@ services:
         - key : SQLPORT
           fromDatabase:
             name: allopromoDB
-            property: PORT
+            property: port
         - key: PGUSER
           fromDatabase:
             name: lightdash-database
