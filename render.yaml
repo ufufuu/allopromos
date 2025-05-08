@@ -1,30 +1,49 @@
 
+
 services:
-- type: web
-  name: sqlserver
-  plan: free
-  env: docker
-  autoDeploy: false
-  
-- type: web
-  name: allopromoApi
-  runtime: docker
-  repo: https://github.com/ufufuu/allopromos
-  plan: free
-  region: oregon
-  dockerContext: .
-  dockerfilePath: src/allopromo.Api/Dockerfile
-  numInstances: 1
-  healthCheckPath: /healthz
-
-
-
-# https://www.howtoforge.com/how-to-create-docker-images-with-dockerfile-ubuntu-20-04/
-
-# https://github.com/render-examples/mysql/blob/master/render.yaml
-# https://github.com/jonahgeorge/render-examples-mssql/blob/main/render.yaml
-
-# https://forums.docker.com/t/sql-server-for-linux-exits-aborts-immediately-after-start/88509
-# https://stackoverflow.com/questions/78194000/docker-container-running-mssql-server-in-ubuntu-20-04-base-image-not-starting
-    
-# https://vijayasimhabr.medium.com/running-microsoft-sql-database-server-with-docker-5a879ef06adb
+  - type: web
+    name: allopromoApi
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    autoDeploy: false
+    dockerContext: .
+    dockerfilePath: src/allopromo.Api/Dockerfile
+    numInstances:1
+    healthCheckPath: /healthz
+    envVars:
+        - key: SQLHOST
+          fromDatabase:
+            name: allopromoDB
+            property:connectionString
+        - key : SQLPORT
+          fromDatabase:
+            name: allopromoDB
+            property: PORT
+        - key: PGUSER
+          fromDatabase:
+            name: lightdash-database
+            property: user
+        - key: PGPASSWORD
+          fromDatabase:
+            name: lightdash-database
+            property: password
+        
+  - type: web
+    name: allopromo_DBServer
+    runtime: docker
+    repo: https://github.com/ufufuu/allopromos
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: src/allopromo.Infrastructure/Dockerfile
+    envVars:
+      - key: ACCEPT_EULA
+        value: "Y"
+      - key: MSSQL_SA_PASSWORD
+        value: "YourStrong@Passw0rd"
+    disk:
+      - name: data
+      - mountPath: /var/opt/mssql
+      - sizeGB: 10

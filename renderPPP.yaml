@@ -6,16 +6,12 @@ services:
     # env: image
     # image:
     # url: mcr.microsoft.com/mssql/server:2017-latest
+    
     env: docker
-    repo: https://github.com/ufufuu/allopromos
+    
     branch: main
-    plan: free
-    region: oregon
-    dockerContext: .
-    dockerfilePath: src/allopromo.Api/Dockerfile
-    numInstances:1
-    healthCheckPath: /healthz
-    autoDeploy: false
+    
+    
     envVars:
       - key: ACCEPT_EULA
         value: "Y"
@@ -27,3 +23,16 @@ services:
         sizeGB: 10
       
     
+    
+
+
+# To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
+# /opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Operation not permitted
+# /opt/mssql/bin/permissions_check.sh: line 59: /opt/mssql/bin/sqlservr: Success
+
+
+# Exported from Render on 2025-04-12T17:52:53Z 
+# https://www.bytebase.com/docs/get-started/install/deploy-to-render/
+# COPY --from=builder /initialized-db /var/lib/mysql
+# https://marketplace.stripe.com/
+# https://render.com/docs/stripe
