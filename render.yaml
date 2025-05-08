@@ -6,7 +6,8 @@ services:
   runtime: image    
   plan: free
   region: oregon
-  
+  image:
+    url: mcr.microsoft.com/mssql/server:2019-latest
   
 - type: web
   name: allopromo_Api
