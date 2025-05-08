@@ -13,7 +13,3 @@ services:
       value: "Y"
     - key : MSSQL_SA_PASSWORD
       value: "myStrong@Passw0rd"
-  disk:
-    - name: data
-    - mountPath: /var/opt/mssql
-    - sizeGB: 10
