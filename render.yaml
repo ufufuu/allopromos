@@ -8,7 +8,11 @@ services:
   region: oregon
   image:
     url: mcr.microsoft.com/mssql/server:2019-latest
-  
+  envVars:
+    -key: ACCEPT_EULA
+     value: "Y"
+    -key : MSSQL_SA_PASSWORD
+     value: "myStrong@Passw0rd"
 - type: web
   name: allopromo_Api
   runtime: docker
