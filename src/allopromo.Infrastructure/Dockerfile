@@ -1,6 +1,6 @@
 
 
-FROM mcr.microsoft.com/mssql/server:2019-latest
+FROM mcr.microsoft.com/mssql/server:2017-latest
 # Create app directory
 WORKDIR /usr/src/app
 
