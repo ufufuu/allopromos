@@ -5,25 +5,26 @@
 
 # https://stackoverflow.com/questions/69941444/how-to-have-docker-compose-init-a-sql-server-database
 
-FROM mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+# FROM mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+FROM postgrest/postgrest
 
 # COPY config/user.cnf /etc/mysql/my.cnf
 # Create app directory
-WORKDIR /usr/src/app
+#WORKDIR /usr/src/app
 
 # Copy initialization scripts
-COPY . /usr/src/app
+# COPY . /usr/src/app
 
 
 # Set environment variables, not have to write them with the docker run command
 # Note: make sure that your password matches what is in the run-initialization script 
-ENV SA_PASSWORD password123!
-ENV ACCEPT_EULA Y
-ENV MSSQL_PID Express
+# ENV SA_PASSWORD password123!
+# ENV ACCEPT_EULA Y
+# ENV MSSQL_PID Express
 
 # Expose port 1433 in case accessing from other container
 # Expose port externally from docker-compose.yml
-EXPOSE 1433
+# EXPOSE 1433
 
 # Run Microsoft SQL Server and initialization script (at the same time)
 # CMD /bin/bash ./entrypoint.sh
