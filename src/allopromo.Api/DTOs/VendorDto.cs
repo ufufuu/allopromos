@@ -4,10 +4,10 @@ using System.Text;
 
 namespace allopromo.Api.DTOs
 {
-    public class RoleDtoo
+    public class VendorDto
     {
         public string RoleName { get; set; }
-        public RoleDtoo()
+        public VendorDto()
         {}
     }
 }
