@@ -26,7 +26,19 @@ namespace allopromo.Controllers
             _config = config;
 
         }
+
+        #region Categories
         [HttpGet]
+        [Route("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var storeCategories = await _catalogService.GetStoreCategories();
+            if (storeCategories != null)
+                return Ok(storeCategories);
+            return NotFound();
+        }
+        [HttpGet]
+
         [Route("category/{categoryId}")]
         public async Task<IActionResult> GetCategory(string categoryId)
         {
@@ -38,16 +50,30 @@ namespace allopromo.Controllers
             }
             return BadRequest();
         }
+        #endregion
 
+        #region Vendors
+        [HttpGet]
+        [Route("{categoryId}/vendors")]
+        public async Task<ActionResult> GetVendorsByCategory(string categoryId)
+        {
+            if (categoryId == null)
+                return BadRequest();
+            var vendors = _catalogService.GetVendors();
+            return Ok(vendors);
+        }
+        #endregion
+
+        #region Products
         [HttpGet]
         [Route("{merchandId}/products")]
-        public async Task<IActionResult> GetVendorProducts(string vendorId)
+        public async Task<IActionResult> GetProductsByVendor(string vendorId)
         {
             if (vendorId == null)
                 return BadRequest();
             var products = (await _catalogService.GetProductsByStore(vendorId));
             return Ok(products);
         }
-
+        #endregion
     }
 }

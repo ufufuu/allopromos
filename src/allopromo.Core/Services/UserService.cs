@@ -37,7 +37,6 @@ namespace allopromo.Core.Services
             _roleManager = roleManager;
             Configuration = configuration;
         }
-
         public async Task<bool> CreateUser(string userName, string password)
         {
             bool userCreated = false;

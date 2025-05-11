@@ -18,6 +18,7 @@ namespace allopromo.Core.Services
         private IRepository<Product> _productRepository { get; set; }
         private IStoreService _storeService { get; set; }
         private IUserService _userService {get; set;}
+        IRepository<Vendor> _vendorRepository { get; set; }
         public CatalogService(
             IRepository<StoreCategory> storeCategoryRepository,
             IRepository<ProductCategory> productCategoryRepository,
@@ -32,6 +33,13 @@ namespace allopromo.Core.Services
             _storeService = storeService;
             _userService = userService;
         }
+        #region Store Categories
+        public async Task<IEnumerable<StoreCategory>> GetStoreCategories()
+        {
+            return (await _storeCategoryRepository.GetAllAsync())
+                .AsEnumerable();
+        }
+        #endregion
         #region Products
         public async Task<Product> CreateProductAsync(Product productDto, string userName)
         {
@@ -199,34 +207,38 @@ namespace allopromo.Core.Services
         {
             throw new NotImplementedException();
         }
-        /*
+        
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             throw new NotImplementedException();
         }
-
-
-        */
-        /*public IEnumerable<ProductCategory> GetProductsCAsync()
+        
+        public async Task<IEnumerable<ProductCategory>> GetProductsCategorAsync()
         {
-            throw new NotImplementedException();
-        }*/
+            return (await _productCategoryRepository.GetAllAsync());
+        }
 
         public Task<StoreCategory> CreateStoreCategory(StoreCategory storeCategory)
         {
             throw new NotImplementedException();
         }
-
         public async Task<Product> UpdateProductAsync (string Id, Object obj)
         {
             var product = await _productRepository.GetByIdAsync(Id);
             return product;
         }
-
-        public Task<IEnumerable<ProductCategory>> GetProductsAync()
+        public async Task<IEnumerable<ProductCategory>> GetProductsAync()
         {
-            throw new NotImplementedException();
+            return await _productCategoryRepository.GetAllAsync();
         }
+
+        #endregion
+
+        #region Vendors
+        public async Task<IEnumerable<Vendor>> GetVendors() =>
+            (await _vendorRepository.GetAllAsync()).AsEnumerable();
+        public async Task<IEnumerable<Vendor>> GetVendorsByCategory(string catId) 
+            => (await _vendorRepository.GetAllAsync()).AsEnumerable();
         #endregion
     }
 }
