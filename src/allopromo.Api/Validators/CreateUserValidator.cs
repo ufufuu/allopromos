@@ -1,4 +1,5 @@
-﻿using allopromo.Api.DTOs;
+﻿
+using allopromo.Api.DTOs;
 using FluentValidation;
 using FluentValidation.Results;
 using System;
@@ -9,36 +10,17 @@ using System.Threading.Tasks;
 
 namespace allopromo.Api.Validators
 {
-    public class CreateUserValidator : FluentValidation.IValidator<CreateUserDto>
+    public class CreateUserValidator :
+        FluentValidation.AbstractValidator<CreateUserDto>
     {
-        public bool CanValidateInstancesOfType(Type type)
+        public CreateUserValidator()
         {
-            throw new NotImplementedException();
-        }
-
-        public IValidatorDescriptor CreateDescriptor()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValidationResult Validate(CreateUserDto instance)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValidationResult Validate(IValidationContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ValidationResult> ValidateAsync(CreateUserDto instance, CancellationToken cancellation = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ValidationResult> ValidateAsync(IValidationContext context, CancellationToken cancellation = default)
-        {
-            throw new NotImplementedException();
+            RuleFor(model => model.UserName)
+                .NotEmpty()
+                .WithMessage("User name Should Not Be Empty");
+            RuleFor(model => model.Password)
+                .NotEmpty()
+                .WithMessage("User password Should Not Be Empty");
         }
     }
 }

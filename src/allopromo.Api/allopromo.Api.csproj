@@ -41,6 +41,7 @@
     <Compile Remove="Commands\Model\AddProductPictureCommand.cs" />
     <Compile Remove="Controllers\AccounttController.cs" />
     <Compile Remove="Controllers\AuthenticationController.cs" />
+    <Compile Remove="Controllers\ErrorController.cs" />
     <Compile Remove="Controllers\OdooController.cs" />
     <Compile Remove="Controllers\OrdersController.cs" />
     <Compile Remove="Controllers\OrderStatus.cs" />
@@ -70,11 +71,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Infrastructure\Filters\ValidationFilter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Commands\Handlers\Customers\" />
     <Folder Include="Commands\Model\Customers\" />
     <Folder Include="Infrastructure\Extensions\" />
-    <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Providers\" />
     <Folder Include="Constants\" />
     <Folder Include="Properties\" />

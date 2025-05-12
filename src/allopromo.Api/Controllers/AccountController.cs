@@ -1,16 +1,13 @@
 ﻿
 using allopromo.Api.DTOs;
 using allopromo.Core.Abstract;
-using allopromo.Core.Domain;
 using allopromo.Core.Entities;
-using allopromo.Core.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -149,7 +146,6 @@ namespace allopromo.Api.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginUserDto dto)
         {
-
             if (dto == null)
                 return BadRequest();
             ApplicationUser user = await _userManager.FindByEmailAsync(dto.UserName);
@@ -157,10 +153,10 @@ namespace allopromo.Api.Controllers
                 return Unauthorized();
             if (!_signInManager.UserManager.CheckPasswordAsync(user, dto.Password).Result)
                 return NotFound(new
-                {
-                    status = " Failed ",
-                    message = " User name or Pwd UUY incorrect "
-                });
+             {
+                status = " Failed ",
+                message = " User name or Pwd UUY incorrect "
+             });
             //var signedIn = await _signInManager.SignInAsync(user, true);
 
             UserDto userDto = _mapper.Map<UserDto>(user);
@@ -173,7 +169,6 @@ namespace allopromo.Api.Controllers
                 role = userRole.FirstOrDefault().ToString(),
             });
         }
-
         [Route("register-admin")]
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin([FromBody] CreateUserDto dto)

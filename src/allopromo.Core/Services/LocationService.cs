@@ -93,5 +93,56 @@ namespace allopromo.Core.Services
         {
         }
     }
+
+
+    /*
+    public class StoreLocator
+    {
+        HttpClient _httpClient { get; set; }
+        private ILogger _logger { get; set; }
+        public StoreLocator(HttpClient httpClient, ILogger logger)
+        {
+            _httpClient = httpClient;
+            _logger = logger;
+        }
+        public string GetLocation()
+        {
+            var location = getAddress(23.5270797, 77.2548046);
+            return location.ToString();
+        }
+        private string ReturnGPSCoordinates()
+        {
+            var rootObjc = getAddress(23.5270797, 77.2548046);
+            return ""; //rootObj.display_Name;
+        }
+        //private static RootObject getAddress(double Longitude, double Latitude)
+
+        //getAddress(23.5270797, 77.2548046);
+        {
+            //onst double longitude = Longitude;
+            //const double latitude = Latitude;
+
+            //const string pathUrl = " https://nominatim.openstreetmap.org/reverse?format=json&lat=30.4573699&lon=-97.8247654";
+
+            //const string  mapBox= " https://api.mapbox.com/geocoding/v5/{endpoint}/";
+
+            const string reverseGeoCodingApiEndPoint = " http://nominatim.openstreetmap.org/reverse?format=json&lat= "; // + Latitude + "&lon=" + Longitude;
+
+        HttpResponseMessage msg = new HttpResponseMessage();
+        RootObject obj = null;
+            using (var httpClient = new HttpClient())
+            {
+                //msg = await httpClient.GetFromJsonAsync(pathUrl);
+            }
+        using (var webClient = new WebClient())
+        {
+            var jsonData = webClient.DownloadData(reverseGeoCodingApiEndPoint);
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RootObject));
+            obj = (RootObject)ser.ReadObject(new MemoryStream(jsonData));
+        }
+        return obj;
+                }
+            }
+    */
 }
 

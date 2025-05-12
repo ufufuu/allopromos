@@ -41,16 +41,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using FluentValidation.AspNetCore;
 
 #nullable enable
 namespace allopromo.Api
 {
     public class Startup
     {
-        public readonly
-#nullable disable
-    string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
-
+        public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
@@ -63,7 +61,8 @@ namespace allopromo.Api
             this.Configuration.GetSection("Jwt").Get<AppSettings>();
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
             services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultProdDocker4"))));
+                options => options
+                .UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
@@ -75,7 +74,7 @@ namespace allopromo.Api
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddRoleManager<RoleManager<IdentityRole>>()
             .AddDefaultTokenProviders();
-            services.AddAuthentication("Bearer").AddJwtBearer((Action<JwtBearerOptions>)(options =>
+            services.AddAuthentication("Bearer").AddJwtBearer(options =>
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
@@ -90,7 +89,7 @@ namespace allopromo.Api
                     IssuerSigningKey = (SecurityKey)new SymmetricSecurityKey(key),
                     RequireExpirationTime = false
                 };
-            }));
+            });
             services.AddAuthorization((Action<AuthorizationOptions>)(options =>
             {
                 options.AddPolicy("MerchantsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Merchants")));
@@ -108,9 +107,19 @@ namespace allopromo.Api
                 //mc.ValidateInlineMaps = new bool?(false);
             })).CreateMapper();
             services.AddSingleton<IMapper>(mapper);
+
             /// <summary>
             /// Add MediatR
             /// </summary>
+
+            /// <summary>
+            /// Add FluentValidation
+            //services.AddFluentValidation(IValidator<CreateUserDto>, CreateUserValidator>);
+            services.AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters()
+                .AddValidatorsFromAssemblyContaining<UserValidator>();
+            /// </summary>
+            
             //services.AddMediatR(typeof(CreateCommandHandler));
             /// <summary>
             /// Add AutoMapper
@@ -125,7 +134,9 @@ namespace allopromo.Api
             }));
             services.AddHttpContextAccessor();
             services.AddOptions();
-            services.AddControllers();
+            // Fluent Validation Options Filer on Controllers
+            services.AddControllers(options => options.Filters
+            .Add(typeof(Infrastructure.Filters.ValidationFilter)));
             SwaggerGenServiceCollectionExtensions.AddSwaggerGen(services, (Action<SwaggerGenOptions>)(c =>
             {
                 SwaggerGenOptionsExtensions.SwaggerDoc(c, "v1", new OpenApiInfo()

@@ -8,26 +8,8 @@ using FluentValidation.Results;
 
 namespace allopromo.Api.Validators
 {
-    public class ProductValidator : IValidator
+    public class ProductValidator : AbstractValidator<DTOs.ProductDto>
     {
-        bool IValidator.CanValidateInstancesOfType(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        IValidatorDescriptor IValidator.CreateDescriptor()
-        {
-            throw new NotImplementedException();
-        }
-
-        ValidationResult IValidator.Validate(IValidationContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<ValidationResult> IValidator.ValidateAsync(IValidationContext context, CancellationToken cancellation)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

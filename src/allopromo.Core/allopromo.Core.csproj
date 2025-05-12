@@ -80,7 +80,6 @@
     <Compile Remove="Services\EmailNotificationService.cs" />
     <Compile Remove="Services\EmailService.cs" />
     <Compile Remove="Services\IAccountService.cs" />
-    <Compile Remove="Services\LocalisationService.cs" />
     <Compile Remove="Services\MediaServices.cs" />
     <Compile Remove="Services\MembershipService.cs" />
     <Compile Remove="Services\ProductService.cs" />
