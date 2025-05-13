@@ -8,7 +8,7 @@ using FluentValidation.Results;
 
 namespace allopromo.Api.Validators
 {
-    public class UserValidator : AbstractValidator<UserDto>
+    public class CreateStoreValidator : AbstractValidator<StoreDto>
     {
        
     }

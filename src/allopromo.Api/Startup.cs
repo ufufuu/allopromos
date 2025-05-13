@@ -114,10 +114,9 @@ namespace allopromo.Api
 
             /// <summary>
             /// Add FluentValidation
-            //services.AddFluentValidation(IValidator<CreateUserDto>, CreateUserValidator>);
             services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
-                .AddValidatorsFromAssemblyContaining<UserValidator>();
+                .AddValidatorsFromAssemblyContaining<CreateStoreValidator>();
             /// </summary>
             
             //services.AddMediatR(typeof(CreateCommandHandler));

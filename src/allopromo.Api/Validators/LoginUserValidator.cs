@@ -18,7 +18,7 @@ namespace allopromo.Api.Validators
                 .WithMessage("User name Should Not Be Empty");
             RuleFor(model => model.Password)
                 .NotEmpty()
-                .WithMessage("User password Should Not Be Empty");
+                .WithMessage("User password Should Not Be Empty from Fluent baby");
         }
     }
 }

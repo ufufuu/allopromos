@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace allopromo.Api.Validators
 {
-    public class VendorValidator : 
+    public class CreateVendorValidator : 
         FluentValidation.AbstractValidator<VendorDto>
     {
         

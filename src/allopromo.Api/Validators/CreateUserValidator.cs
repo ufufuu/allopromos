@@ -17,10 +17,10 @@ namespace allopromo.Api.Validators
         {
             RuleFor(model => model.UserName)
                 .NotEmpty()
-                .WithMessage("User name Should Not Be Empty");
+                .WithMessage(" Create User name Should Not Be Empty from Fluent ");
             RuleFor(model => model.Password)
                 .NotEmpty()
-                .WithMessage("User password Should Not Be Empty");
+                .WithMessage(" Create User password Should Not Be Empty from Fluent ");
         }
     }
 }

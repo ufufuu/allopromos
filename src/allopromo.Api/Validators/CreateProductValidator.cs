@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using allopromo.Core.Entities;
+using allopromo.Api.DTOs;
 using FluentValidation;
 using FluentValidation.Results;
 
 namespace allopromo.Api.Validators
 {
-    public class StoreCategoryValidator : AbstractValidator<StoreCategory>
+    public class CreateProductValidator : AbstractValidator<ProductDto>
     {
+       
     }
 }
