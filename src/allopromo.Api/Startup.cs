@@ -61,7 +61,7 @@ namespace allopromo.Api
             services.AddEntityFrameworkNpgsql()
             .AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
                 options => options
-                .UseNpgsql(Configuration.GetConnectionString("DefaultPostGres"))));
+                .UseNpgsql(Configuration.GetConnectionString("DefaultProdPostGres"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
