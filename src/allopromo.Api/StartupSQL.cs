@@ -18,7 +18,10 @@ using allopromo.Infrastructure.Data;
 using allopromo.Infrastructure.Repositories;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -36,43 +39,41 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using FluentValidation.AspNetCore;
 
 #nullable enable
 namespace allopromo.Api
 {
-    public class Startup3
+    public class Startup2
     {
         public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
-        public Startup3(IConfiguration configuration) => Configuration = configuration;
+        public Startup2(IConfiguration configuration) => Configuration = configuration;
+
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-            Configuration.GetSection("JwtSettings");
-            Configuration.GetSection("Jwt").Get<AppSettings>();
-            byte[] key = Encoding.UTF8.GetBytes(Configuration["Jwt:Secret"]);
+            services.AddMvc((Action<MvcOptions>)(options => options.EnableEndpointRouting = false));
+            this.Configuration.GetSection("JwtSettings");
+            this.Configuration.GetSection("Jwt").Get<AppSettings>();
+            byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
+            services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
+                options => options
+                .UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))));
 
-            //services.AddEntityFrameworkNpgsql()
-            .AddDbContext<ApplicationDbContext>(options => options
-            .UseNpgsql(Configuration.GetConnectionString("DefaultProdDockerPgsqlJ")));
-            
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
                 options.Stores.MaxLengthForKeys = 128;
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-            }).AddRoles<IdentityRole>()
-
-            //.AddEntityFrameworkStores<ApplicationDbContext>()
-            //.AddEntityFrameworkNpgsql()
-
+            })).AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddRoleManager<RoleManager<IdentityRole>>()
             .AddDefaultTokenProviders();
-            //services.AddEntityFrameworkNpgsql();
             services.AddAuthentication("Bearer").AddJwtBearer(options =>
             {
                 options.SaveToken = true;
@@ -89,12 +90,12 @@ namespace allopromo.Api
                     RequireExpirationTime = false
                 };
             });
-            services.AddAuthorization(options =>
+            services.AddAuthorization((Action<AuthorizationOptions>)(options =>
             {
-                options.AddPolicy("MerchantsOnly", policy => policy.RequireRole("Merchants"));
-                options.AddPolicy("ClientsOnly", policy => policy.RequireRole("Clients"));
-            });
-            IMapper mapper = new MapperConfiguration(mc =>
+                options.AddPolicy("MerchantsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Merchants")));
+                options.AddPolicy("ClientsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Clients")));
+            }));
+            IMapper mapper = new MapperConfiguration((Action<IMapperConfigurationExpression>)(mc =>
             {
                 mc.AddProfile<UserProfile>();
                 mc.AddProfile<StoreProfile>();
@@ -102,11 +103,11 @@ namespace allopromo.Api
                 mc.AddProfile<StoreCategoryProfile>();
                 mc.AddProfile<CityProfile>();
                 mc.AddProfile<ProductCategoryProfile>();
-                //mc.ValidateInlineMaps = new bool?(false);
 
-            }).CreateMapper();
+                //mc.ValidateInlineMaps = new bool?(false);
+            })).CreateMapper();
             services.AddSingleton<IMapper>(mapper);
-            services.AddRazorPages();
+
             /// <summary>
             /// Add MediatR
             /// </summary>
@@ -125,17 +126,17 @@ namespace allopromo.Api
             AutoMapperConfig.Configure();
             services.AddAutoMapper(typeof(Program));
             services.AddDistributedMemoryCache();
-            services.AddSession(options =>
+            services.AddSession((Action<SessionOptions>)(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10.0);
                 options.Cookie.HttpOnly = true;
-            });
+            }));
             services.AddHttpContextAccessor();
             services.AddOptions();
             // Fluent Validation Options Filer on Controllers
             services.AddControllers(options => options.Filters
             .Add(typeof(Infrastructure.Filters.ValidationFilter)));
-            SwaggerGenServiceCollectionExtensions.AddSwaggerGen(services, c =>
+            SwaggerGenServiceCollectionExtensions.AddSwaggerGen(services, (Action<SwaggerGenOptions>)(c =>
             {
                 SwaggerGenOptionsExtensions.SwaggerDoc(c, "v1", new OpenApiInfo()
                 {
@@ -152,20 +153,20 @@ namespace allopromo.Api
                 });
                 SwaggerGenOptions swaggerGenOptions = c;
                 SwaggerGenOptionsExtensions.AddSecurityRequirement(swaggerGenOptions, new OpenApiSecurityRequirement()
-                {
-                    {
-                        new OpenApiSecurityScheme()
-                        {
-                          Reference = new OpenApiReference()
-                          {
-                            Type = new ReferenceType?(ReferenceType.SecurityScheme),
-                            Id = "Bearer"
-                          }
-                        },
-                    (IList<string>) Array.Empty<string>()
-                    }
-                });
-                });
+        {
+          {
+            new OpenApiSecurityScheme()
+            {
+              Reference = new OpenApiReference()
+              {
+                Type = new ReferenceType?(ReferenceType.SecurityScheme),
+                Id = "Bearer"
+              }
+            },
+            (IList<string>) Array.Empty<string>()
+          }
+        });
+            }));
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<ILocationService, LocationService>();
@@ -178,6 +179,7 @@ namespace allopromo.Api
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<ICatalogService, CatalogService>();
             services.AddScoped<IStoreService, StoreService>();
+
             services.AddScoped<IValidationService, ValidationService>();
             services.AddScoped<IImageUploadService, ImageUploadService>();
             services.AddScoped<IMediaService, ImgurMediaService>();
@@ -193,12 +195,10 @@ namespace allopromo.Api
             //services.AddScoped<IValidator<CreateUserDto>, CreateUserValidator>();
 
             services.AddSingleton<ILoggerManager, LoggerManager>();
-            services.AddSingleton<EmailConfiguration>(this.Configuration.GetSection("EmailConfiguration")
-                .Get<EmailConfiguration>());
+            services.AddSingleton<EmailConfiguration>(this.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddSingleton<IEmailConfiguration, EmailConfiguration>();
             services.AddSignalRCore();
             services.AddSignalR();
-
             /*
             ServiceCollectionExtensions.AddMediatR(services, (Action<MediatRServiceConfiguration>)
                 (cfg => cfg.RegisterServicesFromAssemblies(new Assembly[1]
@@ -207,11 +207,9 @@ namespace allopromo.Api
                 })));
             */
 
-            services.AddCors(policyBuilder => policyBuilder
-            .AddDefaultPolicy(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader()));
+            services.AddCors((Action<CorsOptions>)(policyBuilder => policyBuilder.AddDefaultPolicy((Action<CorsPolicyBuilder>)(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader()))));
             FluentEmailServiceCollectionExtensions.AddFluentEmail(services, "test-email@allopromo.test", "");
-            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>((IAsyncPolicy<HttpResponseMessage>)AsyncRetryTResultSyntax
-                .WaitAndRetryAsync<HttpResponseMessage>(Policy.HandleResult<HttpResponseMessage>((Func<HttpResponseMessage, bool>)(r => !r.IsSuccessStatusCode)), 3, (Func<int, TimeSpan>)(retryAttemps => TimeSpan.FromSeconds((double)retryAttemps))));
+            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>((IAsyncPolicy<HttpResponseMessage>)AsyncRetryTResultSyntax.WaitAndRetryAsync<HttpResponseMessage>(Policy.HandleResult<HttpResponseMessage>((Func<HttpResponseMessage, bool>)(r => !r.IsSuccessStatusCode)), 3, (Func<int, TimeSpan>)(retryAttemps => TimeSpan.FromSeconds((double)retryAttemps))));
             HttpClient httpClient = new HttpClient();
             services.AddSingleton<AsyncRetryPolicy>((Func<IServiceProvider, AsyncRetryPolicy>)(x => AsyncRetrySyntax.WaitAndRetryAsync(Policy.Handle<Exception>(), 3, (Func<int, TimeSpan>)(retryCount => TimeSpan.FromMilliseconds((double)(500 * retryCount))), (Action<Exception, TimeSpan, int, Context>)((result, timeSpan, retryCount, context) => Console.WriteLine(string.Format("begin {0} retry {1} ", (object)retryCount, (object)context.CorrelationId) + string.Format("with {0} seconds of delays", (object)timeSpan.TotalSeconds))))));
             //services.BuildServiceProvider();
@@ -231,23 +229,22 @@ namespace allopromo.Api
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader()
-            .SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials());
+            app.UseCors((Action<CorsPolicyBuilder>)(options => options.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
             app.UseCors("CORSPolicy");
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
-            app.UseEndpoints(endpoint => endpoint.MapControllers());
+            app.UseEndpoints((Action<IEndpointRouteBuilder>)(endpoint => endpoint.MapControllers()));
             SwaggerBuilderExtensions.UseSwagger(app, (Action<SwaggerOptions>)null);
-            SwaggerUIBuilderExtensions.UseSwaggerUI(app, c =>
+            SwaggerUIBuilderExtensions.UseSwaggerUI(app, (Action<SwaggerUIOptions>)(c =>
             {
                 SwaggerUIOptionsExtensions.DefaultModelExpandDepth(c, -1);
                 SwaggerUIOptionsExtensions.SwaggerEndpoint(c, "/swagger/v1/swagger.json", "My-- API V1");
-            });
-            app.UseCors(options => options.AllowAnyMethod()
+            }));
+            app.UseCors((Action<CorsPolicyBuilder>)(options => options.AllowAnyMethod()
             .WithOrigins("http://localhost:44306")
             .AllowAnyHeader()
-            .SetIsOriginAllowed(host => true).AllowCredentials());
+            .SetIsOriginAllowed((Func<string, bool>)(host => true)).AllowCredentials()));
             app.UseMvc();
         }
     }

@@ -2,69 +2,94 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using allopromo.Infrastructure.Data;
 
 namespace allopromo.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230907115243_v0")]
-    partial class v0
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.7")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6b3beb85-8d21-4c0f-9bf1-28108de88b47",
+                            ConcurrencyStamp = "2ed31ebb-8245-4b35-9caf-424f8015577e",
+                            Name = "Administrators",
+                            NormalizedName = "ADMINISTRATORS"
+                        },
+                        new
+                        {
+                            Id = "3698097a-6314-4c0a-b338-982bb76831d7",
+                            ConcurrencyStamp = "5d49748d-7a4b-4de4-bb64-59bce902daa7",
+                            Name = "Merchants",
+                            NormalizedName = "MERCHANTS"
+                        },
+                        new
+                        {
+                            Id = "7f7da027-4f39-42df-b2da-b37715c03d04",
+                            ConcurrencyStamp = "48d11d01-c326-4996-99e8-2b136e884458",
+                            Name = "Users",
+                            NormalizedName = "USERS"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -73,93 +98,22 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<int>("Type").HasValue(1);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -173,19 +127,19 @@ namespace allopromo.Infrastructure.Migrations
                     b.Property<string>("LoginProvider")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -198,86 +152,137 @@ namespace allopromo.Infrastructure.Migrations
                 {
                     b.Property<string>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("Name")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationRole", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("isMerchant")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApplicationRole");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<int>("Type").HasValue(1);
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tCity", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.City", b =>
                 {
                     b.Property<int>("cityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("cityCountrycountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("cityGpsLatitude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cityGpsLongitude")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("integer");
 
                     b.Property<string>("cityName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("cityId");
 
@@ -286,18 +291,18 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tCountry", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Country", b =>
                 {
                     b.Property<int>("countryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("countryName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("regionId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("countryId");
 
@@ -306,27 +311,27 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tDepartment", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Department", b =>
                 {
                     b.Property<string>("departmentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("text")
                         .HasColumnName("departmentId");
 
                     b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("createdDate");
 
                     b.Property<string>("departmentName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("departmentName");
 
                     b.Property<string>("departmentThumbnail")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("departmentThumbnail");
 
                     b.Property<DateTime?>("updatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updatedDate");
 
                     b.HasKey("departmentId");
@@ -334,44 +339,56 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tOrder", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Order", b =>
                 {
                     b.Property<int>("orderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("createOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("customerId")
+                        .HasColumnType("text");
 
                     b.Property<int>("orderDate")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("orderNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    b.Property<string>("storeId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("updateOn")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("orderId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tProduct", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Product", b =>
                 {
                     b.Property<string>("productId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("productCategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("productDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("productName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("productStatus")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid?>("storeId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("productId");
 
@@ -382,81 +399,72 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tProductCategory", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.ProductCategory", b =>
                 {
                     b.Property<int>("productCategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("productCategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
-                    b.Property<DateTime?>("updatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("updatedDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("productCategoryId");
 
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tRegion", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Region", b =>
                 {
                     b.Property<int>("regionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("regionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("updatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("text");
 
                     b.HasKey("regionId");
 
                     b.ToTable("Regions");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tStore", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Store", b =>
                 {
                     b.Property<Guid>("storeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("storeId");
 
                     b.Property<Guid?>("CategorystoreCategoryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("cityId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("storeBecomesInactiveOn")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("storeExpires");
 
                     b.Property<DateTime>("storeCreatedOn")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("storeCreatedOn");
 
                     b.Property<string>("storeDescription")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("storeDescription");
 
                     b.Property<string>("storeName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("storeName");
 
                     b.HasKey("storeId");
@@ -470,30 +478,30 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tStoreCategory", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.StoreCategory", b =>
                 {
                     b.Property<Guid>("storeCategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("categoryId");
 
                     b.Property<bool>("active")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("active");
 
                     b.Property<DateTime>("created")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("storeCreated");
 
                     b.Property<string>("departmentId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("expires")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("storeExpires");
 
                     b.Property<string>("storeCategoryName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("storeCategoryName");
 
                     b.HasKey("storeCategoryId");
@@ -503,28 +511,11 @@ namespace allopromo.Infrastructure.Migrations
                     b.ToTable("StoreCategories");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue(2);
-                });
-
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationUserRole", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
-
-                    b.Property<string>("RoleId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("RoleId1");
-
-                    b.HasIndex("UserId1");
-
-                    b.HasDiscriminator().HasValue("ApplicationUserRole");
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", null)
+                        .WithMany("UserRoles")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -538,7 +529,7 @@ namespace allopromo.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -547,7 +538,7 @@ namespace allopromo.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -562,7 +553,7 @@ namespace allopromo.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -571,38 +562,38 @@ namespace allopromo.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tCity", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.City", b =>
                 {
-                    b.HasOne("allopromo.Core.Entities.tCountry", "cityCountry")
+                    b.HasOne("allopromo.Core.Entities.Country", "cityCountry")
                         .WithMany("Cities")
                         .HasForeignKey("cityCountrycountryId");
 
                     b.Navigation("cityCountry");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tCountry", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Country", b =>
                 {
-                    b.HasOne("allopromo.Core.Entities.tRegion", "Region")
+                    b.HasOne("allopromo.Core.Entities.Region", "Region")
                         .WithMany("Countries")
                         .HasForeignKey("regionId");
 
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tProduct", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Product", b =>
                 {
-                    b.HasOne("allopromo.Core.Entities.tProductCategory", "ProductCategory")
+                    b.HasOne("allopromo.Core.Entities.ProductCategory", "ProductCategory")
                         .WithMany()
                         .HasForeignKey("productCategoryId");
 
-                    b.HasOne("allopromo.Core.Entities.tStore", "Store")
+                    b.HasOne("allopromo.Core.Entities.Store", "Store")
                         .WithMany()
                         .HasForeignKey("storeId");
 
@@ -611,79 +602,59 @@ namespace allopromo.Infrastructure.Migrations
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tStore", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Store", b =>
                 {
-                    b.HasOne("allopromo.Core.Entities.tStoreCategory", "Category")
+                    b.HasOne("allopromo.Core.Entities.StoreCategory", "Category")
                         .WithMany("Stores")
                         .HasForeignKey("CategorystoreCategoryId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("allopromo.Core.Entities.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.HasOne("allopromo.Core.Entities.tCity", "City")
+                    b.HasOne("allopromo.Core.Entities.City", "city")
                         .WithMany()
                         .HasForeignKey("cityId");
 
                     b.Navigation("Category");
 
-                    b.Navigation("City");
+                    b.Navigation("city");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tStoreCategory", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.StoreCategory", b =>
                 {
-                    b.HasOne("allopromo.Core.Entities.tDepartment", "Department")
+                    b.HasOne("allopromo.Core.Entities.Department", "Department")
                         .WithMany("Categories")
                         .HasForeignKey("departmentId");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationUserRole", b =>
-                {
-                    b.HasOne("allopromo.Core.Domain.ApplicationRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("allopromo.Core.Domain.ApplicationUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationRole", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tCountry", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Country", b =>
                 {
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tDepartment", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Department", b =>
                 {
                     b.Navigation("Categories");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tRegion", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.Region", b =>
                 {
                     b.Navigation("Countries");
                 });
 
-            modelBuilder.Entity("allopromo.Core.Entities.tStoreCategory", b =>
+            modelBuilder.Entity("allopromo.Core.Entities.StoreCategory", b =>
                 {
                     b.Navigation("Stores");
-                });
-
-            modelBuilder.Entity("allopromo.Core.Domain.ApplicationUser", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

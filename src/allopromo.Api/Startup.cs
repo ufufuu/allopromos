@@ -39,7 +39,6 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Reflection;
 using System.Text;
 using FluentValidation.AspNetCore;
 
@@ -50,19 +49,19 @@ namespace allopromo.Api
     {
         public readonly string MyAllowSpecificOrigins = "myAllowSpecificOrigin";
         public Startup(IConfiguration configuration) => Configuration = configuration;
-
         public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices (IServiceCollection services)
         {
             services.AddControllers();
             services.AddMvc((Action<MvcOptions>)(options => options.EnableEndpointRouting = false));
             this.Configuration.GetSection("JwtSettings");
             this.Configuration.GetSection("Jwt").Get<AppSettings>();
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["Jwt:Secret"]);
-            services.AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
+
+            services.AddEntityFrameworkNpgsql()
+            .AddDbContext<ApplicationDbContext>((Action<DbContextOptionsBuilder>)(
                 options => options
-                .UseSqlServer(Configuration.GetConnectionString("DefaultDevConnection"))));
+                .UseNpgsql(Configuration.GetConnectionString("DefaultPostGres"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>((Action<IdentityOptions>)(options =>
             {
@@ -71,6 +70,7 @@ namespace allopromo.Api
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
             })).AddRoles<IdentityRole>()
+
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddRoleManager<RoleManager<IdentityRole>>()
             .AddDefaultTokenProviders();
@@ -90,6 +90,7 @@ namespace allopromo.Api
                     RequireExpirationTime = false
                 };
             });
+            //services.AddEntityFrameworkNpgsql();
             services.AddAuthorization((Action<AuthorizationOptions>)(options =>
             {
                 options.AddPolicy("MerchantsOnly", (Action<AuthorizationPolicyBuilder>)(policy => policy.RequireRole("Merchants")));
