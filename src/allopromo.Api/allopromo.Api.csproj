@@ -62,6 +62,7 @@
     <Compile Remove="Queries\Models\GetQuery.cs" />
     <Compile Remove="Services\ErrorService.cs" />
     <Compile Remove="Infrastructure\ToolKit\JwtSecurityTokenHandler.cs" />
+    <Compile Remove="Startup3.cs" />
     <Compile Remove="ViewModel\MappingProfile.cs" />
   </ItemGroup>
 

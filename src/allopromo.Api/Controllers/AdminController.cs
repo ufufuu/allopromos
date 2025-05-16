@@ -1,8 +1,10 @@
 ﻿
+using allopromo.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,8 @@ namespace allopromo.Controllers
     [ApiController]
     public class AdminController : Controller   //Base
     {
-        private UserManager<IdentityUser> _userManager { get; set; }
+        private UserManager<ApplicationUser> _userManager { get; set; }
+        RoleManager<IdentityRole> _roleManager { get; set; }
         private IHttpContextAccessor _httpContextAccessor { get; set; }
         public Infrastructure.Data.ApplicationDbContext _dbContext { get; set; }
 
@@ -23,7 +26,8 @@ namespace allopromo.Controllers
         public Microsoft.AspNetCore.SignalR.
             IHubContext<Api.Infrastructure.Hubs.MessageHub,Api.Infrastructure.Hubs.IMessageHubClient>
                 _messageHub { get; set; }
-        public AdminController(UserManager<IdentityUser> userManager, 
+        public AdminController(UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager, 
             IHttpContextAccessor httpContextAccessor,
             Microsoft.AspNetCore.SignalR.
             IHubContext<Api.Infrastructure.Hubs.ChatHub> notificationHub
@@ -31,6 +35,7 @@ namespace allopromo.Controllers
         {
             _notificationHub = notificationHub;
             _userManager = userManager;
+            _roleManager = roleManager;
             _httpContextAccessor = httpContextAccessor;
         }
         [HttpGet]
@@ -67,6 +72,26 @@ namespace allopromo.Controllers
             return User.Identity.Name.ToString();
         }
 
+        [HttpPost]
+        [Route("{roleName}")]
+        public async Task<IActionResult> CreateRole(string roleName)
+        {
+            //if (roleName != null)
+            //{
+            var role = new IdentityRole(roleName);
+            var Role = await _roleManager.CreateAsync(role);
+            return Ok(Role);
+            //}
+            //else 
+            //  return NoContent();
+        }
+        [HttpGet]
+        [Route("roles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            //var roles = AutoMapper.
+            return Ok( await _roleManager.Roles.ToListAsync());
+        }
         //[HttpPost]
         //public async Task<>
         //[HttpPost]

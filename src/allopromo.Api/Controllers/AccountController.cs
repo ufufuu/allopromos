@@ -109,7 +109,7 @@ namespace allopromo.Api.Controllers
                     Status = "Error",
                     Message = "User Already Exist!"
                 });
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest();
             ApplicationUser user = _mapper.Map<ApplicationUser>(dto);
             if ((await _userManager.CreateAsync(user, dto.Password)).Succeeded)
