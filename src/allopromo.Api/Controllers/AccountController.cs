@@ -153,10 +153,10 @@ namespace allopromo.Api.Controllers
                 return Unauthorized();
             if (!_signInManager.UserManager.CheckPasswordAsync(user, dto.Password).Result)
                 return NotFound(new
-             {
-                status = " Failed ",
-                message = " User name or Pwd UUY incorrect "
-             });
+                {
+                    status = " Failed ",
+                    message = " User name or Pwd UUY incorrect "
+                });
             //var signedIn = await _signInManager.SignInAsync(user, true);
 
             UserDto userDto = _mapper.Map<UserDto>(user);
